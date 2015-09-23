@@ -8,7 +8,7 @@
 
 function dropDown_update_for_storage($select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name,$stored_name){ #send also the query name?, always based on sample name
 
-			include('../config/path.php');
+			include('config/path.php');
 			$path = $_SERVER['DOCUMENT_ROOT'].$root;
 			include($path.'database_connection.php');
 			

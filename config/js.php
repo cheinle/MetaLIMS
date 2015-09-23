@@ -15,8 +15,9 @@
 
 <!--More JavaScript-->
 <!--relCopy-->
-<script type="text/javascript" src="/series/dynamic/airmicrobiomes/relCopy.js"></script>
-		
+<!--<script type="text/javascript" src="/series/dynamic/airmicrobiomes/relCopy.js"></script>-->
+
+	
 
 <!--Sample Storage Dropdown-->
 <script type="text/javascript">
@@ -31,7 +32,7 @@
                 else{
 	                var Store_name = "oStore_name";
 	                $.ajax({
-	                    url     : '/series/dynamic/airmicrobiomes/freezer_drawer_select.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'freezer_drawer_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : { Store_temp: Store_temp,Store_name: Store_name}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},
@@ -87,7 +88,7 @@
                 var Store_temp = $('#dStore_temp').val(); //<----- get the value from the parent select 
                 var Store_name = "dStore_name";
                 $.ajax({
-                    url     : '/series/dynamic/airmicrobiomes/freezer_drawer_select.php', //the url you are sending datas to which will again send the result
+                    url     : root+'freezer_drawer_select.php', //the url you are sending datas to which will again send the result
                     type    : 'GET', //type of request, GET or POST
                     data    : { Store_temp: Store_temp,Store_name: Store_name}, //Data you are sending
                     //success : function(data){$('#div_store').html(data)},
@@ -109,7 +110,7 @@
                 var Store_temp = $('#rStore_temp').val(); //<----- get the value from the parent select 
                 var Store_name = "rStore_name";
                 $.ajax({
-                    url     : '/series/dynamic/airmicrobiomes/freezer_drawer_select.php', //the url you are sending datas to which will again send the result
+                    url     : root+'freezer_drawer_select.php', //the url you are sending datas to which will again send the result
                     type    : 'GET', //type of request, GET or POST
                     data    : { Store_temp: Store_temp,Store_name: Store_name}, //Data you are sending
                     //success : function(data){$('#div_store').html(data)},
@@ -124,8 +125,7 @@
 </script>
 
 <!--ptTimeSelect-->
-
-<script type="text/javascript" src="/series/dynamic/airmicrobiomes/config/jquery.ptTimeSelect.js"></script>
+<?php echo '<script type="text/javascript" src="'.$root.'config/jquery.ptTimeSelect.js"></script>'; ?>
 
 <!--custom alert box-->
 <script>
@@ -278,7 +278,7 @@
                 var num_air_samplers = $('#air_samp_num').val(); //<----- get the value from the parent select 
                 //alert(num_sensors);
 	                $.ajax({
-	                    url     : '/series/dynamic/airmicrobiomes/air_sampler_select.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'air_sampler_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : { num_air_samplers: num_air_samplers}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},
@@ -302,7 +302,7 @@
                 var projName = $('#projName').val(); //<----- get the value from the parent select 
                 //alert(num_sensors);
 	                $.ajax({
-	                    url     : '/series/dynamic/airmicrobiomes/sample_select.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'sample_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : { projName: projName,
 	                    			start_date:start_date,
@@ -326,7 +326,7 @@
                 var num_pooled_samples = $('#pool_num').val(); //<----- get the value from the parent select 
                 //alert(num_sensors);
 	                $.ajax({
-	                    url     : '/series/dynamic/airmicrobiomes/pool_select.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'pool_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : { num_pooled_samples: num_pooled_samples}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},
@@ -348,7 +348,7 @@
                 var sample_type = $('#sample_type').val(); //<----- get the value from the parent select 
                 //alert(num_sensors);
 	                $.ajax({
-	                    url     : '/series/dynamic/airmicrobiomes/amplicon_div_select.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'amplicon_div_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : { sample_type: sample_type}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},

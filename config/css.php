@@ -473,6 +473,19 @@ form.registration label.textbox-label,label.password-label{
   padding:0px;
 }
 
+form.registration label.textbox-label-sampler{
+  font-size: 16px;
+  width:200px;
+  float: left;
+  text-align: right;
+  /*color:#999;*/
+  color:#666666;
+  clear:left;
+  margin:4px 4px 0px 0px;
+  padding:0px;
+  color:#0d0301;
+}
+
 form.registration input[type=text],input[type=password],input[type=email]{
   font-family: Georgia;
   font-size: 20px;

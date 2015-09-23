@@ -1,21 +1,5 @@
 <?php
 	 include('database_connection.php');
-	 echo '<style>
-	select{
-  font-family: Georgia;
-  font-size: 20px;
-  float:left;
-  border:1px solid #cccccc;
-  margin:2px 0px 10px 10px;
-  color:#00abdf;
-  height:32px;
-  width:300px;
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-}
-	</style>';
 
 	$num_air_samplers = $_GET['num_air_samplers'];
 	//echo '<fieldset>';
@@ -23,7 +7,7 @@
 	for ($x = 1; $x <= $num_air_samplers; $x++) {
     	#echo "The number is: $x <br>";
     	echo "<p>";
-		echo "<label class='textbox-label' style='color: pink'>Air Sampler #".$x.":*</label>";
+		echo "<label class='textbox-label-sampler'>Air Sampler #".$x.":*</label>";
 		echo "<select id='airSamp".$x."' name='airSamp".$x."'>";
 		echo "<option value='0'>-Select-</option>";
 		$stmt[$x] = $dbc->prepare("SELECT air_sampler_name FROM air_sampler");
@@ -52,18 +36,12 @@
 			echo "</select>";
 			echo "</p>";
 ?>
-			
-				<!--<label class="textbox-label">Start Time:*</label>
-				<input type="text" name="stime<?php echo $x ?>" id ="stime<?php echo $x ?>" class="time_fields" placeholder="Start" value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo htmlspecialchars($_GET['stime']);} ?>"/>
-				<label class="textbox-label">End Time:*</label>
-				<input type= "text" name="etime<?php echo $x ?>" id="etime<?php echo $x ?>" class="time_fields" placeholder="End" value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo htmlspecialchars($_GET['etime']);} ?>"/>
-				-->
-				
-				<label class="textbox-label" style="color: pink">Start Date/Time:*</label>
+
+				<label class="textbox-label-sampler">Start Date/Time:*</label>
 				<input type="text" id="sdate<?php echo $x ?>"  class = "shrtfields" placeholder = "Date" name="sdate<?php echo $x ?>" value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo htmlspecialchars($_GET['sdate']);} ?>"/>
 				<input type="text" name="stime<?php echo $x ?>" id ="stime<?php echo $x ?>" class="shrtfields"  placeholder="Time"  value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo htmlspecialchars($_GET['stime']);} ?>"/>
 				
-				<label class="textbox-label" style="color: pink">End Date/Time:*</label>
+				<label class="textbox-label-sampler">End Date/Time:*</label>
 				<input type="text" id="edate<?php echo $x ?>" class = "shrtfields" placeholder = "Date" name="edate<?php echo $x ?>" value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo htmlspecialchars($_GET['edate']);} ?>"/>
 				<input type="text" name="etime<?php echo $x ?>" id="etime<?php echo $x ?>" class="shrtfields"  placeholder="Time" value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo htmlspecialchars($_GET['etime']);} ?>"/>
 				
