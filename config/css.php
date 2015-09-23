@@ -33,7 +33,7 @@
 .nav.navbar-nav li a {
     color: black;
     font-family: Georgia;
-  	font-size: 16px;
+  	font-size: 15px;
 }
 
 .nav.navbar-nav li a:hover {
@@ -50,8 +50,7 @@ body.homepage {
 body{
    height: 100%;
    color: black;
-   /*background: grey;*/
-   background: #f1f1f1;
+   background: #008080;
    font-family: Georgia;
 }
 
@@ -61,6 +60,8 @@ div.page-header h3 {
     margin-top:2%;
     margin-bottom:2%;
     clear:both;
+    color:#666666;
+    font-family: Georgia;
 }
 
 div.page-header{
@@ -346,7 +347,7 @@ div.indent{
 }
 div.border legend{
   text-align:left;
-  color:#A3A3A3;
+  color:#666666;
   font-size:18px;
   padding:10px 4px 0px 4px;
   margin-left:20px;
@@ -465,7 +466,8 @@ form.registration label.textbox-label,label.password-label{
   width:200px;
   float: left;
   text-align: right;
-  color:#999;
+  /*color:#999;*/
+  color:#666666;
   clear:left;
   margin:4px 4px 0px 0px;
   padding:0px;
@@ -550,6 +552,7 @@ form.registration label.checkbox-label,label.radio-label{
 	overflow:hidden;
 	font-size: 14px;
 	text-align: left;
+	color:#666666;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 }
 
@@ -574,14 +577,15 @@ form.registration label.sm-checkbox{
   font-size:14px;
   display:inline-block;/*inline-flex ?*/
   word-wrap:break-word; 
-  overflow:hidden; "
+  overflow:hidden; 
+  color:#666666;
 }
 
 form.registration h3.checkbox-header{
   font-size: 16px;
   width:200px;
   text-align: right;
-  color:#999;
+  color:#666666;
   clear:both;
   margin:8px 8px 0px 0px;
   padding:8px;
