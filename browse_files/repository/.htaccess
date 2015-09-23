@@ -1,0 +1,7 @@
+#
+# secure directory by disabling script and html execution
+#
+<filesMatch "\.(php|php3|pl|py|jsp|asp|htm|html|xhtml|shtml|sh|cgi)$">
+Order Deny,Allow
+Deny from All
+</filesMatch>

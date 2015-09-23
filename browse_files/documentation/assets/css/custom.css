@@ -1,0 +1,17 @@
+/*
+ * Copyright (c) 2013 
+ * ==================================
+ * 
+ *
+ * This is part of an item on themeforest
+ * You can check out the screenshots and purchase it on themeforest:
+ * http://rxa.li/documenter
+ * 
+ * 
+ * ===========================================
+ * original filename: custom.css
+ * filesize: 1701 Bytes
+ * last modified: Fri, 17 May 2013 16:20:12 +0200
+ *
+ */
+body{ background:url(http://static.revaxarts-themes.com/ci_line.gif) repeat-x top center fixed; height:6px; } #documenter_content{ background-color:#F3F3F3; margin-top:20px; } #documenter_content p.warning, #documenter_content p.info{ box-shadow:0px 0px 8px rgba(0,0,0,0.1); -moz-box-shadow:0px 0px 8px rgba(0,0,0,0.1); -webkit-box-shadow:0px 0px 8px rgba(0,0,0,0.1); border:1px solid #D3D6DB; } #documenter_content p.warning{ background-color:#ffd; } #documenter_content p.info{ background-color::#dff; } p.c_1{ background-color:#069; padding:20px; color:#fff; font-size:48px; } p.c_2{ background-color:#960; margin:20px; font-size:28px; text-align:right; color:#CCC; padding-right:20px; } p.c_3{ width:200px; border:3px solid #090; text-align:center; background:#990; color:#FFF; } p.c_4{ text-align:center; text-shadow: 0 1px 1px rgba(0,0,0,.3); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2); -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2); box-shadow: 0 1px 2px rgba(0,0,0,.2); color: #fef4e9; font-size:18px; border: solid 1px #4093AE; background: #4093AE; background: -webkit-gradient(linear, left top, left bottom, from(#4093AE), to(#367C94)); background: -moz-linear-gradient(top, #4093AE, #367C94); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4093AE', endColorstr='#367C94'); -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4093AE', endColorstr='#367C94'); } p.c_5{ text-decoration:blink; } p.c_5:after{ content:" Don't use text-decoration:blink in your docs! (added with :after pseudo class)"; } p.c_6{ } p.c_7{ } p.c_8{ } p.c_9{ }

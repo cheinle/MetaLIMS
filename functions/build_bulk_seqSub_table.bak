@@ -1,0 +1,390 @@
+<?php	
+
+//display table
+function build_bulk_seqSub_table($stmt){
+	include('convert_time.php');
+	include('convert_header_names.php');
+	include('text_insert_update.php');
+	include('dropDown.php');
+	include('../config/path.php');
+	$path = $_SERVER['DOCUMENT_ROOT'].$root;
+	include($path.'/config/js.php'); //was not being inherited correctly...just added here for now;
+	echo '<pre>';
+	echo '*Notice: Bulk Update will update all samples that have been checkmarked';
+	echo '</pre>';
+	#echo '<form class="bulk" onsubmit="return confirm(\'Do you want to submit the form?\');" action="seqSub_bulk_update.php" method="GET">';
+	echo '<form class="bulk" onsubmit="return validate(this)" action="seqSub_bulk_update.php" method="GET">';
+	#echo '<form name=\'form-main\' onsubmit=\'return validate()\' action=\'\' method=\'post\'>';
+	//echo '<div class = \'left\'>';
+	echo '<div>';
+	
+	echo '<table class = \'bulk\'>';
+	echo '<thead>';
+	echo '<tr>';
+	echo '<th>Sample Name <br><input type="checkbox" id="selecctall"/>(Select All)</th>';
+	echo '<th>DNA Conc. (ng/uL)</th>';
+	echo '<th>Volume Of Aliquot(uL)</th>';
+	echo '<th>Does DNA Sample Still Exisit?<br><input type="checkbox" id="selecctallyes"/>Yes <input type="checkbox" id="selecctallno"/>No</th>';
+	echo '</tr>';
+	echo '</thead>';					
+	echo '<tbody>';
+	
+	if ($stmt->execute()){
+	    if($stmt->fetch()){
+			$meta = $stmt->result_metadata(); 
+		    while ($field = $meta->fetch_field()){ 
+		    	$params[] = &$row[$field->name]; 
+		    } 
+		
+		    call_user_func_array(array($stmt, 'bind_result'), $params); 
+			
+			$sample_name = '';
+			$stmt->execute();
+		    while ($stmt->fetch()) {
+		    	$counter = 0;
+				foreach($row as $key => $value){
+					$counter++;
+					if($counter == 1){
+						$data[] = array('sample_name' => $row['sample_name'], 'sample_sort' => $row['sample_sort'],'seq_dna_conc' => $row['seq_dna_conc'],'seq_vol' => $row['seq_vol']);
+					}
+				}
+			}
+			?><script type="text/javascript">var js_array = <?php echo json_encode($data); ?>;</script><?php
+			// Obtain a list of columns
+			foreach ($data as $key => $row) {
+			    $s_sort[$key]  = $row['sample_sort'];
+			    $s_name[$key] = $row['sample_name'];
+			}
+			
+			// Sort the sample names for output
+			// Add $data as the last parameter, to sort by the common key
+			array_multisort($s_sort, SORT_ASC, $s_name, SORT_ASC, $data);
+
+				foreach($data as $key => $row){
+					echo '<tr class = "row_collapse">';
+					$p_value = htmlspecialchars($row['sample_name']);
+					$sample_name = $p_value;
+					$mod_sample_name = preg_replace("/\//",'-',$sample_name);//jQuery cannot use slashes
+					?>
+					<td>
+ 					<input type="checkbox" class = "checkbox1" id="<?php echo $mod_sample_name;?>_checkbox" name="sample[<?php echo $sample_name; ?>][checkbox]" value="checked" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
+ 																																																 if(isset($_SESSION['sample_array'][$sample_name]['checkbox']) && htmlspecialchars($_SESSION['sample_array'][$sample_name]['checkbox']) == 'checked'){
+ 																																																 	echo "checked";
+																																																 }
+																																															}?>/> <?php echo $sample_name ?><br />
+					</td>
+					<?php
+					#$dna_conc = text_insert_update($sample_name,'d_conc'); 
+					$dna_conc = htmlspecialchars($row['seq_dna_conc']);
+					$vol = htmlspecialchars($row['seq_vol']);
+					if($vol == '0'){
+						$vol = '';
+					}
+					?>
+					<td><input type="text" class = "checkbox1" id="<?php echo $mod_sample_name;?>_dna" name="sample[<?php echo $sample_name; ?>][dna]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['dna']);}else{echo $dna_conc;} ?>"></td>
+					<td><input type="text" class = "checkbox1" id="<?php echo $mod_sample_name;?>_vol" name="sample[<?php echo $sample_name; ?>][vol]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['vol']);}else{echo $vol;}?>"></td>
+					
+					
+					<td><div id="<?php echo $mod_sample_name;?>_color_checkbox_div"><input type="radio" class = "checkbox2" id="<?php echo $mod_sample_name;?>_exists_yes" name="sample[<?php echo $sample_name; ?>][exists]" value="one" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {if(isset($_SESSION['sample_array'][$sample_name]['exists']) && htmlspecialchars($_SESSION['sample_array'][$sample_name]['exists']) == 'one'){echo "checked='checked'";}}?>">Yes
+					
+					<input type="radio" class = "checkbox3" id="<?php echo $mod_sample_name;?>_exists_no" name="sample[<?php echo $sample_name; ?>][exists]" value="three" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {if(isset($_SESSION['sample_array'][$sample_name]['exists']) && htmlspecialchars($_SESSION['sample_array'][$sample_name]['exists']) == 'three'){
+ 					
+																																														 	echo "checked='checked'";;
+																																																 }}?>">No</div></td>
+																																															 
+					<!---------form validation----->
+					<!--if sample name is checked, make sure dna conc, vol and does sample exist are checked-->
+					
+					<script type="text/javascript">
+					//var valid = 'true';
+					var inputs = document.getElementsByTagName("input");
+					for (var i = 0; i < inputs.length; i++) {
+  						//alert(inputs[i].id);
+					}
+					$(document).ready(function(){ 
+					
+						var test = valid_check();
+						
+						function valid_check(){ 
+							var valid_check = '';
+							var sample_name = <?php echo json_encode("$mod_sample_name"); ?>;
+							var checkbox_name = sample_name+'_checkbox';
+							
+							var dna_name = sample_name+'_dna';
+							dna_name = document.getElementById(dna_name);
+							
+							var vol_name = sample_name+'_vol';
+							vol_name = document.getElementById(vol_name);
+							
+							var exists_name_yes = sample_name+'_exists_yes';
+							var exists_name_no = sample_name+'_exists_no';
+							
+							var color_checkbox_div = sample_name+'_color_checkbox_div';
+							color_checkbox_div = document.getElementById(color_checkbox_div);
+							
+							//if checkbox is checked, make sure all the required fields are there
+							$("#"+checkbox_name).change(function(){ 	
+								if(document.getElementById(checkbox_name).checked){	
+									Emptyvalidation(dna_name);
+									Emptyvalidation(vol_name);
+									if((!document.getElementById(exists_name_yes).checked) && (!document.getElementById(exists_name_no).checked)){
+										color_checkbox_div.style.backgroundColor = "red";
+										valid_check = 'false';
+									}
+									else{
+										color_checkbox_div.style.backgroundColor = "white";
+										valid_check = 'true';
+									}	
+								}
+								else{
+									dna_name.style.background = "white";
+									vol_name.style.background = "white";
+									color_checkbox_div.style.backgroundColor = "white";
+									valid_check = 'true';
+								}
+							});
+							
+							//if user uses back button, keep error highlighting
+							if(document.getElementById(checkbox_name).checked){	
+									Emptyvalidation(dna_name);
+									Emptyvalidation(vol_name);
+									if((!document.getElementById(exists_name_yes).checked) && (!document.getElementById(exists_name_no).checked)){
+										color_checkbox_div.style.backgroundColor = "red";
+										valid_check = 'false';
+									}
+									else{
+										color_checkbox_div.style.backgroundColor = "white";
+										valid_check = 'true';
+									}	
+							}
+							else{
+									dna_name.style.background = "white";
+									vol_name.style.background = "white";
+									color_checkbox_div.style.backgroundColor = "white";
+									valid_check = 'true';
+							}
+						
+							//if you checkbox is checked and you change your DNA conc etc, then oncolor
+							$("#"+sample_name+'_dna').change(function(){ 
+								if(document.getElementById(checkbox_name).checked){		
+									Emptyvalidation(dna_name);
+								}
+							});		
+							$("#"+sample_name+'_vol').change(function(){ 
+								if(document.getElementById(checkbox_name).checked){		
+									Emptyvalidation(vol_name);
+								}
+							});	
+							$("#"+sample_name+'_exists_yes').change(function(){ 
+								if(document.getElementById(checkbox_name).checked){		
+									if((!document.getElementById(exists_name_yes).checked) && (!document.getElementById(exists_name_no).checked)){
+										color_checkbox_div.style.backgroundColor = "red";
+										valid_check = 'false';
+									}
+									else{
+										color_checkbox_div.style.backgroundColor = "white";
+										valid_check = 'true';
+									}	
+								}
+							});	
+							$("#"+sample_name+'_exists_no').change(function(){ 
+								if(document.getElementById(checkbox_name).checked){		
+									if((!document.getElementById(exists_name_yes).checked) && (!document.getElementById(exists_name_no).checked)){
+										color_checkbox_div.style.backgroundColor = "red";
+										valid_check = 'false';
+									}
+									else{
+										color_checkbox_div.style.backgroundColor = "white";
+										valid_check = 'true';
+									}	
+								}
+							});			
+						}				
+					    function Emptyvalidation(inputtxt){
+					    	  
+					    	if (inputtxt.value.length == 0){  
+					    		inputtxt.style.backgroundColor =   'Yellow';
+					    		valid_check = 'false';   
+					         }  
+					    	else{  
+					    		inputtxt.style.backgroundColor = 'White';  
+					    		valid_check = 'true';
+					         }  
+					   }  
+					   
+					   
+					 });
+					</script>
+					<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {if(isset($_SESSION['sample_array'][$sample_name]['exists']) && htmlspecialchars($_SESSION['sample_array'][$sample_name]['exists']) == 'one'){echo 'checked';}}?>	
+					<!--mark checkbox if you change a DNA Concentration in the bulk DNA update-->
+					<script type="text/javascript">
+					
+						$(document).ready(function(){  
+							var sample_name = <?php echo(json_encode($mod_sample_name)); ?>;
+							var sample_name_dna = sample_name+'_dna';
+							var sample_name_checkbox = sample_name+'_checkbox';
+	
+			        		$('#'+sample_name_dna).change(function(){ //on change event
+			        			$('#'+sample_name_checkbox).prop('checked',true);
+			        			//alert(sample_name);  
+							});
+		
+						});	
+					</script>
+			<?php
+				echo '</tr>';
+				}	
+				
+			
+			//}
+			$stmt->close();
+			echo '</tbody>';
+			echo '</table>';
+			echo '</div>';
+			//other fields to update
+			//check if form has  been submitted successfully or not
+			$submitted = 'true';
+			if(isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false'){
+				$submitted = 'false';
+			}
+			?>
+			<!--<div class = 'right'>--></div>
+			<div = 'bulk'>
+			<table class = 'bulk'>
+			<th>Sequencing Submission Info:(Required)</th>
+			
+			<tr>
+			<td>
+			<!--Date Submitted-->
+			<p>
+			<label>Date Submitted:</label><br>
+			<input type="text" id="datepicker2"  name="dtSub" class="fields" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['dtSub']);} ?>"/>
+			<script>
+			$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+			</script>
+			</td>
+			</tr>
+			
+			
+			<tr>
+			<td>
+			<p>
+			<!--Project Name Dropdown-->
+			<label for="project_name">Select Project Name:</label><br/>
+			<?php
+			//url or $_GET name, table name, field name
+			dropDown('projName', 'project_name', 'project_name','project_name',$submitted);
+			?>
+			</p>
+					
+			<tr>
+			<td>
+			<label>Sequencing Type:</label><br>
+			<p>
+			<input type="checkbox" name="type[]" value="Amplicon16S" <?php if((isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false')){$i=3;while($i>=0){if((isset($_SESSION['type'][$i])) && (($_SESSION['type'][$i]) == 'Amplicon16S')){echo "checked";}$i--;}} ?>/>Amplicon-16S<br />
+			<input type="checkbox" name="type[]" value="Amplicon18S" <?php if((isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false')){$i=3;while($i>=0){if((isset($_SESSION['type'][$i])) && (($_SESSION['type'][$i]) == 'Amplicon18S')){echo "checked";}$i--;}} ?>/>Amplicon-18S<br />
+			<input type="checkbox" name="type[]" value="AmpliconOther" <?php if((isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false')){$i=3;while($i>=0){if((isset($_SESSION['type'][$i])) && (($_SESSION['type'][$i]) == 'AmpliconOther')){echo "checked";}$i--;}} ?>/>Amplicon-other
+			<div id="appear_div">
+			<input type="text" name="seqOther" class="fields" placeholder="Enter Other Sequencing Type" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['seqOther']);} ?>"/><br>
+	 		</div>
+			<input type="checkbox" name="type[]" value="Metagenome"  <?php if((isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false')){$i=3;while($i>=0){if((isset($_SESSION['type'][$i])) && (($_SESSION['type'][$i]) == 'Metagenome')){echo "checked";}$i--;}} ?>/>Metagenome<br />
+			</p>
+			
+			<tr>
+			<td>
+			<!--Sequencer Name-->
+			<p>
+			<label>Sequencer Name:</label><br>
+			<?php
+			//url or $_GET name, table name, field name
+			dropDown('seqName', 'sequencer_names', 'seqName','seqName',$submitted);
+			?>
+			</p>
+			</td>
+			</tr>
+			
+			<tr>
+			<td>
+			<p>
+			<!--Library Prep Kit-->
+			<label>Library Prep Kit:</label><br>
+			<?php
+			//url or $_GET name, table name, field name
+			dropDown('libPK', 'library_prep_kit', 'lib_prep_kit','lib_prep_kit',$submitted);
+			?>
+			</p>
+			</td>
+			</tr>
+			
+			<tr>
+			<td>
+			<script type="text/javascript">
+			    function validate(from) {
+			    	
+			    	//if you tried to submit, check the entire page for color?
+			    	//return valid is false if you find it
+			    	
+			    	var valid = 'true';
+				    if(check_form() == 'false'){
+				    	valid = 'false';	
+				    }
+				    if(valid == 'false'){
+				    	alert('ERROR: Some inputs are invalid. Please check fields');
+				    	return false;
+				    }
+				    else{
+				   		return confirm('Are you sure you want to submit?');
+				    }
+				}
+				
+				function check_form(){
+					var index;
+					var a = js_array;
+					alert('test');
+					for (index = 0; index < a.length; ++index) {
+   	 					//console.log(a[index]["sample_name"]);
+   	 					var sample_name = a[index]["sample_name"];
+   	 					var dna_name = sample_name+'_dna';
+   	 					dna_name = document.getElementById(dna_name);
+   	 					console.log(dna_name);
+   	 					//if(document.getElementById(dna_name).value){
+   	 						console.log(document.getElementById(dna_name).value);
+   	 					//}
+   	 					//alert(document.getElementById(dna_name).style.color);
+   	 					//document.getElementById(dna_name).style.color;
+   	 					alert('testaaaa');
+					}
+					return 'false';
+						
+						
+					
+						//var checkbox_name = sample_name+'_checkbox';
+			
+						//var dna_name = sample_name+'_dna';
+						//dna_name = document.getElementById(dna_name);
+								
+						//var vol_name = sample_name+'_vol';
+						//vol_name = document.getElementById(vol_name);
+								
+						//var color_checkbox_div = sample_name+'_color_checkbox_div';
+						//color_checkbox_div = document.getElementById(color_checkbox_div);
+						
+						//document.getElementById("myP").style.color
+								
+				}
+			
+			</script>
+			<!--<button type="submit" name="submit" value="1" class="btn btn-success"> Update Samples </button>-->
+			 <input type='submit' id="sub"  name ="submit" value='Update Samples' />
+			</td>
+			</tr>
+			</table>
+			</form>	
+			</div>
+<?php
+			
+		}
+	}
+}
+
+?>
