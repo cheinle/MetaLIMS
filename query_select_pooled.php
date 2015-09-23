@@ -29,11 +29,15 @@ include('functions/check_box_tables.php');
 
 <!--query by date range-->	
 <form class="registration" action="query_results_pooled.php" method="GET">
+<div class="container-fluid">
+<div class="row">
+	
 <fieldset>
 <LEGEND><b>Display Pool Info:</b></LEGEND>
+	<div class="col-xs-6">
 	<i>(Select Dates and/or Fields to Query By)</i><br>
 	<label class="textbox-label">Select Start & End Date:</label>
-	<input type="text" id="datepicker"  name="smydate"><input type="text" id="datepicker2"  name="emydate">
+	<input type="text" id="datepicker"  name="smydate" class="shrtfields"><input type="text" id="datepicker2"  name="emydate" class="shrtfields">
 	<script>
 		$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 		$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd' }).val();
@@ -61,9 +65,12 @@ include('functions/check_box_tables.php');
 	<label class="checkbox-label"><input type="checkbox" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="all">Yes, Display All Pooled Samples</label>
 	</p>
 	</div>
+	</div>
 	<!--submit button-->
 	<p><button type="submit" name="submit" class="button" value="p_sample"> Submit </button></p>
 </fieldset>
+</div>
+</div>
 </form>
 </body>
 </html>

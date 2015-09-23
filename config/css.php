@@ -378,6 +378,7 @@ pre.border{
  width:90%;
  float:left;
  color:#818181;
+ margin-left: 5%;
  background: #f1f1f1;
  border: 2px solid #ccc;
  padding:10px;
@@ -476,7 +477,7 @@ form.registration legend{
   color: #7a7a7a;
   font-size:18px;
   padding:10px 4px 0px 4px;
-  margin-left:20px;
+  margin-left:10px;
 }
 
 form.registration label.textbox-label,label.password-label{
