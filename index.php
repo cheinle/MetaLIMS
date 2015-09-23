@@ -66,7 +66,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	  <div class="container-fluid">
 		
 			<ul class="nav navbar-nav">
-				<li ><a href="<?php echo $root;?>home_page.php">Home</a></li>
+				<li ><a href="<?php echo $root;?>home_page.php"><span class="glyphicon glyphicon-home"></a></li>
 				<li ><a href="<?php echo $root;?>form_insert.php">Insert Sample</a></li>
 				<!--<li ><a href="<?php echo $root;?>update_samples.php">Update Sample</a></li>-->
 				<li ><a href="<?php echo $root;?>sample_update_lookup.php">Update Sample</a></li>
@@ -142,7 +142,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 					</ul>
 				</li>
 				<li ><a href="<?php echo $root;?>FAQ.php">FAQ</a></li>
-				<li ><a href="<?php echo $root;?>logout.php">Logout</a></li>
+				<li ><a href="<?php echo $root;?>logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
 			</ul>
 		
 	</div>		

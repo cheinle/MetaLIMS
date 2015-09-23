@@ -148,13 +148,13 @@ include('functions/check_box_tables.php');
 	
 <fieldset>
 	<LEGEND><b>Data Dump (Choose One)</b></LEGEND>
-	<LEGEND><b>Display All Project Info:</b></LEGEND>
+	<LEGEND  style="margin-left:2%;"><b>Display All Project Info:</b></LEGEND>
 	<div class="vert-checkboxes">
 	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="project_all">Display all DB Project Info</label>
 	</div>
 	
 	
-	<LEGEND><b>  Display All Weather:</b></LEGEND>
+	<LEGEND  style="margin-left:2%;"><b>  Display All Weather:</b></LEGEND>
 	<div class="vert-checkboxes">
 	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="weather_all">Display all DB weather content</label>
 	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content =="xls") echo "checked";?> value="weather_xls">Download to MS Excel worksheet</label>
@@ -173,12 +173,12 @@ include('functions/check_box_tables.php');
 	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content =="xls") echo "checked";?> value="daily_data_xls">Download to MS Excel worksheet</label>
 	</div>-->
 	
-	<LEGEND><b>  Display All Air Samplers:</b></LEGEND>
+	<LEGEND  style="margin-left:2%;"><b>  Display All Air Samplers:</b></LEGEND>
 	<div class="vert-checkboxes">
 	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="airSampler_all">Display all DB air sampler content</label>
 	</div>
 	
-	<LEGEND><b>Display All Particle Counters:</b></LEGEND>
+	<LEGEND  style="margin-left:2%;"><b>Display All Particle Counters:</b></LEGEND>
 	<div class="vert-checkboxes">
 	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="partCt_all">Display all DB particle counter content</label>
 	</div>

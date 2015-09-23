@@ -27,13 +27,20 @@
 .navbar{
     border: none;
     border-radius: 2;
-    /*background-color: rgba(204,255,255,0.5);
-     * background: linear-gradient(rgba(192,192,192,1), rgba(192,192,192,0.5), rgba(192,192,192,1));
-     *   background: linear-gradient(rgba(204,255,255,1),rgba(204,255,255,0.5),rgba(204,255,255,1));
-     */
-  
     background: linear-gradient(rgba(192,213,219,1),rgba(192,213,219,0.5),rgba(192,213,219,1));
+}
+
+.nav.navbar-nav li a {
     color: black;
+    font-family: Georgia;
+  	font-size: 16px;
+}
+
+.nav.navbar-nav li a:hover {
+    color: black;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+             0px 8px 13px rgba(0,0,0,0.1),
+             0px 18px 23px rgba(0,0,0,0.1);
 }
 
 body.homepage {
@@ -42,25 +49,11 @@ body.homepage {
 }
 body{
    height: 100%;
-   /*color:#818181;*/
    color: black;
-   /*background: #f1f1f1;*/
-   background: grey;
+   /*background: grey;*/
+   background: #f1f1f1;
    font-family: Georgia;
-   border-radius: 15px;
-   box-shadow:0 1px 3px rgba(0,0,0,0.5);
 }
-
-/*wrap {*/
-	/*min-height: 100%;*/
-	/*height: 100%;*/
-	
-	/*Negative indent footer by its height*/
-	/*margin: 0 auto -60px;*/
-	/* Pad bottom by footer height */
-	/*padding: 0 0 60px;*/
-/*}*/
-
 
 div.page-header h3 {
     padding-top: 2px;
@@ -82,13 +75,6 @@ div.page-header{
 	 font-size: 14px;
 	 border-radius: 15px;
    	 box-shadow:0 5px 5px rgba(0,0,0,0.5);
-   	 
-   	 /*color: #fef4e9;
-	 border: solid 1px #da7c0c;
-	 background: #f78d1d;
-	 background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
-	 background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
-	 */
 	
 }
 
@@ -250,10 +236,8 @@ td.reg {
 	white-space: nowrap;
     overflow-x: scroll;
 }
-
-
 button.buttonLength {
-    #border: 1px solid black;
+     #border: 1px solid black;
 	clear: left;
 	
 	 width:100%;
@@ -274,41 +258,45 @@ button.buttonLength {
 	
 }
 
+button.med {
+    #border: 1px solid black;
+	clear: left;
+	
+	 width:40%;
+	 float:left;
+	 /*color:#818181;*/
+	 color: black;
+	 /*background: #f1f1f1;*/
+	 background: #D8D8D8;
+	 /*border: 2px solid #ccc;*/
+	 padding:10px;
+	 margin: 1px 1px 1px 1px;
+	 font-family: Georgia;
+	 font-size: 20px;
+	 border-radius: 15px;
+   	 box-shadow:0 5px 5px rgba(0,0,0,0.5);
+   	 /*background: linear-gradient(#D8D8D8,grey);*/
+   	 background: linear-gradient(rgba(216,216,216,1),rgba(216,216,216,0.75),rgba(216,216,216,1));
+	
+}
+
 button.small-button{
 	
 	/*color:#818181;*/
+	clear: both;
+	float:left;
 	color: black;
 	background: #C0D5DB;
 	border-color:#EEEEDBS;
-	width: 90%;
+	width: 35%;
 	height: 5%;
-	margin-left: 5%;
+	margin-left: 2%;
 	margin-top: 10px;
 	border-radius: 15px;
     box-shadow:0 1px 3px rgba(0,0,0,0.5);
     /*background: linear-gradient(#C0D5DB,#D8D8D8);*/
-	background: linear-gradient(rgba(192,213,219,1),rgba(192,213,219,0.5),rgba(192,213,219,1));
+	background: linear-gradient(rgba(192,213,219,1),rgba(192,213,219,0.75),rgba(192,213,219,1));
 }
-
-
-/*#col1 {
-    -webkit-column-count: 2; 
-    -moz-column-count: 2; 
-    column-count: 2;
-    
-    -webkit-column-gap: 40px; 
-    -moz-column-gap: 40px; 
-    column-gap: 40px;
-    
-    -webkit-column-rule-style: solid; 
-    -moz-column-rule-style: solid; 
-    column-rule-style: solid;
-    
-    -webkit-column-rule-width: 1px; 
-    -moz-column-rule-width: 1px; 
-    column-rule-width: 1px;
-    
-}*/
 
 form.registration ul{
 	
@@ -338,16 +326,6 @@ a.add{
 .error{
 	background-color: red;
 }
-
-/*div.homepage{
-	
-    background-image:url("dandi.jpg");
-	border: 2px solid #ccc;
-	background-size:100% 100%;
-	height: 100%;
-	height: 100%;
- 
-}*/
 
 div.border{
  width:90%;
@@ -460,6 +438,7 @@ form.registration{
  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
  -moz-border-radius: 15px;
  -webkit-border-radius: 15px;
+ box-shadow:0 5px 5px rgba(0,0,0,0.5);
 }
 
 form.registration fieldset{
@@ -469,6 +448,7 @@ form.registration fieldset{
   border-right:0;
   padding:6px;
   margin:0px 0px 0px 0px;
+  
 }
 
 form.registration legend{
