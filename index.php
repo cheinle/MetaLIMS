@@ -84,7 +84,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Update Sample Fields<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo $root;?>update_tables/update_air_sampler.php">Add Air Sampler</a></li>
+						<li><a href="<?php echo $root;?>update_tables/update_sampler.php">Add Sampler</a></li>
 						<li><a href="<?php echo $root;?>update_tables/update_analysis.php">Add Analysis</a></li>
 						<!--<li><a href="<?php echo $root;?>update_tables/update_collector.php">Add Collector</a></li>-->
 						<!--<li><a href="<?php echo $root;?>update_tables/add_daily_data.php">Add Daily Data</a></li>

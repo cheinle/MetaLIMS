@@ -155,7 +155,7 @@ function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 							echo '</tr>';
 							
 							if($header_ct == $size-1){
-								echo '<tbody>';
+								echo '</tbody>';
 							}
 								
 							

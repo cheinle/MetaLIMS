@@ -112,7 +112,15 @@
 		<fieldset>
 		<LEGEND><b>Project Name Info:</b></LEGEND>
 		<p>Note: Project Name Must Be Between 3-19 Characters And Contain No Spaces Or Special Characters Other Than Hypehns</p>
-		<p><a href="/series/dynamic/airmicrobiomes/query_select.php#projects">Check Existing Project Names</a></p>
+		<p><a id="myLink" href="link">link</a></p>
+		<script>
+	    	var link = "query_select_mod.php#projects";
+	    	link = root+link;
+	   	 	document.getElementById('myLink').setAttribute("href",link);
+	    	document.getElementById('myLink').innerHTML = 'Check Existing Project Names';
+		</script>
+		
+		
 		<div class="col-xs-6">
 		<!--Project Name-->
 		<p>

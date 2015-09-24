@@ -143,7 +143,7 @@ include('functions/check_box_tables.php');
 </p>
 
 <a name="projects"></a>
-<a name="airSamplers"></a>
+<a name="samplers"></a>
 <form class="registration" action="query_results_mod.php" method="GET">
 	
 <fieldset>

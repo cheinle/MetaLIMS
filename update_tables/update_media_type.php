@@ -100,8 +100,14 @@
 	<fieldset>
 	<LEGEND><b>Media Type Info:</b></LEGEND>
 	<div class="col-xs-6">
-	<p><a href="/series/dynamic/airmicrobiomes/query_select.php#airSamplers">Check if Media Type Exisits</a></p>
-
+	<p><a id="myLink" href="link">link</a></p>
+	<script>
+    	var link = "query_select_mod.php#media";
+    	link = root+link;
+   	 	document.getElementById('myLink').setAttribute("href",link);
+    	document.getElementById('myLink').innerHTML = 'Check if Media Exists';
+	</script>
+	
 	<!--Media Type-->
 	<p>
 	<label class="textbox-label">Media Type:*</label>

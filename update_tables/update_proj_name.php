@@ -9,9 +9,9 @@
 </head>
 <body>
 <?php include('../index.php');
-$path = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/airmicrobiomes/'; ?>
+$path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
 <div class="page-header">
-<h3>Add New Project Name</h3>	
+<h3>Add New Project Name - Admin Only</h3>	
 </div>
 	<?php 
 		//error && type checking 
@@ -186,7 +186,13 @@ $path = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/airmicrobiomes/'; ?>
 		<fieldset>
 		<LEGEND><b>Project Name Info:</b></LEGEND>
 		<p>Note: Project Name Must Be Between 3-19 Characters And Contain No Spaces Or Special Characters Other Than Hypehns</p>
-		<p><a href="/series/dynamic/airmicrobiomes/query_select.php#projects">Check if Project Exisits</a></p>
+		<p><a id="myLink" href="link">link</a></p>
+		<script>
+	    	var link = "query_select_mod.php#projects";
+	    	link = root+link;
+	   	 	document.getElementById('myLink').setAttribute("href",link);
+	    	document.getElementById('myLink').innerHTML = 'Check Existing Project Names';
+		</script>
 		
 		<div class="col-xs-6">
 		<!--Project Name-->
