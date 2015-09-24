@@ -237,7 +237,7 @@ if (isset($_GET['submit'])) {
 								
 			        			#echo "Name:$part_sens_name $start_time $end_time<br>";
 			        			echo "<p>";
-								echo "<label class='textbox-label'>Air Sampler ".$x.":*</label>";   
+								echo "<label class='textbox-label-sampler'>Air Sampler ".$x.":*</label>";   
 								echo "<select id='airSamp".$x."' name='airSamp".$x."' class='airSamp'>";
 								#echo "<option value='0'>-Select-</option>";
 								foreach ($array as $key => $value) {
@@ -254,11 +254,11 @@ if (isset($_GET['submit'])) {
 								?>
 			
 				   	 			
-				   	 			<label class="textbox-label">Start Date/Time <?php echo $x ?>:*</label>
+				   	 			<label class="textbox-label-sampler">Start Date/Time <?php echo $x ?>:*</label>
 								<input type="text" id="sdate<?php echo $x ?>"  class = "shrtfields" placeholder = "Date" name="sdate<?php echo $x ?>" value="<?php echo $start_date; ?>"/>
 								<input type="text" name="stime<?php echo $x ?>" id ="stime<?php echo $x ?>" class="shrtfields"  placeholder="Time"  value="<?php echo $start_time?>"/>
 								
-								<label class="textbox-label">End Date/Time<?php echo $x ?>:*</label>
+								<label class="textbox-label-sampler">End Date/Time<?php echo $x ?>:*</label>
 								<input type="text" id="edate<?php echo $x ?>" class = "shrtfields" placeholder = "Date" name="edate<?php echo $x ?>" value="<?php echo $end_date; ?>"/>
 								<input type="text" name="etime<?php echo $x ?>" id="etime<?php echo $x ?>" class="shrtfields"  placeholder="Time" value="<?php echo $end_time;?>"/>
 								
@@ -278,7 +278,7 @@ if (isset($_GET['submit'])) {
 				   	 			});
 							</script>
 							
-							<h3 class="checkbox-header">Delete Sensor <?php echo $x ?></h3>
+							<h3 class="checkbox-header-sampler">Delete Sensor <?php echo $x ?></h3>
 							<div class='vert-checkboxes'>
 							<label class='checkbox-label'>DELETE</label>
 							<input type='checkbox' name='delete<?php echo $x ?>' id='delete<?php echo $x ?>' value='DELETE'>
@@ -319,20 +319,20 @@ if (isset($_GET['submit'])) {
 				       //create new elements
 				        var ul_element = document.createElement("ul");
 						var start_label = document.createElement("label");
-						start_label.setAttribute("style", "color: pink;");
-						start_label.className="textbox-label";
+						//start_label.setAttribute("style", "color: pink;");
+						start_label.className="textbox-label-sampler";
 						var end_label = document.createElement("label");
-						end_label.setAttribute("style", "color: pink;");
-						end_label.className="textbox-label";
+						//end_label.setAttribute("style", "color: pink;");
+						end_label.className="textbox-label-sampler";
 						var airSamp_label = document.createElement("label");
-						airSamp_label.setAttribute("style", "color: pink;");
-						airSamp_label.className="textbox-label";
+						//airSamp_label.setAttribute("style", "color: pink;");
+						airSamp_label.className="textbox-label-sampler";
 						var checkbox_label = document.createElement("label");
-						checkbox_label.setAttribute("style", "color: pink;");
+						//checkbox_label.setAttribute("style", "color: pink;");
 						checkbox_label.className="checkbox-label";
 						var h3 = document.createElement("h3");
-						h3.setAttribute("style", "color: pink;");
-						h3.className="checkbox-header";
+						//h3.setAttribute("style", "color: pink;");
+						h3.className="checkbox-header-sampler";
 						var div= document.createElement("div");
 						div.className="vert-checkboxes";
 						var input1 = document.createElement("input");

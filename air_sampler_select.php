@@ -67,11 +67,11 @@
 			} 
 		}
 ?>
-		<p>
+		<!--<p>
 		<h3 class="checkbox-header">Check To Mark All Times Are The Same:</h3>
  		<div class="vert-checkboxes">
  		<label class="checkbox-label"><input type="checkbox" name="same_time" id="same_time" value="same_time"/>Yes</label>
 		</div>
-		</p>
+		</p>-->
 		<!--</fieldset>-->
 

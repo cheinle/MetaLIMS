@@ -478,12 +478,24 @@ form.registration label.textbox-label-sampler{
   width:200px;
   float: left;
   text-align: right;
-  /*color:#999;*/
-  color:#666666;
   clear:left;
   margin:4px 4px 0px 0px;
   padding:0px;
-  color:#0d0301;
+  color:#52bab3;
+}
+
+form.registration h3.checkbox-header-sampler{
+  font-size: 16px;
+  width:200px;
+  text-align: right;
+  color:green;
+  clear:both;
+  margin:8px 8px 0px 0px;
+  padding:8px;
+  font-family: Georgia;
+  font-weight: bold;
+  color:#52bab3;
+  
 }
 
 form.registration input[type=text],input[type=password],input[type=email]{
@@ -606,6 +618,7 @@ form.registration h3.checkbox-header{
   font-weight: bold;
   
 }
+
 
 
 form.registration input:focus, form.registration select:focus{
