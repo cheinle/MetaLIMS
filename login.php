@@ -20,7 +20,7 @@
 	 		
 	 		 $count_check = $stmt1->fetch();
              $size =sizeof($count_check);
-			 echo $size;
+			 //echo $size;
 			 //check that one entry was returned
              if($size == 1) {
              	echo "workingggg";
