@@ -274,15 +274,15 @@
 <script type="text/javascript">
 		$(document).ready(function(){  
 				               
-             $('#air_samp_num').change(function(){ //on button click event
-                var num_air_samplers = $('#air_samp_num').val(); //<----- get the value from the parent select 
+             $('#sampler_num').change(function(){ //on button click event
+                var num_samplers = $('#sampler_num').val(); //<----- get the value from the parent select 
                 //alert(num_sensors);
 	                $.ajax({
-	                    url     : root+'air_sampler_select.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'sampler_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
-	                    data    : { num_air_samplers: num_air_samplers}, //Data you are sending
+	                    data    : { num_samplers: num_samplers}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},
-	                    success : function(data){$('#div_air_samp_num').html(data)}, // On success, it will populate the div
+	                    success : function(data){$('#div_sampler_num').html(data)}, // On success, it will populate the div
 	                    error   : function(){alert('an error has occured')} //error message
 	                })
 	

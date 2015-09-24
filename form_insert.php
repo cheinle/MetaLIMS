@@ -164,12 +164,12 @@ include('/config/check_sample_name.php');
 					}
 					else {
 						$error_check = 'true';
-	    				die('execute() failed: ' . htmlspecialchars($stmt->error));
+	    				die('execute() failed: ' . htmlspecialchars($stmt_sid->error));
 					}
 				} 
 				else {
 					$error_check = 'true';
-	    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+	    			die('execute() failed: ' . htmlspecialchars($stmt_sid->error));
 				}
 				$stmt_sid -> close();
 				
@@ -330,11 +330,11 @@ include('/config/check_sample_name.php');
 						}
 						
 						/***************************************************************************************
-						//Insert Air Samplers !!!move this, you must insert in after you put into sample db...same with isolate db?
+						//Insert Samplers !!!move this, you must insert in after you put into sample db...same with isolate db?
 						****************************************************************************************/
-						$num_of_air_samplers = $_GET['air_samp_num'];
+						$num_of_samplers = $_GET['sampler_num'];
 						for ($x = 1; $x <= $num_of_air_samplers; $x++) {
-							$p_air_samp_name = htmlspecialchars($_GET['airSamp'.$x]);
+							$p_sampler_name = htmlspecialchars($_GET['sampler'.$x]);
 							
 							$start = $_GET['sdate'.$x].' '.$_GET['stime'.$x];
 							$end = $_GET['edate'.$x].' '.$_GET['etime'.$x];
@@ -350,27 +350,27 @@ include('/config/check_sample_name.php');
 								$time = ($seconds_diff/3600);
 								$p_time = round($time,2);
 							}
-							$query_air_samp = "INSERT INTO sample_air_sampler (sample_name, air_sampler_name, start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)";
-							$stmt_air_samp = $dbc -> prepare($query_air_samp);
-							if(!$stmt_air_samp){
-								throw new Exception("Prepare Failure: Unable To Insert Sample Air Sampler");	
+							$query_samp = "INSERT INTO sample_sampler (sample_name, sampler_name, start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)";
+							$stmt_samp = $dbc -> prepare($query_air_samp);
+							if(!$stmt_samp){
+								throw new Exception("Prepare Failure: Unable To Insert Sampler");	
 							}
 							else{
-								$stmt_air_samp -> bind_param('ssssd', $p_sample_name,$p_air_samp_name,$start,$end,$p_time);
-								if($stmt_air_samp -> execute()){
-									$rows_affected_air_samp = $stmt_air_samp ->affected_rows;
-									$stmt_air_samp -> close();
+								$stmt_samp -> bind_param('ssssd', $p_sample_name,$p_sampler_name,$start,$end,$p_time);
+								if($stmt_samp -> execute()){
+									$rows_affected_samp = $stmt_samp ->affected_rows;
+									$stmt_samp -> close();
 									//check if add was successful or not. Tell the user
-							   		if($rows_affected_air_samp > 0){
+							   		if($rows_affected_samp > 0){
 							   			//echo 'You Added New Air Sampler Info :'.$p_air_samp_name.'<br>';
 									}else{
 										$insert_check = 'false';
-										throw new Exception("An Error Occured: No Air Sampler Info Added");
+										throw new Exception("An Error Occured: No Sampler Info Added");
 									}
 								}
 								else{
 									$insert_check = 'false';
-									throw new Exception("Execution Failure: Unable To Insert Air Sampler");	
+									throw new Exception("Execution Failure: Unable To Insert Sampler");	
 								}
 							}
 						}
@@ -567,28 +567,28 @@ include('/config/check_sample_name.php');
 				
 				<p>
 				<!--air sampler dropdown-->
-				<label class="textbox-label">Select Number of Air Samplers:*</label>
+				<label class="textbox-label">Select Number of Samplers:*</label>
 				<?php
 				//url or $_GET name, table name, field name
 				//dropDown('airSamp', 'air_sampler', 'air_sampler_name','air_sampler_name',$submitted);
 				?>
-				<select id='air_samp_num' name='air_samp_num'>
+				<select id='sampler_num' name='sampler_num'>
 				<option value='0'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-					if((isset($_GET['air_samp_num']) && $_GET['air_samp_num'] == "0" )){ echo "selected";}}?>>-Select-</option>
+					if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "0" )){ echo "selected";}}?>>-Select-</option>
 				<option value='1'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-					if((isset($_GET['air_samp_num']) && $_GET['air_samp_num'] == "1" )){ echo "selected";}}?>>-1:One-</option>
+					if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "1" )){ echo "selected";}}?>>-1:One-</option>
 				<option value='2'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-					if((isset($_GET['air_samp_num']) && $_GET['air_samp_num'] == "2" )){ echo "selected";}}?>>-2:Two-</option>
+					if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "2" )){ echo "selected";}}?>>-2:Two-</option>
 				<option value='3'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-					if((isset($_GET['air_samp_num']) && $_GET['air_samp_num'] == "3" )){ echo "selected";}}?>>-3:Three-</option>
+					if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "3" )){ echo "selected";}}?>>-3:Three-</option>
 				<option value='4'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-					if((isset($_GET['air_samp_num']) && $_GET['air_samp_num'] == "4" )){ echo "selected";}}?>>-4:Four-</option>
+					if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "4" )){ echo "selected";}}?>>-4:Four-</option>
 				<option value='5'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-					if((isset($_GET['air_samp_num']) && $_GET['air_samp_num'] == "5" )){ echo "selected";}}?>>-5:Five-</option>
+					if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "5" )){ echo "selected";}}?>>-5:Five-</option>
 				<option value='6'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-					if((isset($_GET['air_samp_num']) && $_GET['air_samp_num'] == "6" )){ echo "selected";}}?>>-6:Six-</option>
+					if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "6" )){ echo "selected";}}?>>-6:Six-</option>
 				</select>
-				<div id="div_air_samp_num"></div>
+				<div id="div_sampler_num"></div>
 				</p>
 				</div>
 				

@@ -1,14 +1,13 @@
 <?php
 	 include('database_connection.php');
 
-	$num_air_samplers = $_GET['num_air_samplers'];
-	//echo '<fieldset>';
-	//echo '<legend>Air Samplers (For Pooling Raw Samples Only!)</legend>';
-	for ($x = 1; $x <= $num_air_samplers; $x++) {
+	$num_samplers = $_GET['num_samplers'];
+
+	for ($x = 1; $x <= $num_samplers; $x++) {
     	#echo "The number is: $x <br>";
     	echo "<p>";
-		echo "<label class='textbox-label-sampler'>Air Sampler #".$x.":*</label>";
-		echo "<select id='airSamp".$x."' name='airSamp".$x."'>";
+		echo "<label class='textbox-label-sampler'>Sampler #".$x.":*</label>";
+		echo "<select id='sampler".$x."' name='sampler".$x."'>";
 		echo "<option value='0'>-Select-</option>";
 		$stmt[$x] = $dbc->prepare("SELECT air_sampler_name FROM air_sampler");
   		if ($stmt[$x]->execute()){
@@ -49,14 +48,14 @@
 				$('#sdate<?php echo $x ?>').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 				$('#edate<?php echo $x ?>').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 
-				var air_samp_num = <?php echo(json_encode($x)); ?>;
+				var sampler_num = <?php echo(json_encode($x)); ?>;
     			$(document).ready(function(){
-        			$('input[name="stime'+air_samp_num+'"]').ptTimeSelect();
+        			$('input[name="stime'+sampler_num+'"]').ptTimeSelect();
         			timeFormat: "HH:mm"
    	 			});
    	 			
    	 			$(document).ready(function(){
-   	 				$('input[name="etime'+air_samp_num+'"]').ptTimeSelect();
+   	 				$('input[name="etime'+sampler_num+'"]').ptTimeSelect();
         			timeFormat: "HH:mm"
    	 			});
 				</script>
