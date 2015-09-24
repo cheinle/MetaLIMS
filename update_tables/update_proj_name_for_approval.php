@@ -86,7 +86,7 @@
 
 			//if name does not exist, send email for approval
 		    if($error != 'true'){
-				$email_to="cheinle@ntu.edu.sg";
+				$email_to=$admin_user;
 				$email_subject="Project Name Approval";
 				$email_message="Please Approve Project: '".$p_projName."' with the following description:\n '".$p_description."' \n Project Abbrev:'".$p_abName."' Reply-to:'".$email_address;
 				$headers = "From: admin\r\n".

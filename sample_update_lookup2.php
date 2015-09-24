@@ -17,7 +17,8 @@ include ('database_connection.php');
 
 
 $parent_value = htmlspecialchars($_GET['sample_name']);
-$path = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/airmicrobiomes/';
+include('config/path.php');
+$path = $_SERVER['DOCUMENT_ROOT'].$root;
 include('functions/dropDown_update.php');
 include('functions/dropDown_update_for_storage.php');
 include('functions/dropDown_update_for_isolates.php');
@@ -29,7 +30,6 @@ include ('index.php');
 include('/config/check_form_insert_js.php');
 include('/config/check_sample_name.php');
 //include('/config/add_air_samplers_to_sample_update_js.php');
-
 
 ?>
 <div class="page-header">	
@@ -52,9 +52,8 @@ if (isset($_GET['submit'])) {
 	
 ?>				
 				<form  class="registration" onsubmit="return validate(this)" action="sample_update_lookup3.php" method="GET">
-		
-
-				
+				<!--end of col-xs-6-->
+>
 				<!--transaction time-->
 				<input type="text" style="visibility:hidden" class="hidden" name="transaction_time" id="transaction_time" value="<?php echo $transaction_time ?>"/>
 				
@@ -87,7 +86,7 @@ if (isset($_GET['submit'])) {
     					font-size: 14px;
 					}
 				</style>
-				</div>
+				</div><!--end of col-xs-6-->
 				</fieldset>
 				
 				
@@ -183,7 +182,7 @@ if (isset($_GET['submit'])) {
 				<label class="textbox-label">Height Above Floor:+</label><br>
 				<input type="text" name="sampling_height" id="sampling_height" placeholder="Enter A Height Above Floor (cm)" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'sampling_height');} ?>">
 				</p>
-				</div>
+				</div><!--end of col-xs-6-->
 				
 				<div class="col-xs-6">
 				<p>
@@ -300,7 +299,7 @@ if (isset($_GET['submit'])) {
 					<input type="button" id="more_air_samplers" class="button" style="float:left;margin-left: 220px;margin-bottom: 30px" name ="more_air_samplers" value='Add More Air Samplers' /><br>
 					<!--<div id="div1"></div>-->
 					
-					</div>
+
 					<!--</fieldset>-->
 					<!--add more sensor info!-->
 						<script type="text/javascript">
@@ -486,9 +485,9 @@ if (isset($_GET['submit'])) {
 				
 				
 				</script>
-				</div>
+				</div><!--end of col-xs-6-->
 				</fieldset>
-				</div>
+				</div><!--button-->
 				
 				<p>
 				<button type="button"  data-toggle="collapse" data-target="#isolates" aria-expanded="true" aria-controls="demo" class='buttonLength'>For Isolate Collection Info</button>
@@ -499,6 +498,7 @@ if (isset($_GET['submit'])) {
 				<fieldset>
 				<LEGEND><b>Isolate Collection Info</b></LEGEND>
 				<div class="col-xs-6">
+				
 				<p>
 				<!--<h3 class = 'form-header'>(For Isolate Collection)</h3>-->
 				<label class="textbox-label">Select Isolate Collection Temperature:*</label>
@@ -512,7 +512,7 @@ if (isset($_GET['submit'])) {
 				
 				<p>
 				<label class="textbox-label">Isolate Storage Date:*</label><br>
-				<input type="text" id="datepicker3"  name="iso_date" class = "fields" value="<?php if ((isset($_GET['submit']))){echo text_insert_isolate_update($parent_value,'iso_date');} ?>"/>
+				<input type="text" id="datepicker3"  name="iso_date" class = "fields" value="<?php if ((isset($_GET['submit']))){echo text_insert_isolate_update($parent_value,'iso_date',$root);} ?>"/>
 				</p>
 				<script>
 				$('#datepicker3').datepicker({ dateFormat: 'yy-mm-dd' }).val();
@@ -538,12 +538,12 @@ if (isset($_GET['submit'])) {
 				
 				<p>
 				<label class="textbox-label">16S Sequence (Sanger)</label><br>
-				<input type="text" name="sang_seq" id="sang_seq" placeholder="Enter A Sequence" value="<?php if ((isset($_GET['submit']))){echo text_insert_isolate_update($parent_value,'seq_sang');} ?>">
+				<input type="text" name="sang_seq" id="sang_seq" placeholder="Enter A Sequence" value="<?php if ((isset($_GET['submit']))){echo text_insert_isolate_update($parent_value,'seq_sang',$root);} ?>">
 				</p>
 				
 				<p>
 				<label class="textbox-label">Closest Hit</label><br>
-				<input type="text" name="closest_hit" id="closest_hit" placeholder="Enter A Closest Hit" value="<?php if ((isset($_GET['submit']))){echo text_insert_isolate_update($parent_value,'closest_hit');} ?>">
+				<input type="text" name="closest_hit" id="closest_hit" placeholder="Enter A Closest Hit" value="<?php if ((isset($_GET['submit']))){echo text_insert_isolate_update($parent_value,'closest_hit',$root);} ?>">
 				</p>
 				
 				<p>
@@ -644,16 +644,16 @@ if (isset($_GET['submit'])) {
 					<p>
 					<h3 class="checkbox-header">Does Original Sample Still Exist?:</h3><br>
 	 				<div class="vert-checkboxes">
-	 				<label class="checkbox-label"><input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" class = "orig_sample_exist" value="false" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info'); if($check_exists == 'false'){ echo 'checked';} ?>/>No</label><br />
+	 				<label class="checkbox-label"><input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" class = "orig_sample_exist" value="false" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>No</label><br />
 					</div>
 					</p>
 					
 					<p>
 					<h3 class="checkbox-header">Does DNA Extraction Sample Exist?:</h3><br>
 					<div class="vert-checkboxes">
-	 				<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info'); if($check_exists == 'one'){ echo 'checked';}  ?>/>Yes,DNA Sample Exisits</label><br />
-					<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info'); if($check_exists == 'two'){ echo 'checked';}  ?>/>No, DNA Has Not Been Extracted</label><br />
-					<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info'); if($check_exists == 'three'){ echo 'checked';} ?>/>No, DNA Sample Is Used Up</label><br />
+	 				<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>Yes,DNA Sample Exisits</label><br />
+					<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'two'){ echo 'checked';}  ?>/>No, DNA Has Not Been Extracted</label><br />
+					<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'three'){ echo 'checked';} ?>/>No, DNA Sample Is Used Up</label><br />
 					</div>
 					</p>
 					</div>
@@ -736,16 +736,16 @@ if (isset($_GET['submit'])) {
 				<p>
 				<h3 class="checkbox-header">Does Original RNA Sample Still Exist?:</h3>
 				<div class="vert-checkboxes">
- 				<label class="checkbox-label"><input type="checkbox" class = "orig_sample_exist" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info'); if($check_exists == 'false'){ echo 'checked';} ?>/>No</label><br />
+ 				<label class="checkbox-label"><input type="checkbox" class = "orig_sample_exist" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>No</label><br />
 				</div>
 				</p>
 				
 				<p>
 				<h3 class="checkbox-header">Does RNA Extraction Sample Exist?:</h3><br>
  				<div class="vert-checkboxes">
- 				<label class="checkbox-label"><input type="radio" name="RNA_sample_exist" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info'); if($check_exists == 'one'){ echo 'checked';}  ?>/>Yes,RNA Sample Exisits</label><br />
-				<label class="checkbox-label"><input type="radio" name="RNA_sample_exist" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info'); if($check_exists == 'two'){ echo 'checked';}  ?>/>No, RNA Has Not Been Extracted</label><br />
-				<label class="checkbox-label"><input type="radio" name="RNA_sample_exist" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info'); if($check_exists == 'three'){ echo 'checked';} ?>/>No, RNA Sample Is Used Up</label><br />
+ 				<label class="checkbox-label"><input type="radio" name="RNA_sample_exist" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>Yes,RNA Sample Exisits</label><br />
+				<label class="checkbox-label"><input type="radio" name="RNA_sample_exist" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'two'){ echo 'checked';}  ?>/>No, RNA Has Not Been Extracted</label><br />
+				<label class="checkbox-label"><input type="radio" name="RNA_sample_exist" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'three'){ echo 'checked';} ?>/>No, RNA Sample Is Used Up</label><br />
 				</div>
 				</p>
 				</div>
@@ -819,7 +819,8 @@ if (isset($_GET['submit'])) {
 				
 				<p><button class="button" type="submit" name="submit" value="2">Update </button>
 				<button class="button" type=button onClick="parent.location='/series/dynamic/airmicrobiomes/sample_update_lookup.php'" value='Go Back'>Go Back</button>
-				</p>	
+				</p>
+				
 		</form>
 		<script type="text/javascript">
 			   var name_check = 'true';

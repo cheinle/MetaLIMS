@@ -5,10 +5,11 @@
 <body>
 <?php	
 
-function text_insert_isolate_update($sample_name,$field_name){ #send also the query name?, always based on sample name
+function text_insert_isolate_update($sample_name,$field_name,$root){ #send also the query name?, always based on sample name
 	//$sample_name = '2015/04/23fungal_bac_isolatesF003';
 	//$field_name = 'iso_date';
-	include('../config/path.php');
+	//include('config/path.php');
+	//$path = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/am_production/';
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	include($path.'database_connection.php');
 

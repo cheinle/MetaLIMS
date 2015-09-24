@@ -6,9 +6,9 @@
 <body>
 <?php	
 //2015/05/25 built for text input recall for storage info. trying to mod it to use only one function instead of multiple...still in the works
-function text_insert_update_stinfo($sample_name,$field_name,$table){ #send also the query name?, always based on sample name
+function text_insert_update_stinfo($sample_name,$field_name,$table,$root){ #send also the query name?, always based on sample name
 	#echo 'fn:'.$field_name;
-	include('../config/path.php');
+	//include('config/path.php');
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	include($path.'database_connection.php');
 	
