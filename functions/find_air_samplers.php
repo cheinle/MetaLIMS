@@ -6,10 +6,6 @@ function find_air_samplers($sample_name,$table_type){
 	include($path.'database_connection.php');
 	
 	$stmt = $dbc->prepare("SELECT air_sampler_name, start_date_time,end_date_time FROM sample_air_sampler WHERE sample_name = ?");
-	if(!$stmt){
-		echo "what the heck??!!";
-	}
-	$stmt -> bind_param('s',$sample_name);
 	if(!$stmt){;
 		die('prepare() failed: ' . htmlspecialchars($stmt->error));
 	}

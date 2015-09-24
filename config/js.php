@@ -256,7 +256,7 @@
                 var num_sensors = $('#sens_num').val(); //<----- get the value from the parent select 
                 //alert(num_sensors);
 	                $.ajax({
-	                    url     : '/series/dynamic/airmicrobiomes/sensor_select.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'sensor_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : { num_sensors: num_sensors}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},

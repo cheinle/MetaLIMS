@@ -566,8 +566,8 @@ include('/config/check_sample_name.php');
 				</p>
 				
 				<p>
-				<!--air sampler dropdown-->
-				<label class="textbox-label">Select Number of Samplers:*</label>
+				<!--sampler dropdown-->
+				<<label class="textbox-label">Select Number of Samplers:*</label>
 				<?php
 				//url or $_GET name, table name, field name
 				//dropDown('airSamp', 'air_sampler', 'air_sampler_name','air_sampler_name',$submitted);
@@ -935,10 +935,10 @@ include('/config/check_sample_name.php');
 				function check_form(){
 					var index;
 					var valid = 'true';
-					var x = document.getElementById('air_samp_num').value;
+					var x = document.getElementById('sampler_num').value;
 					if(x == 0){
 						valid = 'false';
-						document.getElementById('air_samp_num').style.backgroundColor = 'blue';
+						document.getElementById('sampler_num').style.backgroundColor = 'blue';
 					}
 					else{
 						//create a contains method to check if airSamp is entered twice
@@ -951,26 +951,26 @@ include('/config/check_sample_name.php');
 							return false;
 						}
 						var seen = [];
-						//validate airSamp data
+						//validate sampler data
 						for (index = 1; index <= x; ++index) {
-	   	 					var airSamp_name = 'airSamp'+index;
+	   	 					var sampler_name = 'sampler'+index;
 	   	 					//check that airSamp is picked 
-	   	 					var airSamp_name_value = document.getElementById(airSamp_name).value;
-	   	 					if(airSamp_name_value == '0' || airSamp_name_value == 'Needs to be added'){
-	   	 						alert("Whoops! Sensor Name Is Not Valid");
-	   	 						document.getElementById(airSamp_name).style.backgroundColor = 'blue';
+	   	 					var sampler_name_value = document.getElementById(sampler_name).value;
+	   	 					if(sampler_name_value == '0' || sampler_name_value == 'Needs to be added'){
+	   	 						alert("Whoops! Sampler Name Is Not Valid");
+	   	 						document.getElementById(sampler_name).style.backgroundColor = 'blue';
 	   	 						valid = 'false';
 	   	 					}
 	   	 					else{
-	   	 						//check to see if airSamp name is already input
-	   	 						if(seen.contains(airSamp_name_value)){
-	   	 							document.getElementById(airSamp_name).style.backgroundColor = 'blue';
-	   	 							alert("You Have Chosen More Than One Air Sampler With The Same Name. Please Check Names");
+	   	 						//check to see if sampler name is already input
+	   	 						if(seen.contains(sampler_name_value)){
+	   	 							document.getElementById(sampler_name).style.backgroundColor = 'blue';
+	   	 							alert("You Have Chosen More Than One Sampler With The Same Name. Please Check Names");
 	   	 							valid = 'false';
 	   	 						}
 	   	 					    else{
-	   	 							seen.push(airSamp_name_value);
-	   	 							document.getElementById(airSamp_name).style.backgroundColor = 'white';
+	   	 							seen.push(sampler_name_value);
+	   	 							document.getElementById(sampler_name).style.backgroundColor = 'white';
 	   	 						}
 	   	 					}
 	   	 				
@@ -1028,7 +1028,7 @@ include('/config/check_sample_name.php');
 									time = (time/1000); 
 
 									var p_time = time.toFixed(2);
-									var airSamp_check = airSamp_name.match(/^Coriolis.*/);
+									var sampler_check = sampler_name.match(/^Coriolis.*/);
 
 									if(p_time < 0){
 										valid = 'false';
@@ -1038,7 +1038,7 @@ include('/config/check_sample_name.php');
 										document.getElementById(start_date).style.backgroundColor = 'blue';
 										document.getElementById(end_date).style.backgroundColor = 'blue';
 									}
-									else if(p_time > 6.5 && airSamp_check  == null){//check if coriolis sampling is greater than 6 hours
+									else if(p_time > 6.5 && sampler_check  == null){//check if coriolis sampling is greater than 6 hours
 										valid = 'false';
 										alert("Sampling Is Greater Than 6 Hours For Coriolis Sampling. Please Check Date/Times");
 										document.getElementById(start_time).style.backgroundColor = 'blue';
