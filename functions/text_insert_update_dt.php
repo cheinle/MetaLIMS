@@ -23,7 +23,7 @@ function text_insert_update_dt($sample_name,$field_name,$field_sub){ #send also 
 			$stmt->execute();
 			while ($stmt->fetch()) {
 				#echo $row[$field_name];
-				if(($field_name == 'start_samp_date_time')|| ($field_name == 'end_samp_date_time') || ($field_name == 'd_extraction_date')){		
+				if(($field_name == 'start_samp_date_time')|| ($field_name == 'end_samp_date_time') || ($field_name == 'd_extraction_date' || $field_name == 'r_extraction_date')){		
 					$explode = explode(" ",$row[$field_name]);
 					if($field_sub == 'date'){
 						return $explode[0];

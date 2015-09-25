@@ -7,7 +7,7 @@
                 var name = $('#sample_name').val(); 
                 //alert(num_sensors);
 	               $.ajax({
-	                    url     : '/series/dynamic/airmicrobiomes/sample_name_validation.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'sample_name_validation.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : {proj: projectName,sa: sampleNumber,current_name: name},
 	                    success : function(data){  
@@ -34,7 +34,7 @@
                 var sampleNumber = $('#sample_number').val(); 
                 //alert(num_sensors);
 	             $.ajax({
-	                    url     : '/series/dynamic/airmicrobiomes/sample_name_validation.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'sample_name_validation.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : {proj: projectName,sa: sampleNumber},
 	                     success : function(data){  

@@ -103,7 +103,6 @@
 							var names = txt.split(',');
 							x = names.length;
 							
-							//validate airSamp data
 							for (index = 0; index < x; ++index) {
 		   	 					var name = names[index];
 		   	 			
@@ -397,7 +396,6 @@
 							var names = extractor_names.split(',');
 							x = names.length;
 							
-							//validate airSamp data
 							for (var index = 0; index < x; ++index) {
 		   	 					var name = names[index];
 		   	 					//check to see if airSamp name is already input
@@ -485,7 +483,7 @@
 				var names = extractor_names.split(',');
 				x = names.length;
 							
-				//validate airSamp data
+				
 				for (var index = 0; index < x; ++index) {
 					var name = names[index];
 		   	 		//check to see if airSamp name is already input
@@ -588,10 +586,9 @@
 						var names = extractor_names.split(',');
 						x = names.length;
 							
-						//validate airSamp data
 						for (var index = 0; index < x; ++index) {
 		   	 				var name = names[index];
-		   	 				//check to see if airSamp name is already input
+		   	 				//check to see if sampler name is already input
 		   	 				if(seen.contains(name)){
 		   	 					document.getElementById(filled2[i8]).style.backgroundColor = 'blue';
 		   	 					alert("You Have One Or More Extractor Name With The Same Name. Please Check Names");

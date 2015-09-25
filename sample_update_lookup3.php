@@ -56,7 +56,7 @@ include('functions/convert_header_names.php');
 				$p_projName = htmlspecialchars($_GET['projName']);
 				$p_loc = htmlspecialchars($_GET['loc']);
 				$p_rloc = htmlspecialchars($_GET['rloc']);
-				//$p_airSamp = htmlspecialchars($_GET['airSamp']);
+				//$p_sampler = htmlspecialchars($_GET['sampler']);
 				$p_partSamp = NULL;
 				$p_poolEx = '0'; //pooling extracts has changed. This should be removed eventually. 
 				$p_dExtKit = htmlspecialchars($_GET['dExtKit']);
@@ -85,15 +85,6 @@ include('functions/convert_header_names.php');
 				$p_dWeather = NULL;
 				$p_media = htmlspecialchars($_GET['media']);
 				$p_sampling_height = htmlspecialchars($_GET['sampling_height']);
-				
-				//for isolates
-				$p_iso_coll_temp = htmlspecialchars($_GET['iso_coll_temp']);
-				$p_iso_date = htmlspecialchars($_GET['iso_date']);
-				$p_iso_store_method = htmlspecialchars($_GET['iso_store_method']);
-				$p_sang_seq= htmlspecialchars($_GET['sang_seq']);
-				$p_closest_hit= htmlspecialchars($_GET['closest_hit']);
-				$p_send_pac_bio= htmlspecialchars($_GET['send_pac_bio']);
-				$p_iso_loc_type= htmlspecialchars($_GET['iso_loc_type']);
 				
 				if(! ($p_sType == 'A' || $p_sType == 'BC' || $p_sType == 'F' || $p_sType == 'UI') ){//this is here to set if the flow rate was left empty...should check if flowrate was empty
 						if($p_fRate == ''){$p_fRate = '0';}
@@ -126,14 +117,7 @@ include('functions/convert_header_names.php');
 				if ($p_fRate_eod == '') {$p_fRate_eod = NULL;}
 				if ($p_dData == '0') {$p_dData = NULL;}
 				if ($p_dWeather == '0') {$p_dWeather = NULL;}
-				
-				if ($p_iso_coll_temp == '0') {$p_iso_coll_temp = NULL;}
-				if ($p_iso_date == '') {$p_iso_date = NULL;}
-				if ($p_iso_store_method == '0') {$p_iso_store_method = NULL;}
-				if ($p_sang_seq== '') {$p_sang_seq = NULL;}
-				if ($p_closest_hit == '') {$p_closest_hit = NULL;}
-				if ($p_send_pac_bio == '0') {$p_send_pac_bio = NULL;}
-				if ($p_iso_loc_type == '0') {$p_iso_loc_type = NULL;}
+
 						
 				//check and process collector info
 				include_once("functions/check_collector_names.php");
@@ -547,103 +531,14 @@ include('functions/convert_header_names.php');
 						echo '<script>Alert.render("ERROR:An error has occred: Please populate a field to update");</script>';
 						throw new Exception("An error has occred: Please populate a field to update");
 					}
-					//////////////////////////////////////////////////////////////////
-					/****Update Isolate Table****/
-					//////////////////////////////////////////////////////////////////
-					//check if sample exists in isolates db, if yes, update, else insert
-					//check if the project name + sample number combo exists
-					$isolate_sample_exists = 'false';
-					$param1 = "%{$p_projName}%";
-					$param2 = "%{$p_sample_number}";
-					$stmt_siso = $dbc->prepare("SELECT sample_name FROM isolates WHERE sample_name LIKE ? AND sample_name LIKE ?");
-					if(!$stmt_siso){
-						$successfull = 'false';
-						throw new Exception("SELECT Prepare Error: Please Notify Admin");
-					}
-					$stmt_siso -> bind_param('ss', $param1,$param2);
-		  			if ($stmt_siso->execute()){
-		    			$stmt_siso->bind_result($name);
-		    			if ($stmt_siso->fetch()){
-		        			$isolate_sample_exists = 'true';
-						}
-					} 
-					else {
-						$successfull = 'false';
-						throw new Exception("SELECT ERROR: Please Check Sample Name");
-		    			//die('execute() failed: ' . htmlspecialchars($stmt->error));
-						
-					}
-					$stmt_siso -> close();
-					
-					if($isolate_sample_exists == 'true'){
-						$p_send_pac_bio = 'N';
-						//update
-						$iso_set_query = 'UPDATE isolates SET sample_name = ?, iso_coll_temp = ?, iso_date = ?,iso_store_method = ?, seq_sang = ?,closest_hit = ?,send_pac_bio =?, loc_type = ? WHERE sample_name = ?';
-						if($iso_stmt = $dbc ->prepare($iso_set_query)) {                 
-		                	$iso_stmt->bind_param('sssssssss',$p_sample_name,$p_iso_coll_temp,$p_iso_date,$p_iso_store_method,$p_sang_seq,$p_closest_hit,$p_send_pac_bio,$p_iso_loc_type,$p_orig_sample_name);
-
-							if(!$iso_stmt -> execute()){
-								$successfull = 'false';
-								throw new Exception("Execution Error: Unable To Update Isolate Info");	
-								//mysqli_error($dbc);
-							}
-							$iso_rows_affected = $iso_stmt ->affected_rows;
-							$iso_stmt -> close();
-							if($iso_rows_affected >= 0){
-								//for testing
-								#echo "You Updated Isolate Info".'<br>'; //cleanup
-								$updates_check = 'true';
-							}
-							else{
-								$successfull = 'false';
-								throw new Exception("Unable To Update Isolate Info");	
-								//mysqli_error($dbc);
-							}
-						}else{
-							$successfull = 'false';
-							throw new Exception("Unable To Prepare Isolate Info");	
-							//mysqli_error($dbc);
-						}
-					}
-					else{
-						//insert
-						$stmt_iso = $dbc -> prepare("INSERT INTO isolates (sample_name,iso_coll_temp,iso_date,iso_store_method,seq_sang,closest_hit,send_pac_bio,loc_type) VALUES (?,?,?,?,?,?,?,?)");
-						if(!$stmt_iso){
-							$successfull = 'false';
-							throw new Exception("Prepare Failure: Unable to insert sample into isolate db.");	
-							//echo "Prepare failed: (" . $dbc->errno . ") " . $dbc->error;
-						}
-						else{
-							$stmt_iso -> bind_param('ssssssss', $p_sample_name, $p_iso_coll_temp,$p_iso_date,$p_iso_store_method,$p_sang_seq,$p_closest_hit,$p_send_pac_bio,$p_iso_loc_type);
-							if(!$stmt_iso-> execute()){
-								$successfull = 'false';
-								throw new Exception("Unable to insert sample into isolate db. Execution failed.");	
-								//echo "execute failed!: (" . $dbc->errno . ") " . $dbc->error;
-							}
-							else{
-								$rows_affected_iso = $stmt_iso ->affected_rows;
-								$stmt_iso -> close();
-									
-								//check if add was successful or not. Tell the user
-								if($rows_affected_iso >= 0){
-									echo 'You added a new Sample '.$p_sample_name.' to isolate db<br>';
-									$updates_check = 'true';								
-								}
-								else{
-									$successfull = 'false';
-									throw new Exception("Unable to insert sample into isolate db");	
-								}
-							}
-						}	
-					}
 					
 					//////////////////////////////////////////////////////////////////
-					/****Update Air Samplers Table****/
+					/****Update Samplers Table****/
 					//////////////////////////////////////////////////////////////////
 					
-					//repeat for x amount of air samplers
-					$num_of_air_samp = $_GET['air_samp_num'];
-					for ($x = 1; $x <= $num_of_air_samp; $x++) {
+					//repeat for x amount of samplers
+					$num_of_samp = $_GET['sampler_num'];
+					for ($x = 1; $x <= $num_of_samp; $x++) {
 		
 						$p_stime[$x] = htmlspecialchars($_GET['stime'.$x]);
 						$p_etime[$x] = htmlspecialchars($_GET['etime'.$x]);
@@ -668,32 +563,31 @@ include('functions/convert_header_names.php');
 						}
 					
 					}
-					//Insert into daily_data2_particle_counter. Wrap in a for loop
-					for ($x = 1; $x <= $num_of_air_samp; $x++) {
-						//echo 'num of air samp:'.$num_of_air_samp.'<br>'.'x'.$x.'<br>'.$_GET['airSamp'.$x];
-						$air_sampler_name = $_GET['airSamp'.$x];
+					
+					for ($x = 1; $x <= $num_of_samp; $x++) {
+						$sampler_name = $_GET['sampler'.$x];
 						if(isset($_GET['delete'.$x])){
 							//delete the daily data for this date/sensor primary key...can you do this?
 							//check if it exists...if it does, delete it
-							if(! $stmt_d = $dbc -> prepare("DELETE FROM sample_air_sampler WHERE sample_name = ? AND air_sampler_name = ?")){
+							if(! $stmt_d = $dbc -> prepare("DELETE FROM sample_sampler WHERE sample_name = ? AND sampler_name = ?")){
 								$successfull = 'false';
-								throw new Exception("Delete Air Sampler Prepare Failure: No Deleted/Added Air Sampler Info");
+								throw new Exception("Delete Sampler Prepare Failure: No Deleted/Added Sampler Info");
 							}
-							$stmt_d->bind_param('ss',$p_sample_name,$air_sampler_name);
+							$stmt_d->bind_param('ss',$p_sample_name,$sampler_name);
 						
 							if(!$stmt_d->execute()){
 								$successfull = 'false';
-								throw new Exception("Execution Error: Unable To Delete Air Sampler Info");
+								throw new Exception("Execution Error: Unable To Delete Sampler Info");
 							}
 							$rows_affected_d = $stmt_d ->affected_rows;
 							//check if add was successful or not. Tell the user
 					   		if($rows_affected_d >= 0){
-					   			echo 'You DELETED Air Sampler Info! :'.$air_sampler_name.'<br>';
+					   			echo 'You DELETED Sampler Info! :'.$sampler_name.'<br>';
 								$updates_check = 'true';
 							}
 							else{
 								$successfull = 'false';
-								throw new Exception("ERROR: No Deleted/Added Air Sampler Info");
+								throw new Exception("ERROR: No Deleted/Added Sampler Info");
 								
 							}
 							$stmt_d->close();
@@ -702,74 +596,71 @@ include('functions/convert_header_names.php');
 							//search to see if exists,if it exists, update the entry
 							//if it does not, insert it
 							$exists = 'false';
-							$stmt_ck_air= $dbc->prepare("SELECT air_sampler_name FROM sample_air_sampler WHERE sample_name = ? AND air_sampler_name = ? ");
-							if(!$stmt_ck_air){
+							$stmt_ck= $dbc->prepare("SELECT sampler_name FROM sample_sampler WHERE sample_name = ? AND sampler_name = ? ");
+							if(!$stmt_ck){
 								$successfull = 'false';
-								throw new Exception("Prepare Error: Unable To Find Matching Air Sampler Info");
+								throw new Exception("Prepare Error: Unable To Find Matching Sampler Info");
 							}
-							$stmt_ck_air -> bind_param('ss', $p_sample_name,$air_sampler_name);
-							if ($stmt_ck_air->execute()){
-								$stmt_ck_air->bind_result($a_sample_name);
-							    while($stmt_ck_air->fetch()){
-									if($a_sample_name == $air_sampler_name){
+							$stmt_ck -> bind_param('ss', $p_sample_name,$sampler_name);
+							if ($stmt_ck->execute()){
+								$stmt_ck->bind_result($compare_sample_name);
+							    while($stmt_ck->fetch()){
+									if($compare_sample_name == $sampler_name){
 										$exists = 'true';
 									}
 								}
 							} 
 							else{
 								$successfull = 'false';
-								throw new Exception("Execution Error: Unable To Find Matching Air Sampler Info");
+								throw new Exception("Execution Error: Unable To Find Matching Sampler Info");
 							}
-							$stmt_ck_air -> close();
+							$stmt_ck -> close();
 							
 							
-							//echo $p_sample_name.'<br>'.$air_sampler_name.'<br>'.$start[$x].'<br>'.$end[$x].'<br>'.$p_time[$x];
 							//if you did not see this entry in the db, insert it. else, update
 							if($exists == 'false'){
-								$stmt_ins_air = $dbc -> prepare("INSERT INTO sample_air_sampler (sample_name,air_sampler_name,start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)");
-								if(!$stmt_ins_air){
+								$stmt_ins = $dbc -> prepare("INSERT INTO sample_sampler (sample_name,sampler_name,start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)");
+								if(!$stmt_ins){
 									$successfull = 'false';
-									throw new Exception("Prepare Error: Unable To Insert Air Sampler Info");
+									throw new Exception("Prepare Error: Unable To Insert Sampler Info");
 								}
-								$stmt_ins_air -> bind_param('ssssd', $p_sample_name,$air_sampler_name,$start[$x],$end[$x],$p_time[$x]);
-								if(!$stmt_ins_air -> execute()){
+								$stmt_ins -> bind_param('ssssd', $p_sample_name,$sampler_name,$start[$x],$end[$x],$p_time[$x]);
+								if(!$stmt_ins -> execute()){
 									$successfull = 'false';
-									throw new Exception("Exectution Error: Unable To Insert Air Sampler Info");
+									throw new Exception("Exectution Error: Unable To Insert Sampler Info");
 								}
-								$rows_affected_ins_air = $stmt_ins_air ->affected_rows;
-								$stmt_ins_air -> close();
+								$rows_affected_ins = $stmt_ins ->affected_rows;
+								$stmt_ins -> close();
 								
 								//check if add was successful or not. Tell the user
-						   		if($rows_affected_ins_air >= 0){
-						   			//echo 'You Added New Air Sampler Info! :'.$air_sampler_name.'<br>';
+						   		if($rows_affected_ins >= 0){
 						   			$updates_check = 'true';
 								}
 								else{
 									$successfull = 'false';
-									throw new Exception("ERROR: No Air Sampler Info Added");
+									throw new Exception("ERROR: No Sampler Info Added");
 								}
 							}	
 							else{
-								$stmt_up_air = $dbc -> prepare("UPDATE sample_air_sampler SET start_date_time = ?, end_date_time = ?,total_date_time = ? WHERE sample_name = ? AND air_sampler_name =?");
-								if(!$stmt_up_air){
+								$stmt_up = $dbc -> prepare("UPDATE sample_sampler SET start_date_time = ?, end_date_time = ?,total_date_time = ? WHERE sample_name = ? AND sampler_name =?");
+								if(!$stmt_up){
 									$successfull = 'false';
-									throw new Exception("Prepare Error: Unable To Update Air Sampler Info");
+									throw new Exception("Prepare Error: Unable To Update Sampler Info");
 								}
-								$stmt_up_air-> bind_param('ssdss',$start[$x],$end[$x], $p_time[$x],$p_sample_name, $air_sampler_name);
-								if(!$stmt_up_air -> execute()){
+								$stmt_up-> bind_param('ssdss',$start[$x],$end[$x], $p_time[$x],$p_sample_name, $sampler_name);
+								if(!$stmt_up -> execute()){
 									$successfull = 'false';
-									throw new Exception("Execution Error: Unable To Update Air Sampler Info");
+									throw new Exception("Execution Error: Unable To Update Sampler Info");
 								}
-								$rows_affected_up_air = $stmt_up_air ->affected_rows;
-								$stmt_up_air -> close();
+								$rows_affected_up = $stmt_up ->affected_rows;
+								$stmt_up -> close();
 									
 								//check if add was successful or not. Tell the user
-							   	if($rows_affected_up_air >= 0){
-									//echo 'You Updated Air Sampler Info! :'.$air_sampler_name.'<br>';
+							   	if($rows_affected_up >= 0){
 									$updates_check = 'true';
 								}else{
 									$successfull = 'false';
-									throw new Exception("An error has occred: No Updated Sensor Info");
+									throw new Exception("An error has occurred: No Updated Sampler Info");
 								}
 							}
 						}
