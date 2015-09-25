@@ -47,7 +47,6 @@ include('/config/check_sample_name.php');
 				$p_projName = htmlspecialchars($_GET['projName']);
 				$p_loc = htmlspecialchars($_GET['loc']);
 				$p_rloc = htmlspecialchars($_GET['rloc']);
-				//$p_airSamp = htmlspecialchars($_GET['airSamp']);
 				$p_partSamp = NULL;
 				$p_poolEx = '0';//pooling of extracts has been moved to another page
 				$p_dExtKit = htmlspecialchars($_GET['dExtKit']);
@@ -55,8 +54,6 @@ include('/config/check_sample_name.php');
 				$p_seqInfo = htmlspecialchars($_GET['seqInfo']);
 				$p_anPipe = htmlspecialchars($_GET['anPipe']);
 				$p_barcode = htmlspecialchars($_GET['barcode']);
-				//$p_start = htmlspecialchars($start);
-				//$p_end = htmlspecialchars($end);
 				$p_sType = htmlspecialchars($_GET['sType']);
 				$p_path = ''; //removing for now
 				$p_dConc = htmlspecialchars($_GET['dConc']);
@@ -76,21 +73,11 @@ include('/config/check_sample_name.php');
 				$p_dWeather = '0';//removing for now
 				$p_media = htmlspecialchars($_GET['media']);
 				$p_sampling_height = htmlspecialchars($_GET['sampling_height']);
-				
-				//for isolates
-				$p_iso_coll_temp = htmlspecialchars($_GET['iso_coll_temp']);
-				$p_iso_date = htmlspecialchars($_GET['iso_date']);
-				$p_iso_store_method = htmlspecialchars($_GET['iso_store_method']);
-				$p_sang_seq= htmlspecialchars($_GET['sang_seq']);
-				$p_closest_hit= htmlspecialchars($_GET['closest_hit']);
-				$p_send_pac_bio= htmlspecialchars($_GET['send_pac_bio']);
-				$p_iso_loc_type= htmlspecialchars($_GET['iso_loc_type']);
-				
+
 				if($p_sType != 'A'){
 						//set flow rate to 0 and set sampling time to zero
 						$p_fRate = '0';
 						$p_fRate_eod = '0';
-						//$p_end = $p_start;	
 				}
 				
 		
@@ -98,7 +85,7 @@ include('/config/check_sample_name.php');
 				include_once("functions/check_collector_names.php");
 				$array=$_GET['collector'];
 				$check = check_collector_names($array,'true');
-				//$p_collName = $check['cat_name'];
+				$p_collName;
 				if($check['boolean'] == 'false'){
 					$error_check = 'true';
 				}
@@ -109,7 +96,7 @@ include('/config/check_sample_name.php');
 				//check and process DNA Extractor names
 				$array2=$_GET['dExtrName'];
 				$check2 = check_collector_names($array2,'false');
-				//$p_dExtrName = $check2['cat_name'];
+				$p_dExtrName;
 				if($check2['boolean'] == 'false'){
 					$error_check = 'true';
 				}
@@ -120,7 +107,7 @@ include('/config/check_sample_name.php');
 				//check and process RNA Extractor names
 				$array3=$_GET['rExtrName'];
 				$check3 = check_collector_names($array3,'false');
-				//$p_rExtrName = $check3['cat_name'];
+				$p_rExtrName;
 				if($check3['boolean'] == 'false'){
 					$error_check = 'true';
 				}
@@ -206,8 +193,6 @@ include('/config/check_sample_name.php');
 						if ($p_seqInfo == '0') {$p_seqInfo = NULL;}
 						if ($p_anPipe == '0') {$p_anPipe = NULL;}
 						if ($p_barcode == '') {$p_barcode = NULL;}
-						//if ($p_start == '') {$p_start = NULL;}
-						//if ($p_end == '') {$p_end = NULL;}
 						if ($p_path == '') {$p_path = NULL;}
 						if ($p_dConc == '') {$p_dConc = NULL;} 
 		   				if ($p_dInstru == '0') {$p_dInstru = NULL;} 
@@ -222,13 +207,7 @@ include('/config/check_sample_name.php');
 						if ($p_fRate_eod == '') {$p_fRate_eod = NULL;}
 						if ($p_dData == '0') {$p_dData = NULL;}
 						if ($p_dWeather == '0') {$p_dWeather = NULL;}
-						if ($p_iso_coll_temp == '0') {$p_iso_coll_temp = NULL;}
-						if ($p_iso_date == '') {$p_iso_date = NULL;}
-						if ($p_iso_store_method == '0') {$p_iso_store_method = NULL;}
-						if ($p_sang_seq== '') {$p_sang_seq = NULL;}
-						if ($p_closest_hit == '') {$p_closest_hit = NULL;}
-						if ($p_send_pac_bio == '0') {$p_send_pac_bio = NULL;}
-						if ($p_iso_loc_type == '0') {$p_iso_loc_type = NULL;}
+
 						
 						$insert_check = 'true';
 						/***************************************************************************************
@@ -279,16 +258,13 @@ include('/config/check_sample_name.php');
 						if(!$stmt2){
 							$insert_check = 'false';
 							throw new Exception("Prepare Failure: Unable To Insert Into Main Sample Table");	
-							//echo "Prepare failed: (" . $dbc->errno . ") " . $dbc->error;
 						}
 						
-						else{//ssssssssssssssdsssdsiisdsiissddssissssdsss
-							//echo $p_sample_name.'<br>'.$p_loc.'<br>'.$p_rloc.'<br>'.$p_partSamp.'<br>'.$p_collName.'<br>'.$p_poolEx.'<br>'.$p_dExtKit.'<br>'.$p_rExtKit.'<br>'.$p_seqInfo.'<br>'.$p_anPipe.'<br>'.$p_barcode.'<br>'.$p_sType.'<br>'.$p_path.'<br>'.$p_projName.'<br>'.$p_dConc.'<br>'.$p_dInstru.'<br>'.$p_dVol.'<br>'.$p_dVol_quant.'<br>'.$p_d_extr_date.'<br>'.$p_rConc.'<br>'.$p_rInstru.'<br>'.$p_rVol.'<br>'.$p_rVol_quant.'<br>'.$p_r_extr_date.'<br>'.$p_notes.'<br>'.$p_fRate.'<br>'.$p_fRate_eod.'<br>'.$p_dData.'<br>'.$p_dWeather.'<br>'.$p_sample_number.'<br>'.$p_entered_by.'<br>'.$sample_sort.'<br>'.$p_orig_time_stamp.'<br>'.$p_media.'<br>'.$p_sampling_height.'<br>'.$p_dExtrName.'<br>'.$p_rExtrName.'<br>'.$seq_id.'<br>';
+						else{
 							 $stmt2 -> bind_param('ssssssssssssssdsiisdsiissddssissssdsss', $p_sample_name, $p_loc,$p_rloc, $p_partSamp, $p_collName, $p_poolEx, $p_dExtKit, $p_rExtKit, $p_seqInfo, $p_anPipe, $p_barcode, $p_sType, $p_path, $p_projName, $p_dConc,$p_dInstru,$p_dVol,$p_dVol_quant,$p_d_extr_date,$p_rConc,$p_rInstru,$p_rVol,$p_rVol_quant,$p_r_extr_date,$p_notes,$p_fRate,$p_fRate_eod,$p_dData,$p_dWeather,$p_sample_number,$p_entered_by,$sample_sort,$p_orig_time_stamp,$p_media,$p_sampling_height,$p_dExtrName,$p_rExtrName,$seq_id);
 							 if(!$stmt2 -> execute()){
 							 	$insert_check = 'false';
 							 	throw new Exception("Execution Failure: Unable To Insert Into Main Sample Table");
-								//echo "execute failed!: (" . $dbc->errno . ") " . $dbc->error;
 							}
 							
 							else{
@@ -374,34 +350,6 @@ include('/config/check_sample_name.php');
 								}
 							}
 						}
-						/***************************************************************************************
-						//Insert Sample Info Into Isolates Table
-						****************************************************************************************/
-						$stmt_iso = $dbc -> prepare("INSERT INTO isolates (sample_name,iso_coll_temp,iso_date,iso_store_method,seq_sang,closest_hit,send_pac_bio,loc_type) VALUES (?,?,?,?,?,?,?,?)");
-						if(!$stmt_iso){
-							throw new Exception("Prepare Failure: Unable To Insert Sample Isolate Info ");	
-						}
-						else{
-							$stmt_iso -> bind_param('ssssssss', $p_sample_name, $p_iso_coll_temp,$p_iso_date,$p_iso_store_method,$p_sang_seq,$p_closest_hit,$p_send_pac_bio,$p_iso_loc_type);
-							
-							if(!$stmt_iso-> execute()){
-								$insert_check = 'false';
-								throw new Exception("Executino Failure: Unable To Insert Sample Isolate Info");	
-								echo "execute failed!: (" . $dbc->errno . ") " . $dbc->error;
-							}
-							
-							else{
-								$rows_affected_iso = $stmt_iso ->affected_rows;
-								$stmt_iso -> close();
-								if($rows_affected_iso > 0){
-									//echo 'You added a new Sample '.$p_sample_name.' to isolate db<br>';								
-								}
-								else{
-									$insert_check = 'false';
-									throw new Exception("Unable to insert sample into isolate db");	
-								}
-							}
-						}
 						
 						/***************************************************************************************
 						//add insert into new table for number_of_seq_submissions. No update/edit for this exists 
@@ -452,7 +400,7 @@ include('/config/check_sample_name.php');
 </div>		
 <!-----------------------------------------------FORM-------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------->
-		<!--<form class="registration" id="sample_form" action="form_insert.php" method="GET">-->
+
 		<form  class="registration" onsubmit="return validate(this)" action="form_insert.php" method="GET">
 	
 			* = required field   + = required for air samples<br>
@@ -597,75 +545,7 @@ include('/config/check_sample_name.php');
 				<!------------------------------------------------------------------------------------------->
 				<!------------------------------------------------------------------------------------------->
 				
-				<p>
-				<button type="button"  data-toggle="collapse" data-target="#isolates" aria-expanded="true" aria-controls="demo" class='buttonLength'>For Isolate Collection Info</button>
-				<div id="isolates" class="collapse">
-				</p>
-				<div class="col-xs-6">
-					<fieldset>
-					<LEGEND><b>Isolate Collection Info</b></LEGEND>
-					<p>
-					<!--<h3 class = 'form-header'>(For Isolate Collection Only)</h3>-->
-					<label class="textbox-label">Select Isolate Collection Temperature:*</label>
-					<br/>
-					<?php
-					//url or $_GET name, table name, field name
-					dropDown('iso_coll_temp', 'isolate_collection_temp', 'temp','temp',$submitted);
-					?>
-					</p>
-					
-					<p>
-					<label class="textbox-label">Isolate Storage Date:*</label><br>
-					<input type="text" id="datepicker3"  name="iso_date"  value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo htmlspecialchars($_GET['iso_date']);} ?>"/>
-					</p>
-					<script>
-					$('#datepicker3').datepicker({ dateFormat: 'yy-mm-dd' }).val();
-					</script>
-					
-					<p>
-					<label class="textbox-label">Isolate Storing Method:*</label>
-					<br/>
-					<?php
-					//url or $_GET name, table name, field name
-					dropDown('iso_store_method', 'isolate_storing_method', 'storing_method','storing_method',$submitted);
-					?>
-					</p>
-					
-					<p>
-					<label class="textbox-label">Isolate Location Type:*</label>
-					<br/>
-					<?php
-					//url or $_GET name, table name, field name
-					dropDown('iso_loc_type', 'isolate_location_type', 'loc_type','loc_type',$submitted);
-					?>
-					</p>
-					
-					<p>
-					<label class="textbox-label">16S Sequence (Sanger)</label><br>
-					<input type="text" id="sang_seq" name="sang_seq"  placeholder="Enter A Sequence" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_sang_seq;} ?>">
-					</p>
-					
-					<p>
-					<label class="textbox-label">Closest Hit</label><br>
-					<input type="text" id="closest_hit" name="closest_hit"  placeholder="Enter A Closest Hit" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_closest_hit;} ?>">
-					</p>
-					
-					<p>
-					<label class="textbox-label">Send For PacBio Sequencing:</label>
-					<br/>
-					<select id='send_pac_bio' name='send_pac_bio';'>
-					<option value='0'<?php if((isset($_GET["send_pac_bio"]) && $_GET["send_pac_bio"] == "0" )){ echo "selected";} ?>>-Select-</option>
-					<option value='Y'<?php if((isset($_GET["send_pac_bio"]) && $_GET["send_pac_bio"] == "Y" )){ echo "selected";} ?>>Yes</option>
-					<option value='N'<?php if((isset($_GET["send_pac_bio"]) && $_GET["send_pac_bio"] == "N" )){ echo "selected";} ?>>No</option>
-					</select>
-					</p>
-					
-	
-					</fieldset>
-					</div>
-				</div> 
-				<!--</div>--> <!--end of col2-->
-				<!--</div>--> <!--end of wrap-->
+
 				<p>
 				<button type="button"  data-toggle="collapse" data-target="#demo" aria-expanded="true" aria-controls="demo" class='buttonLength'>Add More Info to Sample</button>
 				<div id="demo" class="collapse">

@@ -51,13 +51,6 @@
 				fRate: "number",
 				fRate_eod: "number",
 				sampling_height: "number",
-				iso_coll_temp: "text",
-				iso_date: "date",
-				iso_store_method: "text",
-				iso_loc_type: "text",
-				sang_seq: "text",
-				closest_hit: "text",
-				send_pac_bio: "text"
        		};
 
              var index;
@@ -318,99 +311,7 @@
 			
 			
 			/**Specials**/
-			//based on sample type   
-			var iso_coll_temp = document.getElementById('iso_coll_temp').value;
-        	var iso_store_date = document.getElementById('datepicker3').value;
-        	var iso_store_method = document.getElementById('iso_store_method').value;
-        	var iso_loc_type = document.getElementById('iso_loc_type').value;
-        			
-        	var iso_sang_seq = document.getElementById('sang_seq').value;
-        	var iso_closest_hit = document.getElementById('closest_hit').value;
-        	var iso_send_for_pac_bio = document.getElementById('send_pac_bio').value;  
-        	
-        	if(sType == "F" || sType == "BC" || sType == "UI"){ 
-        			//if you are an isolate, make sure you have the required fields filled out
-        			//else make sure you are all empty
-        			//if you are not required, make sure you have correct format anyway if you are filled out
-        			
-        			//check required
-        			if(iso_coll_temp == 0 ){
-        				document.getElementById('iso_coll_temp').style.backgroundColor = 'blue';
-        				valid = 'false';
-        			}
-        			else{document.getElementById('iso_coll_temp').style.backgroundColor = 'white';}
-        			
-        			if(iso_store_method == 0 ){
-        				document.getElementById('iso_store_method').style.backgroundColor = 'blue';
-        				valid = 'false';
-        			}else{document.getElementById('iso_store_method').style.backgroundColor = 'white';}
-        			
-        			if(iso_loc_type == 0 ){
-        				document.getElementById('iso_loc_type').style.backgroundColor = 'blue';
-        				valid = 'false';
-        			}else{document.getElementById('iso_loc_type').style.backgroundColor = 'white';}
-        			
-        			if(iso_store_date.length == 0){
-        				document.getElementById('datepicker3').style.backgroundColor = 'blue';
-        				valid = 'false';
-        			}else{document.getElementById('datepicker3').style.backgroundColor = 'white';}
-        			
-					//check non-required
-        			//if sanger seq is not empty, then check it is the correct format
-        			if(iso_sang_seq.length != 0){
-	        			var regrex_check_sang_seq  =  iso_sang_seq.match(/^[ATCGNatcgn]+$/);
-						if (regrex_check_sang_seq == null){
-							alert("Please Check Sanger Sequence");
-							document.getElementById('sang_seq').style.backgroundColor = 'blue';
-						    valid = 'false';
-						}else{
-							document.getElementById('sang_seq').style.backgroundColor = 'white';
-						}
-					}
-        	}
-        	else{
-        		//check that if you are not an isolate that you are not filled out;
-        		//check required
-        			if(iso_coll_temp != 0 ){
-        				document.getElementById('iso_coll_temp').style.backgroundColor = 'blue';
-        				valid = 'false';
-        			}
-        			else{document.getElementById('iso_coll_temp').style.backgroundColor = 'white';}
-        			
-        			if(iso_store_method != 0 ){
-        				document.getElementById('iso_store_method').style.backgroundColor = 'blue';
-        				valid = 'false';
-        			}else{document.getElementById('iso_store_method').style.backgroundColor = 'white';}
-        			
-        			if(iso_loc_type != 0 ){
-        				document.getElementById('iso_loc_type').style.backgroundColor = 'blue';
-        				valid = 'false';
-        			}else{document.getElementById('iso_loc_type').style.backgroundColor = 'white';}
-        			
-        			if(iso_store_date.length != 0){
-        				document.getElementById('datepicker3').style.backgroundColor = 'blue';
-        				valid = 'false';
-        			}else{document.getElementById('datepicker3').style.backgroundColor = 'white';}
-        			
-        			if(iso_sang_seq.length != 0){document.getElementById('sang_seq').style.backgroundColor = 'blue';
-					    valid = 'false';
-					}else{
-						document.getElementById('sang_seq').style.backgroundColor = 'white';
-					}
-					
-					if(iso_closest_hit.length != 0){document.getElementById('closest_hit').style.backgroundColor = 'blue';
-					    valid = 'false';
-					}else{
-						document.getElementById('closest_hit').style.backgroundColor = 'white';
-					}
-					
-					if(iso_send_for_pac_bio != 0){
-        				document.getElementById('send_pac_bio').style.backgroundColor = 'blue';
-        				valid = 'false';
-        			}else{document.getElementById('send_pac_bio').style.backgroundColor = 'white';}
-        			
-					
-        	}
+			
 			//////////////////////////////////////////////////////////////
 			//check if some DNA filled out that all of it is filled out
 			//////////////////////////////////////////////////////////////
