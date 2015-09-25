@@ -81,7 +81,6 @@ include('functions/convert_header_names.php');
 				$p_fRate = htmlspecialchars($_GET['fRate']);
 				$p_fRate_eod = htmlspecialchars($_GET['fRate_eod']);
 				$p_dData = NULL;
-				$p_dWeather = NULL;
 				$p_media = htmlspecialchars($_GET['media']);
 				$p_sampling_height = htmlspecialchars($_GET['sampling_height']);
 				
@@ -114,7 +113,6 @@ include('functions/convert_header_names.php');
 				if ($p_fRate == '') {$p_fRate = NULL;}
 				if ($p_fRate_eod == '') {$p_fRate_eod = NULL;}
 				if ($p_dData == '0') {$p_dData = NULL;}
-				if ($p_dWeather == '0') {$p_dWeather = NULL;}
 
 						
 				//check and process collector info
@@ -356,7 +354,6 @@ include('functions/convert_header_names.php');
 						array('field' => 'flow_rate', 'value' => $p_fRate, 'type' => 'd'),
 						array('field' => 'flow_rate_eod', 'value' => $p_fRate_eod, 'type' => 'd'),
 						array('field' => 'daily_data', 'value' => $p_dData, 'type' => 's'),
-						array('field' => 'daily_weather', 'value' => $p_dWeather, 'type' => 's'),
 						array('field' => 'sample_num', 'value' => $p_sample_number, 'type' => 'i'),
 						array('field' => 'updated_by', 'value' => $p_updated_by, 'type' => 's'),
 						array('field' => 'sample_sort', 'value' => $sample_sort, 'type' => 's'),

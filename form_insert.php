@@ -242,7 +242,6 @@ include('/config/check_sample_name.php');
 																	  flow_rate,
 																	  flow_rate_eod,
 																	  daily_data,
-																	  daily_weather,
 																	  sample_num,
 																	  entered_by,
 																	  sample_sort,
@@ -252,7 +251,7 @@ include('/config/check_sample_name.php');
 																	  dExtrName,
 																	  rExtrName,
 																	  seq_id
-																	  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+																	  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 						
 						if(!$stmt2){
 							$insert_check = 'false';
@@ -260,7 +259,7 @@ include('/config/check_sample_name.php');
 						}
 						
 						else{
-							 $stmt2 -> bind_param('sssssssssssssdsiisdsiissddssissssdsss', $p_sample_name, $p_loc,$p_rloc, $p_partSamp, $p_collName,$p_dExtKit, $p_rExtKit, $p_seqInfo, $p_anPipe, $p_barcode, $p_sType, $p_path, $p_projName, $p_dConc,$p_dInstru,$p_dVol,$p_dVol_quant,$p_d_extr_date,$p_rConc,$p_rInstru,$p_rVol,$p_rVol_quant,$p_r_extr_date,$p_notes,$p_fRate,$p_fRate_eod,$p_dData,$p_dWeather,$p_sample_number,$p_entered_by,$sample_sort,$p_orig_time_stamp,$p_media,$p_sampling_height,$p_dExtrName,$p_rExtrName,$seq_id);
+							 $stmt2 -> bind_param('sssssssssssssdsiisdsiissddsissssdsss', $p_sample_name, $p_loc,$p_rloc, $p_partSamp, $p_collName, $p_dExtKit, $p_rExtKit, $p_seqInfo, $p_anPipe, $p_barcode, $p_sType, $p_path, $p_projName, $p_dConc,$p_dInstru,$p_dVol,$p_dVol_quant,$p_d_extr_date,$p_rConc,$p_rInstru,$p_rVol,$p_rVol_quant,$p_r_extr_date,$p_notes,$p_fRate,$p_fRate_eod,$p_dData,$p_sample_number,$p_entered_by,$sample_sort,$p_orig_time_stamp,$p_media,$p_sampling_height,$p_dExtrName,$p_rExtrName,$seq_id);
 							 if(!$stmt2 -> execute()){
 							 	$insert_check = 'false';
 							 	throw new Exception("Execution Failure: Unable To Insert Into Main Sample Table");
@@ -308,7 +307,7 @@ include('/config/check_sample_name.php');
 						//Insert Samplers !!!move this, you must insert in after you put into sample db...same with isolate db?
 						****************************************************************************************/
 						$num_of_samplers = $_GET['sampler_num'];
-						for ($x = 1; $x <= $num_of_air_samplers; $x++) {
+						for ($x = 1; $x <= $num_of_samplers; $x++) {
 							$p_sampler_name = htmlspecialchars($_GET['sampler'.$x]);
 							
 							$start = $_GET['sdate'.$x].' '.$_GET['stime'.$x];
@@ -326,7 +325,7 @@ include('/config/check_sample_name.php');
 								$p_time = round($time,2);
 							}
 							$query_samp = "INSERT INTO sample_sampler (sample_name, sampler_name, start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)";
-							$stmt_samp = $dbc -> prepare($query_air_samp);
+							$stmt_samp = $dbc -> prepare($query_samp);
 							if(!$stmt_samp){
 								throw new Exception("Prepare Failure: Unable To Insert Sampler");	
 							}
