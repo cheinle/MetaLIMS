@@ -58,7 +58,6 @@ include('functions/convert_header_names.php');
 				$p_rloc = htmlspecialchars($_GET['rloc']);
 				//$p_sampler = htmlspecialchars($_GET['sampler']);
 				$p_partSamp = NULL;
-				$p_poolEx = '0'; //pooling extracts has changed. This should be removed eventually. 
 				$p_dExtKit = htmlspecialchars($_GET['dExtKit']);
 				$p_rExtKit = htmlspecialchars($_GET['rExtKit']);
 				$p_seqInfo = htmlspecialchars($_GET['seqInfo']);
@@ -92,7 +91,6 @@ include('functions/convert_header_names.php');
 				}
 				
 				//check if non-required fields are clear(ed)
-				if ($p_poolEx == '0') {$p_poolEx = NULL;}
 				if ($p_dExtKit == '0') {$p_dExtKit = NULL;} 
 				if ($p_rExtKit == '0') {$p_rExtKit = NULL;}
 				if ($p_seqInfo == '0') {$p_seqInfo = NULL;}
@@ -337,7 +335,6 @@ include('functions/convert_header_names.php');
 						array('field' => 'relt_loc_name', 'value' => $p_rloc, 'type' => 's'),
 						array('field' => 'part_sens_name', 'value' => $p_partSamp, 'type' => 's'),
 						array('field' => 'collector_name', 'value' => $p_collName, 'type' => 's'),
-						array('field' => 'pool_extracts_id', 'value' => $p_poolEx, 'type' => 's'),
 						array('field' => 'dna_extract_kit_name', 'value' => $p_dExtKit, 'type' => 's'),
 						array('field' => 'rna_extract_kit_name', 'value' => $p_rExtKit, 'type' => 's'),
 						array('field' => 'sequencing_info', 'value' => $p_seqInfo, 'type' => 's'),

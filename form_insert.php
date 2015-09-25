@@ -48,7 +48,7 @@ include('/config/check_sample_name.php');
 				$p_loc = htmlspecialchars($_GET['loc']);
 				$p_rloc = htmlspecialchars($_GET['rloc']);
 				$p_partSamp = NULL;
-				$p_poolEx = '0';//pooling of extracts has been moved to another page
+				//$p_poolEx = '0';//pooling of extracts has been moved to another page
 				$p_dExtKit = htmlspecialchars($_GET['dExtKit']);
 				$p_rExtKit = htmlspecialchars($_GET['rExtKit']);
 				$p_seqInfo = htmlspecialchars($_GET['seqInfo']);
@@ -187,7 +187,7 @@ include('/config/check_sample_name.php');
 						$p_entered_by = $_SESSION['first_name'].' '.$_SESSION['last_name']; 
 						
 						//set to null any non-required fields that are not populated
-						if ($p_poolEx == '0') {$p_poolEx = NULL;}
+						//if ($p_poolEx == '0') {$p_poolEx = NULL;}
 						if ($p_dExtKit == '0') {$p_dExtKit = NULL;} 
 						if ($p_rExtKit == '0') {$p_rExtKit = NULL;}
 						if ($p_seqInfo == '0') {$p_seqInfo = NULL;}
@@ -220,7 +220,6 @@ include('/config/check_sample_name.php');
 																	  relt_loc_name, 
 																	  part_sens_name, 
 																	  collector_name, 
-																	  pool_extracts_id,
 																	  dna_extract_kit_name,
 																	  rna_extract_kit_name,
 																	  sequencing_info,
@@ -253,7 +252,7 @@ include('/config/check_sample_name.php');
 																	  dExtrName,
 																	  rExtrName,
 																	  seq_id
-																	  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+																	  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 						
 						if(!$stmt2){
 							$insert_check = 'false';
@@ -261,7 +260,7 @@ include('/config/check_sample_name.php');
 						}
 						
 						else{
-							 $stmt2 -> bind_param('ssssssssssssssdsiisdsiissddssissssdsss', $p_sample_name, $p_loc,$p_rloc, $p_partSamp, $p_collName, $p_poolEx, $p_dExtKit, $p_rExtKit, $p_seqInfo, $p_anPipe, $p_barcode, $p_sType, $p_path, $p_projName, $p_dConc,$p_dInstru,$p_dVol,$p_dVol_quant,$p_d_extr_date,$p_rConc,$p_rInstru,$p_rVol,$p_rVol_quant,$p_r_extr_date,$p_notes,$p_fRate,$p_fRate_eod,$p_dData,$p_dWeather,$p_sample_number,$p_entered_by,$sample_sort,$p_orig_time_stamp,$p_media,$p_sampling_height,$p_dExtrName,$p_rExtrName,$seq_id);
+							 $stmt2 -> bind_param('sssssssssssssdsiisdsiissddssissssdsss', $p_sample_name, $p_loc,$p_rloc, $p_partSamp, $p_collName,$p_dExtKit, $p_rExtKit, $p_seqInfo, $p_anPipe, $p_barcode, $p_sType, $p_path, $p_projName, $p_dConc,$p_dInstru,$p_dVol,$p_dVol_quant,$p_d_extr_date,$p_rConc,$p_rInstru,$p_rVol,$p_rVol_quant,$p_r_extr_date,$p_notes,$p_fRate,$p_fRate_eod,$p_dData,$p_dWeather,$p_sample_number,$p_entered_by,$sample_sort,$p_orig_time_stamp,$p_media,$p_sampling_height,$p_dExtrName,$p_rExtrName,$seq_id);
 							 if(!$stmt2 -> execute()){
 							 	$insert_check = 'false';
 							 	throw new Exception("Execution Failure: Unable To Insert Into Main Sample Table");

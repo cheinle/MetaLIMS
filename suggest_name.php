@@ -68,11 +68,9 @@ if ($stmt->execute()){
 	}
 }
 
-//add Air Sampler names (this works, but just testing it out for now. maybe best used for query field matches)
-$stmt2 = $dbc->prepare("SELECT * FROM air_sampler WHERE air_sampler_name LIKE ? ORDER BY air_sampler_name LIMIT 10");
+//add Sampler names 
+$stmt2 = $dbc->prepare("SELECT * FROM sampler WHERE sampler_name LIKE ? ORDER BY sampler_name LIMIT 10");
 $stmt2->bind_param("s", $param);
-
-#$data = array();
 if ($stmt2->execute()){
 	    			
 	if($stmt2->fetch()){
@@ -85,8 +83,8 @@ if ($stmt2->execute()){
 		$stmt2->execute();
     	while ($stmt2->fetch()) {
 			$data[] = array(
-				'label' => $row['air_sampler_name'],
-				'value' => $row['air_sampler_name']
+				'label' => $row['sampler_name'],
+				'value' => $row['sampler_name']
 			);				
 		}
 	}
@@ -96,7 +94,6 @@ if ($stmt2->execute()){
 $stmt3 = $dbc->prepare("SELECT * FROM project_name WHERE project_name LIKE ? ORDER BY project_name LIMIT 10");
 $stmt3->bind_param("s", $param);
 
-#$data = array();
 if ($stmt3->execute()){
 	    			
 	if($stmt3->fetch()){
@@ -120,7 +117,6 @@ if ($stmt3->execute()){
 $stmt4 = $dbc->prepare("SELECT * FROM daily_data2 WHERE daily_date LIKE ? ORDER BY daily_date LIMIT 10");
 $stmt4->bind_param("s", $param);
 
-#$data = array();
 if ($stmt4->execute()){
 	    			
 	if($stmt4->fetch()){
