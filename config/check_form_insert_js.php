@@ -106,7 +106,7 @@
 							for (index = 0; index < x; ++index) {
 		   	 					var name = names[index];
 		   	 			
-		   	 					//check to see if airSamp name is already input
+		   	 					//check to see if extractor name is already input
 		   	 					if(seen.contains(name)){
 		   	 						inputs[i].style.background = "blue";
 		   	 						alert("You Have One Or More With The Same Name. Please Check Names");
@@ -610,7 +610,6 @@
             	}
 			}
 			else if (filled2_out == counter2 && filled2_out != 0){ //assume everythingis filled in 
-			//if (filled2_out == counter2){ //assume everythingis filled in (if not, it would give an error)
 				var i6;
 				for (i6 = 0; i6 < filled.length; i6++) { //assume everything is okie again and check again
 					document.getElementById(filled[i6]).style.backgroundColor = 'white';
@@ -673,15 +672,15 @@
 	
 				for (var index = 0; index < x; ++index) {
 		   	 		var name = names[index];
-		   	 		//check to see if airSamp name is already input
+		   	 		//check to see if extractor name is already input
 		   	 		if(seen.contains(name)){
-		   	 			document.getElementById(filled2[i8]).style.backgroundColor = 'blue';
+		   	 			document.getElementById('rExtrName').style.backgroundColor = 'blue';
 		   	 			alert("You Have One Or More Extractor Name With The Same Name. Please Check Names");
 		   	 			valid = 'false';
 		   	 		}
 		   	 		else{
 		   	 			seen.push(name);
-		   	 			document.getElementById(filled2[i8]).style.backgroundColor = 'white';
+		   	 			document.getElementById('rExtrName').style.backgroundColor = 'white';
 		   	 		}	
 		   	 	}
 								

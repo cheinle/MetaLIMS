@@ -658,7 +658,7 @@ if (isset($_GET['submit'])) {
 				</script>-->
 				
 				<p>
-				<h3 class="checkbox-header">Does Original RNA Sample Still Exist?:</h3>
+				<h3 class="checkbox-header">Does Original Sample Still Exist?:</h3>
 				<div class="vert-checkboxes">
  				<label class="checkbox-label"><input type="checkbox" class = "orig_sample_exist" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>No</label><br />
 				</div>
