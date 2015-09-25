@@ -9,7 +9,7 @@
 		echo "<label class='textbox-label-sampler'>Sampler #".$x.":*</label>";
 		echo "<select id='sampler".$x."' name='sampler".$x."'>";
 		echo "<option value='0'>-Select-</option>";
-		$stmt[$x] = $dbc->prepare("SELECT air_sampler_name FROM air_sampler");
+		$stmt[$x] = $dbc->prepare("SELECT sampler_name FROM sampler");
   		if ($stmt[$x]->execute()){
 			if($stmt[$x]->fetch()){
 				$meta[$x] = $stmt[$x]->result_metadata(); 
