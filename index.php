@@ -4,11 +4,8 @@ ini_set('display_errors', 1);
 include('config/path.php');
 
 //if user is not logged in, do not let him access any of the pages/directories
-session_start(); //can use ob_start() if header sending problems
-if(!isset($_SESSION['username'])){  //this works like what you want the above to do because you destroy the whole session if the session id is different
-	//header('Location: login.php');
-	//$path = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/airmicrobiomes/login.php';
-	//header('Location: '.$path);
+session_start(); 
+if(!isset($_SESSION['username'])){  
 	header('Location:'.$root.'login.php');
 	exit();
 }
@@ -68,7 +65,6 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 			<ul class="nav navbar-nav">
 				<li ><a href="<?php echo $root;?>home_page.php"><span class="glyphicon glyphicon-home"></a></li>
 				<li ><a href="<?php echo $root;?>form_insert.php">Insert Sample</a></li>
-				<!--<li ><a href="<?php echo $root;?>update_samples.php">Update Sample</a></li>-->
 				<li ><a href="<?php echo $root;?>sample_update_lookup.php">Update Sample</a></li>
 			</ul>
 			<ul class="nav navbar-nav ">
@@ -76,7 +72,6 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Storage Info<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="<?php echo $root;?>update_storage/update_storage_info.php">Query/Update Storage Info</a></li>
-						<!--<li><a href="<?php echo $root;?>update_tables/#">Query Storage</a></li>-->
 					</ul>
 				</li>
 			</ul>	
@@ -86,20 +81,13 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="<?php echo $root;?>update_tables/update_sampler.php">Add Sampler</a></li>
 						<li><a href="<?php echo $root;?>update_tables/update_analysis.php">Add Analysis</a></li>
-						<!--<li><a href="<?php echo $root;?>update_tables/update_collector.php">Add Collector</a></li>-->
-						<!--<li><a href="<?php echo $root;?>update_tables/add_daily_data.php">Add Daily Data</a></li>
-						<li><a href="<?php echo $root;?>update_tables/update_daily_data1.php">Update Daily Data</a></li>
-						<li><a href="<?php echo $root;?>update_tables/update_daily_weather.php">Add Daily Weather</a></li>-->
 						<li><a href="<?php echo $root;?>update_tables/update_dna_extr.php">Add DNA Extraction Kit</a></li>
 						<li><a href="<?php echo $root;?>update_tables/update_media_type.php">Add Media Type</a></li>
 						<li><a href="<?php echo $root;?>update_tables/update_samp_loc.php">Add Sampling Location</a></li>
 						<li><a href="<?php echo $root;?>update_tables/update_samp_rel_loc.php">Add Sampling Relative Location</a></li>
 						<li><a href="<?php echo $root;?>update_tables/update_part_sens.php">Add New Sensor</a></li>
-						<!--<li><a href="<?php echo $root;?>update_tables/update_pool_name.php">Add Pool Name</a></li>-->
 						<li><a href="<?php echo $root;?>update_tables/update_proj_name_for_approval.php">Add Project Name For Approval</a></li>
-						<?php if($_SESSION['username'] == $admin_user){ echo '<li><a href="'.$root.'update_tables/update_proj_name.php">Add Project Name (Admin)</a></li>';} ?>
 						<li><a href="<?php echo $root;?>update_tables/update_rna_extr.php">Add RNA Extraction Kit</a></li>
-						<!--<li><a href="<?php echo $root;?>update_tables/update_seq_info.php">Add Sequencing Info</a></li>-->
 					</ul>
 				</li>
 			</ul>
@@ -127,9 +115,6 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Files<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="<?php echo $root;?>browse_files/">Browse Files</a></li>
-						<!--<li><a href="<?php echo $root;?>cute_file_browser/">Browse Files</a></li>
-						<li><a href="<?php echo $root;?>mini_ajax_file_upload_form/">Upload Files</a></li>-->
-						<!--<li><a href="<?php echo $root;?>update_tables/#">Query Storage</a></li>-->
 					</ul>
 				</li>
 				</li>
@@ -142,11 +127,22 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 					</ul>
 				</li>
 				<li ><a href="<?php echo $root;?>FAQ.php">FAQ</a></li>
+				
+				<?php if($_SESSION['username'] == $admin_user){ echo '
+				<ul class="nav navbar-nav ">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Admin Tools<b class="caret"></b></a>
+					<ul class="dropdown-menu" role="menu">';}?>
+						<?php if($_SESSION['username'] == $admin_user){ echo '<li><a href="'.$root.'update_tables/update_proj_name.php">Add Freezer/Drawers</a></li>';} ?>
+						<?php if($_SESSION['username'] == $admin_user){ echo '<li><a href="'.$root.'update_tables/update_proj_name.php">Add Sample Type</a></li>';} ?>
+						<?php if($_SESSION['username'] == $admin_user){ echo '<li><a href="'.$root.'update_tables/update_proj_name.php">Add Instrument Used To Quantify DNA</a></li>';} ?>
+						<?php if($_SESSION['username'] == $admin_user){ echo '<li><a href="'.$root.'update_tables/update_proj_name.php">Add Project Name</a></li>';} ?>
+					<?php echo '</ul>
+				</li>
+			</ul>'; ?>
 				<li ><a href="<?php echo $root;?>logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
 			</ul>
-		
-	</div>		
-		
+	</div>			
 	</nav><!--ENd nav Main Nav-->
 	
 	
