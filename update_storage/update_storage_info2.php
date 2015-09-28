@@ -40,7 +40,7 @@ $transaction_time = date("Y-m-d H:i:s");
 		<label class="textbox-label">Sample Name:*</label>
 		<br>
 		<input type="text" name="sample_name" id="sample_name" class="textbox-label" data-toggle="popover" title="Tip:" data-content="Unable to edit sample name. Please select Go Back button to select a different sample or go to Insert Sample tab to enter a new sample" 
-		placeholder="yyyy/mm/dd[project name][sample_type][sample number-000]" value="<?php if (isset($_GET['submit'])){echo text_insert_update_stinfo($parent_value,'sample_name','storage_info');}?>" readonly />
+		placeholder="yyyy/mm/dd[project name][sample_type][sample number-000]" value="<?php if (isset($_GET['submit'])){echo text_insert_update_stinfo($parent_value,'sample_name','storage_info',$root);}?>" readonly />
 		</p>
 		<script>
 			$(document).ready(function(){
@@ -69,7 +69,7 @@ $transaction_time = date("Y-m-d H:i:s");
 		<p>
 		<h3 class="checkbox-header">Does Original Sample Still Exist?:</h3>
 		<div class="vert-checkboxes">
- 		<label class="checkbox-label"><input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" value="false" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info'); if($check_exists == 'false'){ echo 'checked';} ?>/>No</label><br />
+ 		<label class="checkbox-label"><input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" value="false" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>No</label><br />
 		</div>	
 		</p>
 		
