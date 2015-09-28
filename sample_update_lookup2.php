@@ -742,7 +742,7 @@ if (isset($_GET['submit'])) {
 				</div>
 				
 				<p><button class="button" type="submit" name="submit" value="2">Update </button>
-				<button class="button" type=button onClick="parent.location='/series/dynamic/airmicrobiomes/sample_update_lookup.php'" value='Go Back'>Go Back</button>
+				<button class="button" type=button onClick="parent.location='<?php echo $root;?>sample_update_lookup.php'" value='Go Back'>Go Back</button>
 				</p>
 				
 		</form>

@@ -292,7 +292,7 @@
 				$_SESSION['submitted'] = 'true';
 				$dbc->commit();
 				unset_session_vars('bulk_seqSub_update');
-				echo '<p><button class="btn btn-success" type=button onClick="parent.location=\'/series/dynamic/airmicrobiomes/sample_update_lookup.php\'" value="\'Go Back\'>Go Back</button></p>';
+				echo '<p><button class="btn btn-success" type=button onClick="parent.location=\'<?php echo $root;?>sample_update_lookup.php\'" value="\'Go Back\'>Go Back</button></p>';
 			}
 			else{
 				throw new Exception("ERROR: Update Failed. Please Contact Admin");

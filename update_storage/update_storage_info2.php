@@ -94,7 +94,7 @@ $transaction_time = date("Y-m-d H:i:s");
 		</p>
 		
 		<button class="button" type="submit" name="submit" value="1">Update </button>
-		<button class="button" type=button onClick="parent.location='/series/dynamic/airmicrobiomes/update_storage/update_storage_info.php'" value='Go Back'>Go Back</button>
+		<button class="button" type=button onClick="parent.location='<?php echo $root;?>update_storage/update_storage_info.php'" value='Go Back'>Go Back</button>
 		<!--<input action="action" class="btn btn-success" type="button" value="Go Back" onclick="history.go(-1);" />-->
 		</div>
 		</fieldset>

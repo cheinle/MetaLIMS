@@ -701,7 +701,7 @@ include('functions/convert_header_names.php');
 </p>
 <!--<button class="btn btn-success" type=button onClick="parent.location='/series/dynamic/airmicrobiomes/sample_update_lookup2.php'" value='Go Back'>Go Back</button>-->
 </p>
-<button class="button" type=button onClick="parent.location='/series/dynamic/airmicrobiomes/sample_update_lookup.php'" value='update'>Update Another Sample</button>
+<button class="button" type=button onClick="parent.location='<?php echo $root;?>sample_update_lookup.php'" value='update'>Update Another Sample</button>
 </p>
 
 </body>

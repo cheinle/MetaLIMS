@@ -181,7 +181,7 @@
 	?>
 
 <input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" />
-<button class="button" type=button onClick="parent.location='/series/dynamic/airmicrobiomes/update_storage/update_storage_info.php'" value='update'>Update Another Sample</button>
+<button class="button" type=button onClick="parent.location='<?php echo $root;?>update_storage/update_storage_info.php'" value='update'>Update Another Sample</button>
 	
 
 </body>
