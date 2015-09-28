@@ -326,9 +326,9 @@ if(isset($_POST['submit'])){
 				//write to file						
 				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 				$path = $_SERVER['DOCUMENT_ROOT'].$root;
-				$objWriter->save($path.'/browse_files/repository/shared/sequencing_sample_submission_forms/airMicrobiomeSamplesSubmissionForm_'.$dtSub.'.xlsx');
+				$objWriter->save($path.'/browse_files/repository/shared/sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
 				
-				$file_name ='airMicrobiomeSamplesSubmissionForm_'.$dtSub.'.xlsx';
+				$file_name ='SamplesSubmissionForm_'.$dtSub.'.xlsx';
 				echo 'File has been created:',EOL;
 				echo '<a href='.$root.'browse_files/repository/shared/sequencing_sample_submission_forms/'.$file_name.' download>Click here</a><br>';
 				echo 'Note: Files Can Also Be Found Under Files-Browse_Files->Shared-><name of file>';
