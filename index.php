@@ -132,14 +132,16 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				<ul class="nav navbar-nav ">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Admin Tools<b class="caret"></b></a>
-					<ul class="dropdown-menu" role="menu">';}?>
-						<?php if($_SESSION['username'] == $admin_user){ echo '<li><a href="'.$root.'update_tables/update_proj_name.php">Add Freezer/Drawers</a></li>';} ?>
-						<?php if($_SESSION['username'] == $admin_user){ echo '<li><a href="'.$root.'update_tables/add_sample_type.php">Add Sample Type</a></li>';} ?>
-						<?php if($_SESSION['username'] == $admin_user){ echo '<li><a href="'.$root.'update_tables/update_proj_name.php">Add Instrument Used To Quantify DNA</a></li>';} ?>
-						<?php if($_SESSION['username'] == $admin_user){ echo '<li><a href="'.$root.'update_tables/update_proj_name.php">Add Project Name</a></li>';} ?>
-					<?php echo '</ul>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="'.$root.'update_tables/update_proj_name.php">Add Freezer</a></li>
+						<li><a href="'.$root.'update_tables/update_proj_name.php">Add Drawers</a></li>
+						<li><a href="'.$root.'update_tables/add_sample_type.php">Add Sample Type</a></li>
+						<li><a href="'.$root.'update_tables/add_quant_instrument.php">Add Instrument Used To Quantify DNA</a></li>
+						<li><a href="'.$root.'update_tables/update_proj_name.php">Add Project Name</a></li>
+					</ul>
 				</li>
-			</ul>'; ?>
+				</ul> 
+				';}?>
 				<li ><a href="<?php echo $root;?>logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
 			</ul>
 	</div>			

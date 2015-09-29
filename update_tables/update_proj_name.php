@@ -185,7 +185,7 @@ $path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
 	
 		<fieldset>
 		<LEGEND><b>Project Name Info:</b></LEGEND>
-		<p>Note: Project Name Must Be Between 3-19 Characters And Contain No Spaces Or Special Characters Other Than Hypehns</p>
+		<p>Note: Project Name Must Be Between 3-19 Characters And Contain No Spaces Or Special Characters Other Than Hyphens</p>
 		<p><a id="myLink" href="link">link</a></p>
 		<script>
 	    	var link = "query_select_mod.php#projects";

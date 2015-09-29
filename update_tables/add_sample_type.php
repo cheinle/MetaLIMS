@@ -41,12 +41,12 @@
 			$p_sampleID = strtoupper($p_sampleID);
 			
 			if($p_sampleType == ''){
-				echo '<p>You must enter a Sample Type!<p>';
+				echo '<p>You Must Enter A Sample Type!<p>';
 				$error = 'true';
 			}
 			
 			if($p_sampleID == ''){
-				echo '<p>You must enter a Sample ID!<p>';
+				echo '<p>You Must Enter A Sample ID!<p>';
 				$error = 'true';
 			}
 			
@@ -73,10 +73,6 @@
 						$error = 'true';
 					}
 				}
-    			else {
-        			echo "Name Exists: No Results <br>";//no result came back so free to enter into db, no error
-					
-    			}
 			} 
 			else {
 				$error = 'true';
