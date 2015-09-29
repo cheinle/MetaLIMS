@@ -4,24 +4,9 @@
 <head>
 <meta charset="utf-8">
 <title>Add Freezers</title>
+
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-
-<script>
-	$(document).ready(function(){
-   		$('[data-toggle="popover"]').popover({
-        	placement : 'right'
-    	});
-	});
-</script>
-				
-<style>
-	.popover-content {
-    	font-style: bold;
-    	font-size: 14px;
-	}
-</style>
-
 </head>
 <body>
 <?php include('../index.php'); ?>
@@ -29,11 +14,11 @@
 <h3>Add Freezers</h3>	
 </div>
 <?php 	
+		$submitted = 'false';
 		//error checking 
 		if(isset($_GET['submit'])){
 			$error = 'false';
-			$submitted = 'false';
-			
+
 			//sanatize user input to make safe for browser
 			$p_freezer = htmlspecialchars($_GET['freezer']);
 			$p_freezer = ucfirst($p_freezer);
@@ -51,7 +36,7 @@
 				}
 			}
 			
-			//check if name exisset
+			//check if name exists
 			$stmt1 = $dbc->prepare("SELECT freezer_id FROM freezer WHERE freezer_id = ?");
 			$stmt1 -> bind_param('s', $p_freezer);
 
@@ -66,7 +51,7 @@
 			} 
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				
 			}
 			$stmt1 -> close();
@@ -106,6 +91,7 @@
 							$set_stmt -> close();
 							if($set_rows_affected >= 0){
 								echo "You Updated Freezer Name To: ".$p_freezer.'<br>';
+								$submitted = 'true';
 							}
 							else{	
 								echo 'An Error Has Occured';

@@ -1,3 +1,6 @@
+<link rel="shortcut icon" href="/favicon.ico" type="image/icon"> <link rel="icon" href="/favicon.ico" type="image/icon">
+
+
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -133,8 +136,8 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Admin Tools<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="'.$root.'update_tables/update_proj_name.php">Add Freezer</a></li>
-						<li><a href="'.$root.'update_tables/update_proj_name.php">Add Drawers</a></li>
+						<li><a href="'.$root.'update_tables/add_freezers.php">Add Freezer</a></li>
+						<li><a href="'.$root.'update_tables/add_drawers.php">Add Drawers</a></li>
 						<li><a href="'.$root.'update_tables/add_sample_type.php">Add Sample Type</a></li>
 						<li><a href="'.$root.'update_tables/add_quant_instrument.php">Add Instrument Used To Quantify DNA</a></li>
 						<li><a href="'.$root.'update_tables/update_proj_name.php">Add Project Name</a></li>

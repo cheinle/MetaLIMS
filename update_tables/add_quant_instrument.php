@@ -29,10 +29,11 @@
 <h3>Add Quantitation Instrument</h3>	
 </div>
 <?php 	
+		$submitted = 'false';
 		//error checking 
 		if(isset($_GET['submit'])){
 			$error = 'false';
-			$submitted = 'false';
+			
 			
 			//sanatize user input to make safe for browser
 			$p_quantInstrument = htmlspecialchars($_GET['quantInstrument']);
@@ -51,7 +52,7 @@
 				}
 			}
 			
-			//check if name exisset
+			//check if name exists
 			$stmt1 = $dbc->prepare("SELECT kit_name FROM quant_instruments WHERE kit_name = ?");
 			$stmt1 -> bind_param('s', $p_quantInstrument);
 
@@ -66,7 +67,7 @@
 			} 
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				
 			}
 			#echo 'done';
@@ -107,6 +108,7 @@
 							$set_stmt -> close();
 							if($set_rows_affected >= 0){
 								echo "You Updated Quantitation Instrument Name To: ".$p_quantInstrument.'<br>';
+								$submitted = 'true';
 							}
 							else{	
 								echo 'An Error Has Occured';
