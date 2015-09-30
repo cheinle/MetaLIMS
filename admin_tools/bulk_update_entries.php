@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Remove An Entry</title>
+<title>Bulk Update Entries</title>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 </head>
@@ -11,7 +11,7 @@
 <?php include('../index.php');
 $path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
 <div class="page-header">
-<h3>Remove An Entry</h3>	
+<h3>Bulk Update Entries</h3>	
 </div>
 	<?php 
 
@@ -22,18 +22,27 @@ $path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
 			$submitted = 'false';
 			
 			$entry_type  = $_GET['eType'];
-			$entry_to_delete = $_GET['eNameDelete'];
+			$old_entry_name = $_GET['eOldName'];
+			$new_entry_name = $_GET['eNewName'];
 			
 			
 			if($entry_type == '0'){
-					echo '<p>You Must Enter An Entry Type To Delete!<p>';
+					echo '<p>You Must Enter An Entry Type To Update Samples!<p>';
 					$error = 'true';
 			}
 			
-			if($entry_to_delete == ''){
-					echo '<p>You Must Enter A Name To Delete!<p>';
+			if($old_entry_name == ''){
+					echo '<p>You Must Enter An Old Name To Update Samples!<p>';
 					$error = 'true';
 			}
+			
+			if($new_entry_name == ''){
+					echo '<p>You Must Enter An New Name To Update Samples!<p>';
+					$error = 'true';
+			}
+			
+			
+			//do you want to check that  both new and old exits?
 			
 			if($entry_type == 'dExtrKit'){
 				$select_exists_query = "SELECT d_kit_name FROM dna_extraction WHERE d_kit_name = ?";
@@ -156,16 +165,17 @@ $path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
 		}
 	?>
 	<form class="registration" action="remove_entries.php" method="GET">
-	<p><i>* = required field</i></p>
+	<p><i>* = required field </i></p>
 	<div class="container-fluid">
 	<fieldset>
   	<div class="row">
-	<LEGEND><b>Delete Entry:</b></LEGEND>
+	<LEGEND><b>Update All Samples In A Group:</b></LEGEND>
+	<pre>Bulk Update All Samples Containing One Field To A New Field</pre>
 	
   	<div class="col-xs-6">
 	<!--Entry Type-->
 	<p>
-	<label class="textbox-label">Entry Type:*</label>
+	<label class="textbox-label">Field Name:*</label>
 	<select name="eType">
 		<option value='0'>-Select-</option>
 		<option value='dExtrKit'>DNA Extraction Kit</option>
@@ -181,8 +191,14 @@ $path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
 	
 	<!--Entry Name-->
 	<p>
-	<label class="textbox-label">Old Entry Name To Delete:*</label>
-	<input type="text" name="eNameDelete" class="fields" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $entry_to_delete;} ?>">
+	<label class="textbox-label">Update Samples From:*</label>
+	<input type="text" name="eOldName" class="fields" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $oldEntry;} ?>">
+	</p>
+	
+	<!--New Entry Name-->
+	<p>
+	<label class="textbox-label">Update Samples To:*</label>
+	<input type="text" name="eNewName" class="fields" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $newEntry;} ?>">
 	</p>
 	
 	</div><!--end of class = 'col-xs-6'-->
