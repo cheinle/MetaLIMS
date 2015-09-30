@@ -40,17 +40,18 @@ function dropDown($select_name,$table_name,$field_name,$select_id,$submitted){
 					$name = htmlspecialchars($row["$p_field_name"]);
 					$id = htmlspecialchars($row["$p_select_id"]);
 					$visible_check = htmlspecialchars($row["visible"]);
+					echo $visible_check;
 					if($visible_check == '1'){
 						if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy'])))   {
 							if(isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false'){
-									echo '<option value="<?php echo $id; ?>" <?php if((isset($_SESSION["$p_select_name"]) && $_SESSION["$p_select_name"] == "$id" )){ echo "selected";} ?>><?php echo "$name" ?></option>';
+									echo '<option value="'.$id.'" if((isset($_SESSION["'.$p_select_name.'"]) && $_SESSION["'.$p_select_name.'"] == '.$id.')){ echo "selected";}>'.$name.'</option>';
 							}
 							else{
-								echo '<option value="<?php echo $id; ?>" <?php if((isset($_GET["$p_select_name"]) && $_GET["$p_select_name"] == "$id" )){ echo "selected";} ?>><?php echo "$name" ?></option>';
+								echo '<option value="'.$id.'" if((isset($_GET["'.$p_select_name.'"]) && $_GET["'.$p_select_name.'"] == '.$id.' )){ echo "selected";}>'.$name.'</option>';
 							}
 						}
 						else{
-							echo '<option value="<?php echo $id; ?>"><?php echo "$name" ?></option>';
+							echo '<option value="'.$id.'">'.$name.'</option>';
 						}
 					}
 				}

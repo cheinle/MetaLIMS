@@ -61,12 +61,11 @@ function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$sel
 					
 					$visible_check = htmlspecialchars($row["visible"]);
 					if($visible_check == 1){
-					
 						if($id == $name1){
-							echo '<option value="<?php echo $id ?>" <?php echo "selected"; ?>><?php echo "$name" ?></option>';
+							echo '<option value="'.$id.'" selected>'.$name.'</option>';
 						}
 						else{
-							echo '<option value="<?php echo $id ?>"><?php echo "$name" ?></option>';
+							echo '<option value="'.$id.'">'.$name.'</option>';
 						}
 					}
 

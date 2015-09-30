@@ -8,7 +8,7 @@
 
 function dropDown_update_for_storage($select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name,$stored_name){ #send also the query name?, always based on sample name
 
-			include('../config/path.php');
+			include('config/path.php');
 			$path = $_SERVER['DOCUMENT_ROOT'].$root;
 			include($path.'database_connection.php');
 			
@@ -72,13 +72,12 @@ function dropDown_update_for_storage($select_name,$table_name,$field_name,$selec
 					
 					$visible_check = htmlspecialchars($row["visible"]);
 					if($visible_check == 1){
-
+						
 						if($id == $name1){
-							echo '<option value="<?php echo $id ?>" <?php echo "selected"; ?>><?php echo "$name" ?></option>';
-							
+							echo '<option value="'.$id.'" selected>'.$name.'</option>';
 						}
 						else{
-							echo '<option value="<?php echo $id ?>"><?php echo "$name" ?></option>';
+							echo '<option value="'.$id.'">'.$name.'</option>';
 						}
 					}
 

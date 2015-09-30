@@ -21,7 +21,6 @@ include('config/path.php');
 $path = $_SERVER['DOCUMENT_ROOT'].$root;
 include('functions/dropDown_update.php');
 include('functions/dropDown_update_for_storage.php');
-include('functions/dropDown_update_for_isolates.php');
 include('functions/text_insert_update.php');
 include('functions/text_insert_isolate_update.php');
 include('functions/text_insert_update_dt.php');
