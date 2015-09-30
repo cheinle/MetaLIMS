@@ -22,7 +22,7 @@ function dropDown_update($select_name,$table_name,$field_name,$select_id,$s_fiel
 				#echo "samp Name:".$sample_name.'<br>';
 				$query1 = "SELECT $p_s_field_name FROM sample WHERE sample_name = '$p_sample_name'";
 				$result1 = mysqli_query($dbc, $query1);
-				$name;
+				$name1;
 				if($result1){
 					while($row1 = mysqli_fetch_assoc($result1)) {
 						$name1 = $row1["$p_s_field_name"];
@@ -54,17 +54,16 @@ function dropDown_update($select_name,$table_name,$field_name,$select_id,$s_fiel
 					$id = trim($id);
 					$name = trim($name);
 					$name1 = trim($name1);
+					
+					$visible_check = htmlspecialchars($row["visible"]);
+					if($visible_check == 1){
 
-					if($id == $name1){
-?>
-						<option value="<?php echo $id ?>" <?php echo "selected"; ?>><?php echo "$name" ?></option>
-						
-<?php
-					}
-					else{
-?>
-						<option value="<?php echo $id ?>"><?php echo "$name" ?></option>
-<?php
+						if($id == $name1){
+							echo '<option value="<?php echo $id ?>" <?php echo "selected"; ?>><?php echo "$name" ?></option>';
+						}
+						else{
+							echo '<option value="<?php echo $id ?>"><?php echo "$name" ?></option>';
+						}
 					}
 
 				}
