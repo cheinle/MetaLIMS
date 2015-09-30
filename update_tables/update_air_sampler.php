@@ -55,8 +55,7 @@
 			//check if air sampler name exists
 			$stmt1 = $dbc->prepare("SELECT air_sampler_name FROM air_sampler WHERE air_sampler_name = ?");
 			$stmt1 -> bind_param('s', $p_airSamp);
-			$stmt1->bind_result($col1);
-				
+
   			if ($stmt1->execute()){
     			$stmt1->bind_result($name);
     			if ($stmt1->fetch()){

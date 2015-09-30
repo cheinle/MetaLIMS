@@ -112,7 +112,6 @@ include('../functions/dropDown.php');
 			//check if date exists
 			$stmt1 = $dbc->prepare("SELECT daily_date FROM daily_data2 WHERE daily_date = ?");
 			$stmt1 -> bind_param('s', $p_mydate);
-			$stmt1->bind_result($col1);
 				
   			if ($stmt1->execute()){
     			$stmt1->bind_result($name);
@@ -131,7 +130,7 @@ include('../functions/dropDown.php');
 			} 
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				
 			}
 			#echo 'done';

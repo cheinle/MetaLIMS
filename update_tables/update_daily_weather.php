@@ -150,7 +150,6 @@
 			//check if air sampler name exists
 			$stmt1 = $dbc->prepare("SELECT daily_date FROM daily_weather WHERE daily_date = ?");
 			$stmt1 -> bind_param('s', $p_date);
-			$stmt1->bind_result($col1);
 				
   			if ($stmt1->execute()){
     			$stmt1->bind_result($name);
@@ -168,7 +167,7 @@
 			} 
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				
 			}
 			#echo 'done';

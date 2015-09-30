@@ -104,7 +104,6 @@ include($path.'functions/dropdown.php');
 			//check sequence info name exists
 			$stmt1 = $dbc->prepare("SELECT sequencing_info FROM sequencing2 WHERE sequencing_info = ?");
 			$stmt1 -> bind_param('s', $p_seqInfo);
-			$stmt1->bind_result($col1);
 				
   			if ($stmt1->execute()){
     			$stmt1->bind_result($name);
@@ -123,7 +122,7 @@ include($path.'functions/dropdown.php');
 			} 
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				
 			}
 			#echo 'done';

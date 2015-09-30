@@ -64,8 +64,7 @@
 			//check if project name exists
 			$stmt1 = $dbc->prepare("SELECT project_name FROM project_name WHERE project_name = ?");
 			$stmt1 -> bind_param('s', $p_projName);
-			$stmt1->bind_result($col1);
-				
+
   			if ($stmt1->execute()){
   			
     			$stmt1->bind_result($name);
@@ -78,7 +77,7 @@
 			} 
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				
 			}
 			#echo 'done';

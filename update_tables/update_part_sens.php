@@ -41,7 +41,6 @@
 			//check if particle sensor name exists
 			$stmt1 = $dbc->prepare("SELECT part_sens_name FROM particle_counter WHERE part_sens_name = ?");
 			$stmt1 -> bind_param('s', $p_partSens);
-			$stmt1->bind_result($col1);
 				
   			if ($stmt1->execute()){
     			$stmt1->bind_result($name);
@@ -60,7 +59,7 @@
 			} 
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				
 			}
 			#echo 'done';

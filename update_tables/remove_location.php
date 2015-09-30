@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Project name update</title>
+<title>Remove A Location</title>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 </head>
@@ -11,118 +11,54 @@
 <?php include('../index.php');
 $path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
 <div class="page-header">
-<h3>Add New Project Name - Admin Only</h3>	
+<h3>Remove A Location</h3>	
 </div>
 	<?php 
+		//Check if samples still exist for location
+		//if samples exists, tell user they have to update the location name for each of the other samples
+		//(bulk update?)
+		//list out the samples for the user (xls?)
+		
+		//if there are no samples for this location name, go ahead and change visible to 0
+
+	
+	
+	
 		//error && type checking 
 		if(isset($_GET['submit'])){
-			//print_r($_GET);
+			
 			$error = 'false';
 			$submitted = 'false';
 			
-			//get username and update entered by with
-			$p_addedBy = $_SESSION['first_name'].' '.$_SESSION['last_name']; 
-		
-		
-			//sanatize user input to make safe for browser
-			$p_projName = htmlspecialchars($_GET['projName']);
-			$p_abName = htmlspecialchars($_GET['abName']);
-			$p_description = htmlspecialchars($_GET['description']);
-			$p_subEmail = htmlspecialchars($_GET['subEmail']);
-		
-		
-			if($p_projName == ''){
-					echo '<p>You must enter a Project Name!<p>';
-					$error = 'true';
-			}
-			else{
-				//check that project name is 19chars or less
-				$regrex_check = '/^[A-Za-z0-9-]{3,19}$/'; 
-				if(preg_match($regrex_check,$p_projName) == false){
-					echo '<p>Project Name Must Be 3-19 Chars Or Less And Contain No Illegal Characters!<p>';
-					$error = 'true';
-				}
-				
-			}
-			if($p_abName == ''){
-					echo '<p>You Must Enter A Project Abbreviation!<p>';
-					$error = 'true';
-			}else{
-				//check that abbrev is 3-5 characters
-				$regrex_check2 = '/^[A-Za-z0-9]{3,5}$/'; 
-				if(preg_match($regrex_check2,$p_abName) == false){
-					echo '<p>Project Name Must Be 3-5 Characters!<p>';
-					$error = 'true';
-				}
-			}
-			if($p_addedBy == ''){
-					echo '<p>You must enter your name!<p>';
-					$error = 'true';
-			}
-			if($p_description == ''){
-					echo '<p>You must enter a description of the project!<p>';
-					$error = 'true';
-			}
-			if($p_subEmail == ''){
-					echo '<p>You must enter the email of the submitter!<p>';
+			
+			if($p_delete_entry_name == ''){
+					echo '<p>You Must Enter A Location Name To Delete!<p>';
 					$error = 'true';
 			}
 				
-			//check if project name exists
-			$stmt1 = $dbc->prepare("SELECT project_name FROM project_name WHERE project_name = ?");
-			$stmt1 -> bind_param('s', $p_projName);
-				
-  			if ($stmt1->execute()){
-  			
-    			$stmt1->bind_result($name);
-    			if ($stmt1->fetch()){
-        			echo "Name: {$name}<br>";
-        			if($name == $p_projName){
-        				echo $p_projName." exits. Please check name.";
+			//check samples exists for this project
+			if($dbc->prepare("SELECT sample_name FROM sample WHERE location_name = ?")){
+				$stmt1 -> bind_param('s', $p_delete_entry_name);
+	
+	  			if ($stmt1->execute()){
+	  			
+	    			$stmt1->bind_result($name);
+	    			while ($stmt1->fetch()){
+	        			echo "Name: $name <br>";
 						$error = 'true';
 					}
+				} 
+				else {
+					$error = 'true';
+	    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				}
-    			else {
-        			//echo "Name exisits: No results".'<br>';//no result came back so free to enter into db, no error
-					
-    			}
-			} 
+			}
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
-				
+	    		die('execute() failed: ' . htmlspecialchars($stmt1->error));	
 			}
-			#echo 'done';
 			$stmt1 -> close();
-			
-			//create seq_id from project name
-			#include($path.'functions/create_seq_id.php');
-			#$seq_id = create_seq_id($p_projName);
-			//no longer creating seq id. user supplied
-			$seq_id = $p_abName;
-			
-			//check if seq ID exisits. 
-			$stmt2 = $dbc->prepare("SELECT seq_id_start FROM project_name WHERE seq_id_start = ?");
-			$stmt2 -> bind_param('s', $seq_id);
-			#$stmt2->bind_result($col1);
-				
-  			if ($stmt2->execute()){
-  			
-    			$stmt2->bind_result($name);
-    			if ($stmt2->fetch()){
-        			echo "Name: {$name}<br>";
-        			if($name == $seq_id){
-        				echo $seq_id." exits. Please check name.";
-						$error = 'true';
-					}
-				}
-			} 
-			else {
-				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
-				
-			}
-			$stmt2 -> close();
+
 
 			//insert info into db
 		    if($error != 'true'){

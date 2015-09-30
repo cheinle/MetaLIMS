@@ -30,7 +30,6 @@
 			//check if pool name exists
 			$stmt1 = $dbc->prepare("SELECT pool_extracts_name FROM pool_extractions WHERE pool_extracts_name = ?");
 			$stmt1 -> bind_param('s', $p_poolName);
-			$stmt1->bind_result($col1);
 				
   			if ($stmt1->execute()){
   			
@@ -49,7 +48,7 @@
 			} 
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				
 			}
 			#echo 'done';

@@ -31,7 +31,6 @@
 			//check if dna extraction kit name exists
 			$stmt1 = $dbc->prepare("SELECT d_kit_name FROM dna_extraction WHERE d_kit_name = ?");
 			$stmt1 -> bind_param('s', $p_dExtr);
-			$stmt1->bind_result($col1);
 				
   			if ($stmt1->execute()){
     			$stmt1->bind_result($name);
@@ -49,7 +48,7 @@
 			} 
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				
 			}
 			#echo 'done';

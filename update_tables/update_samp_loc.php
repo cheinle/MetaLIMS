@@ -24,7 +24,6 @@
 			$p_address = htmlspecialchars($_GET['address']);
 			$p_loc_type = htmlspecialchars($_GET['loc_type']);
 			$p_env_type = htmlspecialchars($_GET['env_type']);
-			$p_circ_type = htmlspecialchars($_GET['circ_type']);
 			$p_long = htmlspecialchars($_GET['long']);
 			$p_lat = htmlspecialchars($_GET['lat']);
 		
@@ -45,10 +44,6 @@
 				echo '<p>You must enter an Environmental Type!<p>';
 				$error = 'true';
 			}
-			if($p_circ_type == ''){
-				echo '<p>You must enter a Circulation Type!<p>';
-				$error = 'true';
-			}
 			if($p_long == ''){
 				echo '<p>You must enter a Latitude!<p>';
 				$error = 'true';
@@ -61,7 +56,6 @@
 			//check location name exists
 			$stmt1 = $dbc->prepare("SELECT loc_name FROM location WHERE loc_name = ?");
 			$stmt1 -> bind_param('s', $p_loc_name);
-			$stmt1->bind_result($col1);
 				
   			if ($stmt1->execute()){
     			$stmt1->bind_result($name);
@@ -80,7 +74,7 @@
 			} 
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				
 			}
 			#echo 'done';
@@ -94,13 +88,12 @@
 				if($p_address == ''){$p_address = NULL;}
 				if($p_loc_type == ''){$p_loc_type = NULL;}
 				if($p_env_type == ''){$p_env_type = NULL;}
-				if($p_circ_type == ''){$p_circ_type = NULL;}
 				if($p_lat == ''){$p_lat = NULL;}
 				if($p_long == ''){$p_long = NULL;}
 					
 				//insert data into db. Use prepared statement 
-				$stmt2 = $dbc -> prepare("INSERT INTO location (loc_name, address, loc_type,environmental_type,circulation_type,latitude,longitude) VALUES (?,?,?,?,?,?,?)");
-				$stmt2 -> bind_param('sssssss', $p_loc_name,$p_address,$p_loc_type,$p_env_type,$p_circ_type,$p_lat,$p_long);
+				$stmt2 = $dbc -> prepare("INSERT INTO location (loc_name, address, loc_type,environmental_type,latitude,longitude) VALUES (?,?,?,?,?,?,?)");
+				$stmt2 -> bind_param('ssssss', $p_loc_name,$p_address,$p_loc_type,$p_env_type,$p_lat,$p_long);
 				
 				$stmt2 -> execute();
 				$rows_affected2 = $stmt2 ->affected_rows;

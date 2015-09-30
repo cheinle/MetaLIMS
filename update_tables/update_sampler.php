@@ -57,7 +57,6 @@
 			//check if air sampler name exists
 			$stmt1 = $dbc->prepare("SELECT sampler_name FROM sampler WHERE sampler_name = ?");
 			$stmt1 -> bind_param('s', $p_samp);
-			$stmt1->bind_result($col1);
 				
   			if ($stmt1->execute()){
     			$stmt1->bind_result($name);
@@ -75,7 +74,7 @@
 			} 
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				
 			}
 			#echo 'done';
