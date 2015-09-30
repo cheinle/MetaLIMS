@@ -136,11 +136,12 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Admin Tools<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="'.$root.'update_tables/add_freezers.php">Add Freezer</a></li>
-						<li><a href="'.$root.'update_tables/add_drawers.php">Add Drawers</a></li>
-						<li><a href="'.$root.'update_tables/add_sample_type.php">Add Sample Type</a></li>
-						<li><a href="'.$root.'update_tables/add_quant_instrument.php">Add Instrument Used To Quantify DNA</a></li>
-						<li><a href="'.$root.'update_tables/update_proj_name.php">Add Project Name</a></li>
+						<li><a href="'.$root.'admin_tools/add_freezers.php">Add Freezer</a></li>
+						<li><a href="'.$root.'admin_tools/add_drawers.php">Add Drawers</a></li>
+						<li><a href="'.$root.'admin_tools/add_sample_type.php">Add Sample Type</a></li>
+						<li><a href="'.$root.'admin_tools/add_quant_instrument.php">Add Instrument Used To Quantify DNA</a></li>
+						<li><a href="'.$root.'admin_tools/update_proj_name.php">Add Project Name</a></li>
+						<li><a href="'.$root.'admin_tools/remove_entries.php">Delete Entries</a></li>
 					</ul>
 				</li>
 				</ul> 
@@ -148,7 +149,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				<li ><a href="<?php echo $root;?>logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
 			</ul>
 	</div>			
-	</nav><!--ENd nav Main Nav-->
+	</nav><!--End nav Main Nav-->
 	
 	
 

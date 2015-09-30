@@ -113,7 +113,7 @@ $path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
 				$stmt_delete -> bind_param('is', $zero_visible,$entry_to_delete);
 				$stmt_delete -> execute();
 				$rows_affected_delete = $stmt_delete ->affected_rows;
-				if($rows_affected_delete == 0){ //return zero on update
+				if($rows_affected_delete == 0){ //return zero on update ...will return the same if did not update anything
 					echo "You Successfully Deleted ".$entry_to_delete.'<br>';
 					$submitted = 'true';
 				}
