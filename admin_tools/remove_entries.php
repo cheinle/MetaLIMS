@@ -83,7 +83,6 @@ $path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
 	    			$stmt_exists->bind_result($name);
 	    			while ($stmt_exists->fetch()){
 	        			echo "$name <br>";
-						$error = 'true';
 						$entry_exists_check = 'true';
 					}
 				} 
@@ -135,7 +134,7 @@ $path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
 				echo $entry_to_delete.' Does Not Exist. Please Check Name And Type';
 			}
 			
-			//update location visible to 0
+			//update visible to 0
 			$zero_visible = 0;
 		    if($error == 'false'  && $entry_exists_check  == 'true'){
 		    	$stmt_delete = $dbc -> prepare($update_query);

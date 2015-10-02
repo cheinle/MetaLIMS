@@ -106,7 +106,7 @@ if(isset($_GET['submit'])){
 			$p_emydate = $p_emydate.' 23:59:00';
 			#$query_date = ' start_samp_date_time BETWEEN (?) AND (?)';
 			//$query_date = ' sample.start_samp_date_time BETWEEN (?) AND (?)';
-			$query_date = ' sample_air_sampler.start_date_time BETWEEN (?) AND (?)';
+			$query_date = ' sample_sampler.start_date_time BETWEEN (?) AND (?)';
 			$check_date = 'true';
 		}
 			
@@ -116,8 +116,8 @@ if(isset($_GET['submit'])){
 			//check whitelist for p_field
 			$p_field_check = whiteList($p_field, 'column');
 			if($p_field_check == 'true'){
-				if($p_field == 'air_sampler_name'){
-					$query_field = " sample_air_sampler.$p_field = (?)";
+				if($p_field == 'sampler_name'){
+					$query_field = " sample_sampler.$p_field = (?)";
 				}
 				else{
 					$query_field = " sample.$p_field = (?)";
@@ -173,8 +173,8 @@ if(isset($_GET['submit'])){
 		}
 		else{
 			//$query_main = "SELECT $field_names FROM sample WHERE";
-			//add new air sampler table
-			$query_main = "SELECT $field_names FROM sample JOIN sample_air_sampler ON sample_air_sampler.sample_name  = sample.sample_name WHERE";
+			//add new sampler table
+			$query_main = "SELECT $field_names FROM sample LEFT JOIN sample_sampler ON sample_sampler.sample_name  = sample.sample_name WHERE";
 		}
 		$query = "";
 		$query_add = "";
@@ -183,7 +183,9 @@ if(isset($_GET['submit'])){
 			$query = $query_main.$query_field;
 			$query_add = $query_field;
 			$stmt = $dbc->prepare($query);
+			echo $query;
 			$stmt -> bind_param('s', $p_query_basis);
+			echo $p_query_basis;
 		}
 		elseif ($check_field == 'false' && $check_date == 'true') {//only date is populated
 			$query = $query_main.$query_date;
@@ -260,20 +262,10 @@ if(isset($_GET['submit'])){
 			echo "</body>";
 			echo "</html>";
 		}
-		/*//depricated
-		 * if($_GET['db_content']=='daily_data_all'){
-			$sdate = htmlspecialchars($_GET['sdate']);
-			$edate = htmlspecialchars($_GET['edate']);
-			//$stmt = $dbc->prepare("SELECT daily_data2_particle_counter.daily_date,daily_data2_particle_counter.part_sens_name,daily_data2_particle_counter.start_time,daily_data2_particle_counter.end_time,daily_data2.temp,daily_data2.hum,daily_data2.co2,daily_data2.rain,daily_data2.notes,daily_data2.entered_by,daily_data2.updated_by,daily_data2.update_timestamp FROM daily_data2_particle_counter LEFT JOIN daily_data2 ON (daily_data2_particle_counter.daily_date = daily_data2.daily_date) WHERE daily_data2_particle_counter.daily_date BETWEEN (?) AND (?)");
-			$stmt = $dbc->prepare("SELECT * FROM daily_data2 JOIN daily_data2_particle_counter ON daily_data2.daily_date = daily_data2_particle_counter.daily_date");
-			
-			$stmt -> bind_param('ss', $sdate,$edate);
-			build_table($stmt);
-		}
-		*/
-		//air samplers
-		if($_GET['db_content']=='airSampler_all'){
-			$stmt = $dbc->prepare("SELECT * FROM air_sampler");
+
+		// samplers
+		if($_GET['db_content']=='sampler_all'){
+			$stmt = $dbc->prepare("SELECT * FROM sampler");
 	    	build_table($stmt,'display');
 		}
 		
