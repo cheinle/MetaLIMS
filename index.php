@@ -139,8 +139,9 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 						<li><a href="'.$root.'admin_tools/add_freezers.php">Add Freezer</a></li>
 						<li><a href="'.$root.'admin_tools/add_drawers.php">Add Drawers</a></li>
 						<li><a href="'.$root.'admin_tools/add_sample_type.php">Add Sample Type</a></li>
-						<li><a href="'.$root.'admin_tools/add_quant_instrument.php">Add Instrument Used To Quantify DNA</a></li>
+						<li><a href="'.$root.'admin_tools/add_quant_instrument.php">Add Instrument Used To Quantify DNA/RNA</a></li>
 						<li><a href="'.$root.'admin_tools/update_proj_name.php">Add Project Name</a></li>
+						<li><a href="'.$root.'admin_tools/add_delete_users.php">Add/Delete Users</a></li>
 						<li><a href="'.$root.'admin_tools/remove_entries.php">Delete Entries</a></li>
 					</ul>
 				</li>
