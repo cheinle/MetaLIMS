@@ -1,5 +1,6 @@
 <?php
 	include ('index.php');
+	include ('config/path.php');
 	include ('database_connection.php');
 	include ('functions/text_insert_update_storage_info.php');
 	include_once("functions/check_collector_names.php");
@@ -324,14 +325,14 @@ if(isset($_POST['submit'])){
 				//unset_session_vars('bulk_seqSub_update'); //uncomment this!
 				//write to file						
 				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-				$path = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/airmicrobiomes/';
-				$objWriter->save($path.'/browse_files/repository/shared/sequencing_sample_submission_forms/airMicrobiomeSamplesSubmissionForm_'.$dtSub.'.xlsx');
+				$path = $_SERVER['DOCUMENT_ROOT'].$root;
+				$objWriter->save($path.'/browse_files/repository/shared/sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
 				
-				$file_name ='airMicrobiomeSamplesSubmissionForm_'.$dtSub.'.xlsx';
+				$file_name ='SamplesSubmissionForm_'.$dtSub.'.xlsx';
 				echo 'File has been created:',EOL;
-				echo '<a href=/series/dynamic/airmicrobiomes/browse_files/repository/shared/sequencing_sample_submission_forms/'.$file_name.' download>Click here</a><br>';
+				echo '<a href='.$root.'browse_files/repository/shared/sequencing_sample_submission_forms/'.$file_name.' download>Click here</a><br>';
 				echo 'Note: Files Can Also Be Found Under Files-Browse_Files->Shared-><name of file>';
-				echo '<button class="button" type=button onClick="parent.location=\'/series/dynamic/airmicrobiomes/sample_update_lookup.php\'" value="\'Go Back\'>Go Back</button>';
+				echo '<button class="button" type=button onClick="parent.location=\'<?php echo $root;?>sample_update_lookup.php\'" value="\'Go Back\'>Go Back</button>';
 			}
 			else{
 				throw new Exception("ERROR: Update Failed. Please Contact Admin");

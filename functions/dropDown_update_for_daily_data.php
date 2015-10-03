@@ -59,18 +59,12 @@ function dropDown_update_for_daily_data($select_name,$table_name,$field_name,$se
 					$name = htmlspecialchars($row["$p_field_name"]);
 					$id = htmlspecialchars($row["$p_select_id"]);
 
-					if($id == $name1){
-?>
-						<option value="<?php echo $id; ?>" <?php echo "selected"; ?>><?php echo htmlspecialchars($name); ?></option>
-						
-<?php
-					}
-					else{
-?>
-						<option value="<?php echo $id; ?>"><?php echo htmlspecialchars($name); ?></option>
-<?php
-					}
-
+						if($id == $name1){
+							echo '<option value="'.$id.'" selected>'.$name.'</option>';
+						}
+						else{
+							echo '<option value="'.$id.'">'.$name.'</option>';
+						}
 				}
 	   	 		echo "</select><br>";
 					

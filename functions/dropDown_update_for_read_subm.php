@@ -30,24 +30,14 @@ function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$sel
 				#echo "samp Name:".$sample_name.'<br>';
 				$query1 = "SELECT $p_s_field_name FROM read_submission WHERE sample_name = '$p_sample_name' AND subm_id = '$p_comp_pk_name'";
 				$result1 = mysqli_query($dbc, $query1);
-				$name;
+				$name1;
 				if($result1){
 					while($row1 = mysqli_fetch_assoc($result1)) {
 						$name1 = $row1["$p_s_field_name"];
-						#echo "name:".$name1.'<br>';
-						/*if($name1){
-							$pieces = explode(",",$name1);
-							$name1 = $pieces[$stored_name];
-						}
-						else{
-							$name1 = ""; //see if exisits?
-						}
-						#echo "name:".$name1.'<br>';*/
 					}
 				}else{
 					echo 'An error has occured';
 					mysqli_error($dbc);
-					#echo '<p>'.$query.'</p>';
 				}
 				
 				#now get your dropdown slect menu and cycle through it till you match above. When you match above make it the selected option
@@ -56,7 +46,6 @@ function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$sel
 				if(!$result){
 					echo 'An error has occured';
 					mysqli_error($dbc);
-					#echo '<p>'.$query.'</p>';
 				}
 				$s_name='sample['.$p_sample_name.','.$p_comp_pk_name.']['.$p_select_name.']';
 				echo "<select id='$p_select_name' name='$s_name'>";
@@ -69,17 +58,15 @@ function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$sel
 					$id = trim($id);
 					$name = trim($name);
 					$name1 = trim($name1);
-					if($id == $name1){
-						
-?>
-						<option value="<?php echo $id ?>" <?php echo "selected"; ?>><?php echo "$name" ?></option>
-						
-<?php
-					}
-					else{
-?>
-						<option value="<?php echo $id ?>"><?php echo "$name" ?></option>
-<?php
+					
+					$visible_check = htmlspecialchars($row["visible"]);
+					if($visible_check == 1){
+						if($id == $name1){
+							echo '<option value="'.$id.'" selected>'.$name.'</option>';
+						}
+						else{
+							echo '<option value="'.$id.'">'.$name.'</option>';
+						}
 					}
 
 				}
@@ -90,66 +77,6 @@ function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$sel
 			echo "ERROR: Please check table name";
      	}
      }	
-
-
-
-
-
-
-/*
-function dropDown_update_for_storage($s_field_name,$sample_name){ #send also the query name?, always based on sample name
-
-			$path = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/airmicrobiomes/';
-			include($path.'connect_air.php');
-			
-			$p_s_field_name = htmlspecialchars($s_field_name);
-			$p_sample_name = htmlspecialchars($sample_name);
-
-			//check that $table_name exists in white list
-			include_once('white_list.php');
-			
-			//$check = whiteList($p_table_name,'table'); 
-			$check2 = whiteList($p_s_field_name,'column'); 
-			//if($check == 'true' && $check2 == 'true'){
-			if($check2 == 'true'){
-				#echo "sfname:".$s_field_name.'<br>';
-				#echo "samp Name:".$sample_name.'<br>';
-				$query1 = "SELECT $p_s_field_name FROM storage_info WHERE sample_name = '$p_sample_name'";
-				$result1 = mysqli_query($dbc, $query1);
-				$name1 = "";
-				if($result1){
-					while($row1 = mysqli_fetch_assoc($result1)) {
-						$name1 = $row1["$p_s_field_name"];
-						#echo "name:".$name1.'<br>';
-					}
-				}else{
-					echo 'An error has occured';
-					mysqli_error($dbc);
-					#echo '<p>'.$query.'</p>';
-				}
-
-				if($name1){
-					$pieces = explode(",",$name1);
-					return $pieces;
-		
-				}
-				else{return "";}
-			}	
-				
-			
-     }	
-
-
-	function recall ($temp, $check_temp,$get_array){
-			if($temp == $check_temp){
-				return "true";	
-			}
-			else{
-				return "falseeee";
-			}
-	}
- * 
- */
 ?>
 
 </body>

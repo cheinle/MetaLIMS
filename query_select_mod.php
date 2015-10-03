@@ -118,7 +118,6 @@ include('functions/check_box_tables.php');
 	<h3 class="checkbox-header">Bulk Action:</h3>
 	<div class="vert-checkboxes">
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="bulk_dna") echo "checked";?> value="bulk_dna">Bulk Update For DNA Extraction Info</label>
-	<!--<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="seq_sub") echo "checked";?> value="seq_sub">Bulk Update For Sequencing Submission</label>-->
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="read_sub") echo "checked";?> value="read_sub">Bulk Insert For Read Submission IDs</label>
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="update_read_sub") echo "checked";?> value="update_read_sub">Bulk Update For Read Submission IDs</label>
 	</div>
@@ -137,10 +136,6 @@ include('functions/check_box_tables.php');
 </fieldset>
 </form>
 
-<p>
-<!--<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo" aria-expanded="true" aria-controls="demo" class='buttonLength'>More Query Options</button>
-<div id="demo" class="collapse">-->
-</p>
 
 <a name="projects"></a>
 <a name="samplers"></a>
@@ -150,44 +145,19 @@ include('functions/check_box_tables.php');
 	<LEGEND><b>Data Dump (Choose One)</b></LEGEND>
 	<LEGEND  style="margin-left:2%;"><b>Display All Project Info:</b></LEGEND>
 	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="project_all">Display all DB Project Info</label>
+	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="project_all">Display All DB Project Info</label>
 	</div>
-	
-	
-	<LEGEND  style="margin-left:2%;"><b>  Display All Weather:</b></LEGEND>
-	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="weather_all">Display all DB weather content</label>
-	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content =="xls") echo "checked";?> value="weather_xls">Download to MS Excel worksheet</label>
-	</div>
-	
-	<!--DEPRICATED
-		<LEGEND><b>  Display All Daily Data:</b></LEGEND>
-	<label class="textbox-label">Select Date Range:</label>
-	<input type="text" id="datepicker3"  name="sdate"><input type="text" id="datepicker4"  name="edate">
-	<script>
-		$('#datepicker3').datepicker({ dateFormat: 'yy-mm-dd' }).val();
-		$('#datepicker4').datepicker({ dateFormat: 'yy-mm-dd' }).val();
-	</script>
-	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="daily_data_all">Display all DB daily data content</label>
-	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content =="xls") echo "checked";?> value="daily_data_xls">Download to MS Excel worksheet</label>
-	</div>-->
 	
 	<LEGEND  style="margin-left:2%;"><b>  Display All Air Samplers:</b></LEGEND>
 	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="airSampler_all">Display all DB air sampler content</label>
+	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="sampler_all">Display All Sampler Content</label>
 	</div>
 	
 	<LEGEND  style="margin-left:2%;"><b>Display All Particle Counters:</b></LEGEND>
 	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="partCt_all">Display all DB particle counter content</label>
+	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="partCt_all">Display All DB Sensor Content</label>
 	</div>
 
-	<!--<LEGEND><b>  Display All Sequencing Submission Info:</b></LEGEND>
-	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="all">Display all DB sequencing submission info</label>
-	</div>-->
-	
 
 	<!--submit button-->
 	<button type="submit" name="submit" class="button" value="other"> Submit </button>

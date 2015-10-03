@@ -71,7 +71,6 @@ $path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
 			//check if project name exists
 			$stmt1 = $dbc->prepare("SELECT project_name FROM project_name WHERE project_name = ?");
 			$stmt1 -> bind_param('s', $p_projName);
-			$stmt1->bind_result($col1);
 				
   			if ($stmt1->execute()){
   			
@@ -90,7 +89,7 @@ $path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
 			} 
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				
 			}
 			#echo 'done';
@@ -185,7 +184,7 @@ $path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
 	
 		<fieldset>
 		<LEGEND><b>Project Name Info:</b></LEGEND>
-		<p>Note: Project Name Must Be Between 3-19 Characters And Contain No Spaces Or Special Characters Other Than Hypehns</p>
+		<p>Note: Project Name Must Be Between 3-19 Characters And Contain No Spaces Or Special Characters Other Than Hyphens</p>
 		<p><a id="myLink" href="link">link</a></p>
 		<script>
 	    	var link = "query_select_mod.php#projects";

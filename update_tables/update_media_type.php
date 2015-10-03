@@ -45,7 +45,6 @@
 			//check if name exists
 			$stmt1 = $dbc->prepare("SELECT media_type FROM media_type WHERE media_type = ?");
 			$stmt1 -> bind_param('s', $p_medType);
-			$stmt1->bind_result($col1);
 				
   			if ($stmt1->execute()){
     			$stmt1->bind_result($name);
@@ -63,7 +62,7 @@
 			} 
 			else {
 				$error = 'true';
-    			die('execute() failed: ' . htmlspecialchars($stmt->error));
+    			die('execute() failed: ' . htmlspecialchars($stmt1->error));
 				
 			}
 			#echo 'done';

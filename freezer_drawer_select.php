@@ -29,7 +29,7 @@
 					#echo "pvalue:".$p_value.'<br>';
 					
 					
-						echo '<option value='.$p_value.'>'.$p_value.'</option>';
+						echo '<option value="'.$p_value.'">'.$p_value.'</option>';
 						
 				
 					$array[] = $p_value;

@@ -21,7 +21,6 @@ include('config/path.php');
 $path = $_SERVER['DOCUMENT_ROOT'].$root;
 include('functions/dropDown_update.php');
 include('functions/dropDown_update_for_storage.php');
-include('functions/dropDown_update_for_isolates.php');
 include('functions/text_insert_update.php');
 include('functions/text_insert_isolate_update.php');
 include('functions/text_insert_update_dt.php');
@@ -742,7 +741,7 @@ if (isset($_GET['submit'])) {
 				</div>
 				
 				<p><button class="button" type="submit" name="submit" value="2">Update </button>
-				<button class="button" type=button onClick="parent.location='/series/dynamic/airmicrobiomes/sample_update_lookup.php'" value='Go Back'>Go Back</button>
+				<button class="button" type=button onClick="parent.location='<?php echo $root;?>sample_update_lookup.php'" value='Go Back'>Go Back</button>
 				</p>
 				
 		</form>

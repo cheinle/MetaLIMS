@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 	</head>
 <body>
-<?php	//was to return a dropdown, now to return names...can modify text update to do this instead?
+<?php
 
 function dropDown_update_for_storage($select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name,$stored_name){ #send also the query name?, always based on sample name
 
@@ -29,7 +29,7 @@ function dropDown_update_for_storage($select_name,$table_name,$field_name,$selec
 				#echo "samp Name:".$sample_name.'<br>';
 				$query1 = "SELECT $p_s_field_name FROM storage_info WHERE sample_name = '$p_sample_name'";
 				$result1 = mysqli_query($dbc, $query1);
-				$name;
+				$name1;
 				if($result1){
 					while($row1 = mysqli_fetch_assoc($result1)) {
 						$name1 = $row1["$p_s_field_name"];
@@ -69,17 +69,16 @@ function dropDown_update_for_storage($select_name,$table_name,$field_name,$selec
 					$id = trim($id);
 					$name = trim($name);
 					$name1 = trim($name1);
-
-					if($id == $name1){
-?>
-						<option value="<?php echo $id ?>" <?php echo "selected"; ?>><?php echo "$name" ?></option>
+					
+					$visible_check = htmlspecialchars($row["visible"]);
+					if($visible_check == 1){
 						
-<?php
-					}
-					else{
-?>
-						<option value="<?php echo $id ?>"><?php echo "$name" ?></option>
-<?php
+						if($id == $name1){
+							echo '<option value="'.$id.'" selected>'.$name.'</option>';
+						}
+						else{
+							echo '<option value="'.$id.'">'.$name.'</option>';
+						}
 					}
 
 				}
