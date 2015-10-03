@@ -28,12 +28,16 @@ function convert_time($keys,$val){
 		}
 		#echo '<td class = "reg">'.$hours.'h'.$minutes.'m'.'</td>';
 		#echo $hours.'hrs'.$minutes.'m'.'<br>';
-		echo '<td class = "reg">'.$hours.'h'.$minutes.'m'.'</td>';
+		//echo '<td class = "reg">'.$hours.'h'.$minutes.'m'.'</td>';
+		$time = $hours.'h'.$minutes.'m';
+		return $time;
 	}
 	else{
 		#echo '<td class = "reg">'.$hours.'h'.$minutes.'m'.'</td>';
 		#echo $hours.'h'.$minutes.'m'.'<br>';
-		echo '<td class = "reg">'.$hours.'h'.$minutes.'m'.'</td>';
+		//echo '<td class = "reg">'.$hours.'h'.$minutes.'m'.'</td>';
+		$time = $hours.'h'.$minutes.'m';
+		return $time;
 	}
 				
 	

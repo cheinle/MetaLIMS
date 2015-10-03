@@ -47,13 +47,19 @@ include('functions/check_box_tables.php');
 		<label class="textbox-label">Select Field to Query Samples:</label><br/>
 		<?php	
 		    include_once('functions/convert_header_names.php');
+			//drowpdown to select query from videos table
 			$query = "SELECT * FROM sample";
-			$result = mysqli_query($dbc, $query);
-			if(!$result){
-				echo 'An error has occured';
-				mysqli_error($dbc);
-			}
+			#$query = "SELECT * FROM sample LEFT JOIN isolates ON isolates.sample_name = sample.sample_name";
 			
+			$result = mysqli_query($dbc, $query);
+			if($result){
+					#echo 'You queried your sample table';
+					#echo '<p>'.$query.'</p>';
+			}else{
+					echo 'An error has occured';
+					mysqli_error($dbc);
+					echo '<p>'.$query.'</p>';
+			}			
 			echo "<select name='field'>";
 			echo "<option value='0'>-Select-</option>";
 
@@ -68,10 +74,10 @@ include('functions/check_box_tables.php');
 					}
 					$array[$name]['name'] = $name;
 					$array[$name]['id'] = $id;
-
+					#echo "<option value='$id'>$name</option>";
     		}
 			sort($array);
-
+			#print_r($array);
 			foreach($array as $key => $value){
 				$name2 = $value['name'];
 				$id2 = $value['id'];
@@ -103,6 +109,8 @@ include('functions/check_box_tables.php');
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="xls") echo "checked";?> value="xls">Download MS Excel Worksheet</label>
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="sensor") echo "checked";?> value="sensor">Include Sensor Data</label>
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="view_read_sub") echo "checked";?> value="view_read_sub">View Read Submission IDs</label>
+	<!--<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="isolates") echo "checked";?> value="isolates">View Isolate Info Only</label>
+	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="xls_isolates") echo "checked";?> value="xls_isolates">Download MS Excel-Isolate Info Only</label>-->
 	</div>
 	</p>
 	
@@ -135,17 +143,17 @@ include('functions/check_box_tables.php');
 	
 <fieldset>
 	<LEGEND><b>Data Dump (Choose One)</b></LEGEND>
-	<LEGEND  style="margin-left:1.5%;"><b>Display All Project Info:</b></LEGEND>
+	<LEGEND  style="margin-left:2%;"><b>Display All Project Info:</b></LEGEND>
 	<div class="vert-checkboxes">
 	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="project_all">Display All DB Project Info</label>
 	</div>
 	
-	<LEGEND  style="margin-left:1.5%;"><b>  Display All Air Samplers:</b></LEGEND>
+	<LEGEND  style="margin-left:2%;"><b>  Display All Air Samplers:</b></LEGEND>
 	<div class="vert-checkboxes">
 	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="sampler_all">Display All Sampler Content</label>
 	</div>
 	
-	<LEGEND  style="margin-left:1.5%;"><b>Display All Particle Counters:</b></LEGEND>
+	<LEGEND  style="margin-left:2%;"><b>Display All Particle Counters:</b></LEGEND>
 	<div class="vert-checkboxes">
 	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="partCt_all">Display All DB Sensor Content</label>
 	</div>

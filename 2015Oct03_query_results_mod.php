@@ -2,6 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('database_connection.php'); 
+#include('index.php');
 ////choose which files to include depending on if you are exporting an xls or not.
 //xls cannot include the index file because it will send headers too early (and the wrong ones)
 if((isset($_GET['db_content'])) && ($_GET['db_content'] == 'xls' || $_GET['db_content'] == 'xls_isolates')){
@@ -14,6 +15,7 @@ elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_dna')){
 elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'seq_sub')){
 	include('index.php');
 	include('functions/build_bulk_seqSub_table.php');
+
 }
 elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'read_sub')){
 	include('index.php');
@@ -26,6 +28,7 @@ elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'update_read_sub'))
 else{
 	include('index.php');
 	include('functions/build_table.php');
+
 }
 ?>
 
@@ -101,8 +104,9 @@ if(isset($_GET['submit'])){
 			//make sure you cover the entire day
 			$p_smydate = $p_smydate.' 00:00:00';
 			$p_emydate = $p_emydate.' 23:59:00';
-			//$query_date = ' sample.start_date_time BETWEEN (?) AND (?)';
-			$query_date = ' sample.start_samp_date_time BETWEEN (?) AND (?)';
+			#$query_date = ' start_samp_date_time BETWEEN (?) AND (?)';
+			//$query_date = ' sample.start_samp_date_time BETWEEN (?) AND (?)';
+			$query_date = ' sample_sampler.start_date_time BETWEEN (?) AND (?)';
 			$check_date = 'true';
 		}
 			
@@ -129,19 +133,33 @@ if(isset($_GET['submit'])){
 			$field_names = 'sample_name,d_conc,sample_sort';
 		}
 		else{$field_names = "*";}
-
+		#$query = "SELECT $field_names FROM sample WHERE $p_field = (?) AND start_samp_date_time BETWEEN (?) AND (?)";
+		//$query_main = "SELECT $field_names FROM sample WHERE";
+		#$query_main = "SELECT $field_names FROM sample LEFT JOIN isolates ON isolates.sample_name = sample.sample_name WHERE";
+		//note: not sure why this is working to show correct sample names instead of the one on top
+		#$query_main = "SELECT $field_names FROM isolates RIGHT JOIN sample ON isolates.sample_name = sample.sample_name WHERE";
+		
+		
 		if(isset($_GET['db_content']) && $_GET['db_content'] == 'sensor'){
+			#$query_main = "SELECT * FROM sample JOIN daily_data2 ON sample.daily_data = daily_data2.daily_date WHERE ";
+			//trying to make it so you don't have to manually link the daily date to the sample entry...this should do it
 			$query_main = "SELECT * FROM sample JOIN daily_data2 ON DATE(sample.start_samp_date_time) = daily_data2.daily_date WHERE ";
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
+			#$query_main = "SELECT * FROM sample JOIN read_submission ON read_submission.sample_name = sample.sample_name WHERE ";
 			$query_main = "SELECT sample.sample_name,sample.sample_num,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample LEFT JOIN read_submission ON read_submission.sample_name = sample.sample_name WHERE ";
+			#$query_main = "SELECT * FROM sample WHERE ";
 		}
 		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'view_read_sub' || $_GET['db_content'] == 'update_read_sub')){
 			$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name WHERE ";
 		}
+		//elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'isolates' || $_GET['db_content'] == 'xls_isolates')){
+		//	$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.collector_name,sample.start_samp_date_time,sample.sample_type,sample.location_name,isolates.loc_type,sample.media_type,isolates.iso_coll_temp,isolates.iso_date,isolates.iso_store_method,isolates.seq_sang,isolates.closest_hit,isolates.send_pac_bio FROM sample JOIN isolates ON isolates.sample_name = sample.sample_name WHERE (sample.sample_type = 'F' OR sample.sample_type = 'BC') AND ";
+		//}
 		else{
+			//$query_main = "SELECT $field_names FROM sample WHERE";
+			//add new sampler table
 			$query_main = "SELECT $field_names FROM sample LEFT JOIN sample_sampler ON sample_sampler.sample_name  = sample.sample_name WHERE";
-			//SELECT * FROM sample LEFT JOIN sample_sampler ON sample_sampler.sample_name = sample.sample_name WHERE sample.start_samp_date_time BETWEEN '2014-08-01 00:00:00' AND '2015-10-03 23:59:00'
 		}
 		$query = "";
 		$query_add = "";
@@ -150,7 +168,9 @@ if(isset($_GET['submit'])){
 			$query = $query_main.$query_field;
 			$query_add = $query_field;
 			$stmt = $dbc->prepare($query);
+			echo $query;
 			$stmt -> bind_param('s', $p_query_basis);
+			echo $p_query_basis;
 		}
 		elseif ($check_field == 'false' && $check_date == 'true') {//only date is populated
 			$query = $query_main.$query_date;
@@ -191,7 +211,7 @@ if(isset($_GET['submit'])){
 		}
 		else{
 			if($stmt){
-				build_table($stmt,'display');
+				build_table($stmt,'display',$dbc);
 			}
 		}
 	}

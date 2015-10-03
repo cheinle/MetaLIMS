@@ -137,8 +137,8 @@ function convert_header_names($p_key){
 		$p_key = 'Time Stamp (YYYY-MM-DD HH:MM:SS)';
 	}
 	if($p_key == 'total_samp_time'){
-		//$p_key = 'Total Sampling Time';
-		$p_key = 'false';
+		$p_key = 'Total Sampling Time';
+		//$p_key = 'false';
 	}
 	if($p_key == 'updated_by'){
 		$p_key = 'Updated By';
