@@ -4,10 +4,10 @@
 function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 	include('convert_time.php');
 	include('convert_header_names.php');
-	//include('find_air_samplers.php');
+	include('find_samplers.php');
 
 	if ($stmt->execute()){
-	    			
+	 			
 			    if($stmt->fetch()){
 			    	$meta = $stmt->result_metadata(); 
 		   			while ($field = $meta->fetch_field()){
@@ -79,8 +79,8 @@ function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 										}
 									}
 								}
-								if($key == 'air_sampler_name'){
-									//find_air_samplers($p_sample_name,$table_type);
+								if($key == 'sampler_name'){
+									$p_value = find_samplers($p_sample_name,$table_type);
 								}
 								if($key == 'total_samp_time'){
 									$p_value = convert_time($key, $p_value);
@@ -92,9 +92,7 @@ function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 									continue;
 								}
 								else{
-									
 									echo '<td class = "reg">'.$p_value.'</td>';
-									#echo '<td class = "reg" id='.$header_ct.'>'.$header_ct.'</td>';//test for sorting by ID
 								}
 							
 									
@@ -135,8 +133,8 @@ function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 										}
 									}
 								}
-								if($key == 'air_sampler_name'){
-									//find_air_samplers($p_sample_name,$table_type);
+								if($key == 'sampler_name'){
+									$p_value = find_samplers($p_sample_name,$table_type);
 								}
 								if($key == 'total_samp_time'){
 									$p_value = convert_time($key, $p_value);
@@ -147,8 +145,7 @@ function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 									continue;
 								}
 								else{
-									echo '<td class = "reg">'.$p_value.'</td>';
-									#echo '<td class = "reg" id='.$header_ct.'>'.$header_ct.'</td>';//test for sorting by ID
+										echo '<td class = "reg">'.$p_value.'</td>';
 								}
 								
 		
@@ -175,9 +172,8 @@ function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 			}
 }	
 
-			
-
-		   /* if($stmt->fetch()){
+			/*
+		   if($stmt->fetch()){
 			    	$meta = $stmt->result_metadata(); 
 		   			while ($field = $meta->fetch_field()){ 
 		        		$params[] = &$row[$field->name]; 
@@ -305,7 +301,7 @@ function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 				else{
 					echo '<script>Alert.render2("Sorry! No Results Found. Please Check Query");</script>';
 				} 
+			}
 			}*/
-
 			
 ?>

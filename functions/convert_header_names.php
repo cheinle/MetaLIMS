@@ -2,8 +2,8 @@
 
 function convert_header_names($p_key){
 	
-	if($p_key == 'air_sampler_name'){
-		$p_key = 'Air Sampler Name';
+	if($p_key == 'sampler_name'){
+		$p_key = 'Sampler Name';
 	}
 	if($p_key == 'analysis_name'){
 		$p_key = 'Analysis Name';
