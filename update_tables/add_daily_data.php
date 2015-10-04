@@ -218,8 +218,7 @@ include('../functions/dropDown.php');
 	?>
 	<form name="form_name" class="registration" onsubmit="return validate(this)" action="add_daily_data.php" method="GET">
 	<p><i>* = required field </i></p>
-		<div class="container-fluid">
-  		<div class="row">
+		
 		
 		<fieldset>
 		<LEGEND><b>Location/Date:</b></LEGEND>
@@ -422,8 +421,7 @@ include('../functions/dropDown.php');
 			</script>
 			<input type='submit'class="button" id="sub"  name ="submit" value='Add Daily Data' />
 			<input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" />
-		</div>
-		</div>
+		
 	</form>
 	
 	

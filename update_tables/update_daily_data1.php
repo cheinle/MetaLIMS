@@ -20,8 +20,6 @@ $submitted = 'false';
 </div>
 
 	<form name="form_name" class="registration" onsubmit="return validate(this)" action="update_daily_data_two.php" method="GET">
-	<div class="container-fluid">
-  	<div class="row">
 	<p><i>* = required field </i></p>
 		
 		<fieldset>
@@ -96,8 +94,7 @@ $submitted = 'false';
 			
 			</script>
 			<input type='submit' id="sub" class="button" name ="submit" value='Submit'>
-			</div>
-		</div>
+	
 	</form>
 	
 	
