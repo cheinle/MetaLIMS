@@ -16,7 +16,7 @@ include('../index.php');
 include('../functions/dropDown.php');
 ?>
 <div class="page-header">
-<h3>Add Daily Sensor Data</h3>
+<h3>Add Daily Data</h3>
 </div>
 <?php 	
 		$submitted = 'false';
@@ -396,7 +396,7 @@ include('../functions/dropDown.php');
   		<div class="row">
 		
 		<fieldset>
-		<LEGEND><b>Location/Date:</b></LEGEND>
+		<LEGEND><b>Date:</b></LEGEND>
 		<div class="col-xs-6">
 		<p>
 		<label class="textbox-label">Daily Data DATE:*</label>
@@ -404,17 +404,6 @@ include('../functions/dropDown.php');
 		<script>
 			$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 		</script>
-		</p>
-		
-		
-		<!--location dropdown-->
-		<p>
-		<label class="textbox-label">Select Location:*</label>
-		<?php
-
-		//url or $_GET name, table name, field name
-		dropDown('loc', 'location', 'loc_name','loc_name',$submitted);
-		?>
 		</p>
 		</div>
 		</fieldset>
@@ -446,6 +435,98 @@ include('../functions/dropDown.php');
 		</p>
 		</div>
 		</fieldset>
+		
+		<fieldset>
+		<LEGEND><b>Weather Data:(Optional)</b></LEGEND>
+		<div class="col-xs-6">
+		
+		<div id = 'inline1'>
+		<p>
+		<label class="textbox-label">Average Temperature:</label><br>
+		<input type="text" name="temp" id = "temp" class="fields" placeholder="Enter An Avg Temp in Celsius" value="<?php if ((isset($_GET['submit']) && $submitted != 'true')) {echo $p_temp;}?>">
+		</p>
+		
+		<p>
+		<label class="textbox-label">Record Used To Input Temperature:</label><br>
+		<?php
+		//$select_name,$table_name,$field_name,$select_id,$submitted
+		dropDown('temp_record', 'records', 'records','records',$submitted);
+		?>
+		</p>
+		</div>
+		
+		<div id = 'inline2'>
+		<p>
+		<label class="textbox-label">Average Relative Humidity:</label><br>
+		<input type="text" name="hum" id = "hum" class="fields" placeholder="Enter An Avg Humidity" value="<?php if ((isset($_GET['submit']) && $submitted != 'true')) {echo $p_hum;}?>"/>
+		</p>
+		
+		<p>
+		<label class="textbox-label">Record Used To Input Humidity:</label><br>
+		<?php
+		dropDown('hum_record', 'records', 'records','records',$submitted);
+		?>
+		</p>
+		</div>
+		
+		<div id = 'inline3'>
+		<p>
+		<label class="textbox-label">Average CO2:</label><br>
+		<input type="text" name="co2" id="co2" class="fields" placeholder="Enter An Avg CO2" value="<?php if ((isset($_GET['submit']) && $submitted != 'true')) {echo $p_co2;}?>"/>
+		</p>
+		
+		<p>
+		<label class="textbox-label">Record Used To Input CO2:</label><br>
+		<?php
+		dropDown('co2_record', 'records', 'records','records',$submitted);
+		?>
+		</p>
+		</div>
+		
+		<div id = 'inline4'>
+		<p>
+		<label class="textbox-label">Average Windspeed:</label><br>
+		<input type="text" name="wind" id="wind" class="fields" placeholder="Enter An Avg Windspeed (m/s)" value="<?php if ((isset($_GET['submit']) && $submitted != 'true')) {echo $p_wind;}?>"/>
+		</p>
+		
+		<p>
+		<label class="textbox-label">Record Used To Input Windspeed:</label><br>
+		<?php
+		dropDown('wind_record', 'records', 'records','records',$submitted);
+		?>
+		</p>
+		</div>
+		
+		<div id = 'inline5'>
+		<p>
+		<label class="textbox-label">Average Rainfall:</label><br>
+		<input type="text" name="rain" id="rain" class="fields" placeholder="Enter An Avg Rainfall (mm)" value="<?php if ((isset($_GET['submit']) && $submitted != 'true')) {echo $p_rain;}?>"/>
+		</p>
+		
+		<p>
+		<label class="textbox-label">Record Used To Input Rain:</label><br>
+		<?php
+		dropDown('rain_record', 'records', 'records','records',$submitted);
+		?>
+		</p>
+		</div>
+		
+		<div id = 'inline6'>
+		<p>
+		<label class="textbox-label">Average Haze:</label><br>
+		<input type="text" name="haze" id="haze" class="fields" placeholder="Enter An Avg Haze (PSI)" value="<?php if ((isset($_GET['submit']) && $submitted != 'true')) {echo $p_haze;}?>"/>
+		</p>
+		
+		<p>
+		<label class="textbox-label">Record Used To Input Haze:</label><br>
+		<?php
+		dropDown('haze_record', 'records', 'records','records',$submitted);
+		?>
+		</p>
+		</div>
+		</div>
+		</fieldset>
+		
 		
 		<fieldset>
 		<LEGEND><b>Daily Notes:(Optional)</b></LEGEND>

@@ -1,7 +1,9 @@
 <?php
 	 include('database_connection.php');
+	 include('functions/dropDown.php');
 
 	$num_of_sens = $_GET['num_sensors'];
+	$submitted = 'false';
 
 	for ($x = 1; $x <= $num_of_sens; $x++) {
     	#echo "The number is: $x <br>";
@@ -51,6 +53,17 @@
         			timeFormat: "HH:mm"
    	 			});
 				</script>
+				
+				<label class="textbox-label">Average Sensor Measurement<?php echo $x ?>:</label><br>
+				<input type="text" name="measurement'+num_sensors+'" id = "measurement'+num_sensors+'" class="fields" placeholder="Enter An Avg Measurement" value="<?php if ((isset($_GET['submit']) && $submitted != 'true')) {echo $p_temp;}?>">
+				</p>
+				
+				<p>
+				<label class="textbox-label">Record Source For Sensor Measurement<?php echo $x ?>:</label><br>
+				<?php
+				dropDown('sensor'.$x, 'records', 'records','records',$submitted);
+				?>
+				</p>
 				
 <?php
 			echo '<br>';
