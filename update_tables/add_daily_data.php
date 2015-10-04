@@ -26,74 +26,28 @@ include('../functions/dropDown.php');
 
 			//sanatize user input and check for required fields
 			$p_mydate = htmlspecialchars($_GET['mydate']);
+			$p_mylocation = htmlspecialchars($_GET['loc']);
 			$p_notes = htmlspecialchars($_GET['notes']);
 			
-			$p_temp = htmlspecialchars($_GET['temp']);
-			$p_temp_record = htmlspecialchars($_GET['temp_record']);
-			$p_hum = htmlspecialchars($_GET['hum']);
-			$p_hum_record = htmlspecialchars($_GET['hum_record']);
-			$p_co2 = htmlspecialchars($_GET['co2']);
-			$p_co2_record = htmlspecialchars($_GET['co2_record']);
-			$p_rain = htmlspecialchars($_GET['rain']);
-			$p_rain_record = htmlspecialchars($_GET['rain_record']);
-			$p_wind= htmlspecialchars($_GET['wind']);
-			$p_wind_record = htmlspecialchars($_GET['wind_record']);
-			$p_haze= htmlspecialchars($_GET['haze']);
-			$p_haze_record= htmlspecialchars($_GET['haze_record']);
-			
-			
+		
 			if($p_mydate == ''){
 					echo '<p>You Must Enter A Daily Data Date!<p>';
 					$error = 'true';
 			}
-			
-			if(($p_temp != '' && $p_temp_record == '0') || $p_temp == '' && $p_temp_record != '0'){
-				echo '<p>You Must Enter Both A Temperature And A Record!<p>';
-				$error = 'true';
-			}
-			if(($p_hum != '' && $p_hum_record == '0') || $p_hum == '' && $p_hum_record != '0'){
-				echo '<p>You Must Enter Both A Humidity And A Record!<p>';
-				$error = 'true';
-			}
-			if(($p_co2 != '' && $p_co2_record == '0') || $p_co2 == '' && $p_co2_record != '0'){
-				echo '<p>You Must Enter Both A CO2 Amt And A Record!<p>';
-				$error = 'true';
-			}
-			if(($p_wind != '' && $p_wind_record == '0') || $p_wind == '' && $p_wind_record != '0'){
-				echo '<p>You Must Enter Both A Wind Speed And A Record!<p>';
-				$error = 'true';
-			}
-			if(($p_rain != '' && $p_rain_record == '0') || $p_rain == '' && $p_rain_record != '0'){
-				echo '<p>You Must Enter Both A Rainfall Amount And A Record!<p>';
-				$error = 'true';
-			}
-			if(($p_haze != '' && $p_haze_record == '0') || $p_haze == '' && $p_haze_record != '0'){
-				echo '<p>You Must Enter Both A Haze Amount And A Record!<p>';
-				$error = 'true';
+			if($p_mylocation == 0){
+					echo '<p>You Must Enter A Location!<p>';
+					$error = 'true';
 			}
 			
-			
+	
 			
 			//repeat for x amount of sensors 
 			$num_of_sens = $_GET['sens_num'];
 			for ($x = 1; $x <= $num_of_sens; $x++) {
 				$p_stime[$x] = htmlspecialchars($_GET['stime'.$x]);
 				$p_etime[$x] = htmlspecialchars($_GET['etime'.$x]);
-				
-			
-				//check to see that particle counter is a valid selection (no 'N/A' or 'Needs to be Added)
-				if (preg_match('/^N\/A/', $_GET['sensor'.$x])){
-					echo '<p>You Must Select A Valid Sensor! Please Check Sensor Name(s):'.$_GET['sensor'.$x].'<p>';
-					$error = 'true';
-				}
-				if (preg_match('/^Needs to be added/', $_GET['sensor'.$x])){
-					echo '<p>You Must Select A Valid Sensor! Please Sensor Name(s):'.$_GET['sensor'.$x].'<p>';
-					$error = 'true';
-				}
-				if (preg_match('/^test_sensor/', $_GET['sensor'.$x])){
-					echo '<p>You Must Select A Valid Sensor! Please Sensor Name(s):'.$_GET['sensor'.$x].'<p>';
-					$error = 'true';
-				}		
+				$p_measurement[$x] = htmlspecialchars($_GET['measurement'.$x]);
+				$p_record[$x] = htmlspecialchars($_GET['record'.$x]);		
 						
 						
 				//check to see if time pairs exist
@@ -109,31 +63,25 @@ include('../functions/dropDown.php');
 				}
 			}
 			
-			//check if date exists
-			$stmt1 = $dbc->prepare("SELECT daily_date FROM daily_data2 WHERE daily_date = ?");
-			$stmt1 -> bind_param('s', $p_mydate);
+			//check if daily data already exists
+			$stmt1 = $dbc->prepare("SELECT daily_date,location FROM daily_data2 WHERE daily_date = ? AND location = ?");
+			$stmt1 -> bind_param('ss', $p_mydate,$p_mylocation);
 				
   			if ($stmt1->execute()){
-    			$stmt1->bind_result($name);
+    			$stmt1->bind_result($name,$location);
     			if ($stmt1->fetch()){
         			echo "Name: {$name}<br>";
-        			#echo 'Another way:'.print_r($row, true); //won't work with bind_result
-        			if($name == $p_mydate){
-        				echo $p_mydate." exists. Please check name.";
+
+        			if($name == $p_mydate && $location == $p_mylocation){
+        				echo "Daily Data For ".$p_mydate." And Location ".$p_mylocation." exists. Please check name.";
 						$error = 'true';
 					}
 				}
-    			else {
-        			echo "Name exisits: No results <br>";//no result came back so free to enter into db, no error
-					
-    			}
 			} 
 			else {
 				$error = 'true';
     			die('execute() failed: ' . htmlspecialchars($stmt1->error));
-				
 			}
-			#echo 'done';
 			$stmt1 -> close();
 			
 			//get username and update entered by with
@@ -144,13 +92,7 @@ include('../functions/dropDown.php');
 			$p_orig_time_stamp = date("Y-m-d H:i:s");
 			
 			//check that each of your entries has the correct decimal places
-			if($p_temp != ""){//00.000
-				$regrex_check_temp  = '/^\s*(?=.*[0-9])\d{0,2}(?:\.\d{1,3})?\s*$/';
-				if (!preg_match("$regrex_check_temp", $p_temp)){
-					echo '<p>ERROR: You Must Enter Valid Temperature. Number must have no more than 3 decimal places.<p>';
-					$error = 'true';
-				}
-			}
+			
 			if($p_hum != ""){//000.000
 				$regrex_check_hum  = '/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,3})?\s*$/';
 				if (!preg_match("$regrex_check_hum", $p_hum)){
@@ -158,50 +100,8 @@ include('../functions/dropDown.php');
 					$error = 'true';
 				}
 			}
-			if($p_co2 != ""){//1-4 digits
-				$regrex_check_co2  = '/^\d{1,4}$/';
-				if (!preg_match("$regrex_check_co2", $p_co2)){
-					echo '<p>ERROR: You Must Enter Valid CO2. Number must be a 1-4 digit whole number<p>';
-					$error = 'true';
-				}
-			}
-			if($p_rain != ""){//000.000
-				$regrex_check_rain  = '/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,3})?\s*$/';
-				if (!preg_match("$regrex_check_rain", $p_rain)){
-					echo '<p>ERROR: You Must Enter Valid Rain Amt (mm). Number must have no more than 3 decimal places.<p>';
-					$error = 'true';
-				}
-			}
-			if($p_wind != ""){//000.000
-				$regrex_check_wind  = '/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,3})?\s*$/';
-				if (!preg_match("$regrex_check_wind", $p_wind)){
-					echo '<p>ERROR: You Must Enter Valid Wind Speed (m/s). Number must have no more than 3 decimal places.<p>';
-					$error = 'true';
-				}
-			}
-			if($p_haze != ""){//1-2 digit
-				$regrex_check_haze  = '/^[0-9]{1,2}/';
-				if (!preg_match("$regrex_check_haze", $p_haze)){
-					echo '<p>ERROR: You Must Enter Valid Haze Info (PSI). Expecting a 2 digit number<p>';
-					$error = 'true';
-				}
-			}
+		
 			
-
-			//check to see if non-required fields exist. 
-			if ($p_temp == '') {$p_temp = NULL;}
-			if ($p_hum == '') {$p_hum = NULL;} 
-			if ($p_co2 == '') {$p_co2 = NULL;}
-			if ($p_rain == '') {$p_rain = NULL;}
-			if ($p_wind == '') {$p_wind = NULL;}
-			if ($p_haze == '') {$p_haze = NULL;}
-			
-			if ($p_temp_record == '0') {$p_temp_record = NULL;}
-			if ($p_hum_record == '0') {$p_hum_record = NULL;} 
-			if ($p_co2_record == '0') {$p_co2_record = NULL;}
-			if ($p_rain_record == '0') {$p_rain_record = NULL;}
-			if ($p_wind_record  == '0') {$p_wind_record = NULL;}
-			if ($p_haze_record  == '0') {$p_haze_record = NULL;}
 		
 			//insert info into db
 		    if($error != 'true'){
@@ -211,68 +111,31 @@ include('../functions/dropDown.php');
 				//first enter date (+ notes, +entered by) into daily data2
 				//second for each sensor you have enter into daily_data2_particle_counter
 				//a date-sensor pair with start and end time
-				//don't forget to set up a way to retrieve this info
-				//set up into a transaction?
+
 				$commit_check = "true"; //assume you are going to commit unless you see an error
 				try{
 					$dbc->autocommit(FALSE);
 					
 					//insert into daily_data2
-					$stmt = $dbc -> prepare("INSERT INTO daily_data2 (daily_date,
-																	notes,
-																	entered_by,
-																	temp,
-																	temp_record,
-																	hum,
-																	hum_record,
-																	co2,
-																	co2_record,
-																	rain,
-																	rain_record,
-																	wind, 
-																	wind_record,
-																	haze,
-																	haze_record,
-																	orig_time_stamp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-					$stmt -> bind_param('sssdsdsdsdsdsiss', $p_mydate,
-															$p_notes,
-															$p_entered_by,
-															$p_temp,
-															$p_temp_record,
-															$p_hum,
-															$p_hum_record,
-															$p_co2,
-															$p_co2_record,
-															$p_rain,
-															$p_rain_record,
-															$p_wind,
-															$p_wind_record,
-															$p_haze,
-															$p_haze_record,
-															$p_orig_time_stamp);
-					
+					$stmt = $dbc -> prepare("INSERT INTO daily_data2 (daily_date,location,notes,entered_by,orig_time_stamp) VALUES (?,?,?,?,?)");
+					$stmt -> bind_param('sss', $p_mydate,$p_mylocation,$p_notes,$p_entered_by,$p_orig_time_stamp);
 					$stmt -> execute();
 					$rows_affected = $stmt ->affected_rows;
 					
 					$stmt -> close();
 					
 					//check if add was successful or not. Tell the user
-			   		if($rows_affected >= 0){
-						#echo 'You added new Daily Data! :'.$p_mydate.'<br>';
-						$submitted = 'true';
-					}else{
+			   		if($rows_affected < 0){
 						$commit_check = "false";
-						echo 'An error has occured';
-						throw new Exception("An error has occred: No Added Daily Date");
+						throw new Exception("An Error Has Occured: No Added Daily Data");
 					}
 					
 					
 					//Insert into daily_data2_particle_counter. Wrap in a for loop
-					
 					for ($x = 1; $x <= $num_of_sens; $x++) {
 						$p_part_sens_name = $_GET['sensor'.$x];
-						$stmt2 = $dbc -> prepare("INSERT INTO daily_data2_particle_counter (daily_date,part_sens_name,start_time,end_time) VALUES (?,?,?,?)");
-						$stmt2 -> bind_param('ssss', $p_mydate,$p_part_sens_name,$p_stime[$x],$p_etime[$x]);
+						$stmt2 = $dbc -> prepare("INSERT INTO daily_data2_particle_counter (daily_date,part_sens_name,start_time,end_time,avg_measurement,record_source) VALUES (?,?,?,?,?,?)");
+						$stmt2 -> bind_param('ssss', $p_mydate,$p_part_sens_name,$p_stime[$x],$p_etime[$x],$p_measurement[$x],$p_record[$x]);
 						
 						$stmt2 -> execute();
 						$rows_affected2 = $stmt2 ->affected_rows;
@@ -281,13 +144,11 @@ include('../functions/dropDown.php');
 						
 						//check if add was successful or not. Tell the user
 				   		if($rows_affected2 >= 0){
-				   			echo 'You added new Daily Data! :'.$p_mydate.'<br>';
-							#echo 'You Added New Sensor Data!<br>';
+				   			echo 'You Added New Daily Data! :'.$p_mydate.' For Location '.$p_mylocation.'<br>';
 							$submitted = 'true';
 						}else{
 							$commit_check = "false";
-							echo 'An error has occured';
-							throw new Exception("An error has occured: No Added Sensor Info");
+							throw new Exception("An Error Has Occured: No Added Sensor Info");
 							
 						}
 					}
@@ -299,8 +160,8 @@ include('../functions/dropDown.php');
 					$p_emydate = $p_mydate.' 23:59:00';
 					
 					$sample_array = array();
-					$stmt_sid= $dbc->prepare("SELECT sample_name FROM sample WHERE start_samp_date_time BETWEEN (?) AND (?)");
-					$stmt_sid -> bind_param('ss', $p_smydate,$p_emydate);
+					$stmt_sid= $dbc->prepare("SELECT sample_name FROM sample WHERE start_samp_date_time BETWEEN (?) AND (?) AND location_name = ?");
+					$stmt_sid -> bind_param('sss', $p_smydate,$p_emydate,$p_mylocation);
 					if ($stmt_sid->execute()){
 						$stmt_sid->bind_result($sample_name);
 					    while($stmt_sid->fetch()){
@@ -317,49 +178,26 @@ include('../functions/dropDown.php');
 					
 					//check size of sample array. if you didn't return anything, throw error
 					if(count($sample_array) == 0){
-						echo "Warning: No Samples Were Found With This Date. Please Manually Link Any Samples Later Added<br>";
+						echo "Notice: No Samples Were Found With This Date And Location. No Samples Have Been Updated With This Information<br>";
 					}
 					$p_updated_by = $_SESSION['first_name'].' '.$_SESSION['last_name'];
 					foreach($sample_array as $key => $sample_name){
 						echo $sample_name.'<br>';
-						$query = 'UPDATE sample SET daily_data = ?,updated_by = ? WHERE sample_name = ?';
+						$daily_data_entry = $p_emydate.' '.$p_mylocation;
+						$query = 'UPDATE sample SET daily_data = ?,updated_by = ? WHERE sample_name = ? AND location = ?';
 					    if($stmt = $dbc ->prepare($query)) {                 
-					        $stmt->bind_param('sss', $p_mydate, $p_updated_by,$sample_name);
+					        $stmt->bind_param('sss', $daily_data_entry, $p_updated_by,$sample_name,$p_mylocation);
 							$stmt -> execute();
 							$rows_affected = $stmt ->affected_rows;
 							$stmt -> close();
 									
 							//check if add was successful or not. Tell the user
 							if($rows_affected >= 0){
-								/*echo "dbc info".$dbc->info;
-								preg_match_all ('/(\S[^:]+): (\d+)/', $dbc->info, $matches);
-	    						$info = array_combine ($matches[1], $matches[2]);
-								if ($info ['Rows matched'] == 0) {
-	        						//echo "This operation did not match any rows.\n";
-	        						$commit_check = "false";
-									echo '<script>Alert.render("ERROR:Unable to find entry to update. Please contact admin");</script>';
-									throw new Exception("ERROR:Unable to find entry to update. Please contact admin");	
-								} 
-	    						elseif ($info ['Changed'] == 0) {
-	    							//for testing only
-	        						#echo "This operation matched rows, but none required updating.\n";
-	   							}
-								else{
-									echo "You Update Daily Data For ".$sample_name.'<br>';
-								}*/
-								
-								//check if add was successful or not. Tell the user
-								echo 'You Updated Sample Info For Daily Data!:'.$sample_name.'<br>';
-								
-									
+								echo 'You Updated Sample Info For Daily Data!:'.$sample_name.'<br>';	
 							}
 							else{
 								$commit_check = "false";
-								echo '<script>Alert.render("ERROR:Your sample has been updated by another user since you began your update. Please refresh your page to view updated information and try again");</script>';
-								throw new Exception("An error has occred: No Update To Samples");
-								echo 'An error has occured';
-								mysqli_error($dbc);
-										
+								throw new Exception("An Error Has Occured: No Update To Samples");	
 							}
 					            	
 						}
@@ -458,9 +296,8 @@ include('../functions/dropDown.php');
 		
 			    function validate(from) {
 			    	
-			    	//if you tried to submit, check the entire page for color?
-			    	//return valid is false if you find it
-			    	var date = document.getElementById('datepicker').value;
+			    	//if you tried to submit, check the entire page
+			    	//return valid is false if you find erro
 			    	var valid = 'true';
 				    if(check_form() == 'false'){
 				    	valid = 'false';	
@@ -483,7 +320,7 @@ include('../functions/dropDown.php');
 						document.getElementById('sens_num').style.backgroundColor = 'blue';
 					}
 					else{
-						//create a contains method to check if sensor is entered twice
+						//create a contains method to check if sensor is entered more than once
 						Array.prototype.contains = function(needle){
 							for (i in this){
 								if(this[i]===needle){
@@ -492,30 +329,25 @@ include('../functions/dropDown.php');
 							}
 							return false;
 						}
-							var seen = [];
+						
+						var seen = [];
 						//validate sensor data
 						for (index = 1; index <= x; ++index) {
 	   	 					var sensor_name = 'sensor'+index;
 	   	 					//check that sensor is picked 
 	   	 					var sensor_name_value = document.getElementById(sensor_name).value;
-	   	 					//alert(sensor_name_value);
-	   	 					if(sensor_name_value == '0' || sensor_name_value == 'Needs to be added' || sensor_name_value == 'N/A' || sensor_name_value == '(pooled)' || sensor_name_value == 'test_sensor'){
-	   	 						alert("Whoops! Sensor Name Is Not Valid");
-	   	 						document.getElementById(sensor_name).style.backgroundColor = 'blue';
-	   	 						valid = 'false';
-	   	 					}
-	   	 					else{
-	   	 						//check to see if sensor name is already input
-	   	 						if(seen.contains(sensor_name_value)){
-	   	 							document.getElementById(sensor_name).style.backgroundColor = 'blue';
-	   	 							alert("You Have Chosen More Than One Sensor With The Same Name. Please Check Names");
-	   	 							valid = 'false';
-	   	 						}
-	   	 					    else{
-	   	 							seen.push(sensor_name_value);
-	   	 							document.getElementById(sensor_name).style.backgroundColor = 'white';
-	   	 						}
-	   	 					}
+	   	 					
+   	 						//check to see if sensor name is already input
+   	 						if(seen.contains(sensor_name_value)){
+   	 							document.getElementById(sensor_name).style.backgroundColor = 'blue';
+   	 							alert("You Have Chosen More Than One Sensor With The Same Name. Please Check Names");
+   	 							valid = 'false';
+   	 						}
+   	 					    else{
+   	 							seen.push(sensor_name_value);
+   	 							document.getElementById(sensor_name).style.backgroundColor = 'white';
+   	 						}
+	   	 					
 	   	 					//check that start and end date are entered
 	   	 					var start_time = 'stime'+index;
 	   	 					var start_time_value = document.getElementById(start_time).value;
@@ -606,51 +438,8 @@ include('../functions/dropDown.php');
 		   	 							}
 		   	 							
 		   	 						}
-		   	 						
-		   	 						else if(input_id == 'co2'){
-		   	 							if(!input_check.match(/^\d{1,4}$/)){
-		   	 								inputs[index].style.backgroundColor = 'red';
-		   	 								selects[index].style.backgroundColor = 'red';
-		   	 								valid = 'false'
-		   	 								alert("Whoops! CO2 Should Be A Whole Number Up To 4 Places");
-		   	 							}
-		   	 							else{
-		   	 								inputs[index].style.backgroundColor = 'white';
-		   	 								selects[index].style.backgroundColor = 'white';
-		   	 							}
-		   	 						}
-		   	 						
-		   	 						else if(input_id == 'haze'){
-		   	 							if(!input_check.match(/^[0-9]{1,2}$/)){
-		   	 								inputs[index].style.backgroundColor = 'red';
-		   	 								selects[index].style.backgroundColor = 'red';
-		   	 								valid = 'false'
-		   	 								alert("Whoops! Haze Should Be A Whole Number Up To 2 Places");
-		   	 							}
-		   	 							else{
-		   	 								inputs[index].style.backgroundColor = 'white';
-		   	 								selects[index].style.backgroundColor = 'white';
-		   	 							}
-		   	 						}
-		   	 
-		   	 						else{
-		   	 							if(!input_check.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,3})?\s*$/)){
-		   	 								inputs[index].style.backgroundColor = 'red';
-		   	 								selects[index].style.backgroundColor = 'red';
-		   	 								valid = 'false'
-		   	 								alert("Whoops! "+input_check+"Should Be A Decimal Up To 3 Decimal Places");
-		   	 							}
-		   	 							else{
-		   	 								inputs[index].style.backgroundColor = 'white';
-		   	 								selects[index].style.backgroundColor = 'white';
-		   	 							}
-		   	 						}
-		   	 						
 		   	 					}
-		   	 					else{//if there is no input for either input or dropdown
-		   	 						inputs[index].style.backgroundColor = 'white';
-		   	 						selects[index].style.backgroundColor = 'white';
-		   	 					}
+		   	
 							}
 						}
 					   

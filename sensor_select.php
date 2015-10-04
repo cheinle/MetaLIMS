@@ -61,7 +61,7 @@
 				<p>
 				<label class="textbox-label">Record Source For Sensor Measurement<?php echo $x ?>:</label><br>
 				<?php
-				dropDown('sensor'.$x, 'records', 'records','records',$submitted);
+				dropDown('record'.$x, 'records', 'records','records',$submitted);
 				?>
 				</p>
 				
