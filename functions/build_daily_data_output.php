@@ -20,15 +20,19 @@ function build_daily_data_output($stmt){
 					$sample_names_array = array();
 		    		while ($stmt->fetch()) {
 		    			
+						$sensorID;
 						foreach($row as $key => $value){
 							if($key == 'daily_date'){
-								$seq_subID = htmlspecialchars($value);
-								if($seq_subID == $seen){
+								$sensorID = htmlspecialchars($value);
+							}
+							if($key == 'location'){
+								$p_location = htmlspecialchars($value);
+								if($sensorID == $seen){
 									$seen_check = 'not_new';
 									continue;
 								}
 								else{
-									$seen = $seq_subID;
+									$seen = $sensorID;
 									$seen_check = 'new';
 									if($counter != '0'){//if you are not the beginning, add these to close the end of the last loop
 										echo '</tr>';
@@ -36,8 +40,8 @@ function build_daily_data_output($stmt){
 										echo '<br>';
 										echo '</div>';
 									}
-									echo '<button type="button"  data-toggle="collapse" data-target="#'.$seq_subID.'" aria-expanded="true" aria-controls="demo" class="buttonLength">'.$seq_subID.'</button><br>';
-									echo '<div id="'.$seq_subID.'" class="collapse">';
+									echo '<button type="button"  data-toggle="collapse" data-target="#'.$sensorID.'" aria-expanded="true" aria-controls="demo" class="buttonLength">'.$sensorID.' '.$p_location.'</button><br>';
+									echo '<div id="'.$sensorID.'" class="collapse">';
 								}
 							}
 							else{
@@ -50,11 +54,20 @@ function build_daily_data_output($stmt){
 								elseif($key == 'end_time'){
 									$sample_names_array['end_time'] = $value;
 								}
+								elseif($key == 'avg_measurement'){
+									$sample_names_array['avg_measurement'] = $value;
+								}
+								elseif($key == 'record_source'){
+									$sample_names_array['record_source'] = $value;
+								}
 								else{
 									if($seen_check == 'not_new'){
 										continue;
 									}
 									$key = convert_header_names($key);
+									if($key == 'false'){
+										continue;
+									}
 									echo '<p class="adjust"><strong>'.$key.'</strong>:  '.$value.'</p>';
 								}
 								
@@ -64,7 +77,9 @@ function build_daily_data_output($stmt){
 							echo '<table class="bulk">';
 							echo '<th class="bulk">Sensor Name</th>';
 							echo '<th class="bulk">Start Time</th>';	
-							echo '<th class="bulk">End Time</th>';	
+							echo '<th class="bulk">End Time</th>';
+							echo '<th class="bulk">Avg Measurement</th>';
+							echo '<th class="bulk">Record Source</th>';		
 						}
 						
 						echo '<tr>';

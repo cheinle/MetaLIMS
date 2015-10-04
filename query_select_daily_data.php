@@ -22,6 +22,7 @@ include('database_connection.php');
 <?php 
 include('index.php');
 include('functions/dropDown.php');
+$submitted = 'false';
 ?>
 <div class="page-header">
 <h3>Query Daily Data</h3>
@@ -37,13 +38,19 @@ include('functions/dropDown.php');
 <fieldset>
 <LEGEND><b>Display Daily Data Info:</b></LEGEND>
 	<div class="col-xs-6">
-	<i>(Select Dates)</i><br>
+	<i>(Select Dates AND/OR Location)</i><br>
 	<label class="textbox-label">Select Start & End Date:</label>
 	<input type="text" id="datepicker"  name="smydate" class="shrtfields"><input type="text" id="datepicker2"  name="emydate" class="shrtfields">
 	<script>
 		$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 		$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 	</script>
+	
+	<!--location dropdown-->
+	<p>
+	<label class="textbox-label">Select Location:</label>
+	<?php dropDown('loc', 'location', 'loc_name','loc_name',$submitted);?>
+	</p>
 	
 	<h3 class="checkbox-header">Display All?:</h3>
 	<div class="vert-checkboxes">

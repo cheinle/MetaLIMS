@@ -160,6 +160,7 @@ function convert_header_names($p_key){
 	//for daily_data2 table
 	if($p_key == 'daily_date'){
 		$p_key = 'Daily Date';
+		$p_key = 'false';
 	}
 	if($p_key == 'start_time'){
 		$p_key = 'Start Time';
@@ -169,42 +170,58 @@ function convert_header_names($p_key){
 	}
 	if($p_key == 'temp'){
 		$p_key = 'Temp (Celsius)';
+		$p_key = 'false';
 	}
 	if($p_key == 'hum'){
 		$p_key = 'Humidity';
+		$p_key = 'false';
 	}
 	if($p_key == 'co2'){
 		$p_key = 'CO2';
+		$p_key = 'false';
 	}
 	if($p_key == 'rain'){
 		$p_key = 'Rain (mm)';
+		$p_key = 'false';
 	}
 	if($p_key == 'update_timestamp'){
 		$p_key = 'Updated Timestamp (YYYY-MM-DD HH:MM:SS)';
 	}
 	if($p_key == 'temp_record'){
 		$p_key = 'Temperature Record';
+		$p_key = 'false';
 	}
 	if($p_key == 'hum_record'){
 		$p_key = 'Humidity Record';
+		$p_key = 'false';
 	}
 	if($p_key == 'co2_record'){
 		$p_key = 'CO2 Record';
+		$p_key = 'false';
 	}
 	if($p_key == 'rain_record'){
 		$p_key = 'Rain Record';
+		$p_key = 'false';
 	}
 	if($p_key == 'wind_record'){
 		$p_key = 'Wind Record';
+		$p_key = 'false';
 	}
 	if($p_key == 'haze_record'){
 		$p_key = 'Haze Record';
+		$p_key = 'false';
 	}
 	if($p_key == 'haze'){
 		$p_key = 'Haze (PSI)';
+		$p_key = 'false';
 	}
 	if($p_key == 'wind'){
 		$p_key = 'Wind (m/s)';
+		$p_key = 'false';
+	}
+	if($p_key == 'location'){
+		//$p_key = 'Location';
+		$p_key = 'false';
 	}
 	
 	//for pooled sample lookup
