@@ -150,6 +150,7 @@ function whiteList($name_check,$type){// Example string to test against
 							'rain_record',
 							'haze',
 							'haze_record',
+							'record_source',
 							//from users
 							'first_name',
 							'user_id',

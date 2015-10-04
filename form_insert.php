@@ -785,7 +785,7 @@ include('/config/check_sample_name.php');
 		</form>
 		<script type="text/javascript">
 				var name_check = 'true';
-			    function validate(from) {
+			    function validate(form) {
 
 			       var valid = 'true';
 				   // if(check_form() == 'false'){

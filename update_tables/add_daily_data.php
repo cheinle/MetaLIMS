@@ -122,8 +122,8 @@ include('../functions/dropDown.php');
 					//Insert into daily_data2_particle_counter. Wrap in a for loop
 					for ($x = 1; $x <= $num_of_sens; $x++) {
 						$p_part_sens_name = $_GET['sensor'.$x];
-						$stmt2 = $dbc -> prepare("INSERT INTO daily_data2_particle_counter (daily_date,part_sens_name,start_time,end_time,avg_measurement,record_source) VALUES (?,?,?,?,?,?)");
-						$stmt2 -> bind_param('ssssss', $p_mydate,$p_part_sens_name,$p_stime[$x],$p_etime[$x],$p_measurement[$x],$p_record[$x]);
+						$stmt2 = $dbc -> prepare("INSERT INTO daily_data2_particle_counter (daily_date,part_sens_name,start_time,end_time,avg_measurement,record_source,location) VALUES (?,?,?,?,?,?,?)");
+						$stmt2 -> bind_param('sssssss', $p_mydate,$p_part_sens_name,$p_stime[$x],$p_etime[$x],$p_measurement[$x],$p_record[$x],$p_mylocation);
 						
 						$stmt2 -> execute();
 						$rows_affected2 = $stmt2 ->affected_rows;
@@ -282,7 +282,7 @@ include('../functions/dropDown.php');
 		</fieldset>
 		<script type="text/javascript">
 		
-			    function validate(from) {
+			    function validate(form) {
 			    	
 			    	//if you tried to submit, check the entire page
 			    	//return valid is false if you find erro

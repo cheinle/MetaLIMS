@@ -10,19 +10,16 @@ error_reporting(E_ALL); ?>
 </head>
 
 <body>
-<?php 
-include('../index.php');
-include('../functions/dropDown.php');
-$submitted = 'false';
-?>
+<?php include('../index.php');?>
 <div class="page-header">
 <h3>Pick Daily Data To Update</h3>
 </div>
 
-	<form name="form_name" class="registration" onsubmit="return validate(this)" action="update_daily_data_two.php" method="GET">
+	<form name="form_name" class="registration" onsubmit="return validate(this)" action="update_daily_data2.php" method="GET">
 	<div class="container-fluid">
   	<div class="row">
 	<p><i>* = required field </i></p>
+	<p><i>NOTICE: Currently Date Fields Cannot Be Changed For Daily Data. Please See Admin For Assistance! </i></p>
 		
 		<fieldset>
 		<LEGEND><b>Date:</b></LEGEND>
@@ -34,23 +31,13 @@ $submitted = 'false';
 			$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 		</script>
 		</p>
-		
-		<!--location dropdown-->
-		<p>
-		<label class="textbox-label">Select Location:*</label>
-		<?php
-
-		//url or $_GET name, table name, field name
-		dropDown('loc', 'location', 'loc_name','loc_name',$submitted);
-		?>
-		</p>
 		</div>
 		</fieldset>
 
 		<script type="text/javascript">
 		
 				//vailidate form
-			    function validate(form) {
+			    function validate(from) {
 			    	//if you tried to submit, check the entire page for color
 			    	//return valid is false if you find it
 			    	var valid = 'true';
@@ -74,28 +61,17 @@ $submitted = 'false';
 	   	 			var date = 'datepicker';
 	   	 			var date_value = document.getElementById(date).value;
 	   	 			if(date_value == ''){
-	   	 				document.getElementById(date).style.backgroundColor = 'blue';
+	   	 				document.getElementById(date).style.backgroundColor = 'yellow';
 	   	 				valid = 'false'
 	   	 			}
 	   	 			else{
 	   	 				document.getElementById(date).style.backgroundColor = 'white';
 	   	 			}
-	   	 			
-	   	 			//check locatioin
-	   	 			var location = 'loc';
-	   	 			var location_value = document.getElementById(location).value;
-	   	 			if(location_value == '0'){
-	   	 				document.getElementById(location).style.backgroundColor = 'blue';
-	   	 				valid = 'false'
-	   	 			}
-	   	 			else{
-	   	 				document.getElementById(location).style.backgroundColor = 'white';
-	   	 			}
 					return valid;
 				}
 			
 			</script>
-			<input type='submit' id="sub" class="button" name ="submit" value='Submit'>
+			<input type='submit' id="sub" class="button" name ="submit" value='Submit' />
 			</div>
 		</div>
 	</form>

@@ -6,7 +6,7 @@
 <body>
 <?php
 
-function dropDown_update_for_daily_data($select_name,$table_name,$field_name,$select_id,$s_field_name,$daily_date){ #send also the query name?, always based on sample name
+function dropDown_update_for_daily_data($select_name,$table_name,$field_name,$select_id,$s_field_name,$daily_date,$location){ #send also the query name?, always based on sample name
 
 			include('../config/path.php');
 			$path = $_SERVER['DOCUMENT_ROOT'].$root;
@@ -18,6 +18,7 @@ function dropDown_update_for_daily_data($select_name,$table_name,$field_name,$se
 			$p_select_id = htmlspecialchars($select_id);
 			$p_s_field_name = htmlspecialchars($s_field_name);
 			$p_daily_date = htmlspecialchars($daily_date);
+			$p_location = htmlspecialchars($location);
 
 			//check that $table_name exists in white list
 			include_once($path.'functions/white_list.php');
@@ -27,7 +28,7 @@ function dropDown_update_for_daily_data($select_name,$table_name,$field_name,$se
 			$check2 = whiteList($p_s_field_name,'column'); 
 			if($check == 'true' && $check2 == 'true'){
 				
-				$query1 = "SELECT $p_s_field_name FROM daily_data2 JOIN daily_data2_particle_counter ON daily_data2.daily_date = daily_data2_particle_counter.daily_date WHERE daily_data2.daily_date = '$p_daily_date'";
+				$query1 = "SELECT $p_s_field_name FROM daily_data2 JOIN daily_data2_particle_counter ON daily_data2.daily_date = daily_data2_particle_counter.daily_date WHERE daily_data2.daily_date = '$p_daily_date' AND daily_data2.location = '$p_location'";
 				$result1 = mysqli_query($dbc, $query1);
 				$name1;
 				
@@ -36,7 +37,7 @@ function dropDown_update_for_daily_data($select_name,$table_name,$field_name,$se
 						$name1 = $row1["$p_s_field_name"];
 					}
 				}else{
-					echo 'An error has occured in selection';
+					echo 'An Error Has Occurred In Selection';
 					mysqli_error($dbc);
 				}
 				
