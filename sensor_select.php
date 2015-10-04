@@ -55,7 +55,7 @@
 				</script>
 				
 				<label class="textbox-label">Average Sensor Measurement<?php echo $x ?>:</label><br>
-				<input type="text" name="measurement<?php echo $x ?>" id = "measurement<?php echo $x ?>" class="fields" placeholder="Enter An Avg Measurement" value="">
+				<input type="text" name="measurement<?php echo $x ?>" id = "measurement<?php echo $x ?>" placeholder="Enter An Avg Measurement" value="">
 				</p>
 				
 				<p>
