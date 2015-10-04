@@ -34,7 +34,7 @@ include('../functions/dropDown.php');
 					echo '<p>You Must Enter A Daily Data Date!<p>';
 					$error = 'true';
 			}
-			if($p_mylocation == 0){
+			if($p_mylocation == '0'){
 					echo '<p>You Must Enter A Location!<p>';
 					$error = 'true';
 			}
@@ -91,18 +91,6 @@ include('../functions/dropDown.php');
 			$p_orig_time_stamp = date_default_timezone_set("Asia/Singapore");
 			$p_orig_time_stamp = date("Y-m-d H:i:s");
 			
-			//check that each of your entries has the correct decimal places
-			
-			if($p_hum != ""){//000.000
-				$regrex_check_hum  = '/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,3})?\s*$/';
-				if (!preg_match("$regrex_check_hum", $p_hum)){
-					echo '<p>ERROR: You Must Enter Valid Humidity. Number must have no more than 3 decimal places.<p>';
-					$error = 'true';
-				}
-			}
-		
-			
-		
 			//insert info into db
 		    if($error != 'true'){
 		    	
@@ -118,7 +106,7 @@ include('../functions/dropDown.php');
 					
 					//insert into daily_data2
 					$stmt = $dbc -> prepare("INSERT INTO daily_data2 (daily_date,location,notes,entered_by,orig_time_stamp) VALUES (?,?,?,?,?)");
-					$stmt -> bind_param('sss', $p_mydate,$p_mylocation,$p_notes,$p_entered_by,$p_orig_time_stamp);
+					$stmt -> bind_param('sssss', $p_mydate,$p_mylocation,$p_notes,$p_entered_by,$p_orig_time_stamp);
 					$stmt -> execute();
 					$rows_affected = $stmt ->affected_rows;
 					
@@ -135,7 +123,7 @@ include('../functions/dropDown.php');
 					for ($x = 1; $x <= $num_of_sens; $x++) {
 						$p_part_sens_name = $_GET['sensor'.$x];
 						$stmt2 = $dbc -> prepare("INSERT INTO daily_data2_particle_counter (daily_date,part_sens_name,start_time,end_time,avg_measurement,record_source) VALUES (?,?,?,?,?,?)");
-						$stmt2 -> bind_param('ssss', $p_mydate,$p_part_sens_name,$p_stime[$x],$p_etime[$x],$p_measurement[$x],$p_record[$x]);
+						$stmt2 -> bind_param('ssssss', $p_mydate,$p_part_sens_name,$p_stime[$x],$p_etime[$x],$p_measurement[$x],$p_record[$x]);
 						
 						$stmt2 -> execute();
 						$rows_affected2 = $stmt2 ->affected_rows;
@@ -312,14 +300,56 @@ include('../functions/dropDown.php');
 				}
 				
 				function check_form(){
-					var index;
 					var valid = 'true';
 					var x = document.getElementById('sens_num').value;
-					if(x == 0){
-						valid = 'false';
-						document.getElementById('sens_num').style.backgroundColor = 'blue';
+					
+					//check date
+   	 				var date = 'datepicker';
+   	 				var date_value = document.getElementById(date).value;
+   	 				if(date_value == ''){
+   	 					alert("Whoops! Please Enter Daily Date");
+   	 					document.getElementById(date).style.backgroundColor = 'blue';
+   	 					valid = 'false'
+   	 				}
+   	 				else{
+   	 					document.getElementById(date).style.backgroundColor = 'white';
+   	 				}
+   	 				
+   	 				//check selects are selected for required data
+					var selects = document.getElementsByTagName("select");
+		            var i2;
+		             for (i2 = 0; i2 < selects.length; i2++) {
+		                 selected = selects[i2].value;
+		                 var name2 = selects[i2].getAttribute("name");
+		                
+			                 if(selected == '0'){
+			                 	selects[i2].style.backgroundColor = "blue";
+			                    valid = 'false';
+			                 }
+			                 else{
+			                 	selects[i2].style.backgroundColor = "white";
+			                 }
+
 					}
-					else{
+
+					 //grab all inputs
+		             var inputs = document.getElementsByTagName("input");
+		             var txt = "";
+		             var i;
+		             for (i = 0; i < inputs.length; i++) {
+		                 txt = inputs[i].value;
+		                 var name = inputs[i].getAttribute("name");
+		                 //check if your input is empty
+			             var n = txt.length;
+			             if(n == 0){
+			             	inputs[i].style.background = "blue";
+			                valid = 'false';
+		                 }else{
+							inputs[i].style.background = "white";
+						}
+					}
+				
+					if(valid == 'true'){ //if your form is still valid, go ahead and do some more checks
 						//create a contains method to check if sensor is entered more than once
 						Array.prototype.contains = function(needle){
 							for (i in this){
@@ -332,46 +362,30 @@ include('../functions/dropDown.php');
 						
 						var seen = [];
 						//validate sensor data
-						for (index = 1; index <= x; ++index) {
+						for (var index = 1; index <= x; index++) {
 	   	 					var sensor_name = 'sensor'+index;
 	   	 					//check that sensor is picked 
 	   	 					var sensor_name_value = document.getElementById(sensor_name).value;
 	   	 					
-   	 						//check to see if sensor name is already input
-   	 						if(seen.contains(sensor_name_value)){
-   	 							document.getElementById(sensor_name).style.backgroundColor = 'blue';
-   	 							alert("You Have Chosen More Than One Sensor With The Same Name. Please Check Names");
-   	 							valid = 'false';
-   	 						}
-   	 					    else{
-   	 							seen.push(sensor_name_value);
-   	 							document.getElementById(sensor_name).style.backgroundColor = 'white';
-   	 						}
+	 						//check to see if sensor name is already input
+	 						if(seen.contains(sensor_name_value)){
+	 							document.getElementById(sensor_name).style.backgroundColor = 'blue';
+	 							alert("You Have Chosen More Than One Sensor With The Same Name. Please Check Names");
+	 							valid = 'false';
+	 						}
+	 					    else{
+	 							seen.push(sensor_name_value);
+	 							document.getElementById(sensor_name).style.backgroundColor = 'white';
+	 						}
 	   	 					
-	   	 					//check that start and end date are entered
+	   	 					//check that start time is earlier than end time
 	   	 					var start_time = 'stime'+index;
 	   	 					var start_time_value = document.getElementById(start_time).value;
-	   	 					if(start_time_value == ''){
-	   	 						alert("Whoops! Please Enter A Start Date");
-	   	 						document.getElementById(start_time).style.backgroundColor = 'blue';
-	   	 						valid = 'false';
-	   	 					}
-	   	 					else{
-	   	 						document.getElementById(start_time).style.backgroundColor = 'white';
-	   	 					}
+	   	 					
 	   	 					
 	   	 					var end_time = 'etime'+index;
 	   	 					var end_time_value = document.getElementById(end_time).value;
-	   	 					if(end_time_value == ''){
-	   	 						alert("Whoops! Please Enter An End Time");
-	   	 						document.getElementById(end_time).style.backgroundColor = 'blue';
-	   	 						valid = 'false';
-	   	 					}
-	   	 					else{
-	   	 						document.getElementById(end_time).style.backgroundColor = 'white';
-	   	 					}
-	   	 					
-	   	 					//check that start time is earlier than end time
+
 	   	 					if(start_time_value > end_time_value){
 	   	 						alert("Whoops! Please Check Start And End Times");
 	   	 						document.getElementById(start_time).style.backgroundColor = 'blue';
@@ -382,69 +396,26 @@ include('../functions/dropDown.php');
 	   	 						document.getElementById(start_time).style.backgroundColor = 'white';
 	   	 						document.getElementById(end_time).style.backgroundColor = 'white';
 	   	 					}
+		   	 				
+		   	 				//check avg sensor measurement is a 2 digit decimal
+		   	 				var measurement = 'measurement'+index;
+	   	 					var measurement_value = document.getElementById(measurement).value;
+	
+
+ 							if(!measurement_value.match(/^\s*(?=.*[0-9])\d{0,4}(?:\.\d{1,2})?\s*$/)){
+ 								document.getElementById(measurement).style.backgroundColor = 'blue';
+ 								valid = 'false'
+ 								alert("Whoops! Measurement Should Be No More Than 2 Decimal Places And 6 Digits");
+ 							}
+ 							else{
+ 								document.getElementById(measurement).style.backgroundColor = 'white';
+ 							}
 	   	 					
 						}
 					}
-						//validate other info
-						
-						//check date
-	   	 				var date = 'datepicker';
-	   	 				var date_value = document.getElementById(date).value;
-	   	 				if(date_value == ''){
-	   	 					alert("Whoops! Please Enter Daily Date");
-	   	 					document.getElementById(date).style.backgroundColor = 'blue';
-	   	 					valid = 'false'
-	   	 				}
-	   	 				else{
-	   	 					document.getElementById(date).style.backgroundColor = 'white';
-	   	 				}
-	   	 				
-	   	 				//now check the input/dropdown pairs
-	   	 				var num_divs = '6';
-	   	 				for (index_div = 1; index_div <= num_divs; ++index_div) {
-		   	 				var divs = document.getElementById('inline'+index_div);
-		   	 				
-		   	 				var inputs = divs.getElementsByTagName('input');
-		   	 				var selects = divs.getElementsByTagName('select');
-	
-	
-		   	 				for (index = 0; index < inputs.length; ++index) {
-	    						//deal with inputs[index] element
-	    						//assume same number of input and select fields.
-	    						input_value = inputs[index].value
-	    						select_value = selects[index].value
-	    						
-	    						//check if the dropdown exists, the input exists also (and vice versa)
-	    						if((input_value == '' && select_value != '0') || ((input_value != '' && select_value == '0'))){
-		   	 						inputs[index].style.backgroundColor = 'blue';
-		   	 						selects[index].style.backgroundColor = 'blue';
-		   	 						valid = 'false'
-		   	 					}
-		   	 					else if(input_value != '' &&  select_value != '0'){
-		   	 						//check if input is there it is the correct format
-		   	 						var input_check = input_value;
-		   	 						var input_id = inputs[index].id;
-		   	 						//alert(input_id);
-		   	 						if(input_id == 'temp'){
-		   	 							if(!input_check.match(/^\s*(?=.*[0-9])\d{0,2}(?:\.\d{1,3})?\s*$/)){
-		   	 								inputs[index].style.backgroundColor = 'red';
-		   	 								selects[index].style.backgroundColor = 'red';
-		   	 								valid = 'false'
-		   	 								alert("Whoops! Temperature Should Be Up To 2 Decimal Places");
-		   	 							}
-		   	 							else{
-		   	 								inputs[index].style.backgroundColor = 'white';
-		   	 								selects[index].style.backgroundColor = 'white';
-		   	 							}
-		   	 							
-		   	 						}
-		   	 					}
-		   	
-							}
-						}
-					   
-						
+					
 					return valid;
+				
 				}
 			
 			

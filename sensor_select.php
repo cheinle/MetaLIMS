@@ -55,7 +55,7 @@
 				</script>
 				
 				<label class="textbox-label">Average Sensor Measurement<?php echo $x ?>:</label><br>
-				<input type="text" name="measurement'+num_sensors+'" id = "measurement'+num_sensors+'" class="fields" placeholder="Enter An Avg Measurement" value="<?php if ((isset($_GET['submit']) && $submitted != 'true')) {echo $p_temp;}?>">
+				<input type="text" name="measurement<?php echo $x ?>" id = "measurement<?php echo $x ?>" class="fields" placeholder="Enter An Avg Measurement" value="<?php if ((isset($_GET['submit']) && $submitted != 'true')) {echo $p_temp;}?>">
 				</p>
 				
 				<p>
