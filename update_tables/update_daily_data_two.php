@@ -155,6 +155,11 @@ include($path.'/index.php');
 		<br>
 		<textarea class="form-control" from="sample_form" rows="3" name="notes" placeholder = "Enter Date and Initials for Comment (e.g.: YYYY/MM/DD Comment -initials)"><?php echo text_insert_update_daily_data($parent_value,'notes','daily_data2',$p_mylocation,$root);?></textarea>
 		</p>
+		
+		
+		<input type="text" style="visibility:hidden" name="mydate" id="mydate" value="<?php echo text_insert_update_daily_data($parent_value,'daily_date','daily_data2',$p_mylocation,$root);?>"/>
+		<input type="text" style="visibility:hidden" name="loc" id="loc" value="<?php echo text_insert_update_daily_data($parent_value,'location','daily_data2',$p_mylocation,$root);?>"/>
+		
 		</fieldset>
 		<!--add more sensor info!-->
 		<script type="text/javascript">
@@ -373,7 +378,7 @@ include($path.'/index.php');
 						}
 					}
 				
-					/*if(valid == 'true'){ //if your form is still valid, go ahead and do some more checks
+					if(valid == 'true'){ //if your form is still valid, go ahead and do some more checks
 						//create a contains method to check if sensor is entered more than once
 						Array.prototype.contains = function(needle){
 							for (i in this){
@@ -437,7 +442,15 @@ include($path.'/index.php');
 	   	 					
 						}
 					}
-					*/
+					var element = document.getElementById("sensor_data");
+					var sens_num = document.createElement("input");	
+				    sens_num.setAttribute("type", "text");
+				    sens_num.setAttribute("name", "sens_num");
+				    sens_num.setAttribute("value", num);
+				   	//sens_num.setAttribute("style", "visibility:hidden");
+				   	element.appendChild(sens_num);
+				   	
+				   	
 					return valid;
 				
 				}

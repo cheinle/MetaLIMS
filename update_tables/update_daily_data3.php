@@ -131,7 +131,7 @@ include('../functions/text_insert_update_storage_info.php');
 							$stmt_sid= $dbc->prepare("SELECT part_sens_name FROM daily_data2_particle_counter WHERE daily_date = ? AND part_sens_name = ? AND location = ?");
 							$stmt_sid -> bind_param('sss', $p_mydate,$p_part_sens_name,$p_mylocation);
 							if ($stmt_sid->execute()){
-								$stmt_sid->bind_result($sample_name,$location);
+								$stmt_sid->bind_result($sample_name);
 							    while($stmt_sid->fetch()){
 									if($sample_name == $p_part_sens_name){
 										$exists = 'true';
