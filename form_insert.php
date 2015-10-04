@@ -508,7 +508,7 @@ include('/config/check_sample_name.php');
 				
 				<p>
 				<label class="textbox-label">Height Above Floor:+</label><br>
-				<input type="text" name="sampling_height" id="sampling_height"  placeholder="Enter A Height Above Floor (cm)" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_sampling_height;} ?>">
+				<input type="text" name="sampling_height" id="sampling_height"  placeholder="Height Above Floor (cm)" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_sampling_height;} ?>">
 				</p>
 				
 				<p>
