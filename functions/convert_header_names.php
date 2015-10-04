@@ -223,6 +223,12 @@ function convert_header_names($p_key){
 		//$p_key = 'Location';
 		$p_key = 'false';
 	}
+	if($p_key == 'avg_measurement'){
+		$p_key = 'Avg. Sensor Measurement';
+	}
+	if($p_key == 'record_source'){
+		$p_key = 'Sensor Record Source';
+	}
 	
 	//for pooled sample lookup
 	if($p_key == 'new_pooled_samp_name'){
