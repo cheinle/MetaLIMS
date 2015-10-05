@@ -151,7 +151,7 @@ form.bulk input[type=text],select{
   margin:0px 0px 10px 10px;
   color:#00abdf;
   height:32px;
-  border-radius: 15px;
+  border-radius: 5px;
   box-shadow:0 1px 3px rgba(0,0,0,0.5);
 }
 
@@ -339,8 +339,10 @@ div.border{
  font-size: 14px;
  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
  -moz-border-radius: 15px;
  -webkit-border-radius: 15px;
+  border-radius: 15px;
 }
 div.indent{
   margin-left:20px;
@@ -365,8 +367,10 @@ pre.border{
  font-size: 14px;
  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
  -moz-border-radius: 15px;
  -webkit-border-radius: 15px;
+  border-radius: 15px;
 }
 	
 /**********************************************************************/
@@ -437,9 +441,11 @@ form.registration{
  font-size: 14px;
  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
  -moz-border-radius: 15px;
  -webkit-border-radius: 15px;
- box-shadow:0 5px 5px rgba(0,0,0,0.5);
+  border-radius: 15px;
+
 }
 
 form.registration fieldset{
@@ -511,8 +517,10 @@ form.registration input[type=text],input[type=password],input[type=email]{
   padding:3px;
   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+   border-radius: 5px;
 }
 
 form.registration textarea.form-control{
@@ -527,8 +535,10 @@ form.registration textarea.form-control{
   padding:3px;
   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+   border-radius: 5px;
 }
 
 
@@ -545,8 +555,10 @@ form.registration input[type=text].shrtfields,input[type=text].time_fields{
   height:32px;
   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+   border-radius: 5px;
 }
 
 form.registration input[type=text].bulkfields{
@@ -561,8 +573,10 @@ form.registration input[type=text].bulkfields{
   padding: 0px;
   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+   border-radius: 5px;
 }
 
 
@@ -636,8 +650,10 @@ form.registration select{
   width: 50%;
   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+   border-radius: 5px;
 }
 
 .button, .button:visited{
@@ -654,11 +670,12 @@ form.registration select{
   margin:10px 2px 2px 2px;
   background-color: #00abdf;
   display: inline-block;
-  -moz-border-radius: 10px;
+ -moz-border-radius: 10px;
  -webkit-border-radius: 10px;
+  border-radius: 10px;
  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   background: linear-gradient(to bottom, #00abdf 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);
 }
 .button:hover{
