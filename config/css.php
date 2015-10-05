@@ -597,13 +597,11 @@ form.registration label.checkbox-label,label.radio-label{
 
 form.registration input[type=checkbox],input[type=radio]{
   font-family: Georgia;
-  font-size: 20px;
   float:left;
-  width:40px;
-  
+  width:20px;
   margin:2px 0px 2px 2px;
   color:#00abdf;
-  height:32px;
+  height:16px;
   padding:3px;
 }
 

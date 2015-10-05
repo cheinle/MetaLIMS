@@ -67,7 +67,9 @@ include($path.'/index.php');
   			if ($stmt1->execute()){
     			$stmt1->bind_result($part_sens_name,$start_time,$end_time,$avg_measurement,$record);
 				$counter = 0;
-				echo '<fieldset><LEGEND><b>Sensor Data:</b></LEGEND>';
+				
+				echo '<fieldset><LEGEND><b>Sensor Data: '.$p_mydate.' '.$p_mylocation.'</b></LEGEND>';
+				echo '<div class="col-xs-6">';
 				echo '<div  id = "sensor_data" name = "sensor_data">';
     			while ($stmt1->fetch()){
     				$counter++;
@@ -145,6 +147,7 @@ include($path.'/index.php');
 		<input type="button" id="more_sensors" class="button" style="float:left;margin: 10px;" name ="more_sensors" value='Add More Sensors' /><br>
 		<!--<div id="div1"></div>-->
 		
+		</div>
 		</div>
 		</fieldset>
 		
