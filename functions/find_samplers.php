@@ -27,17 +27,15 @@ function find_samplers($sample_name,$table_type){
 		
 		if($table_type == 'display'){ //view as dropdown
 			$dropdown = '<select>'."\n";
-		  	$dropdown .= '<option>-empty-</option>'."\n";
+		  	//$dropdown .= '<option>-empty-</option>'."\n";
 			foreach($array as $key=>$option) {
-	   			  $dropdown .= '<option value="'.$key.'"'.$select.'>'.$option.'</option>'."\n";
+	   			  $dropdown .= '<option value="'.$key.'">'.$option.'</option>'."\n";
 			}
 			$dropdown .= '</select>'."\n";
 			return $dropdown;
 		}
 		else{//view as one string
-			echo "<td class = 'reg'>";
-			echo $string_of_samplers = implode("\n", $array);
-			echo "</td>";
+			return $string_of_samplers = implode("\n", $array);
 		}
 	}
 	else{

@@ -40,7 +40,7 @@ else{
 	body { font-size: 140%; }
 	div.dataTables_wrapper {
 		width: 99%;
-		height: 100%
+		height: 85%;
 		margin: 0 auto;
 	}
 	div.dataTables_scrollBody {

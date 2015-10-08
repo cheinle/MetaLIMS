@@ -11,7 +11,7 @@
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : {proj: projectName,sa: sampleNumber,current_name: name},
 	                    success : function(data){  
-	                    				var res = data.match(/^false/);
+	                    				var res = data.match(/false/);
 						                if(res != null){  
 						                    //show that the username is available  
 						                    $('#samplename_availability_result').html('Sample Name is Available');
@@ -38,7 +38,7 @@
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : {proj: projectName,sa: sampleNumber},
 	                     success : function(data){  
-	                    				var res = data.match(/^false/);
+	                    				var res = data.match(/false/);
 						                if(res != null){  
 						                    //show that the name is available  
 						                    $('#samplename_availability_result').html('Sample Name is Available');

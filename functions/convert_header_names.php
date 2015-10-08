@@ -44,8 +44,8 @@ function convert_header_names($p_key){
 		$p_key = 'false';
 	}
 	if($p_key == 'end_samp_date_time'){
-		//$p_key = 'End Sampling Date/Time (YYYY-MM-DD HH:MM:SS)';
-		$p_key = 'false';
+		$p_key = 'End Sampling Date/Time (YYYY-MM-DD HH:MM:SS)';
+		//$p_key = 'false';
 	}
 	if($p_key == 'entered_by'){
 		$p_key = 'Entered By';
@@ -130,15 +130,14 @@ function convert_header_names($p_key){
 		$p_key = 'false';
 	}
 	if($p_key == 'start_samp_date_time'){
-		//$p_key = 'Start Sampling Date/Time (YYYY-MM-DD HH:MM:SS)';
-		$p_key = 'false';
+		$p_key = 'Start Sampling Date/Time (YYYY-MM-DD HH:MM:SS)';
+		//$p_key = 'false';
 	}
 	if($p_key == 'time_stamp'){
 		$p_key = 'Time Stamp (YYYY-MM-DD HH:MM:SS)';
 	}
 	if($p_key == 'total_samp_time'){
 		$p_key = 'Total Sampling Time';
-		//$p_key = 'false';
 	}
 	if($p_key == 'updated_by'){
 		$p_key = 'Updated By';
@@ -377,15 +376,18 @@ function convert_header_names($p_key){
 		$p_key = 'Isolate Location Type';
 	}
 	
-	//air sampler fields
+	//sampler fields
 	if($p_key == 'start_date_time'){
-		$p_key = 'Start Date/Time (YYYY-MM-DD HH:MM:SS)';
+		//$p_key = 'Start Date/Time (YYYY-MM-DD HH:MM:SS)';
+		$p_key = 'false';
 	}
 	if($p_key == 'end_date_time'){
-		$p_key = 'End Date/Time (YYYY-MM-DD HH:MM:SS)';
+		//$p_key = 'End Date/Time (YYYY-MM-DD HH:MM:SS)';
+		$p_key = 'false';
 	}
 	if($p_key == 'total_date_time'){
-		$p_key = 'Total Time';
+		//$p_key = 'Total Time';
+		$p_key = 'false';
 	}
 	
 	return $p_key;		

@@ -558,8 +558,14 @@ include('functions/convert_header_names.php');
 					
 					}
 					
+					$earliest_start;
+					$latest_end;
+					$counter = 0;
 					for ($x = 1; $x <= $num_of_samp; $x++) {
 						$sampler_name = $_GET['sampler'.$x];
+						
+						$counter++;
+						
 						if(isset($_GET['delete'.$x])){
 							//delete the daily data for this date/sensor primary key...can you do this?
 							//check if it exists...if it does, delete it
@@ -657,8 +663,66 @@ include('functions/convert_header_names.php');
 									throw new Exception("An error has occurred: No Updated Sampler Info");
 								}
 							}
+							
+							$start = $_GET['sdate'.$x].' '.$_GET['stime'.$x];
+							$end = $_GET['edate'.$x].' '.$_GET['etime'.$x];
+							
+							if($counter == 1){
+								$earliest_start = $start;
+								$latest_end = $end;
+							}
+							else{
+								//check starts
+								if($start < $earliest_start){
+									$earliest_start = $start;
+								}
+								
+								//check ends
+								if($end > $latest_end){
+									$latest_end = $end;
+								}
+							}
 						}
 					}
+
+					echo 'earliest and latest'.$earliest_start.' '.$latest_end.'<br>';
+					//format largest sampling period for samplers run at the same time period
+					//update sample table with this new time
+					$p_biggest_time;
+					if(($start) && ($end)){
+							$bts1 = strtotime($earliest_start);
+							$bts2 = strtotime($latest_end);
+		
+							$big_seconds_diff = $bts2 - $bts1;
+							
+							$big_time = ($big_seconds_diff/3600);
+							$p_biggest_time = round($big_time,2);
+					}
+					//echo 'biggest time'.$p_biggest_time;
+					
+					$time_query = "UPDATE sample SET start_samp_date_time = ?, end_samp_date_time = ?, total_samp_time = ? WHERE sample_name = ?";
+					if($time_stmt = $dbc ->prepare($time_query)) {                 
+	                	$time_stmt->bind_param('ssds',$earliest_start,$latest_end,$p_biggest_time,$p_sample_name);
+				
+	                    if($time_stmt -> execute()){
+							$time_rows_affected = $time_stmt ->affected_rows;
+						
+							$time_stmt -> close();
+							if($time_rows_affected < 1){	
+								$successfull = 'false';
+								throw new Exception("Insert Failure: Unable To Insert Air Sampler");
+							}
+						}
+						else{
+							$successfull = 'false';
+							throw new Exception("Execution Failure: Unable To Insert Air Sampler");
+						}
+					}
+					else{
+						$successfull = 'false';
+						throw new Exception("Prepare Failure: Unable To Insert Air Sampler");
+					}
+					
 					
 					//////////////////////////////////////////////////////////////////
 					

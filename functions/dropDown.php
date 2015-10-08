@@ -44,10 +44,13 @@ function dropDown($select_name,$table_name,$field_name,$select_id,$submitted){
 					if($visible_check == '1'){
 						if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy'])))   {
 							if(isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false'){
-									echo '<option value="'.$id.'" if((isset($_SESSION["'.$p_select_name.'"]) && $_SESSION["'.$p_select_name.'"] == '.$id.')){ echo "selected";}>'.$name.'</option>';
+									$selected_option = $_SESSION["$p_select_name"];
+									echo '<option value="'.$id.'"', ($selected_option == $id) ? 'selected':'' ,'>'.$name.'</option>';
+							
 							}
 							else{
-								echo '<option value="'.$id.'" if((isset($_GET["'.$p_select_name.'"]) && $_GET["'.$p_select_name.'"] == '.$id.' )){ echo "selected";}>'.$name.'</option>';
+								$selected_option = $_GET["$p_select_name"];
+								echo '<option value="'.$id.'"', ($selected_option == $id) ? 'selected':'' ,'>'.$name.'</option>';
 							}
 						}
 						else{

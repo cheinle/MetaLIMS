@@ -53,12 +53,12 @@ function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 								$p_value = htmlspecialchars($value);
 								if($key == 'sample_name'){
 									$p_sample_name = $p_value;
-									//if (in_array($p_sample_name, $sample_names_seen)){
-									//	break;
-									//}else{
+									if (in_array($p_sample_name, $sample_names_seen)){
+										break;
+									}else{
 										echo '<tr class = "row_collapse">';
-									//	array_push($sample_names_seen,$p_sample_name);
-									//}
+										array_push($sample_names_seen,$p_sample_name);
+									}
 								}
 							
 								
@@ -101,16 +101,14 @@ function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 						}
 						else{						
 							//print out fields
-						
-							echo '<tr>';
-
 							foreach($row as $key => $value){
 								$p_value = htmlspecialchars($value);
 								if($key == 'sample_name'){
 									$p_sample_name = $p_value;
 									if (in_array($p_value, $sample_names_seen)){
-									//	break;
+										break;
 									}else{
+										echo '<tr>';
 										array_push($sample_names_seen,$p_value);
 									}
 								}
