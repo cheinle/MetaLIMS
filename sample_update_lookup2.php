@@ -26,9 +26,9 @@ include('functions/text_insert_isolate_update.php');
 include('functions/text_insert_update_dt.php');
 include($path.'functions/text_insert_update_storage_info.php');
 include ('index.php');
-include('/config/check_form_insert_js.php');
-include('/config/check_sample_name.php');
-//include('/config/add_air_samplers_to_sample_update_js.php');
+include('config/check_form_insert_js.php');
+include('config/check_sample_name.php');
+//include('config/add_air_samplers_to_sample_update_js.php');
 
 ?>
 <div class="page-header">	

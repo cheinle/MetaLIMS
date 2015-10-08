@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('database_connection.php');
 include('index.php');
-include('/config/path.php');
+include('config/path.php');
 ?>
 <!doctype html>
 <html>

@@ -532,39 +532,28 @@ include('functions/convert_header_names.php');
 					
 					//repeat for x amount of samplers
 					$num_of_samp = $_GET['sampler_num'];
-					for ($x = 1; $x <= $num_of_samp; $x++) {
-		
-						$p_stime[$x] = htmlspecialchars($_GET['stime'.$x]);
-						$p_etime[$x] = htmlspecialchars($_GET['etime'.$x]);
-						
-						$p_sdate[$x] = htmlspecialchars($_GET['sdate'.$x]);
-						$p_edate[$x] = htmlspecialchars($_GET['edate'.$x]);
-						
-						//calcualate total time
-						$start[$x] = $p_sdate[$x].' '.$p_stime[$x];
-						$end[$x] = $p_edate[$x].' '.$p_etime[$x];
-			
-						//format date/time
-						$p_time[$x] = '';
-						if(($start[$x]) && ($end[$x])){
-							$ts1 = strtotime($start[$x]);
-							$ts2 = strtotime($end[$x]);
-			
-							$seconds_diff = $ts2 - $ts1;
-							
-							$time = ($seconds_diff/3600);
-							$p_time[$x] = round($time,2);
-						}
-					
-					}
-					
 					$earliest_start;
 					$latest_end;
 					$counter = 0;
 					for ($x = 1; $x <= $num_of_samp; $x++) {
 						$sampler_name = $_GET['sampler'.$x];
-						
 						$counter++;
+						
+						//calcualate total time
+						$start = htmlspecialchars($_GET['sdate'.$x]).' '.htmlspecialchars($_GET['stime'.$x]);
+						$end= htmlspecialchars($_GET['edate'.$x]).' '.htmlspecialchars($_GET['etime'.$x]);
+			
+						//format date/time
+						$p_time = '';
+						if(($start) && ($end)){
+							$ts1 = strtotime($start);
+							$ts2 = strtotime($end);
+			
+							$seconds_diff = $ts2 - $ts1;
+							
+							$time = ($seconds_diff/3600);
+							$p_time = round($time,2);
+						}
 						
 						if(isset($_GET['delete'.$x])){
 							//delete the daily data for this date/sensor primary key...can you do this?
@@ -624,7 +613,7 @@ include('functions/convert_header_names.php');
 									$successfull = 'false';
 									throw new Exception("Prepare Error: Unable To Insert Sampler Info");
 								}
-								$stmt_ins -> bind_param('ssssd', $p_sample_name,$sampler_name,$start[$x],$end[$x],$p_time[$x]);
+								$stmt_ins -> bind_param('ssssd', $p_sample_name,$sampler_name,$start,$end,$p_time);
 								if(!$stmt_ins -> execute()){
 									$successfull = 'false';
 									throw new Exception("Exectution Error: Unable To Insert Sampler Info");
@@ -647,7 +636,7 @@ include('functions/convert_header_names.php');
 									$successfull = 'false';
 									throw new Exception("Prepare Error: Unable To Update Sampler Info");
 								}
-								$stmt_up-> bind_param('ssdss',$start[$x],$end[$x], $p_time[$x],$p_sample_name, $sampler_name);
+								$stmt_up-> bind_param('ssdss',$start,$end, $p_time,$p_sample_name, $sampler_name);
 								if(!$stmt_up -> execute()){
 									$successfull = 'false';
 									throw new Exception("Execution Error: Unable To Update Sampler Info");
@@ -685,7 +674,6 @@ include('functions/convert_header_names.php');
 						}
 					}
 
-					echo 'earliest and latest'.$earliest_start.' '.$latest_end.'<br>';
 					//format largest sampling period for samplers run at the same time period
 					//update sample table with this new time
 					$p_biggest_time;
@@ -710,17 +698,17 @@ include('functions/convert_header_names.php');
 							$time_stmt -> close();
 							if($time_rows_affected < 1){	
 								$successfull = 'false';
-								throw new Exception("Insert Failure: Unable To Insert Air Sampler");
+								throw new Exception("Insert Failure: Unable To Insert Sampler");
 							}
 						}
 						else{
 							$successfull = 'false';
-							throw new Exception("Execution Failure: Unable To Insert Air Sampler");
+							throw new Exception("Execution Failure: Unable To Insert Sampler");
 						}
 					}
 					else{
 						$successfull = 'false';
-						throw new Exception("Prepare Failure: Unable To Insert Air Sampler");
+						throw new Exception("Prepare Failure: Unable To Insert Sampler");
 					}
 					
 					

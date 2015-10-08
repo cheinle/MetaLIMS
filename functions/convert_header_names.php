@@ -389,6 +389,17 @@ function convert_header_names($p_key){
 		//$p_key = 'Total Time';
 		$p_key = 'false';
 	}
+
+	//project name fields
+	if($p_key == 'added_by'){
+		$p_key = 'Added By';
+	}
+	if($p_key == 'description'){
+		$p_key = 'Description';
+	}
+	if($p_key == 'seq_id_start'){
+		$p_key = 'Seq ID Abbrev';
+	}
 	
 	return $p_key;		
 	

@@ -1,5 +1,5 @@
 <?php
-include('/config/path.php');
+include('config/path.php');
 $path = $_SERVER['DOCUMENT_ROOT'].$root;
 include ('database_connection.php');
 include ($path.'functions/dropDown.php');
