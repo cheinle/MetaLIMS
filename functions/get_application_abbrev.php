@@ -12,7 +12,7 @@ function get_application_abbrev($application,$type){
 		else if($application == 'Exome sequencing'){
 			RETURN 'E';
 		}
-		else if($application == 'Mate pair sequencing'){
+		else if($application == 'Metagenome PacBio'){
 			RETURN 'MP';
 		}
 		else if($application == 'Metagenome sequencing'){
@@ -30,6 +30,9 @@ function get_application_abbrev($application,$type){
 		else if($application == 'Whole Genome Sequencing'){
 			RETURN 'G';
 		}
+		else if($application == 'PacBio Isoaltes'){
+			RETURN 'P';
+		}
 		else{
 			RETURN "ERROR";
 		}
@@ -44,7 +47,7 @@ function get_application_abbrev($application,$type){
 		else if($application == 'Exome sequencing'){
 			RETURN 'UPDATE number_of_seq_submissions SET E = ? WHERE sample_name = ?';
 		}
-		else if($application == 'Mate pair sequencing'){
+		else if($application == 'Metagenome PacBio'){
 			RETURN 'UPDATE number_of_seq_submissions SET MP = ? WHERE sample_name = ?';
 		}
 		else if($application == 'Metagenome sequencing'){
@@ -61,6 +64,9 @@ function get_application_abbrev($application,$type){
 		}
 		else if($application == 'Whole Genome Sequencing'){
 			RETURN 'UPDATE number_of_seq_submissions SET G = ? WHERE sample_name = ?';
+		}
+		else if($application == 'PacBio Isolates'){
+			RETURN 'UPDATE number_of_seq_submissions SET P = ? WHERE sample_name = ?';
 		}
 		else{
 			RETURN "ERROR";

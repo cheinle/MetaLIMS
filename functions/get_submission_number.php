@@ -30,6 +30,9 @@ function get_submission_num($sample_name,$seq_type_abbrev){
 				elseif($seq_type_abbrev == 'G'){
 					$query = 'SELECT G FROM number_of_seq_submissions WHERE sample_name = ?';
 				}
+				elseif($seq_type_abbrev == 'P'){
+					$query = 'SELECT P FROM number_of_seq_submissions WHERE sample_name = ?';
+				}
 				else{
 					return "ERROR";
 				}
