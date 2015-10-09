@@ -425,7 +425,7 @@
 					document.getElementById(filled[i6]).style.backgroundColor = 'white';
 				}
 				var conc = document.getElementById('dConc').value;
-	            var conc_check = conc.match(/^\s*(?=.*[1-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
+	            var conc_check = conc.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
 				if (conc_check  == null){
 					alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
 					document.getElementById('dConc').style.background = "blue";
@@ -436,7 +436,7 @@
 				}
 				
 				var vol = document.getElementById('dVol').value;
-				var vol_check = vol.match(/^\s*(?=.*[1-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
+				var vol_check = vol.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
 				if (vol_check  == null){
 					alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
 					document.getElementById('dVol').style.background = "blue";
@@ -446,7 +446,7 @@
 				}
 				
 				var vol_quant = document.getElementById('dVol_quant').value;
-				var vol_check = vol_quant.match(/^\s*(?=.*[1-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
+				var vol_check = vol_quant.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
 				if (vol_check  == null){
 					alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
 					document.getElementById('dVol_quant').style.background = "blue";
@@ -616,7 +616,7 @@
 				}
 
 				var rconc = document.getElementById('rConc').value;
-	            var rconc_check = rconc.match(/^\s*(?=.*[1-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
+	            var rconc_check = rconc.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
 				if (rconc_check  == null){
 					alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
 					document.getElementById('rConc').style.background = "blue";
@@ -626,7 +626,7 @@
 				}
 				
 				var rvol = document.getElementById('rVol').value;
-				var rvol_check = rvol.match(/^\s*(?=.*[1-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
+				var rvol_check = rvol.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
 				if (rvol_check  == null){
 					alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
 					document.getElementById('rVol').style.background = "blue";
@@ -636,7 +636,7 @@
 				}
 				
 				var rvol_quant = document.getElementById('rVol_quant').value;
-				var rvol_check = rvol_quant.match(/^\s*(?=.*[1-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
+				var rvol_check = rvol_quant.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
 				if (rvol_check  == null){
 					alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
 					document.getElementById('rVol_quant').style.background = "blue";
