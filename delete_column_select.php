@@ -32,12 +32,5 @@
         die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
 		
 	}
-	
-	
 
-	?>
-
-	</body>
-	
-	
-</html>
+?>
