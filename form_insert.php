@@ -916,7 +916,7 @@ include('/config/check_sample_name.php');
 										document.getElementById(start_date).style.backgroundColor = 'blue';
 										document.getElementById(end_date).style.backgroundColor = 'blue';
 									}
-									else if(p_time > 6.5 && sampler_check  == null){//check if coriolis sampling is greater than 6 hours
+									else if(p_time > 6.5 && sampler_check  != null){//check if coriolis sampling is greater than 6 hours
 										valid = 'false';
 										alert("Sampling Is Greater Than 6 Hours For Coriolis Sampling. Please Check Date/Times");
 										document.getElementById(start_time).style.backgroundColor = 'blue';

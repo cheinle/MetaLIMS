@@ -65,7 +65,7 @@ if(isset($_GET['submit_labels']) && $_GET['db_content']=='xls'){
 	$sql = "SELECT sample_name,start_samp_date_time,project_name,sample_type,sample_num FROM sample";
 	$stmt = $dbc->prepare("$sql");
 	$_SESSION['label_prep'] = 'TRUE';
-	build_table($stmt);
+	build_table($stmt,'xls');
 	
 	unset($_SESSION['label_prep']);
 	
@@ -96,7 +96,7 @@ else{
     		} 
 
     		call_user_func_array(array($stmt, 'bind_result'), $params); 
-			build_table($stmt);	
+			build_table($stmt,'display');	
 		}
 	}
 }
