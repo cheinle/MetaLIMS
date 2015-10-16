@@ -21,10 +21,17 @@
 		$field = $pk[4];			
 		$field_query = "SELECT ".$field." FROM ".$table_name." WHERE visible = ".$visible."";
 		$field_res = mysqli_query($dbc,$field_query);
-		if(!$field_values = mysqli_fetch_array($field_res)){
+		$row_num = mysqli_num_rows($field_res);
+		if($row_num < 0 ){
 			header('HTTP/1.1 500 Internal Server Booboo');
        		header('Content-Type: application/json; charset=UTF-8');
         	die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
+		}
+		elseif ($row_num == 0) {
+			echo "<label class='textbox-label'>Field Value Name:</label>";
+			echo "<select id='".$column_name."' name='".$column_name."'>";
+			echo "<option value='0'>-Select-</option>";
+			echo "</select>";
 		}
 		else{
 			$field_res = mysqli_query($dbc,$field_query);
