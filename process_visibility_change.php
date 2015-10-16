@@ -4,9 +4,10 @@
 	$table_name = $_GET['table_value'];
 	$field_value = $_GET['field_value'];
 	$pk = $_GET['pk'];
-	$visibility = 0;
+	$visibility = $_GET['visible'];
 	
 	$pk_query = "UPDATE ".$table_name." SET visible = ? WHERE ".$pk." = ?";
+	//echo $table_name.' '.$field_value.' '.$pk.' '.$visibility.'<br>';
 	if($stmt = $dbc ->prepare($pk_query)){                 
 		$stmt->bind_param('is',$visibility,$field_value);
 	    if($stmt -> execute()){

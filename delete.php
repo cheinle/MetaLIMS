@@ -25,45 +25,36 @@ include ('index.php');
                 var table_value = $('#table').val(); //<----- get the value from the parent select 
                 var split = table_value.split("-"); 
 		       	table_value = split[0];
+		       	var visible = 'invisible';
                 $.ajax({
                     url     : root+'delete_column_select.php', //the url you are sending datas to which will again send the result
                     type    : 'GET', //type of request, GET or POST
-                    data    : { table_value: table_value}, //Data you are sending
+                    data    : { table_value: table_value, visible: visible}, //Data you are sending
                     success : function(data){$('#col').html(data)}, // On success, it will populate the 2nd select
                     error   : function(){alert('An Error Has Occurred')} //error message
                 })
-			
-			
+
 			});
 			
 		});
 		
-
-		function validate(form) {
-
-	       //var valid = 'false';
-		   var selects = document.getElementsByTagName("select");
-           var i2;
-           for (i2 = 0; i2 < selects.length; i2++) {
-                 selected = selects[i2].value;
-                 var name2 = selects[i2].getAttribute("name");
-                 if(selected == '0'){
-                 	selects[i2].style.background = "blue";
-                    valid = 'false';
-                 }
-                 else{
-                 	selects[i2].style.background = "white";
-                 }
-
-		   }
-		   if(valid == 'false'){
-		    	alert('ERROR: Some Inputs Are Invalid. Please Check Fields');
-		    	return false;
-		   }
-		   else{
-		   		return confirm('Sure You Want To Submit?');
-		   }
-		}
+		$(document).ready(function(){  
+			
+                $('#table2').change(function(){ //on change event
+                var table_value = $('#table2').val(); //<----- get the value from the parent select 
+                var split = table_value.split("-"); 
+		       	table_value = split[0];
+		       	var visible = 'visible';
+                $.ajax({
+                    url     : root+'delete_column_select.php', //the url you are sending datas to which will again send the result
+                    type    : 'GET', //type of request, GET or POST
+                    data    : { table_value: table_value, visible: visible}, //Data you are sending
+                    success : function(data){$('#col2').html(data)}, // On success, it will populate the 2nd select
+                    error   : function(){alert('An Error Has Occurred')} //error message
+				});
+			});
+			
+		});
 		
 		
 		// submit form
@@ -71,23 +62,63 @@ include ('index.php');
 		
 		    // process the form
 		    $('form').submit(function(event) {
-		
-		       var table_value = $('#table').val(); //<----- get the value from the parent select
-		       var split = table_value.split("-"); 
-		       table_value = split[0];
-		       var pk = split[1];
-
-               var field_value = $('#column').val();
-
-		        // process the form
-		       $.ajax({
-                    url     : root+'process_visibility_change.php', //the url you are sending datas to which will again send the result
-                    async: false,
-                    type    : 'GET', //type of request, GET or POST
-                    data    : { table_value: table_value, field_value: field_value, pk:pk}, //Data you are sending
-                    success : function(data){alert(data)}, // On success, it will populate the 2nd select
-                    error   : function(){alert('A Submission Error Has Occurred')} //error message,
-                }) 
+			   var form_type = $(this).closest("form").attr('id');
+			   var visible = '';
+			   var table_value = '';
+			   var field_value = '';
+			   if(form_type == 'invisible'){
+			   		visible = 0;
+			   		table_value = $('#table').val();
+			   		field_value = $('#column').val();
+			   		if(table_value == '0' || (field_value == '0' || field_value == undefined)){
+			   			$("#table").css({"background-color": "blue"});
+			   			$("#column").css({"background-color": "blue"});
+			   			alert("ERROR: Please Fill In All Invisible Fields");
+			   			event.preventDefault();
+			   		}
+			   		else{
+			   			  var split = table_value.split("-"); 
+					      table_value = split[0];
+					      var pk = split[1];
+			
+					        // process the form
+					       $.ajax({
+			                    url     : root+'process_visibility_change.php', //the url you are sending datas to which will again send the result
+			                    async: false,
+			                    type    : 'GET', //type of request, GET or POST
+			                    data    : { table_value: table_value, field_value: field_value, pk:pk, visible:visible}, //Data you are sending
+			                    success : function(data){alert(data)}, // On success, it will populate the 2nd select
+			                    error   : function(){alert('A Submission Error Has Occurred')} //error message,
+			                }) 
+			   		}
+			   }
+			   if(form_type == 'visible'){
+			   		visible = 1;
+			   		table_value = $('#table2').val();
+			   		field_value = $('#column2').val();
+			   		if(table_value == '0' || (field_value == '0' || field_value == undefined)){
+			   			$("#table2").css({"background-color": "blue"});
+			   			$("#column2").css({"background-color": "blue"});
+			   			alert("ERROR: Please Fill In All Visible Fields");
+			   			event.preventDefault();
+			   		}
+			   		else{
+			   			  var split = table_value.split("-"); 
+					       table_value = split[0];
+					       var pk = split[1];
+			
+					        // process the form
+					       $.ajax({
+			                    url     : root+'process_visibility_change.php', //the url you are sending datas to which will again send the result
+			                    async: false,
+			                    type    : 'GET', //type of request, GET or POST
+			                    data    : { table_value: table_value, field_value: field_value, pk:pk, visible:visible}, //Data you are sending
+			                    success : function(data){alert(data)}, // On success, it will populate the 2nd select
+			                    error   : function(){alert('A Submission Error Has Occurred')} //error message,
+			                }) 
+			   		}
+			   }
+		     
 		    });
 		});
 	</script>
@@ -100,8 +131,12 @@ include ('index.php');
 	
 	
 	
-	echo '<form  class="registration" id="delete" onsubmit="return validate(this)" action="delete.php" method="GET">';
-	
+	echo '<form  class="registration" id="invisible" name="invisible" action="delete.php" method="GET">';
+	echo '<fieldset>';
+	echo '<LEGEND><b>Option1: Make Invisible</b></LEGEND>';
+	echo '<div class="container-fluid">';
+  	echo '<div class="row">';
+  	echo '<div class="col-xs-6">';
 	$tables = get_visible_tables($dbc);
 	echo "<label class='textbox-label'>Table Name:</label>";
 						
@@ -113,9 +148,38 @@ include ('index.php');
 	echo "</select>";
 	
 	echo "<div id='col' name='col'></div>";
-	echo "<div id='process' name='process'></div>";
-	echo "<button class='button' type='submit' name='submit' value='1'>DELETE</button>";
+	echo "</div></div></div>";
+	echo "<button class='button' type='submit' name='submit' value='delete'>DELETE</button>";
+	echo '</fieldset>';
 	echo "</form>";
+	
+	
+	
+	
+	/********************************************************************/
+	echo '<form  class="registration" id="visible" name="visible" action="delete.php" method="GET">';
+	echo '<fieldset>';
+	echo '<LEGEND><b>Option2: Make Visible</b></LEGEND>';
+	echo '<div class="container-fluid">';
+  	echo '<div class="row">';
+  	echo '<div class="col-xs-6">';
+	$tables = get_visible_tables($dbc);
+	echo "<label class='textbox-label'>Table Name:</label>";					
+	echo "<select id='table2' name='table2'>";
+	echo "<option value='0'>-Select-</option>";
+	foreach($tables as $table => $pk){
+			echo '<option value="'.$table.'-'.$pk.'">'.$table.'</option>';
+	}
+	echo "</select>";
+	echo "<div id='col2' name='col2'></div>";
+	echo "</div></div></div>";
+	echo "<button class='button' type='submit' name='submit' value='add'>ADD</button>";
+	echo '</fieldset>';
+	echo "</form>";
+	
+	
+	
+	/********************************************************************/
 	
 	
 	function get_visible_tables($dbc){
