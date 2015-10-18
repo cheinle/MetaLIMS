@@ -1,5 +1,6 @@
 <?php
  	include('../database_connection.php');
+	include_once('../functions/white_list.php');
 	
 	$table_name = $_GET['table_name'];
 	$inputs= $_GET['inputs'];
@@ -15,10 +16,19 @@
 		$field_name = $res[0];
 		$field_value = $res[1];
 		
-		$fields = $fields.','.$field_name; //white list field names, if does not exist, throw error
-		$values = $values.','.$field_value;
-		$question_marks = $question_marks.',?';
 		
+		$valid_field_name = whiteList($field_name,'column');
+		
+		if($valid_field_name == 'true'){
+			$fields = $fields.','.$field_name; //white list field names, if does not exist, throw error
+			$values = $values.','.$field_value;
+			$question_marks = $question_marks.',?';
+		}
+		else{
+			header('HTTP/1.1 500 Internal Server Booboo');
+       		header('Content-Type: application/json; charset=UTF-8');
+        	die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
+		}
 	}	
 	
 	$fields = trim($fields,",");
@@ -28,7 +38,12 @@
 	echo "Fields:".$fields.'<br>';
 	echo "Val:".$values.'<br>';
 	echo "Questions Marks:".$question_marks.'<br>';
-	/*$stmt2 = $dbc -> prepare("INSERT INTO sample (sample_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+	$query1 = "INSERT INTO ".$table_name." (".$fields.") VALUES (";
+	$query2 = $question_marks.")";
+	$full_query = $query1.$query2;
+	echo $full_query;
+	$params = "";
+	$stmt2 = $dbc -> prepare($full_query);
 	if(!$stmt2){
 		$insert_check = 'false';
 		throw new Exception("Prepare Failure: Unable To Insert Into Main Sample Table");	
@@ -43,7 +58,7 @@
 			$rows_affected2 = $stmt2 ->affected_rows;
 			$stmt2 -> close();
 			if($rows_affected2 > 0){
-	*/
+	
 
 ?>
 

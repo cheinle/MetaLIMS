@@ -7,12 +7,15 @@
 		'daily_data2_particle_counter',
 		'drawer','freezer',
 		'freezer_drawer',
-		'number_of_submissions',
+		'number_of_seq_submissions',
 		'pooled_sample_lookup',
 		'project_name',
+		'read_submission',
 		'sample_read_submission',
 		'sample_sampler',
 		'sample_sequencing2',
+		'sample_type',
+		'sequencing2',
 		'storage_info',
 		'users'
          );	
