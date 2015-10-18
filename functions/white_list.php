@@ -102,8 +102,19 @@ function whiteList($name_check,$type){// Example string to test against
 							'seq_vol',
 							'seq_dna_conc',
 							'seq_id',
+							//from analysis,
+							'analysis_pipeline',
+							//from particle_counter
+							'part_sens_name',
+							'sensor_type',
+							'serial_num',
 							//from location table
 							'loc_name',
+							'address',
+							'loc_type',
+							'environmental_type',
+							'latitude',
+							'longitude',
 							//from sample_type table
 							'sample_type_name',
 							//from daily data and daily weather table
@@ -117,8 +128,10 @@ function whiteList($name_check,$type){// Example string to test against
 							'r_kit_name',
 							//from quant_instruments
 							'kit_name',
-							//from air_sampler
-							'air_sampler_name',
+							//from sampler
+							'sampler_name',
+							'serial_num',
+							'sampler_identifier',
 							'media_type',
 							//from storage_info
 							'original',
