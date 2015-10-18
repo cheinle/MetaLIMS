@@ -68,11 +68,10 @@
 		}
 		$stmt -> close();
 		
-		
-		foreach($freezer_drawers as $index => $value){
+		foreach($freezer_drawers as $freezer_name){
 			$freezer_drawer_query = "UPDATE freezer_drawer SET visible_flag = ? WHERE freezer_id = ? AND drawer_id = ?";
 			if($stmt_fd = $dbc ->prepare($freezer_drawer_query)){                 
-				$stmt_fd->bind_param('iss',$visibility,$freezer_id,$drawer_name);
+				$stmt_fd->bind_param('iss',$visibility,$freezer_name,$drawer_name);
 			    if($stmt_fd-> execute()){
 					$rows_affected_fd = $stmt_fd ->affected_rows;;
 					$stmt_fd -> close();
