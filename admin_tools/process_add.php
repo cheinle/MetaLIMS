@@ -7,9 +7,9 @@
 	print_r($inputs);
 	
 	$fields = '';
-	$values = '';
+	$values = array();
 	$question_marks = '';
-	$params = '';
+	$params = array();
 	foreach($inputs as $key => $value){
 
 		echo $value;
@@ -22,9 +22,9 @@
 		
 		if($valid_field_name == 'true'){
 			$fields = $fields.','.$field_name; //white list field names, if does not exist, throw error
-			$values = $values.','.$field_value;
+			$values[] = $field_value;
 			$question_marks = $question_marks.',?';
-			$params = $params.'s';
+			$params[] = 's';
 		}
 		else{
 			header('HTTP/1.1 500 Internal Server Booboo');
@@ -32,42 +32,63 @@
         	die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
 		}
 	}	
-	
+
+	/* Bind parameters. Types: s = string, i = integer, d = double,  b = blob */
+	/*http://www.pontikis.net/blog/dynamically-bind_param-array-mysqli*/
+	$a_param_type = array();
+	$a_bind_params = array();
+	$a_param_type = $params;
+	$a_bind_params = $values;
+	$a_params = array();
+	 
+	$param_type = '';
+	$n = count($a_param_type);
+	for($i = 0; $i < $n; $i++) {
+	  $param_type .= $a_param_type[$i];
+	}
+	 
+	/* with call_user_func_array, array params must be passed by reference */
+	$a_params[] = & $param_type;
+	 
+	for($i = 0; $i < $n; $i++) {
+	  /* with call_user_func_array, array params must be passed by reference */
+	  $a_params[] = & $a_bind_params[$i];
+	}
+
 	$fields = trim($fields,",");
-	$values = trim($values,",");
 	$question_marks = trim ($question_marks,",");	
-	
-	echo "Fields:".$fields.'<br>';
-	echo "Val:".$values.'<br>';
-	echo "Questions Marks:".$question_marks.'<br>';
+
 	$query1 = "INSERT INTO ".$table_name." (".$fields.") VALUES (";
 	$query2 = $question_marks.")";
 	$full_query = $query1.$query2;
-	echo $full_query;
 
-	//$stmt2 = $dbc -> prepare($full_query);
-	//if(!$stmt2){
-	//	header('HTTP/1.1 500 Internal Server Booboo');
-   //    	header('Content-Type: application/json; charset=UTF-8');
-   //     die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
-	//}
-	/*else{
-		 $stmt2 -> bind_param($params, $values);
-		 if(!$stmt2 -> execute()){
+	$stmt2 = $dbc -> prepare($full_query);
+	if(!$stmt2){
+		header('HTTP/1.1 500 Internal Server Booboo');
+       	header('Content-Type: application/json; charset=UTF-8');
+        die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
+	}
+	else{
+		
+		call_user_func_array(array($stmt2, 'bind_param'), $a_params);
+		print_r($a_params);
+		if(!$stmt2 -> execute()){
+			
 			header('HTTP/1.1 500 Internal Server Booboo');
        		header('Content-Type: application/json; charset=UTF-8');
         	die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
-		 }
+		}
 		else{
 			$rows_affected2 = $stmt2 ->affected_rows;
 			$stmt2 -> close();
+			echo "rows affected".$rows_affected2;
 			if($rows_affected2 < 1){
 				header('HTTP/1.1 500 Internal Server Booboo');
        			header('Content-Type: application/json; charset=UTF-8');
         		die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
 			}
 		}
-	}*/
+	}
 				
 				
 	
