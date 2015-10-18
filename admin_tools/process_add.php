@@ -4,15 +4,12 @@
 	
 	$table_name = $_GET['table_name'];
 	$inputs= $_GET['inputs'];
-	print_r($inputs);
-	
 	$fields = '';
 	$values = array();
 	$question_marks = '';
 	$params = array();
 	foreach($inputs as $key => $value){
 
-		echo $value;
 		$res = explode("-", $value);
 		$field_name = $res[0];
 		$field_value = $res[1];
@@ -81,11 +78,13 @@
 		else{
 			$rows_affected2 = $stmt2 ->affected_rows;
 			$stmt2 -> close();
-			echo "rows affected".$rows_affected2;
 			if($rows_affected2 < 1){
 				header('HTTP/1.1 500 Internal Server Booboo');
        			header('Content-Type: application/json; charset=UTF-8');
         		die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
+			}
+			else{
+				echo "Success!";
 			}
 		}
 	}
