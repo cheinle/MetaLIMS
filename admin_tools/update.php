@@ -11,12 +11,12 @@ include ('table_exclude_list.php');
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Add</title>
+		<title>Update</title>
 	</head>
  
 	<body>
 		<div class="page-header">
-	    <h3>Add</h3>
+	    <h3>Update</h3>
 		</div>
 		
 		<script type="text/javascript">
@@ -25,7 +25,7 @@ include ('table_exclude_list.php');
                 $('#table').change(function(){ //on change event
                 var table_value = $('#table').val(); //<----- get the value from the parent select 
                 $.ajax({
-                    url     : root+'admin_tools/dynamically_create_add_form.php', //the url you are sending datas to which will again send the result
+                    url     : root+'admin_tools/dynamically_create_update_form.php', //the url you are sending datas to which will again send the result
                     type    : 'GET', //type of request, GET or POST
                     data    : { table_value: table_value}, //Data you are sending
                     success : function(data){$('#col').html(data)}, // On success, it will populate the 2nd select
