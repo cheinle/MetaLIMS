@@ -1,5 +1,5 @@
 <?php
- 	include('database_connection.php');
+ 	include('../database_connection.php');
 	
 	$table_name = $_GET['table_value'];
 	$field_value = $_GET['field_value'];
@@ -18,23 +18,21 @@
 	       		header('Content-Type: application/json; charset=UTF-8');
 	        	die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
 			}else{
-				echo "Success!";
+				
 				
 				//if you are changing the visibility of a drawer, change the visibility of freezer_drawer
-				//you have to select and grab all of the correct fields
-				//the visible field must be named something else
 				if($table_name == 'drawer'){
 					 $update_freezer_drawer = change_freezer_drawer_visibility($dbc,$field_value,$visibility);
 					 if($update_freezer_drawer == 'false'){
 					 	header('HTTP/1.1 500 Internal Server Booboo');
        					header('Content-Type: application/json; charset=UTF-8');
         				die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
+					 }else{
+					 	echo "Success!";
 					 }
+				}else{
+					echo "Success!";
 				}
-				
-				
-				
-				//////////////////////////////////////////////////////////////////////////////////////////
 			}
 		}
 		else{
@@ -73,7 +71,7 @@
 			if($stmt_fd = $dbc ->prepare($freezer_drawer_query)){                 
 				$stmt_fd->bind_param('iss',$visibility,$freezer_name,$drawer_name);
 			    if($stmt_fd-> execute()){
-					$rows_affected_fd = $stmt_fd ->affected_rows;;
+					$rows_affected_fd = $stmt_fd ->affected_rows;
 					$stmt_fd -> close();
 					if($rows_affected_fd < 0){
 						$updated_check = 'false';

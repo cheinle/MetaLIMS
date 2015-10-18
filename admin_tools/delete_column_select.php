@@ -1,5 +1,5 @@
 <?php
- 	include('database_connection.php');
+ 	include('../database_connection.php');
 	
 	$table_name = $_GET['table_value'];
 	$visible = '';

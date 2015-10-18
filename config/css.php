@@ -465,6 +465,7 @@ form.registration legend{
   font-size:18px;
   padding:10px 4px 0px 4px;
   margin-left:10px;
+  width: 90%;
 }
 
 form.registration label.textbox-label,label.password-label{

@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Add Drawers</title>
+<title>Alter Freezers/Drawers</title>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 </head>
@@ -11,7 +11,7 @@
 <?php include('../index.php'); ?>
 <?php include('../functions/dropDown.php'); ?>
 <div class="page-header">
-<h3>Add Drawers</h3>	
+<h3>Alter Freezers/Drawers</h3>	
 </div>
 <?php 	
 		$submitted = 'false';
@@ -190,10 +190,59 @@
 <form class="registration" action="add_drawers.php" method="GET">
 	<p><i>* = required field   + = required only for update</i></p>
 	<div class="container-fluid">
-	<fieldset>
-	<div class="row">
-	<LEGEND><b>Option 1: Add Drawer To Freezer:</b></LEGEND>
+
+ 	<!---------------------------------------Freezer-------------------------------------->
+  	<div class="row">
+	<LEGEND><b>Option 1: Add New Drawer:</b></LEGEND>
 	
+  	<div class="col-xs-6">
+	<!--Drawer Name-->
+	<p>
+	<label class="textbox-label">New Drawer Name:*</label>
+	<input type="text" name="newDrawer" class="fields" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_drawer;} ?>">
+	</p>
+	
+	<!--Old Drawer Name-->
+	<p>
+	<label class="textbox-label">Old Drawer Name:+</label>
+	<?php dropDown('drawer', 'drawer', 'drawer_id','drawer_id',$submitted);?></p></p>
+	</div><!--end of class = 'col-xs-6'-->
+	</div><!--end of row-->
+	<!----------------------------------------------------------------------------->
+	
+	
+	
+	
+	
+	<!---------------------------------------Drawer-------------------------------------->
+	<div class="row">
+	<LEGEND><b>Option 2: Add New Drawer:</b></LEGEND>
+  	<div class="col-xs-6">
+	<!--Freezer Name-->
+	<p>
+	<label class="textbox-label">New Freezer Name:*</label>
+	<input type="text" name="freezer" class="fields" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_freezer;} ?>">
+	</p>
+	
+	<!--Old Freezer Name-->
+	<p>
+	<label class="textbox-label">Old Freezer Name:+</label>
+	<?php dropDown('freezer', 'freezer', 'freezer_id','freezer_id',$submitted);?>	
+	</div><!--end of class = 'col-xs-6'-->
+	</div><!--end of row-->
+	
+	
+
+	<!----------------------------------------------------------------------------------------->
+	
+	
+	
+	
+	
+	
+	<!---------------------------------------Drawer Freezer-------------------------------------->
+	<div class="row">
+	<LEGEND><b>Option 3: Add Drawer To Freezer:</b></LEGEND>
   	<div class="col-xs-6">
   		
   	<!--Freezer To Add Drawer To-->
@@ -206,35 +255,17 @@
 	<p>
   	<?php dropDown('drawer', 'drawer', 'drawer_id','drawer_id',$submitted);?>
   	</p>
- 
   	
   	</div><!--end col-xs-6-->
-  	<button class="button" type="submit" name="submit" value="add_first"> Add </button>
  	</div><!--end row-->
  	
-  	<div class="row">
-	<LEGEND><b>Option 2: Add New Drawer:</b></LEGEND>
-	
-  	<div class="col-xs-6">
-	<!--Drawer Name-->
-	<p>
-	<label class="textbox-label">New Drawer Name:*</label>
-	<input type="text" name="newDrawer" class="fields" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_drawer;} ?>">
-	</p>
-	
-	<!--Old Drawer Name-->
-	<p>
-	<label class="textbox-label">Old Drawer Name:+</label>
-	<input type="text" name="oldDrawer" class="fields" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_oldDrawer;} ?>">
-	</p>
-	</div><!--end of class = 'col-xs-6'-->
-
+ 	
 	<!--submit button-->
 	<button class="button" type="submit" name="submit" value="add_second"> Add </button>
 	<button class="button" type="submit" name="submit" value="update">Update</button>
 	<input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" />
+	<!----------------------------------------------------------------------------------------->
 	
-	</div><!--end of class = 'row'-->
 	</fieldset>
 	</div><!--end of class = 'container-fluid'-->
 </form>

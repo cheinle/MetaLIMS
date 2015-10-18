@@ -1,8 +1,8 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include ('database_connection.php');
-include ('index.php');
+include ('../database_connection.php');
+include ('../index.php');
 
 
 ?>
@@ -27,7 +27,7 @@ include ('index.php');
 		       	table_value = split[0];
 		       	var visible = 'invisible';
                 $.ajax({
-                    url     : root+'delete_column_select.php', //the url you are sending datas to which will again send the result
+                    url     : root+'admin_tools/delete_column_select.php', //the url you are sending datas to which will again send the result
                     type    : 'GET', //type of request, GET or POST
                     data    : { table_value: table_value, visible: visible}, //Data you are sending
                     success : function(data){$('#col').html(data)}, // On success, it will populate the 2nd select
@@ -46,7 +46,7 @@ include ('index.php');
 		       	table_value = split[0];
 		       	var visible = 'visible';
                 $.ajax({
-                    url     : root+'delete_column_select.php', //the url you are sending datas to which will again send the result
+                    url     : root+'admin_tools/delete_column_select.php', //the url you are sending datas to which will again send the result
                     type    : 'GET', //type of request, GET or POST
                     data    : { table_value: table_value, visible: visible}, //Data you are sending
                     success : function(data){$('#col2').html(data)}, // On success, it will populate the 2nd select
@@ -83,7 +83,7 @@ include ('index.php');
 			
 					        // process the form
 					       $.ajax({
-			                    url     : root+'process_visibility_change.php', //the url you are sending datas to which will again send the result
+			                    url     : root+'admin_tools/process_visibility_change.php', //the url you are sending datas to which will again send the result
 			                    async: false,
 			                    type    : 'GET', //type of request, GET or POST
 			                    data    : { table_value: table_value, field_value: field_value, pk:pk, visible:visible}, //Data you are sending
@@ -109,7 +109,7 @@ include ('index.php');
 			
 					        // process the form
 					       $.ajax({
-			                    url     : root+'process_visibility_change.php', //the url you are sending datas to which will again send the result
+			                    url     : root+'admin_tools/process_visibility_change.php', //the url you are sending datas to which will again send the result
 			                    async: false,
 			                    type    : 'GET', //type of request, GET or POST
 			                    data    : { table_value: table_value, field_value: field_value, pk:pk, visible:visible}, //Data you are sending
