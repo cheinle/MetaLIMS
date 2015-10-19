@@ -68,7 +68,6 @@
 	else{
 		
 		call_user_func_array(array($stmt2, 'bind_param'), $a_params);
-		print_r($a_params);
 		if(!$stmt2 -> execute()){
 			
 			header('HTTP/1.1 500 Internal Server Booboo');
