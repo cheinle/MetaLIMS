@@ -6,15 +6,20 @@
 	
 	$columns_query = "SHOW COLUMNS FROM ".$table_name;
 		$col_res = mysqli_query($dbc,$columns_query);
+		$pk = '';
+		$counter = 0;
 		while($column = mysqli_fetch_array($col_res)){
-			
+			$counter++;
+			if($counter == 1){
+				$pk = $column[0]; //assume that the primary key is the first input
+			}
 
 			if($column[0] != 'visible'){ //don't display visible flags
 				echo '<p>';
 				echo '<label class="textbox-label">'.$column[0].':</label>';
 				
 				//whitelist column and tablename?
-				$query = "SELECT ".$column[0]." FROM ".$table_name." WHERE ".$column[0]." = ?";
+				$query = "SELECT ".$column[0]." FROM ".$table_name." WHERE ".$pk." = ?";
 				if($stmt1 = $dbc->prepare($query)){
 					$stmt1 -> bind_param('s',$entry_name);
 		  			if ($stmt1->execute()){

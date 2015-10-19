@@ -65,6 +65,7 @@ include ('table_exclude_list.php');
 			 var input_values = [];
              var txt = "";
              var valid = 'true';
+             var pk = inputs[0].getAttribute("name"); //assume that your primary key is the first input
              for (var i = 0; i < inputs.length; i++) {
                  txt = inputs[i].value;
              
@@ -82,18 +83,17 @@ include ('table_exclude_list.php');
 				 }
 			  }
 			  if(valid == 'true'){
-			  	alert(input_values);
 			   // process the form
 			       $.ajax({
-	                    url     : root+'admin_tools/process_add.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'admin_tools/process_update.php', //the url you are sending datas to which will again send the result
 	                    async: false,
 	                    type    : 'GET', //type of request, GET or POST
-	                    data    : { table_name: table_name, inputs: input_values}, //Data you are sending
+	                    data    : { table_name: table_name, inputs: input_values, pk: pk}, //Data you are sending
 	                    success : function(data){alert(data)}, // On success, it will populate the 2nd select
 	                    error   : function(){alert('A Submission Error Has Occurred')} //error message,
 	                }) 
 			  }else{
-			  	    alert("ERROR: Please Fill In All Invisible Fields");
+			  	    alert("ERROR: Please Fill In All Fields");
 			   	    event.preventDefault();
 			  }
 		    });
@@ -102,7 +102,7 @@ include ('table_exclude_list.php');
 	<?php
 	
 	
-	echo '<form  class="registration" action="add.php" method="GET">';
+	echo '<form  class="registration" action="update.php" method="GET">';
 	echo '<fieldset>';
 	echo '<LEGEND><b>Choose Table And Entry To Update: </b></LEGEND>';
 	echo '<div class="container-fluid">';
@@ -126,7 +126,7 @@ include ('table_exclude_list.php');
 	echo "</div>";
 	echo "<div id='col2' name='col2'></div>";
 	echo "</div></div></div>";
-	echo "<button class='button' type='submit' name='submit' value='add'>ADD</button>";
+	echo "<button class='button' type='submit' name='submit' value='update'>Update</button>";
 	echo '</fieldset>';
 	echo "</form>";
 	

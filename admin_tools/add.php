@@ -66,7 +66,6 @@ include ('table_exclude_list.php');
 				 }
 			  }
 			  if(valid == 'true'){
-			  	alert(input_values);
 			   // process the form
 			       $.ajax({
 	                    url     : root+'admin_tools/process_add.php', //the url you are sending datas to which will again send the result
@@ -77,7 +76,7 @@ include ('table_exclude_list.php');
 	                    error   : function(){alert('A Submission Error Has Occurred')} //error message,
 	                }) 
 			  }else{
-			  	    alert("ERROR: Please Fill In All Invisible Fields");
+			  	    alert("ERROR: Please Fill In All Fields");
 			   	    event.preventDefault();
 			  }
 		    });
