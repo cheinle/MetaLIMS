@@ -25,16 +25,32 @@ include ('table_exclude_list.php');
                 $('#table').change(function(){ //on change event
                 var table_value = $('#table').val(); //<----- get the value from the parent select 
                 $.ajax({
-                    url     : root+'admin_tools/dynamically_create_update_form.php', //the url you are sending datas to which will again send the result
+                    url     : root+'admin_tools/select_entries_for_update.php', //the url you are sending datas to which will again send the result
                     type    : 'GET', //type of request, GET or POST
                     data    : { table_value: table_value}, //Data you are sending
-                    success : function(data){$('#col').html(data)}, // On success, it will populate the 2nd select
+                    success : function(data){$('#entry').html(data)}, // On success, it will populate the 2nd select
                     error   : function(){alert('An Error Has Occurred')} //error message
                 })
+              })
 
 			});
 			
-		});
+			
+			$(document).ready(function(){  
+			 $('#entry').change(function(){ //on change event
+                var entry_value = $('#entry').val(); //<----- get the value from the parent select 
+                var table_value = $('#table').val();
+                $.ajax({
+                    url     : root+'admin_tools/dynamically_create_update_form.php', //the url you are sending datas to which will again send the result
+                    type    : 'GET', //type of request, GET or POST
+                    data    : { entry_value: entry_value, table_value: table_value}, //Data you are sending
+                    success : function(data){$('#col2').html(data)}, // On success, it will populate the 2nd select
+                    error   : function(){alert('An Error Has Occurred')} //error message
+                })
+               })
+			});
+			
+	
 		
 
 		// submit form
@@ -88,7 +104,7 @@ include ('table_exclude_list.php');
 	
 	echo '<form  class="registration" action="add.php" method="GET">';
 	echo '<fieldset>';
-	echo '<LEGEND><b>Choose Table To Add To: </b></LEGEND>';
+	echo '<LEGEND><b>Choose Table And Entry To Update: </b></LEGEND>';
 	echo '<div class="container-fluid">';
   	echo '<div class="row">';
   	echo '<div class="col-xs-6">';
@@ -102,7 +118,13 @@ include ('table_exclude_list.php');
 	}
 	echo "</select>";
 	
-	echo "<div id='col' name='col'></div>";
+	echo "<div id='col' name='col'>";
+	echo "<label class='textbox-label'>Entry To Update:</label>";
+	echo "<select id='entry' name='entry'>";
+	echo "<option value='0'>-Select-</option>";
+	echo "</select>";
+	echo "</div>";
+	echo "<div id='col2' name='col2'></div>";
 	echo "</div></div></div>";
 	echo "<button class='button' type='submit' name='submit' value='add'>ADD</button>";
 	echo '</fieldset>';
