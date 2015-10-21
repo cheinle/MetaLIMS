@@ -166,6 +166,7 @@ function whiteList($name_check,$type){// Example string to test against
 							'record_source',
 							//from users
 							'first_name',
+							'last_name',
 							'user_id',
 							//from read_submission
 							'subm_id',

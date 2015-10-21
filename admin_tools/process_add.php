@@ -58,7 +58,7 @@
 	$query1 = "INSERT INTO ".$table_name." (".$fields.") VALUES (";
 	$query2 = $question_marks.")";
 	$full_query = $query1.$query2;
-
+	
 	$stmt2 = $dbc -> prepare($full_query);
 	if(!$stmt2){
 		header('HTTP/1.1 500 Internal Server Booboo');
@@ -77,10 +77,13 @@
 		else{
 			$rows_affected2 = $stmt2 ->affected_rows;
 			$stmt2 -> close();
-			if($rows_affected2 < 1){
+			if($rows_affected2 < 0){
 				header('HTTP/1.1 500 Internal Server Booboo');
        			header('Content-Type: application/json; charset=UTF-8');
         		die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
+			}
+			elseif($rows_affected2 == 0){
+				echo "Value Already Exists. Please Check Entry";
 			}
 			else{
 				echo "Success!";
