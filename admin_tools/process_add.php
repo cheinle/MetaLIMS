@@ -69,7 +69,7 @@
 		
 		call_user_func_array(array($stmt2, 'bind_param'), $a_params);
 		if(!$stmt2 -> execute()){
-			
+			 
 			header('HTTP/1.1 500 Internal Server Booboo');
        		header('Content-Type: application/json; charset=UTF-8');
         	die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
