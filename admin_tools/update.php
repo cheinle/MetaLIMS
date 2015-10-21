@@ -58,6 +58,10 @@ include ('table_exclude_list.php');
 		
 		    // process the form
 		    $('form').submit(function(event) {
+		    	
+		     //grab the original primary key value which is in a hidden input
+		      var original_value = document.getElementById("original").value;
+		      alert(original_value);
 			  
 			  //check that all of the fields are populated
 			 var table_name = $('#table').val()
@@ -71,6 +75,10 @@ include ('table_exclude_list.php');
              
                  
                  var name = inputs[i].getAttribute("name");
+                 var type = inputs[i].getAttribute("type");
+                 if(type == 'hidden'){
+                 	continue;
+                 }
                  
  				 var n = txt.length;
  				 var new_txt = name+'-'+txt;
@@ -88,7 +96,7 @@ include ('table_exclude_list.php');
 	                    url     : root+'admin_tools/process_update.php', //the url you are sending datas to which will again send the result
 	                    async: false,
 	                    type    : 'GET', //type of request, GET or POST
-	                    data    : { table_name: table_name, inputs: input_values, pk: pk}, //Data you are sending
+	                    data    : { table_name: table_name, inputs: input_values, pk: pk, original_value: original_value}, //Data you are sending
 	                    success : function(data){alert(data)}, // On success, it will populate the 2nd select
 	                    error   : function(){alert('A Submission Error Has Occurred')} //error message,
 	                }) 
@@ -100,7 +108,6 @@ include ('table_exclude_list.php');
 		});
 	</script>
 	<?php
-	
 	
 	echo '<form  class="registration" action="update.php" method="GET">';
 	echo '<fieldset>';

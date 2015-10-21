@@ -8,13 +8,14 @@
 		$col_res = mysqli_query($dbc,$columns_query);
 		$pk = '';
 		$counter = 0;
+		$store_original_value = '';
 		while($column = mysqli_fetch_array($col_res)){
 			$counter++;
 			if($counter == 1){
 				$pk = $column[0]; //assume that the primary key is the first input
 			}
 
-			if($column[0] != 'visible'){ //don't display visible flags
+			if($column[0] != 'visible' && $column[0] != 'password' && $column[0] != 'session_id' && $column[0] != 'time' && $column[0] !='status' && $column[0] != 'pkey' ){ //don't display visible flags
 				echo '<p>';
 				echo '<label class="textbox-label">'.$column[0].':</label>';
 				
@@ -26,6 +27,9 @@
 		    			$stmt1->bind_result($value);
 		    			if ($stmt1->fetch()){
 							echo '<input type="text" name="'.$column[0].'" value="'.$value.'">';
+							if($counter == 1){
+								$store_original_value =  $value;
+							}
 							
 						}else{
 							echo '<input type="text" name="'.$column[0].'" value="">';
@@ -47,8 +51,10 @@
 
 			}
 	       	echo '</p>';
+	       	
+			
 		}
-	
-
+		echo '<input type="hidden"  name="original" id = "original" value="'.$store_original_value.'">';
+		//style="visibility:hidden"
 ?>
 

@@ -138,9 +138,8 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="'.$root.'admin_tools/update_freezer_drawers.php">Add Freezer/Drawer</a></li>
 						<li><a href="'.$root.'admin_tools/add_sample_type.php">Add Sample Type</a></li>
-						<li><a href="'.$root.'admin_tools/add_quant_instrument.php">Add Instrument Used To Quantify DNA/RNA</a></li>
 						<li><a href="'.$root.'admin_tools/update_proj_name.php">Add Project Name</a></li>
-						<li><a href="'.$root.'admin_tools/add_delete_users.php">Add Users</a></li>
+						<li><a href="'.$root.'admin_tools/add_users.php">Add Users</a></li>
 						<li><a href="'.$root.'admin_tools/add.php">Add Entries</a></li>
 						<li><a href="'.$root.'admin_tools/update.php">Update Entries</a></li>
 						<li><a href="'.$root.'admin_tools/delete.php">Delete Entries</a></li>

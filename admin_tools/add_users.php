@@ -14,6 +14,8 @@
 <h3>Add/Delete Users</h3>	
 </div>
 <?php 	
+
+		unset($_SESSION['orig_update_value']); 
 		$submitted = 'false';
 		//error checking 
 		if(isset($_GET['submit'])){
@@ -84,39 +86,7 @@
 						echo 'You Added A New User: '.$p_UserID.'. Please Have User Use Reset Password Feature To Set Password<br>';
 						$submitted = 'true';
 					}else{
-						echo 'An Error Has Occured';
-						mysqli_error($dbc);
-					}
-				}
-				
-				
-				if($_GET['submit'] == 'delete'){
-					$not_visible = 0; //not visible
-					//update name into db
-					$set_query = 'UPDATE users SET visible = ? WHERE user_id = ? AND first_name =? AND last_name = ?';
-					if($set_stmt = $dbc ->prepare($set_query)) {                 
-	                	$set_stmt->bind_param('isss',$not_visible,$p_UserID,$p_firstName,$p_lastName);
-				
-	                    if($set_stmt -> execute()){
-							$set_rows_affected = $set_stmt ->affected_rows;
-						
-							$set_stmt -> close();
-							if($set_rows_affected >= 0){
-								echo "You Deleted User Name: ".$p_UserID.'<br>';
-								$submitted = 'true';
-							}
-							else{	
-								echo 'An Error Has Occured';
-								mysqli_error($dbc);
-							}
-						}
-						else{
-							echo 'An Error Has Occured';
-							mysqli_error($dbc);
-						}
-					}
-					else{
-						echo 'An Error Has Occured';
+						echo 'An Error Has Occurred';
 						mysqli_error($dbc);
 					}
 				}
@@ -125,7 +95,7 @@
 	?>
 
 <form class="registration" action="add_delete_users.php" method="GET">
-	<p><i>* = required field   + = required only for update</i></p>
+	<p><i>* = required field</i></p>
 	<div class="container-fluid">
 	<fieldset>
 	<div class="row">
@@ -136,25 +106,24 @@
 	<!--User Name-->
 	<p>
 	<label class="textbox-label">User ID:*</label>
-	<input type="text" name="UserID" class="fields" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_UserID;} ?>">
+	<input type="text" name="UserID" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_UserID;} ?>">
 	</p>
 	
 	<p>
 	<label class="textbox-label">First Name:*</label>
-	<input type="text" name="firstName" class="shrtfields" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_firstName;} ?>">
+	<input type="text" name="firstName" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_firstName;} ?>">
 	</p>
 	
 	
 	<p>
 	<label class="textbox-label">Last Name:*</label>
-	<input type="text" name="lastName" class="shrtfields" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_lastName;} ?>">
+	<input type="text" name="lastName" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_lastName;} ?>">
 	</p>
 
 	</div><!--end of class = 'col-xs-6'-->
 
 	<!--submit button-->
 	<button class="button" type="submit" name="submit" value="add"> Add </button>
-	<button class="button" type="submit" name="submit" value="delete">Delete</button>
 	<input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" />
 	
 	</div><!--end of class = 'row'-->

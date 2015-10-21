@@ -6,10 +6,12 @@
 	$inputs= $_GET['inputs'];
 	print_r($inputs);
 	$pk = $_GET['pk'];
-	
+	$original_value = $_GET['original_value'];
+	$orig_value = explode("-", $original_value);
+	$original_value = $orig_value[0];
+
 	$fields = '';
 	$values = array();
-	$question_marks = '';
 	$pk_value = '';
 	$params = array();
 	foreach($inputs as $key => $value){
@@ -24,12 +26,8 @@
 		if($valid_field_name == 'true'){
 			$fields = $fields.$field_name.'= ?,'; //white list field names, if does not exist, throw error
 			$values[] = $field_value;
-			$question_marks = $question_marks.',?';
 			$params[] = 's';
-			
-			if($field_name == $pk){
-				$pk_value = $field_value;
-			}
+
 		}
 		else{
 			header('HTTP/1.1 500 Internal Server Booboo');
@@ -38,7 +36,8 @@
 		}
 	}	
 	$params[] = 's'; //one more for pk
-	$values[] = $pk_value; //for pk  
+
+	$values[] = $original_value; //original value for pk 
 	
 	/* Bind parameters. Types: s = string, i = integer, d = double,  b = blob */
 	/*http://www.pontikis.net/blog/dynamically-bind_param-array-mysqli*/
@@ -63,18 +62,14 @@
 	}
 
 	$fields = trim($fields,",");
-	$question_marks = trim ($question_marks,",");	
-
 
 	$query1 = 'UPDATE '.$table_name.' SET '; 
-	//$query2 = 'time_stamp = ?';
 	$query2 = $fields;
 	$query3 = 'WHERE '.$pk.' = ?';
 
 	$full_query = $query1.$query2.' '.$query3;
 	echo $full_query;
 	
-
 
 	$stmt2 = $dbc -> prepare($full_query);
 	if(!$stmt2){
@@ -83,7 +78,7 @@
         die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
 	}
 	else{
-		
+		print_r($a_params);
 		call_user_func_array(array($stmt2, 'bind_param'), $a_params);
 		if(!$stmt2 -> execute()){
 			

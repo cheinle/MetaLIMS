@@ -16,8 +16,7 @@
 		'sample_sequencing2',
 		'sample_type',
 		'sequencing2',
-		'storage_info',
-		'users'
+		'storage_info'
          );	
 		 if (in_array($value, $list)) {
     		return true;
