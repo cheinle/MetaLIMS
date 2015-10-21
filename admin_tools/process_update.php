@@ -4,7 +4,6 @@
 	
 	$table_name = $_GET['table_name'];
 	$inputs= $_GET['inputs'];
-	print_r($inputs);
 	$pk = $_GET['pk'];
 	$original_value = $_GET['original_value'];
 	$orig_value = explode("-", $original_value);
@@ -68,8 +67,6 @@
 	$query3 = 'WHERE '.$pk.' = ?';
 
 	$full_query = $query1.$query2.' '.$query3;
-	echo $full_query;
-	
 
 	$stmt2 = $dbc -> prepare($full_query);
 	if(!$stmt2){
@@ -78,7 +75,6 @@
         die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
 	}
 	else{
-		print_r($a_params);
 		call_user_func_array(array($stmt2, 'bind_param'), $a_params);
 		if(!$stmt2 -> execute()){
 			

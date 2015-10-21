@@ -61,7 +61,6 @@ include ('table_exclude_list.php');
 		    	
 		     //grab the original primary key value which is in a hidden input
 		      var original_value = document.getElementById("original").value;
-		      alert(original_value);
 			  
 			  //check that all of the fields are populated
 			 var table_name = $('#table').val()
