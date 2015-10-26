@@ -16,8 +16,15 @@
 			}
 
 			if($column[0] != 'visible' && $column[0] != 'password' && $column[0] != 'session_id' && $column[0] != 'time' && $column[0] !='status' && $column[0] != 'pkey' ){ //don't display visible flags
+				
+				$pieces = explode('_',$column[0]);
+				$new_label_name = '';
+				foreach($pieces as $name_piece){
+					$name_piece = ucfirst($name_piece);
+					$new_label_name = $new_label_name.' '.$name_piece;
+				}
 				echo '<p>';
-				echo '<label class="textbox-label">'.$column[0].':</label>';
+				echo '<label class="textbox-label">'.$new_label_name.':</label>';
 				
 				//whitelist column and tablename?
 				$query = "SELECT ".$column[0]." FROM ".$table_name." WHERE ".$pk." = ?";

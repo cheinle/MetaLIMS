@@ -1,6 +1,7 @@
 <?php 
-	function check_exclude_list($value){ 
+	function check_exclude_list($value,$type){ //type = 'add', 'update','delete' 
 		include ('../database_connection.php');
+		
 		$list = array(
 		'sample',
 		'daily_data2',
@@ -18,6 +19,10 @@
 		'sequencing2',
 		'storage_info'
          );	
+		 
+		 if($type == 'add'){
+		 	array_push($list,'users');
+		 }
 		 if (in_array($value, $list)) {
     		return true;
 		}

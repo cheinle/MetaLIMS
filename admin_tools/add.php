@@ -116,7 +116,7 @@ include ('table_exclude_list.php');
 			$columns_query = "SHOW COLUMNS FROM ".$table[0];
 			$col_res = mysqli_query($dbc,$columns_query);
   			while($column = mysqli_fetch_array($col_res)){
-					$exclude_table_name = check_exclude_list($table[0]);
+					$exclude_table_name = check_exclude_list($table[0],'add');
 					if($exclude_table_name == false){
 						$pk_query = "SHOW KEYS FROM ".$table[0]." WHERE Key_name = 'PRIMARY'";
 						$pk_res = mysqli_query($dbc,$pk_query);
