@@ -11,7 +11,7 @@
 <?php include('../index.php'); ?>
 <?php include('../functions/dropDown.php'); ?>
 <div class="page-header">
-<h3>Alter Freezers/Drawers</h3>	
+<h3>Add Freezers/Drawers</h3>	
 </div>
 <script type="text/javascript">
 			$(document).ready(function(){  

@@ -21,6 +21,8 @@
 		 
 		 if($type == 'add'){
 		 	array_push($list,'users');
+			array_push($list,'freezer');
+			array_push($list,'drawer');
 		 }
 		 if (in_array($value, $list)) {
     		return true;
