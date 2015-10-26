@@ -13,6 +13,23 @@
 <div class="page-header">
 <h3>Alter Freezers/Drawers</h3>	
 </div>
+<script type="text/javascript">
+			$(document).ready(function(){  
+				               
+                $('#update_type').change(function(){ //on change event
+                var type = $('#update_type').val(); //<----- get the value from the parent select 
+                $.ajax({
+                    url     : root+'admin_tools/select_freezer_drawer_update_type.php', //the url you are sending datas to which will again send the result
+                    type    : 'GET', //type of request, GET or POST
+                    data    : { type: type}, //Data you are sending
+                    success : function(data){$('#type').html(data)}, // On success, it will populate the 2nd select
+                    error   : function(){alert('An Error Has Occurred')} //error message
+                })
+
+			});
+			
+		});
+</script>
 <?php 	
 		$submitted = 'false';
 		//error checking 
@@ -176,93 +193,29 @@
 								}
 							}
 						}
-			}
-			
-			
-			
-			
-			
-			
-			
+			}	
 			
 	?>
 
 <form class="registration" action="add_drawers.php" method="GET">
-	<p><i>* = required field   + = required only for update</i></p>
-	<div class="container-fluid">
-
- 	<!---------------------------------------Freezer-------------------------------------->
-  	<div class="row">
-	<LEGEND><b>Option 1: Add New Drawer:</b></LEGEND>
 	
-  	<div class="col-xs-6">
-	<!--Drawer Name-->
+	
 	<p>
-	<label class="textbox-label">New Drawer Name:*</label>
-	<input type="text" name="newDrawer" class="fields" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_drawer;} ?>">
+	<label class="textbox-label">Select Update Type:</label>
+	<select id='update_type' name='update_type'>
+	<option value='0'>-Select-</option>
+	<option value='drawer'>Add Drawers</option>
+	<option value='freezer'>Add Freezers</option>
+	<option value='freezer_drawer'>Connect Drawers To Freezers</option>
+	</select>
 	</p>
 	
-	<!--Old Drawer Name-->
-	<p>
-	<label class="textbox-label">Old Drawer Name:+</label>
-	<?php dropDown('drawer', 'drawer', 'drawer_id','drawer_id',$submitted);?></p></p>
-	</div><!--end of class = 'col-xs-6'-->
-	</div><!--end of row-->
-	<!----------------------------------------------------------------------------->
+	<div id = "type"></div>
 	
-	
-	
-	
-	
-	<!---------------------------------------Drawer-------------------------------------->
-	<div class="row">
-	<LEGEND><b>Option 2: Add New Drawer:</b></LEGEND>
-  	<div class="col-xs-6">
-	<!--Freezer Name-->
-	<p>
-	<label class="textbox-label">New Freezer Name:*</label>
-	<input type="text" name="freezer" class="fields" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_freezer;} ?>">
-	</p>
-	
-	<!--Old Freezer Name-->
-	<p>
-	<label class="textbox-label">Old Freezer Name:+</label>
-	<?php dropDown('freezer', 'freezer', 'freezer_id','freezer_id',$submitted);?>	
-	</div><!--end of class = 'col-xs-6'-->
-	</div><!--end of row-->
-	
-	
-
-	<!----------------------------------------------------------------------------------------->
-	
-	
-	
-	
-	
-	
-	<!---------------------------------------Drawer Freezer-------------------------------------->
-	<div class="row">
-	<LEGEND><b>Option 3: Add Drawer To Freezer:</b></LEGEND>
-  	<div class="col-xs-6">
-  		
-  	<!--Freezer To Add Drawer To-->
-	<label class="textbox-label">Pick A Freezer:</label>
-	<p>
-	<?php dropDown('freezer', 'freezer', 'freezer_id','freezer_id',$submitted);?>	
-	</p>
-  	
-  	<label class="textbox-label">Pick A Drawer:</label>
-	<p>
-  	<?php dropDown('drawer', 'drawer', 'drawer_id','drawer_id',$submitted);?>
-  	</p>
-  	
-  	</div><!--end col-xs-6-->
- 	</div><!--end row-->
  	
  	
 	<!--submit button-->
-	<button class="button" type="submit" name="submit" value="add_second"> Add </button>
-	<button class="button" type="submit" name="submit" value="update">Update</button>
+	<button class="button" type="submit" name="submit" value="submit">Submit</button>
 	<input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" />
 	<!----------------------------------------------------------------------------------------->
 	
