@@ -22,12 +22,66 @@
                     url     : root+'admin_tools/select_freezer_drawer_update_type.php', //the url you are sending datas to which will again send the result
                     type    : 'GET', //type of request, GET or POST
                     data    : { type: type}, //Data you are sending
-                    success : function(data){$('#type').html(data)}, // On success, it will populate the 2nd select
+                    success : function(data){$('#type').html(data)}, 
                     error   : function(){alert('An Error Has Occurred')} //error message
                 })
 
 			});
 			
+		});
+		// submit form
+		$(document).ready(function() {
+		
+		    // process the form
+		    $('form').submit(function(event) {
+		    	
+			  
+			  //check that all of the fields are populated
+			 var type = $('#update_type').val();
+			 var inputs = document.getElementsByTagName("input");
+             var txt = "";
+             var valid = 'true';
+             for (var i = 0; i < inputs.length; i++) {
+                 txt = inputs[i].value;
+                 var name = inputs[i].getAttribute("name");
+ 				 var n = txt.length;
+	             if(n == 0){
+	             	valid = 'false';
+	             	inputs[i].style.background = "blue";
+				 }else{
+				 	inputs[i].style.background = "white";
+				 }
+			 }
+			 
+			 //check selects are selected for required data
+			var selects = document.getElementsByTagName("select");
+            var i2;
+            for (i2 = 0; i2 < selects.length; i2++) {
+                 selected = selects[i2].value;
+                 var name2 = selects[i2].getAttribute("name");
+	             if(selected == '0'){
+	                 selects[i2].style.background = "blue";
+	                 valid = 'false';
+	             }
+	             else{
+	                 selects[i2].style.background = "white";
+	             }
+			}
+			if(valid == 'true'){
+			   // process the form
+			       $.ajax({
+	                    url     : root+'admin_tools/process_freezer_drawer_update.php', //the url you are sending datas to which will again send the result
+	                    async: false,
+	                    type    : 'GET', //type of request, GET or POST
+	                    data    : { type: type}, //Data you are sending
+	                    success : function(data){alert(data)}, // 
+	                    error   : function(){alert('A Submission Error Has Occurred')} //error message,
+	                }) 
+			  }else{
+			  	    alert("ERROR: Please Fill In All Fields");
+			   	    event.preventDefault();
+			  }
+		    });
 		});
 </script>
 <?php 	
@@ -198,7 +252,9 @@
 	?>
 
 <form class="registration" action="add_drawers.php" method="GET">
-	
+	<div class="container-fluid">
+	<div class="row">
+	<div class="col-xs-6">
 	
 	<p>
 	<label class="textbox-label">Select Update Type:</label>
@@ -209,6 +265,8 @@
 	<option value='freezer_drawer'>Connect Drawers To Freezers</option>
 	</select>
 	</p>
+	</div>
+	</div>
 	
 	<div id = "type"></div>
 	
@@ -220,6 +278,8 @@
 	<!----------------------------------------------------------------------------------------->
 	
 	</fieldset>
+	
+	
 	</div><!--end of class = 'container-fluid'-->
 </form>
 
