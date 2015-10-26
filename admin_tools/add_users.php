@@ -74,8 +74,8 @@
 				if($_GET['submit'] == 'add'){
 					//insert data into db. Use prepared statement 
 					$password = sha1($p_UserID.'!@VE_$eyeNce');
-					$stmt2 = $dbc -> prepare("INSERT INTO users (user_id,first_name,last_name) VALUES (?,?,?)");
-					$stmt2 -> bind_param('sss',$p_UserID,$p_firstName,$p_lastName);
+					$stmt2 = $dbc -> prepare("INSERT INTO users (user_id,first_name,last_name,password) VALUES (?,?,?,?)");
+					$stmt2 -> bind_param('sss',$p_UserID,$p_firstName,$p_lastName,$password);
 					
 					$stmt2 -> execute();
 					$rows_affected2 = $stmt2 ->affected_rows;
@@ -94,7 +94,7 @@
 		}
 	?>
 
-<form class="registration" action="add_delete_users.php" method="GET">
+<form class="registration" action="add_users.php" method="GET">
 	<p><i>* = required field</i></p>
 	<div class="container-fluid">
 	<fieldset>
