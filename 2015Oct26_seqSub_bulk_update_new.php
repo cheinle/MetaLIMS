@@ -127,7 +127,7 @@ if(isset($_POST['submit'])){
 			
 			//prepare excel sample sheet
 			require_once dirname(__FILE__) . '/xls_classes/PHPExcel/IOFactory.php';
-			$objPHPExcel = PHPExcel_IOFactory::load("Sequencing_SampleSubmissionForm.xlsx");
+			$objPHPExcel = PHPExcel_IOFactory::load("SCELSE_Sequencing_SampleSubmissionForm2.xlsx");
 			$styleArray = array(
 		    'font'  => array(
 		    	'color' => array('rgb' => '000000'),
@@ -163,7 +163,7 @@ if(isset($_POST['submit'])){
 				if($number_of_submissions == 'ERROR'){
 						throw new Exception("ERROR: No Sequencing Submission Number. Please Notify Admin");
 				}
-				$new_number_of_submissions = $number_of_submissions + 1;//does this need to be two digits placeholder?
+				$new_number_of_submissions = $number_of_submissions + 1;//does this need to be two digits?
 				echo "new number".$new_number_of_submissions;
 				//check if submission number is two digits
 				$length_check = strlen($new_number_of_submissions);
@@ -326,13 +326,12 @@ if(isset($_POST['submit'])){
 				//write to file						
 				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 				$path = $_SERVER['DOCUMENT_ROOT'].$root;
-				//$objWriter->save($path.'/browse_files/repository/shared/sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
-				$objWriter->save($path.'/sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
+				$objWriter->save($path.'/browse_files/repository/shared/sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
 				
 				$file_name ='SamplesSubmissionForm_'.$dtSub.'.xlsx';
 				echo 'File has been created:',EOL;
-				echo '<a href='.$root.'sequencing_sample_submission_forms/'.$file_name.' download>Click here</a><br>';
-				//echo 'Note: Files Can Also Be Found Under Files-Browse_Files->Shared-><name of file>';
+				echo '<a href='.$root.'browse_files/repository/shared/sequencing_sample_submission_forms/'.$file_name.' download>Click here</a><br>';
+				echo 'Note: Files Can Also Be Found Under Files-Browse_Files->Shared-><name of file>';
 				echo '<button class="button" type=button onClick="parent.location=\'<?php echo $root;?>sample_update_lookup.php\'" value="\'Go Back\'>Go Back</button>';
 			}
 			else{

@@ -67,8 +67,14 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 		
 			<ul class="nav navbar-nav">
 				<li ><a href="<?php echo $root;?>home_page.php"><span class="glyphicon glyphicon-home"></a></li>
-				<li ><a href="<?php echo $root;?>form_insert.php">Insert Sample</a></li>
-				<li ><a href="<?php echo $root;?>sample_update_lookup.php">Update Sample</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Sample Management<b class="caret"></b></a>
+					<ul class="dropdown-menu" role="menu">
+						<li ><a href="<?php echo $root;?>form_insert.php">Insert Sample</a></li>
+						<li ><a href="<?php echo $root;?>sample_update_lookup.php">Update Sample</a></li>
+						<li><a href="<?php echo $root;?>pool_samples.php">Create Sample Pools</a></li>
+					</ul>
+				</li>
 			</ul>
 			<ul class="nav navbar-nav ">
 				<li class="dropdown">
@@ -96,16 +102,14 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 			</ul>
 				
 			<ul class="nav navbar-nav">
-				<li ><a href="<?php echo $root;?>query_select_mod.php">Query Sample Info</a></li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Sample Pooling<b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Query Info<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo $root;?>pool_samples.php">Create Sample Pools</a></li>
-						<li><a href="<?php echo $root;?>query_select_pooled.php">View Pooled Sample Info</a></li>
-						
+						<li ><a href="<?php echo $root;?>query_select_mod.php">Query Sample Info</a></li>
+						<li><a href="<?php echo $root;?>query_select_pooled.php">Query Pooled Sample Info</a></li>
 					</ul>
 				</li>
-					<li class="dropdown">
+				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Sequencing Submission Info<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="<?php echo $root;?>seq_submission_UDF_check.php">Bulk Sequencing Submission</a></li>
