@@ -14,10 +14,11 @@
 	 	echo '<input type="text" name="newDrawer" class="fields" placeholder="Name" value="">';
 		echo '</p>';
 	
-		echo '<p>';
+		/*echo '<p>';
 		echo '<label class="textbox-label">Old Drawer Name:</label>';
 		dropDown('drawer', 'drawer', 'drawer_id','drawer_id',$submitted);
 		echo '</p>';
+		 */
 	}
 	
 	if($type == 'freezer'){
@@ -29,10 +30,11 @@
 		echo '</p>';
 	
 	
-		echo '<p>';
+		/*echo '<p>';
 		echo '<label class="textbox-label">Old Freezer Name:</label>';
 		dropDown('freezer', 'freezer', 'freezer_id','freezer_id',$submitted);	
 		echo '</p>';
+		 */
 	}
 	
 	if($type == 'freezer_drawer'){

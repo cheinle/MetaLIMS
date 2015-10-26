@@ -6,7 +6,6 @@
 		'sample',
 		'daily_data2',
 		'daily_data2_particle_counter',
-		'drawer','freezer',
 		'freezer_drawer',
 		'number_of_seq_submissions',
 		'pooled_sample_lookup',
