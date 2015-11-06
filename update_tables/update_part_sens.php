@@ -11,7 +11,7 @@
 <body>
 <?php include('../index.php'); ?>
 <div class="page-header">
-<h3>Update Particle Sensor Dropdown</h3>	
+<h3>Update Sensor Dropdown</h3>	
 </div>
 	<?php 
 		//error && type checking 
@@ -26,15 +26,15 @@
 			$p_serNum = htmlspecialchars($_GET['serNum']);
 			
 			if($p_partSens == ''){
-					echo '<p>You must enter a Particle Sensor Name!<p>';
+					echo '<p>You Must Enter A Sensor Name!<p>';
 					$error = 'true';
 			}
 			if($p_sensType == ''){
-				echo '<p>You must enter a Sensor Type!<p>';
+				echo '<p>You Must Enter A Sensor Type!<p>';
 				$error = 'true';
 			}
 			if($p_serNum == ''){
-				echo '<p>You must enter Serial Number!<p>';
+				echo '<p>You Must Enter Serial Number!<p>';
 				$error = 'true';
 			}
 			
@@ -93,11 +93,11 @@
 	<form class="registration" action="update_part_sens.php" method="GET">
 	* = required field <!--arbitrary requirement at this moment-->
 		<fieldset>
-		<LEGEND><b>Particle Sensor Info:</b></LEGEND>
+		<LEGEND><b>Sensor Info:</b></LEGEND>
 		<div class="col-xs-6">
 		<!--Particle Sensor Name-->
 		<p>
-		<label class="textbox-label">Particle Sensor Name:*</label>
+		<label class="textbox-label">Sensor Name:*</label>
 		<input type="text" name="partSens" placeholder="Enter A Particle Sensor Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){ echo $p_partSens;} ?>"<br>
 		</p>
 		

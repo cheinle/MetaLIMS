@@ -26,7 +26,7 @@ alert("NOTICE: At This Time. Please Use Chrome As Your Browser. Sorry For Any In
 </p>
 <button class="small-button" type=button onClick="parent.location='<?php echo $root; ?>update_tables/update_proj_name_for_approval.php'" value='1'>Add a New Project Name</button></p>
 <button class="small-button" type=button onClick="parent.location='<?php echo $root; ?>update_tables/update_sampler.php'" value='1'>Add a New Sampler</button></p>
-<button class="small-button" type=button onClick="parent.location='<?php echo $root; ?>update_tables/update_part_sens.php'" value='1'>Add a New Particle Sensor (OPC)</button></p>
+<button class="small-button" type=button onClick="parent.location='<?php echo $root; ?>update_tables/update_part_sens.php'" value='1'>Add a New Sensor</button></p>
 <button class="small-button" type=button onClick="parent.location='<?php echo $root; ?>update_tables/update_samp_loc.php'" value='1'>Add a New Location</button></p>
 <button class="small-button" type=button onClick="parent.location='<?php echo $root; ?>update_tables/update_samp_rel_loc.php'" value ='1'>Add a New Relative Location</button></p>
 </div>
