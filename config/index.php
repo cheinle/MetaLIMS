@@ -1,4 +1,4 @@
-<?php include('path.php');
+<?php include('../path.php');
 session_start();
 if(!isset($_SESSION['username'])){ 
 	header('Location:'.$root.'login.php');

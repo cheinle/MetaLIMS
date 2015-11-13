@@ -20,11 +20,9 @@
 	 		
 	 		 $count_check = $stmt1->fetch();
              $size =sizeof($count_check);
-			 //echo $size;
 			 //check that one entry was returned
              if($size == 1) {
-             	echo "workingggg";
-              
+
 			  	//go on to grab the old session id stored in the db
 				$meta = $stmt1->result_metadata(); 
 		   		while ($field = $meta->fetch_field()){ 
@@ -95,10 +93,8 @@
 						}
 						else{
 							session_destroy();
-							//$path = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/airmicrobiomes/login.php';
-							//header('Location: '.$path);
-							//header('Location: login.php');
-							header('Location: /series/dynamic/airmicrobiomes/login.php');
+							//header('Location: '.$path.'login.php');
+							header('Location: login.php');
 						}
 					}
 					else{
@@ -107,7 +103,7 @@
 					exit;
 				}
 				else{//else stay logged on...this should never be true right now
-					alert("Cassie Is Testing This. Please Notify Her If You See This");
+					alert("Admin Is Testing This. Please Notify Her/Him If You See This");
 					session_start();
 					$_SESSION['username'] = $_POST['email'];
 					$_SESSION['session_id'] = $new_session_id;
@@ -200,16 +196,16 @@
 					to reset your password.
 				</p>
 			</div>
-			<!--<div class="create-account">
+			<div class="create-account">
 				<p>
 					Don't have an account yet ?&nbsp; 
 					<a href="javascript:;" id="register-btn" >Create an account</a>
 				</p>
-			</div>-->
+			</div>
 		</form>
 		<!-- END LOGIN FORM -->        
 		<!-- BEGIN FORGOT PASSWORD FORM -->
-		<form class="form-vertical forget-form" action="/series/dynamic/airmicrobiomes/password_reset/forgot_passwordck.php" method="post">
+		<form class="form-vertical forget-form" action="password_reset/forgot_passwordck.php" method="post">
 			<h3 >Forget Password ?</h3>
 			<p>Enter your e-mail address below to reset your password.</p>
 			<div class="control-group">
@@ -230,6 +226,66 @@
 			</div>
 		</form>
 		<!-- END FORGOT PASSWORD FORM -->
+		<!-- BEGIN REGISTRATION FORM -->
+		<form class="form-vertical register-form" action="login.php" method="post">
+			<h3 >Sign Up</h3>
+			<p>Enter your personal details below:</p>
+			<div class="control-group">
+				<label class="control-label visible-ie8 visible-ie9">First Name</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-font"></i>
+						<input class="m-wrap placeholder-no-fix" type="text" placeholder="First Name" name="firstname"/>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label visible-ie8 visible-ie9">Last Name</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-font"></i>
+						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Last Name" name="lastname"/>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+				<label class="control-label visible-ie8 visible-ie9">Email</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-envelope"></i>
+						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email"/>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label visible-ie8 visible-ie9">Password</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-lock"></i>
+						<input class="m-wrap placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="Password" name="password"/>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-ok"></i>
+						<input class="m-wrap placeholder-no-fix" type="password" autocomplete="off" placeholder="Re-type Your Password" name="rpassword"/>
+					</div>
+				</div>
+			</div>
+			<div class="form-actions">
+				<button id="register-back-btn" type="button" class="btn">
+				<i class="m-icon-swapleft"></i>  Back
+				</button>
+				<button type="submit" id="register-submit-btn" class="btn green pull-right">
+				Sign Up <i class="m-icon-swapright m-icon-white"></i>
+				</button>            
+			</div>
+		</form>
+		<!-- END REGISTRATION FORM -->
 	</div>
 	<!-- END LOGIN -->
 	<!-- BEGIN COPYRIGHT -->
