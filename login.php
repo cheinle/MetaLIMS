@@ -227,7 +227,7 @@
 		</form>
 		<!-- END FORGOT PASSWORD FORM -->
 		<!-- BEGIN REGISTRATION FORM -->
-		<form class="form-vertical register-form" action="login.php" method="post">
+		<form class="form-vertical register-form" action="registration.php" method="post">
 			<h3 >Sign Up</h3>
 			<p>Enter your personal details below:</p>
 			<div class="control-group">
