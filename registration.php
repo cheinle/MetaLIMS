@@ -5,6 +5,13 @@ $last_name = htmlspecialchars($_POST['lastname']);
 $email=htmlspecialchars($_POST['email']);
 $password = htmlspecialchars($_POST['password']);
 
+if($_POST['admin'] == 'yes'){
+	$admin_yn = 'Y';
+}
+else{
+	$admin_yn = 'N';
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -64,8 +71,8 @@ if($status=="OK"){
 			exit;
 		}
 		$password = sha1($password);
-		$stmt2 = $dbc -> prepare("INSERT INTO users (user_id,first_name,last_name,password) VALUES (?,?,?,?)");
-		$stmt2 -> bind_param('ssss',$email,$first_name,$last_name,$password);
+		$stmt2 = $dbc -> prepare("INSERT INTO users (user_id,first_name,last_name,password,admin) VALUES (?,?,?,?,?)");
+		$stmt2 -> bind_param('sssss',$email,$first_name,$last_name,$password,$admin_yn);
 		$stmt2 -> execute();
 		$rows_affected2 = $stmt2 ->affected_rows;
 		$stmt2 -> close();

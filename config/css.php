@@ -465,7 +465,9 @@ div.border legend{
   font-size:18px;
   padding:10px 4px 0px 4px;
   margin-left:20px;
-}
+}*/
+
+/***********Curved Boarder. Used on FAQ ******/
 pre.border{
  width:90%;
  float:left;
@@ -482,7 +484,7 @@ pre.border{
  -moz-border-radius: 15px;
  -webkit-border-radius: 15px;
   border-radius: 15px;
-}*/
+}
 
 /***********For Bulk Update Tables ********/
 table.bulk{

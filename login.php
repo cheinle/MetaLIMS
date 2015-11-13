@@ -276,6 +276,14 @@
 					</div>
 				</div>
 			</div>
+			<div class="control-group">
+				<div class="controls">
+					<label class="checkbox">
+					<input type="checkbox" name="admin" value="yes"/> Sign-Up As System Admin</a>
+					</label>  
+					<div id="register_tnc_error"></div>
+				</div>
+			</div>
 			<div class="form-actions">
 				<button id="register-back-btn" type="button" class="btn">
 				<i class="m-icon-swapleft"></i>  Back

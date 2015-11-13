@@ -51,10 +51,10 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	}
 	
 	//unless you are the admin, don't give access to this page
-	if(($page_name == 'update_proj_name.php') && ($_SESSION['username'] != 'cheinle@ntu.edu.sg')){
+	/*if(($page_name == 'update_proj_name.php') && ($_SESSION['username'] != 'cheinle@ntu.edu.sg')){
 		header('Location: '.$root.'home.php');
 		exit();
-	}
+	}*/
 }
 
 ?>
@@ -135,7 +135,8 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				</li>
 				<li ><a href="<?php echo $root;?>FAQ.php">FAQ</a></li>
 				
-				<?php if($_SESSION['username'] == $admin_user){ echo '
+				<?php //if($_SESSION['username'] == $admin_user){ echo '
+				if($admin_user == 'Y'){ echo '
 				<ul class="nav navbar-nav ">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Admin Tools<b class="caret"></b></a>
