@@ -1,5 +1,5 @@
 <?php 
-	$work = 'true';
+	$work = 'false';
 	if($work == 'true'){
 		include('/xampp_2/config/connect_am_prod.php');
 	}

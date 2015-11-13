@@ -2,16 +2,10 @@
 //CSS:
 ?>
 
-
-
 <!--Latest complied and minified CSS -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 		
-<!--Optional theme-->
-<!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">-->
-		
 <!--jQuery CSS--> 
-<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui-custom.css">-->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
 		
 <!--FontAwesome-->
@@ -24,6 +18,7 @@
 <style>
 /* note: class=hidden for hidden text input is not actually defined...*/
 
+/***********Navigation Bar ********/
 .navbar{
     border: none;
     border-radius: 2;
@@ -43,6 +38,7 @@
              0px 18px 23px rgba(0,0,0,0.1);
 }
 
+/***********Home Page ********/
 body.homepage {
    background-image: url('dandi.jpg'); 
    background-size:100% 100%;
@@ -54,6 +50,8 @@ body{
    font-family: Georgia;
 }
 
+
+/***********Page Headers ********/
 div.page-header h3 {
     padding-top: 2px;
     padding-bottom: 2px;
@@ -84,8 +82,409 @@ div.vert-checkboxes{
 	  margin: 0px 0px 0px 200px;
 }
 
-/**********************************************************************/
-/*for bulk tables*/
+
+
+/***********For Main Tables********/
+p.adjust{
+	clear: both;
+	margin: 0px;
+}
+th {
+    border: 2px solid black;
+    word-wrap:break-word;
+	/*white-space : nowrap;*/
+	background-color: grey;
+	height: .5in;
+	
+}
+table {
+  table-layout:fixed;
+  overflow:hidden;
+  word-wrap:break-word;
+  border: 1px solid black;
+}
+th.reg {
+    border: 2px solid black;
+    word-wrap:break-word;
+	width: 3.20in;
+	background-color: grey;
+	height: .5in;
+	
+}
+td.reg {
+    border: 2px solid black; //increase boarder to show up in chrome. Still a little weird looking in firefox
+	width: 3.20in;
+	white-space: nowrap;
+    overflow-x: scroll;
+}
+
+/***********For Show/Hide Buttons ********/
+button.buttonLength {
+     #border: 1px solid black;
+	 clear: left;
+	 width:100%;
+	 float:left;
+	 color: black;
+	 background: #D8D8D8;
+	 padding:10px;
+	 margin: 1px 1px 1px 1px;
+	 font-family: Georgia;
+	 font-size: 20px;
+	 border-radius: 15px;
+   	 box-shadow:0 5px 5px rgba(0,0,0,0.5);
+   	 background: linear-gradient(rgba(216,216,216,1),rgba(216,216,216,0.5),rgba(216,216,216,1));
+	
+}
+
+button.med {
+    #border: 1px solid black;
+	clear: left;
+	width:40%;
+	float:left;
+	color: black;
+	background: #D8D8D8;
+	padding:10px;
+	margin: 1px 1px 1px 1px;
+	font-family: Georgia;
+	font-size: 20px;
+	border-radius: 15px;
+   	box-shadow:0 5px 5px rgba(0,0,0,0.5);
+   	background: linear-gradient(rgba(216,216,216,1),rgba(216,216,216,0.75),rgba(216,216,216,1));
+	
+}
+
+button.small-button{
+	clear: both;
+	float:left;
+	color: black;
+	background: #C0D5DB;
+	border-color:#EEEEDBS;
+	width: 35%;
+	height: 5%;
+	margin-left: 2%;
+	margin-top: 10px;
+	border-radius: 15px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.5);
+	background: linear-gradient(rgba(192,213,219,1),rgba(192,213,219,0.75),rgba(192,213,219,1));
+}
+
+/***********For Main Form********/
+form.registration{
+ width:90%;
+ float:left;
+ color:#818181;
+ background: #f1f1f1;
+ border: 2px solid #ccc;
+ padding:10px;
+ margin-left: 5%;
+ font-family: Georgia;
+ font-size: 14px;
+ -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+ -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+ -moz-border-radius: 15px;
+ -webkit-border-radius: 15px;
+  border-radius: 15px;
+
+}
+
+form.registration fieldset{
+  border-top:1px solid #ccc;
+  border-left:0;
+  border-bottom:0;
+  border-right:0;
+  padding:6px;
+  margin:0px 0px 0px 0px;
+  
+}
+
+form.registration legend{
+  text-align:left;
+  color: #7a7a7a;
+  font-size:18px;
+  padding:10px 4px 0px 4px;
+  margin-left:10px;
+  width: 90%;
+}
+
+form.registration label.textbox-label,label.password-label{
+  font-size: 16px;
+  width:200px;
+  float: left;
+  text-align: right;
+  color:#666666;
+  clear:left;
+  margin:4px 4px 0px 0px;
+  padding:0px;
+}
+
+form.registration label.textbox-label-sampler{
+  font-size: 16px;
+  width:200px;
+  float: left;
+  text-align: right;
+  clear:left;
+  margin:4px 4px 0px 0px;
+  padding:0px;
+  color:#52bab3;
+}
+
+form.registration h3.checkbox-header-sampler{
+  font-size: 16px;
+  width:200px;
+  text-align: right;
+  color:green;
+  clear:both;
+  margin:8px 8px 0px 0px;
+  padding:8px;
+  font-family: Georgia;
+  font-weight: bold;
+  color:#52bab3;
+  
+}
+
+form.registration input[type=text],input[type=password],input[type=email]{
+  font-family: Georgia;
+  font-size: 20px;
+  float:left;
+  width: 50%;
+  border:1px solid #cccccc;
+  margin:2px 0px 10px 10px;
+  color:#00abdf;
+  height:32px;
+  padding:3px;
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+form.registration textarea.form-control{
+  font-family: Georgia;
+  font-size: 20px;
+  float:left;
+  width:80%;
+  border:1px solid #cccccc;
+  margin:2px 0px 10px 10px;
+  color:#00abdf;
+  height:20%;
+  padding:3px;
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+
+form.registration input[type=text].shrtfields,input[type=text].time_fields{
+  font-family: Georgia;
+  font-size: 20px;
+  float:left;
+  clear: right;
+  width: 24.5%;
+  border:1px solid #cccccc;
+  margin:0px 0px 10px 10px;
+  color:#00abdf;
+  height:32px;
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+form.registration input[type=text].bulkfields{
+  font-family: Georgia;
+  font-size: 20px;
+  float: right;
+  clear: both;
+  width:100%;
+  border:1px solid #cccccc;
+  color:#00abdf;
+  height:32px;
+  padding: 0px;
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+
+form.registration label.checkbox-label,label.radio-label{
+	position:relative;
+	vertical-align: middle;
+	width:200px
+	display:inline-flex;
+	word-wrap:break-word; 
+	overflow:hidden;
+	font-size: 14px;
+	text-align: left;
+	color:#666666;
+
+}
+
+form.registration input[type=checkbox],input[type=radio]{
+  font-family: Georgia;
+  float:left;
+  width:20px;
+  margin:2px 0px 2px 2px;
+  color:#00abdf;
+  height:16px;
+  padding:3px;
+}
+
+form.registration label.sm-checkbox{
+  position:relative;
+  vertical-align: middle;
+  width:25%;
+  height:10%;
+  font-family:Georgia;
+  font-size:14px;
+  display:inline-block;/*inline-flex ?*/
+  word-wrap:break-word; 
+  overflow:hidden; 
+  color:#666666;
+}
+
+form.registration h3.checkbox-header{
+  font-size: 16px;
+  width:200px;
+  text-align: right;
+  color:#666666;
+  clear:both;
+  margin:8px 8px 0px 0px;
+  padding:8px;
+  font-family: Georgia;
+  font-weight: bold;
+  
+}
+
+form.registration input:focus, form.registration select:focus{
+  background-color:#E0E6FF;
+}
+
+form.registration select{
+  font-family: Georgia;
+  font-size: 20px;
+  float:left;
+  border:1px solid #cccccc;
+  margin:2px 0px 10px 10px;
+  color:#00abdf;
+  height:32px;
+  width: 50%;
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+form.registration ul{
+	-webkit-column-break-inside: avoid;
+    page-break-inside: avoid;           /* Theoretically FF 20+ */
+    break-inside: avoid-column;         /* IE 11 */
+    display: inline-block; 
+    -moz-column-fill: balance;
+    column-fill: balance;
+}
+
+/***********For Submit Buttons********/
+.button, .button:visited{
+  float:right;
+  clear: left;
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+  cursor: pointer;
+  padding: 5px 10px 5px 5px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  padding: 10px 15px;
+  margin:10px 2px 2px 2px;
+  background-color: #00abdf;
+  display: inline-block;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+  border-radius: 10px;
+ -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+ -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  background: linear-gradient(to bottom, #00abdf 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);
+}
+.button:hover{
+   background: linear-gradient(to bottom, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);
+}
+
+
+/***********Misc********/
+container.checkbox{
+	flex-direction: column;
+	flex-wrap:wrap;
+}
+
+a.add{
+    color:#0000CD ;
+    float:right;
+    clear: both;
+    font-family: Georgia;
+}
+
+/*.error{
+	background-color: red;
+}
+
+div.border{
+ width:90%;
+ color:#818181;
+ background: #f1f1f1;
+ border: 2px solid #ccc;
+ padding:10px;
+ font-family: Georgia;
+ font-size: 14px;
+ -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+ -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+ -moz-border-radius: 15px;
+ -webkit-border-radius: 15px;
+  border-radius: 15px;
+}
+div.indent{
+  margin-left:20px;
+}
+div.border legend{
+  text-align:left;
+  color:#666666;
+  font-size:18px;
+  padding:10px 4px 0px 4px;
+  margin-left:20px;
+}
+pre.border{
+ width:90%;
+ float:left;
+ color:#818181;
+ margin-left: 5%;
+ background: #f1f1f1;
+ border: 2px solid #ccc;
+ padding:10px;
+ font-family: Georgia;
+ font-size: 14px;
+ -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+ -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+ -moz-border-radius: 15px;
+ -webkit-border-radius: 15px;
+  border-radius: 15px;
+}*/
+
+/***********For Bulk Update Tables ********/
 table.bulk{
 
   width:90%;
@@ -126,10 +525,8 @@ table.bulky_bulk{
   border-radius: 15px;
   box-shadow:0 1px 3px rgba(0,0,0,0.5);
 }
-/**********************************************************************/
 
-/**********************************************************************/
-/*for bulk tables*/
+/***********For Bulk Update Forms ********/
 form.bulk{
   font-family: Georgia;
   font-size: 20px;
@@ -202,179 +599,8 @@ form.bulk h3.checkbox-header{
   font-weight: bold;
   
 }
-/**********************************************************************/
-
-
-p.adjust{
-	clear: both;
-	margin: 0px;
-}
-th {
-    border: 2px solid black;
-    word-wrap:break-word;
-	/*white-space : nowrap;*/
-	background-color: grey;
-	height: .5in;
 	
-}
-table {
-  table-layout:fixed;
-  overflow:hidden;
-  word-wrap:break-word;
-  border: 1px solid black;
-}
-th.reg {
-    border: 2px solid black;
-    word-wrap:break-word;
-	width: 3.20in;
-	background-color: grey;
-	height: .5in;
-	
-}
-td.reg {
-    border: 2px solid black; //increase boarder to show up in chrome. Still a little weird looking in firefox
-	width: 3.20in;
-	white-space: nowrap;
-    overflow-x: scroll;
-}
-button.buttonLength {
-     #border: 1px solid black;
-	clear: left;
-	
-	 width:100%;
-	 float:left;
-	 /*color:#818181;*/
-	 color: black;
-	 /*background: #f1f1f1;*/
-	 background: #D8D8D8;
-	 /*border: 2px solid #ccc;*/
-	 padding:10px;
-	 margin: 1px 1px 1px 1px;
-	 font-family: Georgia;
-	 font-size: 20px;
-	 border-radius: 15px;
-   	 box-shadow:0 5px 5px rgba(0,0,0,0.5);
-   	 /*background: linear-gradient(#D8D8D8,grey);*/
-   	 background: linear-gradient(rgba(216,216,216,1),rgba(216,216,216,0.5),rgba(216,216,216,1));
-	
-}
-
-button.med {
-    #border: 1px solid black;
-	clear: left;
-	
-	 width:40%;
-	 float:left;
-	 /*color:#818181;*/
-	 color: black;
-	 /*background: #f1f1f1;*/
-	 background: #D8D8D8;
-	 /*border: 2px solid #ccc;*/
-	 padding:10px;
-	 margin: 1px 1px 1px 1px;
-	 font-family: Georgia;
-	 font-size: 20px;
-	 border-radius: 15px;
-   	 box-shadow:0 5px 5px rgba(0,0,0,0.5);
-   	 /*background: linear-gradient(#D8D8D8,grey);*/
-   	 background: linear-gradient(rgba(216,216,216,1),rgba(216,216,216,0.75),rgba(216,216,216,1));
-	
-}
-
-button.small-button{
-	
-	/*color:#818181;*/
-	clear: both;
-	float:left;
-	color: black;
-	background: #C0D5DB;
-	border-color:#EEEEDBS;
-	width: 35%;
-	height: 5%;
-	margin-left: 2%;
-	margin-top: 10px;
-	border-radius: 15px;
-    box-shadow:0 1px 3px rgba(0,0,0,0.5);
-    /*background: linear-gradient(#C0D5DB,#D8D8D8);*/
-	background: linear-gradient(rgba(192,213,219,1),rgba(192,213,219,0.75),rgba(192,213,219,1));
-}
-
-form.registration ul{
-	
-
-	-webkit-column-break-inside: avoid;
-    page-break-inside: avoid;           /* Theoretically FF 20+ */
-    break-inside: avoid-column;         /* IE 11 */
-   display: inline-block; 
-   
-   -moz-column-fill: balance;
-       column-fill: balance;
-}
-
-
-container.checkbox{
-	flex-direction: column;
-	flex-wrap:wrap;
-}
-
-a.add{
-    color:#0000CD ;
-    float:right;
-    clear: both;
-    font-family: Georgia;
-}
-
-.error{
-	background-color: red;
-}
-
-div.border{
- width:90%;
- float:left;
- color:#818181;
- background: #f1f1f1;
- border: 2px solid #ccc;
- padding:10px;
- font-family: Georgia;
- font-size: 14px;
- -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
- -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
- -moz-border-radius: 15px;
- -webkit-border-radius: 15px;
-  border-radius: 15px;
-}
-div.indent{
-  margin-left:20px;
-}
-div.border legend{
-  text-align:left;
-  color:#666666;
-  font-size:18px;
-  padding:10px 4px 0px 4px;
-  margin-left:20px;
-}
-
-pre.border{
- width:90%;
- float:left;
- color:#818181;
- margin-left: 5%;
- background: #f1f1f1;
- border: 2px solid #ccc;
- padding:10px;
- font-family: Georgia;
- font-size: 14px;
- -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
- -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
- -moz-border-radius: 15px;
- -webkit-border-radius: 15px;
-  border-radius: 15px;
-}
-	
-/**********************************************************************/
-/*custom alert box css*/
+/***********Custom Alert Boxes ********/
 #dialogoverlay{
 	display:none;
 	opacity: .8;
@@ -423,265 +649,8 @@ pre.border{
 .navbar{
 	margin-bottom: 0px;
 }
-/**********************************************************************/
-
-
-/**********************************************************************/
-/*for registration forms*/
-
-form.registration{
- width:90%;
- float:left;
- color:#818181;
- background: #f1f1f1;
- border: 2px solid #ccc;
- padding:10px;
- margin-left: 5%;
- font-family: Georgia;
- font-size: 14px;
- -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
- -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
- -moz-border-radius: 15px;
- -webkit-border-radius: 15px;
-  border-radius: 15px;
-
-}
-
-form.registration fieldset{
-  border-top:1px solid #ccc;
-  border-left:0;
-  border-bottom:0;
-  border-right:0;
-  padding:6px;
-  margin:0px 0px 0px 0px;
-  
-}
-
-form.registration legend{
-  text-align:left;
-  /*color:#ccc;*/
-  color: #7a7a7a;
-  font-size:18px;
-  padding:10px 4px 0px 4px;
-  margin-left:10px;
-  width: 90%;
-}
-
-form.registration label.textbox-label,label.password-label{
-  font-size: 16px;
-  width:200px;
-  float: left;
-  text-align: right;
-  /*color:#999;*/
-  color:#666666;
-  clear:left;
-  margin:4px 4px 0px 0px;
-  padding:0px;
-}
-
-form.registration label.textbox-label-sampler{
-  font-size: 16px;
-  width:200px;
-  float: left;
-  text-align: right;
-  clear:left;
-  margin:4px 4px 0px 0px;
-  padding:0px;
-  color:#52bab3;
-}
-
-form.registration h3.checkbox-header-sampler{
-  font-size: 16px;
-  width:200px;
-  text-align: right;
-  color:green;
-  clear:both;
-  margin:8px 8px 0px 0px;
-  padding:8px;
-  font-family: Georgia;
-  font-weight: bold;
-  color:#52bab3;
-  
-}
-
-form.registration input[type=text],input[type=password],input[type=email]{
-  font-family: Georgia;
-  font-size: 20px;
-  float:left;
-  /*width:300px;*/
-  width: 50%;
-  border:1px solid #cccccc;
-  margin:2px 0px 10px 10px;
-  color:#00abdf;
-  height:32px;
-  padding:3px;
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-   border-radius: 5px;
-}
-
-form.registration textarea.form-control{
-  font-family: Georgia;
-  font-size: 20px;
-  float:left;
-  width:80%;
-  border:1px solid #cccccc;
-  margin:2px 0px 10px 10px;
-  color:#00abdf;
-  height:20%;
-  padding:3px;
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-   border-radius: 5px;
-}
-
-
-form.registration input[type=text].shrtfields,input[type=text].time_fields{
-  font-family: Georgia;
-  font-size: 20px;
-  float:left;
-  clear: right;
-  /*width:145px;*/
-  width: 24.5%;
-  border:1px solid #cccccc;
-  margin:0px 0px 10px 10px;
-  color:#00abdf;
-  height:32px;
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-   border-radius: 5px;
-}
-
-form.registration input[type=text].bulkfields{
-  font-family: Georgia;
-  font-size: 20px;
-  float: right;
-  clear: both;
-  width:100%;
-  border:1px solid #cccccc;
-  color:#00abdf;
-  height:32px;
-  padding: 0px;
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-   border-radius: 5px;
-}
 
 
 
-
-form.registration label.checkbox-label,label.radio-label{
-	position:relative;
-	vertical-align: middle;
-	width:200px
-	display:inline-flex;
-	word-wrap:break-word; 
-	overflow:hidden;
-	font-size: 14px;
-	text-align: left;
-	color:#666666;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-}
-
-form.registration input[type=checkbox],input[type=radio]{
-  font-family: Georgia;
-  float:left;
-  width:20px;
-  margin:2px 0px 2px 2px;
-  color:#00abdf;
-  height:16px;
-  padding:3px;
-}
-
-form.registration label.sm-checkbox{
-  position:relative;
-  vertical-align: middle;
-  width:25%;
-  height:10%;
-  font-family:Georgia;
-  font-size:14px;
-  display:inline-block;/*inline-flex ?*/
-  word-wrap:break-word; 
-  overflow:hidden; 
-  color:#666666;
-}
-
-form.registration h3.checkbox-header{
-  font-size: 16px;
-  width:200px;
-  text-align: right;
-  color:#666666;
-  clear:both;
-  margin:8px 8px 0px 0px;
-  padding:8px;
-  font-family: Georgia;
-  font-weight: bold;
-  
-}
-
-
-
-form.registration input:focus, form.registration select:focus{
-  background-color:#E0E6FF;
-}
-form.registration select{
-  font-family: Georgia;
-  font-size: 20px;
-  float:left;
-  border:1px solid #cccccc;
-  margin:2px 0px 10px 10px;
-  color:#00abdf;
-  height:32px;
-  /*width:300px;*/
-  width: 50%;
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-   border-radius: 5px;
-}
-
-.button, .button:visited{
-  float:right;
-  clear: left;
-  text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
-  border-bottom: 1px solid rgba(0,0,0,0.25);
-  cursor: pointer;
-  padding: 5px 10px 5px 5px;
-  color: #fff;
-  text-decoration: none;
-  font-size: 24px;
-  padding: 10px 15px;
-  margin:10px 2px 2px 2px;
-  background-color: #00abdf;
-  display: inline-block;
- -moz-border-radius: 10px;
- -webkit-border-radius: 10px;
-  border-radius: 10px;
- -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
- -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  background: linear-gradient(to bottom, #00abdf 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);
-}
-.button:hover{
-   /*background-color: #777;*/
-   background: linear-gradient(to bottom, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);
- 
-}
-/**********************************************************************/
 
 </style>
