@@ -50,7 +50,7 @@ include('functions/check_box_tables.php');
 			$query = "SELECT * FROM sample";
 			$result = mysqli_query($dbc, $query);
 			if(!$result){
-				echo 'An error has occured';
+				echo 'An Error Has Occurred';
 				mysqli_error($dbc);
 			}
 			
