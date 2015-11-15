@@ -116,6 +116,7 @@ include('functions/check_box_tables.php');
 			}else{echo "error what?";}
 			}else{
 				echo "error preparing";
+				die('execute() failed: ' . htmlspecialchars($stmt ->error));
 			}
 
 			////////////////////////////////////////////
