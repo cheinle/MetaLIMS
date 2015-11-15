@@ -135,8 +135,22 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				</li>
 				<li ><a href="<?php echo $root;?>FAQ.php">FAQ</a></li>
 				
-				<?php //if($_SESSION['username'] == $admin_user){ echo '
-				if($admin_user == 'Y'){ echo '
+				<?php
+				//if user is an admin, show admin options
+				$admin_user = 'N';//no by default
+				if($stmt = $dbc->prepare("SELECT admin FROM users WHERE user_id = ?")){
+					$stmt -> bind_param('s', $_SESSION['username']);
+					if ($stmt->execute()){
+				    	$stmt->bind_result($admin_check);
+				    	if ($stmt->fetch()){
+				        	if($admin_check == 'Y'){
+								$admin_user = 'Y';
+							}
+						}	
+					}	
+				}
+				if($admin_user == 'Y'){
+				echo '
 				<ul class="nav navbar-nav ">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Admin Tools<b class="caret"></b></a>
