@@ -56,6 +56,26 @@ if($first_name == '' || $last_name == '' || $email == '' || $password == ''){
 
 echo "<br><br>";
 if($status=="OK"){
+	//check if you are the first user entered. If you are, then automatically set you as an admin and visible, else email admin and set to invisible
+	//do a check when signing in to see if visible
+	//once admin has approved and set to visible, let user know...
+	$first_user = 'false';
+	$admin_email = '';
+	$stmt1 = $dbc->prepare("SELECT user_id from users WHERE admin = Y");	
+	
+  	if ($stmt1->execute()){
+    	$stmt1->bind_result($col);
+		$stmt1->store_result();
+		if ($stmt->fetch()){
+			$admin_email = $col;		
+		}
+		$no = $stmt1->num_rows;
+		if($no == 0){
+				$first_user = 'true';
+		}
+	}
+			
+	//check if username exists
 	$stmt1 = $dbc->prepare("SELECT user_id FROM users WHERE user_id = ?");
 	$stmt1 -> bind_param('s', $email);
 				
@@ -70,9 +90,13 @@ if($status=="OK"){
 			echo "<center><font face='Verdana' size='2' color=red><b>ERROR</b><br> Sorry Your Username (email address) Already Exists In Our Database. Please Check With Admin<BR><BR></center>"; 
 			exit;
 		}
+		$visible = 0; //default not visible
+		if($fist_user == 'true'){
+			$visible = 1; //visible
+		}
 		$password = sha1($password);
-		$stmt2 = $dbc -> prepare("INSERT INTO users (user_id,first_name,last_name,password,admin) VALUES (?,?,?,?,?)");
-		$stmt2 -> bind_param('sssss',$email,$first_name,$last_name,$password,$admin_yn);
+		$stmt2 = $dbc -> prepare("INSERT INTO users (user_id,first_name,last_name,password,admin,visible) VALUES (?,?,?,?,?,?)");
+		$stmt2 -> bind_param('sssssi',$email,$first_name,$last_name,$password,$admin_yn,$visible);
 		$stmt2 -> execute();
 		$rows_affected2 = $stmt2 ->affected_rows;
 		$stmt2 -> close();
@@ -85,7 +109,25 @@ if($status=="OK"){
 			echo " <center><font face='Verdana' size='2' color=red >There Is Some System Problem In Setting Up Login. Please Contact Site-admin Or Retry. <br><br><input type='button' value='Retry' onClick='history.go(-1)'></center></font>";
 		
 		}
-	}
+		
+		
+		//send email to admin to request approval
+		//send email to user to let them know approval is pending
+		if($first_user = 'false'){
+			//email user
+			$mail_user_success = mail($email,"User Registration awating approval","You have registered as User ".$email." and are on the waiting list awaiting approval\n User's email: ".$email);
+			if(!$mail_user_success) {
+				 echo "Warning: User Mail delivery failed";
+			}
+			
+			//email admin
+			$mail_admin_success = mail($admin_email,"User Registration awating approval","User ".$email." has registered and is on the waiting list. Please approve\n User's email: ".$email);
+			if(!$mail_admin_success) {
+				 echo "Warning: Admin Mail delivery failed";
+			}
+			
+		}
+	}	
 }
 ?>
 		
