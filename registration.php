@@ -63,13 +63,13 @@ if($status=="OK"){
 	$admin_email = '';
 	$stmt1 = $dbc->prepare("SELECT user_id from users WHERE admin = Y");	
 	
-  	if ($stmt1->execute()){
-    	$stmt1->bind_result($col);
-		$stmt1->store_result();
+  	if ($stmt->execute()){
+    	$stmt->bind_result($col);
+		$stmt->store_result();
 		if ($stmt->fetch()){
 			$admin_email = $col;		
 		}
-		$no = $stmt1->num_rows;
+		$no = $stmt->num_rows;
 		if($no == 0){
 				$first_user = 'true';
 		}
@@ -128,6 +128,9 @@ if($status=="OK"){
 			
 		}
 	}	
+	
+	$stmt->close();
+	$stmt1->close();
 }
 ?>
 		
