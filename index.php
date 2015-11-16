@@ -165,7 +165,9 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 					</ul>
 				</li>
 				</ul> 
-				';}?>
+				';}
+				$stmt->close();
+				?>
 				<li ><a href="<?php echo $root;?>logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
 			</ul>
 	</div>			

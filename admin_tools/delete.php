@@ -186,8 +186,7 @@ include ('../index.php');
 		//get all of the tables that have a visible flag and grab all of the primary keys for each table
   		$tableList = array();
   		$table_res = mysqli_query($dbc,"SHOW TABLES");
-			 mysqli_free_result($table_res);
-		printf("error: %s\n", mysqli_error($dbc));
+
   		while($table = mysqli_fetch_array($table_res)){
 			$columns_query = "SHOW COLUMNS FROM ".$table[0];
 		
