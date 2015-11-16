@@ -172,8 +172,8 @@ if (isset($_GET['submit'])) {
 				<label class="textbox-label">Select Storage Location:*</label><br/>
 				<?php
 				//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
-				dropDown_update_for_storage('oStore_temp', 'freezer', 'freezer_id','freezer_id', 'original',"$parent_value",'0');
-				dropDown_update_for_storage('oStore_name', 'drawer', 'drawer_id','drawer_id', 'original',"$parent_value",'1');
+				dropDown_update_for_storage('oStore_temp', 'freezer', 'freezer_id','freezer_id', 'original',"$parent_value",'0',$root);
+				dropDown_update_for_storage('oStore_name', 'drawer', 'drawer_id','drawer_id', 'original',"$parent_value",'1',$root);
 				?>
 				</p>
 				
@@ -545,8 +545,8 @@ if (isset($_GET['submit'])) {
 					</p>
 					<?php
 					//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
-					dropDown_update_for_storage('dStore_temp', 'freezer', 'freezer_id','freezer_id', 'dna_extr',"$parent_value",'0');
-					dropDown_update_for_storage('dStore_name', 'drawer', 'drawer_id','drawer_id', 'dna_extr',"$parent_value",'1');
+					dropDown_update_for_storage('dStore_temp', 'freezer', 'freezer_id','freezer_id', 'dna_extr',"$parent_value",'0',$root);
+					dropDown_update_for_storage('dStore_name', 'drawer', 'drawer_id','drawer_id', 'dna_extr',"$parent_value",'1',$root);
 					?>
 					</p>
 					
@@ -637,8 +637,8 @@ if (isset($_GET['submit'])) {
 				</p>
 				<?php
 				//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
-				dropDown_update_for_storage('rStore_temp', 'freezer', 'freezer_id','freezer_id', 'rna_extr',"$parent_value",'0');
-				dropDown_update_for_storage('rStore_name', 'drawer', 'drawer_id','drawer_id', 'rna_extr',"$parent_value",'1');
+				dropDown_update_for_storage('rStore_temp', 'freezer', 'freezer_id','freezer_id', 'rna_extr',"$parent_value",'0',$root);
+				dropDown_update_for_storage('rStore_name', 'drawer', 'drawer_id','drawer_id', 'rna_extr',"$parent_value",'1',$root);
 				?>
 				
 				<p>

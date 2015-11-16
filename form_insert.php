@@ -513,7 +513,7 @@ include('/config/check_sample_name.php');
 				
 				<p>
 				<!--sampler dropdown-->
-				<<label class="textbox-label">Select Number of Samplers:*</label>
+				<label class="textbox-label">Select Number of Samplers:*</label>
 				<?php
 				//url or $_GET name, table name, field name
 				//dropDown('airSamp', 'air_sampler', 'air_sampler_name','air_sampler_name',$submitted);

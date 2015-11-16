@@ -8,7 +8,7 @@
 /// You can use it at your own risk. /////
 //*****************************************
 //include "include/session.php";
-include('../connect_air.php'); // database connection details stored here
+include('../database_connection.php'); // database connection details stored here
  // database connection details stored here
 //////////////////////////////
 $ak=$_POST['ak'];

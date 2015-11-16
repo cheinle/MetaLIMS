@@ -11,7 +11,7 @@
 <body>
 <?php include('../index.php'); ?>
 <div class="page-header">
-<h3>Add/Delete Users</h3>	
+<h3>Add Users</h3>	
 </div>
 <?php 	
 
@@ -75,7 +75,7 @@
 					//insert data into db. Use prepared statement 
 					$password = sha1($p_UserID.'!@VE_$eyeNce');
 					$stmt2 = $dbc -> prepare("INSERT INTO users (user_id,first_name,last_name,password) VALUES (?,?,?,?)");
-					$stmt2 -> bind_param('sss',$p_UserID,$p_firstName,$p_lastName,$password);
+					$stmt2 -> bind_param('ssss',$p_UserID,$p_firstName,$p_lastName,$password);
 					
 					$stmt2 -> execute();
 					$rows_affected2 = $stmt2 ->affected_rows;
@@ -100,12 +100,13 @@
 	<fieldset>
 	<div class="row">
 	<LEGEND><b>User Info:</b></LEGEND>
+	<p>Note: Email address will become username</p>
 	
   	<div class="col-xs-6">
   	
 	<!--User Name-->
 	<p>
-	<label class="textbox-label">User ID:*</label>
+	<label class="textbox-label">Email Address:*</label>
 	<input type="text" name="UserID" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_UserID;} ?>">
 	</p>
 	

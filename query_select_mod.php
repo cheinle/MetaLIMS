@@ -47,11 +47,86 @@ include('functions/check_box_tables.php');
 		<label class="textbox-label">Select Field to Query Samples:</label><br/>
 		<?php	
 		    include_once('functions/convert_header_names.php');
-			$query = "SELECT * FROM sample";
+			
+			//echo "<select name='field'>";
+			//echo "<option value='0'>-Select-</option>";
+			//push the results into an array so you can sort them and output to dropdown
+			/*$array = array();
+			$pick_column = 'sample';
+			if($stmt = $dbc->prepare("select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME=(?)")){
+					$stmt-> bind_param('s', $pick_column);
+					if ($stmt->execute()){
+				    	$stmt->bind_result($sName);
+						
+				    	if ($stmt->fetch()){
+				    		echo "sname".$sName;
+				        	$name = $sName;
+							$id = $name;
+							$name = convert_header_names($name);
+							if($name == 'false'){ //skip certain columns
+								continue;
+							}
+							$array[$name]['name'] = $name;
+							$array[$name]['id'] = $id;
+						}	
+						else{
+							echo "not working";
+						}
+					}else{
+						echo "execute eroor";
+					}	
+				}else{
+					echo "prepare error";
+				}*/
+				
+			//echo "<select name='field'>";
+			//echo "<option value='0'>-Select-</option>";
+			//push the results into an array so you can sort them and output to dropdown
+			$array = array();
+			if($stmt = $dbc->prepare("select * FROM sample")){
+				if ($stmt->execute()){
+	 			
+			    if($stmt->fetch()){
+			    	$meta = $stmt->result_metadata(); 
+		   			while ($field = $meta->fetch_field()){
+		        		$params[] = &$row[$field->name]; 
+		    		} 
+		
+		    		call_user_func_array(array($stmt, 'bind_result'), $params); 
+					$header_ct = 0;	
+					$stmt->execute();
+		    		while ($stmt->fetch()) {
+		    			
+						
+						//print out headers
+						if($header_ct == 0){
+							foreach($row as $key => $value){		
+								$p_key = htmlspecialchars($key);
+								$p_key = convert_header_names($p_key);
+								if($p_key == 'false'){
+									continue;
+								}
+								else{
+									echo $p_key;
+								}		
+							}
+						}
+					}
+				}
+			}else{echo "error what?";}
+			}else{
+				echo "error preparing";
+				die('execute() failed: ' . htmlspecialchars($stmt ->error));
+			}
+
+			////////////////////////////////////////////
+			/*$query = "SELECT * FROM sample";
 			$result = mysqli_query($dbc, $query);
 			if(!$result){
-				echo 'An error has occured';
-				mysqli_error($dbc);
+				echo 'An Error Has Occurred';;
+
+  				printf("error: %s\n", mysqli_error($dbc));
+
 			}
 			
 			echo "<select name='field'>";
@@ -77,7 +152,7 @@ include('functions/check_box_tables.php');
 				$id2 = $value['id'];
 				echo "<option value='$id2'>$name2</option>";
 			}	
-			echo "</select>";
+			echo "</select>";*/
 		?>
 	</p>
 	<p>

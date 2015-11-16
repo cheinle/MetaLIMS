@@ -61,8 +61,8 @@ $transaction_time = date("Y-m-d H:i:s");
 		<label class="textbox-label">Location of original sample:*</label>
 		<?php
 		//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
-		dropDown_update_for_storage('oStore_temp', 'freezer', 'freezer_id','freezer_id', 'original',"$parent_value",'0');
-		dropDown_update_for_storage('oStore_name', 'drawer', 'drawer_id','drawer_id', 'original',"$parent_value",'1');
+		dropDown_update_for_storage('oStore_temp', 'freezer', 'freezer_id','freezer_id', 'original',"$parent_value",'0',$root);
+		dropDown_update_for_storage('oStore_name', 'drawer', 'drawer_id','drawer_id', 'original',"$parent_value",'1',$root);
 		?>
 		</p>
 		
@@ -78,8 +78,8 @@ $transaction_time = date("Y-m-d H:i:s");
 		<label class="textbox-label">Location of DNA Extract:</label>
 		<?php
 				//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
-				dropDown_update_for_storage('dStore_temp', 'freezer', 'freezer_id','freezer_id', 'dna_extr',"$parent_value",'0');
-				dropDown_update_for_storage('dStore_name', 'drawer', 'drawer_id','drawer_id', 'dna_extr',"$parent_value",'1');
+				dropDown_update_for_storage('dStore_temp', 'freezer', 'freezer_id','freezer_id', 'dna_extr',"$parent_value",'0',$root);
+				dropDown_update_for_storage('dStore_name', 'drawer', 'drawer_id','drawer_id', 'dna_extr',"$parent_value",'1',$root);
 		?>
 		</p>
 		
@@ -88,8 +88,8 @@ $transaction_time = date("Y-m-d H:i:s");
 		<label class="textbox-label">Location of RNA Extract:</label>
 		<?php
 				//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
-				dropDown_update_for_storage('rStore_temp', 'freezer', 'freezer_id','freezer_id', 'rna_extr',"$parent_value",'0');
-				dropDown_update_for_storage('rStore_name', 'drawer', 'drawer_id','drawer_id', 'rna_extr',"$parent_value",'1');
+				dropDown_update_for_storage('rStore_temp', 'freezer', 'freezer_id','freezer_id', 'rna_extr',"$parent_value",'0',$root);
+				dropDown_update_for_storage('rStore_name', 'drawer', 'drawer_id','drawer_id', 'rna_extr',"$parent_value",'1',$root);
 		?>
 		</p>
 		

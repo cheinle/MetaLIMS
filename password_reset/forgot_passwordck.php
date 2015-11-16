@@ -1,5 +1,5 @@
 <?php
-include('../connect_air.php');
+include('../database_connection.php');
 //////////////////////////////
 $email=$_POST['email'];
 // Change the URL below to match your site
