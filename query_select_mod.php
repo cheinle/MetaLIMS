@@ -81,7 +81,10 @@ include('functions/check_box_tables.php');
 				
 			//echo "<select name='field'>";
 			//echo "<option value='0'>-Select-</option>";
+			
+			
 			//push the results into an array so you can sort them and output to dropdown
+			
 			$array = array();
 			if($stmt = $dbc->prepare("select * FROM sample")){
 				if ($stmt->execute()){
@@ -107,7 +110,9 @@ include('functions/check_box_tables.php');
 									continue;
 								}
 								else{
-									echo $p_key;
+									//echo $p_key;
+									$array[$p_key]['name'] = $p_key;
+									$array[$p_key]['id'] = $p_key;
 								}		
 							}
 						}
@@ -118,7 +123,16 @@ include('functions/check_box_tables.php');
 				echo "error preparing";
 				die('execute() failed: ' . htmlspecialchars($stmt ->error));
 			}
-
+			sort($array);
+			
+			echo "<select name='field'>";
+			echo "<option value='0'>-Select-</option>";
+			foreach($array as $key => $value){
+				$name2 = $value['name'];
+				$id2 = $value['id'];
+				echo "<option value='$id2'>$name2</option>";
+			}	
+			echo "</select>";
 			////////////////////////////////////////////
 			/*$query = "SELECT * FROM sample";
 			$result = mysqli_query($dbc, $query);
