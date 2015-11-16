@@ -32,6 +32,7 @@
 			echo "<select id='".$column_name."' name='".$column_name."'>";
 			echo "<option value='0'>-Select-</option>";
 			echo "</select>";
+			
 		}
 		else{
 			$field_res = mysqli_query($dbc,$field_query);
@@ -42,6 +43,15 @@
 				echo '<option value="'.$field_values[0].'">'.$field_values[0].'</option>';
 			}
 			echo "</select>";
+			
+			if($table_name == 'users' && $column_name == 'column2'){
+				echo "<label class='textbox-label'>Admin?:</label>";
+				echo "<select id='admin_yn' name='admin_yn'>";
+				echo "<option value='0'>-Select-</option>";
+				echo "<option value='Y'>Yes</option>";
+				echo "<option value='N'>No</option>";
+				echo "</select>";
+			}
 		}
 	}
 	else{

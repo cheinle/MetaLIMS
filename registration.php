@@ -5,13 +5,13 @@ $last_name = htmlspecialchars($_POST['lastname']);
 $email=htmlspecialchars($_POST['email']);
 $password = htmlspecialchars($_POST['password']);
 
-if($_POST['admin'] == 'yes'){
+if($_POST['admin'] == 'yes'){ //what did the user request?
 	$admin_yn = 'Y';
 }
 else{
 	$admin_yn = 'N';
 }
-
+$admin_yn_default = 'N'; //by default, set user as not an admin
 
 ?>
 <!DOCTYPE html>
@@ -91,12 +91,12 @@ if($status=="OK"){
 			exit;
 		}
 		$visible = 0; //default not visible
-		if($fist_user == 'true'){
+		if($first_user == 'true'){
 			$visible = 1; //visible
 		}
 		$password = sha1($password);
 		$stmt2 = $dbc -> prepare("INSERT INTO users (user_id,first_name,last_name,password,admin,visible) VALUES (?,?,?,?,?,?)");
-		$stmt2 -> bind_param('sssssi',$email,$first_name,$last_name,$password,$admin_yn,$visible);
+		$stmt2 -> bind_param('sssssi',$email,$first_name,$last_name,$password,$admin_yn_default,$visible);
 		$stmt2 -> execute();
 		$rows_affected2 = $stmt2 ->affected_rows;
 		$stmt2 -> close();
@@ -115,13 +115,13 @@ if($status=="OK"){
 		//send email to user to let them know approval is pending
 		if($first_user = 'false'){
 			//email user
-			$mail_user_success = mail($email,"User Registration awating approval","You have registered as User ".$email." and are on the waiting list awaiting approval\n User's email: ".$email);
+			$mail_user_success = mail($email,"User Registration awaiting approval","You have registered as User ".$email." and are on the waiting list awaiting approval\n User's email: ".$email." and Admin Access Is: ".$admin_yn);
 			if(!$mail_user_success) {
 				 echo "Warning: User Mail delivery failed";
 			}
 			
 			//email admin
-			$mail_admin_success = mail($admin_email,"User Registration awating approval","User ".$email." has registered and is on the waiting list. Please approve\n User's email: ".$email);
+			$mail_admin_success = mail($admin_email,"User Registration awaiting approval","User ".$email." has registered and is on the waiting list. Please approve\n User's email: ".$email." . Admin Access Requested: ".$admin_yn." . Please email user when approved");
 			if(!$mail_admin_success) {
 				 echo "Warning: Admin Mail delivery failed";
 			}

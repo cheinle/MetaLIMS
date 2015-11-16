@@ -96,6 +96,8 @@ include ('../index.php');
 			   		visible = 1;
 			   		table_value = $('#table2').val();
 			   		field_value = $('#column2').val();
+			   		var admin_yn_value = $('#admin_yn').val();
+			   		alert(admin_yn_value);
 			   		if(table_value == '0' || (field_value == '0' || field_value == undefined)){
 			   			$("#table2").css({"background-color": "blue"});
 			   			$("#column2").css({"background-color": "blue"});
@@ -112,7 +114,7 @@ include ('../index.php');
 			                    url     : root+'admin_tools/process_visibility_change.php', //the url you are sending datas to which will again send the result
 			                    async: false,
 			                    type    : 'GET', //type of request, GET or POST
-			                    data    : { table_value: table_value, field_value: field_value, pk:pk, visible:visible}, //Data you are sending
+			                    data    : { table_value: table_value, field_value: field_value, pk:pk, visible:visible, admin_yn_value: admin_yn_value}, //Data you are sending
 			                    success : function(data){alert(data)}, // On success, it will populate the 2nd select
 			                    error   : function(){alert('A Submission Error Has Occurred')} //error message,
 			                }) 

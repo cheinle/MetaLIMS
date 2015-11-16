@@ -5,49 +5,73 @@
 	$field_value = $_GET['field_value'];
 	$pk = $_GET['pk'];
 	$visibility = $_GET['visible'];
+	if(isset($_GET['admin_yn_value'])){
+		$admin_yn= $_GET['admin_yn_value'];
+	}
 	
-	$pk_query = "UPDATE ".$table_name." SET visible = ? WHERE ".$pk." = ?";
-	//echo $table_name.' '.$field_value.' '.$pk.' '.$visibility.'<br>';
-	if($stmt = $dbc ->prepare($pk_query)){                 
-		$stmt->bind_param('is',$visibility,$field_value);
-	    if($stmt -> execute()){
-			$rows_affected = $stmt ->affected_rows;;
-			$stmt -> close();
-			if($rows_affected < 0){
+	
+	if($table_name == 'users'){
+		$pk_query = "UPDATE ".$table_name." SET visible = ?,admin = ? WHERE ".$pk." = ?";
+		//echo $table_name.' '.$field_value.' '.$pk.' '.$visibility.'<br>';
+		if($stmt = $dbc ->prepare($pk_query)){                 
+			$stmt->bind_param('iss',$visibility,$admin_yn,$field_value);
+	    	if($stmt -> execute()){
+				$rows_affected = $stmt ->affected_rows;;
+				$stmt -> close();
+				if($rows_affected < 0){
+					header('HTTP/1.1 500 Internal Server Boobooppp');
+	       			header('Content-Type: application/json; charset=UTF-8');
+	        		die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
+				}else{
+					echo "Success!!";
+				}
+			}
+		}
+	}
+	else{
+		
+		$pk_query = "UPDATE ".$table_name." SET visible = ? WHERE ".$pk." = ?";
+		//echo $table_name.' '.$field_value.' '.$pk.' '.$visibility.'<br>';
+		if($stmt = $dbc ->prepare($pk_query)){                 
+			$stmt->bind_param('is',$visibility,$field_value);
+		    if($stmt -> execute()){
+				$rows_affected = $stmt ->affected_rows;;
+				$stmt -> close();
+				if($rows_affected < 0){
+					header('HTTP/1.1 500 Internal Server Booboo');
+		       		header('Content-Type: application/json; charset=UTF-8');
+		        	die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
+				}else{
+					
+					
+					//if you are changing the visibility of a drawer, change the visibility of freezer_drawer
+					if($table_name == 'drawer'){
+						 $update_freezer_drawer = change_freezer_drawer_visibility($dbc,$field_value,$visibility);
+						 if($update_freezer_drawer == 'false'){
+						 	header('HTTP/1.1 500 Internal Server Booboo');
+	       					header('Content-Type: application/json; charset=UTF-8');
+	        				die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
+						 }else{
+						 	echo "Success!";
+						 }
+					}else{
+						echo "Success!";
+					}
+				}
+			}
+			else{
 				header('HTTP/1.1 500 Internal Server Booboo');
 	       		header('Content-Type: application/json; charset=UTF-8');
 	        	die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
-			}else{
-				
-				
-				//if you are changing the visibility of a drawer, change the visibility of freezer_drawer
-				if($table_name == 'drawer'){
-					 $update_freezer_drawer = change_freezer_drawer_visibility($dbc,$field_value,$visibility);
-					 if($update_freezer_drawer == 'false'){
-					 	header('HTTP/1.1 500 Internal Server Booboo');
-       					header('Content-Type: application/json; charset=UTF-8');
-        				die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
-					 }else{
-					 	echo "Success!";
-					 }
-				}else{
-					echo "Success!";
-				}
 			}
 		}
 		else{
 			header('HTTP/1.1 500 Internal Server Booboo');
-       		header('Content-Type: application/json; charset=UTF-8');
-        	die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
+	       	header('Content-Type: application/json; charset=UTF-8');
+	        die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
 		}
+	
 	}
-	else{
-		header('HTTP/1.1 500 Internal Server Booboo');
-       	header('Content-Type: application/json; charset=UTF-8');
-        die(json_encode(array('message' => 'ERROR', 'code' => 1337)));
-	}
-
-
 
 	function change_freezer_drawer_visibility($dbc,$drawer_name,$visibility){
 		$updated_check = 'true'; //visible_flag
