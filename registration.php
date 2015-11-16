@@ -5,7 +5,7 @@ $last_name = htmlspecialchars($_POST['lastname']);
 $email=htmlspecialchars($_POST['email']);
 $password = htmlspecialchars($_POST['password']);
 
-if($_POST['admin'] == 'yes'){ //what did the user request?
+if($_POST['admin'] == 'yes'){ //This is what the user requested
 	$admin_yn = 'Y';
 }
 else{

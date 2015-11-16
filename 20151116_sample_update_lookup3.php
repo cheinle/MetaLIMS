@@ -409,73 +409,116 @@ include('functions/convert_header_names.php');
 						}
 						//adding commit after it has gone through each possible update.
 						//check if sample name was updated, if it was, update sample name for storage info also
-					    //database foreign key constraints set. no need to remember original sample name after here (auto updated) 
-					    
+					    //also update storage info for 'original' if needed...need to add how to do if for multiple storage
+						
 						//////////////////////////////////////////////////////////////////
 						/****Update Storage Info Table****/
 						//////////////////////////////////////////////////////////////////
 						
+						//first check if the sample exists in storage
+						$getName = $dbc->prepare('SELECT sample_name FROM storage_info WHERE sample_name = ?') or die('Couldn\'t check the name');
+						if(!$getName){
+							$successfull = 'false';
+							throw new Exception("Prepare Error: Unable To Lookup Storage Info");	
+						}
+						//$getName->bind_param('s', $p_orig_sample_name);
+						$getName->bind_param('s', $p_sample_name);//use new sample name do to foreign key contraints are set to cascade on sample name change from sample table
+						if(!$getName->execute()){
+							$successfull = 'false';
+							throw new Exception("Execution Error: Unable To Lookup Storage Info");	
+						}
+						$getName->store_result();
+						$countRows = $getName->num_rows;
+						$getName->close();
+						
 						$p_oStore = $_GET['oStore_temp'].','.$_GET['oStore_name'];
 						$p_dStore = $_GET['dStore_temp'].','.$_GET['dStore_name'];
 						$p_rStore = $_GET['rStore_temp'].','.$_GET['rStore_name'];
-						
+						if($countRows == 1){
 
-						$data2 = array( 
-							
-							array('field' => 'original', 'value' => $p_oStore, 'type' => 's'),
-							array('field' => 'orig_sample_exists', 'value' => $p_orig_sample_exist, 'type' => 's'),
-							array('field' => 'dna_extr', 'value' => $p_dStore, 'type' => 's'),
-							array('field' => 'rna_extr', 'value' => $p_rStore, 'type' => 's'),
-							array('field' => 'DNA_sample_exists', 'value' => $p_DNA_sample_exist, 'type' => 's'),
-							array('field' => 'RNA_sample_exists', 'value' => $p_RNA_sample_exist, 'type' => 's'),
-							array('field' => 'sample_name', 'value' => $p_sample_name, 'type' => 's')//put sample name updates last
-						);
-						$count2 = count($data2);
-	            		if($count2 > 0) {
-		                	//$errors = false;
-							
-		                	$query_pre = 'UPDATE storage_info SET ';
-		                	foreach($data2 as $id2 => $values2) {
-		                    	$query_si = $query_pre.$values2['field'].' = ? WHERE sample_name = ?';		
-								if($stmt_si = $dbc ->prepare($query_si)) {
-									$types = $values2['type'].'s';//s is for the p_sample_name type, other s is for timestamp
-			                        $stmt_si->bind_param($types, $values2['value'], $p_sample_name); 
-				                    $stmt_si -> execute();
-									$rows_affected_si = $stmt_si ->affected_rows;
-									$stmt_si -> close();
-									
-									//check if rows were updated
-									if($rows_affected_si > 0){
-											$value = convert_header_names($values2['field']);
-											echo "You successfully updated ".$value.'<br>';
-											$updates_check = 'true';
-									}
-									elseif($rows_affected_si == 0){
-										//for testing purposes only
-										#$echo "No need to update ".$value.'<br>';
+							$data2 = array( 
+								
+								array('field' => 'original', 'value' => $p_oStore, 'type' => 's'),
+								array('field' => 'orig_sample_exists', 'value' => $p_orig_sample_exist, 'type' => 's'),
+								array('field' => 'dna_extr', 'value' => $p_dStore, 'type' => 's'),
+								array('field' => 'rna_extr', 'value' => $p_rStore, 'type' => 's'),
+								array('field' => 'DNA_sample_exists', 'value' => $p_DNA_sample_exist, 'type' => 's'),
+								array('field' => 'RNA_sample_exists', 'value' => $p_RNA_sample_exist, 'type' => 's'),
+								array('field' => 'sample_name', 'value' => $p_sample_name, 'type' => 's')//put sample name updates last
+							);
+							$count2 = count($data2);
+		            		if($count2 > 0) {
+			                	//$errors = false;
+								
+			                	$query_pre = 'UPDATE storage_info SET ';
+			                	foreach($data2 as $id2 => $values2) {
+			                    	$query_si = $query_pre.$values2['field'].' = ? WHERE sample_name = ?';		
+									if($stmt_si = $dbc ->prepare($query_si)) {
+										$types = $values2['type'].'s';//s is for the p_sample_name type, other s is for timestamp
+				                        $stmt_si->bind_param($types, $values2['value'], $p_orig_sample_name); 
+					                    $stmt_si -> execute();
+										$rows_affected_si = $stmt_si ->affected_rows;
+										$stmt_si -> close();
+										
+										//check if rows were updated
+										if($rows_affected_si > 0){
+												$value = convert_header_names($values2['field']);
+												echo "You successfully updated ".$value.'<br>';
+												$updates_check = 'true';
+										}
+										elseif($rows_affected_si == 0){
+											//for testing purposes only
+											#$echo "No need to update ".$value.'<br>';
+										}
+										else{
+											$successfull = 'false';
+											echo '<script>Alert.render("ERROR:Unable to update sample name in storage info. No Updates were made to sample!!! Please contact admin for assistance.);</script>';
+											throw new Exception("rows affected is <= 0. ERROR: You were unable to update ");	
+											//mysqli_error($dbc);
+										}
+										 
 									}
 									else{
 										$successfull = 'false';
 										echo '<script>Alert.render("ERROR:Unable to update sample name in storage info. No Updates were made to sample!!! Please contact admin for assistance.);</script>';
-										throw new Exception("rows affected is <= 0. ERROR: You were unable to update ");	
+										throw new Exception("Prepare statement failure. ERROR: You were unable to update ");	
 										//mysqli_error($dbc);
 									}
-									 
 								}
-								else{
+							}
+							else{
 									$successfull = 'false';
 									echo '<script>Alert.render("ERROR:Unable to update sample name in storage info. No Updates were made to sample!!! Please contact admin for assistance.);</script>';
-									throw new Exception("Prepare statement failure. ERROR: You were unable to update ");	
+									throw new Exception("Prepare failed. ERROR: You were unable to update ");	
 									//mysqli_error($dbc);
-								}
 							}
 						}
 						else{
-							$successfull = 'false';
-							echo '<script>Alert.render("ERROR:Unable to update sample name in storage info. No Updates were made to sample!!! Please contact admin for assistance.);</script>';
-							throw new Exception("Prepare failed. ERROR: You were unable to update ");	
+							echo  $p_sample_name.','.$p_oStore.','.$p_orig_sample_exist.','.$p_dStore.','.$p_rStore.','.$p_DNA_sample_exist.','.$p_RNA_sample_exist;
+							//if sample did not exist in storage info, then insert it
+							$stmt3 = $dbc -> prepare("INSERT INTO storage_info (sample_name,original,orig_sample_exists,dna_extr,rna_extr,DNA_sample_exists,RNA_sample_exists) VALUES (?,?,?,?,?,?,?)");
+							if(!$stmt3){
+								$successfull = 'false';
+								throw new Exception("Prepare Failure: Unable to insert sample in storage info");	
+							}
+							$stmt3 -> bind_param('sssssss', $p_sample_name,$p_oStore,$p_orig_sample_exist,$p_dStore,$p_rStore,$p_DNA_sample_exist,$p_RNA_sample_exist);		
+							if(!$stmt3 -> execute()){
+								$successfull = 'false';
+								throw new Exception("Execute Failure: Unable to insert sample in storage info");	
+							}
+							$rows_affected3 = $stmt3 ->affected_rows;		
+							$stmt3 -> close();
+														
+							if($rows_affected3 < 0){
+								$successfull = 'false';
+								echo '<script>Alert.render("ERROR:Unable to insert sample in storage info");</script>';
+								throw new Exception("Unable to insert sample in storage info");												
+							}
+							else{
+								//echo "Insert into samples storage info successfull\n";
+								$updates_check = 'true';
+							}
 						}
-						
 					}
 					else{
 						$successfull = 'false';
