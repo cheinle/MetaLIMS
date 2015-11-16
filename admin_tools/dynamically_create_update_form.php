@@ -24,7 +24,8 @@
 					$new_label_name = $new_label_name.' '.$name_piece;
 				}
 				echo '<p>';
-				echo '<label class="textbox-label">'.$new_label_name.':</label>';
+				//echo '<label class="textbox-label">'.$new_label_name.':</label>';
+				echo '<label class="textbox-label" style="color:blue">Edit Entry Here:</label>';
 				
 				//whitelist column and tablename?
 				$query = "SELECT ".$column[0]." FROM ".$table_name." WHERE ".$pk." = ?";
