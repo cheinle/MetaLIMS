@@ -93,6 +93,7 @@ if($status=="OK"){
 		$visible = 0; //default not visible
 		if($first_user == 'true'){
 			$visible = 1; //visible
+			$admin_yn_default = 'Y';
 		}
 		$password = sha1($password);
 		$stmt2 = $dbc -> prepare("INSERT INTO users (user_id,first_name,last_name,password,admin,visible) VALUES (?,?,?,?,?,?)");
