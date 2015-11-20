@@ -4,7 +4,7 @@
 function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 	include('convert_time.php');
 	include('convert_header_names.php');
-	include('find_air_samplers.php');
+	include('find_samplers.php');
 	
 	$myfile = fopen("document_name.xls", "w") or die("Unable to open file!");
 
@@ -87,8 +87,8 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 										}
 									}
 								}
-								if($key == 'air_sampler_name'){
-									$p_value = find_air_samplers($p_sample_name,$table_type);
+								if($key == 'sampler_name'){
+									$p_value = find_samplers($p_sample_name,$table_type);
 								}
 								if($key == 'total_samp_time'){
 									$p_value = convert_time($key, $p_value);
@@ -147,8 +147,8 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 										}
 									}
 								}
-								if($key == 'air_sampler_name'){
-									$p_value = find_air_samplers($p_sample_name,$table_type);
+								if($key == 'sampler_name'){
+									$p_value = find_samplers($p_sample_name,$table_type);
 								}
 								if($key == 'total_samp_time'){
 									$p_value = convert_time($key, $p_value);
