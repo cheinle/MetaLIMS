@@ -15,7 +15,7 @@ function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 		    		} 
 		
 		    		call_user_func_array(array($stmt, 'bind_result'), $params); 
-					
+					echo "<pre>**Notice: Click On Sample Sort To Correctly Sort Samples</pre>";
 		    		echo '<table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">';
 					#echo '<table>';
 					$header_ct = 0;	
