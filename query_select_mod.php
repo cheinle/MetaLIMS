@@ -142,12 +142,12 @@ include('functions/check_box_tables.php');
 	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="project_all">Display All DB Project Info</label>
 	</div>
 	
-	<LEGEND  style="margin-left:1.5%;"><b>  Display All Air Samplers:</b></LEGEND>
+	<LEGEND  style="margin-left:1.5%;"><b>  Display All Samplers:</b></LEGEND>
 	<div class="vert-checkboxes">
 	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="sampler_all">Display All Sampler Content</label>
 	</div>
 	
-	<LEGEND  style="margin-left:1.5%;"><b>Display All Particle Counters:</b></LEGEND>
+	<LEGEND  style="margin-left:1.5%;"><b>Display All Sensors:</b></LEGEND>
 	<div class="vert-checkboxes">
 	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="partCt_all">Display All DB Sensor Content</label>
 	</div>
