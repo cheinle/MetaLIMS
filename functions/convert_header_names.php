@@ -6,7 +6,8 @@ function convert_header_names($p_key){
 		$p_key = 'Sampler Name';
 	}
 	if($p_key == 'analysis_name'){
-		$p_key = 'Analysis Name';
+		//$p_key = 'Analysis Name';
+		$p_key = 'false';
 	}
 	if($p_key == 'barcode'){
 		$p_key = 'Barcode';
@@ -76,7 +77,8 @@ function convert_header_names($p_key){
 		$p_key = 'false';
 	}
 	if($p_key == 'pool_extracts_id'){
-		$p_key = 'Pool Extracts ID';
+		//$p_key = 'Pool Extracts ID';
+		$p_key = 'false';
 	}
 	if($p_key == 'project_name'){
 		$p_key = 'Project Name';
@@ -121,10 +123,12 @@ function convert_header_names($p_key){
 		$p_key = 'Sampling Height (cm)';
 	}
 	if($p_key == 'sequencing_info'){
-		$p_key = 'Sequencing Submission Info';
+		//$p_key = 'Sequencing Submission Info';
+		$p_key = 'false';
 	}
 	if($p_key == 'seq_id'){
-		$p_key = 'Sequencing Submission ID';
+		//$p_key = 'Sequencing Submission ID';
+		$p_key = 'false';
 	}
 	if($p_key == 'sequencing_id'){
 		$p_key = 'false';
@@ -143,10 +147,12 @@ function convert_header_names($p_key){
 		$p_key = 'Updated By';
 	}
 	if($p_key == 'seq_vol'){
-		$p_key = 'Sequencing Sub. Vol (uL)';
+		//$p_key = 'Sequencing Sub. Vol (uL)';
+		$p_key = 'false';
 	}
 	if($p_key == 'seq_dna_conc'){
-		$p_key = 'Sequencing Sub. DNA Conc.(ng/uL)';
+		//$p_key = 'Sequencing Sub. DNA Conc.(ng/uL)';
+		$p_key = 'false';
 	}
 	if($p_key == 'pooled_flag'){
 		$p_key = 'false';

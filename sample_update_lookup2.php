@@ -677,7 +677,7 @@ if (isset($_GET['submit'])) {
 				</div>
 				
 				<p>
-				<button type="button"  data-toggle="collapse" data-target="#demo3" aria-expanded="true" aria-controls="demo3" class='buttonLength'>Update Sequencing Info</button>
+				<!--<button type="button"  data-toggle="collapse" data-target="#demo3" aria-expanded="true" aria-controls="demo3" class='buttonLength'>Update Sequencing Info</button>
 				<div id="demo3" class="collapse">
 				</p>	
 				
@@ -688,7 +688,7 @@ if (isset($_GET['submit'])) {
 				<p><a href="/series/dynamic/airmicrobiomes/update_tables/update_seq_info.php">Fill Out Sequencing Submission Info</a></p>
 				<p>
 				<!--Sequencing2 Dropdown-->
-				<label class="textbox-label">Select Sequencing Submission Info:</label>
+				<!--<label class="textbox-label">Select Sequencing Submission Info:</label>
 				<br/>
 				<?php
 				//url or $_GET name, table name, field name
@@ -711,7 +711,7 @@ if (isset($_GET['submit'])) {
 				<div class="col-xs-6">
 				<p>
 				<!--Analysis Pipeline Name Dropdown-->
-				<label class="textbox-label">Select Analysis Pipeline:</label>
+				<!--<label class="textbox-label">Select Analysis Pipeline:</label>
 				<br/>
 				<?php
 				//url or $_GET name, table name, field name
@@ -720,7 +720,7 @@ if (isset($_GET['submit'])) {
 				</p>
 				</div>
 				</fieldset>
-				</div>
+				</div>-->
 
 				<p>
 				<button type="button"  data-toggle="collapse" data-target="#demo5" aria-expanded="true" aria-controls="demo5" class='buttonLength'>Update Notes</button>
