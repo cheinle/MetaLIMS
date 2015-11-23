@@ -97,7 +97,7 @@ include ('../index.php');
 			   		table_value = $('#table2').val();
 			   		field_value = $('#column2').val();
 			   		var admin_yn_value = $('#admin_yn').val();
-			   		alert(admin_yn_value);
+			   		//alert(admin_yn_value);
 			   		if(table_value == '0' || (field_value == '0' || field_value == undefined)){
 			   			$("#table2").css({"background-color": "blue"});
 			   			$("#column2").css({"background-color": "blue"});
