@@ -32,22 +32,31 @@
 	    if($error == 'false'){
 	    
 			//insert data into db. Use prepared statement 
-			$stmt_add = $dbc -> prepare("INSERT INTO drawer (drawer_id) VALUES (?)");
-			$stmt_add  -> bind_param('s',$p_drawer);
-				
-			$stmt_add  -> execute();
-			$rows_affected_add  = $stmt_add  ->affected_rows;
-			$stmt_add  -> close();
-			echo $rows_affected_add;	
-			//check if add was successful or not. Tell the user
-		   	if($rows_affected_add  > 0){
-				echo 'You Added A New Drawer: '.$p_drawer;
+			$query_add = "INSERT INTO drawer (drawer_id) VALUES (?)";
+			if($stmt_add = $dbc -> prepare($query_add)){
+				$stmt_add->bind_param("s",$p_drawer);
+					
+				if($stmt_add->execute()){
+					$rows_affected_add  = $stmt_add  ->affected_rows;
+					$stmt_add  -> close();
+					//check if add was successful or not. Tell the user
+				   	if($rows_affected_add  > 0){
+						echo 'You Added A New Drawer: '.$p_drawer;
+					}else{
+						echo 'An Error Has Occurred';
+						mysqli_error($dbc);
+					}
+				}else{
+					echo 'Execute Error: An Error Has Occurred';
+					mysqli_error($dbc);
+				}
 			}else{
-				echo 'An Error Has Occured';
+				echo 'Prepare Error: An Error Has Occurred';
 				mysqli_error($dbc);
 			}
 		}
 	}
+
 
 	
 	if($type == 'freezer'){
@@ -76,18 +85,27 @@
 	    if($error == 'false'){
 	    
 			//insert data into db. Use prepared statement 
-			$stmt_add = $dbc -> prepare("INSERT INTO freezer (freezer_id) VALUES (?)");
-			$stmt_add  -> bind_param('s',$p_freezer);
-				
-			$stmt_add  -> execute();
-			$rows_affected_add  = $stmt_add  ->affected_rows;
-			$stmt_add  -> close();
-				
-			//check if add was successful or not. Tell the user
-		   	if($rows_affected_add  > 0){
-				echo 'You Added A New freezer: '.$p_freezer;
+			$query_add = "INSERT INTO freezer (freezer_id) VALUES (?)";
+			if($stmt_add = $dbc -> prepare($query_add)){
+				$stmt_add  -> bind_param('s',$p_freezer);
+					
+				if($stmt_add  -> execute()){
+					$rows_affected_add  = $stmt_add  ->affected_rows;
+					$stmt_add  -> close();
+						
+					//check if add was successful or not. Tell the user
+				   	if($rows_affected_add  > 0){
+						echo 'You Added A New freezer: '.$p_freezer;
+					}else{
+						echo 'An Error Has Occurred';
+						mysqli_error($dbc);
+					}
+				}else{
+					echo 'Execute Error: An Error Has Occurred';
+					mysqli_error($dbc);
+				}
 			}else{
-				echo 'An Error Has Occured';
+				echo 'Prepare Error: An Error Has Occurred';
 				mysqli_error($dbc);
 			}
 		}
@@ -97,8 +115,8 @@
 	
 	if($type == 'freezer_drawer'){
 		$error = 'false';
-		$p_drawer = htmlspecialchars($values[0]);
-		$p_freezer = htmlspecialchars($values[1]);
+		$p_drawer = htmlspecialchars($values[1]);
+		$p_freezer = htmlspecialchars($values[0]);
 
 		$stmt = $dbc->prepare("SELECT freezer_id,drawer_id FROM freezer_drawer WHERE drawer_id = ? AND freezer_id =?");
 		$stmt -> bind_param('ss', $p_drawer,$p_freezer);
@@ -123,18 +141,27 @@
 	    if($error == 'false'){
 
 			//insert data into db. Use prepared statement 
-			$stmt_add = $dbc -> prepare("INSERT INTO freezer_drawer (drawer_id,freezer_id) VALUES (?,?)");
-			$stmt_add  -> bind_param('ss',$p_drawer,$p_freezer);
-			
-			$stmt_add  -> execute();
-			$rows_affected_add  = $stmt_add  ->affected_rows;
-			$stmt_add  -> close();
-			
-			//check if add was successful or not. Tell the user
-	   		if($rows_affected_add  > 0){
-				echo 'You Added A New Drawer: '.$p_drawer.' To Freezer '.$p_freezer;
+			$query_add = "INSERT INTO freezer_drawer (drawer_id,freezer_id) VALUES (?,?)";
+			if($stmt_add = $dbc -> prepare($query_add)){
+				$stmt_add  -> bind_param('ss',$p_drawer,$p_freezer);
+				
+				if($stmt_add  -> execute()){
+					$rows_affected_add  = $stmt_add  ->affected_rows;
+					$stmt_add  -> close();
+					
+					//check if add was successful or not. Tell the user
+			   		if($rows_affected_add  > 0){
+						echo 'You Added A New Drawer: '.$p_drawer.' To Freezer '.$p_freezer;
+					}else{
+						echo 'An Error Has Occurred'.$p_drawer.$p_freezer;
+						mysqli_error($dbc);
+					}
+				}else{
+					echo 'Execute Error: An Error Has Occurred'.$p_drawer.$p_freezer;
+					mysqli_error($dbc);
+				}
 			}else{
-				echo 'An Error Has Occured';
+				echo 'Prepare Error: An Error Has Occurred';
 				mysqli_error($dbc);
 			}
 		}
