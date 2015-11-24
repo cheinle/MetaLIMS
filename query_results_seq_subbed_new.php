@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 include('database_connection.php'); 
 include('index.php');
 include('functions/build_seq_subbed_output_new.php');
+include('config/path.php');
 ?>
 
 <!doctype html>
@@ -75,7 +76,7 @@ if(isset($_GET['submit'])){
 			$query = $query_main;
 			$stmt = $dbc->prepare($query);
 			if($stmt){
-				build_seq_subbed_output_new($stmt);
+				build_seq_subbed_output_new($stmt,$root);
 			};
 		}
 		else{
@@ -84,7 +85,7 @@ if(isset($_GET['submit'])){
 				$stmt = $dbc->prepare($query);
 				$stmt -> bind_param('s', $p_project_name);
 				if($stmt){
-					build_seq_subbed_output_new($stmt);
+					build_seq_subbed_output_new($stmt,$root);
 				}
 			}
 			elseif ($check_field == 'false' && $check_date == 'true') {//only date is populated
@@ -92,7 +93,7 @@ if(isset($_GET['submit'])){
 				$stmt = $dbc->prepare($query);
 				$stmt -> bind_param('ss',$p_smydate , $p_emydate);
 				if($stmt){
-					build_seq_subbed_output_new($stmt);
+					build_seq_subbed_output_new($stmt,$root);
 				}
 			}
 			elseif ($check_field == 'true' && $check_date == 'true') {//both date and project name are populated
@@ -100,7 +101,7 @@ if(isset($_GET['submit'])){
 				$stmt = $dbc->prepare($query);
 				$stmt -> bind_param('sss',$p_project_name, $p_smydate , $p_emydate);
 				if($stmt){
-					build_seq_subbed_output_new($stmt);
+					build_seq_subbed_output_new($stmt,$root);
 				}
 			}
 			else{
