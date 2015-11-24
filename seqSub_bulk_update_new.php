@@ -6,8 +6,8 @@
 	include_once("functions/check_collector_names.php");
 	include_once("functions/unset_session_vars.php");
 	include("functions/check_sequencing_type.php");
-	include('/functions/get_submission_number.php');
-	include('/functions/get_application_abbrev.php');
+	include('functions/get_submission_number.php');
+	include('functions/get_application_abbrev.php');
 	define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
 ?>
 	<!doctype html>
@@ -154,17 +154,19 @@ if(isset($_POST['submit'])){
 				$prefix = 'ABX';
 				//$application = 'Whole Genome Sequencing'; //gloablly defined earlier
 				$seq_type_abbrev = get_application_abbrev($application,'abbrev'); //genomic ...need a way to get this if application == 'Genomic DNA' seq_type_abbrev = G
-				if($seq_type_abbrev == 'ERROR'){
+				$check_for_error1 = strcmp($seq_type_abbrev,'ERROR');
+				if($check_for_error1 == '0'){
 					throw new Exception("ERROR: No Sequencing Type Abbreviation. Please Notify Admin");
 				}
 				
 				//based on application type?
 				$number_of_submissions = get_submission_num($sample_name,$seq_type_abbrev); //would you need to create an row in the table everytime you create a sample? (yes, because then you can look up in the table)
-				if($number_of_submissions == 'ERROR'){
+				$check_for_error = strcmp($number_of_submissions,'ERROR');
+				if($check_for_error == '0'){
 						throw new Exception("ERROR: No Sequencing Submission Number. Please Notify Admin");
 				}
+				
 				$new_number_of_submissions = $number_of_submissions + 1;//does this need to be two digits placeholder?
-				echo "new number".$new_number_of_submissions;
 				//check if submission number is two digits
 				$length_check = strlen($new_number_of_submissions);
 				if($length_check < 1 || $length_check > 2){
@@ -265,7 +267,7 @@ if(isset($_POST['submit'])){
 					$rows_affected3 = $stmt3 ->affected_rows;
 					$stmt3 -> close();
 					if($rows_affected3 >= 0){
-							echo "You updated sample ".$p_sample_name.'- '.$p_sampConc.' (ng/ul) '.$p_vol.' (uL)<br>'; 
+							echo "You updated sample ".$p_sample_name.'- '.$p_sampConc.' (ng/ul) '.$p_vol.' (uL). Number of Submissions: '.$new_number_of_submissions.'<br>';
 					}
 					else{
 						$insert_error = 'true';
@@ -327,7 +329,7 @@ if(isset($_POST['submit'])){
 				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 				$path = $_SERVER['DOCUMENT_ROOT'].$root;
 				//$objWriter->save($path.'/browse_files/repository/shared/sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
-				$objWriter->save($path.'/sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
+				$objWriter->save($path.'sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
 				
 				$file_name ='SamplesSubmissionForm_'.$dtSub.'.xlsx';
 				echo 'File has been created:',EOL;

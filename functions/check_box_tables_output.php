@@ -12,13 +12,7 @@ function check_box_results($column_names){
         		if(empty($field_names)){
             		$check = whiteList($columns,'column'); 
 					if($check == 'true'){
-						if($columns == 'iso_coll_temp' || $columns == 'iso_date' || $columns == 'iso_store_date' || $columns == 'closest_hit' || $columns == 'seq_sang' || $columns == 'send_pac_bio' || $columns == 'loc_type'){
-							$field_names.="isolates.$columns";
-						}
-						else{
-							$field_names.="sample.$columns";
-						}
-            			
+						$field_names.="sample.$columns";
 					}
 					//if user choose 'all', exit and return all columns
 					if($columns == 'All'){
@@ -29,7 +23,7 @@ function check_box_results($column_names){
          		else{
             		$check = whiteList($columns,'column');
 					if($check == 'true'){
-            			$field_names.=", $columns";
+            			$field_names.=", sample.$columns";
 					}
 					//if user choose 'all', exit and return all columns
 					if($columns == 'All'){
