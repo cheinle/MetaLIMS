@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include ('database_connection.php');
 include ('index.php');
-include ('/functions/build_bulk_seqSub_table_new.php');
+include ('functions/build_bulk_seqSub_table_new.php');
 include('config/path.php');
 
 ?>
@@ -81,7 +81,11 @@ include('config/path.php');
 					$_SESSION['seq_pool'] = $seq_pool;
 					
 					$options = array();
-					$options = $_POST['optional'];
+					$options = array();
+					$options = '';
+					if(isset($_POST['optional'])){
+						$options = $_POST['optional'];
+					}
 					
 					build_bulk_seqSub_table_new($array_sample_names,$options,$sample_type,$container_type,$root);
 			 }
