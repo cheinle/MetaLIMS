@@ -6,9 +6,8 @@
 <body>
 <?php	//was to return a dropdown, now to return names...can modify text update to do this instead?
 
-function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name,$stored_name,$comp_pk_name){ #send also the query name?, always based on sample name
+function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name,$stored_name,$comp_pk_name,$root){ #send also the query name?, always based on sample name
 
-			include('../config/path.php');
 			$path = $_SERVER['DOCUMENT_ROOT'].$root;
 			include($path.'database_connection.php');
 			

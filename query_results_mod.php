@@ -126,7 +126,7 @@ if(isset($_GET['submit'])){
 				
 		if(isset($_GET['column_names'])){$field_names = check_box_results($_GET['column_names']);}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
-			$field_names = 'sample_name,d_conc,sample_sort';
+			$field_names = 'sample.sample_name,sample.d_conc,sample.sample_sort';
 		}
 		else{$field_names = "*";}
 
@@ -176,7 +176,7 @@ if(isset($_GET['submit'])){
 			build_xls_output_table($stmt);
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
-			build_bulk_dna_table($stmt);
+			build_bulk_dna_table($stmt,$root);
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'seq_sub'){
 			echo '<script>Alert.render("ERROR:Current Page Under Construction.");</script>';
@@ -184,10 +184,10 @@ if(isset($_GET['submit'])){
 			//build_bulk_seqSub_table($stmt);
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
-			build_bulk_read_sub_id_table($stmt);
+			build_bulk_read_sub_id_table($stmt,$root);
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'update_read_sub'){
-			build_bulk_read_sub_id_update_table($stmt);
+			build_bulk_read_sub_id_update_table($stmt,$root);
 		}
 		else{
 			if($stmt){

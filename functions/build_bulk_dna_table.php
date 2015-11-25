@@ -1,16 +1,15 @@
 <?php	
 
 //display table
-function build_bulk_dna_table($stmt){
+function build_bulk_dna_table($stmt,$root){
 	include('convert_time.php');
 	include('convert_header_names.php');
 	include('text_insert_update.php');
 	include('dropDown.php');
-	include('../config/path.php');
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	include($path.'/config/js.php'); //was not being inherited correctly...just added here for now
 	
-	echo '<form class="registration" onsubmit="return confirm(\'Do you want to submit the form?\');" action="dna_bulk_update.php" method="GET">';
+	echo '<form class="registration" onsubmit="return confirm(\'Do you want to submit the form?\');" action="dna_bulk_update.php" method="POST">';
 	//echo '<div class = \'left\'>';
 	echo '<div>';
 	echo '<pre>';

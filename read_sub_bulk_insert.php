@@ -11,12 +11,12 @@
 	//db
 	//experiment type
 	
-	$sample_array=$_GET['sample'];
-	//$p_id = htmlspecialchars($_GET['dExtKit']);
-	$p_date = htmlspecialchars($_GET['subm_date']);
-	$p_submitter= htmlspecialchars($_GET['submitter']);
-	$p_db= htmlspecialchars($_GET['subm_db']);
-	$p_experiment_type= htmlspecialchars($_GET['type_of_experiement']);
+	$sample_array=$_POST['sample'];
+	//$p_id = htmlspecialchars($_POST['dExtKit']);
+	$p_date = htmlspecialchars($_POST['subm_date']);
+	$p_submitter= htmlspecialchars($_POST['submitter']);
+	$p_db= htmlspecialchars($_POST['subm_db']);
+	$p_experiment_type= htmlspecialchars($_POST['type_of_experiement']);
 
 	
 	//store get variables into session variables so you can use them on your back button

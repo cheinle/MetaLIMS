@@ -1,24 +1,16 @@
 <?php	
 
-//display table
-function build_bulk_read_sub_id_update_table($stmt){
+function build_bulk_read_sub_id_update_table($stmt,$root){
 	
-	///////////////////////////////////
+
 	$submitted = 'false';
-	
-	
-	
-	include('convert_time.php');
+include('convert_time.php');
 	include('convert_header_names.php');
-	#include('text_insert_update.php');
-	include('../config/path.php');
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
-	#include($path.'/functions/text_insert_read_subm_update.php');
 	include($path.'/functions/dropDown_update_for_read_subm.php');
-	include($path.'/config/js.php'); //was not being inherited correctly...just added here for now
+	include($path.'/config/js.php');
 	
-	echo '<form class="bulk" onsubmit="return confirm(\'Do you want to submit the form?\');" action="read_sub_bulk_update.php" method="GET">';
-	//echo '<div class = \'left\'>';
+	echo '<form class="bulk" onsubmit="return confirm(\'Do you want to submit the form?\');" action="read_sub_bulk_update.php" method="POST">';
 	echo '<div>';
 	echo '<pre>';
 	echo '*Notice: Bulk Update will update all samples that have been checkmarked for Update/Delete';
@@ -146,9 +138,9 @@ function build_bulk_read_sub_id_update_table($stmt){
 				</script>
 				</td>
 				
-				<td><?php dropDown_update_for_read_subm('subm_db', 'read_subm_database', 'database_name','database_name','subm_db',"$sample_name","0","$sub_id");?></td>
+				<td><?php dropDown_update_for_read_subm('subm_db', 'read_subm_database', 'database_name','database_name','subm_db',"$sample_name","0","$sub_id",$root);?></td>
 				<td><input type="text" name="sample[<?php echo $sample_name.','.$old_id; ?>][submitter]" placeholder="Enter A Name" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['submitter']);}else{ echo $submitter;} ?>"></td>
-				<td><?php dropDown_update_for_read_subm('type_of_experiement', 'read_subm_exp_types', 'exp_types','exp_types','type_exp',"$sample_name","0","$sub_id");?></td>
+				<td><?php dropDown_update_for_read_subm('type_of_experiement', 'read_subm_exp_types', 'exp_types','exp_types','type_exp',"$sample_name","0","$sub_id",$root);?></td>
 				</tr>
 
 				<?php

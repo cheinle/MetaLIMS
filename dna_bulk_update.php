@@ -5,17 +5,17 @@
 	include_once("functions/check_collector_names.php");
 	include_once("functions/unset_session_vars.php");
 	
-    $sample_array=$_GET['sample'];
-	$p_dExtKit = htmlspecialchars($_GET['dExtKit']);
-	$p_d_extr_date = htmlspecialchars($_GET['d_extr_date']);
-	$p_dVol= htmlspecialchars($_GET['dVol']);
-	$p_dInstru= htmlspecialchars($_GET['dInstru']);
-	$p_dVol_quant= htmlspecialchars($_GET['dVol_quant']);
-	$p_dStore = $_GET['dStore_temp'].','.$_GET['dStore_name'];
+    $sample_array=$_POST['sample'];
+	$p_dExtKit = htmlspecialchars($_POST['dExtKit']);
+	$p_d_extr_date = htmlspecialchars($_POST['d_extr_date']);
+	$p_dVol= htmlspecialchars($_POST['dVol']);
+	$p_dInstru= htmlspecialchars($_POST['dInstru']);
+	$p_dVol_quant= htmlspecialchars($_POST['dVol_quant']);
+	$p_dStore = $_POST['dStore_temp'].','.$_POST['dStore_name'];
 	$p_dStore = htmlspecialchars($p_dStore);
 	
 	//check and process DNA Extractor names
-	$array2=$_GET['dExtrName'];
+	$array2=$_POST['dExtrName'];
 	$check2 = check_collector_names($array2,'false');
 	$p_dExtrName = $check2['cat_name'];
 	
@@ -31,22 +31,22 @@
 	$_SESSION['dInstru'] = $p_dInstru;
 	$_SESSION['dVol_quant'] = $p_dVol_quant;
 	
-	$_SESSION['dStore_temp'] = $_GET['dStore_temp'];
-	$_SESSION['dStore_name'] = $_GET['dStore_name'];
+	$_SESSION['dStore_temp'] = $_POST['dStore_temp'];
+	$_SESSION['dStore_name'] = $_POST['dStore_name'];
 	//$_SESSION['DNA_sample_exist'] = $p_DNA_sample_exist;
 	
 	$_SESSION['dExtrName']= $p_dExtrName;
 	
-	if(isset($_GET['orig_sample_exist'])){;
-		$p_orig_sample_exist= htmlspecialchars($_GET['orig_sample_exist']);
+	if(isset($_POST['orig_sample_exist'])){;
+		$p_orig_sample_exist= htmlspecialchars($_POST['orig_sample_exist']);
 		$_SESSION['orig_sample_exist']=$p_orig_sample_exist;
 	}
 	else{
 		$p_orig_sample_exist = 'true';
 		$_SESSION['orig_sample_exist']=$p_orig_sample_exist;
 	}
-	if(isset($_GET['DNA_sample_exist'])){
-		$p_DNA_sample_exist= htmlspecialchars($_GET['DNA_sample_exist']);
+	if(isset($_POST['DNA_sample_exist'])){
+		$p_DNA_sample_exist= htmlspecialchars($_POST['DNA_sample_exist']);
 		$_SESSION['DNA_sample_exist']=$p_DNA_sample_exist;
 	}
 	
@@ -81,19 +81,19 @@
 		$error = 'true';
 		echo '<script>Alert.render("ERROR: DNA Extractors Not Entered.");</script>';
 	}
-	if( $_GET['dStore_temp'] == '' ||$_GET['dStore_temp'] == '0' ){
+	if( $_POST['dStore_temp'] == '' ||$_POST['dStore_temp'] == '0' ){
 		$error = 'true';
 		echo '<script>Alert.render("ERROR: DNA Extract Storage Freezer Not Entered.");</script>';
 	}
-	if( $_GET['dStore_name'] == '' ||$_GET['dStore_name'] == '0' ){
+	if( $_POST['dStore_name'] == '' ||$_POST['dStore_name'] == '0' ){
 		$error = 'true';
 		echo '<script>Alert.render("ERROR: DNA Extract Storage Drawer Owner Not Entered.");</script>';
 	}
-	//if( !isset($_GET['orig_sample_exist']) || $_GET['orig_sample_exist'] == ''){
+	//if( !isset($_POST['orig_sample_exist']) || $_POST['orig_sample_exist'] == ''){
 	//	$error = 'true';
 	//	echo '<script>Alert.render("ERROR: Check Checkbox If Original Sample Exists.");</script>';
 	//}
-	if(!isset($_GET['DNA_sample_exist']) || $_GET['DNA_sample_exist'] == ''){
+	if(!isset($_POST['DNA_sample_exist']) || $_POST['DNA_sample_exist'] == ''){
 		$error = 'true';
 		echo '<script>Alert.render("ERROR: Check Checkbox If DNA Sample Exists.");</script>';
 	}
@@ -153,7 +153,7 @@
 			      	}
 					else{
 						//grab what is stored and insert it again O.o
-						$original = text_insert_update_stinfo($p_sample_name,'original');
+						$original = text_insert_update_stinfo($p_sample_name,'original','storage_info',$root);
 						
 					}
 			      	//check that sample exists in storage_info first?

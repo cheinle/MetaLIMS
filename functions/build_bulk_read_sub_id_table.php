@@ -1,17 +1,15 @@
 <?php	
 
 //display table
-function build_bulk_read_sub_id_table($stmt){
+function build_bulk_read_sub_id_table($stmt,$root){
 	include('convert_time.php');
 	include('convert_header_names.php');
 	include('text_insert_update.php');
 	include('dropDown.php');
-	include('../config/path.php');
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	include($path.'/config/js.php'); //was not being inherited correctly...just added here for now
 	
-	echo '<form class="registration" onsubmit="return confirm(\'Do you want to submit the form?\');" action="read_sub_bulk_update.php" method="GET">';
-	//echo '<div class = \'left\'>';
+	echo '<form class="registration" onsubmit="return confirm(\'Do you want to submit the form?\');" action="read_sub_bulk_insert.php" method="POST">';
 	echo '<div>';
 	echo '<pre>';
 	echo '*Notice: Bulk Update will update all samples that have been checkmarked';
@@ -22,8 +20,7 @@ function build_bulk_read_sub_id_table($stmt){
 	echo '<th class="bulk">  Sample Name <br><input type="checkbox" id="selecctall"/>(Select All)</th>';
 	echo '<th class="bulk">Seq Sub Name</th>';
 	echo '<th class="bulk">Read Sub Name</th>';
-	#echo '<th><input type="checkbox" id="selecctall"/>(Select All)</th>';
-	#echo '<th></th><th></th><th></th>';
+
 	echo '</tr>';
 	echo '</thead>';					
 	echo '<tbody>';

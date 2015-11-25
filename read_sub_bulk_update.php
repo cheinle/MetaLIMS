@@ -4,7 +4,7 @@
 	#include ('functions/text_insert_update_storage_info.php');
 	include_once("functions/unset_session_vars.php");
 	
-	$sample_array=$_GET['sample'];
+	$sample_array=$_POST['sample'];
 
 	
 	//store get variables into session variables so you can use them on your back button
