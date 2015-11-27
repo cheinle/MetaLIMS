@@ -9,7 +9,7 @@ include('config/path.php');
 //if user is not logged in, do not let him access any of the pages/directories
 session_start(); 
 if(!isset($_SESSION['username'])){  
-	header('Location:'.$root.'login.php');
+	header('Location: login.php');
 	exit();
 }
 else{//if user is logged in, check to see how long he has been idle. Log user out after x amt of time
@@ -32,9 +32,10 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	    //Check to see if they have been inactive for too long.
 	    if($secondsInactive >= $expireAfterSeconds){
 	        //User has been inactive for too long.
-	        //Kill their session.
+	        //Kill their session and log them out
 	        session_unset();
 	        session_destroy();
+			header('Location: login.php');
 	    }
 	    
 	}
@@ -49,12 +50,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 		include('functions/unset_session_vars.php');
 		unset_session_vars('bulk_dna_update');
 	}
-	
-	//unless you are the admin, don't give access to this page
-	/*if(($page_name == 'update_proj_name.php') && ($_SESSION['username'] != 'cheinle@ntu.edu.sg')){
-		header('Location: '.$root.'home.php');
-		exit();
-	}*/
+
 }
 
 ?>
