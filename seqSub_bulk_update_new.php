@@ -287,7 +287,7 @@ if(isset($_POST['submit'])){
 		      	}
 				else{
 					//grab what is stored and insert it again O.o
-					$p_dStore = text_insert_update_stinfo($p_sample_name,'dna_extr','storage_info');
+					$p_dStore = text_insert_update_stinfo($p_sample_name,'dna_extr','storage_info',$root);
 				}
 				//check that sample name exists in storage first
 		      	$getName = $dbc->prepare('SELECT sample_name FROM storage_info WHERE sample_name = ?') or die('Couldn\'t check the name');
