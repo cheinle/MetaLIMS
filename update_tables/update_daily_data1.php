@@ -19,7 +19,7 @@ $submitted = 'false';
 <h3>Pick Daily Data To Update</h3>
 </div>
 
-	<form name="form_name" class="registration" onsubmit="return validate(this)" action="update_daily_data2.php" method="GET">
+	<form name="form_name" class="registration" onsubmit="return validate(this)" action="update_daily_data_two.php" method="GET">
 	<p><i>* = required field </i></p>
 		
 		<fieldset>

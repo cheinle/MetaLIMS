@@ -52,7 +52,7 @@ function text_insert_update_daily_data($daily_date,$field_name,$table,$location,
 	}
 		
 	if ($stmt->execute()){			
-	    if($stmt->fetch()){
+	    while($stmt->fetch()){
 	    	$meta = $stmt->result_metadata(); 
    			while ($field = $meta->fetch_field()){ 
         		$params[] = &$row[$field->name]; 
@@ -66,9 +66,10 @@ function text_insert_update_daily_data($daily_date,$field_name,$table,$location,
 			}		
 			$stmt->close();
 		}
-		return "Error"; 
+	}else{
+		return "Errorrrr";
 	}
-	return "Error";
+	
 }
 ?>
 

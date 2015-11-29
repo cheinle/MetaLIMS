@@ -46,7 +46,7 @@ if(isset($_GET['submit'])){
 			$check_field = 'true';
 		}
 		
-		$query_main = "SELECT * FROM daily_data2 JOIN daily_data2_particle_counter ON daily_data2.daily_date = daily_data2_particle_counter.daily_date WHERE ";
+		$query_main = "SELECT * FROM daily_data2 JOIN daily_data2_particle_counter ON daily_data2.daily_date = daily_data2_particle_counter.daily_date ";
 		$query = "";
 
 		if(isset($_GET['db_content'])){ //display all
@@ -54,19 +54,19 @@ if(isset($_GET['submit'])){
 			$stmt = $dbc->prepare($query);
 		}
 		elseif($check_field == 'true' && $check_date == 'false'){//only location populated
-			$query = $query_main.$query_field;
+			$query = $query_main." WHERE ".$query_field;
 			$query_add = $query_field;
 			$stmt = $dbc->prepare($query);
 			$stmt -> bind_param('s', $p_mylocation);
 		}
 		elseif ($check_field == 'false' && $check_date == 'true') {//only date is populated
-			$query = $query_main.$query_date;
+			$query = $query_main." WHERE ".$query_date;
 			$query_add = $query_date;
 			$stmt = $dbc->prepare($query);
 			$stmt -> bind_param('ss',$p_smydate , $p_emydate);
 		}
 		elseif ($check_field == 'true' && $check_date == 'true') {//date and query fields are populated
-			$query = $query_main.$query_field.' AND '.$query_date;
+			$query = $query_main." WHERE ".$query_field.' AND '.$query_date;
 			$query_add = $query_field.' AND '.$query_date;
 			$stmt = $dbc->prepare($query);
 			$stmt -> bind_param('sss', $p_mylocation, $p_smydate , $p_emydate);
