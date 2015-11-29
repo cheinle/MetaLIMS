@@ -153,7 +153,7 @@ function build_bulk_read_sub_id_table($stmt,$root){
 			<td>
 			<p>
 			<label>Date Submitted:</label><br>
-			<input type="text" id="datepicker5"  name="subm_date" style='width:4.20in;height:30px;' value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['date_submitted']);} ?>"/>
+			<input type="text" id="datepicker5"  name="subm_date" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['date_submitted']);} ?>"/>
 			<script>
 			$('#datepicker5').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 			</script>
