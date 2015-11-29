@@ -159,7 +159,7 @@ if(isset($_GET['submit'])){
 			$stmt -> bind_param('ss',$p_smydate , $p_emydate);
 		}
 		elseif ($check_field == 'true' && $check_date == 'true') {//date and query fields are populated
-			$query = $query_main.$query_field.' AND '.$query_date;
+			$query = $query_main.$query_fiGeld.' AND '.$query_date;
 			$query_add = $query_field.' AND '.$query_date;
 			$stmt = $dbc->prepare($query);
 			$stmt -> bind_param('sss', $p_query_basis, $p_smydate , $p_emydate);
