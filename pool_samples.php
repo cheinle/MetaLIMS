@@ -445,7 +445,7 @@ include ($path.'functions/convert_header_names.php');
 		<label class="textbox-label">Select Project Name:</label>
 		<?php
 		//url or $_GET name, table name, field name
-		dropDown('projName', 'project_name', 'project_name','project_name',$submitted);
+		dropDown('projName', 'project_name', 'project_name','project_name',$submitted,$root);
 		?>
 		
 		

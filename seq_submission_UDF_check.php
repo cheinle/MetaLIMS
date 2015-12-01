@@ -5,7 +5,7 @@ include('config/path.php');
 $path = $_SERVER['DOCUMENT_ROOT'].$root;
 include ('database_connection.php');
 include ('index.php');
-include($path.'/functions/dropDown.php');
+include($path.'functions/dropDown.php');
 ?>
 <!doctype html>
 <html>
@@ -27,38 +27,38 @@ include($path.'/functions/dropDown.php');
   	<?php $submitted = false; ?>
 	<p>
 	<label class="textbox-label">Sample Type:</label>
-	<?php  dropDown('sample_type','type_seq_sample', 'sample_type', 'sample_type',$submitted);?>
+	<?php  dropDown('sample_type','type_seq_sample', 'sample_type', 'sample_type',$submitted,$root);?>
 	</p>
 	<div id="amplicon_info"></div>
 	
 	<p>
 	<label class="textbox-label">Container Type:</label><br/>
-	<?php  dropDown('container_type','container_type', 'container_type', 'container_type',$submitted);?>
+	<?php  dropDown('container_type','container_type', 'container_type', 'container_type',$submitted,$root);?>
 	</p>
 	
 	<p>
 	<label class="textbox-label">Sequencing Method:</label><br/>
-	<?php  dropDown('method','sequencing_method', 'method', 'method',$submitted);?>
+	<?php  dropDown('method','sequencing_method', 'method', 'method',$submitted,$root);?>
 	</p>
 	
 	<p>
 	<label class="textbox-label">Read Length:</label><br/>
-	<?php  dropDown('read_length','read_length', 'read_length', 'read_length',$submitted);?>
+	<?php  dropDown('read_length','read_length', 'read_length', 'read_length',$submitted,$root);?>
 	</p>
 	
 	<p>
 	<label class="textbox-label">Quantitation Method:</label><br/>
-	<?php  dropDown('quant_method','quantitation_method', 'quant_method', 'quant_method',$submitted);?>
+	<?php  dropDown('quant_method','quantitation_method', 'quant_method', 'quant_method',$submitted,$root);?>
 	</p>
 	
 	<p>
 	<label class="textbox-label">Application:</label><br/>
-	<?php  dropDown('application','application', 'application', 'application',$submitted);?>
+	<?php  dropDown('application','application', 'application', 'application',$submitted,$root);?>
 	</p>
 	
 	<p>
 	<label class="textbox-label">Library Prep Kit:</label><br>
-	<?php dropDown('libPK', 'library_prep_kit', 'lib_prep_kit','lib_prep_kit',$submitted);?>
+	<?php dropDown('libPK', 'library_prep_kit', 'lib_prep_kit','lib_prep_kit',$submitted,$root);?>
 	</p>
 	
 	<p>
@@ -97,7 +97,7 @@ include($path.'/functions/dropDown.php');
 	
     <p>
 	<label class="textbox-label">Submission Made By:</label><br>
-	<?php dropDown('submittedBy', 'users', 'user_id','user_id',$submitted);?>
+	<?php dropDown('submittedBy', 'users', 'user_id','user_id',$submitted,$root);?>
 	</p>
     </fieldset>
     </div>
@@ -117,7 +117,7 @@ include($path.'/functions/dropDown.php');
 	
 	<p>
 	<label class="textbox-label">Pick Project Your Samples Belong To:</label>
-	<?php dropDown('projName', 'project_name', 'project_name','project_name',$submitted);?>
+	<?php dropDown('projName', 'project_name', 'project_name','project_name',$submitted,$root);?>
 	<p class='adjust'>
 	<div id="sampleSelect" name="sampleSelect">
 	</div>

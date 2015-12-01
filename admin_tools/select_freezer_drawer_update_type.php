@@ -1,6 +1,8 @@
 <?php
- 	include('../database_connection.php');
-	include('../functions/dropDown.php');
+ 	include('../config/path.php');
+	$path = $_SERVER['DOCUMENT_ROOT'].$root;
+ 	include($path.'database_connection.php');
+	include($path.'functions/dropDown.php');
 	$type= $_GET['type'];
 	$submitted = 'false';
 	echo '<div class="container-fluid">';
@@ -43,12 +45,12 @@
 
 		echo '<label class="textbox-label">Pick A Freezer:</label>';
 		echo '<p>';
-		dropDown('freezer', 'freezer', 'freezer_id','freezer_id',$submitted);	
+		dropDown('freezer', 'freezer', 'freezer_id','freezer_id',$submitted,$root);	
 		echo '</p>';
 	  	
 	  	echo '<label class="textbox-label">Pick A Drawer:</label>';
 		echo '<p>';
-	  	dropDown('drawer', 'drawer', 'drawer_id','drawer_id',$submitted);
+	  	dropDown('drawer', 'drawer', 'drawer_id','drawer_id',$submitted,$root);
 	  	echo '</p>';
 	}
   	

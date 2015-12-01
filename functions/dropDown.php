@@ -1,7 +1,7 @@
 
 
 <?php	//drowpdown to select field_name from table_name
-function dropDown($select_name,$table_name,$field_name,$select_id,$submitted){
+function dropDown($select_name,$table_name,$field_name,$select_id,$submitted,$root){
 	
 			#sanatize
 			$p_select_name = htmlspecialchars($select_name);
@@ -11,7 +11,7 @@ function dropDown($select_name,$table_name,$field_name,$select_id,$submitted){
 			
 			//include('config/path.php');
 			//$path = $_SERVER['DOCUMENT_ROOT'].$root;
-			$path = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/am_production/';
+			$path = $_SERVER['DOCUMENT_ROOT'].$root;
 			include($path.'database_connection.php');
 		
 

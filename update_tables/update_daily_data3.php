@@ -13,8 +13,7 @@ error_reporting(E_ALL); ?>
 <body>
 <?php 
 include('../index.php');
-include('../functions/dropDown_update_for_daily_data.php');
-include('../functions/text_insert_update_storage_info.php');
+
  ?>
 <div class="page-header">
 <h3>Update Daily Data</h3>

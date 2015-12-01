@@ -12,8 +12,11 @@ error_reporting(E_ALL); ?>
 <!---testing-->
 <body>
 <?php 
-include('../index.php');
-include('../functions/dropDown.php');
+include('../config/path.php');
+$path = $_SERVER['DOCUMENT_ROOT'].$root;	
+include($path.'index.php');
+include($path.'functions/dropDown.php');
+
 ?>
 <div class="page-header">
 <h3>Add Daily Sensor Data</h3>
@@ -238,7 +241,7 @@ include('../functions/dropDown.php');
 		<?php
 
 		//url or $_GET name, table name, field name
-		dropDown('loc', 'location', 'loc_name','loc_name',$submitted);
+		dropDown('loc', 'location', 'loc_name','loc_name',$submitted,$root);
 		?>
 		</p>
 		</div>

@@ -2,6 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('database_connection.php');
+include('config/path.php');
+$path = $_SERVER['DOCUMENT_ROOT'].$root;
 
 ?>
 
@@ -21,7 +23,7 @@ include('database_connection.php');
 <body>
 <?php 
 include('index.php');
-include('functions/dropDown.php');
+include($path.'functions/dropDown.php');
 $submitted = 'false';
 ?>
 <div class="page-header">
@@ -49,7 +51,7 @@ $submitted = 'false';
 	<!--location dropdown-->
 	<p>
 	<label class="textbox-label">Select Location:</label>
-	<?php dropDown('loc', 'location', 'loc_name','loc_name',$submitted);?>
+	<?php dropDown('loc', 'location', 'loc_name','loc_name',$submitted,$root);?>
 	</p>
 	
 	<h3 class="checkbox-header">Display All?:</h3>

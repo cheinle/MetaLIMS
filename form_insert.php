@@ -3,8 +3,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include ('database_connection.php');
 include ('index.php');
-include('/config/check_form_insert_js.php');
-include('/config/check_sample_name.php');
+include('config/check_form_insert_js.php');
+include('config/check_sample_name.php');
+include('config/path.php');
 ?>
 
 <!doctype html>
@@ -433,7 +434,7 @@ include('/config/check_sample_name.php');
 				<label class="textbox-label">Select Project Name:*</label>
 				<?php
 				//url or $_GET name, table name, field name
-				dropDown('projName', 'project_name', 'project_name','project_name',$submitted);
+				dropDown('projName', 'project_name', 'project_name','project_name',$submitted,$root);
 				?>
 				</p>
 				
@@ -443,7 +444,7 @@ include('/config/check_sample_name.php');
 				<?php
 
 				//url or $_GET name, table name, field name
-				dropDown('loc', 'location', 'loc_name','loc_name',$submitted);
+				dropDown('loc', 'location', 'loc_name','loc_name',$submitted,$root);
 				?>
 				</p>
 				
@@ -452,7 +453,7 @@ include('/config/check_sample_name.php');
 				<label class="textbox-label">Select Relative Location:*</label>
 				<?php
 				//url or $_GET name, table name, field name
-				dropDown('rloc', 'relt_location', 'loc_name','loc_name',$submitted);
+				dropDown('rloc', 'relt_location', 'loc_name','loc_name',$submitted,$root);
 				?>
 				</p>
 				
@@ -461,7 +462,7 @@ include('/config/check_sample_name.php');
 				<label class="textbox-label">Media Type:*</label>
 				<?php
 				//url or $_GET name, table name, field name
-				dropDown('media', 'media_type', 'media_type','media_type',$submitted);
+				dropDown('media', 'media_type', 'media_type','media_type',$submitted,$root);
 				?>
 				</p>
 
@@ -478,7 +479,7 @@ include('/config/check_sample_name.php');
 				<label class="textbox-label">Sample Type:*</label>
 				<?php
 				//url or $_GET name, table name, field name, value
-				dropDown('sType', 'sample_type', 'sample_type_name','sample_type_id',$submitted);
+				dropDown('sType', 'sample_type', 'sample_type_name','sample_type_id',$submitted,$root);
 				?>
 				</p>
 				
@@ -494,7 +495,7 @@ include('/config/check_sample_name.php');
 				<p>
 				<?php
 				//url or $_GET name, table name, field name
-				dropDown('oStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted);
+				dropDown('oStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted,$root);
 				?>
 				
 				<select id="oStore_name" name ="oStore_name" >
@@ -567,7 +568,7 @@ include('/config/check_sample_name.php');
 						<br/>
 						<?php
 						//url or $_GET name, table name, field name
-						dropDown('dExtKit', 'dna_extraction', 'd_kit_name','d_kit_name',$submitted);
+						dropDown('dExtKit', 'dna_extraction', 'd_kit_name','d_kit_name',$submitted,$root);
 						?>
 						</p>
 						
@@ -588,7 +589,7 @@ include('/config/check_sample_name.php');
 						<label class="textbox-label">Instrument/Kit Used to Measure DNA Concentration:</label><br>
 						<?php
 						//url or $_GET name, table name, field name
-						dropDown('dInstru', 'quant_instruments', 'kit_name','kit_name',$submitted);
+						dropDown('dInstru', 'quant_instruments', 'kit_name','kit_name',$submitted,$root);
 						?>
 						</p>
 						
@@ -604,7 +605,7 @@ include('/config/check_sample_name.php');
 						<p>
 						<?php
 						//url or $_GET name, table name, field name
-						dropDown('dStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted);
+						dropDown('dStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted,$root);
 						?>
 						</p>
 						<select id="dStore_name" name ="dStore_name">
@@ -658,7 +659,7 @@ include('/config/check_sample_name.php');
 						<br/>
 						<?php
 						//url or $_GET name, table name, field name
-						dropDown('rExtKit', 'rna_extraction', 'r_kit_name','r_kit_name',$submitted);
+						dropDown('rExtKit', 'rna_extraction', 'r_kit_name','r_kit_name',$submitted,$root);
 						?>
 						</p>
 						
@@ -679,7 +680,7 @@ include('/config/check_sample_name.php');
 						<label class="textbox-label">Instrument/Kit Used to Measure RNA Concentration:</label><br>
 						<?php
 						//url or $_GET name, table name, field name
-						dropDown('rInstru', 'quant_instruments', 'kit_name','kit_name',$submitted);
+						dropDown('rInstru', 'quant_instruments', 'kit_name','kit_name',$submitted,$root);
 						?>
 						</p>
 						
@@ -695,7 +696,7 @@ include('/config/check_sample_name.php');
 						<p>
 						<?php
 						//url or $_GET name, table name, field name
-						dropDown('rStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted);
+						dropDown('rStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted,$root);
 						?>
 						</p>
 				
@@ -743,7 +744,7 @@ include('/config/check_sample_name.php');
 					<br/>
 					<?php
 					//url or $_GET name, table name, field name
-					dropDown('seqInfo', 'sequencing2', 'sequencing_info','sequencing_info',$submitted);
+					dropDown('seqInfo', 'sequencing2', 'sequencing_info','sequencing_info',$submitted,$root);
 					?>
 					</p>
 					</fieldset>
@@ -758,7 +759,7 @@ include('/config/check_sample_name.php');
 					<br/>
 					<?php
 					//url or $_GET name, table name, field name
-					dropDown('anPipe', 'analysis', 'analysis_name','analysis_name',$submitted);
+					dropDown('anPipe', 'analysis', 'analysis_name','analysis_name',$submitted,$root);
 					?>
 					</p>
 					</fieldset>
