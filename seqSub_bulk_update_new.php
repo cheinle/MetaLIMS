@@ -259,9 +259,9 @@ if(isset($_POST['submit'])){
 				//update sample table;link new seq submission name
 				//update storage table
 				//update sample storage info
-				$sql = "INSERT INTO sample_sequencing2 (sample_name,seq_id,seq_sub_name,dna_conc,vol,wellLoc,sampBuffer,nano, a_280,a_230,dnaCont,RIN,sample_exists) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				$sql = "INSERT INTO sample_sequencing2 (sample_name,seq_id,seq_sub_name,dna_conc,vol,wellLoc,sampBuffer,nano, a_280,a_230,dnaCont,RIN) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 				if($stmt3 = $dbc ->prepare($sql)){
-	                $stmt3->bind_param('sssddssddddds',$p_sample_name,$p_seqInfo,$new_seq_sub_name,$p_sampConc,$p_vol,$p_wellLoc,$p_sampBuffer,$p_nano,$p_280,$p_230,$p_dnaCont,$p_RIN,$p_exists);
+	                $stmt3->bind_param('sssddssddddd',$p_sample_name,$p_seqInfo,$new_seq_sub_name,$p_sampConc,$p_vol,$p_wellLoc,$p_sampBuffer,$p_nano,$p_280,$p_230,$p_dnaCont,$p_RIN);
 	
 	                $stmt3 -> execute();
 					$rows_affected3 = $stmt3 ->affected_rows;
