@@ -1,6 +1,12 @@
 <link rel="shortcut icon" href="/favicon.ico" type="image/icon"> <link rel="icon" href="/favicon.ico" type="image/icon">
 
 
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+include('config/path.php');
+include('database_connection.php');
+
 //if user is not logged in, do not let him access any of the pages/directories
 session_start(); 
 if(!isset($_SESSION['username'])){  
@@ -47,6 +53,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	}
 
 }
+
 ?>
 
 <?php include('config/css.php'); ?>
@@ -78,7 +85,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Update Sample Fields<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo $root;?>update_tables/update_sampler.php">Add Sampler</a></li>
+						<li><a href="<?php echo $root;?>update_tables/update_air_sampler.php">Add Sampler</a></li>
 						<li><a href="<?php echo $root;?>update_tables/update_analysis.php">Add Analysis</a></li>
 						<li><a href="<?php echo $root;?>update_tables/update_dna_extr.php">Add DNA Extraction Kit</a></li>
 						<li><a href="<?php echo $root;?>update_tables/update_media_type.php">Add Media Type</a></li>
@@ -108,12 +115,6 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 					</ul>
 				</li>
 				<li ><a href="<?php echo $root;?>label_prep.php">Label Prep</a></li>
-				<!--<li class="dropdown">
-					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Files<b class="caret"></b></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo $root;?>browse_files/">Browse Files</a></li>
-					</ul>
-				</li>-->
 				</li>
 					<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Daily Data<b class="caret"></b></a>
@@ -128,7 +129,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				<?php
 				//if user is an admin, show admin options
 				$admin_user = 'N';//no by default
-				/*if($stmt = $dbc->prepare("SELECT admin FROM users WHERE user_id = ?")){
+				if($stmt = $dbc->prepare("SELECT admin FROM users WHERE user_id = ?")){
 					$stmt -> bind_param('s', $_SESSION['username']);
 					if ($stmt->execute()){
 				    	$stmt->bind_result($admin_check);
@@ -138,10 +139,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 							}
 						}	
 					}	
-				}*
-				 * 
-				 */
-				 $admin_user = 'Y';
+				}
 				if($admin_user == 'Y'){
 				echo '
 				<ul class="nav navbar-nav ">
@@ -158,7 +156,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				</li>
 				</ul> 
 				';}
-				//$stmt->close();
+				$stmt->close();
 				?>
 				<li ><a href="<?php echo $root;?>logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
 			</ul>
