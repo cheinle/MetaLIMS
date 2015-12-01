@@ -1,4 +1,0 @@
-<filesMatch "config.json">
-Order Deny,Allow
-Deny from All
-</filesMatch>

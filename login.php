@@ -1,28 +1,30 @@
 <?php 
-
-/* this will only log you out if a single user tries to log in again at a different location, not 
- * if another user logs in. So two users can log in if you have it. 2015/01/23
+include('database_connection.php');
+/* 
+ * Set to logout after set time (time set in index.php). Will log user out from location if same user tries to login at a different locations
  */
-
-	include('database_connection.php');
-	///////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
 	//change flag to true if you need to restrict database access (allows admin only)
 	$database_down = 'false';
-
 	/////////////////////////////////////////////////////////////////////////////////
-
+	
+	
+try{
+	//start transaction
+	mysqli_autocommit($dbc,FALSE);
 	if($_POST) {
 		
-		$stmt1 = $dbc->prepare("SELECT * FROM users WHERE user_id = ? AND password = SHA1(?) AND visible = 1");
+		$stmt1 = $dbc->prepare("SELECT * FROM users WHERE user_id = ? AND password = SHA1(?)");
 		$stmt1 -> bind_param('ss', $_POST['email'],$_POST['password']);
 				
 	 	if ($stmt1->execute()){
 	 		
 	 		 $count_check = $stmt1->fetch();
              $size =sizeof($count_check);
+
 			 //check that one entry was returned
              if($size == 1) {
-
+              
 			  	//go on to grab the old session id stored in the db
 				$meta = $stmt1->result_metadata(); 
 		   		while ($field = $meta->fetch_field()){ 
@@ -74,9 +76,8 @@
 					$stmt2 -> close();
 						
 					//check if add was successful or not. Tell the user
-				    if($rows_affected2 < 0){;
-						echo 'An error has occured here <br>';
-						mysqli_error($dbc);		
+				    if($rows_affected2 < 0){
+				    	throw new Exception("An Error Has Occurred. Please Notify Admin");		
 					}
 					$_SESSION['username'] = $_POST['email'];
 					$_SESSION['session_id'] = $new_session_id;
@@ -93,17 +94,16 @@
 						}
 						else{
 							session_destroy();
-							//header('Location: '.$path.'login.php');
 							header('Location: login.php');
 						}
 					}
 					else{
 						header('Location: home_page.php');
 					}
-					exit;
+					//exit; what is this for?
 				}
-				else{//else stay logged on...this should never be true right now
-					alert("Admin Is Testing This. Please Notify Her/Him If You See This");
+				/*else{//else stay logged on...this should never be true right now
+					alert("Admin Is Testing This. Please Notify Her If You See This");
 					session_start();
 					$_SESSION['username'] = $_POST['email'];
 					$_SESSION['session_id'] = $new_session_id;
@@ -112,11 +112,20 @@
 					echo $_SESSION['username'];
 					header('Location: index.php');
 					exit;
-				}
-	
+				}*/
+			
 			}
 		}
 	}
+	$dbc->commit();
+}
+catch (Exception $e) { 
+	if (isset ($dbc)){
+		$dbc->rollback ();
+		echo '<script>Alert.render("ERROR: Unable To Login. Please Notify Admin");</script>';
+		echo "Final Error:  " . $e; 
+	}
+}
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->

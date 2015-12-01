@@ -1,11 +1,6 @@
 <link rel="shortcut icon" href="/favicon.ico" type="image/icon"> <link rel="icon" href="/favicon.ico" type="image/icon">
 
 
-<?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-include('config/path.php');
-
 //if user is not logged in, do not let him access any of the pages/directories
 session_start(); 
 if(!isset($_SESSION['username'])){  
@@ -52,7 +47,6 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	}
 
 }
-
 ?>
 
 <?php include('config/css.php'); ?>
