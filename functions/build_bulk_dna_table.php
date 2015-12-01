@@ -123,7 +123,7 @@ function build_bulk_dna_table($stmt,$root){
 			<td>
 			<p>
 			<label class="textbox-label">DNA Extraction Date:</label><br>
-			<input type="text" id="datepicker5"  name="d_extr_date" style='width:4.20in;height:30px;' placeholder="Enter Date" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['d_extr_date']);} ?>"/>
+			<input type="text" id="datepicker5"  name="d_extr_date" placeholder="Enter Date" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['d_extr_date']);} ?>"/>
 			<script>
 			$('#datepicker5').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 			</script>
@@ -205,18 +205,11 @@ function build_bulk_dna_table($stmt,$root){
 			<td>
 			<!--DNA Extractor Name input-->
 			<label class="textbox-label">Enter Name(s) of Persons Who Extracted DNA:</label>
-			<p class="clone2"> <input type="text" name="dExtrName[]" class='input' style='width:4.20in;' placeholder="First Name(s)" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['dExtrName']);}  ?>"/></p>
-			<p><a href="#" class="add2" rel=".clone2">Add More Names</a></p>
+			<input type="text" name="dExtrName[]" class='input' placeholder="First Name(s) Comma Seperated" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['dExtrName']);}  ?>"/>
 			</p>
 			</td>
 			</tr>
-			<script type="text/javascript">
-			$(document).ready($(function(){
-				var removeLink = ' <a class="remove" href="#" onclick="$(this).parent().slideUp(function(){ $(this).remove() }); return false">remove</a>';
-					$('a.add2').relCopy({ append: removeLink}); 
-				})
-			);
-			</script>
+
  				
  			<p>
  			<tr>

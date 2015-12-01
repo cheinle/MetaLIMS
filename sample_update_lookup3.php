@@ -60,8 +60,8 @@ include('functions/convert_header_names.php');
 				$p_partSamp = NULL;
 				$p_dExtKit = htmlspecialchars($_GET['dExtKit']);
 				$p_rExtKit = htmlspecialchars($_GET['rExtKit']);
-				$p_seqInfo = htmlspecialchars($_GET['seqInfo']);
-				$p_anPipe = htmlspecialchars($_GET['anPipe']);
+				$p_seqInfo = '0';
+				$p_anPipe = '0';
 				$p_barcode = htmlspecialchars($_GET['barcode']);
 				//$p_start = htmlspecialchars($start);
 				//$p_end = htmlspecialchars($end);
@@ -653,7 +653,7 @@ include('functions/convert_header_names.php');
 							$time_rows_affected = $time_stmt ->affected_rows;
 						
 							$time_stmt -> close();
-							if($time_rows_affected < 1){	
+							if($time_rows_affected < 0){	
 								$successfull = 'false';
 								throw new Exception("Insert Failure: Unable To Insert Sampler");
 							}

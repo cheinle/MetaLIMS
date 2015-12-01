@@ -131,7 +131,7 @@ if(isset($_GET['submit'])){
 		else{$field_names = "*";}
 
 		if(isset($_GET['db_content']) && $_GET['db_content'] == 'sensor'){
-			$query_main = "SELECT * FROM sample JOIN daily_data2_particle_counter ON DATE(sample.start_samp_date_time) = daily_data2_particle_counter.daily_date WHERE ";
+			$query_main = "SELECT * FROM sample JOIN daily_data2_particle_counter ON DATE(sample.start_samp_date_time) = daily_data2_particle_counter.daily_date WHERE sample.location_name = daily_data2_particle_counter.location AND ";
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
 			$query_main = "SELECT sample.sample_name,sample.sample_num,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample LEFT JOIN read_submission ON read_submission.sample_name = sample.sample_name WHERE ";
@@ -159,7 +159,7 @@ if(isset($_GET['submit'])){
 			$stmt -> bind_param('ss',$p_smydate , $p_emydate);
 		}
 		elseif ($check_field == 'true' && $check_date == 'true') {//date and query fields are populated
-			$query = $query_main.$query_field.' AND '.$query_date;
+			$query = $query_main.$query_fiGeld.' AND '.$query_date;
 			$query_add = $query_field.' AND '.$query_date;
 			$stmt = $dbc->prepare($query);
 			$stmt -> bind_param('sss', $p_query_basis, $p_smydate , $p_emydate);

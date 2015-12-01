@@ -134,7 +134,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				<?php
 				//if user is an admin, show admin options
 				$admin_user = 'N';//no by default
-				if($stmt = $dbc->prepare("SELECT admin FROM users WHERE user_id = ?")){
+				/*if($stmt = $dbc->prepare("SELECT admin FROM users WHERE user_id = ?")){
 					$stmt -> bind_param('s', $_SESSION['username']);
 					if ($stmt->execute()){
 				    	$stmt->bind_result($admin_check);
@@ -144,7 +144,10 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 							}
 						}	
 					}	
-				}
+				}*
+				 * 
+				 */
+				 $admin_user = 'Y';
 				if($admin_user == 'Y'){
 				echo '
 				<ul class="nav navbar-nav ">
@@ -161,7 +164,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				</li>
 				</ul> 
 				';}
-				$stmt->close();
+				//$stmt->close();
 				?>
 				<li ><a href="<?php echo $root;?>logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
 			</ul>
