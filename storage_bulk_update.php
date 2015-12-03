@@ -11,10 +11,10 @@
 	
 	//store get variables into session variables so you can use them on your back button
 	$_SESSION['submitted'] = 'false';
-	//$_SESSION['sample_array'] = $sample_array;
-	//$_SESSION['sample_type']= $p_sample_type;
-	//$_SESSION['Store_temp'] = $_POST['Store_temp'];
-	//$_SESSION['Store_name'] = $_POST['Store_name'];
+	$_SESSION['sample_array'] = $sample_array;
+	$_SESSION['sample_type']= $p_sample_type;
+	$_SESSION['Store_temp'] = $_POST['Store_temp'];
+	$_SESSION['Store_name'] = $_POST['Store_name'];
 	
 	$exists = '';
 	
