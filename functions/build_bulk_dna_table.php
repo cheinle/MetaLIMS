@@ -140,7 +140,7 @@ function build_bulk_dna_table($stmt,$root){
 			<?php
 			//url or $_GET name, table name, field name
 			
-			dropDown('dExtKit', 'dna_extraction', 'd_kit_name','d_kit_name',$submitted);
+			dropDown('dExtKit', 'dna_extraction', 'd_kit_name','d_kit_name',$submitted,$root);
 			?>
 			</p>
 			</td>
@@ -163,7 +163,7 @@ function build_bulk_dna_table($stmt,$root){
 			<label class="textbox-label">Instrument/Kit Used to Measure DNA Concentration:</label><br>
 			<?php
 			//url or $_GET name, table name, field name
-			dropDown('dInstru', 'quant_instruments', 'kit_name','kit_name',$submitted);
+			dropDown('dInstru', 'quant_instruments', 'kit_name','kit_name',$submitted,$root);
 			?>
 			</p>
 			</td>
@@ -187,7 +187,7 @@ function build_bulk_dna_table($stmt,$root){
 			
 			<?php
 			//url or $_GET name, table name, field name
-			dropDown('dStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted);
+			dropDown('dStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted,$root);
 			?>
 			
 			<select id="dStore_name" name ="dStore_name" class='fields'>

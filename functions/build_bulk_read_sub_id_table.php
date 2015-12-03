@@ -169,7 +169,7 @@ function build_bulk_read_sub_id_table($stmt,$root){
 			<?php
 			//url or $_GET name, table name, field name
 			
-			dropDown('subm_db', 'read_subm_database', 'database_name','database_name',$submitted);
+			dropDown('subm_db', 'read_subm_database', 'database_name','database_name',$submitted,$root);
 			?>
 			</p>
 			</td>
@@ -191,7 +191,7 @@ function build_bulk_read_sub_id_table($stmt,$root){
 			<i> (For More Details On BioSample Types -https://submit.ncbi.nlm.nih.gov/biosample/template/)</i><br>
 			<?php
 			//url or $_GET name, table name, field name
-			dropDown('type_of_experiement', 'read_subm_exp_types', 'exp_types','exp_types',$submitted);
+			dropDown('type_of_experiement', 'read_subm_exp_types', 'exp_types','exp_types',$submitted,$root);
 			?>
 			</p>
 			</td>
