@@ -82,10 +82,13 @@ include('database_connection.php');
 		      'Project Name' and then typing in your project name. Press submit to view table. Click on 'Sample Sort' header to
 		      sort samples in project by sample number
 		      
-		  <b>Q: Can I bulk update database entires?</b> 
+		    <b>Q: Can I bulk update database entires?</b> 
 		      A: Yes, for DNA extraction info you can bulk update entires under 'Query Sample Info'. Under 'Display Sample Info
 		      Select search criteria and then select 'Bulk Update For DNA Extration Info' and press enter. Note that column selection
-		      will not matter here	
+		      will not matter here. 
+		      
+		      You can also bulk update storage information the same way
+		  
 		
 	</pre>
 	

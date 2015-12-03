@@ -18,6 +18,15 @@ function unset_session_vars($page_type){
 			$_SESSION['orig_sample_exist']
 		);
 	}
+	if($page_type == 'bulk_storage_update'){
+		unset(
+			$_SESSION['submitted'],
+			$_SESSION['sample_array'],
+			$_SESSION['sample_type'],
+			$_SESSION['Store_temp'],
+			$_SESSION['Store_name']
+		);
+	}
 	if($page_type == 'bulk_seqSub_update'){
 		unset(
 	

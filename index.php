@@ -7,6 +7,7 @@ ini_set('display_errors', 1);
 include('config/path.php');
 include('database_connection.php');
 
+
 //if user is not logged in, do not let him access any of the pages/directories
 session_start(); 
 if(!isset($_SESSION['username'])){  
@@ -47,11 +48,14 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	
 	//unset session vars for bulk DNA update if you are not on one of the specified pages
 	$page_name = basename($_SERVER['SCRIPT_NAME']);
-	if(($page_name != 'dna_bulk_update.php') && ($page_name != 'query_results_mod.php')){
 		include('functions/unset_session_vars.php');
+	if(($page_name != 'dna_bulk_update.php') && ($page_name != 'query_results_mod.php')){
 		unset_session_vars('bulk_dna_update');
 	}
-
+	//unset session vars for bulk storage update if you are not on one of the specified pages
+	if(($page_name != 'storage_bulk_update.php') && ($page_name != 'query_results_mod.php')){
+		unset_session_vars('bulk_storage_update');
+	}
 }
 
 ?>

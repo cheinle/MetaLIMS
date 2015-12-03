@@ -37,7 +37,7 @@
 	                    data    : { Store_temp: Store_temp,Store_name: Store_name}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},
 	                    success : function(data){$('#oStore_name').html(data)}, // On success, it will populate the 2nd select
-	                    error   : function(){alert('an error has occured')} //error message
+	                    error   : function(){alert('An Error Has Occurred')} //error message
 	                })
 	                
 	                $('.orig_sample_exist').prop('checked',false);
@@ -93,7 +93,7 @@
                     data    : { Store_temp: Store_temp,Store_name: Store_name}, //Data you are sending
                     //success : function(data){$('#div_store').html(data)},
                     success : function(data){$('#dStore_name').html(data)}, // On success, it will populate the 2nd select
-                    error   : function(){alert('an error has occured')} //error message
+                    error   : function(){alert('An Error Has Occurred')} //error message
                 })
 			
 			
@@ -115,7 +115,29 @@
                     data    : { Store_temp: Store_temp,Store_name: Store_name}, //Data you are sending
                     //success : function(data){$('#div_store').html(data)},
                     success : function(data){$('#rStore_name').html(data)}, // On success, it will populate the 2nd select
-                    error   : function(){alert('an error has occured')} //error message
+                    error   : function(){alert('An Error Has Occurred')} //error message
+                })
+			
+			
+			});
+			
+		});
+</script>
+
+<!--general storage-->
+<script type="text/javascript">
+		$(document).ready(function(){  
+				               
+                $('#Store_temp').change(function(){ //on change event
+                var Store_temp = $('#Store_temp').val(); //<----- get the value from the parent select 
+                var Store_name = "Store_name";
+                $.ajax({
+                    url     : root+'freezer_drawer_select.php', //the url you are sending datas to which will again send the result
+                    type    : 'GET', //type of request, GET or POST
+                    data    : { Store_temp: Store_temp,Store_name: Store_name}, //Data you are sending
+                    //success : function(data){$('#div_store').html(data)},
+                    success : function(data){$('#Store_name').html(data)}, // On success, it will populate the 2nd select
+                    error   : function(){alert('An Error Has Occurred')} //error message
                 })
 			
 			
@@ -261,7 +283,7 @@
 	                    data    : { num_sensors: num_sensors}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},
 	                    success : function(data){$('#div1').html(data)}, // On success, it will populate the div
-	                    error   : function(){alert('an error has occured')} //error message
+	                    error   : function(){alert('An Error Has Occurred')} //error message
 	                })
 	
 			});
@@ -283,7 +305,7 @@
 	                    data    : { num_samplers: num_samplers}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},
 	                    success : function(data){$('#div_sampler_num').html(data)}, // On success, it will populate the div
-	                    error   : function(){alert('an error has occured')} //error message
+	                    error   : function(){alert('An Error Has Occurred')} //error message
 	                })
 	
 			});
@@ -309,7 +331,7 @@
 	                    			end_date:end_date}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},
 	                    success : function(data){$('#sampleSelect').html(data)}, // On success, it will populate the div
-	                    error   : function(){alert('an error has occured')} //error message
+	                    error   : function(){alert('An Error Has Occurred')} //error message
 	                })
 	
 			});
@@ -331,7 +353,7 @@
 	                    data    : { num_pooled_samples: num_pooled_samples}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},
 	                    success : function(data){$('#div_pool').html(data)}, // On success, it will populate the div
-	                    error   : function(){alert('an error has occured')} //error message
+	                    error   : function(){alert('An Error Has Occurred')} //error message
 	                })
 	
 			});
@@ -353,7 +375,7 @@
 	                    data    : { sample_type: sample_type}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},
 	                    success : function(data){$('#amplicon_info').html(data)}, // On success, it will populate the div
-	                    error   : function(){alert('an error has occured')} //error message
+	                    error   : function(){alert('An Error Has Occurred')} //error message
 	                })
 	
 			});

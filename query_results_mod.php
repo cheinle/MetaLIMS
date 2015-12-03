@@ -11,6 +11,10 @@ elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_dna')){
 	include('index.php');
 	include('functions/build_bulk_dna_table.php');
 }
+elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_storage')){
+	include('index.php');
+	include('functions/build_bulk_storage_update_table.php');
+}
 elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'seq_sub')){
 	include('index.php');
 	include('functions/build_bulk_seqSub_table.php');
@@ -128,6 +132,9 @@ if(isset($_GET['submit'])){
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
 			$field_names = 'sample.sample_name,sample.d_conc,sample.sample_sort';
 		}
+		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_storage'){
+			$field_names = 'sample.sample_name,sample.sample_sort';
+		}
 		else{$field_names = "*";}
 
 		if(isset($_GET['db_content']) && $_GET['db_content'] == 'sensor'){
@@ -177,6 +184,9 @@ if(isset($_GET['submit'])){
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
 			build_bulk_dna_table($stmt,$root);
+		}
+		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_storage'){
+			build_bulk_storage_update_table($stmt,$root);
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'seq_sub'){
 			echo '<script>Alert.render("ERROR:Current Page Under Construction.");</script>';

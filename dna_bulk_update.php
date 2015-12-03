@@ -172,13 +172,13 @@
 							$stmt_si -> execute();
 							$rows_affected_si = $stmt_si ->affected_rows;
 							if($rows_affected_si > 0){
-								echo 'SUCCESS: Updated '.$p_sample_name.' in storage info <br>';	
+								echo 'SUCCESS: Updated '.$p_sample_name.' In Storage Info <br>';	
 							}
 							elseif($rows_affected_si == 0){
 								echo "No Update Needed for ".$p_sample_name.'<br>';
 							}
 							else{
-								throw new Exception('An error has occured in storing storage info for '.$p_sample_name);
+								throw new Exception('An Error Has Occurred In Storing Storage Info For '.$p_sample_name);
 							}
 						}
 						else{
