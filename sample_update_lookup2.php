@@ -290,7 +290,7 @@ if (isset($_GET['submit'])) {
 						$stmt1 -> close();
 					
 			?>
-					<input type="button" id="more_samplers" class="button" style="float:left;margin-left: 220px;margin-bottom: 30px" name ="more_samplers" value='Add More Samplers' /><br>
+					<input type="button" id="more_samplers" class="button" style="float:left;margin-left: 40%;margin-bottom: 30px" name ="more_samplers" value='Add More Samplers' /><br>
 					<!--<div id="div1"></div>-->
 					
 

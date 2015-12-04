@@ -50,7 +50,7 @@ include('functions/dropDown.php');
 	<?php
 	$submitted = 'false';
 	//url or $_GET name, table name, field name
-	dropDown('projName', 'project_name', 'project_name','project_name',$submitted);
+	dropDown('projName', 'project_name', 'project_name','project_name',$submitted,$root);
 	?>
 	</p>
 	
