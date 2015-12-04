@@ -80,7 +80,7 @@ include ('table_exclude_list.php');
                  }
                  
  				 var n = txt.length;
- 				 var new_txt = name+'-'+txt;
+ 				 var new_txt = name+'%'+txt;
  				 input_values.push(new_txt);
 	             if(n == 0){
 	             	valid = 'false';

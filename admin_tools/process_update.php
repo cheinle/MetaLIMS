@@ -6,7 +6,7 @@
 	$inputs= $_GET['inputs'];
 	$pk = $_GET['pk'];
 	$original_value = $_GET['original_value'];
-	$orig_value = explode("-", $original_value);
+	$orig_value = explode("%", $original_value);
 	$original_value = $orig_value[0];
 
 	$fields = '';
@@ -15,7 +15,7 @@
 	$params = array();
 	foreach($inputs as $key => $value){
 
-		$res = explode("-", $value);
+		$res = explode("%", $value);
 		$field_name = $res[0];
 		$field_value = $res[1];
 		
@@ -98,7 +98,7 @@
 	}
 				
 	if($table_name == 'drawer'){
-		$res = explode("-", $inputs[0]);
+		$res = explode("%", $inputs[0]);
 		$field_name = $res[0];
 		$field_value = $res[1];
 		
@@ -149,7 +149,7 @@
 	}	
 		
 	if($table_name == 'freezer'){
-		$res = explode("-", $inputs[0]);
+		$res = explode("%", $inputs[0]);
 		$field_name = $res[0];
 		$field_value = $res[1];
 		

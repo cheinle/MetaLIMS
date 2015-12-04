@@ -115,6 +115,7 @@ function whiteList($name_check,$type){// Example string to test against
 							'environmental_type',
 							'latitude',
 							'longitude',
+							'circulation_type',
 							//from sample_type table
 							'sample_type_name',
 							//from daily data and daily weather table
