@@ -1,6 +1,7 @@
 <?php
 	 include('database_connection.php');
 	 include('functions/dropDown.php');
+	 include('config/path.php');
 
 	$num_of_sens = $_GET['num_sensors'];
 	$submitted = 'false';
@@ -61,7 +62,7 @@
 				<p>
 				<label class="textbox-label">Record Source For Sensor Measurement<?php echo $x ?>:</label><br>
 				<?php
-				dropDown('record'.$x, 'records', 'records','records',$submitted);
+				dropDown('record'.$x, 'records', 'records','records',$submitted,$root);
 				?>
 				</p>
 				
