@@ -146,7 +146,7 @@ include($path.'functions/dropdown.php');
 						$submitted = 'true';
 					}else{
 						
-						echo 'An error has occured';
+						echo 'An error has occurred';
 						mysqli_error($dbc);
 					}
 				}

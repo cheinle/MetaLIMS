@@ -67,10 +67,6 @@
 						$error = 'true';
 					}
 				}
-    			else {
-        			echo "Name exisits: No results <br>";//no result came back so free to enter into db, no error
-					
-    			}
 			} 
 			else {
 				$error = 'true';

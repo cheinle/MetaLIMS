@@ -27,7 +27,7 @@ function build_seq_subbed_output_new($stmt,$root){
 		echo '<button type="button"  data-toggle="collapse" data-target="#'.$id.'" aria-expanded="true" aria-controls="demo" class="buttonLength">'.$id.'</button><br>';
 		echo '<div id="'.$id.'" class="collapse">';
 		//1
-		$query_seq = "SELECT container_type,date_submitted,entered_by,library_prep_kit,sample_type,sequencing_method,sequencing_type,submitted_by,quant_method,read_length,seq_pool,amplicon_type,primerL,primerR FROM sequencing2 WHERE sequencing_info = ?";
+		$query_seq = "SELECT container_type,date_submitted,entered_by,library_prep_kit,sample_type,sequencing_method,sequencing_type,submitted_by,quant_method,read_length,seq_pool,amplicon_type,primerL,primerR,results_recieved FROM sequencing2 WHERE sequencing_info = ?";
 		if($stmt_seq = $dbc->prepare($query_seq)){
 			$stmt_seq -> bind_param('s', $id);
 		//////////////
@@ -54,7 +54,11 @@ function build_seq_subbed_output_new($stmt,$root){
 									continue;
 								}
 								else{
-									echo '<strong>'.$p_key_seq.'</strong>:  '.$p_value_seq.'<br>';
+									if($p_key_seq == 'Results Recieved' && $p_value_seq == ''){
+										echo '<strong>'.$p_key_seq.'</strong>: <A HREF="recieved_seq_results.php?id='.$id.'">Click Here To Mark Sequencing Results Recieved</A><br>';
+									}else{
+										echo '<strong>'.$p_key_seq.'</strong>:  '.$p_value_seq.'<br>';
+									}
 								}	
 							}
 						}

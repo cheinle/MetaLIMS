@@ -46,8 +46,9 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	//latest activity
 	$_SESSION['last_action'] = time();
 	
+	//currently not working as you have session names with the same name 
 	//unset session vars for bulk DNA update if you are not on one of the specified pages
-	$page_name = basename($_SERVER['SCRIPT_NAME']);
+	/*$page_name = basename($_SERVER['SCRIPT_NAME']);
 		include('functions/unset_session_vars.php');
 	if(($page_name != 'dna_bulk_update.php') && ($page_name != 'query_results_mod.php')){
 		unset_session_vars('bulk_dna_update');
@@ -56,6 +57,8 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	if(($page_name != 'storage_bulk_update.php') && ($page_name != 'query_results_mod.php')){
 		unset_session_vars('bulk_storage_update');
 	}
+	 * 
+	 */
 }
 
 ?>

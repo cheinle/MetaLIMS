@@ -203,7 +203,7 @@
 					echo 'You added new Daily Weather Info for:'.$p_date;
 					$submitted = 'true';
 				}else{
-					echo 'An error has occured';
+					echo 'An error has occurred';
 					mysqli_error($dbc);
 				}
 			}
