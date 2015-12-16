@@ -52,7 +52,7 @@
 						
 						//check if add was successful or not. Tell the user
 				   		if($rows_affected > 0){
-							echo 'You Updated Date Sequencing Results Were Recieved: '.$p_id.''.$p_date.'<br>';
+							echo 'You Updated Date Sequencing Results Were Recieved: '.$p_id.' for '.$p_date.'<br>';
 							$submitted = 'true';
 						}else{
 							echo 'An error has occurred';
