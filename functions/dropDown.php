@@ -26,9 +26,8 @@ function dropDown($select_name,$table_name,$field_name,$select_id,$submitted,$ro
 				$query = "SELECT * FROM $p_table_name";
 				$result = mysqli_query($dbc, $query);
 				if(!$result){
-					echo 'An error has occured';
+					echo 'An error has occurred';
 					mysqli_error($dbc);
-					echo '<p>'.$query.'</p>';
 				}
 				
 				//echo "<select id='$p_select_name' name='$p_select_name' class='fields';'>";
@@ -40,7 +39,6 @@ function dropDown($select_name,$table_name,$field_name,$select_id,$submitted,$ro
 					$name = htmlspecialchars($row["$p_field_name"]);
 					$id = htmlspecialchars($row["$p_select_id"]);
 					$visible_check = htmlspecialchars($row["visible"]);
-					echo $visible_check;
 					if($visible_check == '1'){
 						if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy'])))   {
 							if(isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false'){
