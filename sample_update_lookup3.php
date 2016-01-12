@@ -156,7 +156,7 @@ include('functions/convert_header_names.php');
 				$p_orig_sample_name = htmlspecialchars($_GET['sample_name']);
 				$p_orig_sample_num = substr($p_orig_sample_name, -3);
 				$date = htmlspecialchars($_GET['sdate1']); //just using start date for sampling date
-				$regrex_check = '/^(201[4-5])-([0-1][0-9])-([0-3][0-9])$/'; //remove dashes (yyyy-mm-dd)
+				$regrex_check = '/^(20[0-9][0-9])-([0-1][0-9])-([0-3][0-9])$/'; //remove dashes (yyyy-mm-dd)
 				$preg_match = preg_match($regrex_check,$date,$matches);
 				if($preg_match != 1){
 					echo "Date Matching Error. Please Notify Admin";

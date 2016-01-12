@@ -174,7 +174,7 @@ include('config/path.php');
 						
 						//format sample name and sample sort name
 						$date = htmlspecialchars($_GET['sdate1']); //just using start date for sampling date of the first air sampler
-						$regrex_check = '/^(201[4-5])-([0-1][0-9])-([0-3][0-9])$/'; //remove dashes
+						$regrex_check = '/^(20[0-9][0-9])-([0-1][0-9])-([0-3][0-9])$/'; //remove dashes
 						preg_match($regrex_check,$date,$matches);
 						$date = $matches[1].'/'.$matches[2].'/'.$matches[3];
 						$p_sample_name = $date.$p_projName.$p_sType.$p_sample_number;
