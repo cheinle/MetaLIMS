@@ -36,6 +36,7 @@ try{
 				$old_session_id;
 				$first_name;
 				$last_name;
+				$admin_user;
 				$count = 0;
 				$stmt1->execute(); //process is foward-curser so need to reset
 				while($stmt1->fetch()){
@@ -43,6 +44,7 @@ try{
 					$old_session_id = $row['session_id'];
 					$first_name = $row['first_name'];
 					$last_name = $row['last_name'];
+					$admin_user = $row['admin'];
 			   	}
 	
 				//store current session id
@@ -89,7 +91,8 @@ try{
 					//destroy session for anyone who is not the developer
 						
 					if($database_down == 'true' || $database_down == 'moving'){
-						if($_SESSION['username'] == $admin_user){
+						//if($_SESSION['username'] == $admin_user){
+						if($admin_user == 'Y'){
 							header('Location: home_page.php');
 						}
 						else{
@@ -160,6 +163,11 @@ catch (Exception $e) {
 	<!-- BEGIN LOGO -->
 	<div class="logo">
 		<!-- PUT YOUR LOGO HERE -->
+		<?php 
+			if($database_down == 'true'){
+				echo "Database Is Currently Down For Maintenance. Sorry For Any inconvenience Caused. Please See Admin For Details";
+			}
+		?>
 	</div>
 	<!-- END LOGO -->
 	<!-- BEGIN LOGIN -->

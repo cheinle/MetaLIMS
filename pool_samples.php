@@ -160,7 +160,7 @@ include ($path.'functions/convert_header_names.php');
 			}
 			
 			//format date
-			$regrex_check = '/^(201[4-5])-([0-1][0-9])-([0-3][0-9])$/'; //remove dashes
+			$regrex_check = '/^(20[0-9][0-9])-([0-1][0-9])-([0-3][0-9])$/'; //remove dashes
 			preg_match($regrex_check,$p_mydate,$matches);
 			$p_mydate = $matches[1].'/'.$matches[2].'/'.$matches[3];
 			
