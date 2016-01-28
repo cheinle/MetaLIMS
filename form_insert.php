@@ -313,7 +313,7 @@ include('config/path.php');
 							
 							$start = $_GET['sdate'.$x].' '.$_GET['stime'.$x];
 							$end = $_GET['edate'.$x].' '.$_GET['etime'.$x];
-
+							
 							//format date/time
 							$p_time;
 							if(($start) && ($end)){

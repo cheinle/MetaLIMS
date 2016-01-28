@@ -319,6 +319,12 @@ include ($path.'functions/convert_header_names.php');
 							}
 						}
 					}
+					//insert samplers
+					//insert new sample name into isolate info
+					//insert new samplers into number of seq submissions
+
+
+
 					////
 								
 	
