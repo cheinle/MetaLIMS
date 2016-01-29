@@ -471,12 +471,14 @@ include ($path.'functions/convert_header_names.php');
 	
 	?>
 	<form class="registration" onsubmit="return validate(this)" action="pool_samples.php" method="GET" target="_blank">
-	<p><i>* = required field </i></p>
+	<p><i>* = required field </i><br>
+		<a href="<?php echo $root;?>how_pooled_samples_created.php">How Pooled Samples Are Created In the DB</a>
+	</p>
 		
 		<fieldset>
 		<LEGEND><b>Pooling Info:</b></LEGEND>
 		<div class="col-xs-6">
-		<label class="textbox-label">Date:</label>
+		<label class="textbox-label">Date:<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="This is the date that will be given to the new pooled sample created"'></i></label>
 		<input type="text" id="datepicker"  name="mydate" class="fields" value="<?php if ((isset($_GET['submit']) && $submitted != 'true')) {echo htmlspecialchars($_GET['mydate']);} ?>"></p>
 		<script>
 			$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' }).val();
@@ -484,14 +486,14 @@ include ($path.'functions/convert_header_names.php');
 		
 		
 		<!--Project Name Dropdown-->
-		<label class="textbox-label">Select Project Name:</label>
+		<label class="textbox-label">Select Project Name:<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Only samples belonging to the same project can currently be pooled. Samples selected will be checked that they belong to the project name selected"></i></label>
 		<?php
 		//url or $_GET name, table name, field name
 		dropDown('projName', 'project_name', 'project_name','project_name',$submitted,$root);
 		?>
 		
 		
-		<h3 class="checkbox-header">Select Pooling Type:</h3>
+		<h3 class="checkbox-header">Select Pooling Type:<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Samples can only be pooled for DNA Extraction at this time. No pooling is availible for Sequencing Submission"></i></h3>
  		<div class="vert-checkboxes">
  		<label class="checkbox-label"><input type="radio" name="pool_type" value="DNA" id="pool_type_dna"<?php if((isset($_GET['submit']) && $submitted != 'true')){if($_GET['pool_type'] == 'DNA'){echo 'checked';}} ?>/>Pool Samples for DNA Extraction<br /></label>
 		<!--<label class="checkbox-label"><input type="radio" name="pool_type" value="Library" id ="pool_type_library"<?php if((isset($_GET['submit']) && $submitted != 'true')){if($_GET['pool_type']== 'Library'){echo 'checked';}} ?>  data-toggle="popover" title=" Currently Only Able To Pool For DNA Extractions"/>Pool DNA Samples for Library Submission<br /></label>-->
