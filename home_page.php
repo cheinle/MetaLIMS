@@ -12,12 +12,7 @@ include('config/path.php');
 <title>Home Page</title>	
 		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 </head>
-<body class="homepage">
-<script>Alert.render("WARNING: Error was found. No updates have been made. Please see details of update );</script>
-					
-<script>
-alert("NOTICE: At This Time. Please Use Chrome As Your Browser. Sorry For Any Inconvenience!");
-</script>
+<body class="homepage">				
 	<!--<div class = "homepage">-->
 <h1 style="color:#fff;font-family: Georgia;text-shadow: 2px 4px 3px rgba(0,0,0,0.3);">Welcome <?php echo htmlspecialchars($_SESSION['first_name'].' '.$_SESSION['last_name']);?>!</h1>
 <p>

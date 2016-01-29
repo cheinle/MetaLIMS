@@ -167,7 +167,7 @@ include ($path.'functions/convert_header_names.php');
 			//create new sample name
 			$new_sample_name = $p_mydate.$p_projName.$p_sample_type.$new_sample_number;
 			$new_sample_sort = $p_projName.$new_sample_number;
-			$air_sampler_name = '(pooled)';
+			$sampler_name = '(pooled)';
 			$collector_name = '(pooled)';	
 			$start_time = $p_mydate.' 01:00:00';
 			$end_time = $p_mydate.' 01:00:00';
@@ -222,7 +222,6 @@ include ($path.'functions/convert_header_names.php');
 					//create new entry with note in sample entry about which samples are pooled
 					$stmt3 = $dbc -> prepare("INSERT INTO sample (sample_name,
 																	sample_sort,
-																	air_sampler_name,
 																	collector_name,
 																	end_samp_date_time,
 																	entered_by,
@@ -243,7 +242,7 @@ include ($path.'functions/convert_header_names.php');
 																	flow_rate,
 																	flow_rate_eod
 																
-					) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 								
 					if(!$stmt3){		
 						#echo "Prepare failed: (" . $dbc->errno . ") " . $dbc->error;
@@ -251,10 +250,9 @@ include ($path.'functions/convert_header_names.php');
 						throw new Exception("Prepared Failure For Sample Insertion");
 					}
 					else{
-						$stmt3 -> bind_param('sssssssssssssdsssdisdd', 
+						$stmt3 -> bind_param('ssssssssssssdsssdisdd', 
 									 						$new_sample_name, 
 									 						$new_sample_sort,
-									 						$air_sampler_name,
 									 						$collector_name,
 									 						$end_time,
 									 						$entered_by,
@@ -319,19 +317,58 @@ include ($path.'functions/convert_header_names.php');
 							}
 						}
 					}
-					//insert samplers
-					//insert new sample name into isolate info
-					//insert new samplers into number of seq submissions
-
-
-
-					////
-								
-	
+					/***************************************************************************************
+					//Insert Samplers !!! (must be after insert of sample to db because of key constraints)
+					****************************************************************************************/
+					$query_samp = "INSERT INTO sample_sampler (sample_name, sampler_name, start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)";
+					$stmt_samp = $dbc -> prepare($query_samp);
+					if(!$stmt_samp){
+						throw new Exception("Prepare Failure: Unable To Insert Sample Sampler");	
+					}
+					else{
+						$stmt_samp -> bind_param('ssssd', $new_sample_name,$sampler_name,$start_time,$end_time,$total_sampling_time);
+						if($stmt_samp -> execute()){
+							$rows_affected_samp = $stmt_samp ->affected_rows;
+							$stmt_samp -> close();
+							//check if add was successful or not. Tell the user
+							if($rows_affected_samp <= 0){
+								$error = 'true';
+								throw new Exception("An Error Occurred: No Sampler Info Added");
+							}
+						}
+						else{
+							$error = 'true';
+							throw new Exception("Execution Failure: Unable To Insert Sampler");	
+						}
+					}
+					
+					/***************************************************************************************
+					//add insert into new table for number_of_seq_submissions. No update/edit for this exists 
+					****************************************************************************************/
+					$stmt_seq_num = $dbc -> prepare("INSERT INTO number_of_seq_submissions (sample_name) VALUES (?)");
+					if(!$stmt_seq_num){
+						$error = 'true';
+						throw new Exception("Prepare Failure: Unable to insert sample into Sequence Number Submission table");	
+					}
+					else{
+						$stmt_seq_num -> bind_param('s', $new_sample_name);
+						if(!$stmt_seq_num-> execute()){
+							$error = 'true';
+							throw new Exception("Execution Failure: Unable to enter sample into Sequence Number Submission table.");	
+						}
+						else{
+							$rows_affected_seq_num = $stmt_seq_num ->affected_rows;
+							$stmt_seq_num -> close();
+							if($rows_affected_seq_num < 0){
+								$error = 'true';
+								throw new Exception("Unable to insert sample into Sequence Number Submission table");	
+							}
+						}
+					}
+					
 					//update all old samples with note for new sample number and pooled samples
 					//also add each of sample to the pooled_sample_lookup table
 					foreach($pooled_sn_array as $key => $value){
-						#echo "value:".$value;
 						//grab existing note from sample and append new one to the old one
 						$old_notes = '';
 						$stmt4 = $dbc->prepare("SELECT sample_name,notes FROM sample WHERE sample_name = ?");
@@ -348,7 +385,6 @@ include ($path.'functions/convert_header_names.php');
 						} 
 						else {
 							$error = 'true';
-			    			#die('execute() failed: ' . htmlspecialchars($stmt->error));
 			    			throw new Exception("execute() failed. Unable to select previous note information");
 						};
 						$stmt4 -> close();			
@@ -371,14 +407,14 @@ include ($path.'functions/convert_header_names.php');
 							}
 							else{
 								$error = 'true';
-								throw new Exception('An error has occured in updating note info for '.$value);
+								throw new Exception('An error has occurred in updating note info for '.$value);
 							}
 						}
 						else{
 							$error = 'true';
 							throw new Exception("ERROR: Note Update Prepare Failure");
 						}
-						/////////////////////////
+
 						$stmt_ps = $dbc -> prepare("INSERT INTO pooled_sample_lookup (new_pooled_samp_name, orig_sample_name, date_entered, entered_by) VALUES (?,?,?,?)");
 								
 						if(!$stmt_ps){		

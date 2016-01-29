@@ -103,20 +103,7 @@ try{
 					else{
 						header('Location: home_page.php');
 					}
-					//exit; what is this for?
 				}
-				/*else{//else stay logged on...this should never be true right now
-					alert("Admin Is Testing This. Please Notify Her If You See This");
-					session_start();
-					$_SESSION['username'] = $_POST['email'];
-					$_SESSION['session_id'] = $new_session_id;
-					session_destroy();//before this and your regenearte id...used to go here if stayed logged on. now goes above but still same problem
-					echo $_SESSION['session_id'];
-					echo $_SESSION['username'];
-					header('Location: index.php');
-					exit;
-				}*/
-			
 			}
 		}
 	}
