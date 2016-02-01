@@ -259,13 +259,11 @@ if (isset($_GET['submit'])) {
 								$('#sdate<?php echo $x ?>').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 								$('#edate<?php echo $x ?>').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 				
-								var sampler_num = <?php echo(json_encode($x)); ?>;
 				    			$(document).ready(function(){
+				    				var sampler_num = <?php echo(json_encode($x)); ?>;
 				        			$('input[name="stime'+sampler_num+'"]').ptTimeSelect();
 				        			timeFormat: "HH:mm"
-				   	 			});
-				   	 			
-				   	 			$(document).ready(function(){
+				   	 	
 				   	 				$('input[name="etime'+sampler_num+'"]').ptTimeSelect();
 				        			timeFormat: "HH:mm"
 				   	 			});
