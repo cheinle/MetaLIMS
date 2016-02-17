@@ -6,6 +6,7 @@ try{
 		//start transaction
 		$dbc->autocommit(FALSE);
 		$insert_check = 'true';
+		
 		//sanatize user input to make safe for browser
 		$p_label_name = htmlspecialchars($_GET['label_text']);
 		$p_type = 'text_input';
@@ -17,7 +18,11 @@ try{
 		if ($stmt->execute()){
 	    	$stmt->bind_result($thing_id);
 	    	while ($stmt->fetch()){
-	        	$number_of_things[] = $thing_id;
+	    		
+				echo $thing_id;
+				$regrex_check = '/^thing(\d+)$/'; //remove dashes
+				preg_match($regrex_check,$thing_id,$matches);
+	        	$number_of_things[] = $matches[1];
 			}
 		} 
 		else {
@@ -28,6 +33,7 @@ try{
 		sort($number_of_things);
 		$last_element = end($number_of_things);
 		$new_thing_id = $last_element + 1;
+		$new_thing_id = 'thing'.$new_thing_id;
 		print_r($number_of_things);
 		echo $new_thing_id;
 				
@@ -38,7 +44,7 @@ try{
 			throw new Exception("Prepare Failure: Unable To Insert Into Main Sample Table");	
 		}
 		else{
-			$stmt2 -> bind_param('isss', $new_thing_id,$p_label_name,$p_type,$p_select_values);
+			$stmt2 -> bind_param('ssss', $new_thing_id,$p_label_name,$p_type,$p_select_values);
 			if(!$stmt2 -> execute()){
 				$insert_check = 'false';
 				throw new Exception("Execution Failure: Unable To Insert Into Main Sample Table");

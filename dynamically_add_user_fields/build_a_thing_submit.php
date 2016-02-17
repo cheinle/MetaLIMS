@@ -1,15 +1,16 @@
 <?php
 		include ('../database_connection.php');
 
-		$stmt = $dbc->prepare("SELECT label_name,type,select_values,thing_id FROM create_user_things");
+		$stmt = $dbc->prepare("SELECT label_name,type,select_values,thing_id, visible FROM create_user_things");
 		if(!$stmt){
 			die('prepare() failed: ' . htmlspecialchars($stmt->error));
 		}
 		if ($stmt->execute()){
-			$stmt->bind_result($label_name,$type,$select_values,$thing_id);
+			$stmt->bind_result($label_name,$type,$select_values,$thing_id,$visible);
 			while ($stmt->fetch()) {
 				echo "$label_name<br>$type<br>$select_values<br>$thing_id<br>";
 				if($type == 'text_input'){
+					if($visible == 1){
 ?>
 					<script type="text/javascript">
 					  var thing_id = <?php echo(json_encode($thing_id)); ?>	
@@ -30,6 +31,7 @@
 					  document.getElementById("user_things").appendChild(linebreak);
 					</script>
 <?php
+					}
 				}	
 			
 			}
