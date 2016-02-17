@@ -1,18 +1,18 @@
 <?php
 		include ('../database_connection.php');
 
-		$stmt = $dbc->prepare("SELECT label_name,type,select_values FROM create_user_things");
+		$stmt = $dbc->prepare("SELECT label_name,type,select_values,thing_id FROM create_user_things");
 		if(!$stmt){
 			die('prepare() failed: ' . htmlspecialchars($stmt->error));
 		}
 		if ($stmt->execute()){
-			$stmt->bind_result($label_name,$type,$select_values);
+			$stmt->bind_result($label_name,$type,$select_values,$thing_id);
 			while ($stmt->fetch()) {
-				echo "$label_name<br>$type<br>$select_values<br>";
+				echo "$label_name<br>$type<br>$select_values<br>$thing_id<br>";
 				if($type == 'text_input'){
 ?>
 					<script type="text/javascript">
-					  var counter = 1;
+					  var thing_id = <?php echo(json_encode($thing_id)); ?>	
 					  var label_text = <?php echo(json_encode($label_name)); ?>	
 					  var label = document.createElement("label");
 					  var node = document.createTextNode(label_text+" : ");
@@ -20,7 +20,7 @@
 					  
 					  var newInput = document.createElement("input");
 					  newInput.type="text";
-					  newInput.name="thing"+counter;
+					  newInput.name="thing"+thing_id;
 						
 					  var linebreak = document.createElement("br");  
 					

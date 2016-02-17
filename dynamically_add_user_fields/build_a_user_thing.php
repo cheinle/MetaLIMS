@@ -57,7 +57,7 @@ include('insert_a_user_thing_js.php');
 					//});
 				});
 				
-				////load page
+				////submit page 
 				$(document).ready(function() {
 					//$("#submit").click(function() {
 
