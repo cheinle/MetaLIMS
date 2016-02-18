@@ -7,7 +7,7 @@ try{
 		$dbc->autocommit(FALSE);
 		$insert_check = 'true';
 		
-		//sanatize user input to make safe for browser
+		//define variables
 		$p_label_name = htmlspecialchars($_GET['label_text']);
 		$p_type = 'text_input';
 		$p_select_values = NULL;
@@ -55,7 +55,32 @@ try{
 			}
 		}
 		
+		//double check that thingid  is really just 'thing#'
+		$thing_check_regrex = '/^thing(\d+)$/'; //remove dashes
+		$thing_type_check = preg_match($thing_check_regrex,$new_thing_id);
+		if($thing_type_check == true && $insert_check == 'true'){
+			//create column in store_user_things
+			$stmt3 = $dbc -> prepare("ALTER TABLE store_user_things ADD $new_thing_id varchar(150)");
+			if(!$stmt3){
+				$insert_check = 'false';
+				throw new Exception("Prepare Failure: Unable To Insert Into Main Sample Table");	
+			}
+			else{
+				if(!$stmt3 -> execute()){
+					$insert_check = 'false';
+					throw new Exception("Execution Failure: Unable To Insert Into Main Sample Table");
+				}
+				else{
+					$rows_affected3 = $stmt3 ->affected_rows;
+					$stmt3 -> close();
+				}
+			}
+		}
+		else{
+			$insert_check = 'false';
+		}
 		
+				
 		
 		/*****************************************************************************
 		 * Do One Last Check And Commit If You Had No Errors
