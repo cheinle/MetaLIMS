@@ -127,7 +127,8 @@ if(isset($_POST['submit'])){
 			
 			//prepare excel sample sheet
 			require_once dirname(__FILE__) . '/xls_classes/PHPExcel/IOFactory.php';
-			$objPHPExcel = PHPExcel_IOFactory::load("Sequencing_SampleSubmissionForm.xlsx");
+			//$objPHPExcel = PHPExcel_IOFactory::load("Sequencing_SampleSubmissionForm.xlsx");
+			$objPHPExcel = PHPExcel_IOFactory::load("test.xlsx");
 			$styleArray = array(
 		    'font'  => array(
 		    	'color' => array('rgb' => '000000'),
@@ -139,10 +140,11 @@ if(isset($_POST['submit'])){
 			for($i = 1; $i <= $number_of_samples; $i++){
 				$objWorksheet->insertNewRowBefore(15);
 			}
-			$starting_row = 14;
+			$starting_row = 15;
 		
 			//insert sample info to db and excel sheet at the same time
 			echo 'Samples Updated:<br>';
+			$countainer_counter = 1;
 			foreach($sample_array as $sample_name => $process){
 				$starting_row++;
 				$p_sample_name = htmlspecialchars($sample_name);
@@ -210,7 +212,11 @@ if(isset($_POST['submit'])){
 				$container_name = '';
 				if(isset($process['wellLoc'])){
 					$p_wellLoc = $process['wellLoc'];
-					$container_name = 'air_container';
+					$container_name = 'air_container'+$container_counter;
+				}
+				
+				if($container_type == 'Tube'){
+					$countainer_counter++;
 				}
 				
 				$p_sampConc = $process['sampConc'];
@@ -241,17 +247,17 @@ if(isset($_POST['submit'])){
 						->setCellValue('K'.$starting_row, $p_nano)
 						->setCellValue('L'.$starting_row, $p_280)
 						->setCellValue('M'.$starting_row, $p_230)
-						->setCellValue('N'.$starting_row, $application)
-						->setCellValue('O'.$starting_row, $method)
-						->setCellValue('P'.$starting_row, $read_length)
+						->setCellValue('R'.$starting_row, $application)
+						->setCellValue('S'.$starting_row, $method)
+						->setCellValue('T'.$starting_row, $read_length)
 						//->setCellValue('Q'.$starting_row, "")//seq coverage (optional)
 						//->setCellValue('R'.$starting_row, "")//ref genome (optional)
-						->setCellValue('S'.$starting_row, $seq_pool)//pooling
-						->setCellValue('T'.$starting_row, $p_sampBuffer)
-						->setCellValue('U'.$starting_row, $p_vol );
+						->setCellValue('W'.$starting_row, $seq_pool)//pooling
+						->setCellValue('X'.$starting_row, $p_sampBuffer)
+						->setCellValue('Y'.$starting_row, $p_vol );
 					
 				//style the newly inserted cells
-				$alpha_array = range('A','U');
+				$alpha_array = range('A','Y');
 				foreach($alpha_array as $index => $alpha){
 					$objPHPExcel->getActiveSheet()->getStyle($alpha.$starting_row)->applyFromArray($styleArray);
 					$objPHPExcel->getActiveSheet()->getStyle($alpha.$starting_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
