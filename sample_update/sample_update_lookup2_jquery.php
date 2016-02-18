@@ -215,7 +215,7 @@ if (isset($_GET['submit'])) {
 				}
 			
 				//grab all of the air sampler info for this sample
-				$stmt1 = $dbc->prepare("SELECT air_sampler_name,start_date_time,end_date_time,total_date_time FROM sample_air_sampler WHERE sample_name = ?");
+				$stmt1 = $dbc->prepare("SELECT sampler_name,start_date_time,end_date_time,total_date_time FROM sample_sampler WHERE sample_name = ?");
 				$stmt1 -> bind_param('s', $p_sample_name);
 	  			if ($stmt1->execute()){
 	    			$stmt1->bind_result($air_sampler_name,$start,$end,$total);
