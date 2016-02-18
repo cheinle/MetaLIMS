@@ -15,7 +15,6 @@
 							var rloc = $("#rloc").val();
 							var dExtKit = $("#dExtKit").val();
 							var rExtKit = $("#rExtKit").val();
-							var seqInfo = $("#seqInfo").val();
 							var anPipe = $("#anPipe").val();
 							var barcode = $("#barcode").val();
 							var sType = $("#sType").val();
@@ -54,15 +53,6 @@
 							var RNA_sample_exist = $("#RNA_sample_exist").val();
 							var rStore_temp = $("#rStore_temp").val();
 							var rStore_name = $("#rStore_name").val();
-	
-							//for isolates
-							var iso_coll_temp= $("#iso_coll_temp").val();
-							var iso_date = $("#datepicker3").val();
-							var iso_store_method = $("#iso_store_method").val();
-							var sang_seq = $("#sang_seq").val();
-							var closest_hit = $("#closest_hit").val();
-							var send_pac_bio = $("#send_pac_bio").val();
-							var iso_loc_type = $("#iso_loc_type").val();
 
 							//air samplers
 							var sampler_num = $("#sampler_num").val();
@@ -98,7 +88,6 @@
 								rloc:rloc,
 								dExtKit:dExtKit, 
 								rExtKit:rExtKit,
-								seqInfo:seqInfo, 
 								anPipe: anPipe,
 								barcode: barcode,
 								sType: sType, 
@@ -134,15 +123,6 @@
 								RNA_sample_exist: RNA_sample_exist,
 								rStore_temp: rStore_temp,
 								rStore_name: rStore_name,
-		
-								//for isolates
-								iso_coll_temp: iso_coll_temp,
-								iso_date: iso_date,
-								iso_store_method: iso_store_method,
-								sang_seq: sang_seq , 
-								closest_hit: closest_hit, 
-								send_pac_bio: send_pac_bio,
-								iso_loc_type: iso_loc_type,
 								
 								//air samplers and date/time arrays
 								sampler_num:sampler_num, 
@@ -153,78 +133,10 @@
 								end_times: end_times
 
 			                    }, //Data you are sending
-			                    //success : function(data){$('#div_store').html(data)},
-			                    success : function(data){alert("\t"+'Success!'+"\n"+'Inserted Sample Number : '+sample_number+"\n"+'For Project: '+projName)}, // On success, it will populate the 2nd select
+			                     success : function(data){alert("\t"+'Success!'+"\n"+'Inserted Sample Number : '+sample_number+"\n"+'For Project: '+projName)}, 
+			                    //success : function(data){alert(data)}, 
 			                    error   : function(){alert('An Error Has Occurred')} //error message
 			                })
-							
-							/*$.get("form_insert_submit.php", {
-								sample_number:sample_number,
-								projName: projName,
-								loc:loc,
-								rloc:rloc,
-								dExtKit:dExtKit, 
-								rExtKit:rExtKit,
-								seqInfo:seqInfo, 
-								anPipe: anPipe,
-								barcode: barcode,
-								sType: sType, 
-								notes: notes, 
-								fRate: fRate,
-								fRate_eod: fRate_eod,
-								media: media,
-								sampling_height: sampling_height, 
-								collector: collector,
-								orig_sample_exist: orig_sample_exist,
-								oStore_temp: oStore_temp,
-								oStore_name: oStore_name,
-								enteredBy:enteredBy,
-								
-								//for dna
-								dConc: dConc,
-								dInstru: dInstru,
-				   				dVol: dVol ,
-				   				dVol_quant: dVol_quant,
-								d_extr_date: d_extr_date,
-								dExtrName: dExtrName,
-								DNA_sample_exist: DNA_sample_exist,
-								dStore_temp: dStore_temp,
-								dStore_name: dStore_name,
-				
-								//for rna
-								rConc: rConc,
-								rInstru: rInstru, 				
-								rVol: rVol,	
-								rVol_quant: rVol_quant,
-								r_extr_date: r_extr_date,
-								rExtrName: rExtrName,
-								RNA_sample_exist: RNA_sample_exist,
-								rStore_temp: rStore_temp,
-								rStore_name: rStore_name,
-		
-								//for isolates
-								iso_coll_temp: iso_coll_temp,
-								iso_date: iso_date,
-								iso_store_method: iso_store_method,
-								sang_seq: sang_seq , 
-								closest_hit: closest_hit, 
-								send_pac_bio: send_pac_bio,
-								iso_loc_type: iso_loc_type,
-								
-								//air samplers and date/time arrays
-								sampler_num:sampler_num, 
-								air_samplers: air_samplers,
-								start_dates : start_dates,
-								end_dates : end_dates,
-								start_times: start_times,
-								end_times: end_times
-					
-								}, 
-								function(data) {
-									alert(data);
-									//$('#form')[0].reset(); // To reset form fields
-								});*/
-								
 							}
 						});
 				});

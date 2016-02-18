@@ -293,16 +293,57 @@
 </script>
 
 <!--Pick Air Samplers Info-->
+<!--Pick Air Samplers Info-->
 <script type="text/javascript">
+		//var old_sampler_num = $("#sampler_num").val();
 		$(document).ready(function(){  
-				               
-             $('#sampler_num').change(function(){ //on button click event
-                var num_samplers = $('#sampler_num').val(); //<----- get the value from the parent select 
-                //alert(num_sensors);
+			
+			
+			var previous;
+		    $("select[id=sampler_num]").on("focus",function () {
+		        previous = this.value;
+		
+		    }).change(function() {
+			   		var value =  this.value;
+	
+			      	//alert('Old Value : '+previous+' New Value : '+value);
+	
+	             	var sampler_num = value;
+	             	var old_sampler_num = previous;
+             	
+             		//air samplers
+					var air_samplers = [];
+					var start_dates = [];
+					var end_dates = [];
+					var start_times = [];
+					var end_times = [];
+							
+					for ( var x = 1; x <= sampler_num; x++) {
+						var airSampler = $("#airSamp"+x).val();
+						air_samplers[x] = airSampler;
+											
+						var sdate = $("#sdate"+x).val();
+						start_dates[x] = sdate;
+											
+						var edate = $("#edate"+x).val();
+						end_dates[x] = edate;
+											
+						var stime = $("#stime"+x).val();
+						start_times[x] = stime;
+											
+						var etime = $("#etime"+x).val();
+						end_times[x] = etime;
+					}
 	                $.ajax({
-	                    url     : root+'sampler_select.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'sample_insert/air_sampler_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
-	                    data    : { num_samplers: num_samplers}, //Data you are sending
+	                    data    : { num_air_samplers: sampler_num,
+	                    			old_num_air_samplers: old_sampler_num, 
+	                    			air_samplers:air_samplers,
+	                    			start_dates:start_dates,
+	                    			end_dates:end_dates,
+	                    			start_times:start_times,
+	                    			end_times:end_times}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},
 	                    success : function(data){$('#div_sampler_num').html(data)}, // On success, it will populate the div
 	                    error   : function(){alert('An Error Has Occurred')} //error message

@@ -15,7 +15,7 @@
 				$p_poolEx = '0';//pooling of extracts has been moved to another page
 				$p_dExtKit = htmlspecialchars($_GET['dExtKit']);
 				$p_rExtKit = htmlspecialchars($_GET['rExtKit']);
-				$p_seqInfo = htmlspecialchars($_GET['seqInfo']);
+				$p_seqInfo = '';
 				$p_anPipe = htmlspecialchars($_GET['anPipe']);
 				$p_barcode = htmlspecialchars($_GET['barcode']);
 				$p_sType = htmlspecialchars($_GET['sType']);
@@ -44,13 +44,21 @@
 				$end_times = $_GET['end_times'];
 				
 				//for isolates
-				$p_iso_coll_temp = htmlspecialchars($_GET['iso_coll_temp']);
+				/*$p_iso_coll_temp = htmlspecialchars($_GET['iso_coll_temp']);
 				$p_iso_date = htmlspecialchars($_GET['iso_date']);
 				$p_iso_store_method = htmlspecialchars($_GET['iso_store_method']);
 				$p_sang_seq= htmlspecialchars($_GET['sang_seq']);
 				$p_closest_hit= htmlspecialchars($_GET['closest_hit']);
 				$p_send_pac_bio= htmlspecialchars($_GET['send_pac_bio']);
 				$p_iso_loc_type= htmlspecialchars($_GET['iso_loc_type']);
+				*/
+				$p_iso_coll_temp = NULL;
+				$p_iso_date = NULL;
+				$p_iso_store_method = NULL;
+				$p_sang_seq= NULL;
+				$p_closest_hit= NULL;
+				$p_send_pac_bio= NULL;
+				$p_iso_loc_type= NULL;
 				
 				$sample_type_regrex = '/^B.*/';//if you are a blank then your flow rate is zero. so is your time
 				$sample_type_check = preg_match($sample_type_regrex,$p_sType);
@@ -196,13 +204,12 @@
 						//Insert Into Main Sample Table. If successful, enter storage info and populate other table
 						****************************************************************************************/
 						
-						//insert data into db. Use prepared statement 
+							//insert data into db. Use prepared statement 
 						$stmt2 = $dbc -> prepare("INSERT INTO sample (sample_name,
 																	  location_name,
 																	  relt_loc_name, 
 																	  part_sens_name, 
 																	  collector_name, 
-																	  pool_extracts_id,
 																	  dna_extract_kit_name,
 																	  rna_extract_kit_name,
 																	  sequencing_info,
@@ -225,7 +232,6 @@
 																	  flow_rate,
 																	  flow_rate_eod,
 																	  daily_data,
-																	  daily_weather,
 																	  sample_num,
 																	  entered_by,
 																	  sample_sort,
@@ -235,20 +241,19 @@
 																	  dExtrName,
 																	  rExtrName,
 																	  seq_id
-																	  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+																	  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 						
 						if(!$stmt2){
 							$insert_check = 'false';
 							throw new Exception("Prepare Failure: Unable To Insert Into Main Sample Table");	
 						}
 						
-						else{//ssssssssssssssdsssdsiisdsiissddssissssdsss
-							 $stmt2 -> bind_param('ssssssssssssssdsiisdsiissddssissssdsss', $p_sample_name, $p_loc,$p_rloc, $p_partSamp, $p_collName, $p_poolEx, $p_dExtKit, $p_rExtKit, $p_seqInfo, $p_anPipe, $p_barcode, $p_sType, $p_path, $p_projName, $p_dConc,$p_dInstru,$p_dVol,$p_dVol_quant,$p_d_extr_date,$p_rConc,$p_rInstru,$p_rVol,$p_rVol_quant,$p_r_extr_date,$p_notes,$p_fRate,$p_fRate_eod,$p_dData,$p_dWeather,$p_sample_number,$p_entered_by,$sample_sort,$p_orig_time_stamp,$p_media,$p_sampling_height,$p_dExtrName,$p_rExtrName,$seq_id);
+						else{
+							 $stmt2 -> bind_param('sssssssssssssdsiisdsiissddsissssdsss', $p_sample_name, $p_loc,$p_rloc, $p_partSamp, $p_collName, $p_dExtKit, $p_rExtKit, $p_seqInfo, $p_anPipe, $p_barcode, $p_sType, $p_path, $p_projName, $p_dConc,$p_dInstru,$p_dVol,$p_dVol_quant,$p_d_extr_date,$p_rConc,$p_rInstru,$p_rVol,$p_rVol_quant,$p_r_extr_date,$p_notes,$p_fRate,$p_fRate_eod,$p_dData,$p_sample_number,$p_entered_by,$sample_sort,$p_orig_time_stamp,$p_media,$p_sampling_height,$p_dExtrName,$p_rExtrName,$seq_id);
 							 if(!$stmt2 -> execute()){
 							 	$insert_check = 'false';
 							 	throw new Exception("Execution Failure: Unable To Insert Into Main Sample Table");
-							}
-							
+							}	
 							else{
 								$rows_affected2 = $stmt2 ->affected_rows;
 								$stmt2 -> close();
@@ -330,10 +335,10 @@
 								$time = ($seconds_diff/3600);
 								$p_time = round($time,2);
 							}
-							$query_air_samp = "INSERT INTO sample_air_sampler (sample_name, air_sampler_name, start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)";
+							$query_air_samp = "INSERT INTO sample_sampler (sample_name, sampler_name, start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)";
 							$stmt_air_samp = $dbc -> prepare($query_air_samp);
 							if(!$stmt_air_samp){
-								throw new Exception("Prepare Failure: Unable To Insert Sample Air Sampler");	
+								throw new Exception("Prepare Failure: Unable To Insert Sample Sampler");	
 							}
 							else{
 								$stmt_air_samp -> bind_param('ssssd', $p_sample_name,$p_air_samp_name,$start,$end,$p_time);
@@ -343,12 +348,12 @@
 									//check if add was successful or not. Tell the user
 							   		if($rows_affected_air_samp < 0){
 										$insert_check = 'false';
-										throw new Exception("An Error Occurred: No Air Sampler Info Added");
+										throw new Exception("An Error Occurred: No Sampler Info Added");
 									}
 								}
 								else{
 									$insert_check = 'false';
-									throw new Exception("Execution Failure: Unable To Insert Air Sampler");	
+									throw new Exception("Execution Failure: Unable To Insert Sampler");	
 								}
 							}
 						}
@@ -389,31 +394,6 @@
 							throw new Exception("Prepare Failure: Unable To Insert Air Sampler");
 						}
 						
-						
-						/***************************************************************************************
-						//Insert Sample Info Into Isolates Table
-						****************************************************************************************/
-						$stmt_iso = $dbc -> prepare("INSERT INTO isolates (sample_name,iso_coll_temp,iso_date,iso_store_method,seq_sang,closest_hit,send_pac_bio,loc_type) VALUES (?,?,?,?,?,?,?,?)");
-						if(!$stmt_iso){
-							throw new Exception("Prepare Failure: Unable To Insert Sample Isolate Info ");	
-						}
-						else{
-							$stmt_iso -> bind_param('ssssssss', $p_sample_name, $p_iso_coll_temp,$p_iso_date,$p_iso_store_method,$p_sang_seq,$p_closest_hit,$p_send_pac_bio,$p_iso_loc_type);
-							
-							if(!$stmt_iso-> execute()){
-								$insert_check = 'false';
-								throw new Exception("Executino Failure: Unable To Insert Sample Isolate Info");	
-							}
-							
-							else{
-								$rows_affected_iso = $stmt_iso ->affected_rows;
-								$stmt_iso -> close();
-								if($rows_affected_iso < 0){
-									$insert_check = 'false';
-									throw new Exception("Unable to insert sample into isolate db");	
-								}
-							}
-						}
 						
 						/***************************************************************************************
 						//add insert into new table for number_of_seq_submissions. No update/edit for this exists 

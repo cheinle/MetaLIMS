@@ -27,12 +27,11 @@ include('form_insert_jquery_js.php');
 		<form class = "registration" id="form" name="form">
 		<div id="tabs">
 				  <ul>
-				    <li><a href="#fragment-1"><span>Collection Info</span></a></li>
-				    <li><a href="#fragment-2"><span>DNA/RNA Extraction</span></a></li>
-				    <li><a href="#fragment-3"><span>Isolate</span></a></li>
-				    <li><a href="#fragment-4"><span>Microscopy</span></a></li>
-				    <li><a href="#fragment-5"><span>CFU Plate Counts</span></a></li>
-				    <li><a href="#fragment-6"><span>Notes</span></a></li>
+				     <li><a href="#fragment-1"><span>Collection Info</span></a></li>
+					 <li><a href="#fragment-2"><span>DNA/RNA Extraction</span></a></li>
+					 <li><a href="#fragment-3"><span>Analysis</span></a></li>
+					 <li><a href="#fragment-4"><span>User Created Fields</span></a></li>
+					 <li><a href="#fragment-5"><span>Notes</span></a></li>
 				  </ul>
 			
 			<br>* = required field <br>
@@ -366,26 +365,16 @@ include('form_insert_jquery_js.php');
 								</p>
 							</div><!--close rna extraction-->
 						</div><!--close col-xs-6-->
-						<!--</fieldset>
 						
-						<fieldset>-->
-						<div class="col-xs-6">
-						<LEGEND><b>Sequencing Info</b></LEGEND>
-							<p><a href="/series/dynamic/airmicrobiomes/update_tables/update_seq_info.php">Fill Out Sequencing Submission Info</a></p>
-							<p>
-							<!--Sequencing2 Dropdown-->
-							<label class="textbox-label">Select Sequencing Submission Info:</label>
-							<br/>
-							<?php
-							//url or $_GET name, table name, field name
-							dropDown('seqInfo', 'sequencing2', 'sequencing_info','sequencing_info',$submitted,$root);
-							?>
-							</p>
+						
+						
+						
 							
-						</div><!--close col-xs-6-->
-						<!--</fieldset>
-						<fieldset>-->
-						<div class="col-xs-6">
+					
+					</fieldset>
+					</div><!--close fragment-2-->
+
+					<div id="fragment-3">
 						<LEGEND><b>Downstream Analysis Info</b></LEGEND>
 							<p>
 							<!--Analysis Pipeline Name Dropdown-->
@@ -396,95 +385,18 @@ include('form_insert_jquery_js.php');
 							dropDown('anPipe', 'analysis', 'analysis_name','analysis_name',$submitted,$root);
 							?>
 							</p>
-							
-						</div><!--col-xs-6-->
-					</fieldset>
-					</div><!--close fragment-2-->
-				
-					<div id="fragment-3">
-						<fieldset>
-						<LEGEND><b>Isolate Collection Info</b></LEGEND>
-						<div class="col-xs-6">
-							<p>
-							<!--<h3 class = 'form-header'>(For Isolate Collection Only)</h3>-->
-							<label class="textbox-label">Select Isolate Collection Temperature:*</label>
-							<br/>
-							<?php
-							//url or $_GET name, table name, field name
-							dropDown('iso_coll_temp', 'isolate_collection_temp', 'temp','temp',$submitted,$root);
-							?>
-							</p>
-							
-							<p>
-							<label class="textbox-label">Isolate Storage Date:*</label><br>
-							<input type="text" id="datepicker3"  name="iso_date"  value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo htmlspecialchars($p_iso_date);} ?>"/>
-							</p>
-							<script>
-							$('#datepicker3').datepicker({ dateFormat: 'yy-mm-dd' }).val();
-							</script>
-							
-							<p>
-							<label class="textbox-label">Isolate Storing Method:*</label>
-							<br/>
-							<?php
-							//url or $_GET name, table name, field name
-							dropDown('iso_store_method', 'isolate_storing_method', 'storing_method','storing_method',$submitted,$root);
-							?>
-							</p>
-							
-							<p>
-							<label class="textbox-label">Isolate Location Type:*</label>
-							<br/>
-							<?php
-							//url or $_GET name, table name, field name
-							dropDown('iso_loc_type', 'isolate_location_type', 'loc_type','loc_type',$submitted,$root);
-							?>
-							</p>
-							
-							<p>
-							<label class="textbox-label">16S Sequence (Sanger)</label><br>
-							<input type="text" id="sang_seq" name="sang_seq"  placeholder="Enter A Sequence" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_sang_seq;} ?>">
-							</p>
-							
-							<p>
-							<label class="textbox-label">Closest Hit</label><br>
-							<input type="text" id="closest_hit" name="closest_hit"  placeholder="Enter A Closest Hit" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_closest_hit;} ?>">
-							</p>
-							
-							<p>
-							<label class="textbox-label">Send For PacBio Sequencing:</label>
-							<br/>
-							<select id='send_pac_bio' name='send_pac_bio';'>
-							<option value='0'<?php if((isset($_GET["send_pac_bio"]) && $_GET["send_pac_bio"] == "0" )){ echo "selected";} ?>>-Select-</option>
-							<option value='Y'<?php if((isset($_GET["send_pac_bio"]) && $_GET["send_pac_bio"] == "Y" )){ echo "selected";} ?>>Yes</option>
-							<option value='N'<?php if((isset($_GET["send_pac_bio"]) && $_GET["send_pac_bio"] == "N" )){ echo "selected";} ?>>No</option>
-							</select>
-							</p>
-							
-						</div><!--col-xs-6-->
-					</fieldset>
-					</div><!--end of fragment-3-->
-				
+					</div><!--fragment-3-->
+
 					<div id="fragment-4">
 					<fieldset>
-					<LEGEND><b>Microscopy</b></LEGEND>
+					<LEGEND><b>User Created Fields</b></LEGEND>
 						<div class="col-xs-6">
 							<i>Coming Soon</i>
 						</div>
 					</fieldset>
-					</div><!--end fragment-4-->
-					
+					</div><!--end fragment-5-->
 					
 					<div id="fragment-5">
-					<fieldset>
-					<LEGEND><b>CFU Collection</b></LEGEND>
-						<div class="col-xs-6">
-							<i>Coming Soon</i>
-						</div>
-					</fieldset>
-					</div><!-- end fragment-5-->
-			
-					<div id="fragment-6">
 					<fieldset>
 					<LEGEND><b>Notes</b></LEGEND>
 						<div class="col-md-12">
@@ -498,7 +410,7 @@ include('form_insert_jquery_js.php');
 						<?php  $entered_by = $_SESSION['first_name'].' '.$_SESSION['last_name']; // ?>
 						<input type="text" style="visibility:hidden" name="enteredBy" id="enteredBy" value="<?php echo $entered_by;?>"/>
 					</fieldset>
-					</div> <!--close fragement-6-->
+					</div> <!--close fragement-5-->
 				</div><!--close div row-->
 			</div><!-- close fluid container-->
 		</div> <!--close tab div-->

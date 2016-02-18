@@ -54,8 +54,9 @@ if (isset($_GET['submit'])) {
 					  <ul>
 					    <li><a href="#fragment-1"><span>Collection Info</span></a></li>
 					    <li><a href="#fragment-2"><span>DNA/RNA Extraction</span></a></li>
-					    <li><a href="#fragment-3"><span>User Created Fields</span></a></li>
-					    <li><a href="#fragment-6"><span>Notes</span></a></li>
+					    <li><a href="#fragment-3"><span>Analysis</span></a></li>
+					    <li><a href="#fragment-4"><span>User Created Fields</span></a></li>
+					    <li><a href="#fragment-5"><span>Notes</span></a></li>
 					  </ul>
 
 				<!--transaction time-->
@@ -492,7 +493,7 @@ if (isset($_GET['submit'])) {
 				</div><!--end of col-xs-6-->
 				</fieldset>
 				</div><!--end of fragment-1-->
-				
+			
 				
 				<!-----------------------------------------fragment 2---------------------------------------->
 				<div id="fragment-2">
@@ -681,37 +682,40 @@ if (isset($_GET['submit'])) {
 			
 				
 				
-				<div class="col-xs-6">
-				<LEGEND><b>Sequencing Info</b></LEGEND>
-				<p><a href="/series/dynamic/airmicrobiomes/update_tables/update_seq_info.php">Fill Out Sequencing Submission Info</a></p>
-				<p>
-				<!--Sequencing2 Dropdown-->
-				<label class="textbox-label">Select Sequencing Submission Info:</label>
-				<br/>
-				<?php
-				//url or $_GET name, table name, field name
-				dropDown_update('seqInfo', 'sequencing2', 'sequencing_info','sequencing_info','sequencing_info',"$parent_value",$root);
-				?>
-				</p>
 				</fieldset>
 				</div><!-- end of fragment 2-->
 				
-				
-				
-				
 				<!-----------------------------------------fragment 3----------------------------------------->
 				<div id="fragment-3">
+					<fieldset>
+						<LEGEND><b>Analysis</b></LEGEND>
+						<p><a href="/series/dynamic/airmicrobiomes/update_tables/update_seq_info.php">Fill Out Sequencing Submission Info</a></p>
+						<p>
+						<!--Sequencing2 Dropdown-->
+						<label class="textbox-label">Select Analysis Pipeline:</label>
+						<br/>
+						<?php
+						//url or $_GET name, table name, field name
+						dropDown_update('anPipe', 'analysis', 'analysis_name','analysis_name','analysis_name',$parent_value,$root);
+						?>
+						</p>
+					</fieldset>
+				</div><!--end fragment-3-->
+				
+				
+				<!-----------------------------------------fragment 4----------------------------------------->
+				<div id="fragment-4">
 					<fieldset>
 					<LEGEND><b>User Created Fields</b></LEGEND>
 						<div class="col-xs-6">
 							<i>Coming Soon</i>
 						</div>
 					</fieldset>
-				</div><!--end fragment-3-->
+				</div><!--end fragment-4-->
 
 				
-				<!-----------------------------------------fragment 4------------------------------------------>
-				<div id="fragment-4">
+				<!-----------------------------------------fragment 5------------------------------------------>
+				<div id="fragment-5">
 					<fieldset>
 					<LEGEND><b>Notes</b></LEGEND>
 						<div class="col-md-12">
@@ -721,7 +725,7 @@ if (isset($_GET['submit'])) {
 							</p>
 						</div><!--close col-md-12-->
 					</fieldset>
-				</div> <!--close fragement-4-->
+				</div> <!--close fragement-5-->
 			</div><!--tabs-->
 				
 				
