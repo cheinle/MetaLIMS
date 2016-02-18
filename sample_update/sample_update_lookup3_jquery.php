@@ -61,9 +61,9 @@ include('../functions/convert_header_names.php');
 				$p_poolEx = '0'; //pooling extracts has changed. This should be removed eventually. 
 				$p_dExtKit = htmlspecialchars($_GET['dExtKit']);
 				$p_rExtKit = htmlspecialchars($_GET['rExtKit']);
-				$p_seqInfo = htmlspecialchars($_GET['seqInfo']);
-				//$p_anPipe = htmlspecialchars($_GET['anPipe']);
-				$p_anPipe = '0';
+				//$p_seqInfo = htmlspecialchars($_GET['seqInfo']);
+				$p_anPipe = htmlspecialchars($_GET['anPipe']);
+				//$p_anPipe = '0';
 				$p_barcode = htmlspecialchars($_GET['barcode']);
 				//$p_start = htmlspecialchars($start);
 				//$p_end = htmlspecialchars($end);
@@ -88,14 +88,14 @@ include('../functions/convert_header_names.php');
 				$p_sampling_height = htmlspecialchars($_GET['sampling_height']);
 				
 				//for isolates
-				$p_iso_coll_temp = htmlspecialchars($_GET['iso_coll_temp']);
+				/*$p_iso_coll_temp = htmlspecialchars($_GET['iso_coll_temp']);
 				$p_iso_date = htmlspecialchars($_GET['iso_date']);
 				$p_iso_store_method = htmlspecialchars($_GET['iso_store_method']);
 				$p_sang_seq= htmlspecialchars($_GET['sang_seq']);
 				$p_closest_hit= htmlspecialchars($_GET['closest_hit']);
 				$p_send_pac_bio= htmlspecialchars($_GET['send_pac_bio']);
 				$p_iso_loc_type= htmlspecialchars($_GET['iso_loc_type']);
-				
+				*/
 				/*if(! ($p_sType == 'A' || $p_sType == 'BI' || $p_sType == 'FI' || $p_sType == 'UI') ){//this is here to set if the flow rate was left empty...should check if flowrate was empty
 						if($p_fRate == ''){$p_fRate = '0';}
 						if($p_fRate_eod == ''){$p_fRate_eod = '0';}
@@ -112,7 +112,7 @@ include('../functions/convert_header_names.php');
 				if ($p_poolEx == '0') {$p_poolEx = NULL;}
 				if ($p_dExtKit == '0') {$p_dExtKit = NULL;} 
 				if ($p_rExtKit == '0') {$p_rExtKit = NULL;}
-				if ($p_seqInfo == '0') {$p_seqInfo = NULL;}
+				//if ($p_seqInfo == '0') {$p_seqInfo = NULL;}
 				if ($p_anPipe == '0') {$p_anPipe = NULL;}
 				if ($p_barcode == '') {$p_barcode = NULL;}
 				//if ($p_start == '') {$p_start = NULL;}
@@ -135,14 +135,15 @@ include('../functions/convert_header_names.php');
 				if ($p_dData == '0') {$p_dData = NULL;}
 				if ($p_dWeather == '0') {$p_dWeather = NULL;}
 				
-				if ($p_iso_coll_temp == '0') {$p_iso_coll_temp = NULL;}
+				/*if ($p_iso_coll_temp == '0') {$p_iso_coll_temp = NULL;}
 				if ($p_iso_date == '') {$p_iso_date = NULL;}
 				if ($p_iso_store_method == '0') {$p_iso_store_method = NULL;}
 				if ($p_sang_seq== '') {$p_sang_seq = NULL;}
 				if ($p_closest_hit == '') {$p_closest_hit = NULL;}
 				if ($p_send_pac_bio == '0') {$p_send_pac_bio = NULL;}
 				if ($p_iso_loc_type == '0') {$p_iso_loc_type = NULL;}
-						
+				*/
+					
 				//check and process collector info
 				include_once("../functions/check_collector_names.php");
 				$array=$get_array['collector'];
@@ -365,7 +366,7 @@ include('../functions/convert_header_names.php');
 						array('field' => 'pool_extracts_id', 'value' => $p_poolEx, 'type' => 's'),
 						array('field' => 'dna_extract_kit_name', 'value' => $p_dExtKit, 'type' => 's'),
 						array('field' => 'rna_extract_kit_name', 'value' => $p_rExtKit, 'type' => 's'),
-						array('field' => 'sequencing_info', 'value' => $p_seqInfo, 'type' => 's'),
+						//array('field' => 'sequencing_info', 'value' => $p_seqInfo, 'type' => 's'),
 						array('field' => 'analysis_name', 'value' => $p_anPipe, 'type' => 's'),
 						array('field' => 'barcode', 'value' => $p_barcode, 'type' => 's'),
 						array('field' => 'sample_type', 'value' => $p_sType, 'type' => 's'),
@@ -518,9 +519,9 @@ include('../functions/convert_header_names.php');
 					/****Update Isolate Table****/
 					//////////////////////////////////////////////////////////////////
 
-					$p_send_pac_bio = 'N';
+					//$p_send_pac_bio = 'N';
 					//update
-					$iso_set_query = 'UPDATE isolates SET sample_name = ?, iso_coll_temp = ?, iso_date = ?,iso_store_method = ?, seq_sang = ?,closest_hit = ?,send_pac_bio =?, loc_type = ? WHERE sample_name = ?';
+					/*$iso_set_query = 'UPDATE isolates SET sample_name = ?, iso_coll_temp = ?, iso_date = ?,iso_store_method = ?, seq_sang = ?,closest_hit = ?,send_pac_bio =?, loc_type = ? WHERE sample_name = ?';
 					if($iso_stmt = $dbc ->prepare($iso_set_query)) {                 
 	                	//$iso_stmt->bind_param('sssssssss',$p_sample_name,$p_iso_coll_temp,$p_iso_date,$p_iso_store_method,$p_sang_seq,$p_closest_hit,$p_send_pac_bio,$p_iso_loc_type,$p_orig_sample_name);
 						$iso_stmt->bind_param('sssssssss',$p_sample_name,$p_iso_coll_temp,$p_iso_date,$p_iso_store_method,$p_sang_seq,$p_closest_hit,$p_send_pac_bio,$p_iso_loc_type,$p_sample_name);
@@ -547,7 +548,7 @@ include('../functions/convert_header_names.php');
 						//mysqli_error($dbc);
 					}
 
-
+					*/
 					
 					//////////////////////////////////////////////////////////////////
 					/****Update Air Samplers Table****/

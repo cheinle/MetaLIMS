@@ -2,6 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('database_connection.php'); 
+#include('index.php');
 ////choose which files to include depending on if you are exporting an xls or not.
 //xls cannot include the index file because it will send headers too early (and the wrong ones)
 if((isset($_GET['db_content'])) && ($_GET['db_content'] == 'xls' || $_GET['db_content'] == 'xls_isolates')){
@@ -18,6 +19,7 @@ elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_storage')){
 elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'seq_sub')){
 	include('index.php');
 	include('functions/build_bulk_seqSub_table.php');
+
 }
 elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'read_sub')){
 	include('index.php');
@@ -30,6 +32,8 @@ elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'update_read_sub'))
 else{
 	include('index.php');
 	include('functions/build_table.php');
+	include('functions/basic_build_table.php');
+
 }
 ?>
 
@@ -45,10 +49,10 @@ else{
 	div.dataTables_wrapper {
 		width: 99%;
 		height: 85%;
-		margin: 0 auto;
+		
 	}
 	div.dataTables_scrollBody {
-		/*height: 90%*/
+		/*height: 90%;*/
 	}
 	</style>
 	<script type="text/javascript" language="javascript" src="freeze/jquery.js"></script>
@@ -105,8 +109,9 @@ if(isset($_GET['submit'])){
 			//make sure you cover the entire day
 			$p_smydate = $p_smydate.' 00:00:00';
 			$p_emydate = $p_emydate.' 23:59:00';
-			//$query_date = ' sample.start_date_time BETWEEN (?) AND (?)';
-			$query_date = ' sample.start_samp_date_time BETWEEN (?) AND (?)';
+			#$query_date = ' start_samp_date_time BETWEEN (?) AND (?)';
+			//$query_date = ' sample.start_samp_date_time BETWEEN (?) AND (?)';
+			$query_date = ' sample.start_samp_date_time BETWEEN (?) AND (?)'; //still going to pull this date time from the regular table
 			$check_date = 'true';
 		}
 			
@@ -138,7 +143,7 @@ if(isset($_GET['submit'])){
 		else{$field_names = "*";}
 
 		if(isset($_GET['db_content']) && $_GET['db_content'] == 'sensor'){
-			$query_main = "SELECT * FROM sample JOIN daily_data2_particle_counter ON DATE(sample.start_samp_date_time) = daily_data2_particle_counter.daily_date WHERE sample.location_name = daily_data2_particle_counter.location AND ";
+			$query_main = "SELECT * FROM sample JOIN daily_data2 ON DATE(sample.start_samp_date_time) = daily_data2.daily_date WHERE ";
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
 			$query_main = "SELECT sample.sample_name,sample.sample_num,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample LEFT JOIN read_submission ON read_submission.sample_name = sample.sample_name WHERE ";
@@ -146,9 +151,27 @@ if(isset($_GET['submit'])){
 		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'view_read_sub' || $_GET['db_content'] == 'update_read_sub')){
 			$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name WHERE ";
 		}
+		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'isolates' || $_GET['db_content'] == 'xls_isolates')){
+			$query_main = "SELECT 
+			sample.sample_name,
+			sample.sample_sort,
+			sample.collector_name,
+			sample.start_samp_date_time,
+			sample.sample_type,
+			sample.location_name,
+			isolates.loc_type,
+			sample.media_type,
+			isolates.iso_coll_temp,
+			isolates.iso_date,
+			isolates.iso_store_method,
+			isolates.seq_sang,
+			isolates.closest_hit,
+			isolates.send_pac_bio
+			FROM sample JOIN isolates ON isolates.sample_name = sample.sample_name WHERE (sample.sample_type = 'F' OR sample.sample_type = 'BC') AND ";
+		}
 		else{
-			$query_main = "SELECT $field_names FROM sample LEFT JOIN sample_sampler ON sample_sampler.sample_name  = sample.sample_name WHERE";
-			//SELECT * FROM sample LEFT JOIN sample_sampler ON sample_sampler.sample_name = sample.sample_name WHERE sample.start_samp_date_time BETWEEN '2014-08-01 00:00:00' AND '2015-10-03 23:59:00'
+			//add new sampler table
+			$query_main = "SELECT $field_names FROM sample JOIN sample_sampler ON sample_sampler.sample_name  = sample.sample_name WHERE";
 		}
 		$query = "";
 		$query_add = "";
@@ -166,7 +189,7 @@ if(isset($_GET['submit'])){
 			$stmt -> bind_param('ss',$p_smydate , $p_emydate);
 		}
 		elseif ($check_field == 'true' && $check_date == 'true') {//date and query fields are populated
-			$query = $query_main.$query_fiGeld.' AND '.$query_date;
+			$query = $query_main.$query_field.' AND '.$query_date;
 			$query_add = $query_field.' AND '.$query_date;
 			$stmt = $dbc->prepare($query);
 			$stmt -> bind_param('sss', $p_query_basis, $p_smydate , $p_emydate);
@@ -181,6 +204,9 @@ if(isset($_GET['submit'])){
 
 		if(isset($_GET['db_content']) && ($_GET['db_content'] == 'xls' || $_GET['db_content'] == 'xls_isolates')){
 			build_xls_output_table($stmt);
+		}
+		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'xls' || $_GET['db_content'] == 'isolates')){
+			basic_build_table($stmt,'display');
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
 			build_bulk_dna_table($stmt,$root);
@@ -237,10 +263,20 @@ if(isset($_GET['submit'])){
 			echo "</body>";
 			echo "</html>";
 		}
-
+		/*//depricated
+		 * if($_GET['db_content']=='daily_data_all'){
+			$sdate = htmlspecialchars($_GET['sdate']);
+			$edate = htmlspecialchars($_GET['edate']);
+			//$stmt = $dbc->prepare("SELECT daily_data2_particle_counter.daily_date,daily_data2_particle_counter.part_sens_name,daily_data2_particle_counter.start_time,daily_data2_particle_counter.end_time,daily_data2.temp,daily_data2.hum,daily_data2.co2,daily_data2.rain,daily_data2.notes,daily_data2.entered_by,daily_data2.updated_by,daily_data2.update_timestamp FROM daily_data2_particle_counter LEFT JOIN daily_data2 ON (daily_data2_particle_counter.daily_date = daily_data2.daily_date) WHERE daily_data2_particle_counter.daily_date BETWEEN (?) AND (?)");
+			$stmt = $dbc->prepare("SELECT * FROM daily_data2 JOIN daily_data2_particle_counter ON daily_data2.daily_date = daily_data2_particle_counter.daily_date");
+			
+			$stmt -> bind_param('ss', $sdate,$edate);
+			build_table($stmt);
+		}
+		*/
 		// samplers
 		if($_GET['db_content']=='sampler_all'){
-			$stmt = $dbc->prepare("SELECT * FROM sampler");
+			$stmt = $dbc->prepare("SELECT * FROM air_sampler");
 	    	build_table($stmt,'display');
 		}
 		

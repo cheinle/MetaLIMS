@@ -3,7 +3,7 @@
 <?php	//function to check fields have appropriate info
 function field_check($get_array,$check_for){
 				include ('database_connection.php');
-				include("functions/check_collector_names.php");
+				include("../functions/check_collector_names.php");
 
 				$error = 'false';
 				//check that all date/times exist
