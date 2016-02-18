@@ -30,7 +30,7 @@ include('config/path.php');
 <button type="button"  data-toggle="collapse" data-target="#demo2" aria-expanded="true" aria-controls="demo" class='med'>Adding Samples to Exisiting Project?</button>
 <div id="demo2" class="collapse">
 </p>
-<button class="small-button" type=button onClick="parent.location='<?php echo $root; ?>form_insert.php'" value='2'>Insert Sample(s)</button></p>
+<button class="small-button" type=button onClick="parent.location='<?php echo $root; ?>sample_insert/form_insert_jquery.php'" value='2'>Insert Sample(s)</button></p>
 </div>
 
 

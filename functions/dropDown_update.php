@@ -2,7 +2,7 @@
 <body>
 <?php	//drowpdown to select field_name from table_name
 
-function dropDown_update($select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name){ #send also the query name?, always based on sample name
+function dropDown_update($select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name,$root){ #send also the query name?, always based on sample name
 
 			include('database_connection.php');
 			$p_select_name = htmlspecialchars($select_name);
@@ -13,7 +13,8 @@ function dropDown_update($select_name,$table_name,$field_name,$select_id,$s_fiel
 			$p_sample_name = htmlspecialchars($sample_name);
 
 			//check that $table_name exists in white list
-			include_once('functions/white_list.php');
+			$path = $_SERVER['DOCUMENT_ROOT'].$root;
+			include_once($path.'functions/white_list.php');
 			
 			$check = whiteList($p_table_name,'table'); 
 			$check2 = whiteList($p_s_field_name,'column'); 

@@ -74,8 +74,8 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Sample Management<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li ><a href="<?php echo $root;?>form_insert.php">Insert Sample</a></li>
-						<li ><a href="<?php echo $root;?>sample_update_lookup.php">Update Sample</a></li>
+						<li ><a href="<?php echo $root;?>sample_insert/form_insert_jquery.php">Insert Sample</a></li>
+						<li ><a href="<?php echo $root;?>sample_update/sample_update_lookup_jquery.php">Update Sample</a></li>
 						<li><a href="<?php echo $root;?>pool_samples.php">Create Sample Pools (For DNA Extr)</a></li>
 					</ul>
 				</li>
