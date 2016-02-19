@@ -440,7 +440,6 @@ div.border legend{
   color:#666666;
   font-size:18px;
   padding:10px 4px 0px 4px;
-  margin-left:20px;
 }
 
 /***********Curved Boarder. Used on FAQ ******/
