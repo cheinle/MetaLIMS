@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 include ('../database_connection.php');
 include ('../index.php');
 include('../functions/convert_header_names.php');
+include('../functions/unset_session_vars.php');
 ?>
 
 <!doctype html>
@@ -56,7 +57,7 @@ include('../functions/convert_header_names.php');
 				$p_projName = htmlspecialchars($_GET['projName']);
 				$p_loc = htmlspecialchars($_GET['loc']);
 				$p_rloc = htmlspecialchars($_GET['rloc']);
-				//$p_airSamp = htmlspecialchars($_GET['airSamp']);
+				//$p_mySamp = htmlspecialchars($_GET['mySamp']);
 				$p_partSamp = NULL;
 				$p_poolEx = '0'; //pooling extracts has changed. This should be removed eventually. 
 				$p_dExtKit = htmlspecialchars($_GET['dExtKit']);
@@ -551,17 +552,17 @@ include('../functions/convert_header_names.php');
 					*/
 					
 					//////////////////////////////////////////////////////////////////
-					/****Update Air Samplers Table****/
+					/****Update Samplers Table****/
 					//////////////////////////////////////////////////////////////////
 					
-					//repeat for x amount of air samplers
-					$num_of_air_samp = $_GET['air_samp_num'];
+					//repeat for x amount of my samplers
+					$num_of_my_samp = $_GET['my_samp_num'];
 					$earliest_start;
 					$latest_end;
 					$counter = 0;
 					//Insert into daily_data2_particle_counter. Wrap in a for loop
-					for ($x = 1; $x <= $num_of_air_samp; $x++) {
-						$air_sampler_name = $_GET['airSamp'.$x];
+					for ($x = 1; $x <= $num_of_my_samp; $x++) {
+						$my_sampler_name = $_GET['mySamp'.$x];
 						$counter++;
 						
 						//calcualate total time
@@ -588,26 +589,26 @@ include('../functions/convert_header_names.php');
 						if(isset($_GET['delete'.$x])){
 							//delete the daily data for this date/sensor primary key...can you do this?
 							//check if it exists...if it does, delete it
-							if(! $stmt_d = $dbc -> prepare("DELETE FROM sample_air_sampler WHERE sample_name = ? AND air_sampler_name = ?")){
+							if(! $stmt_d = $dbc -> prepare("DELETE FROM sample_sampler WHERE sample_name = ? AND sampler_name = ?")){
 								$successfull = 'false';
-								throw new Exception("Delete Air Sampler Prepare Failure: No Deleted/Added Air Sampler Info");
+								throw new Exception("Delete Sampler Prepare Failure: No Deleted/Added Sampler Info");
 							}
-							//$stmt_d->bind_param('ss',$p_sample_name,$air_sampler_name);
-							$stmt_d->bind_param('ss',$p_orig_sample_name,$air_sampler_name);
+							//$stmt_d->bind_param('ss',$p_sample_name,$my_sampler_name);
+							$stmt_d->bind_param('ss',$p_orig_sample_name,$my_sampler_name);
 						
 							if(!$stmt_d->execute()){
 								$successfull = 'false';
-								throw new Exception("Execution Error: Unable To Delete Air Sampler Info");
+								throw new Exception("Execution Error: Unable To Delete Sampler Info");
 							}
 							$rows_affected_d = $stmt_d ->affected_rows;
 							//check if add was successful or not. Tell the user
 					   		if($rows_affected_d >= 0){
-					   			echo 'You DELETED Air Sampler Info! :'.$air_sampler_name.'<br>';
+					   			echo 'You DELETED Sampler Info! :'.$my_sampler_name.'<br>';
 								$updates_check = 'true';
 							}
 							else{
 								$successfull = 'false';
-								throw new Exception("ERROR: No Deleted/Added Air Sampler Info");
+								throw new Exception("ERROR: No Deleted/Added Sampler Info");
 								
 							}
 							$stmt_d->close();
@@ -616,75 +617,69 @@ include('../functions/convert_header_names.php');
 							//search to see if exists,if it exists, update the entry
 							//if it does not, insert it
 							$exists = 'false';
-							$stmt_ck_air= $dbc->prepare("SELECT air_sampler_name FROM sample_air_sampler WHERE sample_name = ? AND air_sampler_name = ? ");
-							if(!$stmt_ck_air){
+							$stmt_ck_my= $dbc->prepare("SELECT sampler_name FROM sample_sampler WHERE sample_name = ? AND sampler_name = ? ");
+							if(!$stmt_ck_my){
 								$successfull = 'false';
-								throw new Exception("Prepare Error: Unable To Find Matching Air Sampler Info");
+								throw new Exception("Prepare Error: Unable To Find Matching Sampler Info");
 							}
-							//$stmt_ck_air -> bind_param('ss', $p_sample_name,$air_sampler_name);
-							//$stmt_ck_air -> bind_param('ss', $p_orig_sample_name,$air_sampler_name);
-							$stmt_ck_air -> bind_param('ss', $p_sample_name,$air_sampler_name);
-							if ($stmt_ck_air->execute()){
-								$stmt_ck_air->bind_result($a_sample_name);
-							    while($stmt_ck_air->fetch()){
-									if($a_sample_name == $air_sampler_name){
+							$stmt_ck_my -> bind_param('ss', $p_sample_name,$my_sampler_name);
+							if ($stmt_ck_my->execute()){
+								$stmt_ck_my->bind_result($a_sample_name);
+							    while($stmt_ck_my->fetch()){
+									if($a_sample_name == $my_sampler_name){
 										$exists = 'true';
 									}
 								}
 							} 
 							else{
 								$successfull = 'false';
-								throw new Exception("Execution Error: Unable To Find Matching Air Sampler Info");
+								throw new Exception("Execution Error: Unable To Find Matching Sampler Info");
 							}
-							$stmt_ck_air -> close();
+							$stmt_ck_my -> close();
 							
-							
-							//echo $p_sample_name.'<br>'.$air_sampler_name.'<br>'.$start[$x].'<br>'.$end[$x].'<br>'.$p_time[$x];
 							//if you did not see this entry in the db, insert it. else, update
 							if($exists == 'false'){
-								$stmt_ins_air = $dbc -> prepare("INSERT INTO sample_air_sampler (sample_name,air_sampler_name,start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)");
-								if(!$stmt_ins_air){
+								$stmt_ins_my = $dbc -> prepare("INSERT INTO sample_sampler (sample_name,sampler_name,start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)");
+								if(!$stmt_ins_my){
 									$successfull = 'false';
-									throw new Exception("Prepare Error: Unable To Insert Air Sampler Info");
+									throw new Exception("Prepare Error: Unable To Insert Sampler Info");
 								}
-								$stmt_ins_air -> bind_param('ssssd', $p_sample_name,$air_sampler_name,$start,$end,$p_time);
-								if(!$stmt_ins_air -> execute()){
+								$stmt_ins_my -> bind_param('ssssd', $p_sample_name,$my_sampler_name,$start,$end,$p_time);
+								if(!$stmt_ins_my -> execute()){
 									$successfull = 'false';
 									//echo "Prepareeee failed: (" . $dbc->errno . ") " . $dbc->error;
-									throw new Exception("Exectution Error: Unable To Insert Air Sampler Info");
+									throw new Exception("Exectution Error: Unable To Insert Sampler Info");
 								}
-								$rows_affected_ins_air = $stmt_ins_air ->affected_rows;
-								$stmt_ins_air -> close();
+								$rows_affected_ins_my = $stmt_ins_my ->affected_rows;
+								$stmt_ins_my -> close();
 								
 								//check if add was successful or not. Tell the user
-						   		if($rows_affected_ins_air >= 0){
-						   			//echo 'You Added New Air Sampler Info! :'.$air_sampler_name.'<br>';
+						   		if($rows_affected_ins_my >= 0){
 						   			$updates_check = 'true';
 								}
 								else{
 									$successfull = 'false';
-									throw new Exception("ERROR: No Air Sampler Info Added");
+									throw new Exception("ERROR: No Sampler Info Added");
 								}
 							}	
 							else{
 								
-								$stmt_up_air = $dbc -> prepare("UPDATE sample_air_sampler SET sample_name = ?, start_date_time = ?, end_date_time = ?,total_date_time = ? WHERE sample_name = ? AND air_sampler_name =?");
-								if(!$stmt_up_air){
+								$stmt_up_my = $dbc -> prepare("UPDATE sample_sampler SET sample_name = ?, start_date_time = ?, end_date_time = ?,total_date_time = ? WHERE sample_name = ? AND sampler_name =?");
+								if(!$stmt_up_my){
 									$successfull = 'false';
-									throw new Exception("Prepare Error: Unable To Update Air Sampler Info");
+									throw new Exception("Prepare Error: Unable To Update Sampler Info");
 								}
-								//$stmt_up_air-> bind_param('sssdss',$p_sample_name,$start,$end,$p_time,$p_orig_sample_name, $air_sampler_name);
-								$stmt_up_air-> bind_param('sssdss',$p_sample_name,$start,$end,$p_time,$p_sample_name, $air_sampler_name);
-								if(!$stmt_up_air -> execute()){
+								//$stmt_up_my-> bind_param('sssdss',$p_sample_name,$start,$end,$p_time,$p_orig_sample_name, $my_sampler_name);
+								$stmt_up_my-> bind_param('sssdss',$p_sample_name,$start,$end,$p_time,$p_sample_name, $my_sampler_name);
+								if(!$stmt_up_my -> execute()){
 									$successfull = 'false';
-									throw new Exception("Execution Error: Unable To Update Air Sampler Info");
+									throw new Exception("Execution Error: Unable To Update Sampler Info");
 								}
-								$rows_affected_up_air = $stmt_up_air ->affected_rows;
-								$stmt_up_air -> close();
+								$rows_affected_up_my = $stmt_up_my ->affected_rows;
+								$stmt_up_my -> close();
 									
 								//check if add was successful or not. Tell the user
-							   	if($rows_affected_up_air >= 0){
-									//echo 'You Updated Air Sampler Info! :'.$air_sampler_name.'<br>';
+							   	if($rows_affected_up_my >= 0){
 									$updates_check = 'true';
 								}else{
 									$successfull = 'false';
@@ -737,17 +732,17 @@ include('../functions/convert_header_names.php');
 							$time_stmt -> close();
 							if($time_rows_affected < 0){	
 								$successfull = 'false';
-								throw new Exception("Update Failure: Unable To Insert Air Sampler");
+								throw new Exception("Update Failure: Unable To Insert Sampler");
 							}
 						}
 						else{
 							$successfull = 'false';
-							throw new Exception("Execution Failure: Unable To Insert Air Sampler");
+							throw new Exception("Execution Failure: Unable To Insert Sampler");
 						}
 					}
 					else{
 						$successfull = 'false';
-						throw new Exception("Prepare Failure: Unable To Insert Air Sampler");
+						throw new Exception("Prepare Failure: Unable To Insert Sampler");
 					}
 					
 					//////////////////////////////////////////////////////////////////
@@ -789,7 +784,6 @@ include('../functions/convert_header_names.php');
 <p>
 <input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" />
 </p>
-<!--<button class="btn btn-success" type=button onClick="parent.location='/series/dynamic/airmicrobiomes/sample_update_lookup2.php'" value='Go Back'>Go Back</button>-->
 </p>
 <button class="button" type=button onClick="parent.location='<?php echo $root;?>sample_update/sample_update_lookup_jquery.php'" value='update'>Update Another Sample</button>
 </p>

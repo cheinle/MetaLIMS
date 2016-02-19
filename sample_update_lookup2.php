@@ -114,7 +114,7 @@ if (isset($_GET['submit'])) {
 				<label class="textbox-label">Select Project Name:*</label><br/>
 				<?php
 				//url or $_GET name, table name, field name
-				dropDown_update('projName', 'project_name', 'project_name','project_name','project_name',"$parent_value");
+				dropDown_update('projName', 'project_name', 'project_name','project_name','project_name',"$parent_value",$root);
 				?>
 				</p>
 
@@ -123,7 +123,7 @@ if (isset($_GET['submit'])) {
 				<label class="textbox-label">Select Location:*</label><br/>
 				<?php
 				//url or $_GET name, table name, field name
-				dropDown_update('loc', 'location', 'loc_name','loc_name','location_name',"$parent_value");
+				dropDown_update('loc', 'location', 'loc_name','loc_name','location_name',"$parent_value",$root);
 				?>
 				</p>
 				
@@ -132,7 +132,7 @@ if (isset($_GET['submit'])) {
 				<label class="textbox-label">Select Relative Location:*</label><br/>
 				<?php
 				//$select_name,$table_name,$field_name,value,$s_field_name,$sample_name
-				dropDown_update('rloc', 'relt_location', 'loc_name','loc_name','relt_loc_name',"$parent_value");
+				dropDown_update('rloc', 'relt_location', 'loc_name','loc_name','relt_loc_name',"$parent_value",$root);
 				?>
 				</p>
 				
@@ -141,7 +141,7 @@ if (isset($_GET['submit'])) {
 				<label class="textbox-label">Media Type:*</label><br/>
 				<?php
 				//url or $_GET name, table name, field name, select_id, s field name, sample name
-				dropDown_update('media', 'media_type', 'media_type','media_type','media_type',"$parent_value");
+				dropDown_update('media', 'media_type', 'media_type','media_type','media_type',"$parent_value",$root);
 				?>
 				</p>
 				
@@ -156,7 +156,7 @@ if (isset($_GET['submit'])) {
 				<label class="textbox-label">Sample Type:*</label><br>
 				<?php 
 				//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
-				dropDown_update('sType', 'sample_type', 'sample_type_name','sample_type_id','sample_type',"$parent_value");
+				dropDown_update('sType', 'sample_type', 'sample_type_name','sample_type_id','sample_type',"$parent_value",$root);
 				?>
 				</p>
 				
@@ -505,7 +505,7 @@ if (isset($_GET['submit'])) {
 					<br/>
 					<?php
 					//url or $_GET name, table name, field name
-					dropDown_update('dExtKit', 'dna_extraction', 'd_kit_name','d_kit_name','dna_extract_kit_name',"$parent_value");
+					dropDown_update('dExtKit', 'dna_extraction', 'd_kit_name','d_kit_name','dna_extract_kit_name',"$parent_value",$root);
 					?>
 					</p>
 					
@@ -527,7 +527,7 @@ if (isset($_GET['submit'])) {
 					<label class="textbox-label">Instrument/Kit Used to Measure DNA Concentration:</label><br>
 					<?php
 					//url or $_GET name, table name, field name
-					dropDown_update('dInstru', 'quant_instruments', 'kit_name','kit_name','d_conc_instrument',"$parent_value");
+					dropDown_update('dInstru', 'quant_instruments', 'kit_name','kit_name','d_conc_instrument',"$parent_value",$root);
 					?>
 					</p>
 	
@@ -599,7 +599,7 @@ if (isset($_GET['submit'])) {
 				<br/>
 				<?php
 				//url or $_GET name, table name, field name
-				dropDown_update('rExtKit', 'rna_extraction', 'r_kit_name','r_kit_name','rna_extract_kit_name',"$parent_value");
+				dropDown_update('rExtKit', 'rna_extraction', 'r_kit_name','r_kit_name','rna_extract_kit_name',"$parent_value",$root);
 				?>
 				</p>
 				
@@ -620,7 +620,7 @@ if (isset($_GET['submit'])) {
 				<label class="textbox-label">Instrument/Kit Used to Measure RNA Concentration:</label><br>
 				<?php
 				//url or $_GET name, table name, field name
-				dropDown_update('rInstru', 'quant_instruments', 'kit_name','kit_name','r_conc_instrument',"$parent_value");
+				dropDown_update('rInstru', 'quant_instruments', 'kit_name','kit_name','r_conc_instrument',"$parent_value",$root);
 				?>
 				</p>
 				

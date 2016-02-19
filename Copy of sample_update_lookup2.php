@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include ('../database_connection.php');
+include ('database_connection.php');
 
 
 ?>
@@ -17,18 +17,17 @@ include ('../database_connection.php');
 
 
 $parent_value = htmlspecialchars($_GET['sample_name']);
-include('../config/path.php');
+include('config/path.php');
 $path = $_SERVER['DOCUMENT_ROOT'].$root;
-include($path.'functions/dropDown_update.php');
-include($path.'functions/dropDown_update_for_storage.php');
-include($path.'functions/dropDown_update_for_isolates.php');
-include($path.'functions/text_insert_update.php');
-include($path.'functions/text_insert_isolate_update.php');
-include($path.'functions/text_insert_update_dt.php');
+include('functions/dropDown_update.php');
+include('functions/dropDown_update_for_storage.php');
+include('functions/text_insert_update.php');
+include('functions/text_insert_isolate_update.php');
+include('functions/text_insert_update_dt.php');
 include($path.'functions/text_insert_update_storage_info.php');
-include ($path.'index.php');
-include($path.'config/check_form_insert_js.php');
-include($path.'config/check_sample_name.php');
+include ('index.php');
+include('config/check_form_insert_js.php');
+include('config/check_sample_name.php');
 //include('config/add_air_samplers_to_sample_update_js.php');
 
 ?>
@@ -42,7 +41,7 @@ if (isset($_GET['submit'])) {
 	$error = 'false';
 	if($parent_value == ''){
 			echo '<p>ERROR: You must select a Sample Name<p>';
-			echo '<button class="button" type=button onClick="parent.location=\'/series/dynamic/airmicrobiomes/sample_update/sample_update_lookup.php\'" value="Go Back">Go Back</button>';
+			echo '<button class="button" type=button onClick="parent.location=\'/series/dynamic/airmicrobiomes/sample_update_lookup.php\'" value="Go Back">Go Back</button>';
 			$error = 'true';
 	}
 	if ($error != 'true') {
@@ -51,17 +50,9 @@ if (isset($_GET['submit'])) {
 				$transaction_time = date("Y-m-d H:i:s");
 	
 ?>				
-				<form  class="registration" onsubmit="return validate(this)" action="sample_update_lookup3_jquery.php" method="GET">
-				<div id="tabs">
-					  <ul>
-					    <li><a href="#fragment-1"><span>Collection Info</span></a></li>
-					    <li><a href="#fragment-2"><span>DNA/RNA Extraction</span></a></li>
-					    <li><a href="#fragment-3"><span>Isolate</span></a></li>
-					    <li><a href="#fragment-4"><span>Microscopy</span></a></li>
-					    <li><a href="#fragment-5"><span>CFU Plate Counts</span></a></li>
-					    <li><a href="#fragment-6"><span>Notes</span></a></li>
-					  </ul>
-
+				<form  class="registration" onsubmit="return validate(this)" action="sample_update_lookup3.php" method="GET">
+				<!--end of col-xs-6-->
+>
 				<!--transaction time-->
 				<input type="text" style="visibility:hidden" class="hidden" name="transaction_time" id="transaction_time" value="<?php echo $transaction_time ?>"/>
 				
@@ -69,9 +60,9 @@ if (isset($_GET['submit'])) {
 				<input type="text" style="visibility:hidden" class="hidden" name="part_of_pool" id = "part_of_pool"  value="<?php echo text_insert_update($parent_value,'part_of_pool');} ?>"/>
 				
 				
-				<br>* = required field <br>
-				+ = required for air samples (incudes fungal/bacterial isolates when applicable)<br>
-				<i>(Don't see your desired selection in dropdown list? Please add selection in "Update Dropdowns in Insert Sample" tab)</i>
+				* = required field <br>
+				+ = required for air samples
+				<i>(Don't see your desired selection in dropdown list?<br> Please add selection in "Update Dropdowns in Insert Sample" tab)</i>
 				<div id='samplename_availability_result'></div>  
 				<fieldset>
 				<LEGEND><b>Sample Name</b></LEGEND>
@@ -98,9 +89,14 @@ if (isset($_GET['submit'])) {
 				</fieldset>
 				
 				
-				<div id="fragment-1">
+				<p>
+				<button type="button"  data-toggle="collapse" data-target="#demo1" aria-expanded="true" aria-controls="demo" class='buttonLength'>Update Sampling Info</button>
+				<div id="demo1" class="collapse">
+				</p>
+
+				
 				<fieldset>
-				<LEGEND><b>Sample Collection Info</b></LEGEND>
+				<LEGEND><b>Step One: Sample Collection Info</b></LEGEND>
 				<div class="col-xs-6">	
 				<p>
 				<label class="textbox-label">Sample Number:*</label>
@@ -118,16 +114,16 @@ if (isset($_GET['submit'])) {
 				<label class="textbox-label">Select Project Name:*</label><br/>
 				<?php
 				//url or $_GET name, table name, field name
-				dropDown_update('projName', 'project_name', 'project_name','project_name','project_name',"$parent_value");
+				dropDown_update('projName', 'project_name', 'project_name','project_name','project_name',"$parent_value",$root);
 				?>
 				</p>
-				
+
 				<!--location dropdown-->
 				<p>
 				<label class="textbox-label">Select Location:*</label><br/>
 				<?php
 				//url or $_GET name, table name, field name
-				dropDown_update('loc', 'location', 'loc_name','loc_name','location_name',"$parent_value");
+				dropDown_update('loc', 'location', 'loc_name','loc_name','location_name',"$parent_value",$root);
 				?>
 				</p>
 				
@@ -136,7 +132,7 @@ if (isset($_GET['submit'])) {
 				<label class="textbox-label">Select Relative Location:*</label><br/>
 				<?php
 				//$select_name,$table_name,$field_name,value,$s_field_name,$sample_name
-				dropDown_update('rloc', 'relt_location', 'loc_name','loc_name','relt_loc_name',"$parent_value");
+				dropDown_update('rloc', 'relt_location', 'loc_name','loc_name','relt_loc_name',"$parent_value",$root);
 				?>
 				</p>
 				
@@ -145,7 +141,7 @@ if (isset($_GET['submit'])) {
 				<label class="textbox-label">Media Type:*</label><br/>
 				<?php
 				//url or $_GET name, table name, field name, select_id, s field name, sample name
-				dropDown_update('media', 'media_type', 'media_type','media_type','media_type',"$parent_value");
+				dropDown_update('media', 'media_type', 'media_type','media_type','media_type',"$parent_value",$root);
 				?>
 				</p>
 				
@@ -160,7 +156,7 @@ if (isset($_GET['submit'])) {
 				<label class="textbox-label">Sample Type:*</label><br>
 				<?php 
 				//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
-				dropDown_update('sType', 'sample_type', 'sample_type_name','sample_type_id','sample_type',"$parent_value");
+				dropDown_update('sType', 'sample_type', 'sample_type_name','sample_type_id','sample_type',"$parent_value",$root);
 				?>
 				</p>
 				
@@ -182,31 +178,25 @@ if (isset($_GET['submit'])) {
 				</p>
 				
 				<p>
-				<label class="textbox-label">Height Above Floor:+<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title=" Coriolis 113.5cm and SASS 156cm" id='example'></i>
-				</label><br>
+				<label class="textbox-label">Height Above Floor:+</label><br>
 				<input type="text" name="sampling_height" id="sampling_height" placeholder="Enter A Height Above Floor (cm)" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'sampling_height');} ?>">
 				</p>
-				
-				<!--Invisible Project Name Dropdown-->
-				<input type="text" style="visibility:hidden" name="orig_projName" id="orig_projName" placeholder="Enter A Barcode" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'project_name');}?>"/>
-				
-
 				</div><!--end of col-xs-6-->
 				
 				<div class="col-xs-6">
 				<p>
-				<!--air sampler dropdown-->
-				<label class="textbox-label">Select Air Sampler:*<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="At this time, sampler types cannot be updated via the dropdown function. Sampler entries must be deleted using the delete check box and then re-entered. Also, please note that all blanks will have a Sampling duration of zero"></i></label><br/>
+				<!--sampler dropdown-->
+				<label class="textbox-label">Select Sampler:*</label><br/>
 				<!-------------------------------------------------------------------------------------------->
-				<!-----------------------------new air sampler info------------------------------------------->
+				<!-----------------------------new sampler info------------------------------------------->
 				<?php 
 				
 				$p_sample_name = text_insert_update($parent_value,'sample_name');
 				//$parent_value = $p_sample_name;
 
 
-				//grab list of sensors to choose from
-				$query = "SELECT air_sampler_name FROM air_sampler";
+				//grab list of samplers to choose from
+				$query = "SELECT sampler_name FROM sampler";
 				$result = mysqli_query($dbc, $query);
 				if(!$result){
 					$error = 'true';
@@ -214,21 +204,16 @@ if (isset($_GET['submit'])) {
 					mysqli_error($dbc);
 				}
 				while($row = mysqli_fetch_assoc($result)){
-					$array[] = htmlspecialchars($row['air_sampler_name']);
+					$array[] = htmlspecialchars($row['sampler_name']);
 				}
 			
-				//grab all of the air sampler info for this sample
-				$stmt1 = $dbc->prepare("SELECT air_sampler_name,start_date_time,end_date_time,total_date_time FROM sample_air_sampler WHERE sample_name = ?");
+				//grab all of the sampler info for this sample
+				$stmt1 = $dbc->prepare("SELECT sampler_name,start_date_time,end_date_time,total_date_time FROM sample_sampler WHERE sample_name = ?");
 				$stmt1 -> bind_param('s', $p_sample_name);
 	  			if ($stmt1->execute()){
-	    			$stmt1->bind_result($air_sampler_name,$start,$end,$total);
+	    			$stmt1->bind_result($sampler_name,$start,$end,$total);
 					$counter = 0;
-				
-						
-					
-				
-							//echo '<fieldset><LEGEND><b>Air Sampler:</b></LEGEND>';
-							echo '<div  id = "airSamp_div" name = "airSamp_div">';
+							echo '<div  id = "sampler_div" name = "sampler_div">';
 			    			while ($stmt1->fetch()){
 			    				$counter++;
 								$x = $counter;
@@ -245,13 +230,13 @@ if (isset($_GET['submit'])) {
 								
 			        			#echo "Name:$part_sens_name $start_time $end_time<br>";
 			        			echo "<p>";
-								echo "<label class='textbox-label-sampler'>Air Sampler ".$x.":*</label>";   
-								echo "<select id='airSamp".$x."' name='airSamp".$x."' class='airSamp'>";
+								echo "<label class='textbox-label-sampler'>Sampler ".$x.":*</label>";   
+								echo "<select id='sampler".$x."' name='sampler".$x."' class='sampler'>";
 								#echo "<option value='0'>-Select-</option>";
 								foreach ($array as $key => $value) {
 									$name = htmlspecialchars($value);
 									$id = htmlspecialchars($value);
-									if($id == $air_sampler_name){
+									if($id == $sampler_name){
 										echo '<option selected="selected" value="'.$id.'">'.$name.'</option>';
 									}
 									else{
@@ -274,18 +259,17 @@ if (isset($_GET['submit'])) {
 								$('#sdate<?php echo $x ?>').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 								$('#edate<?php echo $x ?>').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 				
-								
 				    			$(document).ready(function(){
-				    				var air_samp_num = <?php echo(json_encode($x)); ?>;
-				        			$('input[name="stime'+air_samp_num+'"]').ptTimeSelect();
+				    				var sampler_num = <?php echo(json_encode($x)); ?>;
+				        			$('input[name="stime'+sampler_num+'"]').ptTimeSelect();
 				        			timeFormat: "HH:mm"
-				   	 			
-				   	 				$('input[name="etime'+air_samp_num+'"]').ptTimeSelect();
+				   	 	
+				   	 				$('input[name="etime'+sampler_num+'"]').ptTimeSelect();
 				        			timeFormat: "HH:mm"
 				   	 			});
 							</script>
 							
-							<h3 class="checkbox-header-sampler">Delete Sampler <?php echo $x ?></h3>
+							<h3 class="checkbox-header-sampler">Delete Sensor <?php echo $x ?></h3>
 							<div class='vert-checkboxes'>
 							<label class='checkbox-label'>DELETE</label>
 							<input type='checkbox' name='delete<?php echo $x ?>' id='delete<?php echo $x ?>' value='DELETE'>
@@ -304,19 +288,19 @@ if (isset($_GET['submit'])) {
 						$stmt1 -> close();
 					
 			?>
-					<input type="button" id="more_air_samplers" class="button" style="float:left;margin-left: 40%;margin-bottom: 30px" name ="more_air_samplers" value='Add More Air Samplers' /><br>
+					<input type="button" id="more_samplers" class="button" style="float:left;margin-left: 40%;margin-bottom: 30px" name ="more_samplers" value='Add More Samplers' /><br>
 					<!--<div id="div1"></div>-->
 					
 
 					<!--</fieldset>-->
-					<!--add more sensor info!-->
+					<!--add more sampler info!-->
 						<script type="text/javascript">
 						var counter = <?php echo json_encode($counter); ?>;
 						var num = counter;
 						$(document).ready(function() {
 					
 					
-				      $('#more_air_samplers').click(function(event) {  //on click, append to correct place, perhaps after and in the first field set
+				      $('#more_samplers').click(function(event) {  //on click, append to correct place, perhaps after and in the first field set
 				    	//var counter = '1';
 				    	
 				    	counter++;
@@ -331,9 +315,9 @@ if (isset($_GET['submit'])) {
 						var end_label = document.createElement("label");
 						//end_label.setAttribute("style", "color: pink;");
 						end_label.className="textbox-label-sampler";
-						var airSamp_label = document.createElement("label");
-						//airSamp_label.setAttribute("style", "color: pink;");
-						airSamp_label.className="textbox-label-sampler";
+						var sampler_label = document.createElement("label");
+						//sampler_label.setAttribute("style", "color: pink;");
+						sampler_label.className="textbox-label-sampler";
 						var checkbox_label = document.createElement("label");
 						//checkbox_label.setAttribute("style", "color: pink;");
 						checkbox_label.className="checkbox-label";
@@ -353,13 +337,13 @@ if (isset($_GET['submit'])) {
 						var node = document.createTextNode("Start Date/Time:"+ counter + ":*");
 						start_label.appendChild(node);
 										
-						var node2 = document.createTextNode("Air Sampler " + counter + ":*");
-						airSamp_label.appendChild(node2);
+						var node2 = document.createTextNode("Sampler " + counter + ":*");
+						sampler_label.appendChild(node2);
 						
 						var node3 = document.createTextNode("DELETE");
 						checkbox_label.appendChild(node3);
 						
-						var node4 = document.createTextNode("Delete Sensor" + counter + ":");
+						var node4 = document.createTextNode("Delete Sampler" + counter + ":");
 						h3.appendChild(node4);
 						
 						var node5 = document.createTextNode("End Date/Time:"+ counter + ":*");
@@ -418,8 +402,8 @@ if (isset($_GET['submit'])) {
 				    	input4.setAttribute("class", "shrtfields");
 				    					
 				    	//select.setAttribute("class", "fields");
-				    	select.setAttribute("name", "airSamp"+ counter);
-				    	select.setAttribute("id", "airSamp"+ counter);
+				    	select.setAttribute("name", "sampler"+ counter);
+				    	select.setAttribute("id", "sampler"+ counter);
 				    	select.setAttribute("value", "");
 				    	
 				    	checkbox.setAttribute("type", "checkbox");
@@ -428,14 +412,14 @@ if (isset($_GET['submit'])) {
 				    	checkbox.setAttribute("value", "DELETE");
 										
 						//append the elements to where you want them in the DOM
-						var element = document.getElementById("airSamp_div");
+						var element = document.getElementById("sampler_div");
 						
 							
 						/*you are trying to format your text boxes correctly using these
 						 * 
 						 */ 
 						element.appendChild(ul_element);
-						ul_element.appendChild(airSamp_label);
+						ul_element.appendChild(sampler_label);
 						ul_element.appendChild(select);
 						
 						ul_element.appendChild(start_label);
@@ -470,24 +454,24 @@ if (isset($_GET['submit'])) {
 						$('#edate'+counter).datepicker({ dateFormat: 'yy-mm-dd' }).val();
 	
 					
-						//if you added air samplers, change the number of air samplers
-						var current_number_air_samplers = document.getElementById("air_samp_num");
-						var current_number_air_samplers_value = current_number_air_samplers.value;
-						current_number_air_samplers_value++;
-						//alert(current_number_air_samplers_value);
-						current_number_air_samplers.value = current_number_air_samplers_value;
+						//if you added samplers, change the number of samplers
+						var current_number_samplers = document.getElementById("sampler_num");
+						var current_number_samplers_value = current_number_samplers.value;
+						current_number_samplers_value++;
+						//alert(current_number_samplers_value);
+						current_number_samplers.value = current_number_samplers_value;
 						}
 				    });
 				    
 				    //Check how many samplers you have on the page without adding any
-					var element2 = document.getElementById("airSamp_div");
-					var air_num = document.createElement("input");	
-				    air_num.setAttribute("type", "text");
-				    air_num.setAttribute("name", "air_samp_num");
-				    air_num.setAttribute("id", "air_samp_num");
-				    air_num.setAttribute("value", num);
-				   	air_num.setAttribute("style", "visibility:hidden");
-				   	element2.appendChild(air_num);
+					var element2 = document.getElementById("sampler_div");
+					var samp_num = document.createElement("input");	
+				    samp_num.setAttribute("type", "text");
+				    samp_num.setAttribute("name", "sampler_num");
+				    samp_num.setAttribute("id", "sampler_num");
+				    samp_num.setAttribute("value", num);
+				   	samp_num.setAttribute("style", "visibility:hidden");
+				   	element2.appendChild(samp_num);
 	
 				});
 				
@@ -495,15 +479,17 @@ if (isset($_GET['submit'])) {
 				</script>
 				</div><!--end of col-xs-6-->
 				</fieldset>
-				</div><!--end of fragment-1-->
+				</div><!--button-->
+				
+				<p>
+				<button type="button"  data-toggle="collapse" data-target="#demo2" aria-expanded="true" aria-controls="demo2" class='buttonLength'>Update Extraction Info</button>
+				<div id="demo2" class="collapse">
+				</p>	
 				
 				
-				<!-----------------------------------------fragment 2---------------------------------------->
-				<div id="fragment-2">
-				<fieldset>
 				<div id="dna_extraction">
-					
-					<LEGEND><b>DNA Extraction Info</b></LEGEND>
+					<fieldset>
+					<LEGEND><b>Step Two: DNA Extraction Info</b></LEGEND>
 					<div class="col-xs-6">
 					
 					<p>
@@ -519,7 +505,7 @@ if (isset($_GET['submit'])) {
 					<br/>
 					<?php
 					//url or $_GET name, table name, field name
-					dropDown_update('dExtKit', 'dna_extraction', 'd_kit_name','d_kit_name','dna_extract_kit_name',"$parent_value");
+					dropDown_update('dExtKit', 'dna_extraction', 'd_kit_name','d_kit_name','dna_extract_kit_name',"$parent_value",$root);
 					?>
 					</p>
 					
@@ -541,7 +527,7 @@ if (isset($_GET['submit'])) {
 					<label class="textbox-label">Instrument/Kit Used to Measure DNA Concentration:</label><br>
 					<?php
 					//url or $_GET name, table name, field name
-					dropDown_update('dInstru', 'quant_instruments', 'kit_name','kit_name','d_conc_instrument',"$parent_value");
+					dropDown_update('dInstru', 'quant_instruments', 'kit_name','kit_name','d_conc_instrument',"$parent_value",$root);
 					?>
 					</p>
 	
@@ -592,12 +578,14 @@ if (isset($_GET['submit'])) {
 					</div>
 					</p>
 					</div>
+					</fieldset>
 				</div>
 
-				<div class="col-xs-6">
-				<div id="rna_extraction">
-				<LEGEND><b>RNA Extraction Info</b></LEGEND>
 				
+				<div id="rna_extraction">
+				<fieldset>
+				<LEGEND><b>Step Three: RNA Extraction Info</b></LEGEND>
+				<div class="col-xs-6">
 				<p>
 				<label class="textbox-label">RNA Extraction Date:</label><br>
 				<input type="text" id="r_extr_date"  name="r_extr_date" value="<?php echo text_insert_update_dt($parent_value,'r_extraction_date','date');?>"/>
@@ -611,7 +599,7 @@ if (isset($_GET['submit'])) {
 				<br/>
 				<?php
 				//url or $_GET name, table name, field name
-				dropDown_update('rExtKit', 'rna_extraction', 'r_kit_name','r_kit_name','rna_extract_kit_name',"$parent_value");
+				dropDown_update('rExtKit', 'rna_extraction', 'r_kit_name','r_kit_name','rna_extract_kit_name',"$parent_value",$root);
 				?>
 				</p>
 				
@@ -632,7 +620,7 @@ if (isset($_GET['submit'])) {
 				<label class="textbox-label">Instrument/Kit Used to Measure RNA Concentration:</label><br>
 				<?php
 				//url or $_GET name, table name, field name
-				dropDown_update('rInstru', 'quant_instruments', 'kit_name','kit_name','r_conc_instrument',"$parent_value");
+				dropDown_update('rInstru', 'quant_instruments', 'kit_name','kit_name','r_conc_instrument',"$parent_value",$root);
 				?>
 				</p>
 				
@@ -667,7 +655,7 @@ if (isset($_GET['submit'])) {
 				</script>-->
 				
 				<p>
-				<h3 class="checkbox-header">Does Original RNA Sample Still Exist?:</h3>
+				<h3 class="checkbox-header">Does Original Sample Still Exist?:</h3>
 				<div class="vert-checkboxes">
  				<label class="checkbox-label"><input type="checkbox" class = "orig_sample_exist" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>No</label><br />
 				</div>
@@ -682,139 +670,79 @@ if (isset($_GET['submit'])) {
 				</div>
 				</p>
 				</div>
-			
+				</fieldset>
+				</div>
+				</div>
+				
+				<p>
+				<!--<button type="button"  data-toggle="collapse" data-target="#demo3" aria-expanded="true" aria-controls="demo3" class='buttonLength'>Update Sequencing Info</button>
+				<div id="demo3" class="collapse">
+				</p>	
 				
 				
+				<fieldset>
+				<LEGEND><b>Step Four: Sequencing Info</b></LEGEND>
 				<div class="col-xs-6">
-				<LEGEND><b>Sequencing Info</b></LEGEND>
 				<p><a href="/series/dynamic/airmicrobiomes/update_tables/update_seq_info.php">Fill Out Sequencing Submission Info</a></p>
 				<p>
 				<!--Sequencing2 Dropdown-->
-				<label class="textbox-label">Select Sequencing Submission Info:</label>
+				<!--<label class="textbox-label">Select Sequencing Submission Info:</label>
 				<br/>
 				<?php
 				//url or $_GET name, table name, field name
 				dropDown_update('seqInfo', 'sequencing2', 'sequencing_info','sequencing_info','sequencing_info',"$parent_value");
 				?>
 				</p>
+				</div>
 				</fieldset>
-				</div><!-- end of fragment 2-->
+				</div>
 				
 				
+				<p>
+				<button type="button"  data-toggle="collapse" data-target="#demo4" aria-expanded="true" aria-controls="demo4" class='buttonLength'>Update Analysis Info</button>
+				<div id="demo4" class="collapse">
+				</p>
 				
 				
-				<!-----------------------------------------fragment 3----------------------------------------->
-				<div id="fragment-3">
 				<fieldset>
-				<LEGEND><b>Isolate Collection Info</b></LEGEND>
+				<LEGEND><b>Step Five: Downstream Analysis Info</b></LEGEND>
 				<div class="col-xs-6">
-				
 				<p>
-				<!--<h3 class = 'form-header'>(For Isolate Collection)</h3>-->
-				<label class="textbox-label">Select Isolate Collection Temperature:*</label>
+				<!--Analysis Pipeline Name Dropdown-->
+				<!--<label class="textbox-label">Select Analysis Pipeline:</label>
 				<br/>
 				<?php
 				//url or $_GET name, table name, field name
-				dropDown_update_for_isolates('iso_coll_temp', 'isolate_collection_temp', 'temp','temp','iso_coll_temp',"$parent_value");
-				
+				dropDown_update('anPipe', 'analysis', 'analysis_name','analysis_name','analysis_name',"$parent_value");
 				?>
 				</p>
-				
+				</div>
+				</fieldset>
+				</div>-->
+
 				<p>
-				<label class="textbox-label">Isolate Storage Date:*</label><br>
-				<input type="text" id="datepicker3"  name="iso_date" class = "fields" value="<?php if ((isset($_GET['submit']))){echo text_insert_isolate_update($parent_value,'iso_date',$root);} ?>"/>
-				</p>
-				<script>
-				$('#datepicker3').datepicker({ dateFormat: 'yy-mm-dd' }).val();
-				</script>
-				
-				<p>
-				<label class="textbox-label">Isolate Storing Method:*</label>
-				<br/>
-				<?php
-				//url or $_GET name, table name, field name
-				dropDown_update_for_isolates('iso_store_method', 'isolate_storing_method', 'storing_method','storing_method','iso_store_method',"$parent_value");
-				?>
+				<button type="button"  data-toggle="collapse" data-target="#demo5" aria-expanded="true" aria-controls="demo5" class='buttonLength'>Update Notes</button>
+				<div id="demo5" class="collapse">
 				</p>
 				
-				<p>
-				<label class="textbox-label">Isolate Location Type:*</label>
-				<br/>
-				<?php
-				//url or $_GET name, table name, field name
-				dropDown_update_for_isolates('iso_loc_type', 'isolate_location_type', 'loc_type','loc_type','loc_type',"$parent_value");
-				?>
-				</p>
 				
-				<p>
-				<label class="textbox-label">16S Sequence (Sanger)</label><br>
-				<input type="text" name="sang_seq" id="sang_seq" placeholder="Enter A Sequence" value="<?php if ((isset($_GET['submit']))){echo text_insert_isolate_update($parent_value,'seq_sang',$root);} ?>">
-				</p>
 				
+				<fieldset>
+				<LEGEND><b>Notes</b></LEGEND>
+				<div class="col-md-12">
 				<p>
-				<label class="textbox-label">Closest Hit</label><br>
-				<input type="text" name="closest_hit" id="closest_hit" placeholder="Enter A Closest Hit" value="<?php if ((isset($_GET['submit']))){echo text_insert_isolate_update($parent_value,'closest_hit',$root);} ?>">
+				<label class="textbox-label">Sample Notes:(optional)</label>
+				<textarea class="form-control" from="sample_form_update" rows="3" name="notes" placeholder = "Enter Date and Initials for Comment (e.g.: YYYY/MM/DD Comment -initials)"><?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'notes');} ?></textarea>
 				</p>
-				
-				<p>
-				<label class="textbox-label">Send For PacBio Sequencing:</label>
-				<br/>
-				<select id='send_pac_bio' name='send_pac_bio' class='fields';'>
-				<option value='0'<?php if((isset($_GET["send_pac_bio"]) && $_GET["send_pac_bio"] == "0" )){ echo "selected";} ?>>-Select-</option>
-				<option value='Y'<?php if((isset($_GET["send_pac_bio"]) && $_GET["send_pac_bio"] == "Y" )){ echo "selected";} ?>>Yes</option>
-				<option value='N'<?php if((isset($_GET["send_pac_bio"]) && $_GET["send_pac_bio"] == "N" )){ echo "selected";} ?>>No</option>
-				</select>
-				</p>
-				
 				</div>
 				</fieldset>
 				</div>
-
-				<!-----------------------------------------fragment 4------------------------------------------>
-				<div id="fragment-4">
-					<fieldset>
-					<LEGEND><b>Microscopy</b></LEGEND>
-						<div class="col-xs-6">
-							<i>Coming Soon</i>
-						</div>
-					</fieldset>
-				</div><!--end fragment-4-->
 				
-				<!-----------------------------------------fragment 5------------------------------------------>
-				<div id="fragment-5">
-					<fieldset>
-					<LEGEND><b>CFU Collection</b></LEGEND>
-						<div class="col-xs-6">
-							<i>Coming Soon</i>
-						</div>
-					</fieldset>
-				</div><!-- end fragment-5-->
-				
-				<!-----------------------------------------fragment 6------------------------------------------>
-				<div id="fragment-6">
-					<fieldset>
-					<LEGEND><b>Notes</b></LEGEND>
-						<div class="col-md-12">
-							<p>
-							<label class="textbox-label">Sample Notes:(optional)</label>
-							<textarea class="form-control" from="sample_form_update" rows="3" name="notes" placeholder = "Enter Date and Initials for Comment (e.g.: YYYY/MM/DD Comment -initials)"><?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'notes');} ?></textarea>
-							</p>
-						</div><!--close col-md-12-->
-					</fieldset>
-				</div> <!--close fragement-6-->
-			</div><!--tabs-->
-				
-				
-				
-			<p>
-			<button class="button" type="submit" name="submit" value="2">Update </button>
-			<button class="button" type=button onClick="parent.location='<?php echo $root;?>sample_update_lookup_jquery.php'" value='Go Back'>Go Back</button>
-			</p>
+				<p><button class="button" type="submit" name="submit" value="2">Update </button>
+				<button class="button" type=button onClick="parent.location='<?php echo $root;?>sample_update_lookup.php'" value='Go Back'>Go Back</button>
+				</p>
 				
 		</form>
-		<script>
-		$( "#tabs" ).tabs();
-		</script>
 		<script type="text/javascript">
 			   var name_check = 'true';
 			   function validate(from) {
@@ -844,19 +772,19 @@ if (isset($_GET['submit'])) {
 				function check_form(){
 					var index;
 					var valid = 'true';
-					//var x = document.getElementById('air_samp_num').value;
-					//var x = 1;//must have a way to check if air sampler...and a way to not delete all
+					//var x = document.getElementById('sampler_num').value;
+					//var x = 1;//must have a way to check if sampler...and a way to not delete all
 					
-					//var airSamp_class = document.getElementsByClassName('airSamp');//should tell you how many air samplers are on the screen
-					//var x = airSamp_class.length;
-					var x = document.getElementById("air_samp_num").value;
+					//var sampler_class = document.getElementsByClassName('sampler');//should tell you how many samplers are on the screen
+					//var x = sampler_class.length;
+					var x = document.getElementById("sampler_num").value;
 
 					if(x == 0){//this should never happen...
 						valid = 'false';
-						alert('ERROR!! There Are No Air Samplers. Please Add Some');
+						alert('ERROR!! There Are No Samplers. Please Add Some');
 					}
 					else{
-						//create a contains method to check if airSamp is entered twice
+						//create a contains method to check if sampler is entered twice
 						Array.prototype.contains = function(needle){
 							for (i in this){
 								if(this[i]===needle){
@@ -866,26 +794,26 @@ if (isset($_GET['submit'])) {
 							return false;
 						}
 						var seen = [];
-						//validate airSamp data
+						//validate sampler data
 						for (index = 1; index <= x; ++index) {
-	   	 					var airSamp_name = 'airSamp'+index;
-	   	 					//check that airSamp is picked 
-	   	 					var airSamp_name_value = document.getElementById(airSamp_name).value;
-	   	 					if(airSamp_name_value == '0' || airSamp_name_value == 'Needs to be added'){
-	   	 						alert("Whoops! Sensor Name Is Not Valid");
-	   	 						document.getElementById(airSamp_name).style.backgroundColor = 'blue';
+	   	 					var sampler_name = 'sampler'+index;
+	   	 					//check that sampler is picked 
+	   	 					var sampler_name_value = document.getElementById(sampler_name).value;
+	   	 					if(sampler_name_value == '0' || sampler_name_value == 'Needs to be added'){
+	   	 						alert("Whoops! Sampler Name Is Not Valid");
+	   	 						document.getElementById(sampler_name).style.backgroundColor = 'blue';
 	   	 						valid = 'false';
 	   	 					}
 	   	 					else{
-	   	 						//check to see if airSamp name is already input
-	   	 						if(seen.contains(airSamp_name_value)){
-	   	 							document.getElementById(airSamp_name).style.backgroundColor = 'blue';
+	   	 						//check to see if sampler name is already input
+	   	 						if(seen.contains(sampler_name_value)){
+	   	 							document.getElementById(sampler_name).style.backgroundColor = 'blue';
 	   	 							alert("You Have Chosen More Than One Sensor With The Same Name. Please Check Names");
 	   	 							valid = 'false';
 	   	 						}
 	   	 					    else{
-	   	 							seen.push(airSamp_name_value);
-	   	 							document.getElementById(airSamp_name).style.backgroundColor = 'white';
+	   	 							seen.push(sampler_name_value);
+	   	 							document.getElementById(sampler_name).style.backgroundColor = 'white';
 	   	 						}
 	   	 					}
 	   	 				
@@ -943,7 +871,7 @@ if (isset($_GET['submit'])) {
 									time = (time/1000); 
 
 									var p_time = time.toFixed(2);
-									var airSamp_check = airSamp_name.match(/^Coriolis.*/);
+									var sampler_check = sampler_name.match(/^Coriolis.*/);
 
 									if(p_time < 0){
 										valid = 'false';
@@ -953,7 +881,7 @@ if (isset($_GET['submit'])) {
 										document.getElementById(start_date).style.backgroundColor = 'blue';
 										document.getElementById(end_date).style.backgroundColor = 'blue';
 									}
-									else if(p_time > 6.5 && airSamp_check  != null){//check if coriolis sampling is greater than 6 hours
+									else if(p_time > 6.5 && sampler_check  != null){//check if coriolis sampling is greater than 6 hours
 										valid = 'false';
 										alert("Sampling Is Greater Than 6 Hours For Coriolis Sampling. Please Check Date/Times");
 										document.getElementById(start_time).style.backgroundColor = 'blue';
