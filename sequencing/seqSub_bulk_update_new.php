@@ -187,7 +187,6 @@ if(isset($_POST['submit'])){
 				//if everything went well, you want to update the new number of submissions
 				//do you need a transaction for this?
 				$update_query = get_application_abbrev($application,'query'); 
-				#echo $update_query;
 				$stmt = $dbc -> prepare("$update_query");
 				if($stmt){
 					$stmt -> bind_param('is', $new_number_of_submissions,$sample_name);
@@ -338,8 +337,8 @@ if(isset($_POST['submit'])){
 				$objWriter->save($path.'sequencing/sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
 				
 				$file_name ='SamplesSubmissionForm_'.$dtSub.'.xlsx';
-				echo 'File has been created:',EOL;
-				echo '<a href='.$root.'sequencing/sequencing_sample_submission_forms/'.$file_name.' download>Click here</a><br>';
+				echo 'File has been created and stored in : [base_dir]/sequencing/sequencing_sample_submission_forms/',EOL;
+				echo '<a href='.$root.'sequencing/sequencing_sample_submission_forms/'.$file_name.' download>Click Here To Download</a><br>';
 				echo '<button class="button" type=button onClick="parent.location=\'<?php echo $root;?>sample_update_lookup.php\'" value="\'Go Back\'>Go Back</button>';
 			}
 			else{

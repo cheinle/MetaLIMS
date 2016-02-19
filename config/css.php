@@ -417,22 +417,20 @@ select::-ms-expand {
 }
 /*.error{
 	background-color: red;
-}
+}*/
 
 div.border{
  width:90%;
+ float:left;
  color:#818181;
+ margin-left: 5%;
  background: #f1f1f1;
  border: 2px solid #ccc;
  padding:10px;
  font-family: Georgia;
  font-size: 14px;
- -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
- -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
- -moz-border-radius: 15px;
- -webkit-border-radius: 15px;
-  border-radius: 15px;
+ box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+ border-radius: 15px;
 }
 div.indent{
   margin-left:20px;
@@ -443,7 +441,7 @@ div.border legend{
   font-size:18px;
   padding:10px 4px 0px 4px;
   margin-left:20px;
-}*/
+}
 
 /***********Curved Boarder. Used on FAQ ******/
 pre.border{
