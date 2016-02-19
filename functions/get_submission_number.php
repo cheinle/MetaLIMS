@@ -1,7 +1,7 @@
 <?php
 function get_submission_num($sample_name,$seq_type_abbrev){
 	
-				include ('database_connection.php');
+				include ('../database_connection.php');
 				$query = '';
 				if($seq_type_abbrev == 'A'){
 					$query = 'SELECT A FROM number_of_seq_submissions WHERE sample_name = ?';

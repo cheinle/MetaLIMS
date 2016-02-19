@@ -411,7 +411,7 @@
                 var sample_type = $('#sample_type').val(); //<----- get the value from the parent select 
                 //alert(num_sensors);
 	                $.ajax({
-	                    url     : root+'amplicon_div_select.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'sequencing/amplicon_div_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : { sample_type: sample_type}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},

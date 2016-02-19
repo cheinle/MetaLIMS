@@ -1,5 +1,5 @@
 <?php
-	 include('database_connection.php');
+	 include('../database_connection.php');
 
 	$sample_type = $_GET['sample_type'];
 	if($sample_type == 'Amplicon'){

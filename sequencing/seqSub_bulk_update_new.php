@@ -8,6 +8,7 @@
 	include("../functions/check_sequencing_type.php");
 	include('../functions/get_submission_number.php');
 	include('../functions/get_application_abbrev.php');
+	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
 ?>
 	<!doctype html>
@@ -126,9 +127,11 @@ if(isset($_POST['submit'])){
 			//now process each of the samples with their DNA conc, Vol of aliquot, if DNA sample exists and link to the seq sub info
 			
 			//prepare excel sample sheet
-			require_once dirname(__FILE__) . '/xls_classes/PHPExcel/IOFactory.php';
+			//require_once dirname(__FILE__) . '/xls_classes/PHPExcel/IOFactory.php';
+			require_once ($path.'xls_classes/PHPExcel/IOFactory.php');
+			 
 			//$objPHPExcel = PHPExcel_IOFactory::load("Sequencing_SampleSubmissionForm.xlsx");
-			$objPHPExcel = PHPExcel_IOFactory::load("test.xlsx");
+			$objPHPExcel = PHPExcel_IOFactory::load($path."sequencing/test.xlsx");
 			$styleArray = array(
 		    'font'  => array(
 		    	'color' => array('rgb' => '000000'),
@@ -332,13 +335,13 @@ if(isset($_POST['submit'])){
 				//unset_session_vars('bulk_seqSub_update'); //uncomment this!
 				//write to file						
 				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-				$path = $_SERVER['DOCUMENT_ROOT'].$root;
+				//$path = $_SERVER['DOCUMENT_ROOT'].$root;
 				//$objWriter->save($path.'/browse_files/repository/shared/sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
-				$objWriter->save($path.'sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
+				$objWriter->save($path.'sequencing/sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
 				
 				$file_name ='SamplesSubmissionForm_'.$dtSub.'.xlsx';
 				echo 'File has been created:',EOL;
-				echo '<a href='.$root.'sequencing_sample_submission_forms/'.$file_name.' download>Click here</a><br>';
+				echo '<a href='.$path.'sequencing/sequencing_sample_submission_forms/'.$file_name.' download>Click here</a><br>';
 				//echo 'Note: Files Can Also Be Found Under Files-Browse_Files->Shared-><name of file>';
 				echo '<button class="button" type=button onClick="parent.location=\'<?php echo $root;?>sample_update_lookup.php\'" value="\'Go Back\'>Go Back</button>';
 			}
