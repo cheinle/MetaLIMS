@@ -40,7 +40,7 @@
 
 /***********Home Page ********/
 body.homepage {
-   background-image: url('dandi.jpg'); 
+   background-image: url('images/dandi.jpg'); 
    background-size:100% 100%;
 }
 body{

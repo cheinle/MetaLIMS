@@ -1,13 +1,13 @@
 <?php
-	include ('index.php');
-	include ('config/path.php');
-	include ('database_connection.php');
-	include ('functions/text_insert_update_storage_info.php');
-	include_once("functions/check_collector_names.php");
-	include_once("functions/unset_session_vars.php");
-	include("functions/check_sequencing_type.php");
-	include('functions/get_submission_number.php');
-	include('functions/get_application_abbrev.php');
+	include ('../index.php');
+	include ('../config/path.php');
+	include ('../database_connection.php');
+	include ('../functions/text_insert_update_storage_info.php');
+	include_once("../functions/check_collector_names.php");
+	include_once("../functions/unset_session_vars.php");
+	include("../functions/check_sequencing_type.php");
+	include('../functions/get_submission_number.php');
+	include('../functions/get_application_abbrev.php');
 	define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
 ?>
 	<!doctype html>
@@ -144,7 +144,7 @@ if(isset($_POST['submit'])){
 		
 			//insert sample info to db and excel sheet at the same time
 			echo 'Samples Updated:<br>';
-			$countainer_counter = 1;
+			$container_counter = 1;
 			foreach($sample_array as $sample_name => $process){
 				$starting_row++;
 				$p_sample_name = htmlspecialchars($sample_name);
@@ -212,11 +212,10 @@ if(isset($_POST['submit'])){
 				$container_name = '';
 				if(isset($process['wellLoc'])){
 					$p_wellLoc = $process['wellLoc'];
-					$container_name = 'air_container'+$container_counter;
 				}
-				
+				$container_name = 'air_container'.$container_counter;
 				if($container_type == 'Tube'){
-					$countainer_counter++;
+					$container_counter++;
 				}
 				
 				$p_sampConc = $process['sampConc'];

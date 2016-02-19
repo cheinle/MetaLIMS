@@ -1,10 +1,10 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include ('database_connection.php');
-include ('index.php');
-include ('functions/build_bulk_seqSub_table_new.php');
-include('config/path.php');
+include ('../database_connection.php');
+include ('../index.php');
+include ('../functions/build_bulk_seqSub_table_new.php');
+include('../config/path.php');
 
 ?>
 <!doctype html>
@@ -27,8 +27,8 @@ include('config/path.php');
 			 $_POST['quant_method'] == '0' || $_POST['application'] == '0' || $_POST['libPK'] == '0' || $_POST['submittedBy'] == '0' || $_POST['dtSub'] == ''){
 			 	$error = 'true';
 				echo '<script>Alert.render("ERROR: Required Field Not Entered. Please Check Form");</script>';
-				echo '<p><button class="button" type=button onClick="parent.location=\'/series/dynamic/airmicrobiomes/seq_submission_UDF_check.php\'" value=\'Go Back\'>Go Back</button></p>';
-			 }
+				echo '<input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" />';
+			}
 			 
 			 if($error == 'false'){
 			 		$array_sample_names = array();
@@ -89,79 +89,6 @@ include('config/path.php');
 					
 					build_bulk_seqSub_table_new($array_sample_names,$options,$sample_type,$container_type,$root);
 			 }
-			 
-			 
-			 //check submission (warn cannot be undone)
-			 
-			 
-			 /*//first check which fields you want to have as options to fill in
-			 	//check if you have dna or rna
-			 	//check if you have optional quality/quanity checks to add
-			 	Sample/Name*
-			  * Container/Type*  +
-			  * Container/Name
-			  * Sample/Well Location* 
-			  * UDF/Sample Type  +
-			  * UDF/Sample Conc. *
-			  * UDF/Units 
-			  * UDF/Quantitation Method * +
-			  * UDF/DNA Contamination (%)
-			  * UDF/RIN\/RINe ** (RNA only)
-			  * UDF/Nanodrop Conc. (ng\/uL)
-			  * UDF/260\/280 
-				UDF/269\/230 
-			  * UDF/Application* +
-			  * UDF/Sequencing Method * +
-			  * UDF/Read Length*+
-			  * UDF/Sequencing Coverage (opt)
-				UDF/Reference Genome (opt)
-			  * UDF/Pooling *  
-			  * 
-			 		//add these to first page?
-			 			UDF/Sample Type *
-			 			Container/Type*
-						Container/Name*
-						UDF/Quantitation Method *
-						UDF/Application*
-						UDF/Sequencing Method *
-						UDF/Read Length*
-						UDF/Sequencing Coverage
-						UDF/Reference Genome
-						UDF/Pooling *
-			  * 		UDF/Sample Buffer *
-						UDF/Volume (uL) *
-			 	
-			 		//if DNA
-					 	Sample/Name*
-						Sample/Well Location* (auto populate this, does not need to appear on next page)
-						UDF/Sample Conc. *
-						UDF/Units * 
-						UDF/Nanodrop Conc. (ng\/uL)
-						UDF/260\/280 
-						UDF/269\/230 
-						UDF/Sample Buffer *
-						UDF/Volume (uL) *
-					//if RNA
-						Sample/Name*
-						Sample/Well Location*
-						UDF/Sample Conc. *
-						UDF/Units *
-						UDF/DNA Contamination (%) ** (RNA only)
-						UDF/RIN\/RINe ** (RNA only)
-						UDF/Nanodrop Conc. (ng\/uL)
-						UDF/260\/280 
-						UDF/269\/230 
-						UDF/Sample Buffer *
-						UDF/Volume (uL) *
-			 	
-		
-			 	
-			 //second add what library used and what type of amplicon sequencing and what primers used
-			 //third , add which dna extraction date your dna is taken from? dna extraction info? (have dropdown?)
-			 //fourth, you need to build sample name for rikky based on sample submission type, and times of submission (need to keep track somewhere)
-			 //set up key constraints?
-			 //need way to edit/view per sample/sample submission?
-			 			 */
 			
 		}
 	?>

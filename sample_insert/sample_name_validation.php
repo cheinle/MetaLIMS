@@ -1,5 +1,5 @@
 <?php
-	 include('database_connection.php');
+	 include('../database_connection.php');
 
 	$sample_name_check = 'false';
 	$project_name = htmlspecialchars($_GET['proj']);
