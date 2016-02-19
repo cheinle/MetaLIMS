@@ -335,14 +335,11 @@ if(isset($_POST['submit'])){
 				//unset_session_vars('bulk_seqSub_update'); //uncomment this!
 				//write to file						
 				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-				//$path = $_SERVER['DOCUMENT_ROOT'].$root;
-				//$objWriter->save($path.'/browse_files/repository/shared/sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
 				$objWriter->save($path.'sequencing/sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'.xlsx');
 				
 				$file_name ='SamplesSubmissionForm_'.$dtSub.'.xlsx';
 				echo 'File has been created:',EOL;
-				echo '<a href='.$path.'sequencing/sequencing_sample_submission_forms/'.$file_name.' download>Click here</a><br>';
-				//echo 'Note: Files Can Also Be Found Under Files-Browse_Files->Shared-><name of file>';
+				echo '<a href='.$root.'sequencing/sequencing_sample_submission_forms/'.$file_name.' download>Click here</a><br>';
 				echo '<button class="button" type=button onClick="parent.location=\'<?php echo $root;?>sample_update_lookup.php\'" value="\'Go Back\'>Go Back</button>';
 			}
 			else{
