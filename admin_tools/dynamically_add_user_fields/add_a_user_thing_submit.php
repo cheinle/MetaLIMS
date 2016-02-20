@@ -18,19 +18,34 @@ try{
 		}
 		
 		//format
-		if($p_type != 'select'){
-			$p_select_values = NULL;
-		}
-		else{
+		if($p_type == 'text_select'){//|| $p_type == 'numeric_select'
+	
 			//format all option entries 
 			$pieces = preg_split("/\s+/", $p_select_values);
 			array_walk($pieces,"myfunction");
 			$p_select_values = implode(";", $pieces);
+	
+			/*if($p_type == 'numeric_select'){
+				//check that numbers are correct format
+				//your type will not be a decimal though...?
+			}*/
+		}
+		else{
+			$p_select_values = NULL;
+			/*if($p_type == 'numeric_input'){//would not need to check this...only if select numeric or when user enteres
+				//check that numbers are correct format
+				$regrex_check_fr  = '/^\s*(?=.*[1-9])\d{0,3}(?:\.\d{1,2})?\s*$/';
+				if (!preg_match("$regrex_check_fr", $get_array['fRate'])){
+					echo '<p>ERROR: You Must Enter Valid Flow Rate. Please Check Your Number.<p>';
+					$error = 'true';
+				}
+			}*/
+			
 		}
 		//format all labels 
 		$pieces_of_label = preg_split("/\s+/", $p_label_name);
 		array_walk($pieces_of_label,"myfunction");
-		$p_label_value = implode(" ", $pieces_of_label);
+		$p_label_name = implode(" ", $pieces_of_label);
 		
 		//get number of things and increment by one
 		$number_of_things = array();
@@ -39,7 +54,7 @@ try{
 	    	$stmt->bind_result($thing_id);
 	    	while ($stmt->fetch()){
 	    		
-				echo $thing_id;
+				#echo $thing_id;
 				$regrex_check = '/^thing(\d+)$/'; //remove dashes
 				preg_match($regrex_check,$thing_id,$matches);
 	        	$number_of_things[] = $matches[1];
@@ -54,11 +69,11 @@ try{
 		$last_element = end($number_of_things);
 		$new_thing_id = $last_element + 1;
 		$new_thing_id = 'thing'.$new_thing_id;
-		print_r($number_of_things);
-		echo $new_thing_id;
+		#print_r($number_of_things);
+		#echo $new_thing_id;
 				
 		//insert data into db. Use prepared statement 
-	/*	$stmt2 = $dbc -> prepare("INSERT INTO create_user_things (thing_id, label_name, type, select_values) VALUES (?,?,?,?)");
+		$stmt2 = $dbc -> prepare("INSERT INTO create_user_things (thing_id, label_name, type, select_values) VALUES (?,?,?,?)");
 		if(!$stmt2){
 			$insert_check = 'false';
 			throw new Exception("Prepare Failure: Unable To Insert Into Main Sample Table");	
@@ -74,9 +89,9 @@ try{
 				$stmt2 -> close();
 			}
 		}
-		*/
+		
 		//double check that thingid  is really just 'thing#'
-	/*	$thing_check_regrex = '/^thing(\d+)$/'; //remove dashes
+		$thing_check_regrex = '/^thing(\d+)$/'; //remove dashes
 		$thing_type_check = preg_match($thing_check_regrex,$new_thing_id);
 		if($thing_type_check == true && $insert_check == 'true'){
 			//check which type of table you have
@@ -105,7 +120,7 @@ try{
 		else{
 			$insert_check = 'false';
 		}
-		*/
+		
 				
 		
 		/*****************************************************************************
