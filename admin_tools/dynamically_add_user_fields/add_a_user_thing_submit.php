@@ -1,5 +1,5 @@
 <?php
-		include ('../database_connection.php');
+		include ('../../database_connection.php');
 
 try{
 						
@@ -9,9 +9,9 @@ try{
 		
 		//define variables
 		$p_label_name = htmlspecialchars($_GET['label_text']);
-		$p_type = 'text_input';
-		$p_select_values = NULL;
-		
+		$p_type = htmlspecialchars($_GET['type']);
+		$p_select_values = htmlspecialchars($_GET['options']);
+
 		//get number of things and increment by one
 		$number_of_things = array();
 		$stmt= $dbc->prepare("SELECT thing_id FROM create_user_things");

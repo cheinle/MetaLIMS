@@ -156,9 +156,10 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 						<li><a href="'.$root.'admin_tools/update_freezer_drawers.php">Add Freezer/Drawer</a></li>
 						<li><a href="'.$root.'admin_tools/add_sample_type.php">Add Sample Type</a></li>
 						<li><a href="'.$root.'admin_tools/update_proj_name.php">Add Project Name</a></li>
-						<li><a href="'.$root.'admin_tools/add.php">Add Entries</a></li>
-						<li><a href="'.$root.'admin_tools/update.php">Update Entries</a></li>
-						<li><a href="'.$root.'admin_tools/delete.php">Delete Entries</a></li>
+						<li><a href="'.$root.'admin_tools/add.php">Add Dropdown Options</a></li>
+						<li><a href="'.$root.'admin_tools/update.php">Update Dropdown Options</a></li>
+						<li><a href="'.$root.'admin_tools/delete.php">Delete Dropdown Options</a></li>
+						<li><a href="'.$root.'admin_tools/dynamically_add_user_fields/add_a_user_thing.php">Create Fields</a></li>
 					</ul>
 				</li>
 				</ul> 

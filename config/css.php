@@ -102,6 +102,8 @@ table {
   overflow:hidden;
   word-wrap:break-word;
   border: 1px solid black;
+  border-radius: 15px;
+  box-shadow:0 5px 5px rgba(0,0,0,0.5);
 }
 th.reg {
     border: 2px solid black;
@@ -185,7 +187,7 @@ form.registration{
 }
 
 form.registration fieldset{
-  border-top:1px solid #ccc;
+  /*border-top:1px solid #ccc;*/
   border-left:0;
   border-bottom:0;
   border-right:0;
@@ -415,10 +417,16 @@ a.add{
 select::-ms-expand {
     display: none;
 }
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    border-radius: 10px;
+}
+
+
 /*.error{
 	background-color: red;
-}*/
-
+}
+*/
 div.border{
  width:90%;
  float:left;
@@ -440,6 +448,7 @@ div.border legend{
   color:#666666;
   font-size:18px;
   padding:10px 4px 0px 4px;
+  margin-left:20px;
 }
 
 /***********Curved Boarder. Used on FAQ ******/
