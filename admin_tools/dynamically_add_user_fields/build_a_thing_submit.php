@@ -1,5 +1,5 @@
 <?php
-		include ('../database_connection.php');
+		include ('../../database_connection.php');
 
 		$stmt = $dbc->prepare("SELECT label_name,type,select_values,thing_id, visible FROM create_user_things");
 		if(!$stmt){
@@ -15,6 +15,7 @@
 					  var thing_id = <?php echo(json_encode(htmlspecialchars($thing_id))); ?>	
 					  var label_text = <?php echo(json_encode(htmlspecialchars($label_name))); ?>	
 					  var label = document.createElement("label");
+					  label.className="textbox-label";
 					  var node = document.createTextNode(label_text+" : ");
 					  label.appendChild(node);
 					  

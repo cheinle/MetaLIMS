@@ -1,9 +1,6 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include ('../index.php');
-include('insert_a_user_thing_js.php');
-
 ?>
 
 <!doctype html>
@@ -17,8 +14,8 @@ include('insert_a_user_thing_js.php');
 	</head>
  
 	<body>
-	<div class="page-header">
-	<h3>Add User UDF's to form</h3>
+	<!--<div class="page-header">
+	<h3>Add User UDF's to form</h3>-->
 	
 	<?php //button
 		//add a select
@@ -28,14 +25,7 @@ include('insert_a_user_thing_js.php');
 			
 			
 			
-	?>
-
-		<!--<div id="user_things">User's Things:<br>
-		
-		</div>-->
-	
-		<input class="button" id="submit" type="button" value="submit"><br>
-		
+	?>	
 		<script type="text/javascript">
 				//load page
 				$(document).ready(function() {
@@ -46,7 +36,7 @@ include('insert_a_user_thing_js.php');
 							var type = 'text_input';
 	
 							 $.ajax({
-			                    url     : 'build_a_thing_submit.php', //the url you are sending datas to which will again send the result
+			                    url     : root+'admin_tools/dynamically_add_user_fields/build_a_thing_submit.php', //the url you are sending datas to which will again send the result
 			                    type    : 'GET', //type of request, GET or POST
 			                    data    : { label_text:label_text,type: type}, //Data you are sending
 			                    success : function(data){$('#user_things').html(data)},
@@ -58,7 +48,7 @@ include('insert_a_user_thing_js.php');
 				});
 				
 				////submit page 
-				$(document).ready(function() {
+				/*$(document).ready(function() {
 					//$("#submit").click(function() {
 
 							//define variables..
@@ -66,7 +56,7 @@ include('insert_a_user_thing_js.php');
 							var type = 'text_input';
 	
 							 $.ajax({
-			                    url     : 'build_a_thing_submit.php', //the url you are sending datas to which will again send the result
+			                    url     : root+'admin_tools/dynamically_add_user_fields/build_a_thing_submit.php', //the url you are sending datas to which will again send the result
 			                    type    : 'GET', //type of request, GET or POST
 			                    data    : { label_text:label_text,type: type}, //Data you are sending
 			                    success : function(data){$('#user_things').html(data)},
@@ -75,7 +65,7 @@ include('insert_a_user_thing_js.php');
 						});
 						
 					//});
-				});
+				});*/
 		</script>
 			
 	</body>
