@@ -6,7 +6,7 @@
 							//define variables..
 							var label_text = $("#label").val();
 							var type = $("#field_type").val();
-							var options = $("#option").val();
+							var options = $("#options").val();
 	
 							 $.ajax({
 			                    url     : 'add_a_user_thing_submit.php', //the url you are sending datas to which will again send the result

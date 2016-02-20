@@ -34,7 +34,8 @@ include('add_a_user_thing_js.php');
   				<div class="row">  	
 					<fieldset>
 					<LEGEND><b>Sample Collection Info</b></LEGEND>
-					<pre>* required field  + required only for dropdown entries<br></pre>
+					<pre>* required field  + required only for dropdown entries 
+						Note: All Numeric Fields Will Be Of Format 000.00</pre>
 			
 						<div class="col-xs-6">
 						<div id="user_things">
@@ -46,11 +47,12 @@ include('add_a_user_thing_js.php');
 						<select id='field_type' name='field_type'>
 							<option value='0'>-Select-</option>
 							<option value='text_input'>Text Input</option>
-							<option value='select'>Dropdown Entry</option>
+							<option value='numeric_input'>Numeric Input</option>
+							<option value='select'>Dropdown</option>
 						</select>
 						
 						<label class="textbox-label">Enter Dropdown Options:+</label>
-						<input type="text" "name="option" id="options" placeholder = "Option1; Option2; Option3" value=""/>
+						<input type="text" "name="options" id="options" placeholder = "Option1; Option2; Option3" value=""/>
 						</div><!--end of div id "user things...is this needed?-->
 						
 					
@@ -61,7 +63,7 @@ include('add_a_user_thing_js.php');
 					</fieldset>
 				</div><!--end of row-->
 			</div><!--end of container fluid-->
-			<input class="button" id="submit" type="button" value="submit"><br>
+			<input class="button" id="submit" type="button" value="Submit"><br>
 		</form>	
 	</body>	
 </html>

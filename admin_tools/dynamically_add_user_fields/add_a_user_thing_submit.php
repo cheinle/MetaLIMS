@@ -11,7 +11,30 @@ try{
 		$p_label_name = htmlspecialchars($_GET['label_text']);
 		$p_type = htmlspecialchars($_GET['type']);
 		$p_select_values = htmlspecialchars($_GET['options']);
-
+		if($p_type != 'select'){
+			$p_select_values = NULL;
+		}
+		else{
+			//format all option entries 
+			//uppercase first letter and lowercase all other letters
+				$pieces = explode(";", $p_select_values);
+				foreach ($pieces as $options) {
+				    ucfirst(strtolower($options));
+					
+				}
+				$p_select_values = implode(";", $pieces);
+		}
+		//format all labels 
+		//uppercase first letter and lowercase all other letters
+		//$pieces_of_label = explode("\s", $p_label_name);
+		$pieces_of_label = preg_split("/\s+/", $p_label_name);
+		function myfunction(&$value,$key){
+			$value = ucfirst(strtolower($value));
+		}
+		array_walk($pieces_of_label,"myfunction");
+		//$p_label_value = implode(";", $pieces_of_label);
+		print_r($pieces_of_label);
+		
 		//get number of things and increment by one
 		$number_of_things = array();
 		$stmt= $dbc->prepare("SELECT thing_id FROM create_user_things");
@@ -38,7 +61,7 @@ try{
 		echo $new_thing_id;
 				
 		//insert data into db. Use prepared statement 
-		$stmt2 = $dbc -> prepare("INSERT INTO create_user_things (thing_id, label_name, type, select_values) VALUES (?,?,?,?)");
+	/*	$stmt2 = $dbc -> prepare("INSERT INTO create_user_things (thing_id, label_name, type, select_values) VALUES (?,?,?,?)");
 		if(!$stmt2){
 			$insert_check = 'false';
 			throw new Exception("Prepare Failure: Unable To Insert Into Main Sample Table");	
@@ -54,13 +77,19 @@ try{
 				$stmt2 -> close();
 			}
 		}
-		
+		*/
 		//double check that thingid  is really just 'thing#'
-		$thing_check_regrex = '/^thing(\d+)$/'; //remove dashes
+	/*	$thing_check_regrex = '/^thing(\d+)$/'; //remove dashes
 		$thing_type_check = preg_match($thing_check_regrex,$new_thing_id);
 		if($thing_type_check == true && $insert_check == 'true'){
+			//check which type of table you have
+			$field_type = 'varchar(150)'; //default
+			if($p_type == 'numeric_insert'){
+				$field_type = 'decimal(5,2)';
+			}
+			
 			//create column in store_user_things
-			$stmt3 = $dbc -> prepare("ALTER TABLE store_user_things ADD $new_thing_id varchar(150)");
+			$stmt3 = $dbc -> prepare("ALTER TABLE store_user_things ADD $new_thing_id $field_type");
 			if(!$stmt3){
 				$insert_check = 'false';
 				throw new Exception("Prepare Failure: Unable To Insert Into Main Sample Table");	
@@ -79,7 +108,7 @@ try{
 		else{
 			$insert_check = 'false';
 		}
-		
+		*/
 				
 		
 		/*****************************************************************************
