@@ -38,7 +38,6 @@ include('add_a_user_thing_js.php');
 						Note: All Numeric Fields Will Be Of Format 000.00</pre>
 			
 						<div class="col-xs-6">
-						<div id="user_things">
 						<label class="textbox-label">Enter Label Name:*</label>
 						<input type="text" "name="label" id="label" Placeholder = "Label Name" value=""/>
 						<br>
@@ -54,12 +53,6 @@ include('add_a_user_thing_js.php');
 						
 						<label class="textbox-label">Enter Dropdown Options:+</label>
 						<input type="text" "name="options" id="options" placeholder = "Option1; Option2; Option3" value=""/>
-						</div><!--end of div id "user things...is this needed?-->
-						
-					
-				
-						<script type="text/javascript">
-						</script>
 						</div><!--end of col-xs-6-->
 					</fieldset>
 				</div><!--end of row-->

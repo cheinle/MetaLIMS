@@ -30,9 +30,9 @@ include('insert_a_user_thing_js.php');
 			
 	?>
 
-		<div id="user_things">User's Things:<br>
+		<!--<div id="user_things">User's Things:<br>
 		
-		</div>
+		</div>-->
 	
 		<input class="button" id="submit" type="button" value="submit"><br>
 		
