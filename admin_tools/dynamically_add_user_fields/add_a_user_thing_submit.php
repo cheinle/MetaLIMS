@@ -11,29 +11,26 @@ try{
 		$p_label_name = htmlspecialchars($_GET['label_text']);
 		$p_type = htmlspecialchars($_GET['type']);
 		$p_select_values = htmlspecialchars($_GET['options']);
+		
+		//formatting function - uppercase first letter and lowercase all other letters
+		function myfunction(&$value,$key){
+			$value = ucfirst(strtolower($value));
+		}
+		
+		//format
 		if($p_type != 'select'){
 			$p_select_values = NULL;
 		}
 		else{
 			//format all option entries 
-			//uppercase first letter and lowercase all other letters
-				$pieces = explode(";", $p_select_values);
-				foreach ($pieces as $options) {
-				    ucfirst(strtolower($options));
-					
-				}
-				$p_select_values = implode(";", $pieces);
+			$pieces = preg_split("/\s+/", $p_select_values);
+			array_walk($pieces,"myfunction");
+			$p_select_values = implode(";", $pieces);
 		}
 		//format all labels 
-		//uppercase first letter and lowercase all other letters
-		//$pieces_of_label = explode("\s", $p_label_name);
 		$pieces_of_label = preg_split("/\s+/", $p_label_name);
-		function myfunction(&$value,$key){
-			$value = ucfirst(strtolower($value));
-		}
 		array_walk($pieces_of_label,"myfunction");
-		//$p_label_value = implode(";", $pieces_of_label);
-		print_r($pieces_of_label);
+		$p_label_value = implode(" ", $pieces_of_label);
 		
 		//get number of things and increment by one
 		$number_of_things = array();
