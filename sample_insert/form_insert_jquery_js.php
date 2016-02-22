@@ -68,6 +68,7 @@
 							$(".things").each(function(){
 								user_things_s[counter] = $(this).val();
 								counter++;
+								alert($(this).val());
 							});
 							
 					

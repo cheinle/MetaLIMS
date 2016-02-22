@@ -45,6 +45,7 @@
 				
 				//user things
 				$p_user_things_varchars = $_GET['user_things_s'];
+				print_r($p_user_things_varchars);
 				//$p_user_things_varchars = array();
 				
 				//for isolates
@@ -440,31 +441,31 @@
 						if(isset($p_user_things_varchars[2])){
 							$thing3 = $p_user_things_varchars[2];
 						}
-						$thing1 = NULL;					
+						$thing4 = NULL;					
 						if(isset($p_user_things_varchars[3])){
 							$thing4 = $p_user_things_varchars[3];
 						}
-						$thing1 = NULL;					
+						$thing5 = NULL;					
 						if(isset($p_user_things_varchars[4])){
 							$thing5 = $p_user_things_varchars[4];
 						}
-						$thing1 = NULL;					
+						$thing6 = NULL;					
 						if(isset($p_user_things_varchars[5])){
 							$thing6 = $p_user_things_varchars[5];
 						}
-						$thing1 = NULL;					
+						$thing7 = NULL;					
 						if(isset($p_user_things_varchars[6])){
 							$thing7 = $p_user_things_varchars[6];
 						}
-						$thing1 = NULL;					
+						$thing8 = NULL;					
 						if(isset($p_user_things_varchars[7])){
 							$thing8 = $p_user_things_varchars[7];
 						}
-						$thing1 = NULL;					
+						$thing9 = NULL;					
 						if(isset($p_user_things_varchars[8])){
 							$thing9 = $p_user_things_varchars[8];
 						}
-						$thing1 = NULL;					
+						$thing10 = NULL;					
 						if(isset($p_user_things_varchars[9])){
 							$thing10 = $p_user_things_varchars[9];
 						}
