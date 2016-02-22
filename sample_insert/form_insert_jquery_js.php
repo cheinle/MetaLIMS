@@ -64,8 +64,10 @@
 							
 							//user things
 							var user_things_s = [];
+							var counter = 0;
 							$(".things").each(function(){
-								user_things_s[] = $(this).val();
+								user_things_s[counter] = $(this).val();
+								counter++;
 							});
 							
 					

@@ -37,11 +37,11 @@
 				$p_dWeather = '0';//removing for now
 				$p_media = htmlspecialchars($_GET['media']);
 				$p_sampling_height = htmlspecialchars($_GET['sampling_height']);
-				$air_samplers = htmlspecialchars($_GET['air_samplers']);
-				$start_dates = htmlspecialchars($_GET['start_dates']);
-				$end_dates = htmlspecialchars($_GET['end_dates']);
-				$start_times = htmlspecialchars($_GET['start_times']);
-				$end_times = htmlspecialchars($_GET['end_times']);
+				$air_samplers = $_GET['air_samplers'];
+				$start_dates = $_GET['start_dates'];
+				$end_dates = $_GET['end_dates'];
+				$start_times = $_GET['start_times'];
+				$end_times = $_GET['end_times'];
 				
 				//user things
 				$p_user_things_varchars = $_GET['user_things_s'];
@@ -429,43 +429,43 @@
 						//$size = size($p_user_things_varchars);
 						//for($x = 0; $x < 10; $x++){
 						$thing1 = NULL;					
-						if($p_user_things_varchars[0]){
+						if(isset($p_user_things_varchars[0])){
 							$thing1 = $p_user_things_varchars[0];
 						}
 						$thing2 = NULL;					
-						if($p_user_things_varchars[1]){
+						if(isset($p_user_things_varchars[1])){
 							$thing2 = $p_user_things_varchars[1];
 						}
 						$thing3 = NULL;					
-						if($p_user_things_varchars[2]){
+						if(isset($p_user_things_varchars[2])){
 							$thing3 = $p_user_things_varchars[2];
 						}
 						$thing1 = NULL;					
-						if($p_user_things_varchars[3]){
+						if(isset($p_user_things_varchars[3])){
 							$thing4 = $p_user_things_varchars[3];
 						}
 						$thing1 = NULL;					
-						if($p_user_things_varchars[4]){
+						if(isset($p_user_things_varchars[4])){
 							$thing5 = $p_user_things_varchars[4];
 						}
 						$thing1 = NULL;					
-						if($p_user_things_varchars[5]){
+						if(isset($p_user_things_varchars[5])){
 							$thing6 = $p_user_things_varchars[5];
 						}
 						$thing1 = NULL;					
-						if($p_user_things_varchars[6]){
+						if(isset($p_user_things_varchars[6])){
 							$thing7 = $p_user_things_varchars[6];
 						}
 						$thing1 = NULL;					
-						if($p_user_things_varchars[7]){
+						if(isset($p_user_things_varchars[7])){
 							$thing8 = $p_user_things_varchars[7];
 						}
 						$thing1 = NULL;					
-						if($p_user_things_varchars[8]){
+						if(isset($p_user_things_varchars[8])){
 							$thing9 = $p_user_things_varchars[8];
 						}
 						$thing1 = NULL;					
-						if($p_user_things_varchars[9]){
+						if(isset($p_user_things_varchars[9])){
 							$thing10 = $p_user_things_varchars[9];
 						}
 						//}
