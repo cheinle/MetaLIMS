@@ -32,13 +32,13 @@ ini_set('display_errors', 1);
 					//$("#submit").click(function() {
 
 							//define variables..
-							var label_text = $("#label").val();
-							var type = 'text_input';
+							//var label_text = $("#label").val();
+							//var type = 'text_input';
 	
 							 $.ajax({
 			                    url     : root+'admin_tools/dynamically_add_user_fields/build_a_thing_submit.php', //the url you are sending datas to which will again send the result
 			                    type    : 'GET', //type of request, GET or POST
-			                    data    : { label_text:label_text,type: type}, //Data you are sending
+			                    data    : { }, //Data you are sending
 			                    success : function(data){$('#user_things').html(data)},
 			                    error   : function(){alert('An Error Has Occurred')} //error message
 

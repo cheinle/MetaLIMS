@@ -37,6 +37,49 @@
 					</script>
 <?php
 					}
+				}
+				if($type == 'select'){
+					if($visible == 1){
+						$select_array = explode(';', $select_values);
+?>
+					<script type="text/javascript">
+					  var thing_id = <?php echo(json_encode(htmlspecialchars($thing_id))); ?>	
+					  var label_text = <?php echo(json_encode(htmlspecialchars($label_name))); ?>	
+					  var label = document.createElement("label");
+					  label.className="textbox-label";
+					  var node = document.createTextNode(label_text+" : ");
+					  label.appendChild(node);
+					  
+					  var select = document.createElement("select");
+					  var array = <?php echo json_encode($select_array); ?>;
+					  array.unshift("-Select-");
+						for (index = 0; index < array.length; ++index) {
+					   		var option = array[index];
+					   		//alert(option);
+							var opt = document.createElement('option');
+							opt.appendChild(document.createTextNode(option));
+							if(option == '-Select-'){
+								opt.value = '0';
+							}
+							else{
+								opt.value = option;
+							}
+							select.appendChild(opt);
+						}	
+				    	select.setAttribute("name", thing_id);
+				    	select.setAttribute("id", thing_id);
+				    	select.setAttribute("class", "things");
+				    	select.setAttribute("value", "");	
+	
+ 						linebreak = document.createElement("br");  
+					
+					 	 var element = document.getElementById("user_things").appendChild(label);
+					  	 document.getElementById("user_things").appendChild(linebreak);
+					 	 document.getElementById("user_things").appendChild(select);
+					 	 document.getElementById("user_things").appendChild(linebreak);
+					</script>
+<?php
+					}
 				}	
 			
 			}

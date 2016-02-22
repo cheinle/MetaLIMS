@@ -195,7 +195,7 @@ if(isset($_GET['submit'])){
 			$stmt -> bind_param('sss', $p_query_basis, $p_smydate , $p_emydate);
 		}
 		else{
-			echo '<script>Alert.render("ERROR: No entries found. Ppppplease check fields");</script>';
+			echo '<script>Alert.render("ERROR: No entries found. Please check fields");</script>';
 			echo '<input action="action" class="btn btn-success" type="button" value="Go Back" onclick="history.go(-1);" />';
 		}
 		
