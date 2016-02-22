@@ -91,7 +91,7 @@ try{
 		}
 		
 		//double check that thingid  is really just 'thing#'
-		$thing_check_regrex = '/^thing(\d+)$/'; //remove dashes
+		/*$thing_check_regrex = '/^thing(\d+)$/'; //remove dashes
 		$thing_type_check = preg_match($thing_check_regrex,$new_thing_id);
 		if($thing_type_check == true && $insert_check == 'true'){
 			//check which type of table you have
@@ -120,7 +120,7 @@ try{
 		else{
 			$insert_check = 'false';
 		}
-		
+		*/
 				
 		
 		/*****************************************************************************

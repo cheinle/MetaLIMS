@@ -37,11 +37,15 @@
 				$p_dWeather = '0';//removing for now
 				$p_media = htmlspecialchars($_GET['media']);
 				$p_sampling_height = htmlspecialchars($_GET['sampling_height']);
-				$air_samplers = $_GET['air_samplers'];
-				$start_dates = $_GET['start_dates'];
-				$end_dates = $_GET['end_dates'];
-				$start_times = $_GET['start_times'];
-				$end_times = $_GET['end_times'];
+				$air_samplers = htmlspecialchars($_GET['air_samplers']);
+				$start_dates = htmlspecialchars($_GET['start_dates']);
+				$end_dates = htmlspecialchars($_GET['end_dates']);
+				$start_times = htmlspecialchars($_GET['start_times']);
+				$end_times = htmlspecialchars($_GET['end_times']);
+				
+				//user things
+				$p_user_things_varchars = $_GET['user_things_s'];
+				//$p_user_things_varchars = array();
 				
 				//for isolates
 				/*$p_iso_coll_temp = htmlspecialchars($_GET['iso_coll_temp']);
@@ -288,7 +292,7 @@
 						}
 						
 						/***************************************************************************************
-						//Insert Air Samplers !!! (must be after insert of sample to db because of key constraints)
+						//Insert Samplers !!! (must be after insert of sample to db because of key constraints)
 						****************************************************************************************/
 						$num_of_air_samplers = $_GET['sampler_num'];
 						
@@ -418,6 +422,75 @@
 								}
 							}
 						}
+						
+						/***************************************************************************************
+						//Insert Admin Created Things
+						****************************************************************************************/
+						//$size = size($p_user_things_varchars);
+						//for($x = 0; $x < 10; $x++){
+						$thing1 = NULL;					
+						if($p_user_things_varchars[0]){
+							$thing1 = $p_user_things_varchars[0];
+						}
+						$thing2 = NULL;					
+						if($p_user_things_varchars[1]){
+							$thing2 = $p_user_things_varchars[1];
+						}
+						$thing3 = NULL;					
+						if($p_user_things_varchars[2]){
+							$thing3 = $p_user_things_varchars[2];
+						}
+						$thing1 = NULL;					
+						if($p_user_things_varchars[3]){
+							$thing4 = $p_user_things_varchars[3];
+						}
+						$thing1 = NULL;					
+						if($p_user_things_varchars[4]){
+							$thing5 = $p_user_things_varchars[4];
+						}
+						$thing1 = NULL;					
+						if($p_user_things_varchars[5]){
+							$thing6 = $p_user_things_varchars[5];
+						}
+						$thing1 = NULL;					
+						if($p_user_things_varchars[6]){
+							$thing7 = $p_user_things_varchars[6];
+						}
+						$thing1 = NULL;					
+						if($p_user_things_varchars[7]){
+							$thing8 = $p_user_things_varchars[7];
+						}
+						$thing1 = NULL;					
+						if($p_user_things_varchars[8]){
+							$thing9 = $p_user_things_varchars[8];
+						}
+						$thing1 = NULL;					
+						if($p_user_things_varchars[9]){
+							$thing10 = $p_user_things_varchars[9];
+						}
+						//}
+						
+						$stmt_things = $dbc -> prepare("INSERT INTO store_user_things (sample_name, thing1,thing2,thing3,thing4,thing5,thing6,thing7,thing8,thing9,thing10) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+						if(!$stmt_things){
+								$insert_check = 'false';
+								throw new Exception("Prepare Failure: Unable to insert user created fields");	
+						}
+						else{
+							$stmt_things -> bind_param('sssssssssss', $p_sample_name,$thing1,$thing2,$thing3,$thing4,$thing5,$thing6,$thing7,$thing8,$thing9,$thing10);
+							if(!$stmt_things-> execute()){
+								$insert_check = 'false';
+								throw new Exception("Execution Failure: Unable to enter user created fields.");	
+							}
+							else{
+								$rows_affected_things = $stmt_things ->affected_rows;
+								$stmt_things -> close();
+								if($rows_affected_things< 0){
+									$insert_check = 'false';
+									throw new Exception("Unable to insert sample into Sequence Number Submission table");	
+								}
+							}
+						}
+						
 						/*****************************************************************************
 						 * Do One Last Check And Commit If You Had No Errors
 						 * ***************************************************************************/

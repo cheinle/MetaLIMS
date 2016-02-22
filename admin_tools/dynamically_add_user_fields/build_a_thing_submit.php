@@ -20,8 +20,13 @@
 					  label.appendChild(node);
 					  
 					  var newInput = document.createElement("input");
-					  newInput.type="text";
-					  newInput.name= thing_id;
+					  //newInput.type="text";
+					  //newInput.name= thing_id;
+					  newInput.setAttribute("type", "text");
+				      newInput.setAttribute("name", thing_id);
+				      newInput.setAttribute("id", thing_id);
+				      newInput.setAttribute("value", "");
+				      newInput.setAttribute("class", "things");
 						
 					  var linebreak = document.createElement("br");  
 					

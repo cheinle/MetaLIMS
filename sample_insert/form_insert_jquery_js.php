@@ -61,7 +61,13 @@
 							var end_dates = [];
 							var start_times = [];
 							var end_times = [];
-					
+							
+							//user things
+							var user_things_s = [];
+							$(".things").each(function(){
+								user_things_s[] = $(this).val();
+							});
+							
 					
 							for ( var x = 1; x <= sampler_num; x++) {
 									var airSampler = $("#airSamp"+x).val();
@@ -130,11 +136,14 @@
 								start_dates : start_dates,
 								end_dates : end_dates,
 								start_times: start_times,
-								end_times: end_times
+								end_times: end_times,
+								
+								//user things
+								user_things_s: user_things_s
 
 			                    }, //Data you are sending
-			                     success : function(data){alert("\t"+'Success!'+"\n"+'Inserted Sample Number : '+sample_number+"\n"+'For Project: '+projName)}, 
-			                    //success : function(data){alert(data)}, 
+			                    //success : function(data){alert("\t"+'Success!'+"\n"+'Inserted Sample Number : '+sample_number+"\n"+'For Project: '+projName)}, 
+			                    success : function(data){alert(data)}, 
 			                    error   : function(){alert('An Error Has Occurred')} //error message
 			                })
 							}

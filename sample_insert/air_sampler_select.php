@@ -28,7 +28,7 @@
 	for ($x = 1; $x <= $num_air_samplers; $x++) {
 
     	echo "<p>";
-		echo "<label class='textbox-label-sampler'>Air Sampler #".$x.":*</label>";
+		echo "<label class='textbox-label-sampler'>Sampler #".$x.":*</label>";
 		echo "<select id='airSamp".$x."' name='airSamp".$x."'>";
 		echo "<option value='0'>-Select-</option>";
 		$stmt[$x] = $dbc->prepare("SELECT sampler_name FROM sampler");
