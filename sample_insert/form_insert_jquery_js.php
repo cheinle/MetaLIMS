@@ -64,11 +64,17 @@
 							
 							//user things
 							var user_things_s = [];
-							var counter = 0;
+							//var counter = 0;
 							$(".things").each(function(){
-								user_things_s[counter] = $(this).val();
-								counter++;
-								alert($(this).val());
+								var id = this.id;
+								console.log("id"+id);
+								var myString = id;
+								var myRegexp = /^thing(\d+)$/;
+								var match = myRegexp.exec(myString);
+								var index = match[1];
+								user_things_s[index] = $(this).val();
+								//counter++;
+								
 							});
 							
 					

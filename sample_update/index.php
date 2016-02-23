@@ -5,7 +5,8 @@ if(!isset($_SESSION['username'])){
 	session_start();
 	//This would delete all the session keys
 	session_destroy(); 
-	header('Location:'.$path.'login.php');
+	//header('Location:'.$path.'login.php');
+	header('Location: ../login.php');
 	exit();
 }
 ?>
