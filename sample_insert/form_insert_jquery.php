@@ -393,7 +393,6 @@ include('form_insert_jquery_js.php');
 					<fieldset>
 					<LEGEND><b>User Created Fields</b></LEGEND>
 						<div class="col-xs-6">
-							<i>Coming Soon</i>
 							<div id="required_things">
 								
 							</div>

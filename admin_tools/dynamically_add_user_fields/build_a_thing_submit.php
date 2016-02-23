@@ -17,8 +17,7 @@
 					  	var label = document.createElement("label");
 					  	var linebreak = document.createElement("br"); 
 					  	label.className="textbox-label";
-					  	var node = document.createTextNode(label_text+" : ");
-					  	label.appendChild(node);
+					  	
 					  
 					  	var newInput = document.createElement("input");
 					  	//newInput.type="text";
@@ -31,12 +30,15 @@
 					  	var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						 
 						if(required == 'Y'){
+						  var node = document.createTextNode(label_text+" :*");
+					  	  label.appendChild(node);
 						  var required_element = document.getElementById("required_things").appendChild(label);
 						  document.getElementById("required_things").appendChild(linebreak);
 						  document.getElementById("required_things").appendChild(newInput);
 						  document.getElementById("required_things").appendChild(linebreak);
 						}else{
-						
+						  var node = document.createTextNode(label_text+" : ");
+					  	 label.appendChild(node);
 						  var element = document.getElementById("user_things").appendChild(label);
 						  document.getElementById("user_things").appendChild(linebreak);
 						  document.getElementById("user_things").appendChild(newInput);
@@ -56,8 +58,7 @@
 					  var label = document.createElement("label");
 					  var linebreak = document.createElement("br"); 
 					  label.className="textbox-label";
-					  var node = document.createTextNode(label_text+" : ");
-					  label.appendChild(node);
+					  
 					  
 					  var select = document.createElement("select");
 					  var array = <?php echo json_encode($select_array); ?>;
@@ -68,7 +69,7 @@
 							var opt = document.createElement('option');
 							opt.appendChild(document.createTextNode(option));
 							if(option == '-Select-'){
-								opt.value = '';
+								opt.value = '0';
 							}
 							else{
 								opt.value = option;
@@ -81,11 +82,16 @@
 				    	select.setAttribute("value", "");	
 						var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						if(required == 'Y'){
+							var node = document.createTextNode(label_text+" :*");
+					  		label.appendChild(node);
 							var element = document.getElementById("required_things").appendChild(label);
 					  	 	document.getElementById("required_things").appendChild(linebreak);
 					 	 	document.getElementById("required_things").appendChild(select);
 					 	 	document.getElementById("required_things").appendChild(linebreak);
+					 	 	
 						}else{
+							var node = document.createTextNode(label_text+" : ");
+					  		label.appendChild(node);
 							var element = document.getElementById("user_things").appendChild(label);
 					  	 	document.getElementById("user_things").appendChild(linebreak);
 					 	 	document.getElementById("user_things").appendChild(select);
