@@ -170,7 +170,10 @@
 				   }
 				   if(check_form_required() == 'false'){
 				    	valid = 'false';
-				   }	
+				   }
+				   if(check_required_user_things() == 'false'){
+				    	valid = 'false';
+				   }		
 				   check_sample_name_insert();
 				   if(name_check == 'false'){
 				   		alert('Sample Name Not Valid. Please Check Project Name And Sample Number');

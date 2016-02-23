@@ -5,6 +5,7 @@ include ('../database_connection.php');
 include ('../index.php');
 include('../config/check_form_insert_js.php');
 include('../config/check_sample_name.php');
+include('../config/check_required_user_things_js.php');
 include('../admin_tools/dynamically_add_user_fields/build_a_user_thing.php');
 include('form_insert_jquery_js.php');
 ?>
@@ -393,7 +394,12 @@ include('form_insert_jquery_js.php');
 					<LEGEND><b>User Created Fields</b></LEGEND>
 						<div class="col-xs-6">
 							<i>Coming Soon</i>
-							<div id="user_things"></div>
+							<div id="required_things">
+								
+							</div>
+							<div id="user_things">
+								
+							</div>
 						</div>
 					</fieldset>
 					</div><!--end fragment-5-->
