@@ -430,54 +430,74 @@
 						//$size = size($p_user_things_varchars);
 						//for($x = 0; $x < 10; $x++){
 						$thing1 = NULL;					
-						if(isset($p_user_things_varchars[0])){
-							$thing1 = $p_user_things_varchars[0];
+						if(isset($p_user_things_varchars[1])){
+							$thing1 = $p_user_things_varchars[1];
 						}
 						$thing2 = NULL;					
-						if(isset($p_user_things_varchars[1])){
-							$thing2 = $p_user_things_varchars[1];
+						if(isset($p_user_things_varchars[2])){
+							$thing2 = $p_user_things_varchars[2];
 						}
 						$thing3 = NULL;					
-						if(isset($p_user_things_varchars[2])){
-							$thing3 = $p_user_things_varchars[2];
+						if(isset($p_user_things_varchars[3])){
+							$thing3 = $p_user_things_varchars[3];
 						}
 						$thing4 = NULL;					
-						if(isset($p_user_things_varchars[3])){
-							$thing4 = $p_user_things_varchars[3];
+						if(isset($p_user_things_varchars[4])){
+							$thing4 = $p_user_things_varchars[4];
 						}
 						$thing5 = NULL;					
-						if(isset($p_user_things_varchars[4])){
-							$thing5 = $p_user_things_varchars[4];
+						if(isset($p_user_things_varchars[5])){
+							$thing5 = $p_user_things_varchars[5];
 						}
 						$thing6 = NULL;					
-						if(isset($p_user_things_varchars[5])){
-							$thing6 = $p_user_things_varchars[5];
+						if(isset($p_user_things_varchars[6])){
+							$thing6 = $p_user_things_varchars[6];
 						}
 						$thing7 = NULL;					
-						if(isset($p_user_things_varchars[6])){
-							$thing7 = $p_user_things_varchars[6];
+						if(isset($p_user_things_varchars[7])){
+							$thing7 = $p_user_things_varchars[7];
 						}
 						$thing8 = NULL;					
-						if(isset($p_user_things_varchars[7])){
-							$thing8 = $p_user_things_varchars[7];
+						if(isset($p_user_things_varchars[8])){
+							$thing8 = $p_user_things_varchars[8];
 						}
 						$thing9 = NULL;					
-						if(isset($p_user_things_varchars[8])){
-							$thing9 = $p_user_things_varchars[8];
+						if(isset($p_user_things_varchars[9])){
+							$thing9 = $p_user_things_varchars[9];
 						}
 						$thing10 = NULL;					
-						if(isset($p_user_things_varchars[9])){
-							$thing10 = $p_user_things_varchars[9];
+						if(isset($p_user_things_varchars[10])){
+							$thing10 = $p_user_things_varchars[10];
+						}
+						$thing11 = NULL;					
+						if(isset($p_user_things_varchars[11])){
+							$thing11 = $p_user_things_varchars[11];
+						}
+						$thing12 = NULL;					
+						if(isset($p_user_things_varchars[12])){
+							$thing12 = $p_user_things_varchars[12];
+						}
+						$thing13 = NULL;					
+						if(isset($p_user_things_varchars[13])){
+							$thing13 = $p_user_things_varchars[13];
+						}
+						$thing14 = NULL;					
+						if(isset($p_user_things_varchars[14])){
+							$thing14 = $p_user_things_varchars[14];
+						}
+						$thing15 = NULL;					
+						if(isset($p_user_things_varchars[15])){
+							$thing15 = $p_user_things_varchars[15];
 						}
 						//}
 						
-						$stmt_things = $dbc -> prepare("INSERT INTO store_user_things (sample_name, thing1,thing2,thing3,thing4,thing5,thing6,thing7,thing8,thing9,thing10) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+						$stmt_things = $dbc -> prepare("INSERT INTO store_user_things (sample_name, thing1,thing2,thing3,thing4,thing5,thing6,thing7,thing8,thing9,thing10,thing11,thing12,thing13,thing14,thing15) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 						if(!$stmt_things){
 								$insert_check = 'false';
 								throw new Exception("Prepare Failure: Unable to insert user created fields");	
 						}
 						else{
-							$stmt_things -> bind_param('sssssssssss', $p_sample_name,$thing1,$thing2,$thing3,$thing4,$thing5,$thing6,$thing7,$thing8,$thing9,$thing10);
+							$stmt_things -> bind_param('sssssssssssiiiii', $p_sample_name,$thing1,$thing2,$thing3,$thing4,$thing5,$thing6,$thing7,$thing8,$thing9,$thing10,$thing11,$thing12,$thing13,$thing14,$thing15);
 							if(!$stmt_things-> execute()){
 								$insert_check = 'false';
 								throw new Exception("Execution Failure: Unable to enter user created fields.");	

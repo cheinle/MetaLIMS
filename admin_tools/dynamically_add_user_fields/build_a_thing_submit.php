@@ -8,7 +8,7 @@
 		if ($stmt->execute()){
 			$stmt->bind_result($label_name,$type,$select_values,$thing_id,$visible);
 			while ($stmt->fetch()) {
-				if($type == 'text_input'){
+				if($type == 'text_input' || $type == 'numeric_input'){
 					if($visible == 1){
 ?>
 					<script type="text/javascript">

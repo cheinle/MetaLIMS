@@ -48,8 +48,11 @@ try{
 		$p_label_name = implode(" ", $pieces_of_label);
 		
 		//get number of things and increment by one
-		$number_of_things = array();
+		//$number_of_things = array();
 		$stmt= $dbc->prepare("SELECT thing_id FROM create_user_things");
+		
+		$check_number_of_numeric = array();
+		$check_number_of_varchars = array();
 		if ($stmt->execute()){
 	    	$stmt->bind_result($thing_id);
 	    	while ($stmt->fetch()){
@@ -57,7 +60,13 @@ try{
 				#echo $thing_id;
 				$regrex_check = '/^thing(\d+)$/'; //remove dashes
 				preg_match($regrex_check,$thing_id,$matches);
-	        	$number_of_things[] = $matches[1];
+	        	//$number_of_things[] = $matches[1];
+	        	if($matches[1] < 11 AND $matches[1] > 0){
+	        		$check_number_of_varchars[] = $matches[1];
+	        	}
+				if($matches[1] < 16 AND $matches[1] > 10){
+					$check_number_of_numeric[] = $matches[1];
+				}
 			}
 		} 
 		else {
@@ -65,8 +74,24 @@ try{
 		}
 		$stmt -> close();
 		
-		sort($number_of_things);
-		$last_element = end($number_of_things);
+		//sort($number_of_things);
+		//$last_element = end($number_of_things);
+		$last_element = '';
+		if($p_type == 'numeric_input'){
+			sort($check_number_of_numeric);
+			$last_element = end($check_number_of_numeric);
+			
+			if($last_element > 15){
+				throw new Exception("Indexing is out of range. Unable to add more numeric fields. Max input fields is 5");	
+			}
+		}else{
+			sort($check_number_of_varchars);
+			$last_element = end($check_number_of_varchars);
+			if($last_element > 10){
+				throw new Exception("Indexing is out of range. Unable to add more input fields. Max input fields 10");	
+			}
+		}
+
 		$new_thing_id = $last_element + 1;
 		$new_thing_id = 'thing'.$new_thing_id;
 		#print_r($number_of_things);
