@@ -529,7 +529,8 @@
 					catch (Exception $e) { 
 						if (isset ($dbc)){
        	 					$dbc->rollback ();
-       						echo "Error:  " . $e; 
+       						//echo "Error:  " . $e;
+       						header('HTTP/1.0 400 Bad error'); 
     					}	
 					}
 			}

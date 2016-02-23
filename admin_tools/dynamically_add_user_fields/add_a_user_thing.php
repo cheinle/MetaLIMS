@@ -53,6 +53,14 @@ include('add_a_user_thing_js.php');
 						
 						<label class="textbox-label">Enter Dropdown Options:+</label>
 						<input type="text" "name="options" id="options" placeholder = "Option1; Option2; Option3" value=""/>
+						
+						<label class="textbox-label">Is Field Required?:*</label>
+						<select id='required' name='required'>
+							<option value='0'>-Select-</option>
+							<option value='Y'>Yes</option>
+							<option value='N'>No</option>
+						</select>
+						
 						</div><!--end of col-xs-6-->
 					</fieldset>
 				</div><!--end of row-->

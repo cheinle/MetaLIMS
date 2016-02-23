@@ -11,7 +11,8 @@ try{
 		$p_label_name = htmlspecialchars($_GET['label_text']);
 		$p_type = htmlspecialchars($_GET['type']);
 		$p_select_values = htmlspecialchars($_GET['options']);
-		
+		$p_required = htmlspecialchars($_GET['required']);
+	
 		//formatting function - uppercase first letter and lowercase all other letters
 		function myfunction(&$value,$key){
 			$value = ucfirst(strtolower($value));
@@ -98,13 +99,13 @@ try{
 		#echo $new_thing_id;
 				
 		//insert data into db. Use prepared statement 
-		$stmt2 = $dbc -> prepare("INSERT INTO create_user_things (thing_id, label_name, type, select_values) VALUES (?,?,?,?)");
+		$stmt2 = $dbc -> prepare("INSERT INTO create_user_things (thing_id, label_name, type, select_values,required) VALUES (?,?,?,?,?)");
 		if(!$stmt2){
 			$insert_check = 'false';
 			throw new Exception("Prepare Failure: Unable To Insert Into Main Sample Table");	
 		}
 		else{
-			$stmt2 -> bind_param('ssss', $new_thing_id,$p_label_name,$p_type,$p_select_values);
+			$stmt2 -> bind_param('sssss', $new_thing_id,$p_label_name,$p_type,$p_select_values,$p_required);
 			if(!$stmt2 -> execute()){
 				$insert_check = 'false';
 				throw new Exception("Execution Failure: Unable To Insert Into Main Sample Table");
@@ -164,7 +165,8 @@ try{
 catch (Exception $e) { 
 		if (isset ($dbc)){
        	 	$dbc->rollback ();
-       		echo "Error:  " . $e; 
+       		//echo "Error:  " . $e; 
+       		header('HTTP/1.0 400 Bad error');
     	}	
 }
 ?>
