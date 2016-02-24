@@ -1,38 +1,34 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include('database_connection.php'); 
+include('../database_connection.php'); 
+
 #include('index.php');
 ////choose which files to include depending on if you are exporting an xls or not.
 //xls cannot include the index file because it will send headers too early (and the wrong ones)
-if((isset($_GET['db_content'])) && ($_GET['db_content'] == 'xls' || $_GET['db_content'] == 'xls_isolates')){
-	include('functions/build_xls_output_table.php');
+if((isset($_GET['db_content'])) && ($_GET['db_content'] == 'xls')){
+	include('../functions/build_xls_output_table.php');
 }
 elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_dna')){
-	include('index.php');
-	include('functions/build_bulk_dna_table.php');
+	include('../index.php');
+	include('../functions/build_bulk_dna_table.php');
 }
 elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_storage')){
-	include('index.php');
-	include('functions/build_bulk_storage_update_table.php');
-}
-elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'seq_sub')){
-	include('index.php');
-	include('functions/build_bulk_seqSub_table.php');
-
+	include('../index.php');
+	include('../functions/build_bulk_storage_update_table.php');
 }
 elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'read_sub')){
-	include('index.php');
-	include('functions/build_bulk_read_sub_id_table.php');
+	include('../index.php');
+	include('../functions/build_bulk_read_sub_id_table.php');
 }
 elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'update_read_sub')){
-	include('index.php');
-	include('functions/build_bulk_read_sub_id_update_table.php');
+	include('../index.php');
+	include('../functions/build_bulk_read_sub_id_update_table.php');
 }
 else{
-	include('index.php');
-	include('functions/build_table.php');
-	include('functions/basic_build_table.php');
+	include('../index.php');
+	include('../functions/build_table.php');
+	include('../functions/basic_build_table.php');
 
 }
 ?>
@@ -42,8 +38,8 @@ else{
 <head>
 <title>Query Results</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="freeze/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="freeze/dataTables.bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../aquired/freeze/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../aquired/freeze/dataTables.bootstrap.css">
 	<style type="text/css" class="init">
 	body { font-size: 140%; }
 	div.dataTables_wrapper {
@@ -55,10 +51,10 @@ else{
 		/*height: 90%;*/
 	}
 	</style>
-	<script type="text/javascript" language="javascript" src="freeze/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="freeze/jquery.dataTables.js"></script>
-	<script type="text/javascript" language="javascript" src="freeze/dataTables.fixedColumns.js"></script>
-	<script type="text/javascript" language="javascript" src="freeze/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" language="javascript" src="../aquired/freeze/jquery.js"></script>
+	<script type="text/javascript" language="javascript" src="../aquired/freeze/jquery.dataTables.js"></script>
+	<script type="text/javascript" language="javascript" src="../aquired/freeze/dataTables.fixedColumns.js"></script>
+	<script type="text/javascript" language="javascript" src="../aquired/freeze/dataTables.bootstrap.js"></script>
 	<script type="text/javascript" language="javascript" class="init">
 		$(document).ready(function() {
 			var table = $('#example').DataTable( {
@@ -88,8 +84,8 @@ else{
 <?php
 
 if(isset($_GET['submit'])){
-	include('functions/check_box_tables_output.php');
-	include('functions/white_list.php');
+	include('../functions/check_box_tables_output.php');
+	include('../functions/white_list.php');
 	
 	$submit = $_GET['submit'];
 	
@@ -151,24 +147,6 @@ if(isset($_GET['submit'])){
 		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'view_read_sub' || $_GET['db_content'] == 'update_read_sub')){
 			$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name WHERE ";
 		}
-		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'isolates' || $_GET['db_content'] == 'xls_isolates')){
-			$query_main = "SELECT 
-			sample.sample_name,
-			sample.sample_sort,
-			sample.collector_name,
-			sample.start_samp_date_time,
-			sample.sample_type,
-			sample.location_name,
-			isolates.loc_type,
-			sample.media_type,
-			isolates.iso_coll_temp,
-			isolates.iso_date,
-			isolates.iso_store_method,
-			isolates.seq_sang,
-			isolates.closest_hit,
-			isolates.send_pac_bio
-			FROM sample JOIN isolates ON isolates.sample_name = sample.sample_name WHERE (sample.sample_type = 'F' OR sample.sample_type = 'BC') AND ";
-		}
 		else{
 			//add new sampler table
 			$query_main = "SELECT $field_names FROM sample JOIN sample_sampler ON sample_sampler.sample_name  = sample.sample_name WHERE";
@@ -202,22 +180,17 @@ if(isset($_GET['submit'])){
 		
 	
 
-		if(isset($_GET['db_content']) && ($_GET['db_content'] == 'xls' || $_GET['db_content'] == 'xls_isolates')){
+		if(isset($_GET['db_content']) && ($_GET['db_content'] == 'xls')){
 			build_xls_output_table($stmt);
 		}
-		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'xls' || $_GET['db_content'] == 'isolates')){
-			basic_build_table($stmt,'display');
+		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'xls')){
+			basic_build_table($stmt,'display',$root);
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
 			build_bulk_dna_table($stmt,$root);
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_storage'){
 			build_bulk_storage_update_table($stmt,$root);
-		}
-		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'seq_sub'){
-			echo '<script>Alert.render("ERROR:Current Page Under Construction.");</script>';
-			echo '<input action="action" style = "float: left"class="button" type="button" value="Go Back" onclick="history.go(-1);" />';
-			//build_bulk_seqSub_table($stmt);
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
 			build_bulk_read_sub_id_table($stmt,$root);
@@ -263,21 +236,12 @@ if(isset($_GET['submit'])){
 			echo "</body>";
 			echo "</html>";
 		}
-		/*//depricated
-		 * if($_GET['db_content']=='daily_data_all'){
-			$sdate = htmlspecialchars($_GET['sdate']);
-			$edate = htmlspecialchars($_GET['edate']);
-			//$stmt = $dbc->prepare("SELECT daily_data2_particle_counter.daily_date,daily_data2_particle_counter.part_sens_name,daily_data2_particle_counter.start_time,daily_data2_particle_counter.end_time,daily_data2.temp,daily_data2.hum,daily_data2.co2,daily_data2.rain,daily_data2.notes,daily_data2.entered_by,daily_data2.updated_by,daily_data2.update_timestamp FROM daily_data2_particle_counter LEFT JOIN daily_data2 ON (daily_data2_particle_counter.daily_date = daily_data2.daily_date) WHERE daily_data2_particle_counter.daily_date BETWEEN (?) AND (?)");
-			$stmt = $dbc->prepare("SELECT * FROM daily_data2 JOIN daily_data2_particle_counter ON daily_data2.daily_date = daily_data2_particle_counter.daily_date");
-			
-			$stmt -> bind_param('ss', $sdate,$edate);
-			build_table($stmt);
-		}
-		*/
+		
 		// samplers
 		if($_GET['db_content']=='sampler_all'){
-			$stmt = $dbc->prepare("SELECT * FROM air_sampler");
-	    	build_table($stmt,'display');
+			$stmt = $dbc->prepare("SELECT * FROM sampler");
+	    	//build_table($stmt,'display');
+	    	basic_build_table($stmt,'display',$root);
 		}
 		
 		//sensors

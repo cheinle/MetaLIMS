@@ -1,7 +1,7 @@
 <?php
-	include ('index.php');
-	include ('database_connection.php');
-	include_once("functions/unset_session_vars.php");
+	include ('../../index.php');
+	include ('../../database_connection.php');
+	include_once("../../functions/unset_session_vars.php");
 	
 	$error = 'false';
     $sample_array=$_POST['sample_names'];
@@ -47,7 +47,8 @@
 		echo '<script>Alert.render("ERROR: Please Notify Admin");</script>';
 	}
 	
-
+	echo "<div class='page-header'><h3>Storage Bulk Update</h3></div>";
+	echo "<div class= border>";
 	//if there are no errors, proceed to update the samples choosen
 	if($error == 'false'){
 		echo 'Samples Updated:<br>';
@@ -72,12 +73,12 @@
 	
 						$stmt_si -> execute();
 						$rows_affected_si = $stmt_si ->affected_rows;
-						if($rows_affected_si > 0){
+						if($rows_affected_si >= 0){
 							echo 'SUCCESS: Updated '.$p_sample_name.' in storage info <br>';	
 						}
-						elseif($rows_affected_si == 0){
+						/*elseif($rows_affected_si == 0){
 							echo "No Update Needed for ".$p_sample_name.'<br>';
-						}
+						}*/
 						else{
 							throw new Exception('An Error Has Occurred In Storing Storage Info For '.$p_sample_name);
 						}
@@ -92,9 +93,11 @@
 					throw new Exception("ERROR: Sample ".$p_sample_name." Does Not Exist In Storage Info. Please See Admin");
 				}
 			}
+		
 			$dbc->commit();
 			unset_session_vars('bulk_storage_update');	
 			echo '<p><input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" /></p>';
+			echo "</div>";
 		}
 		catch (Exception $e) { 
     		if (isset ($dbc)){

@@ -1,8 +1,8 @@
 <?php
-	include ('index.php');
-	include ('database_connection.php');
-	include ('functions/text_insert_update_storage_info.php');
-	include_once("functions/unset_session_vars.php");
+	include ('../../../index.php');
+	include ('../../../database_connection.php');
+	include ('../../../functions/text_insert_update_storage_info.php');
+	include_once("../../../functions/unset_session_vars.php");
 	
     //sample names
 	//id
@@ -52,7 +52,8 @@
 		echo '<script>Alert.render("ERROR: Type Of Experiment Submitted Not Entered.");</script>';
 	}
 	
-
+	echo "<div class='page-header'><h3>Read Submission Bulk Insert</h3></div>";
+	echo "<div class= border>";
 	//if there are no errors, proceed to update the samples choosen
 	$insert_error = 'false';
 	if($error == 'false'){
@@ -96,6 +97,8 @@
 			if($insert_error == 'false'){
 				$dbc->commit();
 				unset_session_vars('bulk_read_insert');
+				echo '<p><input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" /></p>';
+				echo "</div>";
 			}
 			
 		}

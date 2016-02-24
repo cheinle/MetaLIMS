@@ -10,7 +10,7 @@ include('convert_time.php');
 	include($path.'/functions/dropDown_update_for_read_subm.php');
 	include($path.'/config/js.php');
 	
-	echo '<form class="bulk" onsubmit="return confirm(\'Do you want to submit the form?\');" action="read_sub_bulk_update.php" method="POST">';
+	echo '<form class="bulk" onsubmit="return confirm(\'Do you want to submit the form?\');" action="bulk_insert_and_updates/read_submission/read_sub_bulk_update.php" method="POST">';
 	echo '<div>';
 	echo '<pre>';
 	echo '*Notice: Bulk Update will update all samples that have been checkmarked for Update/Delete';

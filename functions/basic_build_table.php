@@ -1,41 +1,13 @@
 <?php	
 
 //display table
-function basic_build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
-	include('convert_time.php');
-	include('convert_header_names.php');
-	include('find_air_samplers.php');
-	?>
-	<!--<table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
-	<thead>
-		<tr>
-			<th>A</th>
-			<th>B</th>
-			<th>C</th>
-			<th>D</th>
-			<th>E</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>A</td>
-			<td>B</td>
-			<td>C</td>
-			<td>D</td>
-			<td>E</td>
-		</tr>
-		<tr>
-			<td>A</td>
-			<td>B</td>
-			<td>C</td>
-			<td>D</td>
-			<td>E</td>
-		</tr>
-	</tbody>
-</table>-->
-	<?php
-	
+function basic_build_table($stmt,$table_type,$root){ //table types are 'dislapy' and 'xls'
 
+	$path = $_SERVER['DOCUMENT_ROOT'].$root;
+	include($path.'functions/convert_time.php');
+	include($path.'functions/convert_header_names.php');
+	include($path.'functions/find_samplers.php');
+	
 	if ($stmt->execute()){
 	 			
 			    if($stmt->fetch()){

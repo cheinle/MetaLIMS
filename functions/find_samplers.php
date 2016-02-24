@@ -1,7 +1,7 @@
 <?php	
 function find_samplers($sample_name,$table_type){ 
 	//2015/09/02test_projectA109
-	include('config/path.php');
+	include('../config/path.php');
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	include($path.'database_connection.php');
 	

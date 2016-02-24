@@ -1,26 +1,12 @@
 <?php
-	include ('index.php');
-	include ('database_connection.php');
-	#include ('functions/text_insert_update_storage_info.php');
-	include_once("functions/unset_session_vars.php");
+	include ('../../../index.php');
+	include ('../../../database_connection.php');
+	include_once("../../../functions/unset_session_vars.php");
 	
 	$sample_array=$_POST['sample'];
 
-	
-	//store get variables into session variables so you can use them on your back button
-	////seems to be working on back button without setting these
-	/*$_SESSION['sample_array']['submitted'] = 'false';
-	$_SESSION['sample_array']['date_submitted'] = $p_date;
-	$_SESSION['sample_array']['sample_array'] = $sample_array;
-	$_SESSION['sample_array']['subm_date'] = $p_date;
-	$_SESSION['sample_array']['submitter'] = $p_submitter;
-	$_SESSION['sample_array']['subm_db'] = $p_db;
-	$_SESSION['sample_array']['type_of_experiment'] = $p_experiment_type;
-	
-	*/
-	/////
-	
-	
+	echo "<div class='page-header'><h3>Read Submission Bulk Update</h3></div>";
+	echo "<div class= border>";
 	//if there are no errors, proceed to update the samples choosen
 	$insert_error = 'false';
 		echo 'Samples Updated:<br>';
@@ -30,11 +16,9 @@
 			$dbc->autocommit(FALSE);
 			$update_delete_error = 'false';
 			foreach($sample_array as $sample_name => $subm_id){
-				#print_r($subm_id);
 				$p_sample_name = htmlspecialchars($sample_name);
 				$p_subm_id = $subm_id['id'];
 				$old_id = $_SESSION[$p_sample_name]['old_id'];//test
-				#echo $old_id;
 				
 				$explode = explode(",",$sample_name);
 				$p_sample_name = $explode[0];
@@ -44,8 +28,7 @@
 					$p_submitter= htmlspecialchars($subm_id['submitter']);
 					$p_db= htmlspecialchars($subm_id['subm_db']);
 					$p_experiment_type= htmlspecialchars($subm_id['type_of_experiement']);
-					#echo $p_date.'<br>'.$p_db.'<br>'.$p_submitter.'<br>'.$p_experiment_type.'<br>';
-					
+
 					//check that fields have been set
 					if($p_date == ''){
 						echo '<script>Alert.render("ERROR: Date Not Entered.");</script>';
@@ -111,17 +94,15 @@
 					}
 					$stmt_d->close();
 					
-				}
-				else{
-					#echo "Noting To Do For:".$p_sample_name.'<br>';
-				}
-				
+				}		
 					
 			}
 			if($update_delete_error == 'false'){
 				$dbc->commit();
 				unset_session_vars('bulk_read_insert');
-				echo '<p><input action="action" class="btn btn-success" type="button" value="Go Back" onclick="history.go(-1);" /></p>';
+			
+				echo '<p><input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" /></p>';
+				echo '</div>';	
 			}
 			
 		}

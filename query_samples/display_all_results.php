@@ -1,7 +1,7 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include('database_connection.php'); 
+include('../database_connection.php'); 
 ?>
 
 <!doctype html>
@@ -10,10 +10,8 @@ include('database_connection.php');
 	<meta charset="utf-8">
 	<title>Query All Results</title>
 
-	<link rel="stylesheet" type="text/css" href="freeze/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="freeze/dataTables.bootstrap.css">
-	<!--<link rel="stylesheet" type="text/css" href="freeze/shCore.css">
-	<link rel="stylesheet" type="text/css" href="freeze/demo.css">-->
+	<link rel="stylesheet" type="text/css" href="../aquired/freeze/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../aquired/freeze/dataTables.bootstrap.css">
 	<style type="text/css" class="init">
 
 	body { font-size: 140%; }
@@ -26,12 +24,10 @@ include('database_connection.php');
 	}
 
 	</style>
-	<script type="text/javascript" language="javascript" src="freeze/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="freeze/jquery.dataTables.js"></script>
-	<script type="text/javascript" language="javascript" src="freeze/dataTables.fixedColumns.js"></script>
-	<script type="text/javascript" language="javascript" src="freeze/dataTables.bootstrap.js"></script>
-	<!--<script type="freeze/shCore.js"></script>
-	<script type="text/javascript" language="javascript" src="freeze/demo.js"></script>-->
+	<script type="text/javascript" language="javascript" src="../aquired/freeze/jquery.js"></script>
+	<script type="text/javascript" language="javascript" src="../aquired/freeze/jquery.dataTables.js"></script>
+	<script type="text/javascript" language="javascript" src="../aquired/freeze/dataTables.fixedColumns.js"></script>
+	<script type="text/javascript" language="javascript" src="../aquired/freeze/dataTables.bootstrap.js"></script>
 	<script type="text/javascript" language="javascript" class="init">
 
 
@@ -51,7 +47,7 @@ $(document).ready(function() {
 
  
 <body class="dt-example">
-<?php include('index.php'); ?>
+<?php include('../index.php'); ?>
 <pre>
 	<h3>Display DB</h3>
 </pre>

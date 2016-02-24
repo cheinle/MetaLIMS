@@ -2,14 +2,14 @@
 
 //display table
 function build_bulk_dna_table($stmt,$root){
+	$path = $_SERVER['DOCUMENT_ROOT'].$root;		
 	include('convert_time.php');
 	include('convert_header_names.php');
 	include('text_insert_update.php');
 	include('dropDown.php');
-	$path = $_SERVER['DOCUMENT_ROOT'].$root;
-	include($path.'/config/js.php'); //was not being inherited correctly...just added here for now
+	include($path.'/config/js.php');
 	
-	echo '<form class="registration" onsubmit="return confirm(\'Do you want to submit the form?\');" action="dna_bulk_update.php" method="POST">';
+	echo '<form class="registration" onsubmit="return confirm(\'Do you want to submit the form?\');" action="bulk_insert_and_updates/dna_bulk_update.php" method="POST">';
 	//echo '<div class = \'left\'>';
 	echo '<div>';
 	echo '<pre>';
@@ -173,17 +173,10 @@ function build_bulk_dna_table($stmt,$root){
 	<!--DNA Extractor Name input-->
 	<label class="textbox-label">Enter Name(s) of Persons Who Extracted DNA:</label>
 	<p class="clone2"> <input type="text" name="dExtrName[]" class='input' placeholder="First Name(s)" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['dExtrName']);}  ?>"/></p>
-	<p><a href="#" class="add2" rel=".clone2">Add More Names</a></p>
 	</p>
 	</td>
 	</tr>
-	<script type="text/javascript">
-	$(document).ready($(function(){
-		var removeLink = ' <a class="remove" href="#" onclick="$(this).parent().slideUp(function(){ $(this).remove() }); return false">remove</a>';
-			$('a.add2').relCopy({ append: removeLink}); 
-		})
-	);
-	</script>
+
 		
 	<p>
 	<tr>

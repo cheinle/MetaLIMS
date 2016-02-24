@@ -9,7 +9,7 @@ function build_bulk_read_sub_id_table($stmt,$root){
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	include($path.'/config/js.php'); //was not being inherited correctly...just added here for now
 	
-	echo '<form class="registration" onsubmit="return confirm(\'Do you want to submit the form?\');" action="read_sub_bulk_insert.php" method="POST">';
+	echo '<form class="registration" onsubmit="return confirm(\'Do you want to submit the form?\');" action="bulk_insert_and_updates/read_submission/read_sub_bulk_insert.php" method="POST">';
 	echo '<div>';
 	echo '<pre>';
 	echo '*Notice: Bulk Update will update all samples that have been checkmarked';

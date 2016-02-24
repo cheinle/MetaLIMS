@@ -1,7 +1,7 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include('database_connection.php');
+include('../database_connection.php');
 
 ?>
 
@@ -20,8 +20,8 @@ include('database_connection.php');
  
 <body>
 <?php 
-include('index.php');
-include('functions/check_box_tables.php');
+include('../index.php');
+include('../functions/check_box_tables.php');
 
  ?>
 <div class="page-header">
@@ -46,7 +46,7 @@ include('functions/check_box_tables.php');
 	<p>
 		<label class="textbox-label">Select Field to Query Samples:</label><br/>
 		<?php	
-		    include_once('functions/convert_header_names.php');
+		    include_once('../functions/convert_header_names.php');
 			$query = "SELECT * FROM sample";
 			$result = mysqli_query($dbc, $query);
 			if(!$result){
@@ -90,7 +90,7 @@ include('functions/check_box_tables.php');
 		<script>
 			$(document).ready(function($){
     			$('#customerAutocomplte').autocomplete({
-					source:'suggest_name.php', 
+					source:'../suggest_name.php', 
 					minLength:2
     			});
 			});
@@ -114,7 +114,7 @@ include('functions/check_box_tables.php');
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="bulk_dna") echo "checked";?> value="bulk_dna">Bulk Update For DNA Extraction Info</label>
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="bulk_storage") echo "checked";?> value="bulk_storage">Bulk Update For Storage Info</label>
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="read_sub") echo "checked";?> value="read_sub">Bulk Insert For Read Submission IDs</label>
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="update_read_sub") echo "checked";?> value="update_read_sub">Bulk Update For Read Submission IDs</label>
+	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="update_read_sub") echo "checked";?> value="update_read_sub">Bulk Update AND View For Read Submission IDs</label>
 	</div>
 	</p>
 	

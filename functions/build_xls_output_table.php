@@ -2,9 +2,9 @@
 
 //build xls spreadsheet for output
 function build_xls_output_table($stmt){
-	include('database_connection.php');
-	include('functions/build_table_tab.php');
-	include('functions/build_table.php');
+	include('../database_connection.php');
+	include('../functions/build_table_tab.php');
+	include('../functions/build_table.php');
 
 	build_table_tab($stmt,'xls');
 	echo '<div style="text-align:center">';    

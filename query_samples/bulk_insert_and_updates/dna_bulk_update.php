@@ -1,9 +1,9 @@
 <?php
-	include ('index.php');
-	include ('database_connection.php');
-	include ('functions/text_insert_update_storage_info.php');
-	include_once("functions/check_collector_names.php");
-	include_once("functions/unset_session_vars.php");
+	include ('../../index.php');
+	include ('../../database_connection.php');
+	include ('../../functions/text_insert_update_storage_info.php');
+	include_once("../../functions/check_collector_names.php");
+	include_once("../../functions/unset_session_vars.php");
 	
     $sample_array=$_POST['sample'];
 	$p_dExtKit = htmlspecialchars($_POST['dExtKit']);
@@ -50,13 +50,8 @@
 		$_SESSION['DNA_sample_exist']=$p_DNA_sample_exist;
 	}
 	
-	
-	
-	
-	/////
-	
-	
-
+	echo "<div class='page-header'><h3>DNA Bulk Update</h3></div>";
+	echo "<div class= border>";
 	//or should these fields be optional? This way you can choose if you want to update these extra fields or not?
 	//right now leave as required for DNA extract updates :D
 	$error = 'false';
@@ -175,7 +170,7 @@
 								echo 'SUCCESS: Updated '.$p_sample_name.' In Storage Info <br>';	
 							}
 							elseif($rows_affected_si == 0){
-								echo "No Update Needed for ".$p_sample_name.'<br>';
+								echo "No Storage Update Needed for ".$p_sample_name.'<br>';
 							}
 							else{
 								throw new Exception('An Error Has Occurred In Storing Storage Info For '.$p_sample_name);
@@ -192,6 +187,8 @@
 					}
 				}	
 			}
+			echo '<p><input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" /></p>';
+		    echo "</div>";
 			$dbc->commit();
 			unset_session_vars('bulk_dna_update');
 		}
