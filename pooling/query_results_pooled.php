@@ -1,8 +1,8 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include('database_connection.php'); 
-include('index.php');
+include('../database_connection.php'); 
+include('../index.php');
 ?>
 
 <!doctype html>
@@ -20,9 +20,9 @@ include('index.php');
 <?php
 
 if(isset($_GET['submit'])){
-	include('functions/check_box_tables_output.php');
-	include('functions/white_list.php');
-	include('functions/build_pooled_samp_output.php');
+	include('../functions/check_box_tables_output.php');
+	include('../functions/white_list.php');
+	include('../functions/build_pooled_samp_output.php');
 	
 	$submit = $_GET['submit'];
 	
@@ -40,7 +40,7 @@ if(isset($_GET['submit'])){
 			$p_emydate = htmlspecialchars($_GET['emydate']);
 			
 			//format date
-			$regrex_check = '/^(201[4-5])-([0-1][0-9])-([0-3][0-9])$/'; //remove dashes
+			$regrex_check = '/^(20[0-9][0-9])-([0-1][0-9])-([0-3][0-9])$/'; //remove dashes
 			preg_match($regrex_check,$p_smydate,$matches);
 			$p_smydate = $matches[1].'/'.$matches[2].'/'.$matches[3];
 			preg_match($regrex_check,$p_emydate,$matches2);

@@ -1,5 +1,5 @@
 <?php
-	 include('database_connection.php');
+	 include('../database_connection.php');
 
 	$num_to_pool = $_GET['num_pooled_samples'];
 
@@ -15,7 +15,7 @@
 			$(document).ready(function($){
 				var x = <?php echo json_encode($x); ?>;
     			$('#customerAutocomplte'+x).autocomplete({
-					source:'suggest_name.php', 
+					source:'../suggest_name.php', 
 					minLength:3
     			});
 			});

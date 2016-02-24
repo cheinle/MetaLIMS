@@ -76,7 +76,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 					<ul class="dropdown-menu" role="menu">
 						<li ><a href="<?php echo $root;?>sample_insert/form_insert_jquery.php">Insert Sample</a></li>
 						<li ><a href="<?php echo $root;?>sample_update/sample_update_lookup_jquery.php">Update Sample</a></li>
-						<li><a href="<?php echo $root;?>pool_samples.php">Create Sample Pools (For DNA Extr)</a></li>
+						<li><a href="<?php echo $root;?>pooling/pool_samples.php">Create Sample Pools (For DNA Extr)</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -110,7 +110,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Query Info<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
 						<li ><a href="<?php echo $root;?>query_select_mod.php">Query Sample Info</a></li>
-						<li><a href="<?php echo $root;?>query_select_pooled.php">Query Pooled Sample Info</a></li>
+						<li><a href="<?php echo $root;?>pooling/query_select_pooled.php">Query Pooled Sample Info</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">

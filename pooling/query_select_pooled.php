@@ -1,7 +1,7 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include('database_connection.php');
+include('../database_connection.php');
 
 ?>
 
@@ -20,8 +20,8 @@ include('database_connection.php');
  
 <body>
 <?php 
-include('index.php');
-include('functions/check_box_tables.php');
+include('../index.php');
+include('../functions/check_box_tables.php');
 ?>
 <div class="page-header">
 <h3>Query Pooled Samples</h3>
@@ -51,7 +51,7 @@ include('functions/check_box_tables.php');
 	<script>
 		$(document).ready(function($){
     		$('#customerAutocomplte').autocomplete({
-				source:'suggest_name.php', 
+				source:'../suggest_name.php', 
 				minLength:3
     			});
 		});

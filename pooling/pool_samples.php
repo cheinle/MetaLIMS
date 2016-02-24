@@ -1,7 +1,7 @@
 <?php
-include('config/path.php');
+include('../config/path.php');
 $path = $_SERVER['DOCUMENT_ROOT'].$root;
-include ('database_connection.php');
+include ('../database_connection.php');
 include ($path.'functions/dropDown.php');
 include ($path.'functions/convert_header_names.php');
 ?>
@@ -13,7 +13,7 @@ include ($path.'functions/convert_header_names.php');
 		<title>Sample Pooling</title>	
 	</head>
 	
-	<body><?php include ('index.php');?>
+	<body><?php include ('../index.php');?>
 	<div class="page-header">
 	<h3>Sample Pooling Form</h3>
 	</div>
@@ -472,7 +472,7 @@ include ($path.'functions/convert_header_names.php');
 	?>
 	<form class="registration" onsubmit="return validate(this)" action="pool_samples.php" method="GET" target="_blank">
 	<p><i>* = required field </i><br>
-		<a href="<?php echo $root;?>how_pooled_samples_created.php">How Pooled Samples Are Created In the DB</a>
+		<a href="<?php echo $root;?>pooling/how_pooled_samples_created.php">How Pooled Samples Are Created In the DB</a>
 	</p>
 		
 		<fieldset>

@@ -389,7 +389,7 @@
                 var num_pooled_samples = $('#pool_num').val(); //<----- get the value from the parent select 
                 //alert(num_sensors);
 	                $.ajax({
-	                    url     : root+'pool_select.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'pooling/pool_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : { num_pooled_samples: num_pooled_samples}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},
