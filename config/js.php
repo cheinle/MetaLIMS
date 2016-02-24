@@ -218,14 +218,8 @@
                 //alert(sType);
 				var flow_rate = $('#fRate');
 				var flow_rate_eod = $('#fRate_eod');
-				
-				var iso_coll_temp = $('#iso_coll_temp').val();
-				var iso_store_date= $('#datepicker3').val();
-				var iso_store_method = $('#iso_store_method').val();
-				
-				//alert(iso_store_method);
 
-        		if (sType == "A" ) {//assume coriolis and commonly used 300
+        		/*if (sType == "A" ) {//assume coriolis and commonly used 300
         			$('#fRate').val('300');
         			$('#fRate_eod').val('300');
         			
@@ -233,36 +227,11 @@
         				Alert.render("Warning: Media is MilliQ. Please check if this is what you want");
         			}
         		}
-        		else if(sType == "F" || sType == "BC" || sType == "UI"){ //assume air sampler rate is 28.3
-        			$('#fRate').val('28.3');
-        			$('#fRate_eod').val('28.3');
-        		}
         		else {
         			$('#fRate').val('0');
         			$('#fRate_eod').val('0');
-        		}
-        		
-        		
-        		//check if you are a Fungal or Bacterial Isolate
-        		//if you are, check to make sure you have the required fields
-        		/*if (sType == "F" || sType == "BA") {
-        			if(iso_store_method == '0'){$('#iso_store_method').css({"backgroundColor": "blue"});}
-        			else{$('#iso_store_method').css({"backgroundColor": "white"});}
-        			
-        			if(iso_coll_temp == '0'){$('#iso_coll_temp').css({"backgroundColor": "blue"});}
-        			else{$('#iso_coll_temp').css({"backgroundColor": "white"});}
-        			
-        			if(iso_store_date == ''){$('#datepicker3').css({"backgroundColor": "blue"});}
-        			else{$('#datepicker3').css({"backgroundColor": "white"});}
-        			
-        		
-        		}
-        		else{
-        			$('#iso_coll_temp').css({"backgroundColor": "white"});
-        			$('#datepicker3').css({"backgroundColor": "white"});
-        			$('#iso_store_method').css({"backgroundColor": "white"});
-        		}
-    			*/
+        		}*/
+      
 			});
 			
 		});
@@ -365,7 +334,7 @@
                 var projName = $('#projName').val(); //<----- get the value from the parent select 
                 //alert(num_sensors);
 	                $.ajax({
-	                    url     : root+'sample_select.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'sequencing/sample_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : { projName: projName,
 	                    			start_date:start_date,
