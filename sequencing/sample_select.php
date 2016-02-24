@@ -1,5 +1,5 @@
 <?php
-	include('database_connection.php');
+	include('../database_connection.php');
 	 
 	$project_name = $_GET['projName'];
 	$start_date = $_GET['start_date'];

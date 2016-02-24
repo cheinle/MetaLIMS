@@ -128,7 +128,7 @@ if(isset($_POST['submit'])){
 			
 			//prepare excel sample sheet
 			//require_once dirname(__FILE__) . '/xls_classes/PHPExcel/IOFactory.php';
-			require_once ($path.'xls_classes/PHPExcel/IOFactory.php');
+			require_once ($path.'aquired/xls_classes/PHPExcel/IOFactory.php');
 			 
 			//$objPHPExcel = PHPExcel_IOFactory::load("Sequencing_SampleSubmissionForm.xlsx");
 			$objPHPExcel = PHPExcel_IOFactory::load($path."sequencing/test.xlsx");
@@ -153,14 +153,14 @@ if(isset($_POST['submit'])){
 				$p_sample_name = htmlspecialchars($sample_name);
 				
 				//create new sample name
-				///////////////////////////////****need to build this out for Rikky***/////////////////////////
+				///////////////////////////////Build to track number of submissions for each sequencing type for each sample/////////////////////////
 				//$seq_sub_name = $p_sample_name;
 				$seq_name = $process['seq_id'];
 				$prefix = 'ABX';
 				//$application = 'Whole Genome Sequencing'; //gloablly defined earlier
 				$seq_type_abbrev = get_application_abbrev($application,'abbrev'); //genomic ...need a way to get this if application == 'Genomic DNA' seq_type_abbrev = G
 				$check_for_error1 = strcmp($seq_type_abbrev,'ERROR');
-				if($check_for_error1 == '0'){
+				if($check_for_error1 > '0'){
 					throw new Exception("ERROR: No Sequencing Type Abbreviation. Please Notify Admin");
 				}
 				
