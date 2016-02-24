@@ -1,10 +1,10 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include('database_connection.php'); 
-include('index.php');
-include('functions/build_seq_subbed_output_new.php');
-include('config/path.php');
+include('../../database_connection.php'); 
+include('../../index.php');
+include('../../functions/build_seq_subbed_output_new.php');
+include('../../config/path.php');
 ?>
 
 <!doctype html>
@@ -46,24 +46,7 @@ if(isset($_GET['submit'])){
 			$check_field = 'true';
 		}
 				
-		#$query_main = "SELECT sequencing2.sequencing_info FROM sample JOIN sequencing2 ON sample.sequencing_info = sequencing2.sequencing_info WHERE ";
-		//$query_main = "SELECT sequencing2.sequencing_info,sequencing2.sequencer_name,sequencing2.sequencing_type,sequencing2.date_submitted,sequencing2.library_prep_kit,sample.sample_name,sample.seq_id FROM sequencing2 JOIN sample ON sequencing2.sequencing_info = sample.sequencing_info";
-		/*$query_main = "SELECT sample_sequencing2.seq_id,
-		sample_sequencing2.seq_sub_name,
-		sample_sequencing2.dna_conc,
-		sample_sequencing2.vol,
-		sample_sequencing2.wellLoc,
-		sample_sequencing2.sampBuffer,
-		sample_sequencing2.nano,
-		sample_sequencing2.a_280,
-		sample_sequencing2.a_230,
-		sample_sequencing2.dnaCont,
-		sample_sequencing2.RIN,
-		sample_sequencing2.sample_exists,
-		sample.sample_name 
-		 FROM sample_sequencing2 JOIN sample ON sample_sequencing2.sample_name = sample.sample_name";*/
-		 
-		//$query_main = "SELECT DISTINCT sample_sequencing2.seq_id FROM sample_sequencing2 JOIN sample ON sample_sequencing2.sample_name = sample.sample_name";
+
 		$query_main = "SELECT DISTINCT sample_sequencing2.seq_id FROM sample_sequencing2 
 		JOIN sample ON sample_sequencing2.sample_name = sample.sample_name
 		JOIN sequencing2 ON sample_sequencing2.seq_id = sequencing2.sequencing_info";

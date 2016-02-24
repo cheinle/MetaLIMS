@@ -117,7 +117,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Sequencing Submission Info<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="<?php echo $root;?>sequencing/seq_submission_UDF_check.php">Bulk Sequencing Submission</a></li>
-						<li><a href="<?php echo $root;?>query_select_seq_subbed.php">View Past Submission</a></li>
+						<li><a href="<?php echo $root;?>sequencing/query_past_seq_submissions/query_select_seq_subbed.php">View Past Submission</a></li>
 						
 					</ul>
 				</li>
