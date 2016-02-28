@@ -63,7 +63,7 @@
 							var end_times = [];
 							
 							//user things
-							var user_things_s = [];
+							var user_things = [];
 							//var counter = 0;
 							$(".things").each(function(){
 								var id = this.id;
@@ -72,7 +72,7 @@
 								var myRegexp = /^thing(\d+)$/;
 								var match = myRegexp.exec(myString);
 								var index = match[1];
-								user_things_s[index] = $(this).val();
+								user_things[index] = $(this).val();
 								//counter++;
 								
 							});
@@ -148,7 +148,7 @@
 								end_times: end_times,
 								
 								//user things
-								user_things_s: user_things_s
+								user_things: user_things
 
 			                    }, //Data you are sending
 			                    success : function(data){alert("\t"+'Success!'+"\n"+'Inserted Sample Number : '+sample_number+"\n"+'For Project: '+projName)}, 

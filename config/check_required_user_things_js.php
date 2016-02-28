@@ -7,7 +7,7 @@
              for (var i9 = 0; i9 < required_selects.length; i9++) {
                  var selected = required_selects[i9].value;
                  var select_id = required_selects[i9].getAttribute("id");
-          		 if(selected == '0'){
+          		 if(selected == ''){
           		 	 valid = 'false';
 	                 document.getElementById(select_id).style.backgroundColor = 'blue';
 	             }

@@ -69,7 +69,7 @@
 							var opt = document.createElement('option');
 							opt.appendChild(document.createTextNode(option));
 							if(option == '-Select-'){
-								opt.value = '0';
+								opt.value = '';
 							}
 							else{
 								opt.value = option;

@@ -56,6 +56,7 @@
 				if($type == 'select'){
 					if($visible == 1){
 						//	dropDown_update('anPipe', 'analysis', 'analysis_name','analysis_name','analysis_name',$parent_value,$root);
+						$value = text_insert_update_things($parent_value,$thing_id);
 						$select_array = explode(';', $select_values);
 ?>
 					<script type="text/javascript">
@@ -65,7 +66,7 @@
 					  var linebreak = document.createElement("br"); 
 					  label.className="textbox-label";
 					  
-					  
+					  var selected_value = <?php echo(json_encode(htmlspecialchars($value))); ?>;
 					  var select = document.createElement("select");
 					  var array = <?php echo json_encode($select_array); ?>;
 					  array.unshift("-Select-");
@@ -75,17 +76,23 @@
 							var opt = document.createElement('option');
 							opt.appendChild(document.createTextNode(option));
 							if(option == '-Select-'){
-								opt.value = '0';
+								opt.value = '';
 							}
 							else{
 								opt.value = option;
+							
+				    			if(opt.value == selected_value){
+				    				opt.setAttribute("selected", "selected");
+				    			}
 							}
 							select.appendChild(opt);
 						}	
 				    	select.setAttribute("name", thing_id);
 				    	select.setAttribute("id", thing_id);
 				    	select.setAttribute("class", "things");
-				    	select.setAttribute("value", "");	
+				    	select.setAttribute("value", "");
+				    	
+				    		
 						var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						if(required == 'Y'){
 							var node = document.createTextNode(label_text+" :*");
