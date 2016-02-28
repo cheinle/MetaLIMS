@@ -21,6 +21,11 @@
 	             if(inputed == ''){
 	             	 valid = 'false';
 	                 document.getElementById(input_id).style.backgroundColor = 'blue';
+	             }else{
+	             	var numeric_check = isNaN(inputed); //returns true if is not a number
+	             	if(numeric_check == true){
+	             		document.getElementById(input_id).style.backgroundColor = 'blue';
+	             	}
 	             }
 			}
 
