@@ -22,9 +22,15 @@
 	             	 valid = 'false';
 	                 document.getElementById(input_id).style.backgroundColor = 'blue';
 	             }else{
-	             	var numeric_check = isNaN(inputed); //returns true if is not a number
-	             	if(numeric_check == true){
-	             		document.getElementById(input_id).style.backgroundColor = 'blue';
+	             	//select type from create_user_things where thing_id = input_id. if type equals numeric_input, do a check
+	             	
+	             	var type = 'numeric_input';
+	             	
+	             	if(type == 'numeric_input'){
+	             		var numeric_check = isNaN(inputed); //returns true if is not a number
+		             	if(numeric_check == true){
+		             		document.getElementById(input_id).style.backgroundColor = 'blue';
+		             	}
 	             	}
 	             }
 			}
