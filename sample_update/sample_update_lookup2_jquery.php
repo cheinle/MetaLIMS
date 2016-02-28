@@ -26,8 +26,9 @@ include($path.'functions/text_insert_update_dt.php');
 include($path.'functions/text_insert_update_storage_info.php');
 include ($path.'index.php');
 include($path.'config/check_form_insert_js.php');
+include($path.'config/check_required_user_things_js.php');
 include($path.'config/check_sample_name.php');
-//include('config/add_my_samplers_to_sample_update_js.php');
+include($path.'admin_tools/dynamically_add_user_fields/build_a_user_thing.php');
 
 ?>
 <div class="page-header">	
@@ -63,7 +64,7 @@ if (isset($_GET['submit'])) {
 				<input type="text" style="visibility:hidden" class="hidden" name="transaction_time" id="transaction_time" value="<?php echo $transaction_time ?>"/>
 				
 				<!--see if sample is part of a pool-->
-				<input type="text" style="visibility:hidden" class="hidden" name="part_of_pool" id = "part_of_pool"  value="<?php echo text_insert_update($parent_value,'part_of_pool');} ?>"/>
+				<input type="text" style="visibility:hidden" class="hidden" name="part_of_pool" id = "part_of_pool"  value="<?php echo text_insert_update($parent_value,'part_of_pool',$dbc);} ?>"/>
 				
 				
 				<br>* = required field <br>
@@ -75,7 +76,7 @@ if (isset($_GET['submit'])) {
 				<div class="col-xs-6">
 				<p>
 				<label class="textbox-label">Sample Name:*</label>
-				<input type="text" name="sample_name" id="sample_name" data-toggle="popover" title="Tip:" data-content="Unable to edit sample name. Please select Go Back button to select a different sample or go to Insert Sample tab to enter a new sample. Sample Name is automatically re-created if name components are updated" placeholder="yyyy/mm/dd[project name][sample_type][sample number-000]" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'sample_name');}?>" readonly />
+				<input type="text" name="sample_name" id="sample_name" data-toggle="popover" title="Tip:" data-content="Unable to edit sample name. Please select Go Back button to select a different sample or go to Insert Sample tab to enter a new sample. Sample Name is automatically re-created if name components are updated" placeholder="yyyy/mm/dd[project name][sample_type][sample number-000]" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'sample_name',$dbc);}?>" readonly />
 				</p>
 				<script>
 					$(document).ready(function(){
@@ -101,13 +102,13 @@ if (isset($_GET['submit'])) {
 				<div class="col-xs-6">	
 				<p>
 				<label class="textbox-label">Sample Number:*</label>
-				<input type="text" name="sample_number" id="sample_number"  placeholder="[001]" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'sample_num');}?>" />
+				<input type="text" name="sample_number" id="sample_number"  placeholder="[001]" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'sample_num',$dbc);}?>" />
 				</p>
 				
 				<!--Barcode insert field-->
 				<p>
 				<label class="textbox-label">Barcode:(optional)</label><br>
-				<input type="text" name="barcode" id="barcode" placeholder="Enter A Barcode" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'barcode');}?>"/>
+				<input type="text" name="barcode" id="barcode" placeholder="Enter A Barcode" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'barcode',$dbc);}?>"/>
 				</p>
 
 				<p>
@@ -149,7 +150,7 @@ if (isset($_GET['submit'])) {
 				<p>
 				<!--Collector Name input-->
 				<label class="textbox-label">Enter Collector Name(s):*</label>
-				<p class="clone"> <input type="text" name="collector[]" id="collector" class='input' placeholder="Comma Seperated Names" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'collector_name');} ?>"/></p>
+				<p class="clone"> <input type="text" name="collector[]" id="collector" class='input' placeholder="Comma Seperated Names" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'collector_name',$dbc);} ?>"/></p>
 				</p>
 				
 				<!--Sampling Type insert field-->
@@ -163,8 +164,8 @@ if (isset($_GET['submit'])) {
 				
 				<p>
 				<label class="textbox-label">Flow Rate-Start/End of Day:+<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Coriolis or SASS: 300 l/m. Spin Air: 20-100 l/m"></i></label><br>
-				<input type="text" name="fRate" id="fRate"  class = "shrtfields" placeholder="Enter A Flow Rate for SOD" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'flow_rate');} ?>">
-				<input type="text" name="fRate_eod" id="fRate_eod"  class = "shrtfields" placeholder="Enter A Flow Rate for EOD" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'flow_rate_eod');} ?>">
+				<input type="text" name="fRate" id="fRate"  class = "shrtfields" placeholder="Enter A Flow Rate for SOD" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'flow_rate',$dbc);} ?>">
+				<input type="text" name="fRate_eod" id="fRate_eod"  class = "shrtfields" placeholder="Enter A Flow Rate for EOD" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'flow_rate_eod',$dbc);} ?>">
 				</p>
 
 				
@@ -181,11 +182,11 @@ if (isset($_GET['submit'])) {
 				<p>
 				<label class="textbox-label">Height Above Floor:+<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title=" Coriolis-113.5cm: SASS-156cm: Spin Air-151cm (all on tripods)" id='example'></i>
 				</label><br>
-				<input type="text" name="sampling_height" id="sampling_height" placeholder="Enter A Height Above Floor (cm)" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'sampling_height');} ?>">
+				<input type="text" name="sampling_height" id="sampling_height" placeholder="Enter A Height Above Floor (cm)" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'sampling_height',$dbc);} ?>">
 				</p>
 				
 				<!--Invisible Project Name Dropdown-->
-				<input type="text" style="visibility:hidden" name="orig_projName" id="orig_projName" placeholder="Enter A Barcode" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'project_name');}?>"/>
+				<input type="text" style="visibility:hidden" name="orig_projName" id="orig_projName" placeholder="Enter A Barcode" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'project_name',$dbc);}?>"/>
 				
 
 				</div><!--end of col-xs-6-->
@@ -198,7 +199,7 @@ if (isset($_GET['submit'])) {
 				<!-----------------------------new my sampler info------------------------------------------->
 				<?php 
 				
-				$p_sample_name = text_insert_update($parent_value,'sample_name');
+				$p_sample_name = text_insert_update($parent_value,'sample_name',$dbc);
 				//$parent_value = $p_sample_name;
 
 
@@ -519,13 +520,13 @@ if (isset($_GET['submit'])) {
 					<!--DNA Concentration-->
 					<p>
 					<label class="textbox-label">DNA Concentration (ng/ul):</label><br>
-					<input type="text" name="dConc" id="dConc" placeholder="Enter A DNA Concentration. Note: (0 = ND = <0.0050ng/ul)" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'d_conc');} ?>">
+					<input type="text" name="dConc" id="dConc" placeholder="Enter A DNA Concentration. Note: (0 = ND = <0.0050ng/ul)" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'d_conc',$dbc);} ?>">
 					</p>
 					
 						<!--Volume of DNA-->
 					<p>
 					<label class="textbox-label">Volume of DNA Elution (ul):</label><br>
-					<input type="text" name="dVol" id="dVol" placeholder="Enter A Volume" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'d_volume');} ?>">
+					<input type="text" name="dVol" id="dVol" placeholder="Enter A Volume" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'d_volume',$dbc);} ?>">
 					</p>
 	
 	
@@ -541,7 +542,7 @@ if (isset($_GET['submit'])) {
 					<!--Volume of DNA to measure DNA conc-->
 					<p>
 					<label class="textbox-label">Volume of DNA Used for Measure DNA Concentration(ul):</label><br>
-					<input type="text" name="dVol_quant" id="dVol_quant" placeholder="Enter A Volume" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'d_volume_quant');}?>">
+					<input type="text" name="dVol_quant" id="dVol_quant" placeholder="Enter A Volume" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'d_volume_quant',$dbc);}?>">
 					</p>
 					<!------------------------------------------------------------>
 					<!--DNA -->
@@ -558,7 +559,7 @@ if (isset($_GET['submit'])) {
 					<p>
 					<!--Extractor Name input-->
 					<label class="textbox-label">Enter Name of Person(s) Who Extracted DNA:</label>
-					<p class="clone2"> <input type="text" name="dExtrName[]" id="dExtrName" class="input"  placeholder="Comma Seperated Names" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'dExtrName');} ?>"/></p>
+					<p class="clone2"> <input type="text" name="dExtrName[]" id="dExtrName" class="input"  placeholder="Comma Seperated Names" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'dExtrName',$dbc);} ?>"/></p>
 					<!--<p><a href="#" class="add2" rel=".clone2">Add More Names</a></p>
 					</p>
 					<script type="text/javascript">
@@ -611,13 +612,13 @@ if (isset($_GET['submit'])) {
 				<!--RNA Concentration-->		
 				<p>
 				<label class="textbox-label">RNA Concentration (ng/ul):</label><br>
-				<input type="text" name="rConc" id="rConc"  placeholder="Enter an RNA Concentration" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'r_conc');} ?>">
+				<input type="text" name="rConc" id="rConc"  placeholder="Enter an RNA Concentration" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'r_conc',$dbc);} ?>">
 				</p>
 				
 				<!--RNA Volume-->
 				<p>
 				<label class="textbox-label">Volume of RNA Elution (ul):</label><br>
-				<input type="text" name="rVol" id="rVol" placeholder="Enter A Volume" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'r_volume');} ?>">
+				<input type="text" name="rVol" id="rVol" placeholder="Enter A Volume" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'r_volume',$dbc);} ?>">
 				</p>
 		
 				<!--Instrument used to measure RNA concentration-->
@@ -632,7 +633,7 @@ if (isset($_GET['submit'])) {
 				<!--RNA Volume-->
 				<p>
 				<label class="textbox-label">Volume of RNA for Quantification(ul):</label><br>
-				<input type="text" name="rVol_quant" id="rVol_quant" placeholder="Enter A Volume" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'r_volume_quant');} ?>">
+				<input type="text" name="rVol_quant" id="rVol_quant" placeholder="Enter A Volume" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'r_volume_quant',$dbc);} ?>">
 				</p>
 				
 				<p>
@@ -647,7 +648,7 @@ if (isset($_GET['submit'])) {
 				<p>
 				<!--Extractor Name input-->
 				<label class="textbox-label">Enter Name of Person(s) Who Extracted RNA:</label>
-				<p class="clone3"> <input type="text" name="rExtrName[]" id="rExtrName" class="input" placeholder="Comma Sepearted Names" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'rExtrName');} ?>"/></p>
+				<p class="clone3"> <input type="text" name="rExtrName[]" id="rExtrName" class="input" placeholder="Comma Sepearted Names" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'rExtrName',$dbc);} ?>"/></p>
 				<!--<p><a href="#" class="add3" rel=".clone3">Add More Names</a></p>
 				</p>
 				
@@ -704,7 +705,14 @@ if (isset($_GET['submit'])) {
 					<fieldset>
 					<LEGEND><b>User Created Fields</b></LEGEND>
 						<div class="col-xs-6">
-							<i>Coming Soon</i>
+							<input type="text" style="visibility:hidden" class="hidden" name="build_type" id="build_type" value="update"/>
+							<input type="text" style="visibility:hidden" class="hidden" name="parent_value" id="parent_value" value="<?php echo $parent_value;?>"/>
+							<div id="required_things">
+							
+							</div>
+							<div id="user_things">
+								
+							</div>
 						</div>
 					</fieldset>
 				</div><!--end fragment-4-->
@@ -717,7 +725,7 @@ if (isset($_GET['submit'])) {
 						<div class="col-md-12">
 							<p>
 							<label class="textbox-label">Sample Notes:(optional)</label>
-							<textarea class="form-control" from="sample_form_update" rows="3" name="notes" placeholder = "Enter Date and Initials for Comment (e.g.: YYYY/MM/DD Comment -initials)"><?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'notes');} ?></textarea>
+							<textarea class="form-control" from="sample_form_update" rows="3" name="notes" placeholder = "Enter Date and Initials for Comment (e.g.: YYYY/MM/DD Comment -initials)"><?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'notes',$dbc);} ?></textarea>
 							</p>
 						</div><!--close col-md-12-->
 					</fieldset>
@@ -745,6 +753,9 @@ if (isset($_GET['submit'])) {
 				    if(check_form_required() == 'false'){
 				    	valid = 'false';
 				    }
+				    if(check_required_user_things() == 'false'){
+				    	valid = 'false';
+				    }		
 				    check_sample_name_update();
 				    if(name_check == 'false'){
 				    	alert('Sample Name Not Valid. Please Check Project Name And Sample Number');

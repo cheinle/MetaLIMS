@@ -393,6 +393,7 @@ include('form_insert_jquery_js.php');
 					<fieldset>
 					<LEGEND><b>User Created Fields</b></LEGEND>
 						<div class="col-xs-6">
+							<input type="text" style="visibility:hidden" class="hidden" name="build_type" id="build_type" value="update"/>
 							<div id="required_things">
 								
 							</div>

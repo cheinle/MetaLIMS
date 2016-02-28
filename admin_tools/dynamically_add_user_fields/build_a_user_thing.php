@@ -29,43 +29,33 @@ ini_set('display_errors', 1);
 		<script type="text/javascript">
 				//load page
 				$(document).ready(function() {
-					//$("#submit").click(function() {
-
-							//define variables..
-							//var label_text = $("#label").val();
-							//var type = 'text_input';
-	
-							 $.ajax({
-			                    url     : root+'admin_tools/dynamically_add_user_fields/build_a_thing_submit.php', //the url you are sending datas to which will again send the result
+					var build_type = document.getElementById("build_type").value;
+					if(build_type == 'insert'){
+						 $.ajax({
+			                    url     : root+'admin_tools/dynamically_add_user_fields/build_a_thing_insert.php', //the url you are sending datas to which will again send the result
 			                    type    : 'GET', //type of request, GET or POST
 			                    data    : { }, //Data you are sending
 			                    success : function(data){$('#user_things').html(data)},
 			                    error   : function(){alert('An Error Has Occurred')} //error message
 
-						});
-						
-					//});
-				});
-				
-				////submit page 
-				/*$(document).ready(function() {
-					//$("#submit").click(function() {
-
-							//define variables..
-							var label_text = $("#label").val();
-							var type = 'text_input';
-	
-							 $.ajax({
-			                    url     : root+'admin_tools/dynamically_add_user_fields/build_a_thing_submit.php', //the url you are sending datas to which will again send the result
+						 });
+					}
+					else if(build_type == 'update'){
+						var parent_value = document.getElementById("parent_value").value;
+						 $.ajax({
+			                    url     : root+'admin_tools/dynamically_add_user_fields/build_a_thing_update.php', //the url you are sending datas to which will again send the result
 			                    type    : 'GET', //type of request, GET or POST
-			                    data    : { label_text:label_text,type: type}, //Data you are sending
+			                    data    : {parent_value:parent_value}, //Data you are sending
 			                    success : function(data){$('#user_things').html(data)},
 			                    error   : function(){alert('An Error Has Occurred')} //error message
 
 						});
+					}else{
+						alert("Unable To Access User Created Fields. Please Notify Admin");
+					}
+							
 						
-					//});
-				});*/
+				});
 		</script>
 			
 	</body>

@@ -5,11 +5,12 @@
 <body>
 <?php	
 
-function text_insert_update($sample_name,$field_name,$dbc){ #send also the query name?, always based on sample name
+function text_insert_update_things($sample_name,$field_name){
 
-	//include('database_connection.php');
+	include('../../database_connection.php');
 
-	$stmt = $dbc->prepare("SELECT * FROM sample WHERE sample_name = ?");
+	$query = "SELECT * FROM store_user_things WHERE sample_name = ?";
+	$stmt = $dbc->prepare($query);
 	$stmt -> bind_param('s',$sample_name);
 	if ($stmt->execute()){
 	    			
