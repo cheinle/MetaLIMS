@@ -65,6 +65,36 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 
 <?php include('config/css.php'); ?>
 <?php include('config/js.php'); ?>
+<?php
+//get admin email address
+$admin_email = '';
+$admin_Y = 'Y';
+if($stmt1 = $dbc->prepare("SELECT user_id FROM users WHERE admin = ?")){
+	$stmt1 -> bind_param('s', $admin_Y );
+		if ($stmt1->execute()){
+			$stmt1->bind_result($admin_username);
+			if ($stmt1->fetch()){
+				$admin_email = $admin_username;
+			}
+		}
+}
+$stmt1->close();
+
+
+//if user is an admin, show admin options
+$admin_user = 'N';//no by default
+if($stmt = $dbc->prepare("SELECT admin FROM users WHERE user_id = ?")){
+	$stmt -> bind_param('s', $_SESSION['username']);
+	if ($stmt->execute()){
+		$stmt->bind_result($admin_check);
+		if ($stmt->fetch()){
+			if($admin_check == 'Y'){
+				$admin_user = 'Y';
+			}
+		}	
+	}	
+}			
+?>
 
 <nav class="navbar navbar-default" role="navigation">
 	  <div class="container-fluid">
@@ -134,19 +164,6 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				<li ><a href="<?php echo $root;?>FAQ.php">FAQ</a></li>
 				
 				<?php
-				//if user is an admin, show admin options
-				$admin_user = 'N';//no by default
-				if($stmt = $dbc->prepare("SELECT admin FROM users WHERE user_id = ?")){
-					$stmt -> bind_param('s', $_SESSION['username']);
-					if ($stmt->execute()){
-				    	$stmt->bind_result($admin_check);
-				    	if ($stmt->fetch()){
-				        	if($admin_check == 'Y'){
-								$admin_user = 'Y';
-							}
-						}	
-					}	
-				}
 				if($admin_user == 'Y'){
 				echo '
 				<ul class="nav navbar-nav ">
@@ -164,7 +181,6 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 				</li>
 				</ul> 
 				';}
-				$stmt->close();
 				?>
 				<li ><a href="<?php echo $root;?>logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
 			</ul>
