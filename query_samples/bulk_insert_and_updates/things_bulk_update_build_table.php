@@ -27,7 +27,7 @@ $thing_id = $explode[0];
 $label = $explode[1];
 
 
-echo '<form class="registration" onsubmit="return validate(this)" action="bulk_insert_and_updates/storage_bulk_update.php" method="POST">';
+echo '<form class="registration" onsubmit="return validate(this)" action="things_bulk_update_submit.php" method="POST">';
 echo '<div>';
 echo '<pre>';
 echo '*Notice: Bulk update will update all samples that have been checkmarked<br>Please refresh page to clear if needed';
@@ -77,18 +77,22 @@ if ($stmt->execute()){
 ksort($sort_the_samples);
 
 foreach ($sort_the_samples as $sorted_name => $sname) {
-		
+		$mod_sample_name = preg_replace("/\//",'-',$sname['sample_name']);//jQuery cannot use slashes
+		$mod_sample_name = preg_replace("/\s+/",'-',$mod_sample_name);//jQuery can also not use spaces
+
 ?>
 	<tr>
 	<td>
-	<label class="checkbox-label" ><input type="checkbox" class = "checkbox1" name="sample_names[]" value="<?php echo $sname['sample_name'] ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
+	
+		
+	<label class="checkbox-label" ><input type="checkbox" class = "checkbox1" id="<?php echo $mod_sample_name;?>_checkbox" name="sample[<?php echo $sname['sample_name']; ?>][checkbox]" value="<?php echo $mod_sample_name ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
  																																																 if(isset($_SESSION['sample_array'][$sample_name])){
  																																																 	echo "checked";
 																																																 }
 
-																																																}?>><?php echo $sname['sample_name'] ?></label><br>
+																																																}?>><?php echo $mod_sample_name ?></label><br>
 																																																
-	<td><input type="text" name="sample_names[]" value="<?php echo $sname['thing'] ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
+	<td><input type="text" id="<?php echo $mod_sample_name;?>_thing" name="sample[<?php echo $sname['sample_name']; ?>][thing]" value="<?php echo $sname['thing'] ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
  																																																 if(isset($_SESSION['sample_array'][$thing])){
  																																																 	echo "checked";
 																																																 }
@@ -105,16 +109,21 @@ $stmt-> close();
 echo '</tbody>';
 echo '</table>';
 
+
 //other fields to update
 //check if form has  been submitted successfully or not
 $submitted = 'true';
 if(isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false'){
 	$submitted = 'false';
 }
+echo '<input type="text" style="visibility:hidden" class="hidden" name="thing_id" id="thing_id" value="'.$thing_id.'"/>';
 ?>
 			
 <button type="submit" name="submit" value="1" class="button"> Update Samples </button>
 <input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" />
+
+</div>
+</form>
 
 <script type="text/javascript">
  	var name_check = 'true';
