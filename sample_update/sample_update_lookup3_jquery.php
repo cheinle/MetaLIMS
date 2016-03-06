@@ -618,7 +618,7 @@ include('../functions/unset_session_vars.php');
 	                	$thing_stmt->bind_param('sssssssssssiiiiis',$p_sample_name,$p_thing1,$p_thing2,$p_thing3,$p_thing4,$p_thing5,$p_thing6,$p_thing7,$p_thing8,$p_thing9,$p_thing10,$p_thing11,$p_thing12,$p_thing13,$p_thing14,$p_thing15,$p_sample_name);
 						if(!$thing_stmt -> execute()){
 							$successfull = 'false';
-							throw new Exception("Execution Error: Unable To Update Isolate Info");	
+							throw new Exception("Execution Error: Unable To Update User Created Info");	
 							//mysqli_error($dbc);
 						}
 						$thing_rows_affected = $thing_stmt ->affected_rows;
@@ -630,12 +630,12 @@ include('../functions/unset_session_vars.php');
 						}
 						else{
 							$successfull = 'false';
-							throw new Exception("Unable To Update Isolate Info");	
+							throw new Exception("Unable To Update User Created Info");	
 							//mysqli_error($dbc);
 						}
 					}else{
 						$successfull = 'false';
-						throw new Exception("Unable To Prepare Isolate Info");	
+						throw new Exception("Unable To Prepare User Created Info");	
 						//mysqli_error($dbc);
 					}
 
