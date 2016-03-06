@@ -25,6 +25,9 @@ elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'update_read_sub'))
 	include('../index.php');
 	include('../functions/build_bulk_read_sub_id_update_table.php');
 }
+elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_things')){
+	header('Location: bulk_insert_and_updates/things_bulk_update_select.php');
+}
 else{
 	include('../index.php');
 	include('../functions/build_table.php');

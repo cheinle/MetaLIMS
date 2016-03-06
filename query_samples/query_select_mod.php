@@ -115,6 +115,7 @@ include('../functions/check_box_tables.php');
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="bulk_storage") echo "checked";?> value="bulk_storage">Bulk Update For Storage Info</label>
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="read_sub") echo "checked";?> value="read_sub">Bulk Insert For Read Submission IDs</label>
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="update_read_sub") echo "checked";?> value="update_read_sub">Bulk Update AND View For Read Submission IDs</label>
+	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="bulk_things") echo "checked";?> value="bulk_things">Bulk Update User Created Fields</label>
 	</div>
 	</p>
 	
