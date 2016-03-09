@@ -30,7 +30,7 @@ function get_application_abbrev($application,$type){
 		else if($application == 'Whole Genome Sequencing'){
 			RETURN 'G';
 		}
-		else if($application == 'PacBio Isoaltes'){
+		else if($application == 'PacBio Isolates'){
 			RETURN 'P';
 		}
 		else{
