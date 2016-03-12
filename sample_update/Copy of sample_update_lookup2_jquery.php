@@ -58,13 +58,13 @@ if (isset($_GET['submit'])) {
 					    <li><a href="#fragment-3"><span>Analysis</span></a></li>
 					    <li><a href="#fragment-4"><span>User Created Fields</span></a></li>
 					    <li><a href="#fragment-5"><span>Notes</span></a></li>
-					  </ul>	
-					
+					  </ul>
+
 				<!--transaction time-->
 				<input type="text" style="visibility:hidden" class="hidden" name="transaction_time" id="transaction_time" value="<?php echo $transaction_time ?>"/>
 				
 				<!--see if sample is part of a pool-->
-				<input type="text" style="visibility:hidden" class="hidden" name="part_of_pool" id = "part_of_pool"  value="<?php echo text_insert_update($parent_value,'part_of_pool',$dbc); ?>"/>
+				<input type="text" style="visibility:hidden" class="hidden" name="part_of_pool" id = "part_of_pool"  value="<?php echo text_insert_update($parent_value,'part_of_pool',$dbc);} ?>"/>
 				
 				
 				<br>* = required field <br>
@@ -95,7 +95,7 @@ if (isset($_GET['submit'])) {
 				</div><!--end of col-xs-6-->
 				</fieldset>
 				
-				<!--------------------------------------fragment-1----------------------------------->
+				
 				<div id="fragment-1">
 				<fieldset>
 				<LEGEND><b>Sample Collection Info</b></LEGEND>
@@ -490,6 +490,7 @@ if (isset($_GET['submit'])) {
 				</div><!--end of col-xs-6-->
 				</fieldset>
 				</div><!--end of fragment-1-->
+			
 				
 				<!-----------------------------------------fragment 2---------------------------------------->
 				<div id="fragment-2">
@@ -729,19 +730,20 @@ if (isset($_GET['submit'])) {
 						</div><!--close col-md-12-->
 					</fieldset>
 				</div> <!--close fragement-5-->
-			
+			</div><!--tabs-->
 				
-				</div> <!--end of tabs-->
 				
-				<p>
-				<button class="button" type="submit" name="submit" value="2">Update </button>
-				<button class="button" type=button onClick="parent.location='<?php echo $root;?>sample_update/sample_update_lookup_jquery.php'" value='Go Back'>Go Back</button>
-				</p>
-			</form>
-			<script>
-				$( "#tabs" ).tabs();
-			</script>
-			<script type="text/javascript">
+				
+			<p>
+			<button class="button" type="submit" name="submit" value="2">Update </button>
+			<button class="button" type=button onClick="parent.location='<?php echo $root;?>sample_update/sample_update_lookup_jquery.php'" value='Go Back'>Go Back</button>
+			</p>
+				
+		</form>
+		<script>
+		$( "#tabs" ).tabs();
+		</script>
+		<script type="text/javascript">
 			   var name_check = 'true';
 			   function validate(from) {
 			   		var valid = 'true';
@@ -904,7 +906,10 @@ if (isset($_GET['submit'])) {
 					
 				}
 			</script>
-<?php
-		}
-}
-?>
+	
+	<?php }?>
+	
+	
+
+</body>
+</html>

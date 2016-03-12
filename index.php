@@ -5,8 +5,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('config/path.php');
-include('database_connection.php');
-
+$path = $_SERVER['DOCUMENT_ROOT'].$root;
+include($path.'database_connection.php');
 
 //if user is not logged in, do not let him access any of the pages/directories
 session_start(); 
@@ -93,7 +93,8 @@ if($stmt = $dbc->prepare("SELECT admin FROM users WHERE user_id = ?")){
 			}
 		}	
 	}	
-}			
+}
+$stmt->close();		
 ?>
 
 <nav class="navbar navbar-default" role="navigation">

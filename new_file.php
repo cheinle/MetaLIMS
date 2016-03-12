@@ -1,66 +1,4 @@
-<?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-include ('../database_connection.php');
-
-
-?>
-<!doctype html>
-<html>
-<head>
-		<meta charset="utf-8">
-				<!--<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->		
-</head>
-<body class="update">
-	
-<?php	//drowpdown to select field_name from table_name
-
-
-$parent_value = htmlspecialchars($_GET['sample_name']);
-include('../config/path.php');
-$path = $_SERVER['DOCUMENT_ROOT'].$root;
-include($path.'functions/dropDown_update.php');
-include($path.'functions/dropDown_update_for_storage.php');
-include($path.'functions/text_insert_update.php');
-include($path.'functions/text_insert_update_dt.php');
-include($path.'functions/text_insert_update_storage_info.php');
-include ($path.'index.php');
-include($path.'config/check_form_insert_js.php');
-include($path.'config/check_required_user_things_js.php');
-include($path.'config/check_sample_name.php');
-include($path.'admin_tools/dynamically_add_user_fields/build_a_user_thing.php');
-
-?>
-<div class="page-header">	
-	<h3>Update Samples</h3>
-</div>
-<?php
-$testing = 'true';
-if (isset($_GET['submit'])) {
-
-	$error = 'false';
-	if($parent_value == ''){
-			echo '<p>ERROR: You must select a Sample Name<p>';
-			echo '<button class="button" type=button onClick="parent.location=\'/series/dynamic/mymicrobiomes/sample_update/sample_update_lookup.php\'" value="Go Back">Go Back</button>';
-			$error = 'true';
-	}
-	if ($error != 'true') {
-
-				$transaction_time = date_default_timezone_set("Asia/Singapore");
-				$transaction_time = date("Y-m-d H:i:s");
-	
-?>				
-				<form  class="registration" onsubmit="return validate(this)" action="sample_update_lookup3_jquery.php" method="GET">
-				<div id="tabs">
-					  <ul>
-					    <li><a href="#fragment-1"><span>Collection Info</span></a></li>
-					    <li><a href="#fragment-2"><span>DNA/RNA Extraction</span></a></li>
-					    <li><a href="#fragment-3"><span>Analysis</span></a></li>
-					    <li><a href="#fragment-4"><span>User Created Fields</span></a></li>
-					    <li><a href="#fragment-5"><span>Notes</span></a></li>
-					  </ul>	
-					
-				<!--transaction time-->
+		<!--transaction time-->
 				<input type="text" style="visibility:hidden" class="hidden" name="transaction_time" id="transaction_time" value="<?php echo $transaction_time ?>"/>
 				
 				<!--see if sample is part of a pool-->
@@ -95,7 +33,7 @@ if (isset($_GET['submit'])) {
 				</div><!--end of col-xs-6-->
 				</fieldset>
 				
-				<!--------------------------------------fragment-1----------------------------------->
+				
 				<div id="fragment-1">
 				<fieldset>
 				<LEGEND><b>Sample Collection Info</b></LEGEND>
@@ -490,6 +428,7 @@ if (isset($_GET['submit'])) {
 				</div><!--end of col-xs-6-->
 				</fieldset>
 				</div><!--end of fragment-1-->
+			
 				
 				<!-----------------------------------------fragment 2---------------------------------------->
 				<div id="fragment-2">
@@ -729,19 +668,20 @@ if (isset($_GET['submit'])) {
 						</div><!--close col-md-12-->
 					</fieldset>
 				</div> <!--close fragement-5-->
-			
+			</div><!--tabs-->
 				
-				</div> <!--end of tabs-->
 				
-				<p>
-				<button class="button" type="submit" name="submit" value="2">Update </button>
-				<button class="button" type=button onClick="parent.location='<?php echo $root;?>sample_update/sample_update_lookup_jquery.php'" value='Go Back'>Go Back</button>
-				</p>
-			</form>
-			<script>
-				$( "#tabs" ).tabs();
-			</script>
-			<script type="text/javascript">
+				
+			<p>
+			<button class="button" type="submit" name="submit" value="2">Update </button>
+			<button class="button" type=button onClick="parent.location='<?php echo $root;?>sample_update/sample_update_lookup_jquery.php'" value='Go Back'>Go Back</button>
+			</p>
+				
+		</form>
+		<script>
+		$( "#tabs" ).tabs();
+		</script>
+		<script type="text/javascript">
 			   var name_check = 'true';
 			   function validate(from) {
 			   		var valid = 'true';
@@ -904,7 +844,10 @@ if (isset($_GET['submit'])) {
 					
 				}
 			</script>
-<?php
-		}
-}
-?>
+	
+	<?php }?>
+	
+	
+
+</body>
+</html>

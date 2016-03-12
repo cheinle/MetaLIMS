@@ -393,7 +393,7 @@ include('form_insert_jquery_js.php');
 					<fieldset>
 					<LEGEND><b>User Created Fields</b></LEGEND>
 						<div class="col-xs-6">
-							<input type="text" style="visibility:hidden" class="hidden" name="build_type" id="build_type" value="update"/>
+							<input type="text" style="visibility:hidden" class="hidden" name="build_type" id="build_type" value="insert"/>
 							<div id="required_things">
 								
 							</div>
@@ -402,7 +402,7 @@ include('form_insert_jquery_js.php');
 							</div>
 						</div>
 					</fieldset>
-					</div><!--end fragment-5-->
+					</div><!--end fragment-4-->
 					
 					<div id="fragment-5">
 					<fieldset>
