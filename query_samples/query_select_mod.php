@@ -101,11 +101,17 @@ include('../functions/check_box_tables.php');
 	<p>
 	<h3 class="checkbox-header">Display?:</h3>
 	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="screen") echo "checked";?> value="screen">Display To Screen</label>
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="xls") echo "checked";?> value="xls">Download MS Excel Worksheet</label>
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="sensor") echo "checked";?> value="sensor">Include Sensor Data</label>
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="view_read_sub") echo "checked";?> value="view_read_sub">View Read Submission IDs</label>
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="view_read_sub") echo "checked";?> value="view_user_things">View User Created Fields</label>
+	<label class="checkbox-label"><input type="radio" name="db_view" <?php if (isset($db_content) && $db_content =="screen") echo "checked";?> value="screen">Display To Screen</label>
+	<label class="checkbox-label"><input type="radio" name="db_view" <?php if (isset($db_content) && $db_content =="xls") echo "checked";?> value="xls">Download MS Excel Worksheet</label>
+	</div>
+	</p>
+	
+	<p>
+	<h3 class="checkbox-header">Include (Optional):</h3>
+	<div class="vert-checkboxes">
+	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="sensor") echo "checked";?> value="sensor">Sensor Data</label>
+	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="view_read_sub") echo "checked";?> value="view_read_sub">Read Submission IDs</label>
+	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="view_user_things") echo "checked";?> value="view_user_things">User Created Fields</label>
 	</div>
 	</p>
 	

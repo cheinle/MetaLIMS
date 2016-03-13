@@ -3,37 +3,43 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('../database_connection.php'); 
 
-#include('index.php');
-////choose which files to include depending on if you are exporting an xls or not.
-//xls cannot include the index file because it will send headers too early (and the wrong ones)
-if((isset($_GET['db_content'])) && ($_GET['db_content'] == 'xls')){
-	include('../functions/build_xls_output_table.php');
-}
-elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_dna')){
-	include('../index.php');
-	include('../functions/build_bulk_dna_table.php');
-}
-elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_storage')){
-	include('../index.php');
-	include('../functions/build_bulk_storage_update_table.php');
-}
-elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'read_sub')){
-	include('../index.php');
-	include('../functions/build_bulk_read_sub_id_table.php');
-}
-elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'update_read_sub')){
-	include('../index.php');
-	include('../functions/build_bulk_read_sub_id_update_table.php');
-}
-elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_things')){
-	header('Location: bulk_insert_and_updates/things_bulk_update_select.php');
-}
-else{
-	include('../index.php');
-	include('../functions/build_table.php');
-	include('../functions/basic_build_table.php');
 
+//choose which files to include depending on if you are exporting an xls or not.
+//xls cannot include the index file because it will send headers too early (and the wrong ones)
+if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
+	include('../functions/build_xls_output_table.php');
+}else{
+	
+	
+	
+	//check what kind of contents user is wanting to display
+	if(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_dna')){
+		include('../index.php');
+		include('../functions/build_bulk_dna_table.php');
+	}
+	elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_storage')){
+		include('../index.php');
+		include('../functions/build_bulk_storage_update_table.php');
+	}
+	elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'read_sub')){
+		include('../index.php');
+		include('../functions/build_bulk_read_sub_id_table.php');
+	}
+	elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'update_read_sub')){
+		include('../index.php');
+		include('../functions/build_bulk_read_sub_id_update_table.php');
+	}
+	elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_things')){
+		header('Location: bulk_insert_and_updates/things_bulk_update_select.php');
+	}else{
+		include('../index.php');
+		include('../functions/build_table.php');
+		include('../functions/basic_build_table.php');
+	}
 }
+	
+
+
 ?>
 
 <!doctype html>
@@ -64,7 +70,7 @@ else{
 				scrollY:        "90%", 
 				scrollX:        true,
 				scrollCollapse: true,
-				paging:         false
+				paging:         true
 			} );
 			new $.fn.dataTable.FixedColumns( table );
 		} );
@@ -186,11 +192,8 @@ if(isset($_GET['submit'])){
 		
 	
 
-		if(isset($_GET['db_content']) && ($_GET['db_content'] == 'xls')){
+		/*if(isset($_GET['db_content']) && ($_GET['db_content'] == 'xls')){
 			build_xls_output_table($stmt);
-		}
-		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'xls')){
-			basic_build_table($stmt,'display',$root);
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
 			build_bulk_dna_table($stmt,$root);
@@ -208,7 +211,33 @@ if(isset($_GET['submit'])){
 			if($stmt){
 				build_table($stmt,'display');
 			}
+		}*/
+		
+		if(isset($_GET['db_view']) && ($_GET['db_view'] == 'xls')){
+			build_xls_output_table($stmt);
+		}else{
+			if(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
+				build_bulk_dna_table($stmt,$root);
+			}
+			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_storage'){
+				build_bulk_storage_update_table($stmt,$root);
+			}
+			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
+				build_bulk_read_sub_id_table($stmt,$root);
+			}
+			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'update_read_sub'){
+				build_bulk_read_sub_id_update_table($stmt,$root);
+			}
+			else{
+				if($stmt){
+					build_table($stmt,'display');
+				}
+			}
 		}
+
+
+
+		
 	}
 
 

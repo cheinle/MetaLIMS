@@ -48,15 +48,15 @@
 					echo $thing_set_query;
 					
 					if($thing_stmt = $dbc ->prepare($thing_set_query)) {                 
-	                	if($thing_number > 10 && $thing_number < 16){
+	                	/*if($thing_number > 10 && $thing_number < 16){
 							$thing_stmt->bind_param('si',$p_sample_name,$p_thing_value);
 							echo "one";
 							echo $p_sample_name.$p_thing_value;
-						}else{
+						}else{*/
 							$thing_stmt->bind_param('ss',$p_thing_value,$p_sample_name);
 							echo "two";
 							echo $p_sample_name.$p_thing_value;
-						}
+						//}
 						
 						if($thing_stmt -> execute()){
 						
@@ -82,6 +82,7 @@
 		    echo "</div>";
 			$dbc->commit();
 			echo "Update Complete!";
+			//unset_session_vars('bulk_thing_update');
 		}
 		catch (Exception $e) { 
     		if (isset ($dbc)){
