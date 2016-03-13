@@ -6,17 +6,20 @@
 	//you need your thing id
     $sample_array=$_POST['sample'];
 	$thing_id = htmlspecialchars($_POST['thing_id']);
+	echo '<div class="page-header">
+			<h3>Samples Updated</h3>	
+			</div>';
 
-
+	echo '<div class = border>';
 	$error = 'false';
 
 	//if there are no errors, proceed to update the samples choosen
 	if($error == 'false'){
-		echo 'Samples Updated:<br>';
-		
+
 		try{
 			//start transaction
 			$dbc->autocommit(FALSE);
+			
 			
 			foreach($sample_array as $sample_name => $value){
 				
@@ -45,17 +48,12 @@
 					
 					$thing_set_query = "UPDATE store_user_things SET thing1 = ? WHERE sample_name = ?";
 					//$thing_set_query = "UPDATE store_user_things SET ".$whole_thing." = ? WHERE sample_name = ?";
-					echo $thing_set_query;
-					
+
 					if($thing_stmt = $dbc ->prepare($thing_set_query)) {                 
 	                	if($thing_number > 10 && $thing_number < 16){
 							$thing_stmt->bind_param('si',$p_sample_name,$p_thing_value);
-							echo "one";
-							echo $p_sample_name.$p_thing_value;
 						}else{
 							$thing_stmt->bind_param('ss',$p_thing_value,$p_sample_name);
-							echo "two";
-							echo $p_sample_name.$p_thing_value;
 						}
 						
 						if($thing_stmt -> execute()){
@@ -63,8 +61,7 @@
 							$thing_rows_affected = $thing_stmt ->affected_rows;
 							$thing_stmt -> close();
 							if($thing_rows_affected >= 0){
-								echo $thing_set_query.$p_sample_name.$p_thing_value."<br>";
-								$dbc->commit();
+								echo $p_sample_name."<br>";
 							}
 							else{
 								throw new Exception("Unable To Update User Created Info");	
@@ -79,9 +76,9 @@
 				}
 			}
 			echo '<p><input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" /></p>';
-		    echo "</div>";
 			$dbc->commit();
 			echo "Update Complete!";
+			
 		}
 		catch (Exception $e) { 
     		if (isset ($dbc)){
@@ -93,11 +90,13 @@
 			</p>';
 		}
 		
+		
 	}
 	else{
 			echo '<p>
 			<input action="action" class="btn btn-success" type="button" value="Go Back" onclick="history.go(-1);" />
 			</p>';
 	}
+	echo '</div>';
 
 ?>

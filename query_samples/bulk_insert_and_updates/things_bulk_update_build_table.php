@@ -16,15 +16,18 @@
 
  
 <body>
-<div class="page-header">
-<h3>Update Field</h3>	
-</div>
-
 <?php
 $id = htmlspecialchars($_GET['thing_select']);
 $explode = explode(":",$id);
 $thing_id = $explode[0];
 $label = $explode[1];
+$type = $explode[2];
+$select_values = $explode[3];
+
+
+echo '<div class="page-header">
+<h3>Update Field: '.$label.'</h3>	
+</div>';
 
 
 echo '<form class="registration" onsubmit="return validate(this)" action="things_bulk_update_submit.php" method="POST">';
@@ -117,6 +120,7 @@ if(isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false'){
 	$submitted = 'false';
 }
 echo '<input type="text" style="visibility:hidden" class="hidden" name="thing_id" id="thing_id" value="'.$thing_id.'"/>';
+echo '<input type="text" style="visibility:hidden" class="hidden" name="thing_type" id="thing_type" value="'.$type.'"/>';
 ?>
 			
 <button type="submit" name="submit" value="1" class="button"> Update Samples </button>
@@ -155,6 +159,43 @@ echo '<input type="text" style="visibility:hidden" class="hidden" name="thing_id
         else{
        		top_table.style.background = "white";
         }
+        
+        //check that all checked have correct input
+        var coffee = document.forms[0];
+	    var txt = "";
+	    var i;
+	    for (i = 0; i < coffee.length; i++) {
+	        if (coffee[i].checked) {
+	            txt = coffee[i].value;
+	            alert(txt);
+	            var input = document.getElementById(txt+'_thing');
+	            var input_val = input.value;
+		     	if(input_val == ''){
+			        input.style.background = "blue";
+			        valid = 'false';
+			    }
+			    else{
+			    	var type = document.getElementById("thing_type").value;
+		        	if(type == 'numeric_input'){
+			        	var regrex_check_sh2  =  input_val.match(/^\s*(?=.*[0-9])\d{0,5}(?:\.\d{1,2})?\s*$/);//this can be zero
+			        	alert(regrex_check_sh2);
+						if (regrex_check_sh2 == null){
+							alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
+							input.style.background = "blue";
+						    valid = 'false';
+						}
+						else{
+							input.style.background = "white";
+						}
+		        	}
+					else{
+				 		input.style.background = "white";
+				 	}       	
+			    }
+			}
+	    }
+       
+       
 
 		//check that selects are selected
         var selects = document.getElementsByTagName("select");
