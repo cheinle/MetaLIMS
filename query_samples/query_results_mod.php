@@ -150,6 +150,9 @@ if(isset($_GET['submit'])){
 		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'view_read_sub' || $_GET['db_content'] == 'update_read_sub')){
 			$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name WHERE ";
 		}
+		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'view_user_things'){
+			$query_main = "SELECT * FROM sample JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
+		}
 		else{
 			//add new sampler table
 			$query_main = "SELECT $field_names FROM sample JOIN sample_sampler ON sample_sampler.sample_name  = sample.sample_name WHERE";

@@ -71,5 +71,6 @@ function basic_build_table($stmt,$table_type,$root){ //table types are 'dislapy'
 					echo '<script>Alert.render2("Sorry! No Results Found. Please Check Query");</script>';
 				} 
 
-		}			
+		}	
+	}		
 ?>

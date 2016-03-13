@@ -2,6 +2,8 @@
 
 function convert_header_names($p_key){
 	
+	include('../database_connection.php');
+	
 	if($p_key == 'sampler_name'){
 		$p_key = 'Sampler Name';
 	}
@@ -405,6 +407,28 @@ function convert_header_names($p_key){
 	}
 	if($p_key == 'seq_id_start'){
 		$p_key = 'Seq ID Abbrev';
+	}
+	
+	
+	//thing table
+	$regrex_check = '/^thing\d+$/'; //remove dashes
+	$check = preg_match($regrex_check,$p_key);
+	if($check == true){
+		$stmt= $dbc->prepare("SELECT label_name FROM create_user_things WHERE thing_id = ?");
+		$stmt -> bind_param('s', $p_key);
+		if ($stmt->execute()){
+	    	$stmt->bind_result($label);
+	    	if ($stmt->fetch()){
+	        	$p_key = $label;
+			}
+			else {
+				$p_key = 'false'; //assume is not created by user yet
+			}
+		} 
+		else {
+	    	die('execute() failed: ' . htmlspecialchars($stmt->error));
+		}
+		$stmt -> close();
 	}
 	
 	return $p_key;		

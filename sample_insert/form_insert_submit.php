@@ -140,7 +140,7 @@
 					}
 					else {
 						$error_check = 'true';
-	    				die('execute() failed: ' . htmlspecialchars($stmt_sid->error));
+	    				die('fetch() failed: ' . htmlspecialchars($stmt_sid->error));
 					}
 				} 
 				else {
