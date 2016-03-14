@@ -168,30 +168,39 @@ echo '<input type="text" style="visibility:hidden" class="hidden" name="thing_ty
 	        if (coffee[i].checked) {
 	            txt = coffee[i].value;
 	            alert(txt);
+	            var type = document.getElementById("thing_type").value;
 	            var input = document.getElementById(txt+'_thing');
 	            var input_val = input.value;
-		     	if(input_val == ''){
-			        input.style.background = "blue";
-			        valid = 'false';
-			    }
-			    else{
-			    	var type = document.getElementById("thing_type").value;
-		        	if(type == 'numeric_input'){
-			        	var regrex_check_sh2  =  input_val.match(/^\s*(?=.*[0-9])\d{0,5}(?:\.\d{1,2})?\s*$/);//this can be zero
-			        	alert(regrex_check_sh2);
-						if (regrex_check_sh2 == null){
-							alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
-							input.style.background = "blue";
-						    valid = 'false';
-						}
+	            if(type == 'select'){
+	            	if(input_val == '0'){
+			        	input.style.background = "blue";
+			        	valid = 'false';
+			   	 	}
+	            }
+	            else{
+	            	if(input_val == ''){
+			        	input.style.background = "blue";
+			        	valid = 'false';
+				    }
+				    else{
+				    	
+			        	if(type == 'numeric_input'){
+				        	var regrex_check_sh2  =  input_val.match(/^\s*(?=.*[0-9])\d{0,5}(?:\.\d{1,2})?\s*$/);//this can be zero
+				        	alert(regrex_check_sh2);
+							if (regrex_check_sh2 == null){
+								alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
+								input.style.background = "blue";
+							    valid = 'false';
+							}
+							else{
+								input.style.background = "white";
+							}
+			        	}
 						else{
-							input.style.background = "white";
-						}
-		        	}
-					else{
-				 		input.style.background = "white";
-				 	}       	
-			    }
+					 		input.style.background = "white";
+					 	}       	
+			    	}
+	          	}	
 			}
 	    }
        
