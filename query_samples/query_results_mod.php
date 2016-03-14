@@ -70,7 +70,7 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 				scrollY:        "90%", 
 				scrollX:        true,
 				scrollCollapse: true,
-				paging:         true
+				paging:         false
 			} );
 			new $.fn.dataTable.FixedColumns( table );
 		} );
@@ -148,7 +148,7 @@ if(isset($_GET['submit'])){
 		else{$field_names = "*";}
 
 		if(isset($_GET['db_content']) && $_GET['db_content'] == 'sensor'){
-			$query_main = "SELECT * FROM sample JOIN daily_data2 ON DATE(sample.start_samp_date_time) = daily_data2.daily_date WHERE ";
+			$query_main = "SELECT * FROM sample JOIN daily_data2_particle_counter ON DATE(sample.start_samp_date_time) = daily_data2_particle_counter.daily_date and sample.location_name = daily_data2_particle_counter.location WHERE ";
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
 			$query_main = "SELECT sample.sample_name,sample.sample_num,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample LEFT JOIN read_submission ON read_submission.sample_name = sample.sample_name WHERE ";
@@ -227,6 +227,9 @@ if(isset($_GET['submit'])){
 			}
 			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'update_read_sub'){
 				build_bulk_read_sub_id_update_table($stmt,$root);
+			}
+			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'sensor'){
+				basic_build_table($stmt,'display',$root);
 			}
 			else{
 				if($stmt){
