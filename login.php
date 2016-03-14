@@ -136,13 +136,13 @@ catch (Exception $e) {
 	<link href="aquired/assets/css/style.css" rel="stylesheet" type="text/css"/>
 	<link href="aquired/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
 	<link href="aquired/assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
-	<link href="aquired/assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-	<link rel="stylesheet" type="text/css" href="aquired/assets/plugins/select2/select2_metro.css" />
+	<!--<link href="aquired/assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>-->
+	<!--<link rel="stylesheet" type="text/css" href="aquired/assets/plugins/select2/select2_metro.css" />-->
 	<!-- END GLOBAL MANDATORY STYLES -->
 	<!-- BEGIN PAGE LEVEL STYLES -->
 	<link href="aquired/assets/css/pages/login-soft.css" rel="stylesheet" type="text/css"/>
 	<!-- END PAGE LEVEL STYLES -->
-	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="shortcut icon" href="images/favicon.ico" />
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -306,12 +306,12 @@ catch (Exception $e) {
 	</div>
 	<!-- END COPYRIGHT -->
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-	<!-- BEGIN CORE PLUGINS -->   <script src="assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<!-- BEGIN CORE PLUGINS -->   <script src="aquired/assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
 	<script src="aquired/assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 	<script src="aquired/assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
 	<script src="aquired/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="aquired/assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript" ></script>
+	<!--<script src="aquired/assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript" ></script>-->
 	<!--[if lt IE 9]>
 	<script src="aquired/assets/plugins/excanvas.min.js"></script>
 	<script src="aquired/assets/plugins/respond.min.js"></script>  
@@ -319,7 +319,7 @@ catch (Exception $e) {
 	<script src="aquired/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 	<script src="aquired/assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>  
 	<script src="aquired/assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
-	<script src="aquired/assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script>
+	<!--<script src="aquired/assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script>-->
 	<!-- END CORE PLUGINS -->
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
 	<script src="aquired/assets/plugins/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
