@@ -130,8 +130,8 @@ function convert_header_names($p_key){
 		$p_key = 'false';
 	}
 	if($p_key == 'seq_id'){
-		//$p_key = 'Sequencing Submission ID';
-		$p_key = 'false';
+		$p_key = 'Sequencing Submission ID'; //is abbreviated 5 + 3 digit number
+		//$p_key = 'false';
 	}
 	if($p_key == 'sequencing_id'){
 		$p_key = 'false';
