@@ -4,8 +4,8 @@ function build_bulk_read_sub_id_update_table($stmt,$root){
 	
 
 	$submitted = 'false';
-include('convert_time.php');
-	include('convert_header_names.php');
+	include('convert_time.php');
+	//include('convert_header_names.php');
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	include($path.'/functions/dropDown_update_for_read_subm.php');
 	include($path.'/config/js.php');

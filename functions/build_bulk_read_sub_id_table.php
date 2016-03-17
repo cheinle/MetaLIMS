@@ -3,7 +3,7 @@
 //display table
 function build_bulk_read_sub_id_table($stmt,$root){
 	include('convert_time.php');
-	include('convert_header_names.php');
+	//include('convert_header_names.php');
 	include('text_insert_update.php');
 	include('dropDown.php');
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;

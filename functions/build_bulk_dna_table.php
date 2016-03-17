@@ -4,7 +4,7 @@
 function build_bulk_dna_table($stmt,$root){
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;		
 	include('convert_time.php');
-	include('convert_header_names.php');
+	//include('convert_header_names.php');
 	include('text_insert_update.php');
 	include('dropDown.php');
 	include($path.'/config/js.php');
