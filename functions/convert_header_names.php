@@ -9,8 +9,8 @@ function convert_header_names($p_key){
 		$p_key = 'Sampler Name';
 	}
 	if($p_key == 'analysis_name'){
-		//$p_key = 'Analysis Name';
-		$p_key = 'false';
+		$p_key = 'Analysis Name';
+		//$p_key = 'false';
 	}
 	if($p_key == 'barcode'){
 		$p_key = 'Barcode';
