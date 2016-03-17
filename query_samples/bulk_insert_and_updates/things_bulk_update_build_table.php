@@ -7,14 +7,12 @@
 <head>
 	<meta charset="utf-8">
 	<title>Bulk Update User Fields</title>
-	
   	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
   	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-  	
+
 </head>
 
- 
 <body>
 <?php
 $id = htmlspecialchars($_GET['thing_select']);
@@ -24,11 +22,9 @@ $label = $explode[1];
 $type = $explode[2];
 $select_values = $explode[3];
 
-
 echo '<div class="page-header">
 <h3>Update Field: '.$label.'</h3>	
 </div>';
-
 
 echo '<form class="registration" onsubmit="return validate(this)" action="things_bulk_update_submit.php" method="POST">';
 echo '<div>';
@@ -55,26 +51,14 @@ if ($stmt->execute()){
 		call_user_func_array(array($stmt, 'bind_result'), $params); 
 		$sort_the_samples = array();
 		while ($stmt->fetch()) {
-			//echo '<tr>';	
-			//foreach($row as $key => $value){
-				//if($key == 'sample_name' || $key == $thing_id){
-					//$p_value = htmlspecialchars($value);
-					//echo '<td class = "reg">'.$p_value.'</td>';
-					$sample_name = $row['sample_name'];
-					$sample_sort = $row['sample_sort'];
-					$thing = $row[$thing_id];
-					$sort_the_samples[$sample_sort]['sample_name'] = $sample_name;
-					$sort_the_samples[$sample_sort]['thing'] = $thing;
-				//}	
-				
-			//}
-			//echo '</tr>';
+			$sample_name = $row['sample_name'];
+			$sample_sort = $row['sample_sort'];
+			$thing = $row[$thing_id];
+			$sort_the_samples[$sample_sort]['sample_name'] = $sample_name;
+			$sort_the_samples[$sample_sort]['thing'] = $thing;
 		}
-		
 	}
-	
 }		
-			
 			
 
 ksort($sort_the_samples);
@@ -195,56 +179,42 @@ echo '<input type="text" style="visibility:hidden" class="hidden" name="thing_ty
 	           var type = document.getElementById("thing_type").value;
 	           var input = document.getElementById(txt+'_thing');
 	           var input_val = input.value;
-		    	
+		       alert(type);
 		    	if(type == 'select'){
 		    		if(input_val == '0'){
 			      		input.style.background = "blue";
-			       	valid = 'false';
-			   	}
-		    	}else{
+			       		valid = 'false';
+			   		}
+			   		else{
+			   			input.style.background = "white";
+			   		}
+		    	}
+		    	else{
 		    		if(input_val == ''){
 			      		input.style.background = "blue";
-			       	valid = 'false';
-			   	}
-				   else{
-			       	if(type == 'numeric_input'){
-				       	var regrex_check_sh2  =  input_val.match(/^\s*(?=.*[0-9])\d{0,5}(?:\.\d{1,2})?\s*$/);//this can be zero
-				       	alert(regrex_check_sh2);
+			       		valid = 'false';
+			   		}
+				    else{
+			       		if(type == 'numeric_input'){
+				       		var regrex_check_sh2  =  input_val.match(/^\s*(?=.*[0-9])\d{0,5}(?:\.\d{1,2})?\s*$/);//this can be zero
+				       		alert(regrex_check_sh2);
 							if (regrex_check_sh2 == null){
-								alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
-								input.style.background = "blue";
-							   valid = 'false';
+									alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
+									input.style.background = "blue";
+							   		valid = 'false';
 							}
 							else{
 								input.style.background = "white";
 							}
-			       	}
+			       		}
 						else{
 							input.style.background = "white";
 						}       	
-				   }
+				   	}
 		    	}
-		    
 			}
-	   }
-       
-       
-
-		//check that selects are selected
-        /*var selects = document.getElementsByTagName("select");
-        var i2;
-        for (i2 = 0; i2 < selects.length; i2++) {
-        	selected = selects[i2].value;
-            if(selected == '0'){
-	       	selects[i2].style.background = "blue";
-	           valid = 'false';
-	       }
-	       else{
-	       	selects[i2].style.background = "white";
-	       }
-	   }
-	   return valid;
-	}*/
-
+		}
+		return valid; 
+	}
 </script>
 
