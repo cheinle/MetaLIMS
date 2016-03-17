@@ -1,6 +1,7 @@
 <?php 
 include('database_connection.php');
 
+
 /* 
  * Set to logout after set time (time set in index.php). Will log user out from Location if same user tries to login at a different locations
  */
@@ -90,7 +91,7 @@ try{
 						
 					//if you need restrict access to database for any reason
 					//destroy session for anyone who is not the developer
-						
+					include('config/path.php');	
 					if($database_down == 'true' || $database_down == 'moving'){
 						//if($_SESSION['username'] == $admin_user){
 						if($admin_user == 'Y'){
