@@ -8,7 +8,7 @@ session_start();
 //This would delete all the session keys
 session_destroy(); 
 $url = $_SERVER["HTTP_HOST"].$root."login.php"; 
-header("location:".$url);
+header("Location: http://".$url);
 exit();
 ?>
 
