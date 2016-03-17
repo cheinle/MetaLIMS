@@ -7,7 +7,8 @@ include('config/path.php');
 session_start();
 //This would delete all the session keys
 session_destroy(); 
-header('Location: login.php');
+$url = $_SERVER["HTTP_HOST"].$root."login.php"; 
+header("location:".$url);
 exit();
 ?>
 

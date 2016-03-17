@@ -79,32 +79,56 @@ if ($stmt->execute()){
 
 ksort($sort_the_samples);
 
+$build_select = 'N';
+if($select_values != ''){
+	$options = explode(";",$select_values);
+	$build_select = 'Y';
+}
+
 foreach ($sort_the_samples as $sorted_name => $sname) {
 		$mod_sample_name = preg_replace("/\//",'-',$sname['sample_name']);//jQuery cannot use slashes
 		$mod_sample_name = preg_replace("/\s+/",'-',$mod_sample_name);//jQuery can also not use spaces
 
-?>
-	<tr>
-	<td>
+	echo '<tr>';
+	echo '<td>';
 	
 		
-	<label class="checkbox-label" ><input type="checkbox" class = "checkbox1" id="<?php echo $mod_sample_name;?>_checkbox" name="sample[<?php echo $sname['sample_name']; ?>][checkbox]" value="<?php echo $mod_sample_name ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
+	?><label class="checkbox-label" ><input type="checkbox" class = "checkbox1" id="<?php echo $mod_sample_name;?>_checkbox" name="sample[<?php echo $sname['sample_name']; ?>][checkbox]" value="<?php echo $mod_sample_name ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == "false") {
  																																																 if(isset($_SESSION['sample_array'][$sample_name])){
  																																																 	echo "checked";
-																																																 }
+																																																}
 
 																																																}?>><?php echo $mod_sample_name ?></label><br>
+	<?php
 																																																
-	<td><input type="text" id="<?php echo $mod_sample_name;?>_thing" name="sample[<?php echo $sname['sample_name']; ?>][thing]" value="<?php echo $sname['thing'] ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
+	
+	if($build_select == 'Y'){
+		?><td><select id="<?php echo $mod_sample_name;?>_thing" name="sample[<?php echo $sname['sample_name']; ?>][thing]">
+		<?php
+
+		$selected_option = $sname['thing'];
+		echo '<option value="0">-Select-</option>';	
+		foreach ($options as $key => $value) {
+					echo '<option value="'.$value.'"', ($selected_option == $value) ? 'selected':'' ,'>'.$value.'</option>';	
+			
+		}
+		echo '</select>';
+		echo '</td>';
+																																																
+		
+	}
+	else{
+		?>
+		<td><input type="text" id="<?php echo $mod_sample_name;?>_thing" name="sample[<?php echo $sname['sample_name']; ?>][thing]" value="<?php echo $sname['thing'] ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == "false") {
  																																																 if(isset($_SESSION['sample_array'][$thing])){
  																																																 	echo "checked";
-																																																 }
+																																																}
 
 																																																}?>><br>
 																																																
-	</td>
-	</tr>
-<?php
+	<?php }	
+	echo '</td>';
+	echo '</tr>';
 }
 echo '<tr>';	
 	
@@ -162,64 +186,65 @@ echo '<input type="text" style="visibility:hidden" class="hidden" name="thing_ty
         
         //check that all checked have correct input
         var coffee = document.forms[0];
-	    var txt = "";
-	    var i;
-	    for (i = 0; i < coffee.length; i++) {
-	        if (coffee[i].checked) {
-	            txt = coffee[i].value;
-	            alert(txt);
-	            var type = document.getElementById("thing_type").value;
-	            var input = document.getElementById(txt+'_thing');
-	            var input_val = input.value;
-	            if(type == 'select'){
-	            	if(input_val == '0'){
-			        	input.style.background = "blue";
-			        	valid = 'false';
-			   	 	}
-	            }
-	            else{
-	            	if(input_val == ''){
-			        	input.style.background = "blue";
-			        	valid = 'false';
-				    }
-				    else{
-				    	
-			        	if(type == 'numeric_input'){
-				        	var regrex_check_sh2  =  input_val.match(/^\s*(?=.*[0-9])\d{0,5}(?:\.\d{1,2})?\s*$/);//this can be zero
-				        	alert(regrex_check_sh2);
+	   var txt = "";
+	   var i;
+	   for (i = 0; i < coffee.length; i++) {
+	       if (coffee[i].checked) {
+	           txt = coffee[i].value;
+	           alert(txt);
+	           var type = document.getElementById("thing_type").value;
+	           var input = document.getElementById(txt+'_thing');
+	           var input_val = input.value;
+		    	
+		    	if(type == 'select'){
+		    		if(input_val == '0'){
+			      		input.style.background = "blue";
+			       	valid = 'false';
+			   	}
+		    	}else{
+		    		if(input_val == ''){
+			      		input.style.background = "blue";
+			       	valid = 'false';
+			   	}
+				   else{
+			       	if(type == 'numeric_input'){
+				       	var regrex_check_sh2  =  input_val.match(/^\s*(?=.*[0-9])\d{0,5}(?:\.\d{1,2})?\s*$/);//this can be zero
+				       	alert(regrex_check_sh2);
 							if (regrex_check_sh2 == null){
 								alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
 								input.style.background = "blue";
-							    valid = 'false';
+							   valid = 'false';
 							}
 							else{
 								input.style.background = "white";
 							}
-			        	}
+			       	}
 						else{
-					 		input.style.background = "white";
-					 	}       	
-			    	}
-	          	}	
+							input.style.background = "white";
+						}       	
+				   }
+		    	}
+		    
 			}
-	    }
+	   }
        
        
 
 		//check that selects are selected
-        var selects = document.getElementsByTagName("select");
+        /*var selects = document.getElementsByTagName("select");
         var i2;
         for (i2 = 0; i2 < selects.length; i2++) {
         	selected = selects[i2].value;
             if(selected == '0'){
-	        	selects[i2].style.background = "blue";
-	            valid = 'false';
-	        }
-	        else{
-	        	selects[i2].style.background = "white";
-	        }
-	    }
-	    return valid;
-	}
+	       	selects[i2].style.background = "blue";
+	           valid = 'false';
+	       }
+	       else{
+	       	selects[i2].style.background = "white";
+	       }
+	   }
+	   return valid;
+	}*/
 
 </script>
+

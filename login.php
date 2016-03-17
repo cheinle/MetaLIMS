@@ -1,7 +1,8 @@
 <?php 
 include('database_connection.php');
+include('config/path.php');
 /* 
- * Set to logout after set time (time set in index.php). Will log user out from location if same user tries to login at a different locations
+ * Set to logout after set time (time set in index.php). Will log user out from Location if same user tries to login at a different locations
  */
 	/////////////////////////////////////////////////////////////////////////////////
 	//change flag to true if you need to restrict database access (allows admin only)
@@ -93,15 +94,18 @@ try{
 					if($database_down == 'true' || $database_down == 'moving'){
 						//if($_SESSION['username'] == $admin_user){
 						if($admin_user == 'Y'){
-							header('Location: home_page.php');
+							$url = $_SERVER["HTTP_HOST"].$root."home_page.php"; 
+							header("Location:http://".$url);
 						}
 						else{
 							session_destroy();
-							header('Location: login.php');
+							$url = $_SERVER["HTTP_HOST"].$root."login.php"; 
+							header("Location: http://".$url);
 						}
 					}
 					else{
-						header('Location: home_page.php');
+						$url = $_SERVER["HTTP_HOST"].$root."home_page.php"; 
+						header("Location: http://".$url);
 					}
 				}
 			}

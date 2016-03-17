@@ -11,7 +11,8 @@ include($path.'database_connection.php');
 //if user is not logged in, do not let him access any of the pages/directories
 session_start(); 
 if(!isset($_SESSION['username'])){  
-	header('Location: login.php');
+	$url = $_SERVER["HTTP_HOST"].$root."login.php"; 
+	header("Location: http://".$url);
 	exit();
 }
 else{//if user is logged in, check to see how long he has been idle. Log user out after x amt of time
