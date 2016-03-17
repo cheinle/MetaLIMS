@@ -1,6 +1,6 @@
 <?php 
 include('database_connection.php');
-
+include('config/path.php');
 /* 
  * Set to logout after set time (time set in index.php). Will log user out from Location if same user tries to login at a different locations
  */
