@@ -32,16 +32,13 @@ function whiteList($name_check,$type){// Example string to test against
 							'read_subm_database',
 							'read_subm_exp_types',
 							'sample_read_submission',
-							'isolate_collection_temp',
-							'isolates',
-							'isolate_storing_method',
-							'isolate_location_type',
 							'sequencing_method',
 							'read_length',
 							'quantitation_method',
 							'container_type',
 							'application',
-							'type_seq_sample'
+							'type_seq_sample',
+							'create_user_things'
 							); 
 		if( in_array($name_check,$white_list) ){
 	    	#echo $name_check.' is whitelisted.';
@@ -181,19 +178,6 @@ function whiteList($name_check,$type){// Example string to test against
 							//sample_read_submission
 							'read_submn_id',
 							'type_exp',
-							//isolate_collection_temp
-							'temp',
-							//isolates
-							'iso_coll_temp',
-							'iso_store_method',
-							'iso_date',
-							'closest_hit',
-							'seq_sang',
-							'send_pac_bio',
-							//isolate_storing_method
-							'storing_method',
-							//isolate_location_type
-							'loc_type',
 							//sequencing_method
 							'method',
 							//read_length
@@ -205,7 +189,15 @@ function whiteList($name_check,$type){// Example string to test against
 							//application
 							'application',
 							//type_seq_sample
-							'sample_type'
+							'sample_type',
+							//create_user_things
+							'thing_id',
+							'label_name',
+							'type',
+							'select_values',
+							'visible',
+							'required'
+							
 							); 
 		if( in_array($name_check,$white_list) ){
 	    	#echo $name_check.' is whitelisted.';
