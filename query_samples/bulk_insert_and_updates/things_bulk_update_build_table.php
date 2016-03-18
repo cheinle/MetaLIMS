@@ -196,7 +196,7 @@ echo '<input type="text" style="visibility:hidden" class="hidden" name="thing_ty
 			   		}
 				    else{
 			       		if(type == 'numeric_input'){
-				       		var regrex_check_sh2  =  input_val.match(/^\s*(?=.*[0-9])\d{0,5}(?:\.\d{1,2})?\s*$/);//this can be zero
+				       		var regrex_check_sh2  =  input_val.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
 				       		alert(regrex_check_sh2);
 							if (regrex_check_sh2 == null){
 									alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
