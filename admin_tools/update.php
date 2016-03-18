@@ -83,8 +83,11 @@ include ('table_exclude_list.php');
  				 var new_txt = name+'%'+txt;
  				 input_values.push(new_txt);
 	             if(n == 0){
-	             	valid = 'false';
-	             	inputs[i].style.background = "blue";
+	             	if(name != 'select_values'){
+	             		valid = 'false';
+	             		inputs[i].style.background = "blue";
+	             	}
+	             	
 				 }else{
 				 	inputs[i].style.background = "white";
 				 }

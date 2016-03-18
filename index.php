@@ -38,7 +38,9 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	        //Kill their session and log them out
 	        session_unset();
 	        session_destroy();
-			header('Location: login.php');
+			$url = $_SERVER["HTTP_HOST"].$root."login.php"; 
+			header("Location: http://".$url);
+			exit();
 	    }
 	    
 	}

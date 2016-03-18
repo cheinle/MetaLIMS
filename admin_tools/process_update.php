@@ -23,7 +23,7 @@
 		$valid_field_name = whiteList($field_name,'column');
 		$valid_table_name = whiteList($table_name,'table');
 		
-		if($valid_field_name == 'true'){
+		if($valid_field_name == 'true' && $valid_table_name == 'true'){
 			$fields = $fields.$field_name.'= ?,'; //white list field names, if does not exist, throw error
 			$values[] = $field_value;
 			$params[] = 's';
