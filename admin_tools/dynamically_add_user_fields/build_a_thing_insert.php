@@ -14,6 +14,7 @@
 					<script type="text/javascript">
 						var thing_id = <?php echo(json_encode(htmlspecialchars($thing_id))); ?>	
 					  	var label_text = <?php echo(json_encode(htmlspecialchars($label_name))); ?>	
+					  	var type = <?php echo(json_encode(htmlspecialchars($type))); ?>	
 					  	var label = document.createElement("label");
 					  	var linebreak = document.createElement("br"); 
 					  	label.className="textbox-label";
@@ -26,7 +27,7 @@
 				      	newInput.setAttribute("name", thing_id);
 				      	newInput.setAttribute("id", thing_id);
 				      	newInput.setAttribute("value", "");
-				     	newInput.setAttribute("class", "things");
+				     	newInput.setAttribute("class", type);
 					  	var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						 
 						if(required == 'Y'){

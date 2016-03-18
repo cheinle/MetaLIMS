@@ -46,14 +46,15 @@
 					$thing_number = $matches[1];
 					$whole_thing = 'thing'.$thing_number;
 					
-					$thing_set_query = "UPDATE store_user_things SET thing1 = ? WHERE sample_name = ?";
-					//$thing_set_query = "UPDATE store_user_things SET ".$whole_thing." = ? WHERE sample_name = ?";
+					//$thing_set_query = "UPDATE store_user_things SET thing1 = ? WHERE sample_name = ?";
+					$thing_set_query = "UPDATE store_user_things SET ".$whole_thing." = ? WHERE sample_name = ?";
 
-					if($thing_stmt = $dbc ->prepare($thing_set_query)) {                 
+					if($thing_stmt = $dbc ->prepare($thing_set_query)) {
+						echo $thing_number.'<br>'.$p_sample_name.'<br>'.$p_thing_value.'<br>';                 
 	                	if($thing_number > 10 && $thing_number < 16){
-							$thing_stmt->bind_param('si',$p_sample_name,$p_thing_value);
+							$thing_stmt->bind_param('is',$p_thing_value, $p_sample_name);
 						}else{
-							$thing_stmt->bind_param('ss',$p_thing_value,$p_sample_name);
+							$thing_stmt->bind_param('ss',$p_thing_value, $p_sample_name);
 						}
 						
 						if($thing_stmt -> execute()){
