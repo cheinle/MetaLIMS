@@ -25,10 +25,6 @@ include('database_connection.php');
 		      A: The database was designed primarily with Google Chrome and Firefox. Please use one of these
 		      preferred browsers. Thanks!
 		      
-		  <b>Q: What is the 'Add and Copy' button on the Home-Insert Sample page?</b> 
-		      A: It is a button that will allow you to save the input in the fields you just added. 
-			  This is adventageous if you want to add multiple entries in a row which may have similar information to be added
-		
 		  <b>Q: How do I pool samples?</b> 
 		 	  A: Pooling raw samples before processing simply add multiple samplers on the Insert Sample page and proceed as normal. 
 		 	  If pooling already proccessed samples, please use 'Create Sample Pools' in the dropdown named 'Sample Management' on the main 
