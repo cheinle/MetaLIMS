@@ -30,6 +30,7 @@
 	             	if(type == 'numeric_input'){
 	             		var numeric_check = isNaN(inputed); //returns true if is not a number
 		             	if(numeric_check == true){
+		             		valid = 'false';
 		             		document.getElementById(input_id).style.backgroundColor = 'blue';
 		             	}else{
 		             		document.getElementById(input_id).style.backgroundColor = 'white';
@@ -39,7 +40,27 @@
 	             	}
 	             }
 			}
-
+			
+			//check non -required numeric fields also
+			var thing_inputs = document.getElementById('user_things').getElementsByTagName('input');
+            for (var i11 = 0; i11 < thing_inputs.length; i11++) {
+                 var inputed = thing_inputs[i11].value;
+                 var input_id = thing_inputs[i11].getAttribute("id");
+                 var type = thing_inputs[i11].getAttribute("class");
+	        	 if(type == 'numeric_input'){
+	             	var numeric_check = isNaN(inputed); //returns true if is not a number
+		            if(numeric_check == true){
+		            	valid = 'false';
+		             	document.getElementById(input_id).style.backgroundColor = 'blue';
+		             }
+		             else{
+		             	document.getElementById(input_id).style.backgroundColor = 'white';
+		             }
+	             }
+	             else{
+	             	document.getElementById(input_id).style.backgroundColor = 'white';
+	             }
+			}
             return valid;
        }
 
