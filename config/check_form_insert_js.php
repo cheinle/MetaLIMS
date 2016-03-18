@@ -204,7 +204,7 @@
 								}
 								
 								//check you are the correct format
-								var regrex_check_sh2  =  txt.match(/^\s*(?=.*[0-9])\d{0,5}(?:\.\d{1,2})?\s*$/);//this can be zero
+								var regrex_check_sh2  =  txt.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
 								if (regrex_check_sh2 == null){
 									alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
 									inputs[i].style.background = "blue";
@@ -220,7 +220,7 @@
 								var n = txt.length;
 	                 			if(n != 0){
 	              
-									var regrex_check_sh  =  txt.match(/^\s*(?=.*[0-9])\d{0,5}(?:\.\d{1,2})?\s*$/);//this can be zero
+									var regrex_check_sh  =  txt.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
 									if (regrex_check_sh == null){
 										alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
 										inputs[i].style.background = "blue";
@@ -247,7 +247,7 @@
 	                   	 			color_check = 'false';
                  				}
                  				//check you are not zero
-								var regrex_check_sh  = txt.match(/^\s*(?=.*[0-9])[0]{0,5}(?:\.[0]{1,2})?\s*$/);//trying to match any zero here
+								var regrex_check_sh  = txt.match(/^\s*(?=.*[0-9])[0]{0,3}(?:\.[0]{1,2})?\s*$/);//trying to match any zero here
 								if (regrex_check_sh  != null){
 									alert("Flow Rate Cannot Be Zero Or Empty For Air Samples");
 									inputs[i].style.background = "blue";
@@ -256,7 +256,7 @@
 								}
 								
 								//check you are the correct format
-								var regrex_check_sh2  =  txt.match(/^\s*(?=.*[0-9])\d{0,5}(?:\.\d{1,2})?\s*$/);//this can be zero
+								var regrex_check_sh2  =  txt.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
 								if (regrex_check_sh2 == null){
 									alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
 									inputs[i].style.background = "blue";
@@ -272,7 +272,7 @@
 								var n = txt.length;
 	                 			if(n != 0){
 	              
-									var regrex_check_sh  =  txt.match(/^\s*(?=.*[0-9])\d{0,5}(?:\.\d{1,2})?\s*$/);//this can be zero
+									var regrex_check_sh  =  txt.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
 									if (regrex_check_sh == null){
 										alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
 										inputs[i].style.background = "blue";

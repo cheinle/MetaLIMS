@@ -169,17 +169,15 @@ echo '<input type="text" style="visibility:hidden" class="hidden" name="thing_ty
         }
         
         //check that all checked have correct input
-        var coffee = document.forms[0];
+       var bulk_form = document.forms[0];
 	   var txt = "";
 	   var i;
-	   for (i = 0; i < coffee.length; i++) {
-	       if (coffee[i].checked) {
-	           txt = coffee[i].value;
-	           alert(txt);
+	   for (i = 0; i < bulk_form.length; i++) {
+	       if (bulk_form[i].checked) {
+	           txt = bulk_form[i].value;
 	           var type = document.getElementById("thing_type").value;
 	           var input = document.getElementById(txt+'_thing');
 	           var input_val = input.value;
-		       alert(type);
 		    	if(type == 'select'){
 		    		if(input_val == '0'){
 			      		input.style.background = "blue";
@@ -197,7 +195,6 @@ echo '<input type="text" style="visibility:hidden" class="hidden" name="thing_ty
 				    else{
 			       		if(type == 'numeric_input'){
 				       		var regrex_check_sh2  =  input_val.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
-				       		alert(regrex_check_sh2);
 							if (regrex_check_sh2 == null){
 									alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
 									input.style.background = "blue";
