@@ -361,28 +361,8 @@ function convert_header_names($p_key){
 	if($p_key == 'primerR'){
 		$p_key = 'Right Primer Set Name';
 	}
-	
-	//for isolates
-	if($p_key == 'iso_coll_temp'){
-		$p_key = 'Isolate Collection Temperature';
-	}
-	if($p_key == 'iso_date'){
-		$p_key = 'Isolate Collection Date';
-	}
-	if($p_key == 'iso_store_method'){
-		$p_key = 'Isolate Storage Method';
-	}
-	if($p_key == 'closest_hit'){
-		$p_key = 'Closest Hit';
-	}
-	if($p_key == 'seq_sang'){
-		$p_key = 'Sequence (Sanger)';
-	}
-	if($p_key == 'send_pac_bio'){
-		$p_key = 'Send For Pac Bio Seq';
-	}
-	if($p_key == 'loc_type'){
-		$p_key = 'Isolate Location Type';
+	if($p_key == 'results_recieved'){
+		$p_key = 'Results Recieved';
 	}
 	
 	//sampler fields

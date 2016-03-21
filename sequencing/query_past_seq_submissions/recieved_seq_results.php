@@ -1,4 +1,4 @@
-<?php include('database_connection.php'); ?>
+<?php include('../../database_connection.php'); ?>
 <!doctype html>
 <html>
 <head>
@@ -24,7 +24,7 @@
 
 </head>
 <body>
-<?php include('index.php'); ?>
+<?php include('../../index.php'); ?>
 <div class="page-header">
 <h3>Mark Sequencing Submission Recieved</h3>	
 </div>
@@ -34,13 +34,13 @@
 		if(isset($_GET['submit'])){
 			$error = 'false';
 			$submitted = 'false';
-			
+			echo '<div id="border">';
 			//sanatize user input to make safe for browser
 			$p_date = htmlspecialchars($_GET['date']);
 			
 			//insert info into db
 		    if($error != 'true'){
-		    	
+		    
 				//insert data into db. Use prepared statement 
 				$query = 'UPDATE sequencing2 SET results_recieved = ? WHERE sequencing_info = ?';
 				if($stmt = $dbc ->prepare($query )) {   
@@ -70,7 +70,9 @@
 				}
 		
 			}
+			echo '</div>';
 		}
+		
 	?>
 
 <form class="registration" action="recieved_seq_results.php" method="GET">
