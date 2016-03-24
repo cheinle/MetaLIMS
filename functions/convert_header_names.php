@@ -1,9 +1,9 @@
 <?php
 
 function convert_header_names($p_key){
-	global $root;
-	$path = $_SERVER['DOCUMENT_ROOT'].$root;
-	include($path.'database_connection.php');
+	
+
+	include($_SESSION['include_path'].'database_connection.php');
 
 	if($p_key == 'sampler_name'){
 		$p_key = 'Sampler Name';

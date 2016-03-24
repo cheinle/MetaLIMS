@@ -1,6 +1,5 @@
 <?php 
 // Javascript:
-
 ?>
 
 <!--jQuery-->
@@ -10,14 +9,10 @@
 <script src="//code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
 <!--Latest complied and minified JavaScript-->
-<!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>-->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<!--More JavaScript-->
-<!--relCopy-->
-<!--<script type="text/javascript" src="/series/dynamic/airmicrobiomes/relCopy.js"></script>-->
-
-	
+<!--ptTimeSelect-->
+<?php echo '<script type="text/javascript" src="'.$_SESSION['link_root'].'config/jquery.ptTimeSelect.js"></script>'; ?>
 
 <!--Sample Storage Dropdown-->
 <script type="text/javascript">
@@ -146,8 +141,7 @@
 		});
 </script>
 
-<!--ptTimeSelect-->
-<?php echo '<script type="text/javascript" src="'.$root.'config/jquery.ptTimeSelect.js"></script>'; ?>
+
 
 <!--custom alert box-->
 <script>
@@ -247,7 +241,7 @@
                 var num_sensors = $('#sens_num').val(); //<----- get the value from the parent select 
                 //alert(num_sensors);
 	                $.ajax({
-	                    url     : root+'sensor_select.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'daily_data/sensor_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : { num_sensors: num_sensors}, //Data you are sending
 	                    //success : function(data){$('#div_store').html(data)},
@@ -304,7 +298,7 @@
 						end_times[x] = etime;
 					}
 	                $.ajax({
-	                    url     : root+'sample_insert/air_sampler_select.php', //the url you are sending datas to which will again send the result
+	                    url     : root+'sample_insert/sampler_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
 	                    data    : { num_air_samplers: sampler_num,
 	                    			old_num_air_samplers: old_sampler_num, 
@@ -324,7 +318,7 @@
 		
 </script>
 
-<!--Pick Pick Samples-->
+<!--pick sample names--> 
 <script type="text/javascript">
 		$(document).ready(function(){  
 				               

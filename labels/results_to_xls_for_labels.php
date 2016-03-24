@@ -2,7 +2,7 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include('database_connection.php');
+include(INCLUDE_ROOT.'database_connection.php');
 ?>
 <html>
 <head>
@@ -12,7 +12,7 @@ include('database_connection.php');
 
 <?php
 if(isset($_GET['submit_labels']) && $_GET['db_content']=='xls'){	
-	include('functions/build_xls_output_table.php');
+	include(INCLUDE_ROOT.'functions/build_xls_output_table.php');
 
 	$sql = "SELECT sample_name,start_samp_date_time,project_name,sample_type,sample_num FROM sample";
 	$stmt = $dbc->prepare("$sql");

@@ -39,23 +39,8 @@ $transaction_time = date("Y-m-d H:i:s");
 		<p>
 		<label class="textbox-label">Sample Name:*</label>
 		<br>
-		<input type="text" name="sample_name" id="sample_name" class="textbox-label" data-toggle="popover" title="Tip:" data-content="Unable to edit sample name. Please select Go Back button to select a different sample or go to Insert Sample tab to enter a new sample" 
-		placeholder="yyyy/mm/dd[project name][sample_type][sample number-000]" value="<?php if (isset($_GET['submit'])){echo text_insert_update_stinfo($parent_value,'sample_name','storage_info',$root);}?>" readonly />
+		<input type="text" name="sample_name" id="sample_name" class="textbox-label" placeholder="yyyy/mm/dd[project name][sample_type][sample number-000]" value="<?php if (isset($_GET['submit'])){echo text_insert_update_stinfo($parent_value,'sample_name','storage_info',$root);}?>" readonly />
 		</p>
-		<script>
-			$(document).ready(function(){
-    			$('[data-toggle="popover"]').popover({
-        			placement : 'right'
-    			});
-			});
-		</script>
-				
-		<style>
-			.popover-content {
-    			font-style: bold;
-    			font-size: 14px;
-			}
-		</style>
 		
 		<p>
 		<label class="textbox-label">Location of original sample:*</label>

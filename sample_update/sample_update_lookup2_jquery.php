@@ -1,9 +1,9 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+if(!isset($_SESSION)) { session_start(); }
+$root = $_SESSION['link_root'];
 include ('../database_connection.php');
-
-
 ?>
 <!doctype html>
 <html>
@@ -12,7 +12,7 @@ include ('../database_connection.php');
 				<!--<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->		
 </head>
 <body class="update">
-	
+	<script type="text/javascript">var root = "<?php echo $root; ?>"; alert(root);</script>
 <?php	//drowpdown to select field_name from table_name
 
 

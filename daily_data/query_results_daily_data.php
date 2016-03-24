@@ -1,9 +1,9 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include('database_connection.php'); 
-include('index.php');
-include('functions/build_daily_data_output.php');
+include('../database_connection.php'); 
+include('../index.php');
+include('../functions/build_daily_data_output.php');
 ?>
 
 <!doctype html>

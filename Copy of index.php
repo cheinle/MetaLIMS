@@ -4,14 +4,17 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+define('ROOT_PATH', dirname(__FILE__) . '\\');
 
-if(!isset($_SESSION)) { session_start(); }
-include($_SESSION['include_path'].'database_connection.php');
+//include('config/path.php');
+//$path = $_SERVER['DOCUMENT_ROOT'].$root;
+include(ROOT_PATH.'database_connection.php');
 
 //if user is not logged in, do not let him access any of the pages/directories
+session_start(); 
 if(!isset($_SESSION['username'])){  
 	//$url = $_SERVER["HTTP_HOST"].$root."login.php"; 
-	$url = $_SERVER["HTTP_HOST"].$_SESSION['link_root']."login.php"; 
+	$url = ROOT_PATH."login.php"; 
 	header("Location: http://".$url);
 	exit();
 }
@@ -38,7 +41,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	        //Kill their session and log them out
 	        session_unset();
 	        session_destroy();
-			$url = $_SERVER["HTTP_HOST"].$_SESSION['link_root']."login.php"; 
+			$url = $_SERVER["HTTP_HOST"].$root."login.php"; 
 			header("Location: http://".$url);
 			exit();
 	    }
@@ -104,13 +107,13 @@ $stmt->close();
 	  <div class="container-fluid">
 		
 			<ul class="nav navbar-nav">
-				<li ><a href="<?php echo $_SESSION['link_root']?>home_page.php"><span class="glyphicon glyphicon-home"></a></li>
+				<li ><a href="<?php echo $root;?>home_page.php"><span class="glyphicon glyphicon-home"></a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Sample Management<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li ><a href="<?php echo $_SESSION['link_root'];?>sample_insert/form_insert_jquery.php">Insert Sample</a></li>
-						<li ><a href="<?php echo $_SESSION['link_root'];?>sample_update/sample_update_lookup_jquery.php">Update Sample</a></li>
-						<li><a href="<?php echo $_SESSION['link_root'];?>pooling/pool_samples.php">Create Sample Pools (For DNA Extr)</a></li>
+						<li ><a href="<?php echo $root;?>sample_insert/form_insert_jquery.php">Insert Sample</a></li>
+						<li ><a href="<?php echo $root;?>sample_update/sample_update_lookup_jquery.php">Update Sample</a></li>
+						<li><a href="<?php echo $root;?>pooling/pool_samples.php">Create Sample Pools (For DNA Extr)</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -118,7 +121,7 @@ $stmt->close();
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Storage Info<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo $_SESSION['link_root'];?>update_storage/update_storage_info.php">Query/Update Storage Info</a></li>
+						<li><a href="<?php echo $root;?>update_storage/update_storage_info.php">Query/Update Storage Info</a></li>
 					</ul>
 				</li>
 			</ul>	
@@ -126,15 +129,15 @@ $stmt->close();
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Update Sample Fields<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo $_SESSION['link_root'];?>update_tables/update_sampler.php">Add Sampler</a></li>
-						<li><a href="<?php echo $_SESSION['link_root'];?>update_tables/update_analysis.php">Add Analysis</a></li>
-						<li><a href="<?php echo $_SESSION['link_root'];?>update_tables/update_dna_extr.php">Add DNA Extraction Kit</a></li>
-						<li><a href="<?php echo $_SESSION['link_root'];?>update_tables/update_media_type.php">Add Media Type</a></li>
-						<li><a href="<?php echo $_SESSION['link_root'];?>update_tables/update_samp_loc.php">Add Sampling Location</a></li>
-						<li><a href="<?php echo $_SESSION['link_root'];?>update_tables/update_samp_rel_loc.php">Add Sampling Relative Location</a></li>
-						<li><a href="<?php echo $_SESSION['link_root'];?>update_tables/update_part_sens.php">Add New Sensor</a></li>
-						<li><a href="<?php echo $_SESSION['link_root'];?>update_tables/update_proj_name_for_approval.php">Add Project Name For Approval</a></li>
-						<li><a href="<?php echo $_SESSION['link_root'];?>update_tables/update_rna_extr.php">Add RNA Extraction Kit</a></li>
+						<li><a href="<?php echo $root;?>update_tables/update_air_sampler.php">Add Sampler</a></li>
+						<li><a href="<?php echo $root;?>update_tables/update_analysis.php">Add Analysis</a></li>
+						<li><a href="<?php echo $root;?>update_tables/update_dna_extr.php">Add DNA Extraction Kit</a></li>
+						<li><a href="<?php echo $root;?>update_tables/update_media_type.php">Add Media Type</a></li>
+						<li><a href="<?php echo $root;?>update_tables/update_samp_loc.php">Add Sampling Location</a></li>
+						<li><a href="<?php echo $root;?>update_tables/update_samp_rel_loc.php">Add Sampling Relative Location</a></li>
+						<li><a href="<?php echo $root;?>update_tables/update_part_sens.php">Add New Sensor</a></li>
+						<li><a href="<?php echo $root;?>update_tables/update_proj_name_for_approval.php">Add Project Name For Approval</a></li>
+						<li><a href="<?php echo $root;?>update_tables/update_rna_extr.php">Add RNA Extraction Kit</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -143,29 +146,29 @@ $stmt->close();
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Query Info<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li ><a href="<?php echo $_SESSION['link_root'];?>query_samples/query_select_mod.php">Query Sample Info</a></li>
-						<li><a href="<?php echo $_SESSION['link_root'];?>pooling/query_select_pooled.php">Query Pooled Sample Info</a></li>
+						<li ><a href="<?php echo $root;?>query_samples/query_select_mod.php">Query Sample Info</a></li>
+						<li><a href="<?php echo $root;?>pooling/query_select_pooled.php">Query Pooled Sample Info</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Sequencing Submission Info<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo $_SESSION['link_root'];?>sequencing/seq_submission_UDF_check.php">Bulk Sequencing Submission</a></li>
-						<li><a href="<?php echo $_SESSION['link_root'];?>sequencing/query_past_seq_submissions/query_select_seq_subbed.php">View Past Submission</a></li>
+						<li><a href="<?php echo $root;?>sequencing/seq_submission_UDF_check.php">Bulk Sequencing Submission</a></li>
+						<li><a href="<?php echo $root;?>sequencing/query_past_seq_submissions/query_select_seq_subbed.php">View Past Submission</a></li>
 						
 					</ul>
 				</li>
-				<li ><a href="<?php echo $_SESSION['link_root'];?>labels/label_prep.php">Label Prep</a></li>
+				<li ><a href="<?php echo $root;?>labels/label_prep.php">Label Prep</a></li>
 				</li>
 					<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Daily Data<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo $_SESSION['link_root'];?>daily_data/query_select_daily_data.php">Query Daily Data</a></li>
-						<li><a href="<?php echo $_SESSION['link_root'];?>daily_data/add_daily_data.php">Add Daily Data</a></li>
-						<li><a href="<?php echo $_SESSION['link_root'];?>daily_data/update_daily_data1.php">Update Daily Data</a></li>
+						<li><a href="<?php echo $root;?>daily_data/query_select_daily_data.php">Query Daily Data</a></li>
+						<li><a href="<?php echo $root;?>daily_data/add_daily_data.php">Add Daily Data</a></li>
+						<li><a href="<?php echo $root;?>daily_data/update_daily_data1.php">Update Daily Data</a></li>
 					</ul>
 				</li>
-				<li ><a href="<?php echo $_SESSION['link_root'];?>FAQ.php">FAQ</a></li>
+				<li ><a href="<?php echo $root;?>FAQ.php">FAQ</a></li>
 				
 				<?php
 				if($admin_user == 'Y'){
@@ -174,19 +177,19 @@ $stmt->close();
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Admin Tools<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="'.$_SESSION['link_root'].'admin_tools/update_freezer_drawers.php">Add Freezer/Drawer</a></li>
-						<li><a href="'.$_SESSION['link_root'].'admin_tools/add_sample_type.php">Add Sample Type</a></li>
-						<li><a href="'.$_SESSION['link_root'].'admin_tools/update_proj_name.php">Add Project Name</a></li>
-						<li><a href="'.$_SESSION['link_root'].'admin_tools/add.php">Add Dropdown Options</a></li>
-						<li><a href="'.$_SESSION['link_root'].'admin_tools/update.php">Update Dropdown Options</a></li>
-						<li><a href="'.$_SESSION['link_root'].'admin_tools/delete.php">Delete Dropdown Options</a></li>
-						<li><a href="'.$_SESSION['link_root'].'admin_tools/dynamically_add_user_fields/add_a_user_thing.php">Create Fields</a></li>
+						<li><a href="'.$root.'admin_tools/update_freezer_drawers.php">Add Freezer/Drawer</a></li>
+						<li><a href="'.$root.'admin_tools/add_sample_type.php">Add Sample Type</a></li>
+						<li><a href="'.$root.'admin_tools/update_proj_name.php">Add Project Name</a></li>
+						<li><a href="'.$root.'admin_tools/add.php">Add Dropdown Options</a></li>
+						<li><a href="'.$root.'admin_tools/update.php">Update Dropdown Options</a></li>
+						<li><a href="'.$root.'admin_tools/delete.php">Delete Dropdown Options</a></li>
+						<li><a href="'.$root.'admin_tools/dynamically_add_user_fields/add_a_user_thing.php">Create Fields</a></li>
 					</ul>
 				</li>
 				</ul> 
 				';}
 				?>
-				<li ><a href="<?php echo $_SESSION['link_root'];?>logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
+				<li ><a href="<?php echo $root;?>logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
 			</ul>
 	</div>			
 	</nav><!--End nav Main Nav-->

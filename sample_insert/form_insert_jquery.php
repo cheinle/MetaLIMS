@@ -1,4 +1,5 @@
 <?php
+if(!isset($_SESSION)) { session_start(); }
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include ('../database_connection.php');
@@ -8,7 +9,12 @@ include('../config/check_sample_name.php');
 include('../config/check_required_user_things_js.php');
 include('../admin_tools/dynamically_add_user_fields/build_a_user_thing.php');
 include('form_insert_jquery_js.php');
+
+$root = $_SESSION['link_root'];
 ?>
+<script type="text/javascript">
+var root = "<?php echo $root; ?>";
+</script>
 
 <!doctype html>
 <html>
@@ -21,11 +27,12 @@ include('form_insert_jquery_js.php');
 	</head>
  
 	<body>
+		
 		<div class="page-header">
 		<h3>Sample Insert Form</h3>
 		<?php $submitted = 'false';?>
 		</div>
-	
+		
 		<form class = "registration" id="form" name="form">
 		<div id="tabs">
 				  <ul>

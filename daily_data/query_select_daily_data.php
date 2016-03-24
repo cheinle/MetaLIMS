@@ -1,10 +1,7 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include('database_connection.php');
-include('config/path.php');
-$path = $_SERVER['DOCUMENT_ROOT'].$root;
-
+include(INCLUDE_ROOT.'database_connection.php');
 ?>
 
 <!doctype html>
@@ -22,7 +19,7 @@ $path = $_SERVER['DOCUMENT_ROOT'].$root;
  
 <body>
 <?php 
-include('index.php');
+include('../index.php');
 include($path.'functions/dropDown.php');
 $submitted = 'false';
 ?>

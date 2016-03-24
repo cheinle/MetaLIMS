@@ -1,7 +1,7 @@
 <?php
-	 include('database_connection.php');
-	 include('functions/dropDown.php');
-	 include('config/path.php');
+	 include('../database_connection.php');
+	 include('../functions/dropDown.php');
+	 include('../config/path.php');
 
 	$num_of_sens = $_GET['num_sensors'];
 	$submitted = 'false';

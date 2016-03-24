@@ -87,6 +87,15 @@ try{
 					$_SESSION['session_id'] = $new_session_id;
 					$_SESSION['first_name'] = $first_name;
 					$_SESSION['last_name'] = $last_name;
+					
+
+					//fs
+					define('INCLUDE_PATH', $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/am_production/');
+					$_SESSION['include_path'] = INCLUDE_PATH;
+					
+					define('LINK_ROOT', '/series/dynamic/am_production/');
+					$_SESSION['link_root'] = LINK_ROOT;
+
 
 						
 					//if you need restrict access to database for any reason
