@@ -1,8 +1,8 @@
 <?php
+include('../index.php');
 session_start();
-$root = $_SESSION['link_root'];
 if(!isset($_SESSION['username'])){
-	$url = $_SERVER["HTTP_HOST"].$root."login.php"; 
+	$url = $_SERVER["HTTP_HOST"].$logout_path."login.php"; 
 	header("Location: http://".$url);
 	exit();
 }
