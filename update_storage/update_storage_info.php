@@ -1,19 +1,20 @@
 
-<?php include('../database_connection.php'); ?>
+<?php 
+include('../database_connection.php');
+if(!isset($_SESSION)) { session_start(); } 
+?>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Storage Update</title>	
-		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/themes/redmond/jquery-ui.css" />
-		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 </head>
 <body>
 <?php include('../index.php'); ?>
 <div class="page-header">
 	<h3>Update Storage Info</h3>	
 </div>
-<?php include('../functions/dropDown.php'); ?>
+<?php include($_SESSION['include_path'].'functions/dropDown.php'); ?>
 		<form class="registration" id="sample_form_update" action="update_storage_info2.php" method="GET">
 				
 				<fieldset>

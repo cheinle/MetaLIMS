@@ -5,7 +5,6 @@
 <head>
 <meta charset="utf-8">
 <title>Storage Update</title>	
-		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>

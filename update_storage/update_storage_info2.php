@@ -1,24 +1,22 @@
-<?php include('../database_connection.php'); ?>
+<?php 
+include('../database_connection.php');
+if(!isset($_SESSION)) { session_start(); } 
+?>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Storage Update</title>	
-		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 </head>
 <body>
 
 <?php 
-include('../config/path.php');
-$path = $_SERVER['DOCUMENT_ROOT'].$root;
-include($path.'index.php');
-include($path.'config/js.php');
-include($path.'/functions/text_insert_update_storage_info.php');
-include($path.'/functions/dropDown_update_for_storage.php');
+include($_SESSION['include_path'].'index.php');
+include($_SESSION['include_path'].'config/js.php');
+include($_SESSION['include_path'].'functions/text_insert_update_storage_info.php');
+include($_SESSION['include_path'].'functions/dropDown_update_for_storage.php');
 
 $parent_value = $_GET['sample_name'];
-#echo "parentVal:".$parent_value.'<br>';
-
 $transaction_time = date_default_timezone_set("Asia/Singapore");//set timezone to the same as the server (was set at Europe/Berlin time)
 $transaction_time = date("Y-m-d H:i:s");		
 ?>
