@@ -1,6 +1,7 @@
 <?php
- 	include('../config/path.php');
-	$path = $_SERVER['DOCUMENT_ROOT'].$root;
+ 	if(!isset($_SESSION)) { session_start(); }
+
+	$path = $_SESSION['include_path'];
  	include($path.'database_connection.php');
 	include($path.'functions/dropDown.php');
 	$type= $_GET['type'];

@@ -1,7 +1,7 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include(INCLUDE_ROOT.'database_connection.php');
+include('../database_connection.php');
 ?>
 
 <!doctype html>
@@ -20,7 +20,7 @@ include(INCLUDE_ROOT.'database_connection.php');
 <body>
 <?php 
 include('../index.php');
-include($path.'functions/dropDown.php');
+include('../functions/dropDown.php');
 $submitted = 'false';
 ?>
 <div class="page-header">

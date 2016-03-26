@@ -12,11 +12,9 @@ error_reporting(E_ALL); ?>
 
 <body>
 <?php 
-include('../config/path.php');
-$path = $_SERVER['DOCUMENT_ROOT'].$root;	
-include($path.'index.php');
-include($path.'functions/dropDown_update_for_daily_data.php');
-include($path.'functions/text_insert_update_storage_info.php');
+include('../index.php');
+include('../functions/dropDown_update_for_daily_data.php');
+include('../functions/text_insert_update_storage_info.php');
 
  ?>
 <div class="page-header">

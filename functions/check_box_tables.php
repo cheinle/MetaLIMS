@@ -1,7 +1,7 @@
 <?php
 
 function check_box(){
-		include ('../database_connection.php');
+		include ($_SESSION['include_path'].'database_connection.php');
 		//include_once('../convert_header_names.php');
 		$array = array();
 		$stmt = $dbc->prepare("SELECT * FROM sample");//note: this is not actually protecting anything because no 'data' and no bind result

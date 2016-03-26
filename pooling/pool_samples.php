@@ -1,7 +1,8 @@
 <?php
-include('../config/path.php');
-$path = $_SERVER['DOCUMENT_ROOT'].$root;
-include ('../database_connection.php');
+if(!isset($_SESSION)) { session_start(); }
+$path = $_SESSION['include_path'];
+include ($path.'index.php');
+include ($path.'database_connection.php');
 include ($path.'functions/dropDown.php');
 include ($path.'functions/convert_header_names.php');
 ?>
@@ -13,7 +14,7 @@ include ($path.'functions/convert_header_names.php');
 		<title>Sample Pooling</title>	
 	</head>
 	
-	<body><?php include ('../index.php');?>
+	<body><?php ?>
 	<div class="page-header">
 	<h3>Sample Pooling Form</h3>
 	</div>

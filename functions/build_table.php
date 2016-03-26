@@ -2,9 +2,9 @@
 
 //display table
 function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
-	include('convert_time.php');
-	include('convert_header_names.php');
-	include('find_samplers.php');
+	include($_SESSION['include_path'].'functions/convert_time.php');
+	include($_SESSION['include_path'].'functions/convert_header_names.php');
+	include($_SESSION['include_path'].'functions/find_samplers.php');
 
 	if ($stmt->execute()){
 	 			

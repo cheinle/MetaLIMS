@@ -6,7 +6,7 @@ function build_seq_subbed_output_new($stmt,$root){
 	
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	include($path.'/database_connection.php');
-	include('convert_header_names.php');
+	include($path.'functions/convert_header_names.php');
 	echo "*Click On Button(s) For More Info<br>";
 	//first grab all of the uniq seq submission names
 	//then for each seq submission name, grab all of the samples (and their info)

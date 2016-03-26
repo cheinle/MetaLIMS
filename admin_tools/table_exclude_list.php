@@ -1,6 +1,5 @@
 <?php 
 	function check_exclude_list($value,$type){ //type = 'add', 'update','delete' 
-		include ('../database_connection.php');
 		
 		$list = array(
 		'sample',

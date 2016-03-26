@@ -2,7 +2,7 @@
 
 function text_insert_storage_update($sample_name,$field_name){ #send also the query name?, always based on sample name
 
-	include('database_connection.php');
+	include($_SESSION['include_path'].'database_connection.php');
 
 	$stmt = $dbc->prepare("SELECT * FROM storage_info WHERE sample_name = ?");
 	$stmt -> bind_param('s',$sample_name);

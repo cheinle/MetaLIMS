@@ -8,8 +8,7 @@
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 </head>
 <body>
-<?php include('../index.php');
-$path = $_SERVER['DOCUMENT_ROOT'].$root; ?>
+<?php include('../index.php');?>
 <div class="page-header">
 <h3>Add New Project Name - Admin Only</h3>	
 </div>

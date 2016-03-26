@@ -12,36 +12,8 @@ if($dbc->connect_error) {
 }
 
 
-/* retrieve the search term that autocomplete sends */
-/*$term = trim(strip_tags($_REQUEST['term'])); 
-$term = htmlspecialchars($term);
-#$term = '2014';
-$a_json = array();
-$a_json_row = array();
-$data = array();
-if ($data2 = $dbc->query("SELECT * FROM sample WHERE sample_name LIKE '%$term%' ORDER BY sample_name LIMIT 10")) {
-	while($row = mysqli_fetch_array($data2)) {
-		
-		$data[] = array(
-			'label' => $row['sample_name'],
-			'value' => $row['sample_name']
-		);								
-	}
-}
-// jQuery wants JSON data
-echo json_encode($data);
-flush();
- 
-$dbc->close();
-*/
-
-///
-#$param = "%2014%";
-#$param = "%Vaccum%";
-#$param = "%Coil%";
 $term = trim(strip_tags($_REQUEST['term'])); 
 $term = htmlspecialchars($term);
-#$param = "{$term}%"; 
 $param = "%{$term}%";
 
 //add sample names

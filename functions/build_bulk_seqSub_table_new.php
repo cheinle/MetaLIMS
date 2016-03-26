@@ -2,10 +2,10 @@
 
 //display table
 function build_bulk_seqSub_table_new($array_sample_names,$options_array,$sample_type,$container_type,$root){
-	include('convert_time.php');
-	//include('convert_header_names.php');
-	include('text_insert_update.php');
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
+	include($path.'functions/convert_time.php');
+	//include('convert_header_names.php');
+	include($path.'functions/text_insert_update.php');
 	include($path.'/config/js.php'); //was not being inherited correctly...just added here for now;
 	//print_r($options_array);
 	echo '<pre>';

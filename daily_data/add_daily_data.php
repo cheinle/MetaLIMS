@@ -12,10 +12,8 @@ error_reporting(E_ALL); ?>
 <!---testing-->
 <body>
 <?php 
-include('../config/path.php');
-$path = $_SERVER['DOCUMENT_ROOT'].$root;	
-include($path.'index.php');
-include($path.'functions/dropDown.php');
+include('../index.php');
+include('../functions/dropDown.php');
 
 ?>
 <div class="page-header">

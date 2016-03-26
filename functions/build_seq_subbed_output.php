@@ -2,7 +2,7 @@
 
 //display table
 function build_seq_subbed_output($stmt){
-	include('convert_header_names.php');
+	include($_SESSION['include_path'].'functions/convert_header_names.php');
 	echo "*Click On Button(s) For More Info<br>";
 	if ($stmt->execute()){
 			    if($stmt->fetch()){

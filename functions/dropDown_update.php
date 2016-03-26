@@ -4,7 +4,8 @@
 
 function dropDown_update($select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name,$root){ #send also the query name?, always based on sample name
 
-			include('database_connection.php');
+			$path = $_SERVER['DOCUMENT_ROOT'].$root;
+			include($path.'database_connection.php');	
 			$p_select_name = htmlspecialchars($select_name);
 			$p_table_name = htmlspecialchars($table_name);
 			$p_field_name = htmlspecialchars($field_name);
@@ -13,7 +14,6 @@ function dropDown_update($select_name,$table_name,$field_name,$select_id,$s_fiel
 			$p_sample_name = htmlspecialchars($sample_name);
 
 			//check that $table_name exists in white list
-			$path = $_SERVER['DOCUMENT_ROOT'].$root;
 			include_once($path.'functions/white_list.php');
 			
 			$check = whiteList($p_table_name,'table'); 

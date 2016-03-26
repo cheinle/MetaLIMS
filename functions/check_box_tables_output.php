@@ -3,7 +3,7 @@
 function check_box_results($column_names){
 			
 			//check that column name exists in white list
-			include_once('../functions/white_list.php');
+			include_once($_SESSION['include_path'].'functions/white_list.php');
 
      		$field_names = '';
 			//always include sample name and include it at the beginning

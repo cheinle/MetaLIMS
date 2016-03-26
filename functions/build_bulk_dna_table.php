@@ -3,10 +3,10 @@
 //display table
 function build_bulk_dna_table($stmt,$root){
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;		
-	include('convert_time.php');
+	include($path.'functions/convert_time.php');
 	//include('convert_header_names.php');
-	include('text_insert_update.php');
-	include('dropDown.php');
+	include($path.'functions/text_insert_update.php');
+	include($path.'functions/dropDown.php');
 	include($path.'/config/js.php');
 	
 	echo '<form class="registration" onsubmit="return confirm(\'Do you want to submit the form?\');" action="bulk_insert_and_updates/dna_bulk_update.php" method="POST">';

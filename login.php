@@ -89,28 +89,28 @@ try{
 					$_SESSION['last_name'] = $last_name;
 					
 
-					//fs
-					define('INCLUDE_PATH', $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/am_production/');
-					$_SESSION['include_path'] = INCLUDE_PATH;
+					//************CREATE PATH VARIABLES*******//
+					//define('INCLUDE_PATH', $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/am_production/');
+					$_SESSION['include_path'] = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/am_production/';
 	
-					
-					define('LINK_ROOT', '/series/dynamic/am_production/');
-					$_SESSION['link_root'] = LINK_ROOT;
-					
+					//define('LINK_ROOT', '/series/dynamic/am_production/');
+					$_SESSION['link_root'] = '/series/dynamic/am_production/';
+					/////////////////////////////////////////////
 
 						
 					//if you need restrict access to database for any reason
 					//destroy session for anyone who is not the developer
 					include('config/path.php');	
-					if($database_down == 'true' || $database_down == 'moving'){
+					if($database_down == 'true'){
 						//if($_SESSION['username'] == $admin_user){
 						if($admin_user == 'Y'){
 							$url = $_SERVER["HTTP_HOST"].$_SESSION['link_root']."home_page.php"; 
 							header("Location:http://".$url);
 						}
 						else{
+							
 							session_destroy();
-							$url = $_SERVER["HTTP_HOST"].$_SESSION['link_root']."login.php"; 
+							$url = $_SERVER["HTTP_HOST"].$logout_path."login.php"; 
 							header("Location: http://".$url);
 							exit();
 						}

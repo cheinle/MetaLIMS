@@ -1,8 +1,7 @@
 <?php	
 function find_samplers($sample_name,$table_type){ 
 	//2015/09/02test_projectA109
-	include('../config/path.php');
-	$path = $_SERVER['DOCUMENT_ROOT'].$root;
+	$path = $_SESSION['include_path'];
 	include($path.'database_connection.php');
 	
 	$stmt = $dbc->prepare("SELECT sampler_name, start_date_time,end_date_time FROM sample_sampler WHERE sample_name = ?");

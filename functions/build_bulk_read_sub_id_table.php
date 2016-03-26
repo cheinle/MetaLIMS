@@ -2,11 +2,10 @@
 
 //display table
 function build_bulk_read_sub_id_table($stmt,$root){
-	include('convert_time.php');
-	//include('convert_header_names.php');
-	include('text_insert_update.php');
-	include('dropDown.php');
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
+	include($path.'functions/convert_time.php');
+	include($path.'functions/text_insert_update.php');
+	include($path.'functions/dropDown.php');
 	include($path.'/config/js.php'); //was not being inherited correctly...just added here for now
 	
 	echo '<form class="registration" onsubmit="return confirm(\'Do you want to submit the form?\');" action="bulk_insert_and_updates/read_submission/read_sub_bulk_insert.php" method="POST">';

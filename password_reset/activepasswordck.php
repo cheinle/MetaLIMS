@@ -9,6 +9,7 @@
 //*****************************************
 //include "include/session.php";
 include('../database_connection.php'); // database connection details stored here
+include('../index.php');
  // database connection details stored here
 //////////////////////////////
 $ak=$_POST['ak'];
@@ -102,9 +103,9 @@ if ($stmt2->execute()){
 	}
 }
 
-
+echo '<center><a href='.$root.'login.php>Login</a>';
 ?>
-<center><a href=/series/dynamic/airmicrobiomes/login.php>Login</a>
+
 
 </body>
 
