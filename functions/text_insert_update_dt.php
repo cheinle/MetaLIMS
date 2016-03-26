@@ -1,5 +1,4 @@
 
-<body>
 <?php	
 
 function text_insert_update_dt($sample_name,$field_name,$field_sub){ #send also the query name?, always based on sample name
@@ -38,6 +37,3 @@ function text_insert_update_dt($sample_name,$field_name,$field_sub){ #send also 
 	}
 }
 ?>
-
-</body>
-</html>

@@ -1,9 +1,4 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-	</head>
-<body>
+
 <?php	//was to return a dropdown, now to return names...can modify text update to do this instead?
 
 function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name,$stored_name,$comp_pk_name,$root){ #send also the query name?, always based on sample name
@@ -77,6 +72,3 @@ function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$sel
      	}
      }	
 ?>
-
-</body>
-</html>

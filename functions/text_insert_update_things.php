@@ -1,8 +1,4 @@
-<head>
-	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-	
-</head>
-<body>
+
 <?php	
 
 function text_insert_update_things($sample_name,$field_name){
@@ -44,6 +40,3 @@ function text_insert_update_things($sample_name,$field_name){
 	}
 }
 ?>
-
-</body>
-</html>

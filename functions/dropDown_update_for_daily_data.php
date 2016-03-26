@@ -1,9 +1,4 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-	</head>
-<body>
+
 <?php
 
 function dropDown_update_for_daily_data($select_name,$table_name,$field_name,$select_id,$s_field_name,$daily_date,$location){ #send also the query name?, always based on sample name
@@ -76,6 +71,3 @@ function dropDown_update_for_daily_data($select_name,$table_name,$field_name,$se
      }	
 
 ?>
-
-</body>
-</html>

@@ -1,9 +1,4 @@
-<head>
-	<meta charset="utf-8">
-	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-	
-</head>
-<body>
+
 <?php	
 //2015/05/25 built for text input recall for storage info. trying to mod it to use only one function instead of multiple...still in the works
 function text_insert_update_stinfo($sample_name,$field_name,$table,$root){ #send also the query name?, always based on sample name
@@ -72,6 +67,3 @@ function text_insert_update_daily_data($daily_date,$field_name,$table,$location,
 	
 }
 ?>
-
-</body>
-</html>

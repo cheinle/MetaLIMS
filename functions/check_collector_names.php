@@ -82,18 +82,3 @@ function check_collector_names($arr,$true){
 }
 
 ?>
-
-<!--
-	//In the class:
-public function getUserInfo() {
-  ...
-  return array(
-    'id'    => $user_id,
-    'thumb' => $thumb
-  );
-}
-
-//And then for your call:
-$user = $login->getUserInfo();
-
-echo $user['id'].' '.$user['thumb'];-->
