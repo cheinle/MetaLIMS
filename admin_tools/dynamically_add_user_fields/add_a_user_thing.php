@@ -47,7 +47,7 @@ include('add_a_user_thing_js.php');
 							<option value='0'>-Select-</option>
 							<option value='text_input'>Text Input</option>
 							<option value='numeric_input'>Numeric Input</option>
-							<option value='text_select'>Text Dropdown</option>
+							<option value='select'>Text Dropdown</option>
 							<!--<option value='numeric_select'>Numeric Dropdown</option>-->
 						</select>
 						
