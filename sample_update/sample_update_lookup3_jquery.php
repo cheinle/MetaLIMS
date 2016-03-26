@@ -3,8 +3,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include ('../database_connection.php');
 include ('../index.php');
-include('../functions/convert_header_names.php');
-include('../functions/unset_session_vars.php');
+include($path.'functions/convert_header_names.php');
+include($path.'functions/unset_session_vars.php');
 ?>
 
 <!doctype html>
@@ -41,7 +41,7 @@ include('../functions/unset_session_vars.php');
 				$get_array = $_GET;
 
 				//check that all fields are entered properly
-				include('../functions/field_check.php');
+				include($path.'functions/field_check.php');
 				$error_check = field_check($get_array,'update_sample');
 				
 				if($error_check == 'true'){
@@ -146,7 +146,7 @@ include('../functions/unset_session_vars.php');
 				*/
 					
 				//check and process collector info
-				include_once("../functions/check_collector_names.php");
+				include_once($path."functions/check_collector_names.php");
 				$array=$get_array['collector'];
 				$check = check_collector_names($array,'true');
 				if($check['boolean'] == 'false'){

@@ -3,8 +3,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 if(!isset($_SESSION)) { session_start(); }
 $root = $_SESSION['link_root'];
-$path = $_SESSION['include_path']; //same as $_SESSION['include_path']
-include ('../database_connection.php');
+$path = $_SESSION['include_path']; //same as $path
+include ($path.'database_connection.php');
 
 ?>
 <!doctype html>
@@ -14,7 +14,7 @@ include ('../database_connection.php');
 				<!--<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->		
 </head>
 <body class="update">
-	<script type="text/javascript">var root = "<?php echo $root; ?>";</script>
+	<!--<script type="text/javascript">var root = "<?php echo $root; ?>";</script>-->
 <?php	//drowpdown to select field_name from table_name
 
 
