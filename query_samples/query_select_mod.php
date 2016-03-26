@@ -1,7 +1,6 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-if(!isset($_SESSION)) { session_start(); }
 include('../database_connection.php');
 
 ?>
@@ -10,19 +9,14 @@ include('../database_connection.php');
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Query Selection</title>
-	
-  	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-  	
+	<title>Query Selection</title> 	
 </head>
 
  
 <body>
 <?php 
 include('../index.php');
-include('../functions/check_box_tables.php');
+include($path.'functions/check_box_tables.php');
 
  ?>
 <div class="page-header">
@@ -47,7 +41,7 @@ include('../functions/check_box_tables.php');
 	<p>
 		<label class="textbox-label">Select Field to Query Samples:</label><br/>
 		<?php	
-		    include_once('../functions/convert_header_names.php');
+		    include_once($path.'functions/convert_header_names.php');
 			$query = "SELECT * FROM sample";
 			$result = mysqli_query($dbc, $query);
 			if(!$result){

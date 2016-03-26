@@ -8,7 +8,7 @@ include('../database_connection.php');
 //choose which files to include depending on if you are exporting an xls or not.
 //xls cannot include the index file because it will send headers too early (and the wrong ones)
 if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
-	include('../functions/build_xls_output_table.php');
+	include($_SESSION['include_path'].'functions/build_xls_output_table.php');
 }else{
 	
 	
@@ -16,26 +16,26 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 	//check what kind of contents user is wanting to display
 	if(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_dna')){
 		include('../index.php');
-		include('../functions/build_bulk_dna_table.php');
+		include($path.'functions/build_bulk_dna_table.php');
 	}
 	elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_storage')){
 		include('../index.php');
-		include('../functions/build_bulk_storage_update_table.php');
+		include($path.'functions/build_bulk_storage_update_table.php');
 	}
 	elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'read_sub')){
 		include('../index.php');
-		include('../functions/build_bulk_read_sub_id_table.php');
+		include($path.'functions/build_bulk_read_sub_id_table.php');
 	}
 	elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'update_read_sub')){
 		include('../index.php');
-		include('../functions/build_bulk_read_sub_id_update_table.php');
+		include($path.'functions/build_bulk_read_sub_id_update_table.php');
 	}
 	elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_things')){
 		header('Location: bulk_insert_and_updates/things_bulk_update_select.php');
 	}else{
 		include('../index.php');
-		include('../functions/build_table.php');
-		include('../functions/basic_build_table.php');
+		include($path.'functions/build_table.php');
+		include($path.'functions/basic_build_table.php');
 	}
 }
 	
@@ -94,8 +94,8 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 <?php
 
 if(isset($_GET['submit'])){
-	include('../functions/check_box_tables_output.php');
-	include('../functions/white_list.php');
+	include($path.'functions/check_box_tables_output.php');
+	include($path.'functions/white_list.php');
 	
 	$submit = $_GET['submit'];
 	
