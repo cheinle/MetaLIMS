@@ -10,10 +10,8 @@
 </head>
 <body>
 <?php
-include('config/path.php');
-$path = $_SERVER['DOCUMENT_ROOT'].$root;
-include($path.'index.php');
-include($path.'functions/dropdown.php'); 
+include('../index.php');
+include('../functions/dropdown.php'); 
 ?>
 <pre>
 	

@@ -22,7 +22,6 @@
 </head>
 <body>
 <?php include('../index.php');
-	  include('../config/path.php'); 
 ?>
 <div class="page-header">
 <h3>Update Sampler Dropdown</h3>	
