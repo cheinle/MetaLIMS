@@ -3,6 +3,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('../database_connection.php');
+if(!isset($_SESSION)) { session_start(); }
 ?>
 <html>
 <head>

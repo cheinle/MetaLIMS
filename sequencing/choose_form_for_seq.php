@@ -4,7 +4,6 @@ ini_set('display_errors', 1);
 include ('../database_connection.php');
 include ('../index.php');
 include ('../functions/build_bulk_seqSub_table_new.php');
-include('../config/path.php');
 
 ?>
 <!doctype html>

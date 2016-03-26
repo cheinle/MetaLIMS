@@ -1,6 +1,5 @@
 <?php
 	include ('../index.php');
-	include ('../config/path.php');
 	include ('../database_connection.php');
 	include ('../functions/text_insert_update_storage_info.php');
 	include_once("../functions/check_collector_names.php");
@@ -8,7 +7,6 @@
 	include("../functions/check_sequencing_type.php");
 	include('../functions/get_submission_number.php');
 	include('../functions/get_application_abbrev.php');
-	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
 ?>
 	<!doctype html>

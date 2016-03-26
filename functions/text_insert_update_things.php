@@ -3,6 +3,8 @@
 
 function text_insert_update_things($sample_name,$field_name){
 
+	if(!isset($_SESSION)) { session_start(); }
+
 	include($_SESSION['include_path'].'database_connection.php');
 
 	$query = "SELECT * FROM store_user_things WHERE sample_name = ?";

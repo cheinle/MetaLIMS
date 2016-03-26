@@ -3,12 +3,13 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 if(!isset($_SESSION)) { session_start(); }
 include('../database_connection.php'); 
+$path = $_SESSION['include_path'];
 
 
 //choose which files to include depending on if you are exporting an xls or not.
 //xls cannot include the index file because it will send headers too early (and the wrong ones)
 if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
-	include($_SESSION['include_path'].'functions/build_xls_output_table.php');
+	include($path.'functions/build_xls_output_table.php');
 }else{
 	
 	

@@ -1,7 +1,8 @@
 <?php
 	 include('../database_connection.php');
 	 include('../functions/dropDown.php');
-	 include('../config/path.php');
+	 if(!isset($_SESSION)) { session_start(); }
+	 $root = $_SESSION['link_root'];
 
 	$num_of_sens = $_GET['num_sensors'];
 	$submitted = 'false';

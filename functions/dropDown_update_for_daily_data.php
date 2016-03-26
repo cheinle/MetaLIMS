@@ -3,9 +3,8 @@
 
 function dropDown_update_for_daily_data($select_name,$table_name,$field_name,$select_id,$s_field_name,$daily_date,$location){ #send also the query name?, always based on sample name
 	
-			$path = $_SERVER['DOCUMENT_ROOT'].$root;
-			include($path.'config/path.php');
-			
+			if(!isset($_SESSION)) { session_start(); }
+			$path = $_SESSION['include_path'];
 			include($path.'database_connection.php');
 			
 			$p_select_name = htmlspecialchars($select_name);

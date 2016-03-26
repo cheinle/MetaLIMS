@@ -1,11 +1,9 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include('../config/path.php');
-$path = $_SERVER['DOCUMENT_ROOT'].$root;
 include ('../database_connection.php');
 include ('../index.php');
-include($path.'functions/dropDown.php');
+include('../functions/dropDown.php');
 ?>
 <!doctype html>
 <html>

@@ -4,7 +4,6 @@ ini_set('display_errors', 1);
 include('../../database_connection.php'); 
 include('../../index.php');
 include('../../functions/build_seq_subbed_output_new.php');
-include('../../config/path.php');
 ?>
 
 <!doctype html>
