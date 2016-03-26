@@ -3,7 +3,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 if(!isset($_SESSION)) { session_start(); }
 $root = $_SESSION['link_root'];
+$path = $_SESSION['include_path']; //same as $_SESSION['include_path']
 include ('../database_connection.php');
+
 ?>
 <!doctype html>
 <html>
@@ -12,19 +14,18 @@ include ('../database_connection.php');
 				<!--<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->		
 </head>
 <body class="update">
-	<script type="text/javascript">var root = "<?php echo $root; ?>"; alert(root);</script>
+	<script type="text/javascript">var root = "<?php echo $root; ?>";</script>
 <?php	//drowpdown to select field_name from table_name
 
 
 $parent_value = htmlspecialchars($_GET['sample_name']);
-include('../config/path.php');
-$path = $_SERVER['DOCUMENT_ROOT'].$root;
+//include('../config/path.php');
+include ($path.'index.php');
 include($path.'functions/dropDown_update.php');
 include($path.'functions/dropDown_update_for_storage.php');
 include($path.'functions/text_insert_update.php');
 include($path.'functions/text_insert_update_dt.php');
 include($path.'functions/text_insert_update_storage_info.php');
-include ($path.'index.php');
 include($path.'config/check_form_insert_js.php');
 include($path.'config/check_required_user_things_js.php');
 include($path.'config/check_sample_name.php');

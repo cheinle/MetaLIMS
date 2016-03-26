@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 if(!isset($_SESSION)) { session_start(); }
 include('database_connection.php');
 include('index.php');
-include('config/path.php');
+$root = $_SESSION['link_root'];
 
 ?>
 <!doctype html>

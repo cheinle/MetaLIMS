@@ -92,10 +92,11 @@ try{
 					//fs
 					define('INCLUDE_PATH', $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/am_production/');
 					$_SESSION['include_path'] = INCLUDE_PATH;
+	
 					
 					define('LINK_ROOT', '/series/dynamic/am_production/');
 					$_SESSION['link_root'] = LINK_ROOT;
-
+					
 
 						
 					//if you need restrict access to database for any reason
@@ -104,17 +105,18 @@ try{
 					if($database_down == 'true' || $database_down == 'moving'){
 						//if($_SESSION['username'] == $admin_user){
 						if($admin_user == 'Y'){
-							$url = $_SERVER["HTTP_HOST"].$root."home_page.php"; 
+							$url = $_SERVER["HTTP_HOST"].$_SESSION['link_root']."home_page.php"; 
 							header("Location:http://".$url);
 						}
 						else{
 							session_destroy();
-							$url = $_SERVER["HTTP_HOST"].$root."login.php"; 
+							$url = $_SERVER["HTTP_HOST"].$_SESSION['link_root']."login.php"; 
 							header("Location: http://".$url);
+							exit();
 						}
 					}
 					else{
-						$url = $_SERVER["HTTP_HOST"].$root."home_page.php"; 
+						$url = $_SERVER["HTTP_HOST"].$_SESSION['link_root']."home_page.php"; 
 						header("Location: http://".$url);
 					}
 				}

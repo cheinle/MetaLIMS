@@ -66,8 +66,11 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 
 ?>
 
-<?php include('config/css.php'); ?>
-<?php include('config/js.php'); ?>
+<?php 
+include($_SESSION['include_path'].'config/css.php');
+include($_SESSION['include_path'].'config/js.php');
+?>
+
 <?php
 //get admin email address
 $admin_email = '';
