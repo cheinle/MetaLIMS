@@ -427,8 +427,6 @@
 						/***************************************************************************************
 						//Insert Admin Created Things
 						****************************************************************************************/
-						//$size = size($p_user_things);
-						//for($x = 0; $x < 10; $x++){
 						$thing1 = NULL;					
 						if(isset($p_user_things[1])){
 							$thing1 = $p_user_things[1];
@@ -489,15 +487,35 @@
 						if(isset($p_user_things[15])){
 							$thing15 = $p_user_things[15];
 						}
+						$thing16 = NULL;					
+						if(isset($p_user_things[16])){
+							$thing16 = $p_user_things[16];
+						}
+						$thing17 = NULL;					
+						if(isset($p_user_things[17])){
+							$thing17 = $p_user_things[17];
+						}
+						$thing18 = NULL;					
+						if(isset($p_user_things[18])){
+							$thing18 = $p_user_things[18];
+						}
+						$thing19 = NULL;					
+						if(isset($p_user_things[19])){
+							$thing19 = $p_user_things[19];
+						}
+						$thing20 = NULL;					
+						if(isset($p_user_things[20])){
+							$thing20 = $p_user_things[20];
+						}
 						//}
 						
-						$stmt_things = $dbc -> prepare("INSERT INTO store_user_things (sample_name, thing1,thing2,thing3,thing4,thing5,thing6,thing7,thing8,thing9,thing10,thing11,thing12,thing13,thing14,thing15) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+						$stmt_things = $dbc -> prepare("INSERT INTO store_user_things (sample_name, thing1,thing2,thing3,thing4,thing5,thing6,thing7,thing8,thing9,thing10,thing11,thing12,thing13,thing14,thing15,thing16,thing17,thing18,thing19,thing20) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 						if(!$stmt_things){
 								$insert_check = 'false';
 								throw new Exception("Prepare Failure: Unable to insert user created fields");	
 						}
 						else{
-							$stmt_things -> bind_param('sssssssssssiiiii', $p_sample_name,$thing1,$thing2,$thing3,$thing4,$thing5,$thing6,$thing7,$thing8,$thing9,$thing10,$thing11,$thing12,$thing13,$thing14,$thing15);
+							$stmt_things -> bind_param('sssssssssssiiiiiiiiii', $p_sample_name,$thing1,$thing2,$thing3,$thing4,$thing5,$thing6,$thing7,$thing8,$thing9,$thing10,$thing11,$thing12,$thing13,$thing14,$thing15,$thing16,$thing17,$thing18,$thing19,$thing20);
 							if(!$stmt_things-> execute()){
 								$insert_check = 'false';
 								throw new Exception("Execution Failure: Unable to enter user created fields.");	

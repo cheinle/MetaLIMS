@@ -21,8 +21,6 @@
 					  	
 					  
 					  	var newInput = document.createElement("input");
-					  	//newInput.type="text";
-					  	//newInput.name= thing_id;
 					  	newInput.setAttribute("type", "text");
 				      	newInput.setAttribute("name", thing_id);
 				      	newInput.setAttribute("id", thing_id);

@@ -612,10 +612,40 @@ include($path.'functions/unset_session_vars.php');
 								$p_thing15 = $_GET['thing15'];
 							}
 						}
+						$p_thing16 = NULL;					
+						if(isset($_GET['thing16'])){
+							if($_GET['thing16'] != ''){
+								$p_thing16 = $_GET['thing16'];
+							}
+						}
+						$p_thing17 = NULL;					
+						if(isset($_GET['thing17'])){
+							if($_GET['thing17'] != ''){
+								$p_thing17 = $_GET['thing17'];
+							}
+						}
+						$p_thing18 = NULL;					
+						if(isset($_GET['thing18'])){
+							if($_GET['thing18'] != ''){
+								$p_thing18 = $_GET['thing18'];
+							}
+						}
+						$p_thing19 = NULL;					
+						if(isset($_GET['thing19'])){
+							if($_GET['thing19'] != ''){
+								$p_thing19 = $_GET['thing19'];
+							}
+						}
+						$p_thing20 = NULL;					
+						if(isset($_GET['thing20'])){
+							if($_GET['thing20'] != ''){
+								$p_thing20 = $_GET['thing20'];
+							}
+						}
 					//update
-					$thing_set_query = 'UPDATE store_user_things SET sample_name = ?, thing1 = ?, thing2 = ?,thing3 = ?, thing4 = ?,thing5 = ?,thing6 =?, thing7 = ?, thing8 =?, thing9 = ?, thing10 =?, thing11 = ?, thing12 = ?, thing13 = ?, thing14 = ?, thing15 = ? WHERE sample_name = ?';
+					$thing_set_query = 'UPDATE store_user_things SET sample_name = ?, thing1 = ?, thing2 = ?,thing3 = ?, thing4 = ?,thing5 = ?,thing6 =?, thing7 = ?, thing8 =?, thing9 = ?, thing10 =?, thing11 = ?, thing12 = ?, thing13 = ?, thing14 = ?, thing15 = ?, thing16 = ?, thing17 = ?, thing18 = ?, thing19 = ?, thing20 = ? WHERE sample_name = ?';
 					if($thing_stmt = $dbc ->prepare($thing_set_query)) {                 
-	                	$thing_stmt->bind_param('sssssssssssiiiiis',$p_sample_name,$p_thing1,$p_thing2,$p_thing3,$p_thing4,$p_thing5,$p_thing6,$p_thing7,$p_thing8,$p_thing9,$p_thing10,$p_thing11,$p_thing12,$p_thing13,$p_thing14,$p_thing15,$p_sample_name);
+	                	$thing_stmt->bind_param('sssssssssssiiiiiiiiiis',$p_sample_name,$p_thing1,$p_thing2,$p_thing3,$p_thing4,$p_thing5,$p_thing6,$p_thing7,$p_thing8,$p_thing9,$p_thing10,$p_thing11,$p_thing12,$p_thing13,$p_thing14,$p_thing15,$p_thing16,$p_thing17,$p_thing18,$p_thing19,$p_thing20,$p_sample_name);
 						if(!$thing_stmt -> execute()){
 							$successfull = 'false';
 							throw new Exception("Execution Error: Unable To Update User Created Info");	
