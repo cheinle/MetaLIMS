@@ -50,11 +50,16 @@
                  var input_id = thing_inputs[i11].getAttribute("id");
                  var type = thing_inputs[i11].getAttribute("class");
 	        	 if(type == 'numeric_input'){
-	             	var regrex_check  =  inputed.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
-					if (regrex_check == null){
-						alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
-						valid = 'false';
-		             	document.getElementById(input_id).style.backgroundColor = 'blue';
+	        	 	if(inputed != ''){
+	        	 		var regrex_check  =  inputed.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
+						if (regrex_check == null){
+							alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
+							valid = 'false';
+		             		document.getElementById(input_id).style.backgroundColor = 'blue';
+						}
+						else{
+		             		document.getElementById(input_id).style.backgroundColor = 'white';
+		            	 }
 					}
 					else{
 		             	document.getElementById(input_id).style.backgroundColor = 'white';
