@@ -46,6 +46,8 @@
 				seqInfo: "text",
 				anPipe: "text",
 				notes: "text",
+				
+				//special
 				fRate: "number",
 				fRate_eod: "number",
 				sampling_height: "number",
@@ -139,25 +141,149 @@
 	                 ////////////////////
                  	//check non required fields
                  	if(non_required[name] && non_required[name] == 'text'){// ok for non required text fields to be empty...this is just a placeholder for now
+                 	
+                 		/*	alert('working');
+                 		 //check if your input is empty
+	                	var n = txt.length;
+	                 	if(n == 0){
+	                    	inputs[i].style.background = "blue";
+	                   	 	valid = 'false';
+                 		}*/
+                 		
+                 		//////////////////////////////////////////////
+                 		 //check if your input is empty
+	               
+                 		
+                 		
+                 		
+                 		
+                 		
+                 		
+                 		
+                 		
+                 		
+                 		/////////////////////////////////////////////////
+                 		
+                 		
                  		
                  		
                  	}
                  	else if (non_required[name] && non_required[name] == 'number'){
-                 		
-						if(txt != ''){
-	        	 			var regrex_check  =  txt.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
-							if (regrex_check == null){
+                 		//check number format
+                 		//should be for DNA conc/vol and RNA conc/vol
+                 		/*if(name == 'dConc' || name == 'dVol' || name == 'rConc' || name == 'rVol'){
+	                 		var nr_number_check = txt.match(/^\s*(?=.*[1-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
+							if (nr_number_check  == null){
 								alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
-								valid = 'false';
-		             			inputs[i].style.background = "blue";
+								inputs[i].style.background = "blue";
+		                    	valid = 'false';
+							}else{
+								inputs[i].style.background = "white";
+							}
+						}*/
+						
+						if(name == 'sampling_height'){
+							//if you are an air sample you cannot be empty or zero
+							if (sType == "A" ) {
+								var color_check = 'true';
+								//check you are not empty
+								var n = txt.length;
+	                 			if(n == 0){
+	                 				alert("Sampling Height Cannot Be Zero Or Empty For Air Samples");
+	                    			inputs[i].style.background = "blue";
+	                   	 			valid = 'false';
+	                   	 			color_check = 'false';
+                 				}
+                 				//check you are not zero
+								var regrex_check_sh  = txt.match(/^\s*(?=.*[0-9])[0]{0,5}(?:\.[0]{1,2})?\s*$/);//trying to match any zero here
+								if (regrex_check_sh  != null){
+									alert("Sampling Height Cannot Be Zero Or Empty For Air Samples");
+									inputs[i].style.background = "blue";
+			                    	valid = 'false';
+			                    	color_check = 'false';
+								}
+								
+								//check you are the correct format
+								var regrex_check_sh2  =  txt.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
+								if (regrex_check_sh2 == null){
+									alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
+									inputs[i].style.background = "blue";
+					                valid = 'false';
+					                color_check = 'false';
+								}
+								
+								if(color_check == 'true'){
+									inputs[i].style.background = "white";
+								}
 							}
 							else{
-		             			inputs[i].style.background = "white";
-		            		}
+								var n = txt.length;
+	                 			if(n != 0){
+	              
+									var regrex_check_sh  =  txt.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
+									if (regrex_check_sh == null){
+										alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
+										inputs[i].style.background = "blue";
+					                	valid = 'false';
+									}else{
+										inputs[i].style.background = "white";
+									}
+								}
+							} 
 						}
-						else{
-		             		inputs[i].style.background = "white";
-		             	}
+						
+						//repeat for flow rate
+						/////////////////////////////////////////////
+						if(name == 'fRate' || name == 'fRate_eod'){
+							//if you are an air sample you cannot be empty or zero
+							if (sType == "A" ) {
+								var color_check = 'true';
+								//check you are not empty
+								var n = txt.length;
+	                 			if(n == 0){
+	                 				alert("Flow Rate Cannot Be Zero Or Empty For Air Samples");
+	                    			inputs[i].style.background = "blue";
+	                   	 			valid = 'false';
+	                   	 			color_check = 'false';
+                 				}
+                 				//check you are not zero
+								var regrex_check_sh  = txt.match(/^\s*(?=.*[0-9])[0]{0,3}(?:\.[0]{1,2})?\s*$/);//trying to match any zero here
+								if (regrex_check_sh  != null){
+									alert("Flow Rate Cannot Be Zero Or Empty For Air Samples");
+									inputs[i].style.background = "blue";
+			                    	valid = 'false';
+			                    	color_check = 'false';
+								}
+								
+								//check you are the correct format
+								var regrex_check_sh2  =  txt.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
+								if (regrex_check_sh2 == null){
+									alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
+									inputs[i].style.background = "blue";
+					                valid = 'false';
+					                color_check = 'false';
+								}
+								
+								if(color_check == 'true'){
+									inputs[i].style.background = "white";
+								}
+							}
+							else{
+								var n = txt.length;
+	                 			if(n != 0){
+	              
+									var regrex_check_sh  =  txt.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
+									if (regrex_check_sh == null){
+										alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
+										inputs[i].style.background = "blue";
+					                	valid = 'false';
+									}else{
+										inputs[i].style.background = "white";
+									}
+								}
+							} 
+						}
+						//////////////////////////////////////////////
                  	}
                  } 
 			}
@@ -181,6 +307,9 @@
 	              }
 			}
 			
+			
+			
+			/**Specials**/
 			
 			//////////////////////////////////////////////////////////////
 			//check if some DNA filled out that all of it is filled out

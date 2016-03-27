@@ -37,7 +37,7 @@
 				$p_dWeather = '0';//removing for now
 				$p_media = htmlspecialchars($_GET['media']);
 				$p_sampling_height = htmlspecialchars($_GET['sampling_height']);
-				$air_samplers = $_GET['air_samplers'];
+				$my_samplers = $_GET['my_samplers'];
 				$start_dates = $_GET['start_dates'];
 				$end_dates = $_GET['end_dates'];
 				$start_times = $_GET['start_times'];
@@ -161,7 +161,7 @@
 						$dbc->autocommit(FALSE);
 						
 						//format sample name and sample sort name
-						$date = htmlspecialchars($start_dates[1]); //just using start date for sampling date of the first air sampler
+						$date = htmlspecialchars($start_dates[1]); //just using start date for sampling date of the first sampler
 						$regrex_check = '/^(20[0-9][0-9])-([0-1][0-9])-([0-3][0-9])$/'; //remove dashes
 						preg_match($regrex_check,$date,$matches);
 						$date = $matches[1].'/'.$matches[2].'/'.$matches[3];
@@ -295,15 +295,15 @@
 						/***************************************************************************************
 						//Insert Samplers !!! (must be after insert of sample to db because of key constraints)
 						****************************************************************************************/
-						$num_of_air_samplers = $_GET['sampler_num'];
+						$num_of_my_samplers = $_GET['sampler_num'];
 						
 						$earliest_start;
 						$latest_end;
 						$counter = 0;
 					
-						for ($x = 1; $x <= $num_of_air_samplers; $x++) {
+						for ($x = 1; $x <= $num_of_my_samplers; $x++) {
 							$counter++;
-							$p_air_samp_name = htmlspecialchars($air_samplers[$x]);
+							$p_my_samp_name = htmlspecialchars($my_samplers[$x]);
 							$start = $start_dates[$x].' '.$start_times[$x];
 							$end = $end_dates[$x].' '.$end_times[$x];
 							
@@ -340,18 +340,18 @@
 								$time = ($seconds_diff/3600);
 								$p_time = round($time,2);
 							}
-							$query_air_samp = "INSERT INTO sample_sampler (sample_name, sampler_name, start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)";
-							$stmt_air_samp = $dbc -> prepare($query_air_samp);
-							if(!$stmt_air_samp){
+							$query_my_samp = "INSERT INTO sample_sampler (sample_name, sampler_name, start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)";
+							$stmt_my_samp = $dbc -> prepare($query_my_samp);
+							if(!$stmt_my_samp){
 								throw new Exception("Prepare Failure: Unable To Insert Sample Sampler");	
 							}
 							else{
-								$stmt_air_samp -> bind_param('ssssd', $p_sample_name,$p_air_samp_name,$start,$end,$p_time);
-								if($stmt_air_samp -> execute()){
-									$rows_affected_air_samp = $stmt_air_samp ->affected_rows;
-									$stmt_air_samp -> close();
+								$stmt_my_samp -> bind_param('ssssd', $p_sample_name,$p_my_samp_name,$start,$end,$p_time);
+								if($stmt_my_samp -> execute()){
+									$rows_affected_my_samp = $stmt_my_samp ->affected_rows;
+									$stmt_my_samp -> close();
 									//check if add was successful or not. Tell the user
-							   		if($rows_affected_air_samp < 0){
+							   		if($rows_affected_my_samp < 0){
 										$insert_check = 'false';
 										throw new Exception("An Error Occurred: No Sampler Info Added");
 									}
@@ -386,17 +386,17 @@
 								$time_stmt -> close();
 								if($time_rows_affected < 1){	
 									$insert_check = 'false';
-									throw new Exception("Insert Failure: Unable To Insert Air Sampler");
+									throw new Exception("Insert Failure: Unable To Insert Sampler");
 								}
 							}
 							else{
 								$insert_check = 'false';
-								throw new Exception("Execution Failure: Unable To Insert Air Sampler");
+								throw new Exception("Execution Failure: Unable To Insert Sampler");
 							}
 						}
 						else{
 							$insert_check = 'false';
-							throw new Exception("Prepare Failure: Unable To Insert Air Sampler");
+							throw new Exception("Prepare Failure: Unable To Insert Sampler");
 						}
 						
 						

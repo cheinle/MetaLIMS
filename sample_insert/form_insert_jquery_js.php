@@ -54,9 +54,9 @@
 							var rStore_temp = $("#rStore_temp").val();
 							var rStore_name = $("#rStore_name").val();
 
-							//air samplers
+							//my samplers
 							var sampler_num = $("#sampler_num").val();
-							var air_samplers = [];
+							var my_samplers = [];
 							var start_dates = [];
 							var end_dates = [];
 							var start_times = [];
@@ -67,7 +67,6 @@
 							//var counter = 0;
 							$(".things").each(function(){
 								var id = this.id;
-								console.log("id"+id);
 								var myString = id;
 								var myRegexp = /^thing(\d+)$/;
 								var match = myRegexp.exec(myString);
@@ -79,8 +78,8 @@
 							
 					
 							for ( var x = 1; x <= sampler_num; x++) {
-									var airSampler = $("#airSamp"+x).val();
-									air_samplers[x] = airSampler;
+									var mySampler = $("#mySamp"+x).val();
+									my_samplers[x] = mySampler;
 									
 									var sdate = $("#sdate"+x).val();
 									start_dates[x] = sdate;
@@ -139,9 +138,9 @@
 								rStore_temp: rStore_temp,
 								rStore_name: rStore_name,
 								
-								//air samplers and date/time arrays
+								//my samplers and date/time arrays
 								sampler_num:sampler_num, 
-								air_samplers: air_samplers,
+								my_samplers: my_samplers,
 								start_dates : start_dates,
 								end_dates : end_dates,
 								start_times: start_times,
@@ -153,7 +152,7 @@
 			                    }, //Data you are sending
 			                    success : function(data){alert("\t"+'Success!'+"\n"+'Inserted Sample Number : '+sample_number+"\n"+'For Project: '+projName)}, 
 			                    //success : function(data){alert(data)}, 
-			                    error   : function(){alert('An Error Has Occurred')} //error message
+			                    error   : function(data){alert(data)} //error message
 			                })
 							}
 						});
@@ -197,7 +196,7 @@
 						document.getElementById('sampler_num').style.backgroundColor = 'blue';
 					}
 					else{
-						//create a contains method to check if airSamp is entered twice
+						//create a contains method to check if Sampler name is is entered twice
 						Array.prototype.contains = function(needle){
 							for (i in this){
 								if(this[i]===needle){
@@ -207,26 +206,26 @@
 							return false;
 						}
 						var seen = [];
-						//validate airSamp data
+						//validate mySamp data
 						for (index = 1; index <= x; ++index) {
-	   	 					var airSamp_name = 'airSamp'+index;
-	   	 					//check that airSamp is picked 
-	   	 					var airSamp_name_value = document.getElementById(airSamp_name).value;
-	   	 					if(airSamp_name_value == '0' || airSamp_name_value == 'Needs to be added'){
+	   	 					var mySamp_name = 'mySamp'+index;
+	   	 					//check that mySamp is picked 
+	   	 					var mySamp_name_value = document.getElementById(mySamp_name).value;
+	   	 					if(mySamp_name_value == '0' || mySamp_name_value == 'Needs to be added'){
 	   	 						alert("Whoops! Sampler Name Is Not Valid");
-	   	 						document.getElementById(airSamp_name).style.backgroundColor = 'blue';
+	   	 						document.getElementById(mySamp_name).style.backgroundColor = 'blue';
 	   	 						valid = 'false';
 	   	 					}
 	   	 					else{
-	   	 						//check to see if airSamp name is already input
-	   	 						if(seen.contains(airSamp_name_value)){
-	   	 							document.getElementById(airSamp_name).style.backgroundColor = 'blue';
-	   	 							alert("You Have Chosen More Than One Air Sampler With The Same Name. Please Check Names");
+	   	 						//check to see if mySamp name is already input
+	   	 						if(seen.contains(mySamp_name_value)){
+	   	 							document.getElementById(mySamp_name).style.backgroundColor = 'blue';
+	   	 							alert("You Have Chosen More Than One Sampler With The Same Name. Please Check Names");
 	   	 							valid = 'false';
 	   	 						}
 	   	 					    else{
-	   	 							seen.push(airSamp_name_value);
-	   	 							document.getElementById(airSamp_name).style.backgroundColor = 'white';
+	   	 							seen.push(mySamp_name_value);
+	   	 							document.getElementById(mySamp_name).style.backgroundColor = 'white';
 	   	 						}
 	   	 					}
 	   	 				
@@ -282,7 +281,7 @@
 									var time = (seconds_diff/3600);
 									time = (time/1000); 
 									var p_time = time.toFixed(2);
-									var airSamp_check = airSamp_name.match(/^Coriolis.*/);
+									var mySamp_check = mySamp_name.match(/^Coriolis.*/);
 								
 									if(p_time < 0){
 										valid = 'false';
@@ -292,7 +291,7 @@
 										document.getElementById(start_date).style.backgroundColor = 'blue';
 										document.getElementById(end_date).style.backgroundColor = 'blue';
 									}
-									else if(p_time > 6.5 && airSamp_check  != null){//check if coriolis sampling is greater than 6 hours
+									else if(p_time > 6.5 && mySamp_check  != null){//check if coriolis sampling is greater than 6 hours
 										valid = 'false';
 										alert("Sampling Is Greater Than 6 Hours For Coriolis Sampling. Please Check Date/Times");
 										document.getElementById(start_time).style.backgroundColor = 'blue';

@@ -2,11 +2,11 @@
 	include('../database_connection.php');
 
 
-	$num_air_samplers = $_GET['num_air_samplers'];
-	$old_num_air_samplers = $_GET['old_num_air_samplers'];
-	$air_samplers = array();
-	if(isset($_GET['air_samplers'])){
-		$air_samplers = $_GET['air_samplers'];
+	$num_my_samplers = $_GET['num_my_samplers'];
+	$old_num_my_samplers = $_GET['old_num_my_samplers'];
+	$my_samplers = array();
+	if(isset($_GET['my_samplers'])){
+		$my_samplers = $_GET['my_samplers'];
 	}
 	$start_dates = array();
 	if(isset($_GET['start_dates'])){
@@ -25,11 +25,11 @@
 		$end_times = $_GET['end_times'];
 	}
 
-	for ($x = 1; $x <= $num_air_samplers; $x++) {
+	for ($x = 1; $x <= $num_my_samplers; $x++) {
 
     	echo "<p>";
 		echo "<label class='textbox-label-sampler'>Sampler #".$x.":*</label>";
-		echo "<select id='airSamp".$x."' name='airSamp".$x."'>";
+		echo "<select id='mySamp".$x."' name='mySamp".$x."'>";
 		echo "<option value='0'>-Select-</option>";
 		$stmt[$x] = $dbc->prepare("SELECT sampler_name FROM sampler");
   		if ($stmt[$x]->execute()){
@@ -47,13 +47,13 @@
 		    	while ($stmt[$x]->fetch()) {
 					foreach($row[$x] as $key => $value){		
 						$p_value = htmlspecialchars($value);
-						$selected_option = $air_samplers[$x];
+						$selected_option = $my_samplers[$x];
 						if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {
 							echo '<option value="'.$p_vale.'"', ($selected_option == $p_value) ? 'selected':'' ,'>'.$p_value.'</option>';
 						}
 						else{
-							if(isset($_GET['air_samplers'])){
-								if (array_key_exists($x, $air_samplers)) {
+							if(isset($_GET['my_samplers'])){
+								if (array_key_exists($x, $my_samplers)) {
 									echo '<option value="'.$p_value.'"', ($selected_option == $p_value) ? 'selected':'' ,'>'.$p_value.'</option>';
 								}
 							}
@@ -77,7 +77,7 @@
 					echo htmlspecialchars($_GET['sdate']);
 				}
 				else{
-					if(isset($_GET['air_samplers'])){
+					if(isset($_GET['my_samplers'])){
 						if (array_key_exists($x,$start_dates)) {
 							echo $start_dates[$x];
 						}
@@ -88,7 +88,7 @@
 				echo htmlspecialchars($_GET['stime']);
 				}
 				else{
-					if(isset($_GET['air_samplers'])){
+					if(isset($_GET['my_samplers'])){
 						if (array_key_exists($x, $start_times)) {
 							echo $start_times[$x];
 						}
@@ -102,7 +102,7 @@
 					echo htmlspecialchars($_GET['edate']);
 				}
 				else{
-					if(isset($_GET['air_samplers'])){
+					if(isset($_GET['my_samplers'])){
 						if (array_key_exists($x, $end_dates)) {
 							echo $end_dates[$x];
 						}
@@ -114,7 +114,7 @@
 					echo htmlspecialchars($_GET['etime']);
 				}
 				else{
-					if(isset($_GET['air_samplers'])){
+					if(isset($_GET['my_samplers'])){
 						if (array_key_exists($x, $end_times)) {
 						    echo $end_times[$x];
 						}
@@ -125,14 +125,14 @@
 				$('#sdate<?php echo $x ?>').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 				$('#edate<?php echo $x ?>').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 
-				var air_samp_num = <?php echo(json_encode($x)); ?>;
+				var my_samp_num = <?php echo(json_encode($x)); ?>;
     			$(document).ready(function(){
-        			$('input[name="stime'+air_samp_num+'"]').ptTimeSelect();
+        			$('input[name="stime'+my_samp_num+'"]').ptTimeSelect();
         			timeFormat: "HH:mm"
    	 			});
    	 			
    	 			$(document).ready(function(){
-   	 				$('input[name="etime'+air_samp_num+'"]').ptTimeSelect();
+   	 				$('input[name="etime'+my_samp_num+'"]').ptTimeSelect();
         			timeFormat: "HH:mm"
    	 			});
 				</script>

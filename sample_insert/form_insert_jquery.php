@@ -42,8 +42,6 @@ $root = $_SESSION['link_root'];
 				  </ul>
 			
 			<br>* = required field <br>
-			+ = required for air samples (incudes fungal/bacterial isolates when applicable)<br>
-			
 			<i>(Don't see your desired selection in dropdown list? Please add selection in "Update Dropdowns in Insert Sample" tab)</i>
 
 			<!--table insert form-->
@@ -127,7 +125,7 @@ $root = $_SESSION['link_root'];
 							
 							<!--Flow Rate-->
 							<p>
-							<label class="textbox-label">Flow Rate-Start/End of Day:+<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Coriolis or SASS: 300 l/m. Spin Air: 20-100 l/m"></i></label><br>
+							<label class="textbox-label">Flow Rate-Start/End of Day:</label><br>
 							<input type="text" class = "shrtfields" name="fRate" id="fRate"  placeholder="Rate(L/min)" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_fRate;} ?>">
 							<input type="text" class = "shrtfields" name="fRate_eod" id="fRate_eod"  placeholder="Rate(L/min)" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_fRate_eod;} ?>">
 							</p>
@@ -150,7 +148,7 @@ $root = $_SESSION['link_root'];
 			 				</select>	
 							
 							<p>
-							<label class="textbox-label">Height Above Floor:+<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Coriolis-113.5cm: SASS-156cm: Spin Air-151cm (all on tripods)" id='example'></i>
+							<label class="textbox-label">Height Above Floor:
 							</label><br>
 							<input type="text" name="sampling_height" id="sampling_height"  placeholder="Height Above Floor (cm)" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_sampling_height;} ?>">
 							</p>
@@ -158,10 +156,7 @@ $root = $_SESSION['link_root'];
 							<p>
 							<!--sampler dropdown-->
 							<label class="textbox-label">Select Number of Samplers:*<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="This is the number of samplers used to create the original sample. Also, please note that all blanks and cfu samples will have a sampling time duration of zero"></i></label>
-							<?php
-							//url or $_GET name, table name, field name
-							//dropDown('airSamp', 'air_sampler', 'air_sampler_name','air_sampler_name',$submitted);
-							?>
+							
 							<select id='sampler_num' name='sampler_num'>
 							<option value='0'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
 								if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "0" )){ echo "selected";}}?>>-Select-</option>

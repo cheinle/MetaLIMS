@@ -211,7 +211,7 @@
 
 
 
-<!--If Sample Type is not an Air Sample, set flow rate to zero-->
+<!--If Sample Type is not an  Sample, set flow rate to zero-->
 <!--Also, do a check to see if media type is not MilliQ-->
 <script type="text/javascript">
 		$(document).ready(function(){  
@@ -265,8 +265,7 @@
 		
 </script>
 
-<!--Pick Air Samplers Info-->
-<!--Pick Air Samplers Info-->
+<!--Pick Samplers Info-->
 <script type="text/javascript">
 		//var old_sampler_num = $("#sampler_num").val();
 		$(document).ready(function(){  
@@ -284,16 +283,16 @@
 	             	var sampler_num = value;
 	             	var old_sampler_num = previous;
              	
-             		//air samplers
-					var air_samplers = [];
+             		//my samplers
+					var my_samplers = [];
 					var start_dates = [];
 					var end_dates = [];
 					var start_times = [];
 					var end_times = [];
 							
 					for ( var x = 1; x <= sampler_num; x++) {
-						var airSampler = $("#airSamp"+x).val();
-						air_samplers[x] = airSampler;
+						var mySampler = $("#mySamp"+x).val();
+						my_samplers[x] = mySampler;
 											
 						var sdate = $("#sdate"+x).val();
 						start_dates[x] = sdate;
@@ -310,9 +309,9 @@
 	                $.ajax({
 	                    url     : root+'sample_insert/sampler_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
-	                    data    : { num_air_samplers: sampler_num,
-	                    			old_num_air_samplers: old_sampler_num, 
-	                    			air_samplers:air_samplers,
+	                    data    : { num_my_samplers: sampler_num,
+	                    			old_num_my_samplers: old_sampler_num, 
+	                    			my_samplers:my_samplers,
 	                    			start_dates:start_dates,
 	                    			end_dates:end_dates,
 	                    			start_times:start_times,
@@ -464,7 +463,7 @@ $(document).ready(function() {
 		 });  
 </script>
 
-<!--make all air sampler times the same-->
+<!--make all sampler times the same-->
 <!--<script type="text/javascript">
 $(document).ready(function() {
     $('#same_time').change(function() {
