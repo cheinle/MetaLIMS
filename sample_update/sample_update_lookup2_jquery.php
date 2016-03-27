@@ -164,7 +164,7 @@ if (isset($_GET['submit'])) {
 				</p>
 				
 				<p>
-				<label class="textbox-label">Flow Rate-Start/End of Day:<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Coriolis or SASS: 300 l/m. Spin Air: 20-100 l/m"></i></label><br>
+				<label class="textbox-label">Flow Rate-Start/End of Day:</label><br>
 				<input type="text" name="fRate" id="fRate"  class = "shrtfields" placeholder="Enter A Flow Rate for SOD" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'flow_rate',$dbc);} ?>">
 				<input type="text" name="fRate_eod" id="fRate_eod"  class = "shrtfields" placeholder="Enter A Flow Rate for EOD" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'flow_rate_eod',$dbc);} ?>">
 				</p>
@@ -181,7 +181,7 @@ if (isset($_GET['submit'])) {
 				</p>
 				
 				<p>
-				<label class="textbox-label">Height Above Floor:<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title=" Coriolis-113.5cm: SASS-156cm: Spin Air-151cm (all on tripods)" id='example'></i>
+				<label class="textbox-label">Height Above Floor:
 				</label><br>
 				<input type="text" name="sampling_height" id="sampling_height" placeholder="Enter A Height Above Floor (cm)" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'sampling_height',$dbc);} ?>">
 				</p>
