@@ -152,7 +152,7 @@
 			                    }, //Data you are sending
 			                    success : function(data){alert("\t"+'Success!'+"\n"+'Inserted Sample Number : '+sample_number+"\n"+'For Project: '+projName)}, 
 			                    //success : function(data){alert(data)}, 
-			                    error   : function(data){alert(data)} //error message
+			                    error   : function(){alert("An Error Has Occurred")} //error message
 			                })
 							}
 						});
