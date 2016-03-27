@@ -114,7 +114,7 @@ include('../functions/text_insert_update_storage_info.php');
 				<label class="textbox-label">Record Source For Sensor Measurement<?php echo $x ?>:</label><br>
 				<?php
 				//$select_name,$table_name,$field_name,$select_id,$s_field_name,$daily_date
-				dropDown_update_for_daily_data('record'.$x, 'records', 'records','records','record_source', $parent_value,$p_mylocation);
+				dropDown_update_for_daily_data('record'.$x, 'records', 'records','records','record_source', $parent_value,$p_mylocation,$part_sens_name);
 				//dropDown('record'.$x, 'records', 'records','records',$submitted);
 				?>
 				</p>
