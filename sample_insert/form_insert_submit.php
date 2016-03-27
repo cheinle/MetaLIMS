@@ -45,8 +45,6 @@
 				
 				//user things
 				$p_user_things = $_GET['user_things'];
-				print_r($p_user_things);
-				//$p_user_things = array();
 				
 				//for isolates
 				/*$p_iso_coll_temp = htmlspecialchars($_GET['iso_coll_temp']);
@@ -536,7 +534,8 @@
 						
 						if($insert_check == 'true'){
 							$dbc->commit();
-							echo 'Data Submitted Successfully! You added a new Sample '.$p_sample_name.'<br>';
+							//echo 'Data Submitted Successfully! You added a new Sample '.$p_sample_name.'<br>';
+							echo 'Data Submitted Successfully! You added a new Sample '.$p_sample_name;
 							$submitted = 'true';
 							
 						}
