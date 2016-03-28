@@ -1,9 +1,10 @@
 <?php
-include(INCLUDE_ROOT.'/config/path.php');
+include('../path.php');
+# Start Session
 if(!isset($_SESSION)) { session_start(); }
-if(!isset($_SESSION['username'])){
-	$url = $_SERVER["HTTP_HOST"].LINK_ROOT."login.php"; 
-	header("Location: http://".$url);
-	exit();
-}
+//This would delete all the session keys
+session_destroy(); 
+$url = $_SERVER["HTTP_HOST"].$logout_path."login.php"; 
+header("Location: http://".$url);
+exit();
 ?>

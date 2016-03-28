@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include('index.php');
+include('path.php');
 # Start Session
 if(!isset($_SESSION)) { session_start(); }
 //This would delete all the session keys

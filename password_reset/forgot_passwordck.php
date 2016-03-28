@@ -3,7 +3,7 @@ include('../database_connection.php');
 //////////////////////////////
 $email=$_POST['email'];
 // Change the URL below to match your site
-$site_url="http://localhost/series/dynamic/airmicrobiomes/password_reset/";
+$site_url="http://localhost/series/dynamic/am_production/password_reset/";
 
 ?>
 <!DOCTYPE html>
