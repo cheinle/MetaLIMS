@@ -85,7 +85,7 @@
 			   		if($rows_affected >= 0){
 						echo 'You Added New Read Submission Info For: '.$p_sample_name.'<br>';
 					}else{
-						throw new Exception("ERROR: Sample Insert Failure ");
+						throw new Exception("ERROR: Sample Insert Failure. Possible Duplicate Entry ");
 						$insert_error = 'true';
 						echo 'An error has occured';
 						mysqli_error($dbc);

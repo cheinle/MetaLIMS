@@ -4,9 +4,6 @@
 <head>
 <meta charset="utf-8">
 <title>Records</title>
-
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 </head>
 <body>
 <?php include('../index.php'); ?>

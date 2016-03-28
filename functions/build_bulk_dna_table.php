@@ -151,7 +151,7 @@ function build_bulk_dna_table($stmt,$root){
 	<tr>
 	<td class="textbox-label">
 	<label class="textbox-label">Location of DNA Extract:(pick freezer and drawer owner)</label><br>
-	
+	<div class="boxed">
 	<?php
 	//url or $_GET name, table name, field name
 	dropDown('dStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted,$root);
@@ -164,6 +164,7 @@ function build_bulk_dna_table($stmt,$root){
 			echo '<option value="0">-Select-</option>';
 		}?>
 	</select>	
+	</div>
 	</td>
 	</tr>
 		

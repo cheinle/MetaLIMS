@@ -4,8 +4,6 @@
 <head>
 <meta charset="utf-8">
 <title>Pool Name Update</title>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 </head>
 <body>
 <?php include('../index.php'); ?>
@@ -15,6 +13,7 @@
 	<?php 
 		//error && type checking 
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';
 			//print_r($_GET);
 			$error = 'false';
 			$submitted = 'false';
@@ -37,14 +36,10 @@
     			if ($stmt1->fetch()){
         			echo "Name: {$name}<br>";
         			if($name == $p_poolName){
-        				echo $p_poolName." exits. Please check name.";
+        				echo $p_poolName." Exists. Please Check Name.";
 						$error = 'true';
 					}
 				}
-    			else {
-        			echo "Name exisits: No results".'<br>';//no result came back so free to enter into db, no error
-					
-    			}
 			} 
 			else {
 				$error = 'true';
@@ -75,6 +70,7 @@
 					
 				}
 			}
+			echo '</div>';
 		}
 	?>
 </pre>

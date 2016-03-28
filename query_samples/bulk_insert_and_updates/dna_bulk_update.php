@@ -197,16 +197,13 @@
        	 		$dbc->rollback ();
        			echo "Error:  " . $e; 
     		}
-			echo '<p>
-			<input action="action" class="btn btn-success" type="button" value="Go Back" onclick="history.go(-1);" />
-			</p>';
+			echo '<input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" />';
 		}
 		
 	}
 	else{
-			echo '<p>
-			<input action="action" class="btn btn-success" type="button" value="Go Back" onclick="history.go(-1);" />
-			</p>';
+			echo '<input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" />
+	';
 	}
 
 ?>

@@ -180,12 +180,13 @@ $stmt->close();
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Admin Tools<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
+						<li><a href="'.$root.'admin_tools/add_users.php">Add Users</a></li>
 						<li><a href="'.$root.'admin_tools/update_freezer_drawers.php">Add Freezer/Drawer</a></li>
 						<li><a href="'.$root.'admin_tools/add_sample_type.php">Add Sample Type</a></li>
 						<li><a href="'.$root.'admin_tools/update_proj_name.php">Add Project Name</a></li>
 						<li><a href="'.$root.'admin_tools/add.php">Add Dropdown Options</a></li>
 						<li><a href="'.$root.'admin_tools/update.php">Update Dropdown Options</a></li>
-						<li><a href="'.$root.'admin_tools/delete.php">Delete Dropdown Options</a></li>
+						<li><a href="'.$root.'admin_tools/delete.php">Change Visibility</a></li>
 						<li><a href="'.$root.'admin_tools/dynamically_add_user_fields/add_a_user_thing.php">Create Fields</a></li>
 					</ul>
 				</li>

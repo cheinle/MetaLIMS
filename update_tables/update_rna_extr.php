@@ -16,6 +16,7 @@
 	<?php 
 		//error && type checking 
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';
 			//print_r($_GET);
 			$error = 'false';
 			$submitted = 'false';
@@ -37,14 +38,10 @@
     			if ($stmt1->fetch()){
         			echo "Name: {$name}<br>";
         			if($name == $p_rExtr){
-        				echo $p_rExtr." exits. Please check name.";
+        				echo $p_rExtr." Exists. Please Check Name.";
 						$error = 'true';
 					}
 				}
-    			else {
-        			echo "Name exisits: No results <br>";//no result came back so free to enter into db, no error
-					
-    			}
 			} 
 			else {
 				$error = 'true';
@@ -66,7 +63,7 @@
 				
 				//check if add was successful or not. Tell the user
 		   		if($rows_affected2 > 0){
-					echo 'You added new RNA Extraction Kit'.$p_rExtr.'<br>';
+					echo 'You added new RNA Extraction Kit: '.$p_rExtr.'<br>';
 					$submitted = 'true';
 				}else{
 					
@@ -75,6 +72,7 @@
 					
 				}
 			}
+			echo '</div>';
 		}
 	?>
 </pre>

@@ -30,8 +30,7 @@
 		}
 	}	
 
-	/* Bind parameters. Types: s = string, i = integer, d = double,  b = blob */
-	/*http://www.pontikis.net/blog/dynamically-bind_param-array-mysqli*/
+
 	$a_param_type = array();
 	$a_bind_params = array();
 	$a_param_type = $params;

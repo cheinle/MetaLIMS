@@ -16,6 +16,7 @@
 	<?php 
 		//error && type checking 
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';
 			if(isset($_GET['oStore_name'])){
 				$_SESSION['oStore_name'] = $_GET['oStore_name']; //if use back button, select user selected value
 			}
@@ -83,7 +84,7 @@
 					
 					//get timestamp
 					$current_time = $_GET['transaction_time']; //sent from page 2
-					echo "current_time".$current_time.'<br>';
+					//echo "current_time".$current_time.'<br>';
 					
 					//set current timestamp, make sure you are older than the exisiting time stamp
 					$ts_set_query = 'UPDATE storage_info SET time_stamp = ? WHERE sample_name = ? AND time_stamp <= ?';
@@ -92,19 +93,13 @@
 	
 	                    $ts_stmt -> execute();
 						$ts_rows_affected = $ts_stmt ->affected_rows;
-						echo $ts_rows_affected."space";
 					
 						$ts_stmt -> close();
 						if($ts_rows_affected >= 0){
 							echo "You updated timestamp".'<br>';
 						}
 						else{	
-							echo '<script>Alert.render("ERROR: Unable to update sample. Sample may have been modified since you opened this record. Please reload record, review, and try again");</script>';
 							throw new Exception("Unable to update sample. Sample may have been modified since your opened this record. Please reload record, review, and try again");	
-							
-							echo 'An error has occured';
-							mysqli_error($dbc);
-						
 						}
 					}
 					
@@ -142,17 +137,12 @@
 								#	echo "No update needed for field '".$values['field'].".' Contents are the same:".$values['value'].'<br>';
 								}
 								else{
-									echo '<script>Alert.render("ERROR: Your sample has been updated by another user since you began your update. Please refresh your page to view updated information and try again");</script>';
 									throw new Exception("rows affected is <= 0. ERROR: Your sample has been updated by another user since you began your update. Please refresh your page to view updated information and try again.");	
-									echo 'An error has occured';
-									mysqli_error($dbc);
-						
 								}
 	            	
 							}
 							else{
 								throw new Exception("Unable to prepare query for db");
-								echo "An error has occured: Unable to prepare query for db";	
 							}
 						 
 						}
@@ -163,8 +153,7 @@
 						unset($_SESSION['dStore_name']);
 					}
 					else{
-						throw new Exception("An error has occred: Please populate a field to update");
-						echo "An error has occured: Please populate a field to update";
+						throw new Exception("An error has occurred: Please populate a field to update");
 					}
 				}
 				catch (Exception $e) { 
@@ -175,8 +164,9 @@
     				}
 				}
 			}
-			
+			echo '</div>';
 		}
+		
 	?>
 
 <input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" />

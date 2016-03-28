@@ -4,9 +4,6 @@
 <head>
 <meta charset="utf-8">
 <title>Add Sample Type</title>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-
 <script>
 	$(document).ready(function(){
    		$('[data-toggle="popover"]').popover({
@@ -31,6 +28,7 @@
 <?php 	
 		//error checking 
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';
 			$error = 'false';
 			$submitted = 'false';
 			
@@ -53,7 +51,7 @@
 			//check format of ID
 			$regrex_check  = '/[A-Z]{1,3}$/';
 			if (!preg_match("$regrex_check", $p_sampleID)){
-				echo '<p>ERROR: You Must Enter A Valid Sample ID. Please Check ID<p>';
+				echo '<p>ERROR: You Must Enter A Valid Sample ID. Please Check ID<br><p>';
 				$error = 'true';
 			}
 		
@@ -65,11 +63,11 @@
     			$stmt1->bind_result($id,$name);
     			if ($stmt1->fetch()){
         			if($name == $p_sampleType){
-        				echo $p_sampleType." Exists. Please Check Name.";
+        				echo $p_sampleType." Exists. Please Check Name.<br>";
 						$error = 'true';
 					}
 					if($id == $p_sampleID){
-        				echo $p_sampleID." Exists. Please Check ID.";
+        				echo $p_sampleID." Exists. Please Check ID.<br>";
 						$error = 'true';
 					}
 				}
@@ -105,6 +103,7 @@
 				}
 		
 			}
+			echo '</div>';
 		}
 	?>
 

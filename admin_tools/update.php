@@ -93,7 +93,6 @@ include ('table_exclude_list.php');
 				 }
 			  }
 			  if(valid == 'true'){
-			  	alert(original_value);
 			   // process the form
 			       $.ajax({
 	                    url     : root+'admin_tools/process_update.php', //the url you are sending datas to which will again send the result

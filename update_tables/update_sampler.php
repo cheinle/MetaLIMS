@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Air Sampler Update</title>
+<title>Sampler Update</title>
 <script>
 	$(document).ready(function(){
    		$('[data-toggle="popover"]').popover({
@@ -29,6 +29,7 @@
 <?php 	
 		//error checking 
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';
 			$error = 'false';
 			$submitted = 'false';
 			
@@ -62,12 +63,12 @@
     			if ($stmt1->fetch()){
         			echo "Name: {$name}<br>";
         			if($name == $p_samp){
-        				echo $p_samp." exits. Please check name.";
+        				echo $p_samp." Exists. Please Check Name.";
 						$error = 'true';
 					}
 				}
     			else {
-        			echo "Name exisits: No results <br>";//no result came back so free to enter into db, no error
+        			echo "Name Exists: No results <br>";//no result came back so free to enter into db, no error
 					
     			}
 			} 
@@ -92,7 +93,7 @@
 				
 				//check if add was successful or not. Tell the user
 		   		if($rows_affected2 > 0){
-					echo 'You added a new Sampler:'.$p_samp;
+					echo 'You added a new Sampler: '.$p_samp;
 					$submitted = 'true';
 				}else{
 					
@@ -102,6 +103,7 @@
 				}
 		
 			}
+			echo '</div>';
 		}
 	?>
 	

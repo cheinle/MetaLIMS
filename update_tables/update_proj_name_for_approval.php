@@ -7,9 +7,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>project name update</title>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<title>Project Name Update</title>
 </head>
 <body>
 <?php include('../index.php'); ?>
@@ -21,6 +19,7 @@
 		
 		//error && type checking 
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';
 			//print_r($_GET);
 			$error = 'false';
 			$submitted = 'false';
@@ -70,7 +69,7 @@
     			$stmt1->bind_result($name);
     			if ($stmt1->fetch()){
         			if($name == $p_projName){
-        				echo "Project Name '".$p_projName."' exits. Please check name.";
+        				echo "Project Name '".$p_projName."' Exists. Please Check Name.";
 						$error = 'true';
 					}
 				}
@@ -103,6 +102,7 @@
 					</script>';
 				}		
 			}
+			echo '</div>';
 		}
 	?>
 	<form class="registration" action="update_proj_name_for_approval.php" method="GET">

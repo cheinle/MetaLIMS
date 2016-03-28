@@ -61,8 +61,9 @@ if($status=="OK"){
 	//once admin has approved and set to visible, let user know...
 	$first_user = 'false';
 	$admin_email = '';
-	$stmt1 = $dbc->prepare("SELECT user_id from users WHERE admin = Y");	
-	
+	$Y = 'Y';
+	$stmt = $dbc->prepare("SELECT user_id from users WHERE admin = ?");	
+	$stmt -> bind_param('s', $Y);
   	if ($stmt->execute()){
     	$stmt->bind_result($col);
 		$stmt->store_result();
@@ -74,7 +75,10 @@ if($status=="OK"){
 				$first_user = 'true';
 		}
 	}
-			
+	else{
+		echo "what?";
+	}
+	$stmt->close();		
 	//check if username exists
 	$stmt1 = $dbc->prepare("SELECT user_id FROM users WHERE user_id = ?");
 	$stmt1 -> bind_param('s', $email);
@@ -84,7 +88,7 @@ if($status=="OK"){
 		$stmt1->store_result();
 		$stmt1->fetch();
 		$no = $stmt1->num_rows;
-
+		$stmt1->close();
 		
 		if ($no > 0) {
 			echo "<center><font face='Verdana' size='2' color=red><b>ERROR</b><br> Sorry Your Username (email address) Already Exists In Our Database. Please Check With Admin<BR><BR></center>"; 
@@ -104,7 +108,7 @@ if($status=="OK"){
 					
 		//check if add was successful or not. Tell the user
    		if($rows_affected2 > 0){
-			echo " <center><font face='Verdana' size='2' color=red >Success! New Username Is: ".$email."<br></center></font>";
+			echo " <center><font face='Verdana' size='2' color=red >Success! Registration Requsted: ".$email."<br></center></font>";
 		
 		}else{
 			echo " <center><font face='Verdana' size='2' color=red >There Is Some System Problem In Setting Up Login. Please Contact Site-admin Or Retry. <br><br><input type='button' value='Retry' onClick='history.go(-1)'></center></font>";
@@ -130,8 +134,8 @@ if($status=="OK"){
 		}
 	}	
 	
-	$stmt->close();
-	$stmt1->close();
+	
+	
 }
 ?>
 		

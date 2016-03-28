@@ -5,8 +5,6 @@
 <head>
 <meta charset="utf-8">
 <title>Sequencer Info Update</title>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>	
 </head>
 <body>
 <?php
@@ -21,6 +19,7 @@ include('../functions/dropdown.php');
 		//error && type checking 
 		$submitted = 'false';
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';
 			//print_r($_GET);
 			$error = 'false';
 			
@@ -109,13 +108,12 @@ include('../functions/dropdown.php');
         			echo "Name: {$name}<br>";
         			#echo 'Another way:'.print_r($row, true); //won't work with bind_result
         			if($name == $p_seqInfo){
-        				echo $p_seqInfo." exits. Please check name.";
+        				echo $p_seqInfo." Exists. Please Check Name.";
 						$error = 'true';
 					}
 				}
     			else {
-        			echo "Name exisits: No results <br>";//no result came back so free to enter into db, no error
-					
+        			//echo "Name Exists: No results <br>";//no result came back so free to enter into db, no error
     			}
 			} 
 			else {
@@ -152,6 +150,7 @@ include('../functions/dropdown.php');
 					die('execute() failed: ' . htmlspecialchars($stmt2->error));
 				}
 			}
+			echo '</div>';
 		}
 	?>
 </pre>

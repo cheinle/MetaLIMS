@@ -432,16 +432,22 @@ div.border{
  float:left;
  color:#818181;
  margin-left: 5%;
+ margin-bottom: 1%;
  background: #f1f1f1;
  border: 2px solid #ccc;
  padding:10px;
  font-family: Georgia;
  font-size: 14px;
- box-shadow: 0 1px 3px rgba(0,0,0,0.5);
  border-radius: 15px;
+ box-shadow:0 5px 5px rgba(0,0,0,0.5);
+
 }
 div.indent{
   margin-left:20px;
+}
+div.boxed{
+ float: left;
+ width: 50%;
 }
 div.border legend{
   text-align:left;

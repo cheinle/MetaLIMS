@@ -4,9 +4,6 @@
 <head>
 <meta charset="utf-8">
 <title>Media Update</title>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-
 <script>
 	$(document).ready(function(){
    		$('[data-toggle="popover"]').popover({
@@ -31,6 +28,7 @@
 <?php 	
 		//error checking 
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';
 			$error = 'false';
 			$submitted = 'false';
 			
@@ -51,14 +49,10 @@
     			if ($stmt1->fetch()){
         			echo "Name: {$name}<br>";
         			if($name == $p_medType){
-        				echo $p_medType." exits. Please check name.";
+        				echo $p_medType." Exists. Please Check Name.";
 						$error = 'true';
 					}
 				}
-    			else {
-        			echo "Name exisits: No results <br>";//no result came back so free to enter into db, no error
-					
-    			}
 			} 
 			else {
 				$error = 'true';
@@ -91,6 +85,7 @@
 				}
 		
 			}
+			echo '</div>';
 		}
 	?>
 

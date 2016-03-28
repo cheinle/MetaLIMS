@@ -24,6 +24,7 @@ include ($path.'functions/convert_header_names.php');
 		$submitted = 'false';
 		//error checking 
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';
 			$error = 'false';//so far you have no errors
 			$initial_error_check = 'false';//so far you have no errors
 			
@@ -469,7 +470,7 @@ include ($path.'functions/convert_header_names.php');
 			}
 		}
 
-	
+	echo '</div>';
 	?>
 	<form class="registration" onsubmit="return validate(this)" action="pool_samples.php" method="GET" target="_blank">
 	<p><i>* = required field </i><br>

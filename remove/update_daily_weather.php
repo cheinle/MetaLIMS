@@ -1,22 +1,20 @@
 <?php include('../database_connection.php'); ?>
 <?php include('../index.php'); ?>
+
 <!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>Daily Weather</title>
-	 <!--<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->		
-	<script type="text/javascript" src="../relCopy.js"></script>
-	</head>
+</head>
 <body>
-
-
-<pre> <!-- commenting this out gets rid of the large bar-->
-	
+<div class="page-header">
 <h3>Update Daily Weather</h3>
+</div>
 <?php 	
 		//error checking 
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';
 			//print_r($_GET);
 			$error = 'false';
 			$submitted = 'false';
@@ -156,7 +154,7 @@
     			if ($stmt1->fetch()){
         			echo "Name: {$name}<br>";
         			if($name == $p_date){
-        				echo $p_date." exits. Please check name.";
+        				echo $p_date." Exists. Please Check Name.";
 						$error = 'true';
 					}
 				}
@@ -207,6 +205,7 @@
 					mysqli_error($dbc);
 				}
 			}
+			echo '</div>';
 		}
 	?>
 </pre>

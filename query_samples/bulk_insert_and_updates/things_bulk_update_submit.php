@@ -50,7 +50,7 @@
 					$thing_set_query = "UPDATE store_user_things SET ".$whole_thing." = ? WHERE sample_name = ?";
 
 					if($thing_stmt = $dbc ->prepare($thing_set_query)) {
-						echo $thing_number.'<br>'.$p_sample_name.'<br>'.$p_thing_value.'<br>';                 
+						//echo $thing_number.'<br>'.$p_sample_name.'<br>'.$p_thing_value.'<br>';                 
 	                	if($thing_number > 10 && $thing_number < 16){
 							$thing_stmt->bind_param('is',$p_thing_value, $p_sample_name);
 						}else{
@@ -62,7 +62,7 @@
 							$thing_rows_affected = $thing_stmt ->affected_rows;
 							$thing_stmt -> close();
 							if($thing_rows_affected >= 0){
-								echo $p_sample_name."<br>";
+								echo "Updating: ".$p_sample_name."<br>";
 							}
 							else{
 								throw new Exception("Unable To Update User Created Info");	
