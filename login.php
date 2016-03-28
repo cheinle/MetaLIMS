@@ -15,7 +15,7 @@ try{
 	//start transaction
 	mysqli_autocommit($dbc,FALSE);
 	if($_POST) {
-		
+		include('path.php');
 		$stmt1 = $dbc->prepare("SELECT * FROM users WHERE user_id = ? AND password = SHA1(?)");
 		$stmt1 -> bind_param('ss', $_POST['email'],$_POST['password']);
 				
@@ -89,18 +89,22 @@ try{
 					$_SESSION['last_name'] = $last_name;
 					
 
+					/***************************************************************************************************
+					 * Change this to point to where these files are stored in your document root directory. Leave as '/'
+					 * if files are in document root
+					 * *************************************************************************************************/
+					//$logout_path = '/series/dynamic/am_production/'; /*change here*/
 					//************CREATE PATH VARIABLES*******//
 					//define('INCLUDE_PATH', $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/am_production/');
-					$_SESSION['include_path'] = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/am_production/';
+					//$_SESSION['include_path'] = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/am_production/';
 	
 					//define('LINK_ROOT', '/series/dynamic/am_production/');
-					$_SESSION['link_root'] = '/series/dynamic/am_production/';
+					//$_SESSION['link_root'] = '/series/dynamic/am_production/';
 					/////////////////////////////////////////////
 
 						
 					//if you need restrict access to database for any reason
 					//destroy session for anyone who is not the developer
-					include('config/path.php');	
 					if($database_down == 'true'){
 						//if($_SESSION['username'] == $admin_user){
 						if($admin_user == 'Y'){

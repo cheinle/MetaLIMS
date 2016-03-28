@@ -6,16 +6,14 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 if(!isset($_SESSION)) { session_start(); }
 $root = $_SESSION['link_root'];
-$path = $_SESSION['include_path']; //same as $_SESSION['include_path']
-$logout_path = '/series/dynamic/am_production/';
+$path = $_SESSION['include_path']; 
 ?><script type="text/javascript">var root = "<?php echo $root; ?>";</script><?php 
-//doing this is essentially just like your path.php file...but what about var root? 
-//is it ok to define twice? could get confused or no?
 
 include($path.'database_connection.php');
+include($path.'path.php');
+
 //if user is not logged in, do not let him access any of the pages/directories
 if(!isset($_SESSION['username'])){  
-	//$url = $_SERVER["HTTP_HOST"].$root."login.php"; 
 	$url = $_SERVER["HTTP_HOST"].$logout_path."login.php"; 
 	header("Location: http://".$url);
 	exit();
