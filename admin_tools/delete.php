@@ -145,7 +145,8 @@ include ('../index.php');
 	echo "<select id='table' name='table'>";
 	echo "<option value='0'>-Select-</option>";
 	foreach($tables as $table => $pk){
-			echo '<option value="'.$table.'-'.$pk.'">'.$table.'</option>';
+		$new_table_name = ucwords(str_replace("_", " ", $table));
+			echo '<option value="'.$table.'-'.$pk.'">'.$new_table_name.'</option>';
 	}
 	echo "</select>";
 	

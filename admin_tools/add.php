@@ -97,7 +97,8 @@ include ('table_exclude_list.php');
 	echo "<select id='table' name='table'>";
 	echo "<option value='0'>-Select-</option>";
 	foreach($tables as $table => $pk){
-			echo '<option value="'.$table.'">'.$table.'</option>';
+			$new_table_name = ucwords(str_replace("_", " ", $table));
+			echo '<option value="'.$table.'">'.$new_table_name.'</option>';
 	}
 	echo "</select>";
 	
@@ -130,6 +131,7 @@ include ('table_exclude_list.php');
 		}
   		return $tableList;
 	}
+	
 	?>
 
 	</body>
