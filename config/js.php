@@ -212,30 +212,16 @@
 
 
 <!--If Sample Type is not an  Sample, set flow rate to zero-->
-<!--Also, do a check to see if media type is not MilliQ-->
 <script type="text/javascript">
 		$(document).ready(function(){  
 				               
         	$('#sType').change(function(){ //on change event
                 var sType = $('#sType').val(); //<----- get the value from the parent select 
-                var media = $('#media').val();
-                //alert(sType);
-				var flow_rate = $('#fRate');
-				var flow_rate_eod = $('#fRate_eod');
-
-        		/*if (sType == "A" ) {//assume coriolis and commonly used 300
-        			$('#fRate').val('300');
-        			$('#fRate_eod').val('300');
-        			
-					if(media == "MilliQ"){
-        				Alert.render("Warning: Media is MilliQ. Please check if this is what you want");
-        			}
+                var pooled_flag = $('#pooled_flag').val();
+               
+        		if (pooled_flag == "P" && sType != 'P') {//assume coriolis and commonly used 300
+        			Alert.render("Warning: Sample is a pooled sample. Are you sure you want to change sample type?");
         		}
-        		else {
-        			$('#fRate').val('0');
-        			$('#fRate_eod').val('0');
-        		}*/
-      
 			});
 			
 		});

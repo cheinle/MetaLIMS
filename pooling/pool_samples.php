@@ -181,7 +181,7 @@ include ($path.'functions/convert_header_names.php');
 			$part_sens_name = '(pooled)';
 			$sampling_height = '0.00';
 			$sample_type = 'P';
-			$pooled_flag = 'NP';
+			$pooled_flag = 'P';
 			$s_flow_rate = '0.00';
 			$e_flow_rate = '0.00';
 			
