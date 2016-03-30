@@ -16,7 +16,7 @@ try{
 	mysqli_autocommit($dbc,FALSE);
 	if($_POST) {
 		include('path.php');
-		$stmt1 = $dbc->prepare("SELECT * FROM users WHERE user_id = ? AND password = SHA1(?)");
+		$stmt1 = $dbc->prepare("SELECT * FROM users WHERE user_id = ? AND password = SHA1(?) AND visible = '1'");
 		$stmt1 -> bind_param('ss', $_POST['email'],$_POST['password']);
 				
 	 	if ($stmt1->execute()){
