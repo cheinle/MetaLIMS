@@ -9,7 +9,7 @@
 //*****************************************
 //include "include/session.php";
 include('../database_connection.php'); // database connection details stored here
-include('../index.php');
+include('../path.php');
  // database connection details stored here
 //////////////////////////////
 $ak=$_POST['ak'];
@@ -103,7 +103,7 @@ if ($stmt2->execute()){
 	}
 }
 
-echo '<center><a href='.$root.'login.php>Login</a>';
+echo '<center><a href='.$logout_path .'login.php>Login</a>';
 ?>
 
 

@@ -18,7 +18,7 @@ $userid=$_GET['userid'];
 <html>
 <head>
 <meta charset="utf-8">
-<title>Activate Passwrd</title>
+<title>Activate Password</title>
 </head>
 
 <body >
