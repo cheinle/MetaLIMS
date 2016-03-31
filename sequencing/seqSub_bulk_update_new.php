@@ -38,7 +38,6 @@ if(isset($_POST['submit'])){
 	$container_type = $_SESSION['container_type'];			 	
 	$method = $_SESSION['method'];
 	$read_length = $_SESSION['read_length'];
-	$quant_method = $_SESSION['quant_method']; 
 	$application = $_SESSION['application'];
 	$libPK = $_SESSION['libPK'];		
 	$submittedBy = $_SESSION['submittedBy'];
@@ -101,8 +100,8 @@ if(isset($_POST['submit'])){
 			//no longer updating sample table with this sequencing info...going to save and retrieve a diff way
 			//because you now have possibility of submitting sample mult times->//create sequencing info record first, then you can attach it to each of your samples
 			if($p_seqInfo_exists_check == 'false'){
-				$stmt2 = $dbc -> prepare("INSERT INTO sequencing2 (sequencing_info,entered_by,sequencing_type,date_submitted,library_prep_kit,submitted_by,container_type,sequencing_method,read_length,quant_method,sample_type,seq_pool,amplicon_type,primerL,primerR) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-				$stmt2 -> bind_param('sssssssssssssss',$p_seqInfo,$p_updated_by,$application,$dtSub,$libPK,$submittedBy,$container_type,$method,$read_length,$quant_method,$sample_type,$seq_pool,$amplicon_type,$primerL,$primerR);
+				$stmt2 = $dbc -> prepare("INSERT INTO sequencing2 (sequencing_info,entered_by,sequencing_type,date_submitted,library_prep_kit,submitted_by,container_type,sequencing_method,read_length,sample_type,seq_pool,amplicon_type,primerL,primerR) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+				$stmt2 -> bind_param('ssssssssssssss',$p_seqInfo,$p_updated_by,$application,$dtSub,$libPK,$submittedBy,$container_type,$method,$read_length,$sample_type,$seq_pool,$amplicon_type,$primerL,$primerR);
 					
 				if($stmt2 -> execute()){
 					$rows_affected2 = $stmt2 ->affected_rows;
@@ -129,7 +128,7 @@ if(isset($_POST['submit'])){
 			require_once ($path.'aquired/xls_classes/PHPExcel/IOFactory.php');
 			 
 			//$objPHPExcel = PHPExcel_IOFactory::load("Sequencing_SampleSubmissionForm.xlsx");
-			$objPHPExcel = PHPExcel_IOFactory::load($path."sequencing/test.xlsx");
+			$objPHPExcel = PHPExcel_IOFactory::load($path."sequencing/sequencing_form.xlsx");
 			$styleArray = array(
 		    'font'  => array(
 		    	'color' => array('rgb' => '000000'),
@@ -141,7 +140,7 @@ if(isset($_POST['submit'])){
 			for($i = 1; $i <= $number_of_samples; $i++){
 				$objWorksheet->insertNewRowBefore(15);
 			}
-			$starting_row = 15;
+			$starting_row = 18;
 		
 			//insert sample info to db and excel sheet at the same time
 			echo 'Samples Updated:<br>';
@@ -152,13 +151,11 @@ if(isset($_POST['submit'])){
 				
 				//create new sample name
 				///////////////////////////////Build to track number of submissions for each sequencing type for each sample/////////////////////////
-				//$seq_sub_name = $p_sample_name;
+
 				$seq_name = $process['seq_id'];
-				$prefix = 'ABX';
-				//$application = 'Whole Genome Sequencing'; //gloablly defined earlier
 				$seq_type_abbrev = get_application_abbrev($application,'abbrev'); //genomic ...need a way to get this if application == 'Genomic DNA' seq_type_abbrev = G
 				$check_for_error1 = strcmp($seq_type_abbrev,'ERROR');
-				if($check_for_error1 > '0'){
+				if($check_for_error1 == '0'){
 					throw new Exception("ERROR: No Sequencing Type Abbreviation. Please Notify Admin");
 				}
 				
@@ -169,19 +166,19 @@ if(isset($_POST['submit'])){
 						throw new Exception("ERROR: No Sequencing Submission Number. Please Notify Admin");
 				}
 				
-				$new_number_of_submissions = $number_of_submissions + 1;//does this need to be two digits placeholder?
+				$new_number_of_submissions = $number_of_submissions + 1;
 				//check if submission number is two digits
 				$length_check = strlen($new_number_of_submissions);
 				if($length_check < 1 || $length_check > 2){
-					throw new Exception("ERROR: Sequecning Number Has Invalid Format:'".$new_number_of_submission."'.Please Notify Admin");
+					throw new Exception("ERROR: Sequencing Number Has Invalid Format:'".$new_number_of_submission."'.Please Notify Admin");
 				}
 				else if($length_check == 1){
 					$new_number_of_submissions = '0'.$new_number_of_submissions;
 				}
 
-				$new_seq_sub_name = $prefix.'-'.$seq_name.'-'.$seq_type_abbrev.'-'.$new_number_of_submissions;
+				$new_seq_sub_name = $seq_name.'-'.$seq_type_abbrev.'-'.$new_number_of_submissions;
 				
-				#echo $new_seq_sub_name;
+
 				//if everything went well, you want to update the new number of submissions
 				//do you need a transaction for this?
 				$update_query = get_application_abbrev($application,'query'); 
@@ -213,7 +210,7 @@ if(isset($_POST['submit'])){
 				if(isset($process['wellLoc'])){
 					$p_wellLoc = $process['wellLoc'];
 				}
-				$container_name = 'air_container'.$container_counter;
+				$container_name = 'container'.$container_counter;
 				if($container_type == 'Tube'){
 					$container_counter++;
 				}
@@ -223,40 +220,26 @@ if(isset($_POST['submit'])){
 				$p_sampBuffer = $process['sampBuffer'];
 				$p_exists = $process['exists'];
 				
-				//if user chose these, define them
-				if(isset($process['nano'])){$p_nano = $process['nano'];}else{$p_nano = NULL;}
-				if(isset($process['280'])){$p_280 = $process['280'];}else{$p_280 = NULL;}
-				if(isset($process['230'])){$p_230 = $process['230'];}else{$p_230 = NULL;}
-				if(isset($process['dnaCont'])){$p_dnaCont = $process['dnaCont'];}else{$p_dnaCont = NULL;}
-				if(isset($process['RIN'])){$p_RIN = $process['RIN'];}else{$p_RIN = NULL;}
-			
-				
 				//update samplesheet-write to file
 				$objPHPExcel->setActiveSheetIndex(0)
                         ->setCellValue('A'.$starting_row, $new_seq_sub_name)
                         ->setCellValue('B'.$starting_row, $container_type)
-                        ->setCellValue('C'.$starting_row, $container_name) //container name
+                        ->setCellValue('C'.$starting_row, $container_name)
                         ->setCellValue('D'.$starting_row, $p_wellLoc)
-						->setCellValue('E'.$starting_row, $sample_type)
-						->setCellValue('F'.$starting_row, $p_sampConc)
-						->setCellValue('G'.$starting_row, 'ng/uL')
-						->setCellValue('H'.$starting_row, $quant_method)
-						->setCellValue('I'.$starting_row, $p_dnaCont)
-						->setCellValue('J'.$starting_row, $p_RIN)
-						->setCellValue('K'.$starting_row, $p_nano)
-						->setCellValue('L'.$starting_row, $p_280)
-						->setCellValue('M'.$starting_row, $p_230)
-						->setCellValue('R'.$starting_row, $application)
-						->setCellValue('S'.$starting_row, $method)
-						->setCellValue('T'.$starting_row, $read_length)
-						//->setCellValue('Q'.$starting_row, "")//seq coverage (optional)
-						//->setCellValue('R'.$starting_row, "")//ref genome (optional)
-						->setCellValue('W'.$starting_row, $seq_pool)//pooling
-						->setCellValue('X'.$starting_row, $p_sampBuffer)
-						->setCellValue('Y'.$starting_row, $p_vol );
+						->setCellValue('E'.$starting_row, $method)
+						//->setCellValue('F'.$starting_row, "")//seq coverage
+						->setCellValue('G'.$starting_row, $sample_type)//
+						//->setCellValue('H'.$starting_row, "")//reference genome
+						->setCellValue('I'.$starting_row, $seq_pool)//pooling
+						->setCellValue('J'.$starting_row, $application)
+						->setCellValue('K'.$starting_row, $read_length)
+						->setCellValue('L'.$starting_row, $p_sampBuffer)
+						->setCellValue('M'.$starting_row, $p_sampConc)
+						->setCellValue('N'.$starting_row, 'ng/uL')
+						->setCellValue('O'.$starting_row, $p_vol );
 					
 				//style the newly inserted cells
-				$alpha_array = range('A','Y');
+				$alpha_array = range('A','O');
 				foreach($alpha_array as $index => $alpha){
 					$objPHPExcel->getActiveSheet()->getStyle($alpha.$starting_row)->applyFromArray($styleArray);
 					$objPHPExcel->getActiveSheet()->getStyle($alpha.$starting_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);

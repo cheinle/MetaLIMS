@@ -41,7 +41,7 @@ include('database_connection.php');
 
 		      date - yyyy/mm/dd 
 		      project name - name of your project 
-		      sample type - B(sterilization blank),P(pooled) [these two come pre-loaded. Please have your admin add desired types]
+		      sample type - B(Blank-sterilization),P(Pooled) [these two come pre-loaded. Please have your admin add desired types]
 		      sample number - 3-digit sequential #  
  
 		      ex:   2014/10/27test_projectB001 </i> 

@@ -21,7 +21,7 @@ include('../functions/dropDown.php');
   	<div class="row">
 	<div class="col-xs-6">
 	<fieldset>
-	<LEGEND>Option 1:(Required)</LEGEND>
+	<LEGEND>Form Options:</LEGEND>
   	<?php $submitted = false; ?>
 	<p>
 	<label class="textbox-label">Sample Type:</label>
@@ -44,10 +44,10 @@ include('../functions/dropDown.php');
 	<?php  dropDown('read_length','read_length', 'read_length', 'read_length',$submitted,$root);?>
 	</p>
 	
-	<p>
+	<!--<p>
 	<label class="textbox-label">Quantitation Method:</label><br/>
 	<?php  dropDown('quant_method','quantitation_method', 'quant_method', 'quant_method',$submitted,$root);?>
-	</p>
+	</p>-->
 	
 	<p>
 	<label class="textbox-label">Application:</label><br/>
@@ -71,38 +71,8 @@ include('../functions/dropDown.php');
 	</div>
 	
 	<div class="col-xs-6">
-	<fieldset>
-	<LEGEND>Option 2:(Choose All That Apply)</LEGEND>
-	<h3 class="checkbox-header">Optional Quality/Quantity Checks</h3>
-	<label class="checkbox-label"><input type="checkbox" name="optional[]" value="Nanodrop">Nanodrop Conc. (ng/uL)</label><br>
-	<label class="checkbox-label"><input type="checkbox" name="optional[]" value="280">260/280</label><br>
-	<label class="checkbox-label"><input type="checkbox" name="optional[]" value="230">260/230</label><br>
-	</fieldset>
-	</div> <!--end col-->
-	</div> <!--end row-->
-	
-	<div class="row">
-	<div class="col-xs-6">
-	<fieldset>
-	<legend>Details: (Required)</legend>
-	<p>
-	<label class="textbox-label">Date Submitted:</label><br>
-	<input type="text" id="datepicker2"  name="dtSub" class="fields" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['dtSub']);} ?>"/>
-	<script>
-	$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd' }).val();
-	</script>
-	</p>
-	
-    <p>
-	<label class="textbox-label">Submission Made By:</label><br>
-	<?php dropDown('submittedBy', 'users', 'user_id','user_id',$submitted,$root);?>
-	</p>
-    </fieldset>
-    </div>
-    
-    <div class="col-xs-6">
     <fieldset>
-	<LEGEND>Select Samples: (Required)</LEGEND>
+	<LEGEND>Select Samples:</LEGEND>
 	<label class="textbox-label">Select Start Date:</label>
 	<input type="text" id="smydate"  name="smydate">
 	<label class="textbox-label">Select End Date:</label>
@@ -122,8 +92,30 @@ include('../functions/dropDown.php');
 	</p>
 	</p>
 	</fieldset>
-	</div>
+	</div><!--end col-->
     
+	</div> <!--end row-->
+	
+	<div class="row">
+	<div class="col-xs-6">
+	<fieldset>
+	<legend>Details:</legend>
+	<p>
+	<label class="textbox-label">Date Submitted:</label><br>
+	<input type="text" id="datepicker2"  name="dtSub" class="fields" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['dtSub']);} ?>"/>
+	<script>
+	$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+	</script>
+	</p>
+	
+    <p>
+	<label class="textbox-label">Submission Made By:</label><br>
+	<?php dropDown('submittedBy', 'users', 'user_id','user_id',$submitted,$root);?>
+	</p>
+    </fieldset>
+    </div>
+    
+ 
     </div>
 	</div>
     <button class = "button" type="submit" name="submit" value="1">Submit</button>

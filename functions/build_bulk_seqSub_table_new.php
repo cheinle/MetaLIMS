@@ -1,13 +1,12 @@
 <?php	
 
 //display table
-function build_bulk_seqSub_table_new($array_sample_names,$options_array,$sample_type,$container_type,$root){
+function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container_type,$root){
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	include($path.'functions/convert_time.php');
-	//include('convert_header_names.php');
 	include($path.'functions/text_insert_update.php');
-	include($path.'/config/js.php'); //was not being inherited correctly...just added here for now;
-	//print_r($options_array);
+	include($path.'config/js.php'); //was not being inherited correctly...just added here for now;
+
 	echo '<pre>';
 	echo '*Notice: Bulk Update Cannot Be Bulk Edited At This Time. Please Double Check Entries';
 	echo '</pre>';
@@ -24,22 +23,6 @@ function build_bulk_seqSub_table_new($array_sample_names,$options_array,$sample_
 	echo '<th class = "bulk">Sample Conc. (ng/uL)</th>';
 	echo '<th class = "bulk">Volume Of Aliquot(uL)</th>';
 	echo '<th class = "bulk">Sample Buffer<br></th>';
-	if($options_array){
-		if (in_array("Nanodrop", $options_array)) {
-	    	echo '<th class = "bulk">Nanodrop Conc. (ng\/uL)<br></th>';
-		}
-		if (in_array("280", $options_array)) {
-	    	echo '<th class = "bulk">260/280<br></th>';
-		}
-		if (in_array("230", $options_array)) {
-	    	echo '<th class = "bulk">260/230<br></th>';
-		}
-		
-		if($sample_type == 'Purified small RNA' || $sample_type == 'Purified mRNA' || $sample_type == 'Total RNA'){
-			echo '<th class = "bulk">UDF/DNA Contamination (%)br></th>';
-			echo '<th class = "bulk">RIN/RINe<br></th>';
-		}
-	}
 
 	echo '<th class = "bulk">Does Orig DNA/RNA Sample Still Exist?<br><label class="checkbox-label"><input type="checkbox" id="selecctallyes"/>Yes</label><label class="checkbox-label"><input type="checkbox" id="selecctallno"/>No</label></th>';
 	echo '<th class = "bulk">Sequencing ID</th>';
@@ -103,24 +86,17 @@ function build_bulk_seqSub_table_new($array_sample_names,$options_array,$sample_
 		?>
 		<td><input type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_wellLoc" name="sample[<?php echo $sample_name; ?>][wellLoc]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == "false") {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['wellLoc']);}?>"></td>
 		<?php } ?>
+		
+		
 		<td><input type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_sampConc" name="sample[<?php echo $sample_name; ?>][sampConc]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['sampConc']);}?>"></td>
 		<td><input type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_vol" name="sample[<?php echo $sample_name; ?>][vol]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['vol']);}else{echo $vol;}?>"></td>
 		<td><input type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_sampBuffer" name="sample[<?php echo $sample_name; ?>][sampBuffer]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['sampBuffer']);}?>"></td>
 	
-		<?php	if($options_array){if (in_array("Nanodrop", $options_array)) {?>
-    		<td><input type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_nano" name="sample[<?php echo $sample_name; ?>][nano]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['nano']);}?>"></td>
-		<?php } 
-		if (in_array("280", $options_array)) { ?>
-    		<td><input type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_280" name="sample[<?php echo $sample_name; ?>][280]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['280']);}?>"></td>
-		<?php }
-		if (in_array("230", $options_array)) { ?>
-    		<td><input type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_230" name="sample[<?php echo $sample_name; ?>][230]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['230']);}?>"></td>
-		<?php }
+		<?php
 		if($sample_type == 'Purified small RNA' || $sample_type == 'Purified mRNA' || $sample_type == 'Total RNA'){ ?>
 				<td><input type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_dnaCont" name="sample[<?php echo $sample_name; ?>][dnaCont]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['dnaCont']);}?>"></td>
 				<td><input type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_RIN" name="sample[<?php echo $sample_name; ?>][RIN]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['RIN']);}?>"></td>
-		<?php }}
-?>			
+		<?php }?>			
 		<td>
 		<div id="<?php echo $mod_sample_name;?>_color_checkbox_div">
 		<label class="checkbox-label"><input type="radio" id="<?php echo $mod_sample_name;?>_exists_yes"  class = "checkbox2" name="sample[<?php echo $sample_name; ?>][exists]" value="one" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {if(isset($_SESSION['sample_array'][$sample_name]['exists']) && htmlspecialchars($_SESSION['sample_array'][$sample_name]['exists']) == 'one'){echo "checked='checked'";}}?>">Yes</label>			
@@ -129,6 +105,15 @@ function build_bulk_seqSub_table_new($array_sample_names,$options_array,$sample_
 		</td>
 		<td><input  type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_seq_id" name="sample[<?php echo $sample_name; ?>][seq_id]" value="<?php echo $sid ?>"></td>
 		
+		</tr>
+   		</tbody>
+		</table>
+		<input type='submit' id="sub" class = "button" name ="submit" value='Update Samples' />
+		</form>
+
+		</div>		
+
+		<?php }}?>
 																																															 
 		<!---------form validation----->
 		<!--see if anything is not filled in. If it is not, color field blue and don't let the user submit-->
@@ -239,18 +224,4 @@ function build_bulk_seqSub_table_new($array_sample_names,$options_array,$sample_
                            }
 
 		</script>
-<?php
-		echo '</tr>';
-	}
-	
-    echo '</tbody>';
-		
-	echo '</table>';
-	//send other info from first page
-	echo '<input type=\'submit\' id="sub" class = "button" name ="submit" value=\'Update Samples\' />';
-	echo '</form>';
 
-	echo '</div>';		
-}
-
-?>

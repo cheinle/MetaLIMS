@@ -22,8 +22,7 @@ include ('../functions/build_bulk_seqSub_table_new.php');
 		if (isset($_POST['submit'])) {
 			 $error = 'false';
 			 //error check 
-			 if($_POST['sample_type'] == '0' || $_POST['container_type'] == '0' || $_POST['method'] == '0' || $_POST['read_length'] == '0' ||
-			 $_POST['quant_method'] == '0' || $_POST['application'] == '0' || $_POST['libPK'] == '0' || $_POST['submittedBy'] == '0' || $_POST['dtSub'] == ''){
+			 if($_POST['sample_type'] == '0' || $_POST['container_type'] == '0' || $_POST['method'] == '0' || $_POST['read_length'] == '0' || $_POST['application'] == '0' || $_POST['libPK'] == '0' || $_POST['submittedBy'] == '0' || $_POST['dtSub'] == ''){
 			 	$error = 'true';
 				echo '<script>Alert.render("ERROR: Required Field Not Entered. Please Check Form");</script>';
 				echo '<input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" />';
@@ -38,7 +37,6 @@ include ('../functions/build_bulk_seqSub_table_new.php');
 					$container_type = $_POST['container_type'];			 	
 				    $method = $_POST['method'];
 					$read_length = $_POST['read_length'];
-					$quant_method = $_POST['quant_method']; 
 					$application = $_POST['application'];
 					$libPK = $_POST['libPK'];
 					$seq_pool = $_POST['seq_pool'];
@@ -72,21 +70,14 @@ include ('../functions/build_bulk_seqSub_table_new.php');
 					$_SESSION['container_type'] = $container_type;			 	
 				    $_SESSION['method'] = $method;
 					$_SESSION['read_length'] = $read_length ;
-					$_SESSION['quant_method'] = $quant_method; 
 					$_SESSION['application'] = $application;
 					$_SESSION['libPK'] = $libPK;
 					$_SESSION['submittedBy'] = $submittedBy;
 					$_SESSION['dtSub'] = $dtSub;
 					$_SESSION['seq_pool'] = $seq_pool;
 					
-					$options = array();
-					$options = array();
-					$options = '';
-					if(isset($_POST['optional'])){
-						$options = $_POST['optional'];
-					}
 					
-					build_bulk_seqSub_table_new($array_sample_names,$options,$sample_type,$container_type,$root);
+					build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container_type,$root);
 			 }
 			
 		}
