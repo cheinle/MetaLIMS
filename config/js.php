@@ -222,6 +222,10 @@
         		if (pooled_flag == "P" && sType != 'P') {//assume coriolis and commonly used 300
         			Alert.render("Warning: Sample is a pooled sample. Are you sure you want to change sample type?");
         		}
+        		if(pooled_flag == "NP" && sType == 'P'){
+        			Alert.render("Warning: Pooled Sample Type Only For Pooling Samples Already Existing In DB");
+        		}
+
 			});
 			
 		});
