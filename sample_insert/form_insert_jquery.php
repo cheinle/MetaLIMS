@@ -393,10 +393,18 @@ $root = $_SESSION['link_root'];
 					<LEGEND><b>User Created Fields</b></LEGEND>
 						<div class="col-xs-6">
 							<input type="text" style="visibility:hidden" class="hidden" name="build_type" id="build_type" value="insert"/>
-							<div id="required_things">
+							<div id="required_things1" >
 								
 							</div>
-							<div id="user_things">
+							<div id="user_things1" name="user_things">
+								
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div id="required_things2" name = "required_things">
+								
+							</div>
+							<div id="user_things2" name="user_things">
 								
 							</div>
 						</div>

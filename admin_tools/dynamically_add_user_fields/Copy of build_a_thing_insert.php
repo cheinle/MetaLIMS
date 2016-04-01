@@ -8,21 +8,21 @@
 		if ($stmt->execute()){
 			$stmt->bind_result($label_name,$type,$select_values,$thing_id,$visible,$required);
 			$counter = 0;
-			$column_number = 1;
 			while ($stmt->fetch()) {
 				if($type == 'text_input' || $type == 'numeric_input'){
 					if($visible == 1){
 						$counter++;	
 						
-						if($counter > 10){
-							$column_number = 2;	
+						if($counter <= 10){
+							
+							
 						}
-
+						else{
+							
+						}
 ?>
 					
 					<script type="text/javascript">
-						var column_number = <?php echo(json_encode(htmlspecialchars($column_number))); ?>	
-					
 						var thing_id = <?php echo(json_encode(htmlspecialchars($thing_id))); ?>	
 					  	var label_text = <?php echo(json_encode(htmlspecialchars($label_name))); ?>	
 					  	var type = <?php echo(json_encode(htmlspecialchars($type))); ?>	
@@ -42,17 +42,17 @@
 						if(required == 'Y'){
 						  var node = document.createTextNode(label_text+" :*");
 					  	  label.appendChild(node);
-						  var required_element = document.getElementById("required_things"+column_number).appendChild(label);
-						  document.getElementById("required_things"+column_number).appendChild(linebreak);
-						  document.getElementById("required_things"+column_number).appendChild(newInput);
-						  document.getElementById("required_things"+column_number).appendChild(linebreak);
+						  var required_element = document.getElementById("required_things").appendChild(label);
+						  document.getElementById("required_things").appendChild(linebreak);
+						  document.getElementById("required_things").appendChild(newInput);
+						  document.getElementById("required_things").appendChild(linebreak);
 						}else{
 						  var node = document.createTextNode(label_text+" : ");
 					  	 label.appendChild(node);
-						  var element = document.getElementById("user_things"+column_number).appendChild(label);
-						  document.getElementById("user_things"+column_number).appendChild(linebreak);
-						  document.getElementById("user_things"+column_number).appendChild(newInput);
-						  document.getElementById("user_things"+column_number).appendChild(linebreak);
+						  var element = document.getElementById("user_things").appendChild(label);
+						  document.getElementById("user_things").appendChild(linebreak);
+						  document.getElementById("user_things").appendChild(newInput);
+						  document.getElementById("user_things").appendChild(linebreak);
 						}
 					</script>
 <?php
@@ -94,18 +94,18 @@
 						if(required == 'Y'){
 							var node = document.createTextNode(label_text+" :*");
 					  		label.appendChild(node);
-							var element = document.getElementById("required_things"+column_number).appendChild(label);
-					  	 	document.getElementById("required_things"+column_number).appendChild(linebreak);
-					 	 	document.getElementById("required_things"+column_number).appendChild(select);
-					 	 	document.getElementById("required_things"+column_number).appendChild(linebreak);
+							var element = document.getElementById("required_things").appendChild(label);
+					  	 	document.getElementById("required_things").appendChild(linebreak);
+					 	 	document.getElementById("required_things").appendChild(select);
+					 	 	document.getElementById("required_things").appendChild(linebreak);
 					 	 	
 						}else{
 							var node = document.createTextNode(label_text+" : ");
 					  		label.appendChild(node);
-							var element = document.getElementById("user_things"+column_number).appendChild(label);
-					  	 	document.getElementById("user_things"+column_number).appendChild(linebreak);
-					 	 	document.getElementById("user_things"+column_number).appendChild(select);
-					 	 	document.getElementById("user_things"+column_number).appendChild(linebreak);
+							var element = document.getElementById("user_things").appendChild(label);
+					  	 	document.getElementById("user_things").appendChild(linebreak);
+					 	 	document.getElementById("user_things").appendChild(select);
+					 	 	document.getElementById("user_things").appendChild(linebreak);
 						}
 					 	
 					</script>

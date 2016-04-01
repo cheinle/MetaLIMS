@@ -34,8 +34,12 @@ include('add_a_user_thing_js.php');
   				<div class="row">  	
 					<fieldset>
 					<LEGEND><b>Sample Collection Info</b></LEGEND>
-					<pre>* required field  + required only for dropdown entries 
-						Note: All Numeric Fields Will Be Of Format 000.00</pre>
+					<pre>
+* required field  
++ required only for dropdown entries
+Note: All Numeric Fields Will Be Of Format 000.00
+Max 10 Text/Select inputs and Max 10 Numeric Input 
+					</pre>
 			
 						<div class="col-xs-6">
 						<label class="textbox-label">Enter Label Name:*</label>

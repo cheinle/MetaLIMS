@@ -65,14 +65,14 @@ try{
 		if($p_type == 'numeric_input'){
 			sort($check_number_of_numeric);
 			$last_element = end($check_number_of_numeric);
-			
-			if($last_element > 20){
+			if($last_element >=20){
 				throw new Exception("Indexing is out of range. Unable to add more numeric fields. Max input fields is 10");	
 			}
 		}else{
 			sort($check_number_of_varchars);
 			$last_element = end($check_number_of_varchars);
-			if($last_element > 10){
+			
+			if($last_element >=10){
 				throw new Exception("Indexing is out of range. Unable to add more input fields. Max input fields 10");	
 			}
 		}
