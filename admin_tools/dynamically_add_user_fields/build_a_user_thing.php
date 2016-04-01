@@ -46,7 +46,7 @@ ini_set('display_errors', 1);
 			                    url     : root+'admin_tools/dynamically_add_user_fields/build_a_thing_update.php', //the url you are sending datas to which will again send the result
 			                    type    : 'GET', //type of request, GET or POST
 			                    data    : {parent_value:parent_value}, //Data you are sending
-			                    success : function(data){$('#user_things').html(data)},
+			                    success : function(data){$('#user_things1').html(data)},
 			                    error   : function(){alert("An Error Has Occured")} //error message
 
 						});

@@ -1,9 +1,9 @@
 <script type="text/javascript">
        
        function check_required_user_things(){
-       	for (var i = 1; i < 3; i++) {
+       	  var valid = 'true';
+       	  for (var i = 1; i < 3; i++) {
        		
-            var valid = 'true';
 			var required_selects = document.getElementById('required_things'+i).getElementsByTagName('select');
              for (var i9 = 0; i9 < required_selects.length; i9++) {
                  var selected = required_selects[i9].value;

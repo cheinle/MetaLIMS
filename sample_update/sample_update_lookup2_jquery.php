@@ -413,13 +413,21 @@ if (isset($_GET['submit'])) {
 				<div id="fragment-4">
 					<fieldset>
 					<LEGEND><b>User Created Fields</b></LEGEND>
+					<input type="text" style="visibility:hidden" class="hidden" name="build_type" id="build_type" value="update"/>
+					<input type="text" style="visibility:hidden" class="hidden" name="parent_value" id="parent_value" value="<?php echo $parent_value;?>"/>	
 						<div class="col-xs-6">
-							<input type="text" style="visibility:hidden" class="hidden" name="build_type" id="build_type" value="update"/>
-							<input type="text" style="visibility:hidden" class="hidden" name="parent_value" id="parent_value" value="<?php echo $parent_value;?>"/>
-							<div id="required_things">
+							<div id="required_things1">
 							
 							</div>
-							<div id="user_things">
+							<div id="user_things1">
+								
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div id="required_things2">
+								
+							</div>
+							<div id="user_things2">
 								
 							</div>
 						</div>
