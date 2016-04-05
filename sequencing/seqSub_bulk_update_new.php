@@ -210,9 +210,15 @@ if(isset($_POST['submit'])){
 				if(isset($process['wellLoc'])){
 					$p_wellLoc = $process['wellLoc'];
 				}
-				$container_name = 'container'.$container_counter;
+				/*$container_name = 'container'.$container_counter;
 				if($container_type == 'Tube'){
 					$container_counter++;
+				}*/
+				if($container_type == "Tube"){
+					$container_name = $seq_name;
+				}
+				else{
+					$container_name = $p_seqInfo;// $dtSub.'_'.$randomString.'_submission';
 				}
 				
 				$p_sampConc = $process['sampConc'];
@@ -308,7 +314,6 @@ if(isset($_POST['submit'])){
 				}
 					
 			}
-			$insert_error = 'false';
 			if($insert_error == 'false'){
 				$_SESSION['submitted'] = 'true';
 				$dbc->commit();
@@ -320,6 +325,11 @@ if(isset($_POST['submit'])){
 				$file_name ='SamplesSubmissionForm_'.$dtSub.'_'.$randomString.'.xlsx';
 				echo 'File has been created and stored in : [base_dir]/sequencing/sequencing_sample_submission_forms/',EOL;
 				echo '<a href='.$root.'sequencing/sequencing_sample_submission_forms/'.$file_name.' download>Click Here To Download</a><br>';
+				if($container_type != "Tube"){
+					echo '<strong>Your Plate Container Name is: '.$container_name.'</strong><br>';
+				}else{
+					echo "<strong>Container Names for tubes are abbreviated sequencing IDs</strong><br>";
+				}
 				echo '<button class="button" type=button onClick="parent.location=\'<?php echo $root;?>sample_update_lookup.php\'" value="\'Go Back\'>Go Back</button>';
 			}
 			else{
