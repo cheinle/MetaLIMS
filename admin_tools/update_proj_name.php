@@ -186,7 +186,7 @@
 		<p>Note: Project Name Must Be Between 3-19 Characters And Contain No Spaces Or Special Characters Other Than Hyphens</p>
 		<p><a id="myLink" href="link">link</a></p>
 		<script>
-	    	var link = "query_select_mod.php#projects";
+	    	var link = "query_samples/query_select_mod.php#projects";
 	    	link = root+link;
 	   	 	document.getElementById('myLink').setAttribute("href",link);
 	    	document.getElementById('myLink').innerHTML = 'Check Existing Project Names';
