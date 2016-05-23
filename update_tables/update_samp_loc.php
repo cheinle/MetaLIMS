@@ -86,7 +86,7 @@
 				if($p_long == ''){$p_long = NULL;}
 					
 				//insert data into db. Use prepared statement 
-				$stmt2 = $dbc -> prepare("INSERT INTO location (loc_name, address, loc_type,environmental_type,latitude,longitude) VALUES (?,?,?,?,?,?,?)");
+				$stmt2 = $dbc -> prepare("INSERT INTO location (loc_name, address, loc_type,environmental_type,latitude,longitude) VALUES (?,?,?,?,?,?)");
 				$stmt2 -> bind_param('ssssss', $p_loc_name,$p_address,$p_loc_type,$p_env_type,$p_lat,$p_long);
 				
 				$stmt2 -> execute();
