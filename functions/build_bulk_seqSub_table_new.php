@@ -83,9 +83,11 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
 
 		if($container_type != 'Tube'){
 		
+			?>
+			<td><input type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_wellLoc" name="sample[<?php echo $sample_name; ?>][wellLoc]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == "false") {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['wellLoc']);}?>"></td>
+			<?php 
+		} 
 		?>
-		<td><input type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_wellLoc" name="sample[<?php echo $sample_name; ?>][wellLoc]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == "false") {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['wellLoc']);}?>"></td>
-		<?php } ?>
 		
 		
 		<td><input type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_sampConc" name="sample[<?php echo $sample_name; ?>][sampConc]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['sampConc']);}?>"></td>
@@ -106,6 +108,7 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
 		<td><input  type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_seq_id" name="sample[<?php echo $sample_name; ?>][seq_id]" value="<?php echo $sid ?>"></td>
 		
 		</tr>
+		<?php } ?>
    		</tbody>
 		</table>
 		<input type='submit' id="sub" class = "button" name ="submit" value='Update Samples' />
@@ -113,7 +116,7 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
 
 		</div>		
 
-		<?php }}?>
+		<?php }?>
 																																															 
 		<!---------form validation----->
 		<!--see if anything is not filled in. If it is not, color field blue and don't let the user submit-->

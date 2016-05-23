@@ -233,9 +233,9 @@ if(isset($_POST['submit'])){
                         ->setCellValue('C'.$starting_row, $container_name)
                         ->setCellValue('D'.$starting_row, $p_wellLoc)
 						->setCellValue('E'.$starting_row, $method)
-						//->setCellValue('F'.$starting_row, "")//seq coverage
+						->setCellValue('F'.$starting_row, "")//seq coverage
 						->setCellValue('G'.$starting_row, $sample_type)//
-						//->setCellValue('H'.$starting_row, "")//reference genome
+						->setCellValue('H'.$starting_row, "")//reference genome
 						->setCellValue('I'.$starting_row, $seq_pool)//pooling
 						->setCellValue('J'.$starting_row, $application)
 						->setCellValue('K'.$starting_row, $read_length)
