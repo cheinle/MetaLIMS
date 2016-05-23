@@ -19,20 +19,17 @@ function dropDown_update($select_name,$table_name,$field_name,$select_id,$s_fiel
 			$check = whiteList($p_table_name,'table'); 
 			$check2 = whiteList($p_s_field_name,'column'); 
 			if($check == 'true' && $check2 == 'true'){
-				#echo "sfname:".$s_field_name.'<br>';
-				#echo "samp Name:".$sample_name.'<br>';
+
 				$query1 = "SELECT $p_s_field_name FROM sample WHERE sample_name = '$p_sample_name'";
 				$result1 = mysqli_query($dbc, $query1);
 				$name1;
 				if($result1){
 					while($row1 = mysqli_fetch_assoc($result1)) {
 						$name1 = $row1["$p_s_field_name"];
-						#echo "name:".$name1.'<br>';
 					}
 				}else{
-					echo 'An error has occured';
+					echo 'An error has occurred';
 					mysqli_error($dbc);
-					#echo '<p>'.$query.'</p>';
 				}
 				
 				
@@ -40,7 +37,7 @@ function dropDown_update($select_name,$table_name,$field_name,$select_id,$s_fiel
 				$query = "SELECT * FROM $p_table_name";
 				$result = mysqli_query($dbc, $query);
 				if(!$result){
-					echo 'An error has occured';
+					echo 'An error has occurred';
 					mysqli_error($dbc);
 					echo '<p>'.$query.'</p>';
 				}

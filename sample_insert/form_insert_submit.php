@@ -44,28 +44,16 @@
 				$end_times = $_GET['end_times'];
 				
 				//user things
-				$p_user_things = $_GET['user_things'];
+				if(isset($_GET['user_things'])){
+					$p_user_things = $_GET['user_things'];
+				}
+				else{
+					$p_user_things = NULL;
+				}
 				
-				//for isolates
-				/*$p_iso_coll_temp = htmlspecialchars($_GET['iso_coll_temp']);
-				$p_iso_date = htmlspecialchars($_GET['iso_date']);
-				$p_iso_store_method = htmlspecialchars($_GET['iso_store_method']);
-				$p_sang_seq= htmlspecialchars($_GET['sang_seq']);
-				$p_closest_hit= htmlspecialchars($_GET['closest_hit']);
-				$p_send_pac_bio= htmlspecialchars($_GET['send_pac_bio']);
-				$p_iso_loc_type= htmlspecialchars($_GET['iso_loc_type']);
-				*/
-				$p_iso_coll_temp = NULL;
-				$p_iso_date = NULL;
-				$p_iso_store_method = NULL;
-				$p_sang_seq= NULL;
-				$p_closest_hit= NULL;
-				$p_send_pac_bio= NULL;
-				$p_iso_loc_type= NULL;
 				
 				$sample_type_regrex = '/^B.*/';//if you are a blank then your flow rate is zero. so is your time
 				$sample_type_check = preg_match($sample_type_regrex,$p_sType);
-				//if($p_sType != 'A' || $p_sType != 'M'){
 				if($sample_type_check == true){
 						$p_fRate = '0';
 						$p_fRate_eod = '0';	
@@ -191,16 +179,9 @@
 						if ($p_rVol == '') {$p_rVol = NULL;} 
 						if ($p_rVol_quant == '') {$p_rVol_quant = NULL;}
 						if ($p_r_extr_date == '') {$p_r_extr_date = NULL;} 
-						if ($p_fRate_eod == '') {$p_fRate_eod = NULL;}
 						if ($p_dData == '0') {$p_dData = NULL;}
 						if ($p_dWeather == '0') {$p_dWeather = NULL;}
-						if ($p_iso_coll_temp == '0') {$p_iso_coll_temp = NULL;}
-						if ($p_iso_date == '') {$p_iso_date = NULL;}
-						if ($p_iso_store_method == '0') {$p_iso_store_method = NULL;}
-						if ($p_sang_seq== '') {$p_sang_seq = NULL;}
-						if ($p_closest_hit == '') {$p_closest_hit = NULL;}
-						if ($p_send_pac_bio == '0') {$p_send_pac_bio = NULL;}
-						if ($p_iso_loc_type == '0') {$p_iso_loc_type = NULL;}
+
 						
 						$insert_check = 'true';
 						/***************************************************************************************

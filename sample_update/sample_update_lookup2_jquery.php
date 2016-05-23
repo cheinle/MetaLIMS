@@ -71,7 +71,7 @@ if (isset($_GET['submit'])) {
 				<!--see if sample is the end result of a pooling-->
 				<input type="text" style="visibility:hidden" class="hidden" name="pooled_flag" id = "pooled_flag"  value="<?php echo text_insert_update($parent_value,'pooled_flag',$dbc); ?>"/>
 				
-				pooled_flag
+				
 				<br>* = required field <br>
 				<i>(Don't see your desired selection in dropdown list? Please add selection in "Update Dropdowns in Insert Sample" tab)</i>
 				<div id='samplename_availability_result'></div>  

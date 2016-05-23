@@ -87,21 +87,6 @@ include($path.'functions/unset_session_vars.php');
 				$p_dWeather = NULL;
 				$p_media = htmlspecialchars($_GET['media']);
 				$p_sampling_height = htmlspecialchars($_GET['sampling_height']);
-				
-				//for isolates
-				/*$p_iso_coll_temp = htmlspecialchars($_GET['iso_coll_temp']);
-				$p_iso_date = htmlspecialchars($_GET['iso_date']);
-				$p_iso_store_method = htmlspecialchars($_GET['iso_store_method']);
-				$p_sang_seq= htmlspecialchars($_GET['sang_seq']);
-				$p_closest_hit= htmlspecialchars($_GET['closest_hit']);
-				$p_send_pac_bio= htmlspecialchars($_GET['send_pac_bio']);
-				$p_iso_loc_type= htmlspecialchars($_GET['iso_loc_type']);
-				*/
-				/*if(! ($p_sType == 'A' || $p_sType == 'BI' || $p_sType == 'FI' || $p_sType == 'UI') ){//this is here to set if the flow rate was left empty...should check if flowrate was empty
-						if($p_fRate == ''){$p_fRate = '0';}
-						if($p_fRate_eod == ''){$p_fRate_eod = '0';}
-				}*/
-				
 				$sample_type_regrex = '/^B.*/';//if you are a blank then your flow rate is zero. so is your time
 				$sample_type_check = preg_match($sample_type_regrex,$p_sType);
 				if($sample_type_check == true){
@@ -113,11 +98,8 @@ include($path.'functions/unset_session_vars.php');
 				if ($p_poolEx == '0') {$p_poolEx = NULL;}
 				if ($p_dExtKit == '0') {$p_dExtKit = NULL;} 
 				if ($p_rExtKit == '0') {$p_rExtKit = NULL;}
-				//if ($p_seqInfo == '0') {$p_seqInfo = NULL;}
 				if ($p_anPipe == '0') {$p_anPipe = NULL;}
 				if ($p_barcode == '') {$p_barcode = NULL;}
-				//if ($p_start == '') {$p_start = NULL;}
-				//if ($p_end == '') {$p_end = NULL;}
 				if ($p_sType == '') {$p_sType = NULL;}
 				if ($p_path == '') {$p_path = NULL;}
    				if ($p_dInstru == '0') {$p_dInstru = NULL;} 				
@@ -136,14 +118,6 @@ include($path.'functions/unset_session_vars.php');
 				if ($p_dData == '0') {$p_dData = NULL;}
 				if ($p_dWeather == '0') {$p_dWeather = NULL;}
 				
-				/*if ($p_iso_coll_temp == '0') {$p_iso_coll_temp = NULL;}
-				if ($p_iso_date == '') {$p_iso_date = NULL;}
-				if ($p_iso_store_method == '0') {$p_iso_store_method = NULL;}
-				if ($p_sang_seq== '') {$p_sang_seq = NULL;}
-				if ($p_closest_hit == '') {$p_closest_hit = NULL;}
-				if ($p_send_pac_bio == '0') {$p_send_pac_bio = NULL;}
-				if ($p_iso_loc_type == '0') {$p_iso_loc_type = NULL;}
-				*/
 					
 				//check and process collector info
 				include_once($path."functions/check_collector_names.php");
@@ -247,13 +221,6 @@ include($path.'functions/unset_session_vars.php');
 					}
 					$stmt1 -> close();
 				}
-				
-				//calculate total sampling time
-				/*$ts1 = strtotime($p_start);
-				$ts2 = strtotime($p_end);
-				$seconds_diff = $ts2 - $ts1;
-				$time = ($seconds_diff/3600);//hours
-				$p_time = round($time,2);*/
 				
 				//check if original sample still exists
 				if(isset($_GET['orig_sample_exist'])){
@@ -367,7 +334,6 @@ include($path.'functions/unset_session_vars.php');
 						array('field' => 'pool_extracts_id', 'value' => $p_poolEx, 'type' => 's'),
 						array('field' => 'dna_extract_kit_name', 'value' => $p_dExtKit, 'type' => 's'),
 						array('field' => 'rna_extract_kit_name', 'value' => $p_rExtKit, 'type' => 's'),
-						//array('field' => 'sequencing_info', 'value' => $p_seqInfo, 'type' => 's'),
 						array('field' => 'analysis_name', 'value' => $p_anPipe, 'type' => 's'),
 						array('field' => 'barcode', 'value' => $p_barcode, 'type' => 's'),
 						array('field' => 'sample_type', 'value' => $p_sType, 'type' => 's'),

@@ -100,7 +100,7 @@ function whiteList($name_check,$type){// Example string to test against
 							'seq_dna_conc',
 							'seq_id',
 							//from analysis,
-							'analysis_pipeline',
+							'analysis_name',
 							//from particle_counter
 							'part_sens_name',
 							'sensor_type',

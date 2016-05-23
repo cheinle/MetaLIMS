@@ -96,7 +96,7 @@ function field_check($get_array,$check_for){
 					}
 					else{
 						#$regrex_check_fr  = '/(^[0-9]{0,3}\.[0-9][0-9]|[0-9]{0,3})$/';//flow rate should be between 0 and 3 digit number allowing for two decimal places
-						$regrex_check_fr  = '/^\s*(?=.*[1-9])\d{0,3}(?:\.\d{1,2})?\s*$/';
+						$regrex_check_fr  = '/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/';
 						if (!preg_match("$regrex_check_fr", $get_array['fRate'])){
 							echo '<p>ERROR: You Must Enter Valid Flow Rate. Please Check Your Number.<p>';
 							$error = 'true';
