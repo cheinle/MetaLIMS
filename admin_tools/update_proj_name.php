@@ -15,6 +15,7 @@
 	<?php 
 		//error && type checking 
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';
 			//print_r($_GET);
 			$error = 'false';
 			$submitted = 'false';
@@ -175,6 +176,7 @@
 				}
 			}
 		}
+		echo '</div>';
 	?>
 	<form class="registration" action="update_proj_name.php" method="GET">
 	* = required field <br>
