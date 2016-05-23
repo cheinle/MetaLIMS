@@ -1,15 +1,12 @@
 <?php 
 include('database_connection.php');
 
+/////////////////////////////////////////////////////////////////////////////////
+//Change flag to true if you need to restrict database access (allows admin only)
+$database_down = 'false';
+/////////////////////////////////////////////////////////////////////////////////
 
-/* 
- * Set to logout after set time (time set in index.php). Will log user out from Location if same user tries to login at a different locations
- */
-	/////////////////////////////////////////////////////////////////////////////////
-	//change flag to true if you need to restrict database access (allows admin only)
-	$database_down = 'false';
-	/////////////////////////////////////////////////////////////////////////////////
-	
+$path_in_webroot = '/series/dynamic/am_production/';
 	
 try{
 	//start transaction
@@ -93,11 +90,14 @@ try{
 					 * Change this to point to where these files are stored in your document root directory. Leave as '/'
 					 * if files are in document root
 					 * *************************************************************************************************/
-					$logout_path = '/series/dynamic/am_production/'; /*change here*/
 					//************CREATE PATH VARIABLES*******//
-					$_SESSION['include_path'] = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/am_production/';
-	
-					$_SESSION['link_root'] = '/series/dynamic/am_production/';
+					//$logout_path = '/series/dynamic/am_production/'; /*change here*/
+					//$_SESSION['include_path'] = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/am_production/';
+					//$_SESSION['link_root'] = '/series/dynamic/am_production/';
+					
+					$logout_path = $path_in_webroot; /*change here*/
+					$_SESSION['include_path'] = $_SERVER['DOCUMENT_ROOT'].$path_in_webroot;
+					$_SESSION['link_root'] = $path_in_webroot;
 					/////////////////////////////////////////////
 
 						
