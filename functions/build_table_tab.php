@@ -7,33 +7,27 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 	include($_SESSION['include_path'].'functions/find_samplers.php');
 	
 	$myfile = fopen("document_name.xls", "w") or die("Unable to open file!");
-
 	if ($stmt->execute()){
-	 			
-			    if($stmt->fetch()){
-			    	$meta = $stmt->result_metadata(); 
-		   			while ($field = $meta->fetch_field()){
-		        		$params[] = &$row[$field->name]; 
-		    		} 
+	 	if($stmt->fetch()){
+			    $meta = $stmt->result_metadata(); 
+		   		while ($field = $meta->fetch_field()){
+		        	$params[] = &$row[$field->name]; 
+		    	} 
 					
-		    		call_user_func_array(array($stmt, 'bind_result'), $params); 
+		    	call_user_func_array(array($stmt, 'bind_result'), $params); 
 					
-		    		//echo '<table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">';
-					#echo '<table>';
-					$header_ct = 0;	
-					$stmt->execute();
-					$count_check = $stmt->fetch();
-		    		$size =sizeof($count_check);
-					$stmt->execute();
-					$sample_names_seen = array();
-		    		while ($stmt->fetch()) {
+				$header_ct = 0;	
+				$stmt->execute();
+				$count_check = $stmt->fetch();
+		    	$size =sizeof($count_check);
+				$stmt->execute();
+				$sample_names_seen = array();
+		    	while ($stmt->fetch()) {
 		    			
 						
 						//print out headers
 						if($header_ct == 0){
-							//echo '<thead>';
-			        		//echo '<tr>';
-								
+
 							foreach($row as $key => $value){		
 								$p_key = htmlspecialchars($key);
 								$p_key = convert_header_names($p_key);
@@ -41,7 +35,6 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 									continue;
 								}
 								else{
-									//echo '<th class = "reg">'.$p_key.'</th>';
 									$p_key = $p_key."\t";
 									fwrite($myfile, $p_key);
 									
@@ -49,13 +42,7 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 							}
 							fwrite($myfile, "\n");
 							$header_ct++;
-							//echo '</tr>';
-							//echo '</thead>';
-							
-							
-							
-							//echo '<tbody>';
-							//echo '<tr class = "row_collapse">';
+
 							$p_sample_name;
 							foreach($row as $key => $value){
 								$p_value = htmlspecialchars($value);
@@ -64,13 +51,10 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 									if (in_array($p_sample_name, $sample_names_seen)){
 										break;
 									}else{
-										//echo '<tr class = "row_collapse">';
 										array_push($sample_names_seen,$p_sample_name);
 									}
 								}
 							
-								
-					
 								if($key == 'start_samp_date_time' && isset($_SESSION['label_prep'])){
 									$date_time = explode(" ",$p_value);
 									$p_value = $date_time[0];
@@ -100,7 +84,6 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 									continue;
 								}
 								else{
-									//echo '<td class = "reg">'.$p_value.'</td>';
 									$p_value = preg_replace( "/\r|\n/", "", $p_value );
 									$p_value = $p_value."\t";
 									fwrite($myfile, $p_value);
@@ -108,13 +91,11 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 							
 									
 							}
-							//echo '</tr>';
 							fwrite($myfile, "\n");
 						}
 						else{						
 							//print out fields
-						
-							//echo '<tr>';
+
 							$break_flag = 'N';
 							foreach($row as $key => $value){
 								$p_value = htmlspecialchars($value);
@@ -124,7 +105,6 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 										$break_flag = 'Y';
 										break;
 									}else{
-										//echo '<tr>';
 										array_push($sample_names_seen,$p_sample_name);
 									}
 								}
@@ -159,7 +139,6 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 									continue;
 								}
 								else{
-										//echo '<td class = "reg">'.$p_value.'</td>';
 										$p_value = preg_replace( "/\r|\n/", "", $p_value );
 										$p_value = $p_value."\t";
 										fwrite($myfile, $p_value);
@@ -168,28 +147,21 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 		
 							}
 							$header_ct++;
-							//echo '</tr>';
 							if($break_flag == 'N'){
 								fwrite($myfile, "\n");
-							}
-							//if($header_ct == $size-1){
-								//echo '</tbody>';
-							//}
-								
+							}	
 							
 						}
 						
 						
 					}		
 					
-		    		$stmt->close();
-					//echo '</table>';
+		    		$stmt->close();;
 				}
 				else{
 					echo '<script>Alert.render2("Sorry! No Results Found. Please Check Query");</script>';
 				} 
 			}
-
 			fclose($myfile);
 }	
 

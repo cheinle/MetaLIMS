@@ -190,10 +190,11 @@ $stmt->close();
 						<li><a href="'.$root.'admin_tools/dynamically_add_user_fields/add_a_user_thing.php">Create Fields</a></li>
 					</ul>
 				</li>
+				<li ><a href="'.$root.'logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
 				</ul> 
 				';}
 				?>
-				<li ><a href="<?php echo $root;?>logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
+				
 			</ul>
 	</div>			
 	</nav><!--End nav Main Nav-->
