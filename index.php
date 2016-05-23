@@ -1,10 +1,9 @@
+<?php if(!isset($_SESSION)) { session_start(); }?>
 <link rel="shortcut icon" href="/favicon.ico" type="image/icon"> <link rel="icon" href="/favicon.ico" type="image/icon">
-
-
-<?php
+<?php 
+if(!isset($_SESSION)) { session_start(); }
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-if(!isset($_SESSION)) { session_start(); }
 $root = $_SESSION['link_root'];
 $path = $_SESSION['include_path']; 
 ?><script type="text/javascript">var root = "<?php echo $root; ?>";</script><?php 
