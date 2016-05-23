@@ -6,7 +6,12 @@ include('database_connection.php');
 $database_down = 'false';
 /////////////////////////////////////////////////////////////////////////////////
 
-$path_in_webroot = '/series/dynamic/am_production/';
+/////////////////////////////////////////////////////////////////////////////////
+/********************Set Variable For Document Root Path************************/
+//if you did not change the git zip file name and placed folder in webroot, 
+//this will be your path
+$path_in_webroot = '/am_production-master/'; 
+/////////////////////////////////////////////////////////////////////////////////
 	
 try{
 	//start transaction
