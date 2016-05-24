@@ -1,5 +1,6 @@
 
 <?php 
+include('../index.php');
 include('../database_connection.php');
 if(!isset($_SESSION)) { session_start(); } 
 ?>
@@ -10,7 +11,6 @@ if(!isset($_SESSION)) { session_start(); }
 <title>Storage Update</title>	
 </head>
 <body>
-<?php include('../index.php'); ?>
 <div class="page-header">
 	<h3>Update Storage Info</h3>	
 </div>

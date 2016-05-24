@@ -1,3 +1,4 @@
+<?php include('../index.php'); ?>
 <?php include('../database_connection.php'); ?>
 <!doctype html>
 <html>
@@ -8,7 +9,6 @@
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 </head>
 <body>
-<?php include('../index.php'); ?>
 <?php include('../functions/dropDown.php'); ?>
 <div class="page-header">
 <h3>Add Freezers/Drawers</h3>	

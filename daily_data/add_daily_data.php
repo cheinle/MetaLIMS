@@ -1,4 +1,6 @@
-<?php include('../database_connection.php');
+<?php
+include('../index.php'); 
+include('../database_connection.php');
 error_reporting(E_ALL); ?>
 <!doctype html>
 <html>
@@ -8,7 +10,6 @@ error_reporting(E_ALL); ?>
 </head>
 <body>
 <?php 
-include('../index.php');
 include('../functions/dropDown.php');
 include('add_daily_data_ajax.php');
 $submitted = 'false';

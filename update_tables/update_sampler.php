@@ -1,3 +1,4 @@
+<?php include('../index.php'); ?>
 <?php include('../database_connection.php'); ?>
 <!doctype html>
 <html>
@@ -21,8 +22,6 @@
 
 </head>
 <body>
-<?php include('../index.php');
-?>
 <div class="page-header">
 <h3>Update Sampler Dropdown</h3>	
 </div>

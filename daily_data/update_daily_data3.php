@@ -1,4 +1,6 @@
-<?php include('../database_connection.php');
+<?php 
+include('../index.php');
+include('../database_connection.php');
 error_reporting(E_ALL); ?>
 <!doctype html>
 <html>
@@ -11,10 +13,6 @@ error_reporting(E_ALL); ?>
 </head>
 
 <body>
-<?php 
-include('../index.php');
-
- ?>
 <div class="page-header">
 <h3>Update Daily Data</h3>
 </div>

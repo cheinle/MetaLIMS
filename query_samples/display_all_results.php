@@ -1,4 +1,5 @@
 <?php 
+include('../index.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('../database_connection.php'); 
@@ -47,7 +48,6 @@ $(document).ready(function() {
 
  
 <body class="dt-example">
-<?php include('../index.php'); ?>
 <pre>
 	<h3>Display DB</h3>
 </pre>

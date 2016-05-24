@@ -1,3 +1,4 @@
+<?php include('../index.php'); ?>
 <?php include('../database_connection.php'); ?>
 <!doctype html>
 <html>
@@ -6,7 +7,7 @@
 <title>DNA Extraction Kit Update</title>
 </head>
 <body>
-<?php include('../index.php'); ?>
+
 <div class="page-header">
 <h3>Update DNA Extraction Kit Dropdown</h3>	
 </div>

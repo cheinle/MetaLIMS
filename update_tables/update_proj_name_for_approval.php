@@ -1,3 +1,4 @@
+<?php include('../index.php'); ?>
 <?php include('../database_connection.php');
 		//turn on error reporting
 		error_reporting(E_ALL);
@@ -10,7 +11,6 @@
 <title>Project Name Update</title>
 </head>
 <body>
-<?php include('../index.php'); ?>
 <div class="page-header">
 <h3>Add New Project Name - Approval Step</h3>	
 </div>

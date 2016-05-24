@@ -11,11 +11,12 @@
 <h3>Add/Delete Users</h3>	
 </div>
 <?php 	
-		echo '<div class="border">';
+	
 		unset($_SESSION['orig_update_value']); 
 		$submitted = 'false';
 		//error checking 
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';
 			$error = 'false';
 
 			//sanatize user input to make safe for browser

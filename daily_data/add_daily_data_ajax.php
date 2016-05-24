@@ -69,6 +69,7 @@
 						    	return false;
 						    }
 						    else{
+						    	var date = document.getElementById('mydate').value;
 						   		return confirm('Sure You Want To Add: '+date+'??? Action Cannot Be Easily Undone');
 						    }
 						}

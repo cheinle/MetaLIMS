@@ -1,3 +1,4 @@
+<?php include('../index.php'); ?>
 <?php include('../database_connection.php'); ?>
 <!doctype html>
 <html>
@@ -6,7 +7,6 @@
 <title>Update Relative Location</title>
 </head>
 <body>
-<?php include('../index.php'); ?>
 <div class="page-header">	
 <h3>Update Sample Relative Location Dropdown</h3>
 </div>

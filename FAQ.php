@@ -1,4 +1,5 @@
 <?php 
+include ('index.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('database_connection.php');
@@ -11,7 +12,7 @@ include('database_connection.php');
 </head>
 
 <body>
-	<?php include ('index.php');?>
+
 	<div class="page-header">
 	<h3>FAQ</h3>
 	</div>

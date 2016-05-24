@@ -43,7 +43,8 @@ if (isset($_GET['submit'])) {
 	$error = 'false';
 	if($parent_value == ''){
 			echo '<p>ERROR: You must select a Sample Name<p>';
-			echo '<button class="button" type=button onClick="parent.location=\'/series/dynamic/mymicrobiomes/sample_update/sample_update_lookup.php\'" value="Go Back">Go Back</button>';
+			?><button class="button" type=button onClick="parent.location='<?php echo $root;?>sample_update/sample_update_lookup_jquery.php'" value='Go Back'>Go Back</button><?php
+				
 			$error = 'true';
 	}
 	if ($error != 'true') {
@@ -395,7 +396,7 @@ if (isset($_GET['submit'])) {
 				<div id="fragment-3">
 					<fieldset>
 						<LEGEND><b>Analysis</b></LEGEND>
-						<p><a href="/series/dynamic/mymicrobiomes/update_tables/update_seq_info.php">Fill Out Sequencing Submission Info</a></p>
+						<p><a href="../update_tables/update_seq_info.php">Fill Out Sequencing Submission Info</a></p>
 						<p>
 						<!--Sequencing2 Dropdown-->
 						<label class="textbox-label">Select Analysis Pipeline:</label>

@@ -1,9 +1,9 @@
 <?php
+include ('../index.php');
+include ('../database_connection.php');
+include('../functions/dropDown.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include ('../database_connection.php');
-include ('../index.php');
-include('../functions/dropDown.php');
 ?>
 <!doctype html>
 <html>

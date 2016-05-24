@@ -1,6 +1,6 @@
 <?php 
-include('../database_connection.php');
 if(!isset($_SESSION)) { session_start(); } 
+include('../database_connection.php');
 ?>
 <!doctype html>
 <html>

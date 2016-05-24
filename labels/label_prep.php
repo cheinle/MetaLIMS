@@ -1,5 +1,5 @@
-<?php //Note: Testing for use for label printing ?>
 <?php 
+include('../index.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('../database_connection.php'); 
@@ -19,7 +19,7 @@ include('../database_connection.php');
 
  
 <body>
-<?php include('../index.php'); ?>
+<?php  ?>
 <div class="page-header">
 <h3>Label Preperation</h3>
 </div>

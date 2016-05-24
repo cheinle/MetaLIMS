@@ -1,3 +1,4 @@
+<?php include('../index.php'); ?>
 <?php include('../database_connection.php'); ?>
 <!doctype html>
 <html>
@@ -6,7 +7,6 @@
 <title>Pool Name Update</title>
 </head>
 <body>
-<?php include('../index.php'); ?>
 <pre> <!-- commenting this out gets rid of the large bar-->
 	
 <h3>Update Pool Name Dropdown </h3>

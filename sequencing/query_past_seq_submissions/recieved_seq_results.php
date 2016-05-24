@@ -1,4 +1,7 @@
-<?php include('../../database_connection.php'); ?>
+<?php 
+include('../../index.php'); 
+include('../../database_connection.php');
+ ?>
 <!doctype html>
 <html>
 <head>
@@ -24,7 +27,6 @@
 
 </head>
 <body>
-<?php include('../../index.php'); ?>
 <div class="page-header">
 <h3>Mark Sequencing Submission Recieved</h3>	
 </div>

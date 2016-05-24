@@ -1,4 +1,7 @@
-<?php include('../database_connection.php'); ?>
+<?php 
+include('../index.php');
+include('../database_connection.php');
+ ?>
 <!doctype html>
 <html>
 <head>
@@ -21,7 +24,6 @@
 
 </head>
 <body>
-<?php include('../index.php'); ?>
 <div class="page-header">
 <h3>Add Sample Type</h3>	
 </div>

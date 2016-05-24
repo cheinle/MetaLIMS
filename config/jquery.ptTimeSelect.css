@@ -8,7 +8,8 @@
  * 		- $Author: paulinho4u $
  * 		- $Revision: 1.1 $
  */
-#ptTimeSelectCntr {
+
+#ptTimeSelectCntr{
 	width: 250px; 
 	font-size: .9em;
 	position: absolute;

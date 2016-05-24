@@ -1,4 +1,7 @@
-<?php include('../database_connection.php'); ?>
+<?php 
+include('../index.php');
+include('../database_connection.php');
+?>
 <!doctype html>
 <html>
 <head>
@@ -8,7 +11,6 @@
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 </head>
 <body>
-<?php include('../index.php');?>
 <div class="page-header">
 <h3>Add New Project Name - Admin Only</h3>	
 </div>

@@ -1,9 +1,9 @@
 <?php
 if(!isset($_SESSION)) { session_start(); }
+include ('../index.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include ('../database_connection.php');
-include ('../index.php');
 include($path.'config/check_form_insert_js.php');
 include($path.'config/check_sample_name.php');
 include($path.'config/check_required_user_things_js.php');
@@ -20,7 +20,6 @@ $root = $_SESSION['link_root'];
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Form Insert</title>
-		<!--<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->
 	
 	</head>
  

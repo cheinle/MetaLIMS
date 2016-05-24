@@ -102,7 +102,7 @@ include($_SESSION['include_path'].'database_connection.php');
 					//check if add was successful or not. Tell the user
 			   		if($rows_affected < 0){
 						$commit_check = "false";
-						throw new Exception("An Error Has Occured: No Added Daily Data");
+						throw new Exception("An Error Has Occurred: No Added Daily Data");
 					}
 					
 					
@@ -124,7 +124,7 @@ include($_SESSION['include_path'].'database_connection.php');
 							$submitted = 'true';
 						}else{
 							$commit_check = "false";
-							throw new Exception("An Error Has Occured: No Added Sensor Info");
+							throw new Exception("An Error Has Occurred: No Added Sensor Info");
 							
 						}
 					}
@@ -162,7 +162,7 @@ include($_SESSION['include_path'].'database_connection.php');
 						$daily_data_entry = $p_emydate.' '.$p_mylocation;
 						$query = 'UPDATE sample SET daily_data = ?,updated_by = ? WHERE sample_name = ? AND location = ?';
 					    if($stmt = $dbc ->prepare($query)) {                 
-					        $stmt->bind_param('sss', $daily_data_entry, $p_updated_by,$sample_name,$p_mylocation);
+					        $stmt->bind_param('ssss', $daily_data_entry, $p_updated_by,$sample_name,$p_mylocation);
 							$stmt -> execute();
 							$rows_affected = $stmt ->affected_rows;
 							$stmt -> close();
@@ -173,7 +173,7 @@ include($_SESSION['include_path'].'database_connection.php');
 							}
 							else{
 								$commit_check = "false";
-								throw new Exception("An Error Has Occured: No Update To Samples");	
+								throw new Exception("An Error Has Occurred: No Update To Samples");	
 							}
 					            	
 						}

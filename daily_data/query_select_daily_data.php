@@ -1,4 +1,5 @@
 <?php 
+include('../index.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('../database_connection.php');
@@ -19,7 +20,6 @@ include('../database_connection.php');
  
 <body>
 <?php 
-include('../index.php');
 include('../functions/dropDown.php');
 $submitted = 'false';
 ?>

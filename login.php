@@ -2,6 +2,7 @@
 include('database_connection.php');
 
 /////////////////////////////////////////////////////////////////////////////////
+/********************Allow Access For Admin Only *******************************/
 //Change flag to true if you need to restrict database access (allows admin only)
 $database_down = 'false';
 /////////////////////////////////////////////////////////////////////////////////
@@ -10,14 +11,15 @@ $database_down = 'false';
 /********************Set Variable For Document Root Path************************/
 //if you did not change the git zip file name and placed folder in webroot, 
 //this will be your path
-$path_in_webroot = '/am_production-master/'; 
+//$path_in_webroot = '/am_production-master/'; 
+$path_in_webroot = '/series/dynamic/am_production/'; 
 /////////////////////////////////////////////////////////////////////////////////
 	
 try{
 	//start transaction
 	mysqli_autocommit($dbc,FALSE);
 	if($_POST) {
-		include('path.php');
+		//include('path.php');
 		$stmt1 = $dbc->prepare("SELECT * FROM users WHERE user_id = ? AND password = SHA1(?) AND visible = '1'");
 		$stmt1 -> bind_param('ss', $_POST['email'],$_POST['password']);
 				
@@ -91,17 +93,11 @@ try{
 					$_SESSION['last_name'] = $last_name;
 					
 
-					/***************************************************************************************************
-					 * Change this to point to where these files are stored in your document root directory. Leave as '/'
-					 * if files are in document root
-					 * *************************************************************************************************/
-					//************CREATE PATH VARIABLES*******//
-					//$logout_path = '/series/dynamic/am_production/'; /*change here*/
-					//$_SESSION['include_path'] = $_SERVER['DOCUMENT_ROOT'].'/series/dynamic/am_production/';
-					//$_SESSION['link_root'] = '/series/dynamic/am_production/';
-					
-					$logout_path = $path_in_webroot; /*change here*/
+					//************ PATH VARIABLES Set Here Using Above $path_in_webroot*******//
+					$logout_path = $path_in_webroot; 
 					$_SESSION['include_path'] = $_SERVER['DOCUMENT_ROOT'].$path_in_webroot;
+					
+					//$_SESSION['include_path'] = dirname(dirname(__FILE__)).'\';
 					$_SESSION['link_root'] = $path_in_webroot;
 					/////////////////////////////////////////////
 

@@ -1,10 +1,11 @@
 <?php 
+if(!isset($_SESSION)) { session_start(); }
+include('../../index.php');
+include('../../database_connection.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-if(!isset($_SESSION)) { session_start(); }
-include('../../database_connection.php');
-$root = $_SESSION['link_root'];
 
+$root = $_SESSION['link_root'];
 ?>
 
 <!doctype html>
@@ -22,9 +23,7 @@ $root = $_SESSION['link_root'];
  
 <body>
 <?php 
-include('../../index.php');
 include('../../functions/dropDown.php');
-
  ?>
 <div class="page-header">
 <h3>Query Past Sequencing Submission</h3>

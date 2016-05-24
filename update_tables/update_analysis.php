@@ -1,4 +1,7 @@
-<?php include('../database_connection.php'); ?>
+<?php
+include('../index.php');
+include('../database_connection.php');
+ ?>
 <!doctype html>
 <html>
 <head>
@@ -6,7 +9,6 @@
 <title>Analysis Update</title>
 </head>
 <body>
-<?php include('../index.php'); ?>
 <div class="page-header">
 <h3>Update Analysis Dropdown</h3>	
 </div>
