@@ -12,7 +12,11 @@
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
 <!--js css-->
-<link rel="stylesheet" type="text/css" href="/series/dynamic/airmicrobiomes/config/jquery.ptTimeSelect.css" />
+<?php echo '<link rel="stylesheet" type="text/css" href="'.$_SESSION['link_root'].'config/jquery.ptTimeSelect.css"></script>'; ?>
+
+<!--<link rel="stylesheet" type="text/css" href="/series/dynamic/am_production/config/jquery.ptTimeSelect.css" />-->
+
+
 
 
 <style>
