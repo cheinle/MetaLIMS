@@ -1,19 +1,14 @@
-<?php 
-include('../index.php');
+<?php include('../index.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('../database_connection.php');
-
 ?>
-
 <!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>Query Selection</title> 	
 </head>
-
- 
 <body>
 <?php 
 include($path.'functions/check_box_tables.php');
