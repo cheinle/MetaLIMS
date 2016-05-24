@@ -1,4 +1,5 @@
 <?php 
+include('../index.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('../database_connection.php');
@@ -15,9 +16,7 @@ include('../database_connection.php');
  
 <body>
 <?php 
-include('../index.php');
 include($path.'functions/check_box_tables.php');
-
  ?>
 <div class="page-header">
 <h3>Query Selection</h3>	

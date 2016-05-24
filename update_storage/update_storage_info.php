@@ -1,8 +1,7 @@
-
 <?php 
+if(!isset($_SESSION)) { session_start(); } 
 include('../index.php');
 include('../database_connection.php');
-if(!isset($_SESSION)) { session_start(); } 
 ?>
 <!doctype html>
 <html>
