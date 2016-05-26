@@ -26,49 +26,25 @@
 	}
 
 	for ($x = 1; $x <= $num_my_samplers; $x++) {
-
-    	echo "<p>";
+		echo "<p>";
 		echo "<label class='textbox-label-sampler'>Sampler #".$x.":*</label>";
 		echo "<select id='mySamp".$x."' name='mySamp".$x."'>";
 		echo "<option value='0'>-Select-</option>";
-		$stmt[$x] = $dbc->prepare("SELECT sampler_name FROM sampler");
+		$stmt[$x] = $dbc->prepare("SELECT sampler_name, visible FROM sampler");
   		if ($stmt[$x]->execute()){
-			if($stmt[$x]->fetch()){
-				$meta[$x] = $stmt[$x]->result_metadata(); 
-		   		while ($field[$x] = $meta[$x]->fetch_field()){ 
-		        	$params[$x][] = &$row[$x][$field[$x]->name]; 
-		    	} 
-		
-		    	call_user_func_array(array($stmt[$x], 'bind_result'), $params[$x]); 
-		
-				$stmt[$x]->execute();
-				$header_ct = 0;
-			
-		    	while ($stmt[$x]->fetch()) {
-					foreach($row[$x] as $key => $value){		
-						$p_value = htmlspecialchars($value);
-						$selected_option = $my_samplers[$x];
-						if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {
-							echo '<option value="'.$p_vale.'"', ($selected_option == $p_value) ? 'selected':'' ,'>'.$p_value.'</option>';
-						}
-						else{
-							if(isset($_GET['my_samplers'])){
-								if (array_key_exists($x, $my_samplers)) {
-									echo '<option value="'.$p_value.'"', ($selected_option == $p_value) ? 'selected':'' ,'>'.$p_value.'</option>';
-								}
-							}
-							else{
-								echo '<option value="'.$p_value.'">'.$p_value.'</option>';
-							}
-						}
-					}		
-				}	
-				$stmt[$x]->free_result();	
-		    	$stmt[$x]->close();
-			
-			} 
-			echo "</select>";
-			echo "</p>";
+  			
+			$stmt[$x]->bind_result($sampler_name,$visible);
+			while ($stmt[$x]->fetch()) {
+  				if($visible == '1'){
+					echo '<option value="'.$sampler_name.'">'.$sampler_name.'</option>';
+  				}
+			}
+		}	
+		$stmt[$x]->free_result();	
+		$stmt[$x]->close();
+
+		echo "</select>";
+		echo "</p>";
 ?>
 
 			<label class="textbox-label-sampler">Start Date/Time:*</label>
@@ -137,8 +113,5 @@
    	 			});
 				</script>
 				
-<?php	
-			} 
-		}
-?>
+<?php } ?>
 		
