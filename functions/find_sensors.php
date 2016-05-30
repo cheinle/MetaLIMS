@@ -37,7 +37,7 @@ function find_sensors($sample_name,$table_type){
 			return $dropdown;
 		}
 		else{//view as one string
-			return $string_of_sensors = implode("\n", $array);
+			return $string_of_sensors = implode(",", $array);
 		}
 	}
 	else{
