@@ -22,7 +22,7 @@ include($path.'functions/check_box_tables.php');
 <fieldset>
 <LEGEND><b>Display Sample Info:</b></LEGEND>
 	<div class="col-xs-6">
-	<i>(Select Dates and/or Fields to Query By)</i><br>
+	<i>(Select Dates and/or Fields to Query By)</i><br><br>
 	<label class="textbox-label">Select Start/End Date:</label>
 	<input type="text" id="datepicker" class="shrtfields" name="smydate"> 
 	<input type="text" id="datepicker2" class="shrtfields" name="emydate">
@@ -123,7 +123,6 @@ include($path.'functions/check_box_tables.php');
 	<p>
 	<h3 class="checkbox-header">Include (Optional):</h3>
 	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="sensor") echo "checked";?> value="sensor">Sensor Data</label>
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="view_read_sub") echo "checked";?> value="view_read_sub">Read Submission IDs</label>
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="view_user_things") echo "checked";?> value="view_user_things">User Created Fields</label>
 	</div>

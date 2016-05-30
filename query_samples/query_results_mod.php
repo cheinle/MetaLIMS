@@ -103,6 +103,12 @@ if(isset($_GET['submit'])){
 	
 	//sample
 	if($submit == 'sample'){
+			
+			
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		//Define what kind of fields you are querying
+		////////////////////////////////////////////////////////////////////////////////////////////////		
+		
 		$check_date = 'false';
 		$check_field = 'false';
 		$query_date = '';
@@ -139,9 +145,6 @@ if(isset($_GET['submit'])){
 				$check_field = 'true';
 			}
 		}
-		////////////////////////////////////////////////////////////////////////////////////////////////
-		//Check what type of query you are doing
-		////////////////////////////////////////////////////////////////////////////////////////////////		
 		if(isset($_GET['column_names'])){$field_names = check_box_results($_GET['column_names']);}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
 			$field_names = 'sample.sample_name,sample.d_conc,sample.sample_sort';
@@ -151,10 +154,11 @@ if(isset($_GET['submit'])){
 		}
 		else{$field_names = "*";}
 
-		if(isset($_GET['db_content']) && $_GET['db_content'] == 'sensor'){
-			$query_main = "SELECT * FROM sample JOIN daily_data2_particle_counter ON DATE(sample.start_samp_date_time) = daily_data2_particle_counter.daily_date and sample.location_name = daily_data2_particle_counter.location LEFT JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
-		}
-		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		//Check what type of query you are doing
+		////////////////////////////////////////////////////////////////////////////////////////////////		
+	
+		if(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
 			$query_main = "SELECT sample.sample_name,sample.sample_num,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample LEFT JOIN read_submission ON read_submission.sample_name = sample.sample_name JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
 		}
 		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'view_read_sub' || $_GET['db_content'] == 'update_read_sub')){
@@ -214,9 +218,6 @@ if(isset($_GET['submit'])){
 			}
 			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'update_read_sub'){
 				build_bulk_read_sub_id_update_table($stmt,$root);
-			}
-			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'sensor'){
-				basic_build_table($stmt,'display',$root);
 			}
 			else{
 				if($stmt){
