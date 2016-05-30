@@ -389,8 +389,42 @@ function convert_header_names($p_key){
 	if($p_key == 'seq_id_start'){
 		$p_key = 'Seq ID Abbrev';
 	}
+
+	//sampler
+	if($p_key == 'serial_num'){
+		$p_key = 'Serial Number';
+	}
+	if($p_key == 'sampler_identifier'){
+		$p_key = 'Sampler Identifier';
+	}
+	if($p_key == 'visible'){
+		$p_key = 'false';
+	}
+	//sensor
+	if($p_key == 'sensor_type'){
+		$p_key = 'Sensor Type';
+	}
 	
-	
+	//location
+	if($p_key == 'sensor_type'){
+		$p_key = 'Sensor Type';
+	}
+	if($p_key == 'address'){
+		$p_key = 'Address';
+	}
+	if($p_key == 'loc_type'){
+		$p_key = 'Location Type';
+	}
+	if($p_key == 'environmental_type'){
+		$p_key = 'Environmental Type';
+	}
+	if($p_key == 'latitude'){
+		$p_key = 'Latitude';
+	}
+	if($p_key == 'longitude'){
+		$p_key = 'Longitude';
+	}
+
 	//thing table
 	$regrex_check = '/^thing\d+$/'; //remove dashes
 	$check = preg_match($regrex_check,$p_key);
