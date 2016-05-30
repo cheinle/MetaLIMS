@@ -36,6 +36,9 @@ include($path.'functions/check_box_tables.php');
 		<label class="textbox-label">Select Field to Query Samples:</label><br/>
 		<?php	
 		    include_once($path.'functions/convert_header_names.php');
+			
+			
+			/*Grab Sample Columns*/
 			$query = "SELECT * FROM sample";
 			$result = mysqli_query($dbc, $query);
 			if(!$result){
@@ -61,8 +64,30 @@ include($path.'functions/check_box_tables.php');
 					$array[$name]['id'] = $id;
 
     		}
+			
+			
+		
+			/*Grab Custom Columns*/;
+			if ($stmt2 = $dbc->prepare("SELECT thing_id,label_name FROM create_user_things")) {
+	    		$stmt2->execute();
+				/* bind variables to prepared statement */
+				$stmt2->bind_result($thing_id, $label_name);
+				
+				/* fetch values */
+				while ($stmt2->fetch()) {
+					 $name = $label_name;
+				     $array[$name]['name'] = $name;
+					 $array[$name]['id'] = $thing_id;
+				}
+				
+				/* close statement */
+				$stmt2->close();
+			}
+			/* close connection */
+			$dbc->close();
 			sort($array);
 
+			///////////////
 			foreach($array as $key => $value){
 				$name2 = $value['name'];
 				$id2 = $value['id'];
