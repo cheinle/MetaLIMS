@@ -5,7 +5,7 @@ function whiteList($name_check,$type){// Example string to test against
 	
 	//whitelist table mames from db
 	if($type == 'table'){
-		$white_list = array('air_sampler',
+		$white_list = array('sampler',
 							'analysis',
 							'collectors',
 							'daily_data2',

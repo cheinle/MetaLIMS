@@ -152,7 +152,7 @@ if(isset($_GET['submit'])){
 		else{$field_names = "*";}
 
 		if(isset($_GET['db_content']) && $_GET['db_content'] == 'sensor'){
-			$query_main = "SELECT * FROM sample JOIN daily_data2_particle_counter ON DATE(sample.start_samp_date_time) = daily_data2_particle_counter.daily_date and sample.location_name = daily_data2_particle_counter.location JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
+			$query_main = "SELECT * FROM sample JOIN daily_data2_particle_counter ON DATE(sample.start_samp_date_time) = daily_data2_particle_counter.daily_date and sample.location_name = daily_data2_particle_counter.location LEFT JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
 			$query_main = "SELECT sample.sample_name,sample.sample_num,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample LEFT JOIN read_submission ON read_submission.sample_name = sample.sample_name JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
