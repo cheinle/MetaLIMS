@@ -120,13 +120,13 @@ if($status=="OK"){
 		//send email to user to let them know approval is pending
 		if($first_user = 'false'){
 			//email user
-			$mail_user_success = mail($email,"User Registration awaiting approval","You have registered as User ".$email." and are on the waiting list awaiting approval\n User's email: ".$email." and Admin Access Is: ".$admin_yn);
+			$mail_user_success = mail($email,"NanoLIMS User Registration awaiting approval","You have registered as User ".$email." and are on the waiting list awaiting approval by NanoLIMS admin\n User's email: ".$email." and Admin Access Is: ".$admin_yn);
 			if(!$mail_user_success) {
 				 echo "Warning: User Mail delivery may have failed. Please check spam and junk folders for email";
 			}
 			
 			//email admin
-			$mail_admin_success = mail($admin_email,"User Registration awaiting approval","User ".$email." has registered and is on the waiting list. Please approve\n User's email: ".$email." . Admin Access Requested: ".$admin_yn." . Please email user when approved");
+			$mail_admin_success = mail($admin_email,"NanoLIMS User Registration awaiting approval","User ".$email." has registered and is on the waiting list for NanoLIMS admin approval. Please approve\n User's email: ".$email." . Admin Access Requested: ".$admin_yn." . Please email user when approved");
 			if(!$mail_admin_success) {
 				 echo "Warning: Admin Mail delivery failed. If you are the first user. Please ignore this message";
 			}
