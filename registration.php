@@ -5,7 +5,7 @@ $last_name = htmlspecialchars($_POST['lastname']);
 $email=htmlspecialchars($_POST['email']);
 $password = htmlspecialchars($_POST['password']);
 
-if($_POST['admin'] == 'yes'){ //This is what the user requested
+if(isset($_POST['admin']) && $_POST['admin'] == 'yes'){ //This is what the user requested
 	$admin_yn = 'Y';
 }
 else{
@@ -108,7 +108,7 @@ if($status=="OK"){
 					
 		//check if add was successful or not. Tell the user
    		if($rows_affected2 > 0){
-			echo " <center><font face='Verdana' size='2' color=red >Success! Registration Requsted: ".$email."<br></center></font>";
+			echo " <center><font face='Verdana' size='2' color=red >Success! Registration Requsted: ".$email." Please check spam and junk folders for email<br></center></font>";
 		
 		}else{
 			echo " <center><font face='Verdana' size='2' color=red >There Is Some System Problem In Setting Up Login. Please Contact Site-admin Or Retry. <br><br><input type='button' value='Retry' onClick='history.go(-1)'></center></font>";
@@ -122,13 +122,13 @@ if($status=="OK"){
 			//email user
 			$mail_user_success = mail($email,"User Registration awaiting approval","You have registered as User ".$email." and are on the waiting list awaiting approval\n User's email: ".$email." and Admin Access Is: ".$admin_yn);
 			if(!$mail_user_success) {
-				 echo "Warning: User Mail delivery failed";
+				 echo "Warning: User Mail delivery may have failed. Please check spam and junk folders for email";
 			}
 			
 			//email admin
 			$mail_admin_success = mail($admin_email,"User Registration awaiting approval","User ".$email." has registered and is on the waiting list. Please approve\n User's email: ".$email." . Admin Access Requested: ".$admin_yn." . Please email user when approved");
 			if(!$mail_admin_success) {
-				 echo "Warning: Admin Mail delivery failed";
+				 echo "Warning: Admin Mail delivery failed. If you are the first user. Please ignore this message";
 			}
 			
 		}
