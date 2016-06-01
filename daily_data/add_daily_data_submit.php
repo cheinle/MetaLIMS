@@ -17,7 +17,9 @@ include($_SESSION['include_path'].'database_connection.php');
 			$start_times = $_GET['start_times'];
 			$end_times = $_GET['end_times'];
 			$measurement = $_GET['measurement'];
+			print_r($measurement);
 			$record = $_GET['record'];
+			print_r($record);
 
 			if($p_mydate == ''){
 					echo '<p>You Must Enter A Daily Data Date!<p>';

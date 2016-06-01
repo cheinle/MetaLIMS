@@ -32,8 +32,6 @@ function text_insert_update_stinfo($sample_name,$field_name,$table,$root){ #send
 
 
 function text_insert_update_daily_data($daily_date,$field_name,$table,$location,$root){ #send also the query name?, always based on sample name
-	#echo 'fn:'.$field_name;
-	//include('config/path.php');
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	include($path.'database_connection.php');
 	
