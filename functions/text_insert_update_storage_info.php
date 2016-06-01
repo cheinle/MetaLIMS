@@ -41,10 +41,10 @@ function text_insert_update_daily_data($daily_date,$field_name,$table,$location,
 		$stmt = $dbc->prepare("SELECT * FROM daily_data2 WHERE daily_date = ?");
 		$stmt -> bind_param('s',$daily_date);
 	}
-	if($table == 'daily_data2_particle_counter'){
-		$stmt = $dbc->prepare("SELECT * FROM daily_data2_particle_counter WHERE daily_date = ? AND location = ?");
-		$stmt -> bind_param('ss',$daily_date,$location);
-	}
+	/*if($table == 'daily_data2_particle_counter'){ //would need to send sensor name. Do not need at this moment
+		$stmt = $dbc->prepare("SELECT * FROM daily_data2_particle_counter WHERE daily_date = ? AND location = ? AND part_sens_name");
+		$stmt -> bind_param('sss',$daily_date,$location,$sensor_name);
+	}*/
 		
 	if ($stmt->execute()){			
 	    while($stmt->fetch()){
@@ -62,7 +62,7 @@ function text_insert_update_daily_data($daily_date,$field_name,$table,$location,
 			$stmt->close();
 		}
 	}else{
-		return "Errorrrr";
+		return "Error";
 	}
 	
 }

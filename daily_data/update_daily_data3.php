@@ -21,6 +21,7 @@ error_reporting(E_ALL); ?>
 		$submitted = 'false';
 		//error checking 
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';	
 			$error = 'false';
 
 			//sanatize user input and check for required fields
@@ -188,6 +189,7 @@ error_reporting(E_ALL); ?>
     				}
 				}
 			}
+			echo '</div>';
 		}
 
 	

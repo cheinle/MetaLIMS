@@ -62,13 +62,13 @@ include('../functions/text_insert_update_storage_info.php');
   			if ($stmt1->execute()){
     			$stmt1->bind_result($part_sens_name,$start_time,$end_time,$avg_measurement,$record);
 				$counter = 0;
-				
 				echo '<fieldset><LEGEND><b>Sensor Data: '.$p_mydate.' '.$p_mylocation.'</b></LEGEND>';
 				echo '<div class="col-xs-6">';
 				echo '<div  id = "sensor_data" name = "sensor_data">';
     			while ($stmt1->fetch()){
     				$counter++;
 					$x = $counter;
+					echo 'test'.$part_sens_name.'\t'.$avg_measurement.'\t'.$start_time.'\t'.$end_time;
         			echo "<p>";
 					echo "<label class='textbox-label'>Sensor Number".$x.":*</label>";   
 					echo "<select id='sensor".$x."' name='sensor".$x."'>";
@@ -77,6 +77,8 @@ include('../functions/text_insert_update_storage_info.php');
 						$id = htmlspecialchars($value);
 						if($id == $part_sens_name){
 							echo '<option selected="selected" value="'.$id.'">'.$name.'</option>';
+						}else{
+							echo '<option value="'.$id.'">'.$name.'</option>';
 						}
 					}
 					echo '</select>';
@@ -88,41 +90,36 @@ include('../functions/text_insert_update_storage_info.php');
 					<input type="text" name="stime<?php echo $x ?>" id ="stime<?php echo $x ?>" class="shrtfields" value="<?php echo $start_time;?>"/>
 					<input type = "text" name="etime<?php echo $x ?>" id="etime<?php echo $x ?>" class="shrtfields" value="<?php echo $end_time;?>"/>
 					
-					
-				
 					<script type="text/javascript">
 					var num_sensors = <?php echo(json_encode($x)); ?>;
-    				$(document).ready(function(){
+
         				$('input[name="stime'+num_sensors+'"]').ptTimeSelect();
         				timeFormat: "HH:mm"
-   	 				});
-   	 			
-	   	 			$(document).ready(function(){
+
 	   	 				$('input[name="etime'+num_sensors+'"]').ptTimeSelect();
 	        			timeFormat: "HH:mm"
-	   	 			});
-				</script>
+
+					</script>
 				
-				<label class="textbox-label">Average Sensor Measurement<?php echo $x ?>:</label><br>
-				<input type="text" name="measurement<?php echo $x ?>" id = "measurement<?php echo $x ?>" class="fields" placeholder="Enter An Avg Measurement" value="<?php if ((isset($_GET['submit']) && $submitted != 'true')) {echo text_insert_update_daily_data($parent_value,'avg_measurement','daily_data2_particle_counter',$p_mylocation,$root);}?>">
-				</p>
-				
-				<p>
-				<label class="textbox-label">Record Source For Sensor Measurement<?php echo $x ?>:</label><br>
-				<?php
-				//$select_name,$table_name,$field_name,$select_id,$s_field_name,$daily_date
-				dropDown_update_for_daily_data('record'.$x, 'records', 'records','records','record_source', $parent_value,$p_mylocation,$part_sens_name);
-				//dropDown('record'.$x, 'records', 'records','records',$submitted);
-				?>
-				</p>
-				
-				<h3 class="checkbox-header">Delete Sensor Info <?php echo $x ?></h3>
-				<div class='vert-checkboxes'>
-				<label class='checkbox-label'>DELETE</label>
-				<input type='checkbox' name='delete<?php echo $x ?>' id='delete<?php echo $x ?>' value='DELETE'>
-				</div><br />
-				
-				<?php
+					<label class="textbox-label">Average Sensor Measurement<?php echo $x ?>:</label><br>
+					<input type="text" name="measurement<?php echo $x ?>" id = "measurement<?php echo $x ?>" class="fields" placeholder="Enter An Avg Measurement" value="<?php if ((isset($_GET['submit']) && $submitted != 'true')) {echo $avg_measurement;}?>">
+					</p>
+					
+					<p>
+					<label class="textbox-label">Record Source For Sensor Measurement<?php echo $x ?>:</label><br>
+					<?php
+					//$select_name,$table_name,$field_name,$select_id,$s_field_name,$daily_date
+					dropDown_update_for_daily_data('record'.$x, 'records', 'records','records','record_source', $parent_value,$p_mylocation,$part_sens_name);
+					?>
+					</p>
+					
+					<h3 class="checkbox-header">Delete Sensor Info <?php echo $x ?></h3>
+					<div class='vert-checkboxes'>
+					<label class='checkbox-label'>DELETE</label>
+					<input type='checkbox' name='delete<?php echo $x ?>' id='delete<?php echo $x ?>' value='DELETE'>
+					</div><br />
+					
+					<?php
 				}
 
 			} 
