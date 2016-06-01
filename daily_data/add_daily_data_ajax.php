@@ -31,13 +31,11 @@
 									
 									var measurement_unit = $("#measurement"+x).val();
 									measurement[x] = measurement_unit;
-									alert(measurement[x]);
 									
 									var record_unit = $("#record"+x).val();
 									record[x] = record_unit;
 							}
 							
-							alert(measurement);
 							 $.ajax({
 			                    url     : 'add_daily_data_submit.php', //the url you are sending datas to which will again send the result
 			                    type    : 'GET', //type of request, GET or POST
