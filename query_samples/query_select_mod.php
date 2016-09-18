@@ -134,20 +134,25 @@ include($path.'functions/check_box_tables.php');
 <form class="registration" action="query_results_mod.php" method="GET">
 	
 <fieldset>
-	<LEGEND><b>Data Dump (Choose One)</b></LEGEND>
+	<LEGEND><b>Display All (Choose One)</b></LEGEND>
 	<LEGEND  style="margin-left:1.5%;"><b>Display All Project Info:</b></LEGEND>
 	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="project_all">Display All DB Project Info</label>
+	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="project_all") echo "checked";?>value="project_all">Display All DB Project Info</label>
 	</div>
 	
 	<LEGEND  style="margin-left:1.5%;"><b>  Display All Samplers:</b></LEGEND>
 	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="sampler_all">Display All Sampler Content</label>
+	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="sampler_all") echo "checked";?>value="sampler_all">Display All Sampler Content</label>
 	</div>
 	
 	<LEGEND  style="margin-left:1.5%;"><b>Display All Sensors:</b></LEGEND>
 	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="all") echo "checked";?>value="partCt_all">Display All DB Sensor Content</label>
+	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="partCt_all") echo "checked";?>value="partCt_all">Display All DB Sensor Content</label>
+	</div>
+	
+	<LEGEND  style="margin-left:1.5%;"><b>Display All Location Information:</b></LEGEND>
+	<div class="vert-checkboxes">
+	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="location_all") echo "checked";?>value="location_all">Display All DB Locations</label>
 	</div>
 
 

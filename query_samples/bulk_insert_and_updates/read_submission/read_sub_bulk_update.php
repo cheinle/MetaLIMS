@@ -72,8 +72,7 @@
 						echo "Updated: ".$p_sample_name.'<br>';
 					}else{
 						$update_delete_error == 'true';
-						echo 'An error has occured';
-						throw new Exception("An Error Has Occured: No Update/Delete");
+						throw new Exception("ERROR: No Update/Delete");
 					}
 				
 				}
@@ -89,8 +88,7 @@
 					}
 					else{
 						$update_delete_error == 'true';
-						echo 'An error has occured';
-						throw new Exception("An error has occred: No Added Sensor Info");		
+						throw new Exception("ERROR: No Added Sensor Info");		
 					}
 					$stmt_d->close();
 					
@@ -112,7 +110,7 @@
        			echo "Error:  " . $e; 
     		}
 			echo '<p>
-			<input action="action" class="btn btn-success" type="button" value="Go Back" onclick="history.go(-1);" />
+			<input action="action" class="buttn" type="button" value="Go Back" onclick="history.go(-1);" />
 			</p>';
 		}
 		

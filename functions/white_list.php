@@ -115,6 +115,7 @@ function whiteList($name_check,$type){// Example string to test against
 							'circulation_type',
 							//from sample_type table
 							'sample_type_name',
+							'sample_type_id',
 							//from daily data and daily weather table
 							'date',
 							'daily_date',

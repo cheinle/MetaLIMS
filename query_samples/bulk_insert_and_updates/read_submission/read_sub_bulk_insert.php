@@ -73,7 +73,7 @@
 				if($checkbox == 'true'){
 					$p_subm_id = $subm_id['id'];
 					//insert read submission table with sample name, subm_id,subm_db,subm_date,submitter,type_exp
-					echo "id:".$p_subm_id.'<br>';
+					#echo "id:".$p_subm_id.'<br>';
 					$stmt = $dbc -> prepare("INSERT INTO read_submission (sample_name,subm_id,subm_db,subm_date,submitter,type_exp) VALUES (?,?,?,?,?,?)");
 					$stmt -> bind_param('ssssss',$p_sample_name,$p_subm_id,$p_db,$p_date,$p_submitter,$p_experiment_type);
 					
@@ -108,7 +108,7 @@
        			echo "Error:  " . $e; 
     		}
 			echo '<p>
-			<input action="action" class="btn btn-success" type="button" value="Go Back" onclick="history.go(-1);" />
+			<input action="action" class="button" type="button" value="Go Back" onclick="history.go(-1);" />
 			</p>';
 		}
 		

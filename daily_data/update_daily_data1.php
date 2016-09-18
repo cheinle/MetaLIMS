@@ -7,8 +7,6 @@ error_reporting(E_ALL); ?>
 <head>
 <meta charset="utf-8">
 <title>Daily Data Update</title>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/themes/redmond/jquery-ui.css" />	
 </head>
 
 <body>

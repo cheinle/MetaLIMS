@@ -379,6 +379,26 @@ function convert_header_names($p_key){
 		$p_key = 'false';
 	}
 
+	//locations
+	if($p_key == 'loc_name'){
+		$p_key = 'Location Name';
+	}
+	if($p_key == 'address'){
+		$p_key = 'Address';
+	}
+	if($p_key == 'loc_type'){;
+		$p_key = 'Location Type';
+	}
+	if($p_key == 'environmental_type'){
+		$p_key = 'Environmental Type';
+	}
+	if($p_key == 'latitude'){
+		$p_key = 'Latidude';
+	}
+	if($p_key == 'longitude'){
+		$p_key = 'Longitude';
+	}
+
 	//project name fields
 	if($p_key == 'added_by'){
 		$p_key = 'Added By';
@@ -389,6 +409,12 @@ function convert_header_names($p_key){
 	if($p_key == 'seq_id_start'){
 		$p_key = 'Seq ID Abbrev';
 	}
+	
+	//visible
+	if($p_key == 'visible'){
+		$p_key = 'false';
+	}
+
 	
 	
 	//thing table

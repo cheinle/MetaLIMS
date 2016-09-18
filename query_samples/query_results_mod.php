@@ -289,6 +289,12 @@ if(isset($_GET['submit'])){
 			$stmt = $dbc->prepare("SELECT * FROM particle_counter");
 			build_table($stmt,'display');
 		}
+		
+		//locations
+		if($_GET['db_content']=='location_all'){
+			$stmt = $dbc->prepare("SELECT * FROM location");
+			build_table($stmt,'display');
+		}
 	}
 
 }

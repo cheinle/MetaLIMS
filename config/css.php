@@ -31,7 +31,7 @@
 
 .nav.navbar-nav li a {
     color: black;
-    font-family: Georgia;
+    font-family: Arial;
   	font-size: 15px;
 }
 
@@ -51,7 +51,7 @@ body{
    height: 100%;
    color: black;
    background: #008080;
-   font-family: Georgia;
+   font-family: Arial;
 }
 
 
@@ -63,7 +63,7 @@ div.page-header h3 {
     margin-bottom:2%;
     clear:both;
     color:#666666;
-    font-family: Georgia;
+    font-family: Arial;
 }
 
 div.page-header{
@@ -74,7 +74,7 @@ div.page-header{
 	 background: #f1f1f1;
 	 border: 2px solid #ccc;
 	 padding:10px;
-	 font-family: Georgia;
+	 font-family: Arial;
 	 font-size: 14px;
 	 border-radius: 15px;
    	 box-shadow:0 5px 5px rgba(0,0,0,0.5);
@@ -134,7 +134,7 @@ button.buttonLength {
 	 background: #D8D8D8;
 	 padding:10px;
 	 margin: 1px 1px 1px 1px;
-	 font-family: Georgia;
+	 font-family: Arial;
 	 font-size: 20px;
 	 border-radius: 15px;
    	 box-shadow:0 5px 5px rgba(0,0,0,0.5);
@@ -151,7 +151,7 @@ button.med {
 	background: #D8D8D8;
 	padding:10px;
 	margin: 1px 1px 1px 1px;
-	font-family: Georgia;
+	font-family: Arial;
 	font-size: 20px;
 	border-radius: 15px;
    	box-shadow:0 5px 5px rgba(0,0,0,0.5);
@@ -183,7 +183,7 @@ form.registration{
  border: 2px solid #ccc;
  padding:10px;
  margin-left: 5%;
- font-family: Georgia;
+ font-family: Arial;
  font-size: 14px;
  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
  border-radius: 15px;
@@ -239,14 +239,14 @@ form.registration h3.checkbox-header-sampler{
   clear:both;
   margin:8px 8px 0px 0px;
   padding:8px;
-  font-family: Georgia;
+  font-family: Arial;
   font-weight: bold;
   color:#52bab3;
   
 }
 
 form.registration input[type=text],input[type=password],input[type=email]{
-  font-family: Georgia;
+  font-family: Arial;
   font-size: 20px;
   float:left;
   width: 50%;
@@ -260,7 +260,7 @@ form.registration input[type=text],input[type=password],input[type=email]{
 }
 
 form.registration textarea.form-control{
-  font-family: Georgia;
+  font-family: Arial;
   font-size: 20px;
   float:left;
   width:80%;
@@ -275,7 +275,7 @@ form.registration textarea.form-control{
 
 
 form.registration input[type=text].shrtfields,input[type=text].time_fields{
-  font-family: Georgia;
+  font-family: Arial;
   font-size: 20px;
   float:left;
   clear: right;
@@ -289,7 +289,7 @@ form.registration input[type=text].shrtfields,input[type=text].time_fields{
 }
 
 form.registration input[type=text].bulkfields{
-  font-family: Georgia;
+  font-family: Arial;
   font-size: 20px;
   float: right;
   clear: both;
@@ -317,7 +317,7 @@ form.registration label.checkbox-label,label.radio-label{
 }
 
 form.registration input[type=checkbox],input[type=radio]{
-  font-family: Georgia;
+  font-family: Arial;
   float:left;
   width:20px;
   margin:2px 0px 2px 2px;
@@ -330,8 +330,8 @@ form.registration label.sm-checkbox{
   position:relative;
   vertical-align: middle;
   width:25%;
-  height:10%;
-  font-family:Georgia;
+  height:2%;
+  font-family:Arial;
   font-size:14px;
   display:inline-block;/*inline-flex ?*/
   word-wrap:break-word; 
@@ -347,7 +347,7 @@ form.registration h3.checkbox-header{
   clear:both;
   margin:8px 8px 0px 0px;
   padding:8px;
-  font-family: Georgia;
+  font-family: Arial;
   font-weight: bold;
   
 }
@@ -357,7 +357,7 @@ form.registration input:focus, form.registration select:focus{
 }
 
 form.registration select{
-  font-family: Georgia;
+  font-family: Arial;
   font-size: 20px;
   float:left;
   border:1px solid #cccccc;
@@ -415,7 +415,7 @@ a.add{
     color:#0000CD ;
     float:right;
     clear: both;
-    font-family: Georgia;
+    font-family: Arial;
 }
 
 select::-ms-expand {
@@ -440,7 +440,7 @@ div.border{
  background: #f1f1f1;
  border: 2px solid #ccc;
  padding:10px;
- font-family: Georgia;
+ font-family: Arial;
  font-size: 14px;
  border-radius: 15px;
  box-shadow:0 5px 5px rgba(0,0,0,0.5);
@@ -470,7 +470,7 @@ pre.border{
  background: #f1f1f1;
  border: 2px solid #ccc;
  padding:10px;
- font-family: Georgia;
+ font-family: Arial;
  font-size: 14px;
  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
  border-radius: 15px;
@@ -485,7 +485,7 @@ table.bulk{
   background: #f1f1f1;
   border: 2px solid #ccc;
   padding:10px;
-  font-family: Georgia;
+  font-family: Arial;
   font-size: 14px;
   margin: 10px;
   border-radius: 15px;
@@ -534,7 +534,7 @@ table.bulky_bulk{
   background: #f1f1f1;
   border: 2px solid #ccc;
   padding:10px;
-  font-family: Georgia;
+  font-family: Arial;
   font-size: 14px;
   margin: 10px;
   border-radius: 15px;
@@ -543,7 +543,7 @@ table.bulky_bulk{
 
 /***********For Bulk Update Forms ********/
 form.bulk{
-  font-family: Georgia;
+  font-family: Arial;
   font-size: 20px;
   float:left;
   border:1px solid #cccccc;
@@ -556,11 +556,10 @@ form.bulk{
 }
 
 form.bulk input[type=text],select{
-  font-family: Georgia;
+  font-family: Arial;
   font-size: 20px;
   float:left;
   border:1px solid #cccccc;
-  margin:0px 0px 10px 10px;
   color:#00abdf;
   height:32px;
   border-radius: 5px;
@@ -572,7 +571,7 @@ form.bulk input[type=text],select{
 }
 
 form.bulk input[type=checkbox],input[type=radio]{
-  font-family: Georgia;
+  font-family: Arial;
   font-size: 20px;
   float:left;
   width:40px;
@@ -614,7 +613,7 @@ form.bulk h3.checkbox-header{
   clear:both;
   margin:8px 8px 0px 0px;
   padding:8px;
-  font-family: Georgia;
+  font-family: Arial;
   font-weight: bold;
   
 }

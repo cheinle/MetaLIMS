@@ -9,8 +9,6 @@ function dropDown($select_name,$table_name,$field_name,$select_id,$submitted,$ro
 			$p_field_name = htmlspecialchars($field_name);
 			$p_select_id = htmlspecialchars($select_id);
 			
-			//include('config/path.php');
-			//$path = $_SERVER['DOCUMENT_ROOT'].$root;
 			$path = $_SERVER['DOCUMENT_ROOT'].$root;
 			include($path.'database_connection.php');
 		
@@ -19,47 +17,36 @@ function dropDown($select_name,$table_name,$field_name,$select_id,$submitted,$ro
 			include_once($path.'functions/white_list.php');
 			
 			
-			$check = whiteList($p_table_name,'table'); 
+				$check = whiteList($p_table_name,'table'); 
 			$check2 = whiteList($p_field_name,'column');
-			if($check == 'true' && $check2 == 'true'){
-				
-				$query = "SELECT * FROM $p_table_name";
-				$result = mysqli_query($dbc, $query);
-				if(!$result){
-					echo 'An error has occurred';
-					mysqli_error($dbc);
-				}
-				
-				//echo "<select id='$p_select_name' name='$p_select_name' class='fields';'>";
+			$check3 = whiteList($p_select_id,'column');
+			
+			if($check == 'true' && $check2 == 'true' && $check3 == 'true'){
+
 				echo "<select id='$p_select_name' name='$p_select_name'>";
 				echo "<option value='0'>-Select-</option>";
-		
-				$attr = 'selected="selected"';
-				while($row = mysqli_fetch_assoc($result)) {
-					$name = htmlspecialchars($row["$p_field_name"]);
-					$id = htmlspecialchars($row["$p_select_id"]);
-					$visible_check = htmlspecialchars($row["visible"]);
-					if($visible_check == '1'){
-						if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy'])))   {
-							if(isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false'){
-									$selected_option = $_SESSION["$p_select_name"];
-									echo '<option value="'.$id.'"', ($selected_option == $id) ? 'selected':'' ,'>'.$name.'</option>';
-							
-							}
-							else{
-								$selected_option = $_GET["$p_select_name"];
-								echo '<option value="'.$id.'"', ($selected_option == $id) ? 'selected':'' ,'>'.$name.'</option>';
-							}
-						}
-						else{
-							echo '<option value="'.$id.'">'.$name.'</option>';
-						}
+				//$attr = 'selected="selected"'; //page no longer re-loads on submit. No longer needed
+
+				$stmt = $dbc->prepare("SELECT $p_field_name,$p_select_id FROM $p_table_name");
+				if(!$stmt){;
+					die('prepare() failed: ' . htmlspecialchars($stmt->error));
+				}
+				if ($stmt->execute()){
+					$stmt->bind_result($name,$id);
+				
+					while ($stmt->fetch()){
+						$id = htmlspecialchars($id);
+						$id = trim($id);
+						$name = htmlspecialchars($name);
+						$name = trim($name);
+						
+						echo '<option value="'.$id.'">'.$name.'</option>';
 					}
 				}
-	   	 		echo "</select>";
+				$stmt->close();
+				echo "</select><br>";
 				
-		
-     		}
+			}
 			else{
 				echo "ERROR: Please check table name";
 			}

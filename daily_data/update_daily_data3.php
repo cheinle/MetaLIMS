@@ -21,6 +21,7 @@ error_reporting(E_ALL); ?>
 		$submitted = 'false';
 		//error checking 
 		if(isset($_GET['submit'])){
+			echo '<div class="border">';
 			$error = 'false';
 
 			//sanatize user input and check for required fields
@@ -164,7 +165,7 @@ error_reporting(E_ALL); ?>
 									
 								//check if add was successful or not. Tell the user
 							   	if($rows_affected3 >= 0){
-									echo 'You Updated Sensor Info For Daily Data! :'.$p_part_sens_name.'<br>';
+									echo 'You Updated Sensor Info For Daily Data! : '.$p_part_sens_name.'<br>';
 								}else{
 									$commit_check = "false";
 									throw new Exception("An Error Has Occurred: No Added Sensor Info");
@@ -188,6 +189,7 @@ error_reporting(E_ALL); ?>
     				}
 				}
 			}
+			echo "</div>";
 		}
 
 	

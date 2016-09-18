@@ -1,5 +1,5 @@
 
-<?php	//was to return a dropdown, now to return names...can modify text update to do this instead?
+<?php
 
 function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name,$stored_name,$comp_pk_name,$root){ #send also the query name?, always based on sample name
 
@@ -7,10 +7,12 @@ function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$sel
 			include($path.'database_connection.php');
 			
 			$p_select_name = htmlspecialchars($select_name);
+			
 			$p_table_name = htmlspecialchars($table_name);
 			$p_field_name = htmlspecialchars($field_name);
 			$p_select_id = htmlspecialchars($select_id);
 			$p_s_field_name = htmlspecialchars($s_field_name);
+			
 			$p_sample_name = htmlspecialchars($sample_name);
 			$p_comp_pk_name = htmlspecialchars($comp_pk_name);
 
@@ -19,56 +21,54 @@ function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$sel
 			
 			$check = whiteList($p_table_name,'table'); 
 			$check2 = whiteList($p_s_field_name,'column');  
-			if($check == 'true' && $check2 == 'true'){
-				#echo "sfname:".$s_field_name.'<br>';
-				#echo "samp Name:".$sample_name.'<br>';
-				$query1 = "SELECT $p_s_field_name FROM read_submission WHERE sample_name = '$p_sample_name' AND subm_id = '$p_comp_pk_name'";
-				$result1 = mysqli_query($dbc, $query1);
+			$check3 = whiteList($p_field_name,'column');  
+			$check4 = whiteList($p_select_id,'column');  
+			
+			if($check == 'true' && $check2 == 'true' && $check3 == 'true' && $check4 == 'true'){
 				$name1;
-				if($result1){
-					while($row1 = mysqli_fetch_assoc($result1)) {
-						$name1 = $row1["$p_s_field_name"];
-					}
-				}else{
-					echo 'An error has occured';
-					mysqli_error($dbc);
+				$stmt = $dbc->prepare("SELECT $p_s_field_name FROM read_submission WHERE sample_name = ? AND subm_id = ?");
+				if(!$stmt){;
+					die('prepare() failed: ' . htmlspecialchars($stmt->error));
 				}
+				$stmt->bind_param("ss",$p_sample_name,$p_comp_pk_name);
+				if ($stmt->execute()){
+					$stmt->bind_result($name1);
+					while ($stmt->fetch()) {
+						$name1 = htmlspecialchars($name1);
+					}
+				}
+				$stmt->close();
+				
 				
 				#now get your dropdown slect menu and cycle through it till you match above. When you match above make it the selected option
-				$query = "SELECT * FROM $p_table_name";
-				$result = mysqli_query($dbc, $query);
-				if(!$result){
-					echo 'An error has occured';
-					mysqli_error($dbc);
-				}
 				$s_name='sample['.$p_sample_name.','.$p_comp_pk_name.']['.$p_select_name.']';
 				echo "<select id='$p_select_name' name='$s_name'>";
 				echo "<option value='0'>-Select-</option>";
-		
 				$attr = 'selected="selected"';
-				while($row = mysqli_fetch_assoc($result)) {
-					$name = htmlspecialchars($row["$p_field_name"]);
-					$id = htmlspecialchars($row["$p_select_id"]);
-					$id = trim($id);
-					$name = trim($name);
-					$name1 = trim($name1);
-					
-					$visible_check = htmlspecialchars($row["visible"]);
-					if($visible_check == 1){
+	
+				$stmt = $dbc->prepare("SELECT $p_field_name,$p_select_id FROM $p_table_name");
+				if(!$stmt){;
+					die('prepare() failed: ' . htmlspecialchars($stmt->error));
+				}
+				if ($stmt->execute()){
+					$stmt->bind_result($name,$id);
+					while ($stmt->fetch()) {
+						$id = htmlspecialchars($id);
+						$id = trim($id);
+						$name = htmlspecialchars($name);
+						$name = trim($name);
+						$name1 = trim($name1);
+						
 						if($id == $name1){
 							echo '<option value="'.$id.'" selected>'.$name.'</option>';
 						}
 						else{
 							echo '<option value="'.$id.'">'.$name.'</option>';
 						}
+		
 					}
-
 				}
-	   	 		echo "</select><br>";
-					
-     	}
-     	else{
-			echo "ERROR: Please check table name";
-     	}
+				$stmt->close();
+			}		
      }	
 ?>
