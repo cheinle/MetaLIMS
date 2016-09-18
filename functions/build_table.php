@@ -5,6 +5,7 @@ function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 	include($_SESSION['include_path'].'functions/convert_time.php');
 	include($_SESSION['include_path'].'functions/convert_header_names.php');
 	include($_SESSION['include_path'].'functions/find_samplers.php');
+	include($_SESSION['include_path'].'functions/find_sensors.php');
 
 	if ($stmt->execute()){
 	 			
@@ -82,6 +83,9 @@ function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 								if($key == 'sampler_name'){
 									$p_value = find_samplers($p_sample_name,$table_type);
 								}
+								if($key == 'part_sens_name'){
+									$p_value = find_sensors($p_sample_name,$table_type);
+								}
 								if($key == 'total_samp_time'){
 									$p_value = convert_time($key, $p_value);
 								}
@@ -133,6 +137,9 @@ function build_table($stmt,$table_type){ //table types are 'dislapy' and 'xls'
 								}
 								if($key == 'sampler_name'){
 									$p_value = find_samplers($p_sample_name,$table_type);
+								}
+								if($key == 'part_sens_name'){
+									$p_value = find_sensors($p_sample_name,$table_type);
 								}
 								if($key == 'total_samp_time'){
 									$p_value = convert_time($key, $p_value);

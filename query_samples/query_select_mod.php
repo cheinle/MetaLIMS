@@ -22,7 +22,7 @@ include($path.'functions/check_box_tables.php');
 <fieldset>
 <LEGEND><b>Display Sample Info:</b></LEGEND>
 	<div class="col-xs-6">
-	<i>(Select Dates and/or Fields to Query By)</i><br>
+	<i>(Select Dates and/or Fields to Query By)</i><br><br>
 	<label class="textbox-label">Select Start/End Date:</label>
 	<input type="text" id="datepicker" class="shrtfields" name="smydate"> 
 	<input type="text" id="datepicker2" class="shrtfields" name="emydate">
@@ -36,6 +36,9 @@ include($path.'functions/check_box_tables.php');
 		<label class="textbox-label">Select Field to Query Samples:</label><br/>
 		<?php	
 		    include_once($path.'functions/convert_header_names.php');
+			
+			
+			/*Grab Sample Columns*/
 			$query = "SELECT * FROM sample";
 			$result = mysqli_query($dbc, $query);
 			if(!$result){
@@ -61,8 +64,30 @@ include($path.'functions/check_box_tables.php');
 					$array[$name]['id'] = $id;
 
     		}
+			
+			
+		
+			/*Grab Custom Columns*/;
+			if ($stmt2 = $dbc->prepare("SELECT thing_id,label_name FROM create_user_things")) {
+	    		$stmt2->execute();
+				/* bind variables to prepared statement */
+				$stmt2->bind_result($thing_id, $label_name);
+				
+				/* fetch values */
+				while ($stmt2->fetch()) {
+					 $name = $label_name;
+				     $array[$name]['name'] = $name;
+					 $array[$name]['id'] = $thing_id;
+				}
+				
+				/* close statement */
+				$stmt2->close();
+			}
+			/* close connection */
+			$dbc->close();
 			sort($array);
 
+			///////////////
 			foreach($array as $key => $value){
 				$name2 = $value['name'];
 				$id2 = $value['id'];
@@ -98,7 +123,6 @@ include($path.'functions/check_box_tables.php');
 	<p>
 	<h3 class="checkbox-header">Include (Optional):</h3>
 	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="sensor") echo "checked";?> value="sensor">Sensor Data</label>
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="view_read_sub") echo "checked";?> value="view_read_sub">Read Submission IDs</label>
 	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="view_user_things") echo "checked";?> value="view_user_things">User Created Fields</label>
 	</div>
@@ -154,6 +178,7 @@ include($path.'functions/check_box_tables.php');
 	<div class="vert-checkboxes">
 	<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="location_all") echo "checked";?>value="location_all">Display All DB Locations</label>
 	</div>
+
 
 
 	<!--submit button-->

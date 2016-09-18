@@ -153,16 +153,17 @@ include($_SESSION['include_path'].'database_connection.php');
 					$stmt_sid -> close();
 					
 					//check size of sample array. if you didn't return anything, throw error
-					if(count($sample_array) == 0){
+					/*if(count($sample_array) == 0){
 						echo "Notice: No Samples Were Found With This Date And Location. No Samples Have Been Updated With This Information<br>";
 					}
 					$p_updated_by = $_SESSION['first_name'].' '.$_SESSION['last_name'];
 					foreach($sample_array as $key => $sample_name){
 						echo $sample_name.'<br>';
-						$daily_data_entry = $p_emydate.' '.$p_mylocation;
-						$query = 'UPDATE sample SET daily_data = ?,updated_by = ? WHERE sample_name = ? AND location = ?';
-					    if($stmt = $dbc ->prepare($query)) {                 
-					        $stmt->bind_param('ssss', $daily_data_entry, $p_updated_by,$sample_name,$p_mylocation);
+						//$daily_data_entry = $p_emydate.' '.$p_mylocation;
+						$query = 'UPDATE sample SET daily_data = ?,updated_by = ? WHERE sample_name = ? AND location= ?';
+						if($stmt = $dbc ->prepare($query)) {                 
+					        //$stmt->bind_param('ssss', $daily_data_entry, $p_updated_by,$sample_name,$p_mylocation);
+					        $stmt->bind_param('ssss', $p_mydate, $p_updated_by,$sample_name,$p_mylocation);
 							$stmt -> execute();
 							$rows_affected = $stmt ->affected_rows;
 							$stmt -> close();
@@ -182,7 +183,7 @@ include($_SESSION['include_path'].'database_connection.php');
 							throw new Exception("Prepare Error: No Samples Updated With Daily Data");
 						}
 					
-					}
+					}*/
 					
 					if($commit_check == 'true'){
 						$dbc->commit();

@@ -5,9 +5,10 @@ if(!isset($_SESSION)) { session_start(); }
 include('../database_connection.php'); 
 $path = $_SESSION['include_path'];
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////
 //choose which files to include depending on if you are exporting an xls or not.
 //xls cannot include the index file because it will send headers too early (and the wrong ones)
+////////////////////////////////////////////////////////////////////////////////////////////////
 if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 	include($path.'functions/build_xls_output_table.php');
 }else{
@@ -102,6 +103,12 @@ if(isset($_GET['submit'])){
 	
 	//sample
 	if($submit == 'sample'){
+			
+			
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		//Define what kind of fields you are querying
+		////////////////////////////////////////////////////////////////////////////////////////////////		
+		
 		$check_date = 'false';
 		$check_field = 'false';
 		$query_date = '';
@@ -116,8 +123,6 @@ if(isset($_GET['submit'])){
 			//make sure you cover the entire day
 			$p_smydate = $p_smydate.' 00:00:00';
 			$p_emydate = $p_emydate.' 23:59:00';
-			#$query_date = ' start_samp_date_time BETWEEN (?) AND (?)';
-			//$query_date = ' sample.start_samp_date_time BETWEEN (?) AND (?)';
 			$query_date = ' sample.start_samp_date_time BETWEEN (?) AND (?)'; //still going to pull this date time from the regular table
 			$check_date = 'true';
 		}
@@ -131,15 +136,15 @@ if(isset($_GET['submit'])){
 				if($p_field == 'sampler_name'){
 					$query_field = " sample_sampler.$p_field = (?)";
 				}
+				elseif (preg_match("/thing/i",$p_field)) {
+					$query_field = " store_user_things.$p_field = (?)";
+				}
 				else{
 					$query_field = " sample.$p_field = (?)";
 				}
-				
-				#$query_field = " $p_field = (?)";
 				$check_field = 'true';
 			}
 		}
-				
 		if(isset($_GET['column_names'])){$field_names = check_box_results($_GET['column_names']);}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
 			$field_names = 'sample.sample_name,sample.d_conc,sample.sample_sort';
@@ -149,22 +154,26 @@ if(isset($_GET['submit'])){
 		}
 		else{$field_names = "*";}
 
-		if(isset($_GET['db_content']) && $_GET['db_content'] == 'sensor'){
-			$query_main = "SELECT * FROM sample JOIN daily_data2_particle_counter ON DATE(sample.start_samp_date_time) = daily_data2_particle_counter.daily_date and sample.location_name = daily_data2_particle_counter.location WHERE ";
-		}
-		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
-			$query_main = "SELECT sample.sample_name,sample.sample_num,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample LEFT JOIN read_submission ON read_submission.sample_name = sample.sample_name WHERE ";
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		//Check what type of query you are doing
+		////////////////////////////////////////////////////////////////////////////////////////////////		
+	
+		if(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
+			$query_main = "SELECT sample.sample_name,sample.sample_num,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample LEFT JOIN read_submission ON read_submission.sample_name = sample.sample_name JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
 		}
 		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'view_read_sub' || $_GET['db_content'] == 'update_read_sub')){
-			$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name WHERE ";
+			$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'view_user_things'){
 			$query_main = "SELECT * FROM sample JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
 		}
 		else{
-			//add new sampler table
-			$query_main = "SELECT $field_names FROM sample JOIN sample_sampler ON sample_sampler.sample_name  = sample.sample_name WHERE";
+			$query_main = "SELECT $field_names FROM sample JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
 		}
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		//Build Query
+		////////////////////////////////////////////////////////////////////////////////////////////////
 		$query = "";
 		$query_add = "";
 		
@@ -192,29 +201,9 @@ if(isset($_GET['submit'])){
 		}
 		
 		
-	
-
-		/*if(isset($_GET['db_content']) && ($_GET['db_content'] == 'xls')){
-			build_xls_output_table($stmt);
-		}
-		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
-			build_bulk_dna_table($stmt,$root);
-		}
-		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_storage'){
-			build_bulk_storage_update_table($stmt,$root);
-		}
-		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
-			build_bulk_read_sub_id_table($stmt,$root);
-		}
-		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'update_read_sub'){
-			build_bulk_read_sub_id_update_table($stmt,$root);
-		}
-		else{
-			if($stmt){
-				build_table($stmt,'display');
-			}
-		}*/
-		
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		//Build Table
+		////////////////////////////////////////////////////////////////////////////////////////////////
 		if(isset($_GET['db_view']) && ($_GET['db_view'] == 'xls')){
 			build_xls_output_table($stmt);
 		}else{
@@ -230,22 +219,17 @@ if(isset($_GET['submit'])){
 			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'update_read_sub'){
 				build_bulk_read_sub_id_update_table($stmt,$root);
 			}
-			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'sensor'){
-				basic_build_table($stmt,'display',$root);
-			}
 			else{
 				if($stmt){
 					build_table($stmt,'display');
 				}
 			}
 		}
-
-
-
-		
 	}
 
-
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	//Disaply Data dumps
+	////////////////////////////////////////////////////////////////////////////////////////////////
 	if($submit == 'other'){
 		//project
 		if($_GET['db_content']== 'project_all'){
@@ -255,7 +239,6 @@ if(isset($_GET['submit'])){
 		
 		//weather
 		if($_GET['db_content']=='weather_xls'){
-					#echo '<body class="dt-example">'; //you can use this or no?
 					$stmt = $dbc->prepare("SELECT * FROM daily_weather");
 					build_xls_output_table($stmt,'xls');
 					echo "</body>";
@@ -280,7 +263,6 @@ if(isset($_GET['submit'])){
 		// samplers
 		if($_GET['db_content']=='sampler_all'){
 			$stmt = $dbc->prepare("SELECT * FROM sampler");
-	    	//build_table($stmt,'display');
 	    	basic_build_table($stmt,'display',$root);
 		}
 		
@@ -290,7 +272,7 @@ if(isset($_GET['submit'])){
 			build_table($stmt,'display');
 		}
 		
-		//locations
+		//location
 		if($_GET['db_content']=='location_all'){
 			$stmt = $dbc->prepare("SELECT * FROM location");
 			build_table($stmt,'display');

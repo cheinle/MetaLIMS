@@ -332,6 +332,8 @@ form.registration label.sm-checkbox{
   width:25%;
   height:2%;
   font-family:Arial;
+  height:auto;
+  font-family:Georgia;
   font-size:14px;
   display:inline-block;/*inline-flex ?*/
   word-wrap:break-word; 

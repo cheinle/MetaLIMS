@@ -40,8 +40,12 @@ function build_daily_data_output($stmt){
 										echo '<br>';
 										echo '</div>';
 									}
-									echo '<button type="button"  data-toggle="collapse" data-target="#'.$sensorID.'" aria-expanded="true" aria-controls="demo" class="buttonLength">'.$sensorID.' '.$p_location.'</button><br>';
-									echo '<div id="'.$sensorID.'" class="collapse">';
+									$mod_p_location = preg_replace("/\//",'-',$p_location);//jQuery cannot use slashes
+									$mod_p_location = preg_replace("/\s+/",'-',$mod_p_location);//jQuery can also not use spaces
+									$mod_p_location = preg_replace("/\#/",'-',$mod_p_location);//jQuery can also not use pound sign
+									$mod_p_location = preg_replace("/\,/",'-',$mod_p_location);//all of the special chars ...
+									echo '<button type="button"  data-toggle="collapse" data-target="#'.$sensorID.$mod_p_location.'" aria-expanded="true" aria-controls="demo" class="buttonLength">'.$sensorID.' '.$p_location.'</button><br>';
+									echo '<div id="'.$sensorID.$mod_p_location.'" class="collapse">';
 								}
 							}
 							else{

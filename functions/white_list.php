@@ -5,7 +5,7 @@ function whiteList($name_check,$type){// Example string to test against
 	
 	//whitelist table mames from db
 	if($type == 'table'){
-		$white_list = array('air_sampler',
+		$white_list = array('sampler',
 							'analysis',
 							'collectors',
 							'daily_data2',
@@ -38,7 +38,8 @@ function whiteList($name_check,$type){// Example string to test against
 							'container_type',
 							'application',
 							'type_seq_sample',
-							'create_user_things'
+							'create_user_things',
+							'store_user_things'
 							); 
 		if( in_array($name_check,$white_list) ){
 	    	#echo $name_check.' is whitelisted.';
@@ -197,8 +198,28 @@ function whiteList($name_check,$type){// Example string to test against
 							'type',
 							'select_values',
 							'visible',
-							'required'
-							
+							'required',
+							//store_user_things
+							'thing1',
+							'thing2',
+							'thing3',
+							'thing4',
+							'thing5',
+							'thing6',
+							'thing7',
+							'thing8',
+							'thing9',
+							'thing10',
+							'thing11',
+							'thing12',
+							'thing13',
+							'thing14',
+							'thing15',
+							'thing16',
+							'thing17',
+							'thing18',
+							'thing19',
+							'thing20',
 							); 
 		if( in_array($name_check,$white_list) ){
 	    	#echo $name_check.' is whitelisted.';

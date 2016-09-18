@@ -16,6 +16,8 @@
 							 var my_sensors = [];
 							 var start_times = [];
 							 var end_times = [];
+							 var measurement = [];
+							 var record = [];
 							
 							 for ( var x = 1; x <= sens_num; x++) {
 									var mySensors = $("#sensor"+x).val();
@@ -27,12 +29,13 @@
 									var etime = $("#etime"+x).val();
 									end_times[x] = etime;
 									
-									var measurement = $("#measurement"+x).val();
-									measurement[x] = measurement;
+									var measurement_unit = $("#measurement"+x).val();
+									measurement[x] = measurement_unit;
 									
-									var record = $("#record"+x).val();
-									record[x] = record;
+									var record_unit = $("#record"+x).val();
+									record[x] = record_unit;
 							}
+							
 							 $.ajax({
 			                    url     : 'add_daily_data_submit.php', //the url you are sending datas to which will again send the result
 			                    type    : 'GET', //type of request, GET or POST
