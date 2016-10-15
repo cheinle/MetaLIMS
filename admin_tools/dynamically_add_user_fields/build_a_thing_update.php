@@ -9,7 +9,7 @@
 			die('prepare() failed: ' . htmlspecialchars($stmt->error));
 		}
 		if ($stmt->execute()){
-			$stmt->bind_result($label_name,$type,$select_values,$thing_id,$visible,$required);
+			$stmt->bind_result($label_name,$type,$select_values,$thing_id_number,$visible,$required);
 			$counter = 0;
 			$column_number = 1;
 			while ($stmt->fetch()) {
@@ -19,8 +19,8 @@
 						if($counter > 10){
 							$column_number = 2;	
 						}
-						$value = text_insert_update_things($parent_value,$thing_id);
-						
+						$value = text_insert_update_things($parent_value,$thing_id_number);
+						$thing_id = 'thing'.$thing_id_number; //changed from storing as 'thing1' to '1'
 ?>
 					<script type="text/javascript">
 						var column_number = <?php echo(json_encode(htmlspecialchars($column_number))); ?>	

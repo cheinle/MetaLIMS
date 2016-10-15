@@ -163,7 +163,7 @@ include('../functions/get_earliest_date.php');
 				$regrex_check = '/^(20[0-9][0-9])-([0-1][0-9])-([0-3][0-9])$/'; //remove dashes (yyyy-mm-dd)
 				$preg_match = preg_match($regrex_check,$date,$matches);
 				if($preg_match != 1){
-					echo "Date Matching Error. Please Notify Admin";
+					die('Date Matching Error. Please Notify Admin');
 				}
 				$date = $matches[1].'/'.$matches[2].'/'.$matches[3];
 				$p_sample_name = $date.$p_projName.$p_sType.$p_sample_number;
@@ -677,156 +677,55 @@ include('../functions/get_earliest_date.php');
 					//////////////////////////////////////////////////////////////////
 					/****Update User Things Table****/
 					//////////////////////////////////////////////////////////////////
-					$p_thing1 = NULL;					
-						if(isset($_GET['thing1'])){
-							if($_GET['thing1'] != ''){
-								$p_thing1 = $_GET['thing1'];
-							}
-						}
-						$p_thing2 = NULL;					
-						if(isset($_GET['thing2'])){
-							if($_GET['thing2'] != ''){
-								$p_thing2 = $_GET['thing2'];
-							}
-						}
-						$p_thing3 = NULL;					
-						if(isset($_GET['thing3'])){
-							if($_GET['thing3'] != ''){
-								$p_thing3 = $_GET['thing3'];	
-							}
-						}
-						$p_thing4 = NULL;					
-						if(isset($_GET['thing4'])){
-							if($_GET['thing4'] != ''){
-								$p_thing4 = $_GET['thing4'];
-							}
-						}
-						$p_thing5 = NULL;					
-						if(isset($_GET['thing5'])){
-							if($_GET['thing5'] != ''){
-								$p_thing5 = $_GET['thing5'];
-							}
-						}
-						$p_thing6 = NULL;					
-						if(isset($_GET['thing6'])){
-							if($_GET['thing6'] != ''){
-								$p_thing6 = $_GET['thing6'];
-							}
-						}
-						$p_thing7 = NULL;					
-						if(isset($_GET['thing7'])){
-							if($_GET['thing7'] != ''){
-								
-							}
-							$p_thing7 = $_GET['thing7'];
-						}
-						$p_thing8 = NULL;					
-						if(isset($_GET['thing8'])){
-							if($_GET['thing8'] != ''){
-								
-							}
-							$p_thing8 = $_GET['thing8'];
-						}
-						$p_thing9 = NULL;					
-						if(isset($_GET['thing9'])){
-							if($_GET['thing9'] != ''){
-								
-							}
-							$p_thing9 = $_GET['thing9'];
-						}
-						$p_thing10 = NULL;					
-						if(isset($_GET['thing10'])){
-							if($_GET['thing10'] != ''){
-								$p_thing10 = $_GET['thing10'];
-							}
-						}
-						$p_thing11 = NULL;					
-						if(isset($_GET['thing11'])){
-							if($_GET['thing11'] != ''){
-								$p_thing11 = $_GET['thing11'];
-							}
-						}
-						$p_thing12 = NULL;					
-						if(isset($_GET['thing12'])){
-							if($_GET['thing12'] != ''){
-								$p_thing12 = $_GET['thing12'];
-							}
-						}
-						$p_thing13 = NULL;					
-						if(isset($_GET['thing13'])){
-							if($_GET['thing13'] != ''){
-								$p_thing13 =$_GET['thing13'];
-							}
-						}
-						$p_thing14 = NULL;					
-						if(isset($_GET['thing14'])){
-							if($_GET['thing14'] != ''){
-								$p_thing14 = $_GET['thing14'];
-							}
-						}
-						$p_thing15 = NULL;					
-						if(isset($_GET['thing15'])){
-							if($_GET['thing15'] != ''){
-								$p_thing15 = $_GET['thing15'];
-							}
-						}
-						$p_thing16 = NULL;					
-						if(isset($_GET['thing16'])){
-							if($_GET['thing16'] != ''){
-								$p_thing16 = $_GET['thing16'];
-							}
-						}
-						$p_thing17 = NULL;					
-						if(isset($_GET['thing17'])){
-							if($_GET['thing17'] != ''){
-								$p_thing17 = $_GET['thing17'];
-							}
-						}
-						$p_thing18 = NULL;					
-						if(isset($_GET['thing18'])){
-							if($_GET['thing18'] != ''){
-								$p_thing18 = $_GET['thing18'];
-							}
-						}
-						$p_thing19 = NULL;					
-						if(isset($_GET['thing19'])){
-							if($_GET['thing19'] != ''){
-								$p_thing19 = $_GET['thing19'];
-							}
-						}
-						$p_thing20 = NULL;					
-						if(isset($_GET['thing20'])){
-							if($_GET['thing20'] != ''){
-								$p_thing20 = $_GET['thing20'];
-							}
-						}
-					//update
-					$thing_set_query = 'UPDATE store_user_things SET sample_name = ?, thing1 = ?, thing2 = ?,thing3 = ?, thing4 = ?,thing5 = ?,thing6 =?, thing7 = ?, thing8 =?, thing9 = ?, thing10 =?, thing11 = ?, thing12 = ?, thing13 = ?, thing14 = ?, thing15 = ?, thing16 = ?, thing17 = ?, thing18 = ?, thing19 = ?, thing20 = ? WHERE sample_name = ?';
-					if($thing_stmt = $dbc ->prepare($thing_set_query)) {                 
-	                	$thing_stmt->bind_param('sssssssssssiiiiiiiiiis',$p_sample_name,$p_thing1,$p_thing2,$p_thing3,$p_thing4,$p_thing5,$p_thing6,$p_thing7,$p_thing8,$p_thing9,$p_thing10,$p_thing11,$p_thing12,$p_thing13,$p_thing14,$p_thing15,$p_thing16,$p_thing17,$p_thing18,$p_thing19,$p_thing20,$p_sample_name);
-						if(!$thing_stmt -> execute()){
-							$successfull = 'false';
-							throw new Exception("Execution Error: Unable To Update User Created Info");	
-							//mysqli_error($dbc);
-						}
-						$thing_rows_affected = $thing_stmt ->affected_rows;
-						$thing_stmt -> close();
-						if($thing_rows_affected >= 0){
-							//for testing
-							#echo "You Updated Isolate Info".'<br>'; //cleanup
-							$updates_check = 'true';
-						}
-						else{
-							$successfull = 'false';
-							throw new Exception("Unable To Update User Created Info");	
-							//mysqli_error($dbc);
-						}
-					}else{
-						$successfull = 'false';
-						throw new Exception("Unable To Prepare User Created Info");	
-						//mysqli_error($dbc);
+			
+					//Get array of user things
+					$only_things = array();
+					foreach ($get_array as $get_key => $get_value) {
+						echo $get_key;
+					    if (strpos($get_key, 'thing') === 0) {
+					        $only_things[$get_key] = $get_value;
+					    }
 					}
 					
+					//Update
+					foreach($only_things as $thing_id => $thing_value){
+							
+						//grab thing id as a number
+						$thing_regrex_check = '/^thing(\d+)$/'; 
+						$thing_preg_match = preg_match($thing_regrex_check,$thing_id,$thing_matches);
+						if($thing_preg_match != 1){
+							throw new Exception("Thing Matching Error. Please Notify Admin");	
+						}
+						$thing_id_number = $thing_matches[1];
+						
+						
+						$thing_set_query = 'UPDATE thing_storing SET thing_value = ? WHERE sample_name = ? AND thing_id = ?';
+						if($thing_stmt = $dbc ->prepare($thing_set_query)) {                 
+		                	$thing_stmt->bind_param('ssi',$thing_value,$p_sample_name,$thing_id_number); //sample name should update automatically through fk constraint
+							if(!$thing_stmt -> execute()){
+								$successfull = 'false';
+								throw new Exception("Execution Error: Unable To Update User Created Info");	
+								//mysqli_error($dbc);
+							}
+							$thing_rows_affected = $thing_stmt ->affected_rows;
+							$thing_stmt -> close();
+							if($thing_rows_affected >= 0){
+								//for testing
+								#echo "You Updated Isolate Info".'<br>'; //cleanup
+								$updates_check = 'true';
+							}
+							else{
+								$successfull = 'false';
+								throw new Exception("Unable To Update User Created Info");	
+								//mysqli_error($dbc);
+							}
+						}else{
+							$successfull = 'false';
+							throw new Exception("Unable To Prepare User Created Info");	
+							//mysqli_error($dbc);
+						}
+					}
+				
 					
 					//////////////////////////////////////////////////////////////////
 					
