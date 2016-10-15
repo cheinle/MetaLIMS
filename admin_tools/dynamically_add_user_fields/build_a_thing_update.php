@@ -40,7 +40,8 @@
 				      	newInput.setAttribute("id", thing_id);
 				      	var value = <?php echo(json_encode(htmlspecialchars($value))); ?>	
 				      	newInput.setAttribute("value", value);
-				     	newInput.setAttribute("class", type);
+				     	//newInput.setAttribute("class", type);
+				     	newInput.setAttribute("class", 'things');
 					  	var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						 
 						if(required == 'Y'){
