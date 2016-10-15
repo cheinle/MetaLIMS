@@ -487,27 +487,38 @@
 							$thing20 = $p_user_things[20];
 						}
 						//}
-						
-						$stmt_things = $dbc -> prepare("INSERT INTO store_user_things (sample_name, thing1,thing2,thing3,thing4,thing5,thing6,thing7,thing8,thing9,thing10,thing11,thing12,thing13,thing14,thing15,thing16,thing17,thing18,thing19,thing20) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+						//foreach userthing in my userthing array, get the thing id and the value and store it in the new table
+						$stmt_things = $dbc -> prepare("INSERT INTO thing_storing (sample_name, thing_id, thing_value) VALUES (?,?,?)");
 						if(!$stmt_things){
 								$insert_check = 'false';
 								throw new Exception("Prepare Failure: Unable to insert user created fields");	
 						}
 						else{
-							$stmt_things -> bind_param('sssssssssssiiiiiiiiii', $p_sample_name,$thing1,$thing2,$thing3,$thing4,$thing5,$thing6,$thing7,$thing8,$thing9,$thing10,$thing11,$thing12,$thing13,$thing14,$thing15,$thing16,$thing17,$thing18,$thing19,$thing20);
-							if(!$stmt_things-> execute()){
-								$insert_check = 'false';
-								throw new Exception("Execution Failure: Unable to enter user created fields.");	
-							}
-							else{
-								$rows_affected_things = $stmt_things ->affected_rows;
-								$stmt_things -> close();
-								if($rows_affected_things< 0){
-									$insert_check = 'false';
-									throw new Exception("Unable to insert sample into Sequence Number Submission table");	
+						
+							foreach ($p_user_things as $thing_id => $thing_value){
+								if($thing_id == 0){//ignore hidden field
+									continue;
 								}
+								$stmt_things -> bind_param('sis', $p_sample_name,$thing_id,$thing_value);
+								if(!$stmt_things-> execute()){
+									$insert_check = 'false';
+									throw new Exception("Execution Failure: Unable to enter user created fields.");	
+								}
+								else{
+									$rows_affected_things = $stmt_things ->affected_rows;
+									$stmt_things -> close();
+									if($rows_affected_things< 0){
+										$insert_check = 'false';
+										throw new Exception("Unable to insert sample into Sequence Number Submission table");	
+									}
+								}
+								
 							}
+							
 						}
+						
+						
+						
 						
 						/*****************************************************************************
 						 * Do One Last Check And Commit If You Had No Errors

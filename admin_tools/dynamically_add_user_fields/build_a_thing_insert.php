@@ -6,9 +6,10 @@
 			die('prepare() failed: ' . htmlspecialchars($stmt->error));
 		}
 		if ($stmt->execute()){
-			$stmt->bind_result($label_name,$type,$select_values,$thing_id,$visible,$required);
+			$stmt->bind_result($label_name,$type,$select_values,$thing_id_number,$visible,$required);
 			$counter = 0;
 			$column_number = 1;
+			
 			while ($stmt->fetch()) {
 				if($type == 'text_input' || $type == 'numeric_input'){
 					if($visible == 1){
@@ -17,6 +18,7 @@
 						if($counter > 10){
 							$column_number = 2;	
 						}
+						$thing_id = 'thing'.$thing_id_number; //changed from storing as 'thing1' to '1'
 
 ?>
 					
@@ -36,7 +38,8 @@
 				      	newInput.setAttribute("name", thing_id);
 				      	newInput.setAttribute("id", thing_id);
 				      	newInput.setAttribute("value", "");
-				     	newInput.setAttribute("class", type);
+				     	//newInput.setAttribute("class", type);
+				     	newInput.setAttribute("class", 'things');
 					  	var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						 
 						if(required == 'Y'){
