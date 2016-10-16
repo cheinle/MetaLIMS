@@ -34,7 +34,11 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 	}
 	elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_things')){
 		header('Location: bulk_insert_and_updates/things_bulk_update_select.php');
-	}else{
+	}elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'view_user_things'){
+		include('../index.php');
+		include($path.'functions/build_user_things_view.php');
+	}
+	else{
 		include('../index.php');
 		include($path.'functions/build_table.php');
 		include($path.'functions/basic_build_table.php');
@@ -165,7 +169,8 @@ if(isset($_GET['submit'])){
 			$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'view_user_things'){
-			$query_main = "SELECT * FROM sample JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
+			//$query_main = "SELECT * FROM sample JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
+			$query_main = "SELECT create_user_things.label_name,thing_storing.sample_name,thing_storing.thing_id,thing_storing.thing_value FROM sample JOIN thing_storing ON thing_storing.sample_name = sample.sample_name JOIN create_user_things ON create_user_things.thing_id = thing_storing.thing_id WHERE ";
 		}
 		else{
 			$query_main = "SELECT $field_names FROM sample JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
@@ -218,6 +223,9 @@ if(isset($_GET['submit'])){
 			}
 			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'update_read_sub'){
 				build_bulk_read_sub_id_update_table($stmt,$root);
+			}
+			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'view_user_things'){
+				build_user_things_view($stmt,$root);
 			}
 			else{
 				if($stmt){

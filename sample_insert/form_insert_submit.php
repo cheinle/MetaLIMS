@@ -406,47 +406,34 @@
 						/***************************************************************************************
 						//Insert Admin Created Things
 						****************************************************************************************/
-						//foreach userthing in my userthing array, get the thing id and the value and store it in the new table
-						//$stmt_things = $dbc -> prepare("INSERT INTO thing_storing (sample_name, thing_id, thing_value) VALUES (?,?,?)");
-						//if(!$stmt_things){
-						//		$insert_check = 'false';
-						//		throw new Exception("Prepare Failure: Unable to insert user created fields");	
-						//}
-						//else{
-							print_r($p_user_things);
-							foreach ($p_user_things as $thing_id => $thing_value){
-								echo "id".$thing_id;
-								echo "value".$thing_value;
-								if($thing_id == 0){//ignore hidden field
-									continue;
-								}
-								
-								$stmt_things = $dbc -> prepare("INSERT INTO thing_storing (sample_name, thing_id, thing_value) VALUES (?,?,?)");
-								if(!$stmt_things){
-										$insert_check = 'false';
-										throw new Exception("Prepare Failure: Unable to insert user created fields");	
-								}
-								$stmt_things->bind_param('sis',$p_sample_name,$thing_id,$thing_value);
-								if(!$stmt_things-> execute()){
+						foreach ($p_user_things as $thing_id => $thing_value){
+
+							if($thing_id == 0){//ignore hidden field
+								continue;
+							}
+							
+							$stmt_things = $dbc -> prepare("INSERT INTO thing_storing (sample_name, thing_id, thing_value) VALUES (?,?,?)");
+							if(!$stmt_things){
 									$insert_check = 'false';
-									throw new Exception("Execution Failure: Unable to enter user created fields.".$p_sample_name.$thing_id.$thing_value);	
+									throw new Exception("Prepare Failure: Unable to insert user created fields");	
+							}
+							$stmt_things->bind_param('sis',$p_sample_name,$thing_id,$thing_value);
+							if(!$stmt_things-> execute()){
+								$insert_check = 'false';
+								throw new Exception("Execution Failure: Unable to enter user created fields.".$p_sample_name.$thing_id.$thing_value);	
+							}
+							else{
+								$rows_affected_things = $stmt_things ->affected_rows;
+								$stmt_things -> close();
+								if($rows_affected_things< 0){
+									$insert_check = 'false';
+									throw new Exception("Unable to insert sample into Sequence Number Submission table");	
 								}
-								else{
-									$rows_affected_things = $stmt_things ->affected_rows;
-									$stmt_things -> close();
-									if($rows_affected_things< 0){
-										$insert_check = 'false';
-										throw new Exception("Unable to insert sample into Sequence Number Submission table");	
-									}
-								}
-								
-							//}
+							}
 							
 						}
 						
-						
-						
-						
+
 						/*****************************************************************************
 						 * Do One Last Check And Commit If You Had No Errors
 						 * ***************************************************************************/
