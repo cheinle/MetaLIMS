@@ -1,3 +1,10 @@
+
+# WARNING: 
+### NanoLIMS is currently under major re-construction. Suggestion by developers is to not pull current version at this time. A formal release will be created when changes have been finalized. Thank you for your understanding. Please email myself if you have any questions (cheinle@ntu.edu.sg) Apologies for any inconvenience. CHEINLE - Oct 15, 2016 
+
+
+
+
 # NanoLIMS, A Simple Open-Source LIMS System for Small Sequencing Labs 
 
 ##NanoLIMS v1 Manual 
