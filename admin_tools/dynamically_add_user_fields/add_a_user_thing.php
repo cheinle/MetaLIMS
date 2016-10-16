@@ -37,8 +37,6 @@ include('add_a_user_thing_js.php');
 					<pre>
 * required field  
 + required only for dropdown entries
-Note: All Numeric Fields Will Be Of Format 000.00
-Max 10 Text/Select inputs and Max 10 Numeric Input 
 					</pre>
 			
 						<div class="col-xs-6">
@@ -58,7 +56,7 @@ Max 10 Text/Select inputs and Max 10 Numeric Input
 						<label class="textbox-label">Enter Dropdown Options:+</label>
 						<input type="text" "name="options" id="options" placeholder = "Option1; Option2; Option3" value=""/>
 						
-						<label class="textbox-label">Is Field Required?:*</label>
+						<label class="textbox-label">Is Field Required For User?:*</label>
 						<select id='required' name='required'>
 							<option value='0'>-Select-</option>
 							<option value='Y'>Yes</option>

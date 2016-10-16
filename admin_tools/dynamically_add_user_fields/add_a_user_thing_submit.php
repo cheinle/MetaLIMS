@@ -35,23 +35,15 @@ try{
 		array_walk($pieces_of_label,"myfunction");
 		$p_label_name = implode(" ", $pieces_of_label);
 		
-		//get number of things
-		$stmt= $dbc->prepare("SELECT thing_id FROM create_user_things");
-		
-		$check_number_of_numeric = array();
-		$check_number_of_varchars = array();
+		//$check_label_exists = 'false';
+		//Check if label name exists already
+		$stmt= $dbc->prepare("SELECT label_name FROM create_user_things WHERE label_name = ?");
+		$stmt-> bind_param('s', $p_label_name);
 		if ($stmt->execute()){
-	    	$stmt->bind_result($thing_id);
-	    	while ($stmt->fetch()){
-	    		
-				$regrex_check = '/^thing(\d+)$/'; 
-				preg_match($regrex_check,$thing_id,$matches);
-	        	if($matches[1] < 11 AND $matches[1] > 0){
-	        		$check_number_of_varchars[] = $matches[1];
-	        	}
-				if($matches[1] < 21 AND $matches[1] > 10){
-					$check_number_of_numeric[] = $matches[1];
-				}
+	    	$stmt->bind_result($label_name_check);
+	    	if ($stmt->fetch()){
+	    		//$check_label_exists = 'true';
+	    		throw new Exception("Label $p_label_name already exists.");
 			}
 		} 
 		else {
@@ -59,38 +51,19 @@ try{
 		}
 		$stmt -> close();
 		
-		//sort($number_of_things);
-		//$last_element = end($number_of_things);
-		$last_element = '';
-		if($p_type == 'numeric_input'){
-			sort($check_number_of_numeric);
-			$last_element = end($check_number_of_numeric);
-			if($last_element >=20){
-				throw new Exception("Indexing is out of range. Unable to add more numeric fields. Max input fields is 10");	
-			}
-		}else{
-			sort($check_number_of_varchars);
-			$last_element = end($check_number_of_varchars);
-			
-			if($last_element >=10){
-				throw new Exception("Indexing is out of range. Unable to add more input fields. Max input fields 10");	
-			}
-		}
 
-		$new_thing_id = $last_element + 1;
-		$new_thing_id = 'thing'.$new_thing_id;
-				
 		//insert data into db. Use prepared statement 
-		$stmt2 = $dbc -> prepare("INSERT INTO create_user_things (thing_id, label_name, type, select_values,required) VALUES (?,?,?,?,?)");
+		#thing_id will autoincrement
+		$stmt2 = $dbc -> prepare("INSERT INTO create_user_things (label_name, type, select_values,required) VALUES (?,?,?,?)");
 		if(!$stmt2){
 			$insert_check = 'false';
-			throw new Exception("Prepare Failure: Unable To Insert Into Main Sample Table");	
+			throw new Exception("Prepare Failure: Unable To Insert Into Table");	
 		}
 		else{
-			$stmt2 -> bind_param('sssss', $new_thing_id,$p_label_name,$p_type,$p_select_values,$p_required);
+			$stmt2 -> bind_param('ssss',$p_label_name,$p_type,$p_select_values,$p_required);
 			if(!$stmt2 -> execute()){
 				$insert_check = 'false';
-				throw new Exception("Execution Failure: Unable To Insert Into Main Sample Table");
+				throw new Exception("Execution Failure: Unable To Insert Into Table");
 			}
 			else{
 				$rows_affected2 = $stmt2 ->affected_rows;
