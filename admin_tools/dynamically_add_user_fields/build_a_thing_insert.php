@@ -1,5 +1,23 @@
 <?php
 		include ('../../database_connection.php');
+		$stmt = $dbc->prepare("SELECT count(thing_id) FROM create_user_things WHERE visible = ?");
+		if(!$stmt){
+			die('prepare() failed: ' . htmlspecialchars($stmt->error));
+		}
+		$visible_flag = 1;
+		$total_things = 0;
+		$stmt->bind_param('i',$visible_flag);
+		if ($stmt->execute()){
+			$stmt->bind_result($number_of_things);
+			while ($stmt->fetch()) {
+				$total_things = $number_of_things;
+			}
+		}
+
+		$half_of_things = $total_things/2;
+		
+
+
 
 		$stmt = $dbc->prepare("SELECT label_name,type,select_values,thing_id, visible, required FROM create_user_things");
 		if(!$stmt){
@@ -15,7 +33,7 @@
 					if($visible == 1){
 						$counter++;	
 						
-						if($counter > 10){
+						if($counter > $half_of_things){
 							$column_number = 2;	
 						}
 						$thing_id = 'thing'.$thing_id_number; //changed from storing as 'thing1' to '1'
