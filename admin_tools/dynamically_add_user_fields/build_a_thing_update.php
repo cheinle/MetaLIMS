@@ -2,9 +2,27 @@
 		include ('../../database_connection.php');
 		include('../../functions/text_insert_update_things.php');
 		
+		
+		//Find how many fields there will be so can split evenly between 2 columns
+		$stmt = $dbc->prepare("SELECT count(thing_id) FROM create_user_things WHERE visible = ?");
+		if(!$stmt){
+			die('prepare() failed: ' . htmlspecialchars($stmt->error));
+		}
+		$visible_flag = 1;
+		$total_things = 0;
+		$stmt->bind_param('i',$visible_flag);
+		if ($stmt->execute()){
+			$stmt->bind_result($number_of_things);
+			while ($stmt->fetch()) {
+				$total_things = $number_of_things;
+			}
+		}
+		$half_of_things = $total_things/2;
+		
+		//Build form of user things
 		$parent_value = $_GET['parent_value'];
 
-		$stmt = $dbc->prepare("SELECT label_name,type,select_values,thing_id, visible, required FROM create_user_things");
+		$stmt = $dbc->prepare("SELECT label_name,type,select_values,thing_id, visible, required FROM create_user_things ORDER BY LENGTH(label_name),label_name");
 		if(!$stmt){
 			die('prepare() failed: ' . htmlspecialchars($stmt->error));
 		}
@@ -13,14 +31,17 @@
 			$counter = 0;
 			$column_number = 1;
 			while ($stmt->fetch()) {
+				$counter++;	
+				if($counter > $half_of_things){
+					$column_number = 2;	
+				}
+				
+				$thing_id = 'thing'.$thing_id_number; //changed from storing as 'thing1' to '1'
+				
 				if($type == 'text_input' || $type == 'numeric_input'){
 					if($visible == 1){
-						$counter++;	
-						if($counter > 10){
-							$column_number = 2;	
-						}
 						$value = text_insert_update_things($parent_value,$thing_id_number);
-						$thing_id = 'thing'.$thing_id_number; //changed from storing as 'thing1' to '1'
+						
 ?>
 					<script type="text/javascript">
 						var column_number = <?php echo(json_encode(htmlspecialchars($column_number))); ?>	
@@ -40,8 +61,8 @@
 				      	newInput.setAttribute("id", thing_id);
 				      	var value = <?php echo(json_encode(htmlspecialchars($value))); ?>	
 				      	newInput.setAttribute("value", value);
-				     	//newInput.setAttribute("class", type);
-				     	newInput.setAttribute("class", 'things');
+				     	newInput.setAttribute("class", type);
+				     	//newInput.setAttribute("class", 'things');
 					  	var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						 
 						if(required == 'Y'){
@@ -66,10 +87,11 @@
 				if($type == 'select'){
 					if($visible == 1){
 						//	dropDown_update('anPipe', 'analysis', 'analysis_name','analysis_name','analysis_name',$parent_value,$root);
-						$value = text_insert_update_things($parent_value,$thing_id);
+						$value = text_insert_update_things($parent_value,$thing_id_number);
 						$select_array = explode(';', $select_values);
 ?>
 					<script type="text/javascript">
+					  var column_number = <?php echo(json_encode(htmlspecialchars($column_number))); ?>	
 					  var thing_id = <?php echo(json_encode(htmlspecialchars($thing_id))); ?>	
 					  var label_text = <?php echo(json_encode(htmlspecialchars($label_name))); ?>	
 					  var label = document.createElement("label");
@@ -99,7 +121,8 @@
 						}	
 				    	select.setAttribute("name", thing_id);
 				    	select.setAttribute("id", thing_id);
-				    	select.setAttribute("class", "things");
+				    	//select.setAttribute("class", "things");
+				    	select.setAttribute("class", "select");
 				    	select.setAttribute("value", "");
 				    	
 				    		

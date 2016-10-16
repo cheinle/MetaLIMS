@@ -681,7 +681,7 @@ include('../functions/get_earliest_date.php');
 					//Get array of user things
 					$only_things = array();
 					foreach ($get_array as $get_key => $get_value) {
-						echo $get_key;
+						//echo $get_key;
 					    if (strpos($get_key, 'thing') === 0) {
 					        $only_things[$get_key] = $get_value;
 					    }
@@ -699,9 +699,14 @@ include('../functions/get_earliest_date.php');
 						$thing_id_number = $thing_matches[1];
 						
 						
-						$thing_set_query = 'UPDATE thing_storing SET thing_value = ? WHERE sample_name = ? AND thing_id = ?';
+						//Check if thing_id exists for sample already. If yes, update it, if no, insert it
+						$thing_set_query = 'INSERT INTO thing_storing (sample_name, thing_id, thing_value) VALUES (?, ?, ?)
+						ON DUPLICATE KEY UPDATE sample_name=VALUES(sample_name), thing_id=VALUES(thing_id), thing_value=VALUES(thing_value)';
+	
+						//$thing_set_query = 'UPDATE thing_storing SET thing_value = ? WHERE sample_name = ? AND thing_id = ?';
 						if($thing_stmt = $dbc ->prepare($thing_set_query)) {                 
-		                	$thing_stmt->bind_param('ssi',$thing_value,$p_sample_name,$thing_id_number); //sample name should update automatically through fk constraint
+		                	//$thing_stmt->bind_param('ssi',$thing_value,$p_sample_name,$thing_id_number); //sample name should update automatically through fk constraint
+		                	$thing_stmt->bind_param('sis',$p_sample_name,$thing_id_number,$thing_value); //sample name should update automatically through fk constraint
 							if(!$thing_stmt -> execute()){
 								$successfull = 'false';
 								throw new Exception("Execution Error: Unable To Update User Created Info");	

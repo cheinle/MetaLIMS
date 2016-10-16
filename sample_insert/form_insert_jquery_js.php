@@ -65,7 +65,7 @@
 							//user things
 							var user_things = [];
 							//var counter = 0;
-							$(".things").each(function(){
+							/*$(".things").each(function(){
 								var id = this.id;
 								var myString = id;
 								var myRegexp = /^thing(\d+)$/;
@@ -74,7 +74,36 @@
 								user_things[index] = $(this).val();
 								//counter++;
 								
+							});*/
+							
+							$(".numeric_input").each(function(){//user thing by class
+								var id = this.id;
+								var myString = id;
+								var myRegexp = /^thing(\d+)$/;
+								var match = myRegexp.exec(myString);
+								var index = match[1];
+								user_things[index] = $(this).val();
+								//counter++;
 							});
+							$(".text_input").each(function(){//user thing by class
+								var id = this.id;
+								var myString = id;
+								var myRegexp = /^thing(\d+)$/;
+								var match = myRegexp.exec(myString);
+								var index = match[1];
+								user_things[index] = $(this).val();
+								//counter++;
+							});
+							$(".select").each(function(){//user thing by class
+								var id = this.id;
+								var myString = id;
+								var myRegexp = /^thing(\d+)$/;
+								var match = myRegexp.exec(myString);
+								var index = match[1];
+								user_things[index] = $(this).val();
+								//counter++;
+							});
+							
 							
 					
 							for ( var x = 1; x <= sampler_num; x++) {
@@ -152,7 +181,7 @@
 			                    }, //Data you are sending
 			                    //success : function(data){alert("\t"+'Success!'+"\n"+'Inserted Sample Number : '+sample_number+"\n"+'For Project: '+projName)}, 
 			                    success : function(data){alert(data)}, 
-			                    error   : function(){alert("An Error Has Occurred")} //error message
+			                    error   : function(data){alert(data+"An Error Has Occurred")} //error message
 			                })
 							}
 						});
@@ -179,7 +208,7 @@
 				    	valid = 'false';
 				    }
 				   if(valid == 'false'){
-				    	alert('ERROR: Some inputs are invalid. Please check fields');
+				    	alert('ERROR: Some inputs are invalid. Please check fields and other tabs');
 				    	return false;
 				   }
 				   else{

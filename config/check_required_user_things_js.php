@@ -1,8 +1,13 @@
 <script type="text/javascript">
        
+	   function isNumeric(n) {
+		  return !isNaN(parseFloat(n)) && isFinite(n);
+	   }
+	   
+	   
        function check_required_user_things(){
        	  var valid = 'true';
-       	  for (var i = 1; i < 3; i++) {
+       	  for (var i = 1; i < 3; i++) { //two columns of required things
        		
 			var required_selects = document.getElementById('required_things'+i).getElementsByTagName('select');
              for (var i9 = 0; i9 < required_selects.length; i9++) {
@@ -29,9 +34,8 @@
 	             	//select type from create_user_things where thing_id = input_id. if type equals numeric_input, do a check
 	             	
 	             	if(type == 'numeric_input'){
-	             		var regrex_check  =  inputed.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
-						if (regrex_check == null){
-							alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
+						if(isNumeric(inputed) == false){
+							alert("ERROR: Value must be a number");
 							valid = 'false';
 		             		document.getElementById(input_id).style.backgroundColor = 'blue';
 						}
@@ -39,7 +43,14 @@
 		             		document.getElementById(input_id).style.backgroundColor = 'white';
 		             	}
 					}else{
-	             		document.getElementById(input_id).style.backgroundColor = 'white';
+	             		if(isNumeric(inputed) == true){
+							alert("ERROR: Value should not be a number");
+							valid = 'false';
+		             		document.getElementById(input_id).style.backgroundColor = 'blue';
+						}
+						else{
+		             		document.getElementById(input_id).style.backgroundColor = 'white';
+		             	}
 	             	}
 	             }
 			 }
@@ -50,28 +61,36 @@
                  var inputed = thing_inputs[i11].value;
                  var input_id = thing_inputs[i11].getAttribute("id");
                  var type = thing_inputs[i11].getAttribute("class");
-	        	 if(type == 'numeric_input'){
-	        	 	if(inputed != ''){
-	        	 		var regrex_check  =  inputed.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
-						if (regrex_check == null){
-							alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
+	        	if(inputed == ''){
+	             	 valid = 'false';
+	                 document.getElementById(input_id).style.backgroundColor = 'blue';
+	             }else{
+	             	//select type from create_user_things where thing_id = input_id. if type equals numeric_input, do a check
+	             	
+	             	if(type == 'numeric_input'){
+						if(isNumeric(inputed) == false){
+							alert("ERROR: Value must be a number");
 							valid = 'false';
 		             		document.getElementById(input_id).style.backgroundColor = 'blue';
 						}
 						else{
 		             		document.getElementById(input_id).style.backgroundColor = 'white';
-		            	 }
-					}
-					else{
-		             	document.getElementById(input_id).style.backgroundColor = 'white';
-		             }
-				}
-				else{
-	             	document.getElementById(input_id).style.backgroundColor = 'white';
-	           }
+		             	}
+					}else{
+	             		if(isNumeric(inputed) == true){
+							alert("ERROR: Value should not be a number");
+							valid = 'false';
+		             		document.getElementById(input_id).style.backgroundColor = 'blue';
+						}
+						else{
+		             		document.getElementById(input_id).style.backgroundColor = 'white';
+		             	}
+	             	}
+	             }
+			 }
 			}
+			 return valid;
         }
-         return valid;
-      }
+        
 
 </script>
