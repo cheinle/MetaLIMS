@@ -19,7 +19,7 @@
 
 
 
-		$stmt = $dbc->prepare("SELECT label_name,type,select_values,thing_id, visible, required FROM create_user_things");
+		$stmt = $dbc->prepare("SELECT label_name,type,select_values,thing_id, visible, required FROM create_user_things ORDER BY LENGTH(label_name),label_name");
 		if(!$stmt){
 			die('prepare() failed: ' . htmlspecialchars($stmt->error));
 		}
@@ -29,15 +29,14 @@
 			$column_number = 1;
 			
 			while ($stmt->fetch()) {
+				$counter++;	
+				if($counter > $half_of_things){
+					$column_number = 2;	
+				}
+				$thing_id = 'thing'.$thing_id_number; //changed from storing as 'thing1' to '1'
+				
 				if($type == 'text_input' || $type == 'numeric_input'){
 					if($visible == 1){
-						$counter++;	
-						
-						if($counter > $half_of_things){
-							$column_number = 2;	
-						}
-						$thing_id = 'thing'.$thing_id_number; //changed from storing as 'thing1' to '1'
-
 ?>
 					
 					<script type="text/javascript">
@@ -84,6 +83,7 @@
 						$select_array = explode(';', $select_values);
 ?>
 					<script type="text/javascript">
+					  var column_number = <?php echo(json_encode(htmlspecialchars($column_number))); ?>	
 					  var thing_id = <?php echo(json_encode(htmlspecialchars($thing_id))); ?>	
 					  var label_text = <?php echo(json_encode(htmlspecialchars($label_name))); ?>	
 					  var label = document.createElement("label");
