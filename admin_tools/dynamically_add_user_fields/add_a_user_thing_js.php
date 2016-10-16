@@ -20,11 +20,17 @@
 								valid = 'false';
 								document.getElementById('field_type').style.backgroundColor = 'blue';
 							}
-							else if(type == 'text_select' && options == ''){
+							else if(type == 'select' && options == ''){
 								valid = 'false';
 								document.getElementById('options').style.backgroundColor = 'blue';
 								document.getElementById('field_type').style.backgroundColor = 'blue';
-							}else{
+							}
+							else if(type != 'select' && options != ''){
+								valid = 'false';
+								document.getElementById('options').style.backgroundColor = 'blue';
+								document.getElementById('field_type').style.backgroundColor = 'blue';
+							}
+							else{
 								document.getElementById('options').style.backgroundColor = 'white';
 								document.getElementById('field_type').style.backgroundColor = 'white';
 							}
@@ -35,7 +41,6 @@
 							}else{
 								document.getElementById('required').style.backgroundColor = 'white';
 							}
-							
 							
 							
 							if(valid == 'true'){

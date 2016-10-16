@@ -36,7 +36,7 @@ include('add_a_user_thing_js.php');
 					<LEGEND><b>Sample Collection Info</b></LEGEND>
 					<pre>
 * required field  
-+ required only for dropdown entries
++ required only for text dropdown entries
 					</pre>
 			
 						<div class="col-xs-6">
