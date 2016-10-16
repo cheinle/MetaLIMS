@@ -1,5 +1,8 @@
 <?php
 		include ('../../database_connection.php');
+		
+		
+		//Find how many fields there will be so can split evenly between 2 columns
 		$stmt = $dbc->prepare("SELECT count(thing_id) FROM create_user_things WHERE visible = ?");
 		if(!$stmt){
 			die('prepare() failed: ' . htmlspecialchars($stmt->error));
@@ -13,12 +16,10 @@
 				$total_things = $number_of_things;
 			}
 		}
-
 		$half_of_things = $total_things/2;
 		
-
-
-
+		
+		//Populate page with user created fields
 		$stmt = $dbc->prepare("SELECT label_name,type,select_values,thing_id, visible, required FROM create_user_things ORDER BY LENGTH(label_name),label_name");
 		if(!$stmt){
 			die('prepare() failed: ' . htmlspecialchars($stmt->error));
@@ -34,7 +35,7 @@
 					$column_number = 2;	
 				}
 				$thing_id = 'thing'.$thing_id_number; //changed from storing as 'thing1' to '1'
-				
+
 				if($type == 'text_input' || $type == 'numeric_input'){
 					if($visible == 1){
 ?>
@@ -55,8 +56,8 @@
 				      	newInput.setAttribute("name", thing_id);
 				      	newInput.setAttribute("id", thing_id);
 				      	newInput.setAttribute("value", "");
-				     	//newInput.setAttribute("class", type);
-				     	newInput.setAttribute("class", 'things');
+				     	newInput.setAttribute("class", type);
+				     	//newInput.setAttribute("class", 'things');
 					  	var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						 
 						if(required == 'Y'){
@@ -109,7 +110,8 @@
 						}	
 				    	select.setAttribute("name", thing_id);
 				    	select.setAttribute("id", thing_id);
-				    	select.setAttribute("class", "things");
+				    	//select.setAttribute("class", "things");
+				    	select.setAttribute("class", "select");
 				    	select.setAttribute("value", "");	
 						var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						if(required == 'Y'){
