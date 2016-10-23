@@ -12,47 +12,56 @@ $database_down = 'false';
 //if you did not change the git zip file name and placed folder in webroot, 
 //this will be your path
 //$path_in_webroot = '/am_production-master/'; 
-$path_in_webroot = '/series/dynamic/am_production/'; 
+$path_in_webroot = '/series/dynamic/NanoLIMS/NanoLIMS/'; 
 /////////////////////////////////////////////////////////////////////////////////
-	
-try{
-	//start transaction
-	mysqli_autocommit($dbc,FALSE);
-	if($_POST) {
-		//include('path.php');
-		$stmt1 = $dbc->prepare("SELECT * FROM users WHERE user_id = ? AND password = SHA1(?) AND visible = '1'");
-		$stmt1 -> bind_param('ss', $_POST['email'],$_POST['password']);
-				
-	 	if ($stmt1->execute()){
-	 		
-	 		 $count_check = $stmt1->fetch();
-             $size =sizeof($count_check);
 
-			 //check that one entry was returned
-             if($size == 1) {
-              
-			  	//go on to grab the old session id stored in the db
-				$meta = $stmt1->result_metadata(); 
-		   		while ($field = $meta->fetch_field()){ 
-		        	$params[] = &$row[$field->name]; 
-		    	} 
+
+//Process login
+if (isset($_POST['login_button'])){	
+	try{
+		//start transaction
+		mysqli_autocommit($dbc,FALSE);
+		$password_validated = false;
+		$password = $_POST['password'];
 		
-		    	call_user_func_array(array($stmt1, 'bind_result'), $params); 
-			
-				$old_session_id;
-				$first_name;
-				$last_name;
-				$admin_user;
-				$count = 0;
-				$stmt1->execute(); //process is foward-curser so need to reset
-				while($stmt1->fetch()){
-					$count++;
-					$old_session_id = $row['session_id'];
-					$first_name = $row['first_name'];
-					$last_name = $row['last_name'];
-					$admin_user = $row['admin'];
-			   	}
-	
+		
+		//check password and admin status
+		$stmt = $dbc->prepare("SELECT admin,password,first_name,last_name,session_id FROM users WHERE user_id = ? AND visible = '1'");
+		if(!$stmt){;
+			die('prepare() failed: ' . htmlspecialchars($stmt->error));
+		}
+		$stmt->bind_param("s",$_POST['email']);
+		$result = 0;
+		
+		$password_hash;
+		$old_session_id;
+		$first_name;
+		$last_name;
+		$admin_user;
+		if ($stmt->execute()){
+			$stmt->bind_result($admin,$user_password,$fname,$lname,$session_id);
+			while ($stmt->fetch()) {
+				$result++;
+				$old_session_id = $session_id;
+				$first_name = $fname;
+				$last_name = $lname;
+				$admin_user = $admin;
+				$password_hash = $user_password;
+			}
+		}
+		$stmt->close();
+
+	    if ($result > 0){
+		    if (password_verify($password, $password_hash)) {
+				$password_validated = true;
+			}
+	    }else{
+	    	$_SESSION['message'] = 'Login invalid. Please try again';
+	    }
+		
+		
+		if($password_validated == true){
+
 				//store current session id
 				if(session_id()){
 					session_commit();
@@ -111,31 +120,129 @@ try{
 							header("Location:http://".$url);
 						}
 						else{
-							
-							session_destroy();
-							$url = $_SERVER["HTTP_HOST"].$logout_path."login.php"; 
-							header("Location: http://".$url);
-							exit();
+							$_SESSION['message'] = 'Database Is Currently Down For Maintenance. Sorry For Any inconvenience Caused. Please See Admin For Details';
+							//session_destroy();
+							//$url = $_SERVER["HTTP_HOST"].$logout_path."login.php"; 
+							//header("Location: http://".$url);
+							//exit();
 						}
 					}
 					else{
 						$url = $_SERVER["HTTP_HOST"].$_SESSION['link_root']."home_page.php"; 
 						header("Location: http://".$url);
 					}
-				}
-			}
+				}//end if new session id != old session id
+				$dbc->commit();
+			}else{
+				$_SESSION['message'] = 'Login invalid. Please try again';
+			}//end if password validated == true
+	}//end try
+	catch (Exception $e) { 
+		if (isset ($dbc)){
+			$dbc->rollback ();
+			echo '<script>Alert.render("ERROR: Unable to login. Please check username and password");</script>';
 		}
 	}
-	$dbc->commit();
+}//end login
+
+//Process registration
+if (isset($_POST['registration_button'])){	
+	  session_start();
+	  include('functions/send_email.php');
+
+	  include('database_connection.php');
+	  $password = $_POST['password'];
+	  $email = $_POST['email'];
+	  $visible = '0'; //default not visible
+	  $validated = false;
+	  $first_name = $_POST['firstname'];
+	  $last_name = $_POST['lastname'];
+	  
+	  $admin_yn = 'N'; //default
+	  if(isset($_POST['admin']) && $_POST['admin'] == 'yes'){ //This is what the user requested
+		$admin_yn = 'Y';
+	  }
+	 
+	 try{
+	 	
+		//start transaction
+		$dbc->autocommit(FALSE);
+		
+	 
+		  $user_exists = 'FALSE';
+		  if($email!="" && $password!=""){
+			  	$stmt = $dbc -> prepare("SELECT user_id FROM users WHERE user_id = ?");
+				if(!$stmt){;
+					throw new Exception("ERROR: Prepare failure<br>");
+				}
+									
+				$stmt -> bind_param('s',$email);
+				if(!$stmt -> execute()){
+					throw new Exception("ERROR: Execute failure<br>");
+				}else{
+					$stmt->bind_result($existing_username);
+					if($stmt->fetch()) {
+						$user_exists = 'TRUE';
+					}		
+				}
+				$stmt->close();
+			
+			}
+			if($user_exists == 'FALSE'){
+			
+			  	$password_hash = password_hash($password, PASSWORD_BCRYPT); //uses bcrypt, a 60 Char encryption
+			  	$stmt = $dbc -> prepare("INSERT INTO users (user_id,first_name,last_name,password,admin,visible) VALUES (?,?,?,?,?,?)");
+				if(!$stmt){;
+					throw new Exception("ERROR: Prepare failure<br>");
+				}
+									
+				$stmt -> bind_param('sssssi',$email,$first_name,$last_name,$password_hash,$admin_yn,$visible);
+				
+				if(!$stmt -> execute()){
+					throw new Exception("ERROR: Execute failure<br>");
+				}else{
+					$rows_affected = $stmt ->affected_rows;
+					$stmt -> close();
+					if($rows_affected > 0){
+						$validated = true;
+						
+					}
+	
+					//alert all admins through email
+					$email_admin_confirm = send_admin_email($email,'user',0,$dbc,'new_user');
+					if(!$email_admin_confirm){
+						throw new Exception("ERROR: Email to admin(s) was not sent<br>");
+					}
+				}
+		
+			    if($validated){
+			    		
+						$_SESSION['message'] = 'Registration submitted. Admin will email you when registration is complete';
+						//header('location: welcome_new_user.php');
+				}
+			    else{
+			      		$_SESSION['message'] = 'Invalid registration. Please see admin';
+						//header('location: registration.php');
+			    }
+			 }else{
+			 	$message = 'Invalid username. Username '.$email.' exists. Please try another name.';
+			 	$_SESSION['message'] = $message;
+				//header('location: registration.php');
+			 }
+			$dbc->commit();
+		}
+
+		catch (Exception $e) { 
+			if (isset ($dbc)){
+		   	 	$dbc->rollback ();
+		   		echo "Error:  " . $e; 
+			}
+		}
 }
-catch (Exception $e) { 
-	if (isset ($dbc)){
-		$dbc->rollback ();
-		echo '<script>Alert.render("ERROR: Unable To Login. Please Notify Admin");</script>';
-		echo "Final Error:  " . $e; 
-	}
-}
+
+
 ?>
+
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -170,8 +277,12 @@ catch (Exception $e) {
 	<div class="logo">
 		<!-- PUT YOUR LOGO HERE -->
 		<?php 
-			if($database_down == 'true'){
-				echo "Database Is Currently Down For Maintenance. Sorry For Any inconvenience Caused. Please See Admin For Details";
+			//if($database_down == 'true'){
+			//	echo "Database Is Currently Down For Maintenance. Sorry For Any inconvenience Caused. Please See Admin For Details";
+			//}
+			if(isset($_SESSION['message'])){
+			    echo $_SESSION['message'];
+			    unset($_SESSION['message']);
 			}
 		?>
 	</div>
@@ -208,7 +319,7 @@ catch (Exception $e) {
 				<!--<label class="checkbox">
 				<input type="checkbox" name="remember" value="1"/> Remember me
 				</label>-->
-				<button type="submit" class="btn blue pull-right">
+				<button type="submit" class="btn blue pull-right" name="login_button" value="login">
 				Login <i class="m-icon-swapright m-icon-white"></i>
 				</button>            
 			</div>
@@ -250,7 +361,7 @@ catch (Exception $e) {
 		</form>
 		<!-- END FORGOT PASSWORD FORM -->
 		<!-- BEGIN REGISTRATION FORM -->
-		<form class="form-vertical register-form" action="registration.php" method="post">
+		<form class="form-vertical register-form" action="login.php" method="post">
 			<h3 >Sign Up</h3>
 			<p>Enter your personal details below:</p>
 			<div class="control-group">
@@ -311,7 +422,7 @@ catch (Exception $e) {
 				<button id="register-back-btn" type="button" class="btn">
 				<i class="m-icon-swapleft"></i>  Back
 				</button>
-				<button type="submit" id="register-submit-btn" class="btn green pull-right">
+				<button type="submit" id="register-submit-btn" class="btn green pull-right" value="registration" name="registration_button">
 				Sign Up <i class="m-icon-swapright m-icon-white"></i>
 				</button>            
 			</div>
