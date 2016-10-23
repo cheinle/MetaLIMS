@@ -46,11 +46,19 @@ if(isset($_POST['submit'])){
 		$user_array = explode(',',$user_list);
 		if (is_array($user_array) || is_object($user_array)){
 		    foreach($user_array as $index => $uname){
-	
+		    
 				$underscored_username = preg_replace('/[.]/', '_',$uname);
-				
 				$login_allow = $_POST[$underscored_username.'_login'];
 				$role = $_POST[$underscored_username.'_role'];
+				
+				
+				//if your user is the current user, do not allow to change your own login values? 
+				if($uname == $_SESSION['username'] && $uname != 'admin@nanolims.com'){
+					if( $role != $old_user_info[$uname]['role'] || $login_allow != $old_user_info[$uname]['login_allow']  ){
+						echo '<script>alert("Warning: Admin cannot update his/her own login info");</script>';
+						continue;
+					}
+				}
 
 				$query = 'UPDATE users SET admin =?, visible = ? WHERE user_id = ?';
 				if($stmt = $dbc ->prepare($query)) {                 
@@ -77,6 +85,8 @@ if(isset($_POST['submit'])){
 								if($email_admin_confirm == 'false'){
 									throw new Exception("ERROR: Email to admin(s) was not sent<br>");
 								}
+								
+								
 							}
 							
 						}
@@ -108,7 +118,8 @@ if(isset($_POST['submit'])){
 <div id="inner_content" class="inner_content_div" align="center">
 	<div id="datatable_div">
 	<form onsubmit="return confirm(\'Do you want to submit the form?\');" action="update_user_login_info.php" method="POST" class="registration"><!--onsubmit not currently working-->
-		<table id="datatable" class="display" cellspacing="0" width="100%">
+	<pre>*Note: Admin are not able to update his/her own login info (exception-admin@nanolims.com)</pre>		
+	<table id="datatable" class="display" cellspacing="0" width="100%">
 			<thead>
 				<tr>
 					<th>&nbsp;User</th>
