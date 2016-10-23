@@ -9,8 +9,14 @@ function send_user_email($email_address,$role,$login_allow){
 		}else{
 			$allow_deny = 'inactive';
 		}
+		
+		$new_role = 'User';
+		if($role == 'Y'){
+			$new_role = 'Admin';
+		}
+		
 		$subject = "NanoLIMS User Update";
-        $message = "Your role has been updated to: <b>{$role}</b>.<br/>Your login permission has been updated to: <b>{$allow_deny}</b><br/><br/><br/>";
+        $message = "Your role has been updated to: <b>{$new_role}</b>.<br/>Your login permission has been updated to: <b>{$allow_deny}</b><br/><br/><br/>";
         $message = wordwrap($message, 70, "\r\n");
         $headers = 'From: no-reply@nanolims' . "\r\n" .
                    'MIME-Version: 1.0'."\r\n".
@@ -69,9 +75,14 @@ function send_admin_email($username,$role,$login_allow,$dbc,$type_of_email){
 			$allow_deny = 'inactive';
 		}
 		
+		$new_role = 'User';
+		if($role == 'Y'){
+			$new_role = 'Admin';
+		}
+		
 		if($type_of_email == 'update_user'){
 			$subject = "Admin Notice: NanoLIMS User Update";
-       		$message = "User <b>{$username}</b> role has been updated to: <b>{$role}</b>.<br/>Login permission has been updated to: <b>{$allow_deny}</b><br/><br/><br/>";
+       		$message = "User <b>{$username}</b> role has been updated to: <b>{$new_role}</b>.<br/>Login permission has been updated to: <b>{$allow_deny}</b><br/><br/><br/>";
         	$message = wordwrap($message, 70, "\r\n");
 		}
 		if($type_of_email == 'new_user'){
