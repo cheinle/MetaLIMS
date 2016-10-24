@@ -55,7 +55,7 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 <head>
 <title>Query Results</title>
 	<meta charset="utf-8">
-	 <script type="text/javascript">
+	<script type="text/javascript">
 		$(document).ready(function() 
 		{
 			// Setup - add a text input to each footer cell
@@ -176,6 +176,7 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 				} );
 			} )
 			
+			
 			//table 5
 			$(document).ready(function() 
 			{
@@ -236,7 +237,6 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 					} );
 				} );
 			} )
-			
 			
 		} );
 	</script>
