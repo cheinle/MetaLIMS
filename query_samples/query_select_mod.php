@@ -320,6 +320,6 @@ include($path.'functions/check_box_tables.php');
 	</div><!--fragment 3-->
 <script>
 		$( "#tabs" ).tabs();
-		</script>
+</script>
 </body>
 </html>

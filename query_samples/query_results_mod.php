@@ -40,7 +40,7 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 	}
 	else{
 		include('../index.php');
-		include($path.'functions/build_table.php');
+		include($path.'functions/build_query_results_table.php');
 		include($path.'functions/basic_build_table.php');
 	}
 }
@@ -54,45 +54,128 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 <head>
 <title>Query Results</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="../aquired/freeze/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../aquired/freeze/dataTables.bootstrap.css">
-	<style type="text/css" class="init">
-	body { font-size: 140%; }
-	div.dataTables_wrapper {
-		width: 99%;
-		height: 85%;
-		
-	}
-	div.dataTables_scrollBody {
-		/*height: 90%;*/
-	}
-	</style>
-	<script type="text/javascript" language="javascript" src="../aquired/freeze/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="../aquired/freeze/jquery.dataTables.js"></script>
-	<script type="text/javascript" language="javascript" src="../aquired/freeze/dataTables.fixedColumns.js"></script>
-	<script type="text/javascript" language="javascript" src="../aquired/freeze/dataTables.bootstrap.js"></script>
-	<script type="text/javascript" language="javascript" class="init">
-		$(document).ready(function() {
-			var table = $('#example').DataTable( {
-				scrollY:        "90%", 
-				scrollX:        true,
-				scrollCollapse: true,
-				paging:         false
+	 <script type="text/javascript">
+		$(document).ready(function() 
+		{
+			// Setup - add a text input to each footer cell
+			$('#datatable tfoot th').each( function () 
+			{
+				var title = $(this).text();
+				$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
 			} );
-			new $.fn.dataTable.FixedColumns( table );
+ 
+			// DataTable
+			var table = $('#datatable').DataTable();
+ 
+			// Apply the search
+			table.columns().every( function () 
+			{
+				var that = this;
+ 
+				$( 'input', this.footer() ).on( 'keyup change', function () 
+				{
+					if ( that.search() !== this.value ) 
+					{
+						that
+							.search( this.value )
+							.draw();
+					}
+				} );
+			} );
+		} );
+		
+		
+		//table 2
+		$(document).ready(function() 
+		{
+			// Setup - add a text input to each footer cell
+			$('#datatable2 tfoot th').each( function () 
+			{
+				var title = $(this).text();
+				$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+			} );
+ 
+			// DataTable
+			var table = $('#datatable2').DataTable();
+ 
+			// Apply the search
+			table.columns().every( function () 
+			{
+				var that = this;
+ 
+				$( 'input', this.footer() ).on( 'keyup change', function () 
+				{
+					if ( that.search() !== this.value ) 
+					{
+						that
+							.search( this.value )
+							.draw();
+					}
+				} );
+			} );
+		} );
+		
+		//table 3
+		$(document).ready(function() 
+		{
+			// Setup - add a text input to each footer cell
+			$('#datatable3 tfoot th').each( function () 
+			{
+				var title = $(this).text();
+				$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+			} );
+ 
+			// DataTable
+			var table = $('#datatable3').DataTable();
+ 
+			// Apply the search
+			table.columns().every( function () 
+			{
+				var that = this;
+ 
+				$( 'input', this.footer() ).on( 'keyup change', function () 
+				{
+					if ( that.search() !== this.value ) 
+					{
+						that
+							.search( this.value )
+							.draw();
+					}
+				} );
+			} );
+			
+			
+			//table 4
+			$(document).ready(function() 
+			{
+				// Setup - add a text input to each footer cell
+				$('#datatable4 tfoot th').each( function () 
+				{
+					var title = $(this).text();
+					$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+				} );
+	 
+				// DataTable
+				var table = $('#datatable4').DataTable();
+	 
+				// Apply the search
+				table.columns().every( function () 
+				{
+					var that = this;
+	 
+					$( 'input', this.footer() ).on( 'keyup change', function () 
+					{
+						if ( that.search() !== this.value ) 
+						{
+							that
+								.search( this.value )
+								.draw();
+						}
+					} );
+				} );
+			} )
 		} );
 	</script>
-	
-	 <script type="text/javascript">
-        $(document).ready(function() {
-            //$('#btnHide').click(function() {
-            $('.reg').dblclick(function() {
-				var index1 = $(this).index() + 1;
-                $("td:nth-child(" +index1+ ")").toggleClass('hidden');
-                $("th:nth-child(" +index1+ ")").toggleClass('hidden');
-            });
-        });
-    </script>
 </head>
 
  
@@ -156,7 +239,17 @@ if(isset($_GET['submit'])){
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_storage'){
 			$field_names = 'sample.sample_name,sample.sample_sort';
 		}
-		else{$field_names = "*";}
+		else{
+			//$field_names = "*";
+			$general_field_names = 'sample.sample_name,sample.sample_sort,sample.barcode,sample.project_name,sample.location_name,sample.relt_loc_name,sample.media_type,sample.collector_name,sample.sample_type,sample.start_samp_date_time,sample.end_samp_date_time,sample.total_samp_time,sample.updated_by,sample.time_stamp';
+			$dna_field_names = '';
+			$rna_field_names = '';
+			$analysis_field_names = '';
+			//$things_field_names = '';
+			$note_field_names = '';
+			
+			$field_names = $general_field_names.','.$dna_field_names.','.$rna_field_names.','.$analysis_field_names.','.$note_field_names;
+		}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////
 		//Check what type of query you are doing
@@ -229,7 +322,7 @@ if(isset($_GET['submit'])){
 			}
 			else{
 				if($stmt){
-					build_table($stmt,'display');
+					build_query_results_table($stmt,'display',$dbc);
 				}
 			}
 		}
