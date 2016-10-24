@@ -4,9 +4,12 @@
 function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'dislapy' and 'xls'
 	include($_SESSION['include_path'].'functions/convert_time.php');
 	include($_SESSION['include_path'].'functions/find_samplers.php');
+	include($_SESSION['include_path'].'functions/find_thing_labels.php');
 
+	$sample_array = array();
+	$thing_label_array = find_thing_labels();
 	
-
+	
 	 echo "<div id=\"tabs\">";
 		 echo "<ul >";
 		     echo "<li><a href=\"#fragment-1\"><span>General</span></a></li>";
@@ -83,6 +86,14 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 					 $start_time = htmlspecialchars($start_time);
 					// $end_time = htmlspecialchars($end_time);
 					 $total_time = htmlspecialchars($total_time);
+					 
+					// $data[] = array('sample_name' => $row['sample_name'],
+					//					'seq_id' => $row['seq_id'],
+					//					'sample_sort' => $row['sample_sort']
+					//					);
+					
+					$sample_array[] = $sample_name;
+					//push($sample_array,$sample_name);
 					 
 					 $key = 'total_time';
 					 $converted_total_time = convert_time($key, $total_time);
@@ -353,9 +364,51 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				
 				
 		echo "</div>"; //end of fragment 4
-		 echo "<div id=\"fragment-6\">";
+		echo "<div  id=\"fragment-5\">";
+		echo "<table id=\"datatable5\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
+				echo "<thead>";
+				echo "<tr>";
+				echo "<th>Sample Name</th>";
+				echo "<th>Sample Sort</th>";
+				foreach($thing_label_array as $key => $value){
+					$id_label = explode("|",$value);
+					$label =$id_label[1];
+					echo "<th>$label</th>";
+				}
+				echo "</tr>";
+				echo "</thead>";
+				
+				echo "<tfoot>";
+				echo "<tr>";
+				echo "<th>Sample Name</th>";
+				echo "<th>Sample Sort</th>";
+				foreach($thing_label_array as $key => $value){
+					$id_label = explode("|",$value);
+					$label =$id_label[1];
+					echo "<th>$label</th>";
+				}
+				echo "</tr>";
+				echo "</tfoot>";
+				
+				echo "<tbody>";
+				foreach($sample_array as $sample_key => $sample_name){
+					echo "<tr>";
+					foreach($thing_label_array as $key => $value){
+						$id_label = explode("|",$value);
+						$id =$id_label[0];
+						$thing_value = find_thing_values($sample_name, $id);
+						echo "<td>$thing_value</td>";
+					}
+					echo "<tr>";
+				}
+
+				echo "</tbody>";
+				echo "</table>";
 		
-			$stmt->execute();
+		echo "</div>";//end of fragment 5
+		echo "<div id=\"fragment-6\">";
+		
+		$stmt->execute();
 				/* bind variables to prepared statement */
 				$stmt->bind_result($sample_name,$sample_sort,$barcode,$project_name,$location,$relative_location,$media_type,$collector_name,$sample_type,$start_time,$end_time,$total_time,$entered_by,$updated_by,$time_stamp
 				,$dna_extraction_date,$dna_extraction_kit,$dna_concentration,$dna_volume_of_elution,$dna_instrument,$dna_vol_for_instrument,$dna_storage,$dna_extractor,$dna_exists,$orig_exists
