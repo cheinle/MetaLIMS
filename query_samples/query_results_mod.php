@@ -42,6 +42,7 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 		include('../index.php');
 		include($path.'functions/build_query_results_table.php');
 		include($path.'functions/basic_build_table.php');
+		include($path.'functions/build_table.php');
 	}
 }
 	
@@ -295,7 +296,7 @@ if(isset($_GET['submit'])){
 				$check_field = 'true';
 			}
 		}
-		if(isset($_GET['column_names'])){$field_names = check_box_results($_GET['column_names']);}
+		if(isset($_GET['column_names'])){$field_names = check_box_results($_GET['column_names']);}//removed
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
 			$field_names = 'sample.sample_name,sample.d_conc,sample.sample_sort';
 		}
@@ -399,49 +400,46 @@ if(isset($_GET['submit'])){
 	if($submit == 'other'){
 		//project
 		if($_GET['db_content']== 'project_all'){
+			
+			echo "<div class=\"page-header\">
+			<h3>View All Project Info</h3>	
+			</div>";
+			
 			$stmt = $dbc->prepare("SELECT * FROM project_name");
-			build_table($stmt,'display');
-		}
-		
-		//weather
-		if($_GET['db_content']=='weather_xls'){
-					$stmt = $dbc->prepare("SELECT * FROM daily_weather");
-					build_xls_output_table($stmt,'xls');
-					echo "</body>";
-					echo "</html>";
-		}
-		if($_GET['db_content']=='weather_all'){
-			$stmt = $dbc->prepare("SELECT * FROM daily_weather");
-			build_table($stmt,'display');
-		}
-		
-		//daily data
-		if($_GET['db_content']=='daily_data_xls'){
-			$sdate = htmlspecialchars($_GET['sdate']);
-			$edate = htmlspecialchars($_GET['edate']);
-			$stmt = $dbc->prepare("SELECT daily_data2_particle_counter.daily_date,daily_data2_particle_counter.part_sens_name,daily_data2_particle_counter.start_time,daily_data2_particle_counter.end_time,daily_data2.temp,daily_data2.hum,daily_data2.co2,daily_data2.rain,daily_data2.notes,daily_data2.entered_by,daily_data2.updated_by,daily_data2.update_timestamp FROM daily_data2_particle_counter LEFT JOIN daily_data2 ON (daily_data2_particle_counter.daily_date = daily_data2.daily_date) WHERE daily_data2_particle_counter.daily_date BETWEEN (?) AND (?)");
-			$stmt -> bind_param('ss', $sdate,$edate);
-			build_xls_output_table($stmt,'xls');
-			echo "</body>";
-			echo "</html>";
+			basic_build_table($stmt,'display',$root);
 		}
 		
 		// samplers
 		if($_GET['db_content']=='sampler_all'){
+			
+			echo "<div class=\"page-header\">
+			<h3>View All Sampler Info</h3>	
+			</div>";
+			
 			$stmt = $dbc->prepare("SELECT * FROM sampler");
 	    	basic_build_table($stmt,'display',$root);
 		}
 		
 		//sensors
 		if($_GET['db_content']=='partCt_all'){
+			
+			echo "<div class=\"page-header\">
+			<h3>View All Sensor Info</h3>	
+			</div>";
+			
 			$stmt = $dbc->prepare("SELECT * FROM particle_counter");
-			build_table($stmt,'display');
+			basic_build_table($stmt,'display',$root);
 		}
 		
 		//location
 		if($_GET['db_content']=='location_all'){
+			
+			echo "<div class=\"page-header\">
+			<h3>View All Location Info</h3>	
+			</div>";
+			
 			$stmt = $dbc->prepare("SELECT * FROM location");
-			build_table($stmt,'display');
+			basic_build_table($stmt,'display',$root);
 		}
 	}
 

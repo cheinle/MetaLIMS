@@ -102,7 +102,12 @@ th {
 	/*white-space : nowrap;*/
 	background-color: grey;
 	height: .5in;
+	padding-left: 5px;
 	
+}
+td{
+	border: 2px solid black;
+	padding-left: 5px;
 }
 table {
   table-layout:fixed;

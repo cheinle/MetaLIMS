@@ -17,8 +17,7 @@ function basic_build_table($stmt,$table_type,$root){ //table types are 'dislapy'
 		    		} 
 					
 		    		call_user_func_array(array($stmt, 'bind_result'), $params); 
-					
-		    		echo '<table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">';
+		    		echo '<table style="width:90%;margin-left:5%; background-color:white">';
 					#echo '<table>';
 					$header_ct = 0;	
 					$stmt->execute();
@@ -39,7 +38,7 @@ function basic_build_table($stmt,$table_type,$root){ //table types are 'dislapy'
 								continue;
 							}
 							else{
-								echo '<th class = "reg">'.$p_key.'</th>';
+								echo '<th>'.$p_key.'</th>';
 							}		
 						}
 						echo '</tr>';
@@ -55,7 +54,7 @@ function basic_build_table($stmt,$table_type,$root){ //table types are 'dislapy'
 							continue;
 						}
 						else{
-							echo '<td class = "reg">'.$p_value.'</td>';
+							echo '<td>'.$p_value.'</td>';
 						}
 
 					}
@@ -66,6 +65,7 @@ function basic_build_table($stmt,$table_type,$root){ //table types are 'dislapy'
 		    		$stmt->close();
 					echo '</tbody>';
 					echo '</table>';
+					
 				}
 				else{
 					echo '<script>Alert.render2("Sorry! No Results Found. Please Check Query");</script>';
