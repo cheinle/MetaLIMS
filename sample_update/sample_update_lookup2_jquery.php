@@ -290,7 +290,7 @@ if (isset($_GET['submit'])) {
 					<p>
 					<h3 class="checkbox-header">Does DNA Extraction Sample Exist?:</h3><br>
 					<div class="vert-checkboxes">
-	 				<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>Yes,DNA Sample Exisits</label><br />
+	 				<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>Yes,DNA Sample Exists</label><br />
 					<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'two'){ echo 'checked';}  ?>/>No, DNA Has Not Been Extracted</label><br />
 					<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'three'){ echo 'checked';} ?>/>No, DNA Sample Is Used Up</label><br />
 					</div>

@@ -179,12 +179,12 @@ include($path.'functions/check_box_tables.php');
 			<div class="col-xs-6">
 			<i>(Select Dates and/or Fields to Query By)</i><br><br>
 			<label class="textbox-label">Select Start/End Date:</label>
-			<input type="text" id="datepicker" class="shrtfields" name="smydate"> 
-			<input type="text" id="datepicker2" class="shrtfields" name="emydate">
+			<input type="text" id="datepicker3" class="shrtfields" name="smydate"> 
+			<input type="text" id="datepicker4" class="shrtfields" name="emydate">
 			
 			<script>
-				$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' }).val();
-				$('#datepicker2').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+				$('#datepicker3').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+				$('#datepicker4').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 			</script>
 			
 			<p>
@@ -254,11 +254,11 @@ include($path.'functions/check_box_tables.php');
 			<p>
 				<label class="textbox-label">Where field matches:</label><br>
 				<p>
-		    	<input type="text" size="70" placeholder="Insert Query" name="query" id="customerAutocomplte" class="ui-autocomplete-input" autocomplete="off" value="<?php if(isset($_GET['submit'])&& $submitted != 'true'){ echo htmlspecialchars($_GET['query']);} ?>"/>
+		    	<input type="text" size="70" placeholder="Insert Query" name="query" id="customerAutocomplte2" class="ui-autocomplete-input" autocomplete="off" value="<?php if(isset($_GET['submit'])&& $submitted != 'true'){ echo htmlspecialchars($_GET['query']);} ?>"/>
 				</p>
 				<script>
 					$(document).ready(function($){
-		    			$('#customerAutocomplte').autocomplete({
+		    			$('#customerAutocomplte2').autocomplete({
 							source:'../suggest_name.php', 
 							minLength:2
 		    			});

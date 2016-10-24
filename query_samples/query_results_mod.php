@@ -174,6 +174,69 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 					} );
 				} );
 			} )
+			
+			//table 5
+			$(document).ready(function() 
+			{
+				// Setup - add a text input to each footer cell
+				$('#datatable5 tfoot th').each( function () 
+				{
+					var title = $(this).text();
+					$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+				} );
+	 
+				// DataTable
+				var table = $('#datatable5').DataTable();
+	 
+				// Apply the search
+				table.columns().every( function () 
+				{
+					var that = this;
+	 
+					$( 'input', this.footer() ).on( 'keyup change', function () 
+					{
+						if ( that.search() !== this.value ) 
+						{
+							that
+								.search( this.value )
+								.draw();
+						}
+					} );
+				} );
+			} )
+			
+			
+			//table 6
+			$(document).ready(function() 
+			{
+				// Setup - add a text input to each footer cell
+				$('#datatable6 tfoot th').each( function () 
+				{
+					var title = $(this).text();
+					$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+				} );
+	 
+				// DataTable
+				var table = $('#datatable6').DataTable();
+	 
+				// Apply the search
+				table.columns().every( function () 
+				{
+					var that = this;
+	 
+					$( 'input', this.footer() ).on( 'keyup change', function () 
+					{
+						if ( that.search() !== this.value ) 
+						{
+							that
+								.search( this.value )
+								.draw();
+						}
+					} );
+				} );
+			} )
+			
+			
 		} );
 	</script>
 </head>
@@ -241,14 +304,16 @@ if(isset($_GET['submit'])){
 		}
 		else{
 			//$field_names = "*";
-			$general_field_names = 'sample.sample_name,sample.sample_sort,sample.barcode,sample.project_name,sample.location_name,sample.relt_loc_name,sample.media_type,sample.collector_name,sample.sample_type,sample.start_samp_date_time,sample.end_samp_date_time,sample.total_samp_time,sample.updated_by,sample.time_stamp';
-			$dna_field_names = '';
-			$rna_field_names = '';
-			$analysis_field_names = '';
+			$general_field_names = 'sample.sample_name,sample.sample_sort,sample.barcode,sample.project_name,sample.location_name,sample.relt_loc_name,sample.media_type,sample.collector_name,sample.sample_type,sample.start_samp_date_time,sample.end_samp_date_time,sample.total_samp_time,sample.entered_by,sample.updated_by,sample.time_stamp';
+			$dna_field_names = 'sample.d_extraction_date,sample.dna_extract_kit_name,sample.d_conc,sample.d_volume,sample.d_conc_instrument,sample.d_volume_quant,storage_info.dna_extr,sample.dExtrName,storage_info.DNA_sample_exists,storage_info.orig_sample_exists';
+			$rna_field_names = 'sample.r_extraction_date,sample.rna_extract_kit_name,sample.r_conc,sample.r_volume,sample.r_conc_instrument,sample.r_volume_quant,storage_info.rna_extr,sample.rExtrName,storage_info.RNA_sample_exists,storage_info.orig_sample_exists';
+			$analysis_field_names = 'sample.analysis_name';
 			//$things_field_names = '';
-			$note_field_names = '';
+			$note_field_names = 'sample.notes';
 			
 			$field_names = $general_field_names.','.$dna_field_names.','.$rna_field_names.','.$analysis_field_names.','.$note_field_names;
+
+
 		}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////
@@ -266,7 +331,7 @@ if(isset($_GET['submit'])){
 			$query_main = "SELECT create_user_things.label_name,thing_storing.sample_name,thing_storing.thing_id,thing_storing.thing_value FROM sample JOIN thing_storing ON thing_storing.sample_name = sample.sample_name JOIN create_user_things ON create_user_things.thing_id = thing_storing.thing_id WHERE ";
 		}
 		else{
-			$query_main = "SELECT $field_names FROM sample JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
+			$query_main = "SELECT $field_names FROM sample JOIN storage_info ON storage_info.sample_name = sample.sample_name WHERE ";
 		}
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////

@@ -264,7 +264,7 @@ $root = $_SESSION['link_root'];
 								<p>
 								<h3 class="checkbox-header">Does DNA Extraction Sample Still Exist?</h3>
 				 				<div class="vert-checkboxes">
-				 				<label class="radio-label"><input type="radio" name="DNA_sample_exist" value="one" <?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){if($p_DNA_sample_exist == 'one'){echo 'checked';}} ?>/>Yes,DNA Sample Exisits</label><br />
+				 				<label class="radio-label"><input type="radio" name="DNA_sample_exist" value="one" <?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){if($p_DNA_sample_exist == 'one'){echo 'checked';}} ?>/>Yes,DNA Sample Exists</label><br />
 								<label class="radio-label"><input type="radio" name="DNA_sample_exist" value="two" <?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){if($p_DNA_sample_exist == 'two'){echo 'checked';}} ?>/>No, DNA Has Not Been Extracted</label><br />
 								<label class="radio-label"><input type="radio" name="DNA_sample_exist" value="three" <?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){if($p_DNA_sample_exist == 'three'){echo 'checked';}} ?>/>No, DNA Sample Is Used Up</label><br />
 								</div>
