@@ -25,7 +25,7 @@ include($path.'functions/check_box_tables.php');
 
 
 
-	
+<div class="border">
 <div id="tabs">
   <ul >
      <li><a href="#fragment-1"><span>General</span></a></li>
@@ -35,7 +35,7 @@ include($path.'functions/check_box_tables.php');
   
   <div id="fragment-1">
 <!--query by date range-->	
-<form class="registration" action="query_results_mod.php" method="GET">
+<form class="registration" action="query_results_mod.php" method="GET" style="width:100%;margin-left:0px">
 	
 
 	<fieldset>
@@ -139,26 +139,6 @@ include($path.'functions/check_box_tables.php');
 		</div>
 		</p>
 		
-	
-	<!--<p>
-	<h3 class="checkbox-header">Include (Optional):</h3>
-	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="view_read_sub") echo "checked";?> value="view_read_sub">Read Submission IDs</label>
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="view_user_things") echo "checked";?> value="view_user_things">User Created Fields</label>
-	</div>
-	</p>-->
-	
-	<!--<p>
-	<h3 class="checkbox-header">Bulk Action:</h3>
-	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="bulk_dna") echo "checked";?> value="bulk_dna">Bulk Update For DNA Extraction Info</label>
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="bulk_storage") echo "checked";?> value="bulk_storage">Bulk Update For Storage Info</label>
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="read_sub") echo "checked";?> value="read_sub">Bulk Insert For Read Submission IDs</label>
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="update_read_sub") echo "checked";?> value="update_read_sub">Bulk Update AND View For Read Submission IDs</label>
-	<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="bulk_things") echo "checked";?> value="bulk_things">Bulk Update User Created Fields</label>
-	</div>
-	</p>-->
-		
 	<!--submit button-->
 	<button type="submit" class="button" name="submit" value="sample"> Submit </button>
 </fieldset>
@@ -171,7 +151,7 @@ include($path.'functions/check_box_tables.php');
 
 	<div id="fragment-2">
 	<!--query by date range-->	
-	<form class="registration" action="query_results_mod.php" method="GET">
+	<form class="registration" action="query_results_mod.php" method="GET" style="width:100%;margin-left:0px">
 		
 	
 		<fieldset>
@@ -287,7 +267,7 @@ include($path.'functions/check_box_tables.php');
 	<div id="fragment-3">
 		<a name="projects"></a>
 		<a name="samplers"></a>
-		<form class="registration" action="query_results_mod.php" method="GET">
+		<form class="registration" action="query_results_mod.php" method="GET" style="width:100%;margin-left:0px">
 			
 		<fieldset>
 			<LEGEND><b>Display All (Choose One)</b></LEGEND>
@@ -318,6 +298,7 @@ include($path.'functions/check_box_tables.php');
 		</fieldset>
 	</form>
 	</div><!--fragment 3-->
+	</div>
 <script>
 		$( "#tabs" ).tabs();
 </script>
