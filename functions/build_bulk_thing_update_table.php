@@ -3,6 +3,10 @@
 //display table
 function build_bulk_thing_update_table($stmt,$root,$selected_thing){
 
+	echo '<div class="page-header">
+			<h3>Bulk Update User Things</h3>	
+			</div>';
+	
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	include($path.'config/js.php'); //was not being inherited correctly...just added here for now
 	include($path.'functions/dropDown.php');
@@ -13,6 +17,12 @@ function build_bulk_thing_update_table($stmt,$root,$selected_thing){
 	$thing_label = $explode[1];
 	$type = $explode[2];
 	$select_values = $explode[3];
+	
+	$build_select = 'N';
+	if($select_values != ''){
+		$options = explode(";",$select_values);
+		$build_select = 'Y';
+	}
 	
 	//$thing_label = find_thing_label($thing_id);
 	
@@ -62,8 +72,24 @@ function build_bulk_thing_update_table($stmt,$root,$selected_thing){
 				  }?>>
 			<?php echo $mod_sample_name ?></label><br></td>
 
-	
-	
+<?php
+	if($build_select == 'Y'){
+		?><td><select id="<?php echo $mod_sample_name;?>_thing" name="sample[<?php echo $sname; ?>][thing]" ">
+		<?php
+
+		$selected_option = find_thing_values($sname,$thing_id);
+		echo '<option value="0">-Select-</option>';	
+		foreach ($options as $key => $value) {
+					echo '<option value="'.$value.'"', ($selected_option == $value) ? 'selected':'' ,'>'.$value.'</option>';	
+			
+		}
+		echo '</select>';
+		echo '</td>';
+																																																
+		
+	}
+	else{
+?>
 		<td><input type="text" 
 			id="<?php echo $mod_sample_name;?>_thing" 
 			name="sample[<?php echo $sname; ?>][thing]" 
@@ -75,7 +101,8 @@ function build_bulk_thing_update_table($stmt,$root,$selected_thing){
 
 				}?>><br>
 
-		</td>	
+		</td>
+<?php	} ?>	
 	</tr>
 	<?php
 	}

@@ -4,7 +4,6 @@
 	
 	//contains sample names and field values
 	//you need your thing id
-	print_r($_POST);
     $sample_array=$_POST['sample'];
 	$thing_id = htmlspecialchars($_POST['thing_id']);
 	echo "thingId".$thing_id;
