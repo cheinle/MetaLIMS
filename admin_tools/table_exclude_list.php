@@ -16,7 +16,8 @@
 		'sample_type', //no update for sample type due to key constraints
 		'sequencing2',
 		'storage_info',
-		'store_user_things'
+		'store_user_things',
+		'thing_storing'
          );	
 		 
 		 if($type == 'add'){

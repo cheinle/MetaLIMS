@@ -5,7 +5,7 @@ function find_thing_labels(){
 	include($path.'database_connection.php');
 	
 	$thing_label_array = array();
-	$stmt = $dbc->prepare("SELECT thing_id,label_name FROM create_user_things");
+	$stmt = $dbc->prepare("SELECT thing_id,label_name FROM create_user_things WHERE visible = 1");
 	if(!$stmt){;
 		die('prepare() failed: ' . htmlspecialchars($stmt->error));
 	}
@@ -49,10 +49,7 @@ function find_thing_values($sample_name,$thing_id){
 		
 }
 
-function find_thing_label($thing_id){ 
-
-	$path = $_SESSION['include_path'];
-	include($path.'database_connection.php');
+function find_thing_label($thing_id,$dbc){ 
 	
 	$return_label_name = '';
 	$stmt = $dbc->prepare("SELECT label_name FROM create_user_things WHERE thing_id = ?");

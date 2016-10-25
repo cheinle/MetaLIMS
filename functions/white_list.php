@@ -39,7 +39,7 @@ function whiteList($name_check,$type){// Example string to test against
 							'application',
 							'type_seq_sample',
 							'create_user_things',
-							'store_user_things'
+							'thing_storing'
 							); 
 		if( in_array($name_check,$white_list) ){
 	    	#echo $name_check.' is whitelisted.';
@@ -200,26 +200,8 @@ function whiteList($name_check,$type){// Example string to test against
 							'visible',
 							'required',
 							//store_user_things
-							'thing1',
-							'thing2',
-							'thing3',
-							'thing4',
-							'thing5',
-							'thing6',
-							'thing7',
-							'thing8',
-							'thing9',
-							'thing10',
-							'thing11',
-							'thing12',
-							'thing13',
-							'thing14',
-							'thing15',
-							'thing16',
-							'thing17',
-							'thing18',
-							'thing19',
-							'thing20',
+							'thing_id',
+							'thing_value',
 							); 
 		if( in_array($name_check,$white_list) ){
 	    	#echo $name_check.' is whitelisted.';

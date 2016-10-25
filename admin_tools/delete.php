@@ -144,7 +144,7 @@ include ('../database_connection.php');
 	echo "<option value='0'>-Select-</option>";
 	foreach($tables as $table => $pk){
 		$new_table_name = ucwords(str_replace("_", " ", $table));
-			echo '<option value="'.$table.'-'.$pk.'">'.$new_table_name.'</option>';
+		echo '<option value="'.$table.'-'.$pk.'">'.$new_table_name.'</option>';
 	}
 	echo "</select>";
 	
@@ -169,7 +169,8 @@ include ('../database_connection.php');
 	echo "<select id='table2' name='table2'>";
 	echo "<option value='0'>-Select-</option>";
 	foreach($tables as $table => $pk){
-			echo '<option value="'.$table.'-'.$pk.'">'.$table.'</option>';
+		$new_table_name = ucwords(str_replace("_", " ", $table));
+		echo '<option value="'.$table.'-'.$pk.'">'.$new_table_name.'</option>';
 	}
 	echo "</select>";
 	echo "<div id='col2' name='col2'></div>";

@@ -6,7 +6,7 @@ echo "<label class=\"textbox-label\">Select User Created Field to Bulk Update:</
 echo "<select id=\"thing_select\" name = \"thing_select\">";
 echo "<option value=''>-Select-</option>";
 
-$query = "SELECT thing_id, label_name, type, select_values FROM create_user_things";
+$query = "SELECT thing_id, label_name, type, select_values FROM create_user_things where visible = 1";
 $stmt = $dbc->prepare($query);
 if ($stmt->execute()){
 	$stmt->bind_result($thing_id,$label_name,$type,$select_values);

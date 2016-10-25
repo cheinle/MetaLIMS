@@ -1,5 +1,7 @@
 <?php
  	include('../database_connection.php');
+	include('../functions/find_thing_labels.php');
+	include('../functions/find_sample_type_names.php');
 	
 	$table_name = $_GET['table_value'];
 	$visible = '';
@@ -12,7 +14,6 @@
 		$visible = 0;
 		$column_name = "column2";
 	}
-
 	
 	$pk_query = "SHOW KEYS FROM ".$table_name." WHERE Key_name = 'PRIMARY'";
 	$pk_res = mysqli_query($dbc,$pk_query);
@@ -40,7 +41,18 @@
 			echo "<select id='".$column_name."' name='".$column_name."'>";
 			echo "<option value='0'>-Select-</option>";
 		  	while($field_values = mysqli_fetch_array($field_res)){
-				echo '<option value="'.$field_values[0].'">'.$field_values[0].'</option>';
+		  		if($table_name == 'create_user_things'){
+		  			$new_field_value = find_thing_label($field_values[0],$dbc);
+					echo '<option value="'.$field_values[0].'">'.$new_field_value.'</option>';
+		  		}elseif($table_name == 'sample_type'){
+		  			$new_field_value = find_sample_type_name($field_values[0],$dbc);
+					echo '<option value="'.$field_values[0].'">'.$new_field_value.'</option>';
+				}
+		  		else{
+		  			echo '<option value="'.$field_values[0].'">'.$field_values[0].'</option>';
+		  		}
+				
+				
 			}
 			echo "</select>";
 			

@@ -87,7 +87,7 @@ include($path.'functions/check_box_tables.php');
 				
 			
 				/*Grab Custom Columns*/;
-				if ($stmt2 = $dbc->prepare("SELECT thing_id,label_name FROM create_user_things")) {
+				if ($stmt2 = $dbc->prepare("SELECT thing_id,label_name FROM create_user_things WHERE visible = 1")) {
 		    		$stmt2->execute();
 					/* bind variables to prepared statement */
 					$stmt2->bind_result($thing_id, $label_name);
@@ -203,7 +203,7 @@ include($path.'functions/check_box_tables.php');
 					
 				
 					/*Grab Custom Columns*/;
-					if ($stmt2 = $dbc->prepare("SELECT thing_id,label_name FROM create_user_things")) {
+					if ($stmt2 = $dbc->prepare("SELECT thing_id,label_name FROM create_user_things WHERE visible = 1")) {
 			    		$stmt2->execute();
 						/* bind variables to prepared statement */
 						$stmt2->bind_result($thing_id, $label_name);
