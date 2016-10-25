@@ -33,11 +33,17 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 		include($path.'functions/build_bulk_read_sub_id_update_table.php');
 	}
 	elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'bulk_things')){
-		header('Location: bulk_insert_and_updates/things_bulk_update_select.php');
-	}elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'view_user_things'){
+		//header('Location: bulk_insert_and_updates/things_bulk_update_select.php');
+		#bulk_things
 		include('../index.php');
-		include($path.'functions/build_user_things_view.php');
+		include($path.'functions/build_bulk_thing_update_table.php');
+		
+		
 	}
+	//elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'view_user_things'){
+	//	include('../index.php');
+	//	include($path.'functions/build_user_things_view.php');
+	//}
 	else{
 		include('../index.php');
 		include($path.'functions/build_query_results_table.php');
@@ -265,6 +271,10 @@ if(isset($_GET['submit'])){
 		$query_date = '';
 		$query_field = '';
 		$stmt = '';
+		$selected_thing_id = '';
+		if(isset($_GET['thing_select']) && $_GET['thing_select'] != 0){
+			$selected_thing_id = $_GET['thing_select'];
+		}
 		if(($_GET['smydate'] != NULL) && ($_GET['emydate'] != NULL)){
 		
 			//sanatize user input to make safe for browser
@@ -304,6 +314,9 @@ if(isset($_GET['submit'])){
 			$field_names = 'sample.sample_name,sample.d_conc,sample.sample_sort';
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_storage'){
+			$field_names = 'sample.sample_name,sample.sample_sort';
+		}
+		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_things'){
 			$field_names = 'sample.sample_name,sample.sample_sort';
 		}
 		else{
@@ -394,8 +407,8 @@ if(isset($_GET['submit'])){
 			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'update_read_sub'){
 				build_bulk_read_sub_id_update_table($stmt,$root);
 			}
-			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'view_user_things'){
-				build_user_things_view($stmt,$root);
+			elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_things'){
+				build_bulk_thing_update_table($stmt,$root,$selected_thing_id);
 			}
 			else{
 				if($stmt){

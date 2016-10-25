@@ -1,12 +1,11 @@
 <?php
-	include ('../index.php');
-	include ('../database_connection.php');
-?>	
+	
+include ('../database_connection.php');
+echo "<p>";
+echo "<label class=\"textbox-label\">Select User Created Field to Bulk Update:</label><br/>";
+echo "<select id=\"thing_select\" name = \"thing_select\">";
+echo "<option value=''>-Select-</option>";
 
-
-<select id=thing_select name = thing_select>
-<option value=''>-Select-</option>
-<?php
 $query = "SELECT thing_id, label_name, type, select_values FROM create_user_things";
 $stmt = $dbc->prepare($query);
 if ($stmt->execute()){
@@ -14,6 +13,8 @@ if ($stmt->execute()){
 	while ($stmt->fetch()){
     	echo '<option value="'.$thing_id.':'.$label_name.':'.$type.':'.$select_values.'">'.$label_name.'</option>';			}
 }
+
+echo "</select>";
+echo "</p>";
 ?>
-</select>
 	

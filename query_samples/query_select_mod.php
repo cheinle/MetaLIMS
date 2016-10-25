@@ -251,13 +251,39 @@ include($path.'functions/check_box_tables.php');
 			<p>
 			<h3 class="checkbox-header">Bulk Action:</h3>
 			<div class="vert-checkboxes">
-			<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="bulk_dna") echo "checked";?> value="bulk_dna">Bulk Update For DNA Extraction Info</label>
-			<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="bulk_storage") echo "checked";?> value="bulk_storage">Bulk Update For Storage Info</label>
-			<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="read_sub") echo "checked";?> value="read_sub">Bulk Insert For Read Submission IDs</label>
-			<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="update_read_sub") echo "checked";?> value="update_read_sub">Bulk Update AND View For Read Submission IDs</label>
-			<label class="checkbox-label"><input type="radio" name="db_content" <?php if (isset($db_content) && $db_content =="bulk_things") echo "checked";?> value="bulk_things">Bulk Update User Created Fields</label>
+			<label class="checkbox-label"><input type="radio" name="db_content" id= "bulk_update_dna" <?php if (isset($db_content) && $db_content =="bulk_dna") echo "checked";?> value="bulk_dna">Bulk Update For DNA Extraction Info</label>
+			<label class="checkbox-label"><input type="radio" name="db_content" id="bulk_storage" <?php if (isset($db_content) && $db_content =="bulk_storage") echo "checked";?> value="bulk_storage">Bulk Update For Storage Info</label>
+			<label class="checkbox-label"><input type="radio" name="db_content" id="read_sub" <?php if (isset($db_content) && $db_content =="read_sub") echo "checked";?> value="read_sub">Bulk Insert For Read Submission IDs</label>
+			<label class="checkbox-label"><input type="radio" name="db_content" id= "update_read_sub" <?php if (isset($db_content) && $db_content =="update_read_sub") echo "checked";?> value="update_read_sub">Bulk Update AND View For Read Submission IDs</label>
+			<label class="checkbox-label"><input type="radio" name="db_content" id="bulk_things" <?php if (isset($db_content) && $db_content =="bulk_things") echo "checked";?> value="bulk_things">Bulk Update User Created Fields</label>
 			</div>
 			</p>
+			
+			
+			<div id="thing_select">
+					
+			</div>
+			
+			
+			<script type="text/javascript">
+				$(document).ready(function() {
+				    $('#bulk_things').change(function() {
+				        if ($(this).prop('checked')) {
+				             $.ajax({
+			                    url     : 'thing_select.php', //the url you are sending datas to which will again send the result
+			                    type    : 'GET', //type of request, GET or POST
+			                    data    : {}, //Data you are sending
+			                    success : function(data){$('#thing_select').html(data)}, // On success, it will populate the div
+			                    error   : function(){alert('An Error Has Occurred')} //error message
+			                })
+				        }
+				        else {
+				            alert("You have elected to turn off checkout history."); //not checked
+				        }
+				    });
+				});
+			</script>
+			
 	
 		<button type="submit" class="button" name="submit" value="sample"> Submit </button>
 	</fieldset>

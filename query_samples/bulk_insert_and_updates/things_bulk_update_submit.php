@@ -4,8 +4,10 @@
 	
 	//contains sample names and field values
 	//you need your thing id
+	print_r($_POST);
     $sample_array=$_POST['sample'];
 	$thing_id = htmlspecialchars($_POST['thing_id']);
+	echo "thingId".$thing_id;
 	echo '<div class="page-header">
 			<h3>Samples Updated</h3>	
 			</div>';
@@ -29,34 +31,17 @@
 				}
 				//if checkbox is checked/true, then go ahead and update this sample :D
 				if($checkbox == 'true'){
-					
-					//$p_sample_name = htmlspecialchars($value['checkbox']);
+
 					$p_sample_name = $sample_name;
-					//echo $p_sample_name;
-					$p_thing_value = htmlspecialchars($value['thing']);
+					$p_thing_value = $value['thing'];
 					
-					//grab the thing number
-					//build thing query and then depending on number, set the type
-					$regrex_check = '/^thing([0-9]{1,2})$/'; 
-					$preg_match = preg_match($regrex_check,$thing_id,$matches);
-					if($preg_match == false){
-						echo "Matching Error. Please Notify Admin";
-						throw new Exception("Matching Error. Please Notify Admin");	
-					}
-					$thing_number = $matches[1];
-					$whole_thing = 'thing'.$thing_number;
-					
-					//$thing_set_query = "UPDATE store_user_things SET thing1 = ? WHERE sample_name = ?";
-					$thing_set_query = "UPDATE store_user_things SET ".$whole_thing." = ? WHERE sample_name = ?";
+
+					$thing_set_query = "UPDATE thing_storing SET thing_value = ? WHERE sample_name = ? AND thing_id = ?";
 
 					if($thing_stmt = $dbc ->prepare($thing_set_query)) {
-						//echo $thing_number.'<br>'.$p_sample_name.'<br>'.$p_thing_value.'<br>';                 
-	                	if($thing_number > 10 && $thing_number < 16){
-							$thing_stmt->bind_param('is',$p_thing_value, $p_sample_name);
-						}else{
-							$thing_stmt->bind_param('ss',$p_thing_value, $p_sample_name);
-						}
 						
+						$thing_stmt->bind_param('ssi',$p_thing_value, $p_sample_name,$thing_id);
+
 						if($thing_stmt -> execute()){
 						
 							$thing_rows_affected = $thing_stmt ->affected_rows;

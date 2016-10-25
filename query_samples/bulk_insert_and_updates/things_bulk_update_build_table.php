@@ -7,10 +7,6 @@
 <head>
 	<meta charset="utf-8">
 	<title>Bulk Update User Fields</title>
-  	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-
 </head>
 
 <body>
@@ -39,7 +35,7 @@ echo '<th class="bulk">'.$label.'</th>';
 echo '</tr>';
 echo '</thead>';					
 echo '<tbody>';
-$query = "SELECT * FROM store_user_things JOIN sample ON sample.sample_name = store_user_things.sample_name";
+$query = "SELECT * FROM thing_storing JOIN sample ON sample.sample_name = thing_storing.sample_name";
 $stmt = $dbc->prepare($query);
 if ($stmt->execute()){
 	if($stmt->fetch()){
@@ -53,9 +49,10 @@ if ($stmt->execute()){
 		while ($stmt->fetch()) {
 			$sample_name = $row['sample_name'];
 			$sample_sort = $row['sample_sort'];
-			$thing = $row[$thing_id];
+			$thing_id = 'thing'.$row['thing_id'];
+			$thing_value = $row['thing_value'];
 			$sort_the_samples[$sample_sort]['sample_name'] = $sample_name;
-			$sort_the_samples[$sample_sort]['thing'] = $thing;
+			$sort_the_samples[$sample_sort]['thing_value'] = $thing_value;
 		}
 	}
 }		
@@ -87,7 +84,7 @@ foreach ($sort_the_samples as $sorted_name => $sname) {
 																																																
 	
 	if($build_select == 'Y'){
-		?><td><select id="<?php echo $mod_sample_name;?>_thing" name="sample[<?php echo $sname['sample_name']; ?>][thing]">
+		?><td><select id="<?php echo $mod_sample_name;?>_thing" name="sample[<?php echo $sname['sample_name']; ?>][<?php echo $thing ?>]">
 		<?php
 
 		$selected_option = $sname['thing'];
@@ -103,8 +100,8 @@ foreach ($sort_the_samples as $sorted_name => $sname) {
 	}
 	else{
 		?>
-		<td><input type="text" id="<?php echo $mod_sample_name;?>_thing" name="sample[<?php echo $sname['sample_name']; ?>][thing]" value="<?php echo $sname['thing'] ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == "false") {
- 																																																 if(isset($_SESSION['sample_array'][$thing])){
+		<td><input type="text" id="<?php echo $mod_sample_name;?>_thing" name="sample[<?php echo $sname['sample_name']; ?>][thing]" value="<?php echo $sname['thing_value'] ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == "false") {
+ 																																																 if(isset($_SESSION['sample_array'][$thing_id])){
  																																																 	echo "checked";
 																																																}
 
@@ -146,7 +143,7 @@ echo '<input type="text" style="visibility:hidden" class="hidden" name="thing_ty
 			valid = 'false';
 		}	
 		if(valid == 'false'){
-			alert('ERROR: Some inputs are invalid. Please check fields and ensure at least one sample is selected');
+			alert('ERROR: Some inputs are invalid. Please check fields and ensure at least one sample checkbox is checked');
 			return false;
 		}
 		else{
@@ -162,6 +159,7 @@ echo '<input type="text" style="visibility:hidden" class="hidden" name="thing_ty
        	var number_of_samples_checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
         if(number_of_samples_checked < 1){
         	valid = 'false';
+        	//alert("Warning: Please select checkbox for samples to update");
         	top_table.style.background = "pink";
         }
         else{
@@ -194,24 +192,33 @@ echo '<input type="text" style="visibility:hidden" class="hidden" name="thing_ty
 			   		}
 				    else{
 			       		if(type == 'numeric_input'){
-				       		var regrex_check_sh2  =  input_val.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);//this can be zero
-							if (regrex_check_sh2 == null){
-									alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
-									input.style.background = "blue";
-							   		valid = 'false';
+							if(isNumeric(input_val) == false){
+								alert("ERROR: Value must be a number");
+								input.style.background = "blue";
+							   	valid = 'false';
 							}
 							else{
-								input.style.background = "white";
-							}
+			             		input.style.background = "white";
+			             	}
 			       		}
 						else{
-							input.style.background = "white";
+							if(isNumeric(input_val) == true){
+								alert("ERROR: Value should not be a number");
+								input.style.background = "blue";
+							   	valid = 'false';
+							}
+							else{
+			             		input.style.background = "white";
+			             	}
 						}       	
 				   	}
 		    	}
 			}
 		}
 		return valid; 
+	}
+	function isNumeric(n) {
+		return !isNaN(parseFloat(n)) && isFinite(n);
 	}
 </script>
 

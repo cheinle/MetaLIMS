@@ -29,7 +29,7 @@ function find_thing_values($sample_name,$thing_id){
 	$path = $_SESSION['include_path'];
 	include($path.'database_connection.php');
 	
-	$thing_value = '-';
+	$thing_value = '';
 	$thing_label_array = array();
 	$stmt = $dbc->prepare("SELECT thing_value FROM thing_storing WHERE sample_name = ? AND thing_id = ?");
 	if(!$stmt){;
@@ -46,6 +46,32 @@ function find_thing_values($sample_name,$thing_id){
 		}
 	}
 	return $thing_value;
+		
+}
+
+function find_thing_label($thing_id){ 
+
+	$path = $_SESSION['include_path'];
+	include($path.'database_connection.php');
+	
+	$return_label_name = '';
+	$stmt = $dbc->prepare("SELECT label_name FROM create_user_things WHERE thing_id = ?");
+	if(!$stmt){;
+		die('prepare() failed: ' . htmlspecialchars($stmt->error));
+	}
+	$stmt->bind_param("i",$thing_id);
+	if ($stmt->execute()){
+		$stmt->bind_result($label_name);
+
+		$array = array();
+		while ($stmt->fetch()) {
+			
+			$return_label_name = $label_name;
+			
+		}
+	}
+	
+	return $return_label_name;
 		
 }
 ?>
