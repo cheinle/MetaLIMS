@@ -43,9 +43,13 @@ function build_user_things_view($stmt,$root){
 	
 	echo "<tbody>";
 	echo "<tr>";
-	echo "<td class=\"reg\">".$value['sample_name']."</td>";
+	$counter = 0;
 	foreach($map_label_values as $key => $value){
 		//echo $key.'-'.$value['id'].'<br>';
+		$counter++;
+		if($counter == 1){
+				echo "<td class=\"reg\">".$value['sample_name']."</td>";
+		}
 		echo "<td class=\"reg\">".$value['value']."</td>";
 	}
 	echo "</tr>";	
