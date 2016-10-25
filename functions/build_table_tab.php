@@ -22,6 +22,7 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 			);
 			
 			$counter = 0;
+			$sample_names_seen = array();
 			while ($stmt->fetch()) {
 				$counter++;
 				
@@ -76,6 +77,12 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 				$converted_total_time = convert_time($key, $total_time);
 				$samplers = find_samplers($sample_name,'xls');
 					
+				//check if you've seen the sample name already
+				if (in_array($sample_name, $sample_names_seen)){
+					continue;
+				}else{
+					array_push($sample_names_seen,$sample_name);
+				}
 					
 				fwrite($myfile, "$sample_name\t");
 				fwrite($myfile, "$sample_sort\t");

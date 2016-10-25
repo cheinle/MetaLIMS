@@ -72,7 +72,9 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				
 				echo "<tbody>";
 				
+				
 				/* fetch values */
+				$sample_names_seen = array();
 				while ($stmt->fetch()) {
 					 $sample_name = htmlspecialchars($sample_name);
 					 $sample_sort = htmlspecialchars($sample_sort);
@@ -87,15 +89,20 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 					// $end_time = htmlspecialchars($end_time);
 					 $total_time = htmlspecialchars($total_time);
 					
-					$sample_array[$sample_sort] = $sample_name;
+					 $sample_array[$sample_sort] = $sample_name;
 
-					 
 					 $key = 'total_time';
 					 $converted_total_time = convert_time($key, $total_time);
-					 //$sample_name = htmlspecialchars($sample_name);
-					 
-					 
 					 $samplers = find_samplers($sample_name,$table_type);
+					 
+					 //check if you've seen the sample name already
+					 if (in_array($sample_name, $sample_names_seen)){
+						//break;
+						continue;
+					 }else{
+						array_push($sample_names_seen,$sample_name);
+					 }
+					 
 					 
 					 echo "<tr>";
 					 echo "<td>$sample_name</td>";
@@ -166,6 +173,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				echo "<tbody>";
 				
 				/* fetch values */
+				$sample_names_seen = array();
 				while ($stmt->fetch()) {
 					 $sample_name = htmlspecialchars($sample_name);
 					 $sample_sort = htmlspecialchars($sample_sort);
@@ -194,6 +202,14 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 					 	$dna_exists = "No,Extract Used";
 					 }
 					 
+					 //check if you've seen the sample name already
+					 if (in_array($sample_name, $sample_names_seen)){
+						//break;
+						continue;
+					 }else{
+						array_push($sample_names_seen,$sample_name);
+					 }
+								
 					 
 					 echo "<tr>";
 					 echo "<td>$sample_name</td>";
@@ -263,6 +279,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				echo "<tbody>";
 				
 				/* fetch values */
+				$sample_names_seen = array();
 				while ($stmt->fetch()) {
 					 $sample_name = htmlspecialchars($sample_name);
 					 $sample_sort = htmlspecialchars($sample_sort);
@@ -291,6 +308,13 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 					 	$rna_exists = "No,Extract Used";
 					 }
 					 
+					 //check if you've seen the sample name already
+					 if (in_array($sample_name, $sample_names_seen)){
+						//break;
+						continue;
+					 }else{
+						array_push($sample_names_seen,$sample_name);
+					 }
 					 
 					 echo "<tr>";
 					 echo "<td>$sample_name</td>";
@@ -342,11 +366,19 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				echo "<tbody>";
 				
 				/* fetch values */
+				$sample_names_seen = array();
 				while ($stmt->fetch()) {
 					 $sample_name = htmlspecialchars($sample_name);
 					 $sample_sort = htmlspecialchars($sample_sort);
 					 $analysis_name = htmlspecialchars($analysis_name);
 			
+					 //check if you've seen the sample name already
+					 if (in_array($sample_name, $sample_names_seen)){
+						//break;
+						continue;
+					 }else{
+						array_push($sample_names_seen,$sample_name);
+					 }
 					 
 					 echo "<tr>";
 					 echo "<td>$sample_name</td>";
@@ -441,6 +473,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				echo "<tbody>";
 				
 				/* fetch values */
+				$sample_names_seen = array();
 				while ($stmt->fetch()) {
 					 $sample_name = htmlspecialchars($sample_name);
 					 $sample_sort = htmlspecialchars($sample_sort);
@@ -448,7 +481,14 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 					 $entered_by = htmlspecialchars($entered_by);
 					 $updated_by = htmlspecialchars($updated_by);
 					 $time_stamp = htmlspecialchars($time_stamp);
-			
+				
+					 //check if you've seen the sample name already
+					 if (in_array($sample_name, $sample_names_seen)){
+						//break;
+						continue;
+					 }else{
+						array_push($sample_names_seen,$sample_name);
+					 }
 					 
 					 echo "<tr>";
 					 echo "<td>$sample_name</td>";
