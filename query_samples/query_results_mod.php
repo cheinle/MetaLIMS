@@ -281,14 +281,17 @@ if(isset($_GET['submit'])){
 		if(($_GET['field'] != '0') && isset($_GET['query'])){
 			$p_field = htmlspecialchars($_GET['field']);
 			$p_query_basis = htmlspecialchars($_GET['query']);
+			$thing_id = '';
 			//check whitelist for p_field
 			$p_field_check = whiteList($p_field, 'column');
 			if($p_field_check == 'true'){
 				if($p_field == 'sampler_name'){
 					$query_field = " sample_sampler.$p_field = (?)";
 				}
-				elseif (preg_match("/thing/i",$p_field)) {
-					$query_field = " store_user_things.$p_field = (?)";
+				elseif (preg_match("/thing(\d+)/i",$p_field,$matches)) {
+					//$query_field = " store_user_things.$p_field = (?)";
+					$query_field = " thing_storing.thing_id = (?) AND thing_storing.thing_value = (?)";
+					$thing_id = $matches[1];
 				}
 				else{
 					$query_field = " sample.$p_field = (?)";
@@ -296,8 +299,8 @@ if(isset($_GET['submit'])){
 				$check_field = 'true';
 			}
 		}
-		if(isset($_GET['column_names'])){$field_names = check_box_results($_GET['column_names']);}//removed
-		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
+		//if(isset($_GET['column_names'])){$field_names = check_box_results($_GET['column_names']);}//removed
+		if(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
 			$field_names = 'sample.sample_name,sample.d_conc,sample.sample_sort';
 		}
 		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_storage'){
@@ -322,17 +325,13 @@ if(isset($_GET['submit'])){
 		////////////////////////////////////////////////////////////////////////////////////////////////		
 	
 		if(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
-			$query_main = "SELECT sample.sample_name,sample.sample_num,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample LEFT JOIN read_submission ON read_submission.sample_name = sample.sample_name JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
+			$query_main = "SELECT sample.sample_name,sample.sample_num,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample LEFT JOIN read_submission ON read_submission.sample_name = sample.sample_name JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
 		}
 		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'view_read_sub' || $_GET['db_content'] == 'update_read_sub')){
-			$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
-		}
-		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'view_user_things'){
-			//$query_main = "SELECT * FROM sample JOIN store_user_things ON store_user_things.sample_name = sample.sample_name WHERE ";
-			$query_main = "SELECT create_user_things.label_name,thing_storing.sample_name,thing_storing.thing_id,thing_storing.thing_value FROM sample JOIN thing_storing ON thing_storing.sample_name = sample.sample_name JOIN create_user_things ON create_user_things.thing_id = thing_storing.thing_id WHERE ";
+			$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
 		}
 		else{
-			$query_main = "SELECT $field_names FROM sample JOIN storage_info ON storage_info.sample_name = sample.sample_name WHERE ";
+			$query_main = "SELECT $field_names FROM sample JOIN storage_info ON storage_info.sample_name = sample.sample_name JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
 		}
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////
@@ -343,13 +342,18 @@ if(isset($_GET['submit'])){
 		
 		if($check_field == 'true' && $check_date == 'false'){//only query field populated
 			$query = $query_main.$query_field;
-			$query_add = $query_field;
+			//$query_add = $query_field;
 			$stmt = $dbc->prepare($query);
-			$stmt -> bind_param('s', $p_query_basis);
+			if (preg_match("/thing/i",$p_field)) {
+				$stmt -> bind_param('is', $thing_id, $p_query_basis);
+			}
+			else{
+				$stmt -> bind_param('s', $p_query_basis);
+			}
 		}
 		elseif ($check_field == 'false' && $check_date == 'true') {//only date is populated
 			$query = $query_main.$query_date;
-			$query_add = $query_date;
+			//$query_add = $query_date;
 			$stmt = $dbc->prepare($query);
 			$stmt -> bind_param('ss',$p_smydate , $p_emydate);
 		}
@@ -357,7 +361,14 @@ if(isset($_GET['submit'])){
 			$query = $query_main.$query_field.' AND '.$query_date;
 			$query_add = $query_field.' AND '.$query_date;
 			$stmt = $dbc->prepare($query);
-			$stmt -> bind_param('sss', $p_query_basis, $p_smydate , $p_emydate);
+			
+			if (preg_match("/thing/i",$p_field)) {
+				$stmt -> bind_param('isss',$thing_id,$p_query_basis, $p_smydate , $p_emydate);
+			}
+			else{
+				$stmt -> bind_param('sss', $p_query_basis, $p_smydate , $p_emydate);
+			}
+
 		}
 		else{
 			echo '<script>Alert.render("ERROR: No entries found. Please check fields");</script>';

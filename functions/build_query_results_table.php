@@ -361,62 +361,6 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 		echo "</div>"; //end of fragment 4
 		echo "<div  id=\"fragment-5\">";
 		echo "<table id=\"datatable5\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
-				/*$stmt->execute();
-				
-				$stmt->bind_result($sample_name,$sample_sort,$barcode,$project_name,$location,$relative_location,$media_type,$collector_name,$sample_type,$start_time,$end_time,$total_time,$entered_by,$updated_by,$time_stamp
-				,$dna_extraction_date,$dna_extraction_kit,$dna_concentration,$dna_volume_of_elution,$dna_instrument,$dna_vol_for_instrument,$dna_storage,$dna_extractor,$dna_exists,$orig_exists
-				,$rna_extraction_date,$rna_extraction_kit,$rna_concentration,$rna_volume_of_elution,$rna_instrument,$rna_vol_for_instrument,$rna_storage,$rna_extractor,$rna_exists,$orig_exists
-				,$analysis_name
-				,$notes
-				);
-				
-				echo "<table id=\"datatable5\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
-				echo "<thead>";
-				echo "<tr>";
-				echo "<th>Sample Name</th>";
-				echo "<th>Sample Sort</th>";
-				echo "<th>Notes</th>";
-				echo "<th>Entered By</th>";
-				echo "<th>Updated By</th>";
-				echo "<th>Time Stamp</th>";
-				echo "</tr>";
-				echo "</thead>";
-				
-				echo "<tfoot>";
-				echo "<tr>";
-				echo "<th>Sample Name</th>";
-				echo "<th>Sample Sort</th>";
-				echo "<th>Notes</th>";
-				echo "<th>Entered By</th>";
-				echo "<th>Updated By</th>";
-				echo "<th>Time Stamp</th>";
-				echo "</tr>";
-				echo "</tfoot>";
-				
-				echo "<tbody>";
-				
-			
-				while ($stmt->fetch()) {
-					 $sample_name = htmlspecialchars($sample_name);
-					 $sample_sort = htmlspecialchars($sample_sort);
-					 $notes = htmlspecialchars($notes);
-					 $entered_by = htmlspecialchars($entered_by);
-					 $updated_by = htmlspecialchars($updated_by);
-					 $time_stamp = htmlspecialchars($time_stamp);
-			
-					 
-					 echo "<tr>";
-					 echo "<td>$sample_name</td>";
-					 echo "<td>$sample_sort</td>";
-					 echo "<td>$notes</td>";
-					 echo "<td>$entered_by</td>";
-					 echo "<td>$updated_by</td>";
-					 echo "<td>$time_stamp</td>";
-					 echo "</tr>";
-				}
-				echo "</tbody>";
-				echo "</table>";
-				*/
 				
 				echo "<thead>";
 				echo "<tr>";

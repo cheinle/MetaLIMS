@@ -96,7 +96,7 @@ include($path.'functions/check_box_tables.php');
 					while ($stmt2->fetch()) {
 						 $name = $label_name;
 					     $array[$name]['name'] = $name;
-						 $array[$name]['id'] = $thing_id;
+						 $array[$name]['id'] = 'thing'.$thing_id;
 					}
 					
 					/* close statement */
@@ -212,7 +212,7 @@ include($path.'functions/check_box_tables.php');
 						while ($stmt2->fetch()) {
 							 $name = $label_name;
 						     $array[$name]['name'] = $name;
-							 $array[$name]['id'] = $thing_id;
+							 $array[$name]['id'] = 'thing'.$thing_id;
 						}
 						
 						/* close statement */
