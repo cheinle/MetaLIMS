@@ -4,7 +4,7 @@ $email=$_POST['email'];
 
 
 // Change the URL below to match your site
-$site_url="http://localhost/password_reset/";
+$site_url="http://localhost/NanoLIMS/password_reset/";
 
 ?>
 <!DOCTYPE html>
