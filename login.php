@@ -11,8 +11,7 @@ $database_down = 'false';
 /********************Set Variable For Document Root Path************************/
 //if you did not change the git zip file name and placed folder in webroot, 
 //this will be your path
-//$path_in_webroot = '/am_production-master/'; 
-$path_in_webroot = '/series/dynamic/NanoLIMS/NanoLIMS/'; 
+$path_in_webroot = '/NanoLIMS/'; 
 /////////////////////////////////////////////////////////////////////////////////
 
 
