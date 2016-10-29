@@ -62,7 +62,29 @@ echo '<a href="download.php?download_file=nanolims_labels.txt" style = "font-siz
 echo '</div>';	
 			
 ?>
+<script type="text/javascript" src="jquery/sample/jquery-1.3.2.min.js"></script>    
+<script type="text/javascript" src="jquery/jquery-barcode.js"></script>  
 
+<div id="bcTarget"></div>   
+<script type="text/javascript">
+	$("#bcTarget").barcode("1234567890128", "datamatrix"); 
+	
+</script>
+<?php
+include('php-barcode.php');
+$res= 'fpdf';
+$color = 'FF0000';
+$x = '0';
+$y = '0';
+$angle ='150';
+$type = 'code128';
+$datas = '12345678';
+$width = '2';
+$height = '50';
+
+Barcode::gd($res, $color, $x, $y, $angle, $type, $datas, $width = null, $height = null);  
+Barcode::fpdf($res, $color, $x, $y, $angle, $type, $datas, $width = null, $height = null);  
+?>
 
 
 </body>

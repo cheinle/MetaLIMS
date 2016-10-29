@@ -38,7 +38,7 @@ $userid=$_GET['userid'];
 			$stmt2->fetch();
 			$no = $stmt2->num_rows;
 
-			echo " No of records = ".$no; 
+			//echo " No of records = ".$no; 
 
 			if($no <>1){
 				echo "<center><font face='Verdana' size='2' color=red><b>Wrong activation </b></font> "; 

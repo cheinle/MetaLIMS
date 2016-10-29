@@ -277,9 +277,6 @@ if (isset($_POST['registration_button'])){
 	<div class="logo">
 		<!-- PUT YOUR LOGO HERE -->
 		<?php 
-			//if($database_down == 'true'){
-			//	echo "Database Is Currently Down For Maintenance. Sorry For Any inconvenience Caused. Please See Admin For Details";
-			//}
 			if(isset($_SESSION['message'])){
 			    echo $_SESSION['message'];
 			    unset($_SESSION['message']);

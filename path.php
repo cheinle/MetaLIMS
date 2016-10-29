@@ -4,5 +4,5 @@
     **********************************************************************************/
     //$logout_path = '/path/to/webroot/';
     //$logout_path = '/xampp/htdocs/series/dyanmic/NanoLIMS/';
-    $logout_path = '/series/dyanmic/NanoLIMS/NanoLIMS/';
+    $logout_path = '/series/dynamic/NanoLIMS/NanoLIMS/';
 ?>

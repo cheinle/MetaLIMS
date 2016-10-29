@@ -1,10 +1,13 @@
 <?php
 include('../database_connection.php');
+include('../path.php');
+include('/random_compat-2.0.3/lib/random.php');
 $email=$_POST['email'];
 
 
 // Change the URL below to match your site
-$site_url="http://localhost/password_reset/";
+//$site_url="http://localhost/series/dynamic/NanoLIMS/NanoLIMS/password_reset/";
+$site_url = 'http://'.$_SERVER["HTTP_HOST"].$logout_path.'password_reset/';
 
 ?>
 <!DOCTYPE html>
@@ -76,32 +79,22 @@ if($status=="OK"){
 			if($no==1){echo "<center><font face='Verdana' size='2' color=red><b>Your password activation Key is already posted to your email address, please check your Email address & Junk mail folder. "; exit;}
 
 			/////////////// Let us send the email with key /////////////
-			/// function to generate random number ///////////////
-			function random_generator($digits){
-				srand ((double) microtime() * 10000000);
-				//Array of alphabets
-				$input = array ("A", "B", "C", "D", "E","F","G","H","I","J","K","L","M","N","O","P","Q",
-				"R","S","T","U","V","W","X","Y","Z");
-				
-				$random_generator="";// Initialize the string to store random numbers
-				for($i=1;$i<$digits+1;$i++){ // Loop the number of times of required digits
-					if(rand(1,2) == 1){// to decide the digit should be numeric or alphabet
-						// Add one random alphabet 
-						$rand_index = array_rand($input);
-						$random_generator .=$input[$rand_index]; // One char is added
-					}
-					else{
-						// Add one numeric digit between 1 and 10
-						$random_generator .=rand(1,10); // one number is added
-					} // end of if else
-				} // end of for loop 
-	
-				return $random_generator;
-			} // end of function
+			
+			try {
+			    $string = random_bytes(32);
+			} catch (TypeError $e) {
+			    // Well, it's an integer, so this IS unexpected.
+			    die("An unexpected error has occurred"); 
+			} catch (Error $e) {
+			    // This is also unexpected because 32 is a reasonable integer.
+			    die("An unexpected error has occurred");
+			} catch (Exception $e) {
+			    // If you get this message, the CSPRNG failed hard.
+			    die("Could not generate a random string. Is our OS secure?");
+			}
+			
+			$key=bin2hex($string);
 
-
-			$key=random_generator(10);
-			$key=md5($key);
 			$tm=time();
 			$pending = 'pending';
 			//echo "insert into plus_key(userid, pkey,time,status) values('$row->userid','$key','$tm','pending'";

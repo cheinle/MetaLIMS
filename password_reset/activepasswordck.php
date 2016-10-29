@@ -42,7 +42,6 @@ if ($stmt2->execute()){
 	$stmt2->store_result();
 	$stmt2->fetch();
 	$no = $stmt2->num_rows;
-	echo $no;
 
 	if($no <>1){
 		echo "<center><font face='Verdana' size='2' color=red><b>Wrong activation </b></font> "; 
@@ -71,18 +70,18 @@ if ($stmt2->execute()){
 			echo "<font face='Verdana' size='2' color=red>$msg</font><br><center><input type='button' value='Retry' onClick='history.go(-1)'></center>";
 		}
 		else{ // if all validations are passed.
-			$password=sha1($password); // Encrypt the password before storing
-			
+			//$password=sha1($password); // Encrypt the password before storing
+			$password_hash = password_hash($password, PASSWORD_BCRYPT); //uses bcrypt, a 60 Char encryption
 			
 			// Update the new password now //
 			$set_query = 'UPDATE users SET password = ? WHERE user_id =?';
 			if($set_stmt = $dbc ->prepare($set_query)) {                 
-		    	$set_stmt->bind_param('ss',$password, $userid);
+		    	$set_stmt->bind_param('ss',$password_hash, $userid);
 				$set_stmt -> execute();
 				$set_stmt->store_result();
-				$no = $stmt2->num_rows;
-				
-				if($no==1){
+				$no = $set_stmt->num_rows;
+
+				if($no >=  0){
 				
 					$tm=time();
 					// Update the key so it can't be used again. 
@@ -90,7 +89,7 @@ if ($stmt2->execute()){
 					$pending= 'pending';
 					$set_query2 = 'UPDATE users SET status= ? WHERE pkey = ? AND user_id =? AND status = ?';
 					if($set_stmt2 = $dbc ->prepare($set_query2)) {                 
-		    			$set_stmt2->bind_param('ssss',$done,$password,$userid,$pending);
+		    			$set_stmt2->bind_param('ssss',$done,$ak,$userid,$pending);
 						$set_stmt2 -> execute();
 						echo "<font face='Verdana' size='2' ><center>Thanks <br> Your new password is stored successfully. </font></center>";
 					}
