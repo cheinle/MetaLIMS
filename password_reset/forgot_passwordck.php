@@ -6,8 +6,8 @@ $email=$_POST['email'];
 
 
 // Change the URL below to match your site
-//$site_url="http://localhost/series/dynamic/NanoLIMS/NanoLIMS/password_reset/";
 $site_url = 'http://'.$_SERVER["HTTP_HOST"].$logout_path.'password_reset/';
+
 
 ?>
 <!DOCTYPE html>
