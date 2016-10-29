@@ -13,8 +13,7 @@ $database_down = 'false';
 /********************Set Variable For Document Root Path************************/
 //if you did not change the git zip file name and placed folder in webroot, 
 //this will be your path
-//$path_in_webroot = '/NanoLIMS/'; 
-$path_in_webroot = '/series/dynamic/NanoLIMS/NanoLIMS/';
+$path_in_webroot = '/NanoLIMS/'; 
 /////////////////////////////////////////////////////////////////////////////////
 
 
@@ -62,56 +61,51 @@ if (isset($_POST['login_button'])){
 		$stmt->close();
 
 	    if ($result > 0){
-
+			$time_difference = time()-$first_failed_login;
 		    if (password_verify($password, $password_hash)) {
 		    	//if failed attempt is greater than login limit and you are still within lockout time then don't allow login
-				if(($failed_login_count >= $bad_login_limit) && (time() - $first_failed_login < $lockout_time)) {
-				  $_SESSION['message'] = 'You are currently locked out';
+				if(($failed_login_count >= $bad_login_limit) && ($time_difference < $lockout_time)) {
+				  $_SESSION['message'] = 'You are currently locked out. Please wait 10min and try again';
 				} else{
 					$password_validated = true;
 				}
 				
 			}else{
-				//initiate brute force login prevention
-				 if( time() - $first_failed_login > $lockout_time ) {
-				   // first unsuccessful login since $lockout_time on the last one expired
-				    $first_failed_login = time(); // commit to DB
-				    $failed_login_count = 1; // commit to db
-				    echo $first_failed_login.$failed_login_count;
-					$query = "UPDATE users SET first_failed_login = ?, failed_login_count = ? WHERE user_id = ?";
-					echo $query;
-				    
-				    $stmt = $dbc -> prepare($query);
-					$stmt -> bind_param('iis', $first_failed_login,$failed_login_count,$_POST['email']);
-					$stmt -> execute();
-					$stmt -> close();
-					$_SESSION['message'] = 'Login invalid. Please try againnnnn000';
+					if ($time_difference > $lockout_time) {
+					   // first unsuccessful login since $lockout_time on the last one expired
+					    $first_failed_login = time(); // commit to DB
+					    $failed_login_count = 1; // commit to db
+					    
+					    $stmt = $dbc -> prepare("UPDATE users SET first_failed_login = ?, failed_login_count = ? WHERE user_id = ?");
+						$stmt -> bind_param('iis', $first_failed_login,$failed_login_count,$_POST['email']);
+						$stmt -> execute();
+						$stmt -> close();
+						$_SESSION['message'] = 'You are currently locked out. Please wait 10min and try again';
 				  } 
 				  else {
-				    $failed_login_count++; // commit to db.
-				    echo $failed_login_count;
-				    $stmt = $dbc -> prepare("UPDATE users SET failed_login_count = ? WHERE user_id = ?");
-					if(!$stmt){
-						echo "grrr";		
-					}
-					$stmt -> bind_param('is', $failed_login_count,$_POST['email']);
-					if(!$stmt -> execute()){
-						echo "rawr";
-					}
-					$stmt -> close();
-					echo "what";
-					$_SESSION['message'] = 'Login invalid. Please try againnnnn';
-				  }
-				  
+				  		//initiate brute force login prevention
+						if(($failed_login_count >= $bad_login_limit) && ($time_difference < $lockout_time)) {
+						  $_SESSION['message'] = 'You are currently locked out. Please wait 10min and try again';
+						}
+						else{
+						    $failed_login_count++; 
+							$stmt = $dbc -> prepare("UPDATE users SET failed_login_count = ? WHERE user_id = ?");
+							$stmt -> bind_param('is', $failed_login_count,$_POST['email']);
+							$stmt -> execute();
+							$stmt -> close();
+							
+							$_SESSION['message'] = 'Login invalid. Please try again';
+				  		}
+				  	}
+				  	
 			}	
 			
 	    }else{
 	    	$_SESSION['message'] = 'Loginnn invalid. Please try again';
 	    }
-		
+	
 		
 		if($password_validated == true){
-
 				//store current session id
 				if(session_id()){
 					session_commit();
@@ -182,10 +176,8 @@ if (isset($_POST['login_button'])){
 						header("Location: http://".$url);
 					}
 				}//end if new session id != old session id
-				$dbc->commit();
-			}//else{
-			//	$_SESSION['message'] = 'Login invalid. Ppppplease try again';
-			//}//end if password validated == true
+			}
+			$dbc->commit();
 	}//end try
 	catch (Exception $e) { 
 		if (isset ($dbc)){
