@@ -1,5 +1,7 @@
 <?php 
 include('database_connection.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 /////////////////////////////////////////////////////////////////////////////////
 /********************Allow Access For Admin Only *******************************/
@@ -11,7 +13,8 @@ $database_down = 'false';
 /********************Set Variable For Document Root Path************************/
 //if you did not change the git zip file name and placed folder in webroot, 
 //this will be your path
-$path_in_webroot = '/NanoLIMS/'; 
+//$path_in_webroot = '/NanoLIMS/'; 
+$path_in_webroot = '/series/dynamic/NanoLIMS/NanoLIMS/';
 /////////////////////////////////////////////////////////////////////////////////
 
 
@@ -23,9 +26,13 @@ if (isset($_POST['login_button'])){
 		$password_validated = false;
 		$password = $_POST['password'];
 		
+		//to prevent brute force attack
+		$bad_login_limit = 3;
+		$lockout_time = 600;
+		
 		
 		//check password and admin status
-		$stmt = $dbc->prepare("SELECT admin,password,first_name,last_name,session_id FROM users WHERE user_id = ? AND visible = '1'");
+		$stmt = $dbc->prepare("SELECT admin,password,first_name,last_name,session_id,first_failed_login,failed_login_count FROM users WHERE user_id = ? AND visible = '1'");
 		if(!$stmt){;
 			die('prepare() failed: ' . htmlspecialchars($stmt->error));
 		}
@@ -37,8 +44,10 @@ if (isset($_POST['login_button'])){
 		$first_name;
 		$last_name;
 		$admin_user;
+		$first_failed_login;
+		$failed_login_count;
 		if ($stmt->execute()){
-			$stmt->bind_result($admin,$user_password,$fname,$lname,$session_id);
+			$stmt->bind_result($admin,$user_password,$fname,$lname,$session_id,$failed_login_time,$login_count);
 			while ($stmt->fetch()) {
 				$result++;
 				$old_session_id = $session_id;
@@ -46,16 +55,58 @@ if (isset($_POST['login_button'])){
 				$last_name = $lname;
 				$admin_user = $admin;
 				$password_hash = $user_password;
+				$first_failed_login = $failed_login_time;
+				$failed_login_count = $login_count;
 			}
 		}
 		$stmt->close();
 
 	    if ($result > 0){
+
 		    if (password_verify($password, $password_hash)) {
-				$password_validated = true;
-			}
+		    	//if failed attempt is greater than login limit and you are still within lockout time then don't allow login
+				if(($failed_login_count >= $bad_login_limit) && (time() - $first_failed_login < $lockout_time)) {
+				  $_SESSION['message'] = 'You are currently locked out';
+				} else{
+					$password_validated = true;
+				}
+				
+			}else{
+				//initiate brute force login prevention
+				 if( time() - $first_failed_login > $lockout_time ) {
+				   // first unsuccessful login since $lockout_time on the last one expired
+				    $first_failed_login = time(); // commit to DB
+				    $failed_login_count = 1; // commit to db
+				    echo $first_failed_login.$failed_login_count;
+					$query = "UPDATE users SET first_failed_login = ?, failed_login_count = ? WHERE user_id = ?";
+					echo $query;
+				    
+				    $stmt = $dbc -> prepare($query);
+					$stmt -> bind_param('iis', $first_failed_login,$failed_login_count,$_POST['email']);
+					$stmt -> execute();
+					$stmt -> close();
+					$_SESSION['message'] = 'Login invalid. Please try againnnnn000';
+				  } 
+				  else {
+				    $failed_login_count++; // commit to db.
+				    echo $failed_login_count;
+				    $stmt = $dbc -> prepare("UPDATE users SET failed_login_count = ? WHERE user_id = ?");
+					if(!$stmt){
+						echo "grrr";		
+					}
+					$stmt -> bind_param('is', $failed_login_count,$_POST['email']);
+					if(!$stmt -> execute()){
+						echo "rawr";
+					}
+					$stmt -> close();
+					echo "what";
+					$_SESSION['message'] = 'Login invalid. Please try againnnnn';
+				  }
+				  
+			}	
+			
 	    }else{
-	    	$_SESSION['message'] = 'Login invalid. Please try again';
+	    	$_SESSION['message'] = 'Loginnn invalid. Please try again';
 	    }
 		
 		
@@ -132,9 +183,9 @@ if (isset($_POST['login_button'])){
 					}
 				}//end if new session id != old session id
 				$dbc->commit();
-			}else{
-				$_SESSION['message'] = 'Login invalid. Please try again';
-			}//end if password validated == true
+			}//else{
+			//	$_SESSION['message'] = 'Login invalid. Ppppplease try again';
+			//}//end if password validated == true
 	}//end try
 	catch (Exception $e) { 
 		if (isset ($dbc)){
@@ -156,7 +207,7 @@ if (isset($_POST['registration_button'])){
 	  $validated = false;
 	  $first_name = $_POST['firstname'];
 	  $last_name = $_POST['lastname'];
-	  
+
 	  $admin_yn = 'N'; //default
 	  if(isset($_POST['admin']) && $_POST['admin'] == 'yes'){ //This is what the user requested
 		$admin_yn = 'Y';
