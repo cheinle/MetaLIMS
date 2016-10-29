@@ -1,0 +1,22 @@
+Sample Name	Barcode Name	Start Date/Time	Project Name	Sample Type	Sample Number	
+2016/05/23first-projectA001		2016-05-23 03:00:00	first-project	A	1	
+2016/05/23first-projectB004		2016-05-23 07:00:00	first-project	B	4	
+2016/05/24first-projectA002		2016-05-24 07:00:00	first-project	A	2	
+2016/05/24first-projectB003		2016-05-24 07:00:00	first-project	B	3	
+2016/06/21second-projectB002		2016-06-21 07:00:00	second-project	B	2	
+2016/06/21second-projectB004		2016-06-21 07:00:00	second-project	B	4	
+2016/06/21second-projectB006		2016-06-21 07:00:00	second-project	B	6	
+2016/06/21second-projectW001		2016-06-21 07:00:00	second-project	W	1	
+2016/06/21second-projectW003		2016-06-21 07:00:00	second-project	W	3	
+2016/06/21second-projectW005		2016-06-21 07:00:00	second-project	W	5	
+2016/09/01first-projectS005		2016-09-01 03:00:00	first-project	S	5	
+2016/10/14first-projectA010		2016-10-14 02:00:00	first-project	A	10	
+2016/10/14first-projectA011		2016-10-14 02:00:00	first-project	A	11	
+2016/10/14first-projectA013		2016-10-14 03:00:00	first-project	A	13	
+2016/10/14first-projectA014		2016-10-14 03:00:00	first-project	A	14	
+2016/10/14first-projectA018		2016-10-14 03:00:00	first-project	A	18	
+2016/10/14first-projectA019		2016-10-14 03:00:00	first-project	A	19	
+2016/10/14first-projectA112		2016-10-14 03:00:00	first-project	A	112	
+2016/10/14first-projectB017		2016-10-14 03:00:00	first-project	B	17	
+2016/10/16first-projectA020		2016-10-16 03:00:00	first-project	A	20	
+2016/10/16first-projectA021		2016-10-16 03:00:00	first-project	A	21	
