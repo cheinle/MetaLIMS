@@ -113,7 +113,7 @@
 	<div class="col-xs-6">
 	<p><a id="myLink" href="link">link</a></p>
 	<script>
-    var link = "query_samples/query_select_mod.php#samplers";
+    var link = "query_samples/query_select_mod.php#fragment-3";
     link = root+link;
     document.getElementById('myLink').setAttribute("href",link);
     document.getElementById('myLink').innerHTML = 'Check if Sampler Exists';

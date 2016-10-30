@@ -2,8 +2,9 @@
 
 //display table
 function build_daily_data_output($stmt){
+	echo "<pre>*Click On Button(s) For More Info<pre>";
 	include($_SESSION['include_path'].'functions/convert_header_names.php');
-	echo "*Click On Button(s) For More Info<br>";
+	
 	if ($stmt->execute()){
 			    if($stmt->fetch()){
 			    	$meta = $stmt->result_metadata(); 

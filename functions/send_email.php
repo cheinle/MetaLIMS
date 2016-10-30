@@ -121,6 +121,11 @@ function send_admin_email($username,$role,$login_allow,$dbc,$type_of_email){
        		$message = "User <b>{$username}</b> has registered. Please update login permission and role (if needed).<br/><br/><br/>";
         	$message = wordwrap($message, 70, "\r\n");
 		}
+		if($type_of_email == 'project_approval'){
+			$subject = "Admin Notice: NanoLIMS Project Approval Request";
+       		$message = "User <b>{$username}</b> has requested approval for the following project:.<br/><br/><br/>";
+        	$message = wordwrap($message, 70, "\r\n");
+		}
 		
 		
         $headers = 'From: no-reply@nanolims' . "\r\n" .

@@ -116,7 +116,7 @@ include($path.'functions/check_box_tables.php');
 			?>
 		</p>
 		<p>
-			<label class="textbox-label">Where field matches:</label><br>
+			<label class="textbox-label">Where field matches (exact):</label><br>
 			<p>
 	    	<input type="text" size="70" placeholder="Insert Query" name="query" id="customerAutocomplte" class="ui-autocomplete-input" autocomplete="off" value="<?php if(isset($_GET['submit'])&& $submitted != 'true'){ echo htmlspecialchars($_GET['query']);} ?>"/>
 			</p>
@@ -232,7 +232,7 @@ include($path.'functions/check_box_tables.php');
 				?>
 			</p>
 			<p>
-				<label class="textbox-label">Where field matches:</label><br>
+				<label class="textbox-label">Where field matches (exact):</label><br>
 				<p>
 		    	<input type="text" size="70" placeholder="Insert Query" name="query" id="customerAutocomplte2" class="ui-autocomplete-input" autocomplete="off" value="<?php if(isset($_GET['submit'])&& $submitted != 'true'){ echo htmlspecialchars($_GET['query']);} ?>"/>
 				</p>
@@ -297,26 +297,30 @@ include($path.'functions/check_box_tables.php');
 			
 		<fieldset>
 			<LEGEND><b>Display All (Choose One)</b></LEGEND>
-			<LEGEND  style="margin-left:1.5%;"><b>Display All Project Info:</b></LEGEND>
+			<LEGEND  style="margin-left:1.5%;font-size:14px"><b>Display All Project Info:</b></LEGEND>
 			<div class="vert-checkboxes">
 			<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="project_all") echo "checked";?>value="project_all">Display All DB Project Info</label>
 			</div>
 			
-			<LEGEND  style="margin-left:1.5%;"><b>  Display All Samplers:</b></LEGEND>
+			<LEGEND  style="margin-left:1.5%;font-size:14px"><b>  Display All Samplers:</b></LEGEND>
 			<div class="vert-checkboxes">
 			<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="sampler_all") echo "checked";?>value="sampler_all">Display All Sampler Content</label>
 			</div>
 			
-			<LEGEND  style="margin-left:1.5%;"><b>Display All Sensors:</b></LEGEND>
+			<LEGEND  style="margin-left:1.5%;font-size:14px"><b>Display All Sensors:</b></LEGEND>
 			<div class="vert-checkboxes">
 			<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="partCt_all") echo "checked";?>value="partCt_all">Display All DB Sensor Content</label>
 			</div>
 			
-			<LEGEND  style="margin-left:1.5%;"><b>Display All Location Information:</b></LEGEND>
+			<LEGEND  style="margin-left:1.5%;font-size:14px"><b>Display All Location Information:</b></LEGEND>
 			<div class="vert-checkboxes">
 			<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="location_all") echo "checked";?>value="location_all">Display All DB Locations</label>
 			</div>
-		
+			
+			<LEGEND  style="margin-left:1.5%;font-size:14px"><b>Display All Media Types:</b></LEGEND>
+			<div class="vert-checkboxes">
+			<label class="checkbox-label"><input type="radio" name="db_content"<?php if (isset($db_content) && $db_content=="media_all") echo "checked";?>value="media_all">Display All DB Media Types</label>
+			</div>
 		
 		
 			<!--submit button-->

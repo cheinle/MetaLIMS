@@ -84,22 +84,55 @@
 
 			//if name does not exist, send email for approval
 		    if($error != 'true'){
-				$email_to=$admin_email;
-				$email_subject="Project Name Approval";
-				$email_message="Please Approve Project: '".$p_projName."' with the following description:\n '".$p_description."' \n Project Abbrev:'".$p_abName."' Reply-to:'".$email_address;
-				$headers = "From: admin\r\n".
-				"Reply-To:".$email_address."\r\n" .
-				"X-Mailer: PHP/" . phpversion();
-				if(mail($email_to, $email_subject, $email_message, $headers)){
-					echo '<script>
-	    			alert("Email sent for Project Name Approval. Information regarding your project name approval will be sent shortly. Thank You!");
-					</script>';
+	
+					//get all admin's email
+					$email_address_list = '';
+					$admin = 'Y';
+					$admin_visible = 1;
+					$counter = 0;
+					$query = "SELECT user_id FROM users WHERE admin = ? and visible = ?";
+					$stmt = $dbc -> prepare($query);
+					if(!$stmt){;
+						die('prepare() failed: ' . htmlspecialchars($stmt->error));
+						//throw new Exception("ERROR: Email to admins(s) was not sent<br>");
+					}
+										
+					$stmt -> bind_param('si',$admin,$admin_visible);
+					if(!$stmt -> execute()){
+						die('execute() failed: ' . htmlspecialchars($stmt->error));
+						//return $sent_success;
+					}else{
+						$stmt->bind_result($admin_email);
+						while($stmt->fetch()) {
+							if($counter == 0){
+								$email_address_list = $admin_email;
+							}else{
+								$email_address_list = $email_address_list.', '.$admin_email;
+							}
+							 $counter++;
+						}		
+					}
+					$stmt->close();
 					
-				}
-				else{
-					echo '<script>
-	    			alert("Email not sent :( Please contact database admin. Thank you!");
-					</script>';
+					$subject = "Admin Notice: NanoLIMS Project Approval Request";
+			       	$message = "User <b>{$email_address}</b> has requested approval for the following project:<br>Project Name:".$p_projName."<br>Description:".$p_description."<br>Project Abbrev:".$p_abName."<br>Reply-to:".$email_address."<br/><br/><br/>";
+			        $message = wordwrap($message, 70, "\r\n");
+
+						
+			        $headers = 'From: no-reply@nanolims' . "\r\n" .
+			            	   'MIME-Version: 1.0'."\r\n".
+			                   'Content-Type: text/html; charset=UTF-8'."\r\n";
+			
+					
+			    	if(mail($email_address_list, $subject, $message, $headers)){
+			    		echo '<script>
+		    			alert("Email sent for Project Name Approval. Information regarding your project name approval will be sent shortly. Thank You!");
+						</script>';
+					}
+					else{
+						echo '<script>
+	    				alert("Email not sent :( Please contact database admin. Thank you!");
+						</script>';
 				}		
 			}
 			echo '</div>';
@@ -113,7 +146,7 @@
 		<p>Note: Project Name Must Be Between 3-19 Characters And Contain No Spaces Or Special Characters Other Than Hyphens</p>
 		<p><a id="myLink" href="link">link</a></p>
 		<script>
-	    	var link = "query_samples/query_select_mod.php#projects";
+	    	var link = "query_samples/query_select_mod.php#fragment-3";
 	    	link = root+link;
 	   	 	document.getElementById('myLink').setAttribute("href",link);
 	    	document.getElementById('myLink').innerHTML = 'Check Existing Project Names';

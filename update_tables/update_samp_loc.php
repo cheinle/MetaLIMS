@@ -109,6 +109,13 @@
 	?>
 	<form class="registration" action="update_samp_loc.php" method="GET">
 	* = required field <!--arbitrary requirement at this moment-->
+	<p><a id="myLink" href="link">link</a></p>
+	<script>
+    var link = "query_samples/query_select_mod.php#fragment-3";
+    link = root+link;
+    document.getElementById('myLink').setAttribute("href",link);
+    document.getElementById('myLink').innerHTML = 'Check if Location Exists';
+	</script>
 		<fieldset>
 		<LEGEND><b>Sampling Location Info:</b></LEGEND>
 		<div class="col-xs-6">
@@ -145,13 +152,13 @@
 		<!--Latitude-->
 		<p>
 		<label class="textbox-label">Latitude:*</label>
-		<input type="text" name="lat" placeholder="00 00 00 N" value="<?php if(isset($_GET['submit'])&& $submitted != 'true'){echo $p_lat;} ?>">
+		<input type="text" name="lat" placeholder="e.g. 34.865784" value="<?php if(isset($_GET['submit'])&& $submitted != 'true'){echo $p_lat;} ?>">
 		</p>
 		
 		<!--Longitude-->
 		<p>
 		<label class="textbox-label">Longitude:*</label>
-		<input type="text" name="long" placeholder="00 00 00 N" value="<?php if(isset($_GET['submit'])&& $submitted != 'true'){echo $p_long;} ?>">
+		<input type="text" name="long" placeholder="e.g. -120.554501"" value="<?php if(isset($_GET['submit'])&& $submitted != 'true'){echo $p_long;} ?>">
 		</p>
 		</div>
 		<!--submit button-->

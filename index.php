@@ -49,20 +49,6 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	//Assign the current timestamp as the user's
 	//latest activity
 	$_SESSION['last_action'] = time();
-	
-	//currently not working as you have session names with the same name 
-	//unset session vars for bulk DNA update if you are not on one of the specified pages
-	/*$page_name = basename($_SERVER['SCRIPT_NAME']);
-		include('functions/unset_session_vars.php');
-	if(($page_name != 'dna_bulk_update.php') && ($page_name != 'query_results_mod.php')){
-		unset_session_vars('bulk_dna_update');
-	}
-	//unset session vars for bulk storage update if you are not on one of the specified pages
-	if(($page_name != 'storage_bulk_update.php') && ($page_name != 'query_results_mod.php')){
-		unset_session_vars('bulk_storage_update');
-	}
-	 * 
-	 */
 }
 
 ?>
@@ -162,11 +148,11 @@ $stmt->close();
 				<li ><a href="<?php echo $root;?>labels/label_prep.php">Label Prep</a></li>
 				</li>
 					<li class="dropdown">
-					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Daily Data<b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Sensor Data<b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo $root;?>daily_data/query_select_daily_data.php">Query Daily Data</a></li>
-						<li><a href="<?php echo $root;?>daily_data/add_daily_data.php">Add Daily Data</a></li>
-						<li><a href="<?php echo $root;?>daily_data/update_daily_data1.php">Update Daily Data</a></li>
+						<li><a href="<?php echo $root;?>daily_data/query_select_daily_data.php">Query Sensor Data</a></li>
+						<li><a href="<?php echo $root;?>daily_data/add_daily_data.php">Add Sensor Data</a></li>
+						<li><a href="<?php echo $root;?>daily_data/update_daily_data1.php">Update Sensor Data</a></li>
 					</ul>
 				</li>
 				<li ><a href="<?php echo $root;?>FAQ.php">FAQ</a></li>
@@ -177,21 +163,33 @@ $stmt->close();
 				<ul class="nav navbar-nav ">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"  data-toggle="dropdown">Admin Tools<b class="caret"></b></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="'.$root.'admin_tools/add_users.php">Add Users</a></li>
-						<li><a href="'.$root.'admin_tools/update_user_login_info.php">Update User Login</a></li>
-						<li><a href="'.$root.'admin_tools/update_freezer_drawers.php">Add Freezer/Drawer</a></li>
-						<li><a href="'.$root.'admin_tools/add_sample_type.php">Add Sample Type</a></li>
-						<li><a href="'.$root.'admin_tools/update_proj_name.php">Add Project Name</a></li>
-						<li><a href="'.$root.'admin_tools/add.php">Add Dropdown Options</a></li>
-						<li><a href="'.$root.'admin_tools/update.php">Update Dropdown Options</a></li>
-						<li><a href="'.$root.'admin_tools/delete.php">Change Visibility</a></li>
-						<li><a href="'.$root.'admin_tools/dynamically_add_user_fields/add_a_user_thing.php">Create Fields</a></li>
+					<ul class="dropdown-menu multi-level" role="menu">
+						<li><a href="'.$root.'admin_tools/dynamically_add_user_fields/add_a_user_thing.php">Create Sample Fields</a></li>
+						<li class="dropdown-submenu">
+		                <a tabindex="-1" href="#">Manipulate Dropdown Options</a>
+		                <ul class="dropdown-menu">
+							<li><a tabindex="-1" href="'.$root.'admin_tools/add.php">Add Dropdown Options</a></li>
+							<li><a tabindex="-1" href="'.$root.'admin_tools/update.php">Update Dropdown Options</a></li>
+							<li><a tabindex="-1" href="'.$root.'admin_tools/delete.php">Delete Dropdown Options</a></li>
+							
+							<li><a tabindex="-1" href="'.$root.'admin_tools/update_proj_name.php">Add Project Name</a></li>
+							<li><a tabindex="-1" href="'.$root.'admin_tools/add_sample_type.php">Add Sample Type</a></li>
+							<li><a tabindex="-1" href="'.$root.'admin_tools/update_freezer_drawers.php">Add Freezer/Drawer</a></li>
+		                </ul>
+		                </li>
+						
+		              	<li class="dropdown-submenu">
+		                <a tabindex="-1" href="#">User Info</a>
+		                <ul class="dropdown-menu">
+		                  <li><a tabindex="-1" href="'.$root.'admin_tools/add_users.php">Add Users</a></li>
+						  <li><a tabindex="-1" href="'.$root.'admin_tools/update_user_login_info.php">Update User Login</a></li>
+		                </ul>
+		              </li>
 					</ul>
-				</li>
-				<li ><a href="'.$root.'logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
-				</ul> 
-				';}
+				</li>';}
+				echo '<li ><a href="'.$root.'logout.php"><span class="glyphicon glyphicon-log-out"></a></li>
+				</ul> ';
+				
 				?>
 				
 			</ul>

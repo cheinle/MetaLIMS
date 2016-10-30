@@ -9,7 +9,7 @@ include('../database_connection.php');
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>View Daily Data</title>
+	<title>View Daily Sensor Data</title>
 	
   	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
   	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -24,7 +24,7 @@ include('../functions/dropDown.php');
 $submitted = 'false';
 ?>
 <div class="page-header">
-<h3>Query Daily Data</h3>
+<h3>Query Daily Sensor Data</h3>
 </div>
 
 

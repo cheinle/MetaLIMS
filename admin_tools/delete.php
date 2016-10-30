@@ -133,8 +133,8 @@ include ('../database_connection.php');
 	
 	echo '<form  class="registration" id="invisible" name="invisible" action="delete.php" method="GET">';
 	echo '<fieldset>';
-	echo '<pre>Change visibility is a non-premenant delete option and will remove an option from a desired dropdown list. 
-This can be used to archive old selections no longer used or as a non-permanant \'delete\' function for options not wanted. 
+	echo '<pre>Change visibility is a non-permanent delete option and will remove an option from a desired dropdown list. 
+This can be used to archive old selections no longer used or as a non-permanent \'delete\' function for options not wanted. 
 Samples associated with these dropdowns will still contain archived selection unless updated. Selection can be reversed using Option2: Make Visible
 
 Ex: Table Name: Freezer

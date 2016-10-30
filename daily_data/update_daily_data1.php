@@ -6,7 +6,7 @@ error_reporting(E_ALL); ?>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Daily Data Update</title>
+<title>Daily Sensor Data Update</title>
 </head>
 
 <body>
@@ -15,7 +15,7 @@ include('../functions/dropDown.php');
 $submitted = 'false';
 ?>
 <div class="page-header">
-<h3>Pick Daily Data To Update</h3>
+<h3>Pick Daily Sensor Data To Update</h3>
 </div>
 
 	<form name="form_name" class="registration" onsubmit="return validate(this)" action="update_daily_data_two.php" method="GET">

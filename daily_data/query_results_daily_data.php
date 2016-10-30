@@ -9,14 +9,14 @@ include('../functions/build_daily_data_output.php');
 <!doctype html>
 <html>
 <head>
-<title>Query Daily Data</title>
+<title>View Daily Sensor Data</title>
 	<meta charset="utf-8">
 </head>
 
  
 <body>
 <div class="page-header">
-<h3>View Daily Data</h3>
+<h3>View Daily Sensor Data</h3>
 </div>
 
 <?php

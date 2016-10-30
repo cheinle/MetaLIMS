@@ -87,6 +87,13 @@
 	
 	<form class="registration" action="update_part_sens.php" method="GET">
 	* = required field <!--arbitrary requirement at this moment-->
+		<p><a id="myLink" href="link">link</a></p>
+		<script>
+	    var link = "query_samples/query_select_mod.php#fragment-3";
+	    link = root+link;
+	    document.getElementById('myLink').setAttribute("href",link);
+	    document.getElementById('myLink').innerHTML = 'Check if Sensor Exists';
+		</script>
 		<fieldset>
 		<LEGEND><b>Sensor Info:</b></LEGEND>
 		<div class="col-xs-6">

@@ -253,7 +253,7 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 <?php
 
 if(isset($_GET['submit'])){
-	include($path.'functions/check_box_tables_output.php');
+	//include($path.'functions/check_box_tables_output.php');
 	include($path.'functions/white_list.php');
 	
 	$submit = $_GET['submit'];
@@ -463,6 +463,17 @@ if(isset($_GET['submit'])){
 			</div>";
 			
 			$stmt = $dbc->prepare("SELECT * FROM location");
+			basic_build_table($stmt,'display',$root);
+		}
+		
+		//media type
+		if($_GET['db_content']=='media_all'){
+	
+			echo "<div class=\"page-header\">
+			<h3>View All Media Type Info</h3>	
+			</div>";
+			
+			$stmt = $dbc->prepare("SELECT * FROM media_type");
 			basic_build_table($stmt,'display',$root);
 		}
 	}
