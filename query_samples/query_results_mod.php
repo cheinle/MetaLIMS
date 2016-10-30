@@ -10,6 +10,7 @@ $path = $_SESSION['include_path'];
 //xls cannot include the index file because it will send headers too early (and the wrong ones)
 ////////////////////////////////////////////////////////////////////////////////////////////////
 if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
+	include('../index.php');
 	include($path.'functions/build_xls_output_table.php');
 }else{
 	
