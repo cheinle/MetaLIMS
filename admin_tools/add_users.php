@@ -1,6 +1,7 @@
 <?php
 include('../index.php');
 include('../database_connection.php'); 
+include('../functions/send_email.php');
 ?>
 <!doctype html>
 <html>
@@ -10,22 +11,22 @@ include('../database_connection.php');
 </head>
 <body>
 <div class="page-header">
-<h3>Add/Delete Users</h3>	
+<h3>Add Users</h3>	
 </div>
 <?php 	
 	
 		unset($_SESSION['orig_update_value']); 
 		$submitted = 'false';
 		//error checking 
-		if(isset($_GET['submit'])){
+		if(isset($_POST['submit'])){
 			echo '<div class="border">';
 			$error = 'false';
 
 			//sanatize user input to make safe for browser
-			$p_UserID = htmlspecialchars($_GET['UserID']);
-			$p_firstName = htmlspecialchars($_GET['firstName']);
-			$p_lastName = htmlspecialchars($_GET['lastName']);
-			$p_password = htmlspecialchars($_GET['password']);
+			$p_UserID = htmlspecialchars($_POST['UserID']);
+			$p_firstName = htmlspecialchars($_POST['firstName']);
+			$p_lastName = htmlspecialchars($_POST['lastName']);
+			$p_password = htmlspecialchars($_POST['password']);
 			
 			
 			if($p_UserID == ''){
@@ -55,16 +56,16 @@ include('../database_connection.php');
     			while ($stmt1->fetch()){
         			if($name == $p_UserID){
         				$seen_check = 'true';
-        				if($_GET['submit'] == 'add'){
-        					echo $p_UserID." Exists. Please Check Name.";
+        				if($_POST['submit'] == 'add'){
+        					echo "Username ".$p_UserID." already exists. Please check name.";
 						    $error = 'true';
 						}		
 					}
 				}
-				if($_GET['submit'] == 'delete' && $seen_check == 'false'){
-        					echo $p_UserID." Does Not Exist. Please Check Name.";
-						    $error = 'true';
-				}	
+				//if($_POST['submit'] == 'delete' && $seen_check == 'false'){
+        		//			echo $p_UserID." Does Not Exist. Please Check Name.";
+				//		    $error = 'true';
+				//}	
 			} 
 			else {
 				$error = 'true';
@@ -76,11 +77,12 @@ include('../database_connection.php');
 			//insert info into db
 		    if($error != 'true'){
 		    	
-				if($_GET['submit'] == 'add'){
+				if($_POST['submit'] == 'add'){
 					//insert data into db. Use prepared statement 
-					$password = sha1($p_password);
-					$stmt2 = $dbc -> prepare("INSERT INTO users (user_id,first_name,last_name,password) VALUES (?,?,?,?)");
-					$stmt2 -> bind_param('ssss',$p_UserID,$p_firstName,$p_lastName,$password);
+					$visible = 1;
+					$password_hash = password_hash($p_password, PASSWORD_BCRYPT); //uses bcrypt, a 60 Char encryption
+					$stmt2 = $dbc -> prepare("INSERT INTO users (user_id,first_name,last_name,password,visible) VALUES (?,?,?,?,?)");
+					$stmt2 -> bind_param('ssssi',$p_UserID,$p_firstName,$p_lastName,$password_hash,$visible);
 					
 					$stmt2 -> execute();
 					$rows_affected2 = $stmt2 ->affected_rows;
@@ -88,8 +90,17 @@ include('../database_connection.php');
 					
 					//check if add was successful or not. Tell the user
 			   		if($rows_affected2 > 0){
-						echo 'You Added A New User: '.$p_UserID.'. Please Have User Use Reset Password Feature To Set Password<br>';
+						echo 'You added a new user: '.$p_UserID.'. Please have user reset password using \'Forgot your password?\' on login page<br>';
 						$submitted = 'true';
+						
+						$role = 'user';
+						$login_allow = $visible;
+						//send email to user that you are updating their info
+						$email_user_confirm = send_user_registration_email($p_UserID,$role,$login_allow);
+						if($email_user_confirm == 'false'){
+							throw new Exception("ERROR: Email to user(s) was not sent<br>");
+						}
+						
 					}else{
 						echo 'An Error Has Occurred';
 						mysqli_error($dbc);
@@ -100,30 +111,32 @@ include('../database_connection.php');
 		echo '</div>';
 	?>
 
-<form class="registration" action="add_users.php" method="GET">
-	<p><i>* = required field</i></p>
+<form class="registration" action="add_users.php" method="POST">
 	<div class="container-fluid">
 	<fieldset>
 	<div class="row">
 	<LEGEND><b>User Info:</b></LEGEND>
+	<p><i>&nbsp* = required field</i></p>
 	
   	<div class="col-xs-6">
-  	
+  	<pre>Note: User can reset their password using the 'Forgot your password?' feature on login page. 
+To update user to admin or change login capability please use <a href="update_user_login_info.php">Update User Login Info</a> 
+Users are automatically set to 'user' and are able to login</pre>
 	<!--User Name-->
 	<p>
 	<label class="textbox-label">Email Address (Username):*</label>
-	<input type="text" name="UserID" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_UserID;} ?>">
+	<input type="text" name="UserID" placeholder="Name" value="<?php if(isset($_POST['submit']) && $submitted != 'true'){echo $p_UserID;} ?>">
 	</p>
 	
 	<p>
 	<label class="textbox-label">First Name:*</label>
-	<input type="text" name="firstName" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_firstName;} ?>">
+	<input type="text" name="firstName" placeholder="Name" value="<?php if(isset($_POST['submit']) && $submitted != 'true'){echo $p_firstName;} ?>">
 	</p>
 	
 	
 	<p>
 	<label class="textbox-label">Last Name:*</label>
-	<input type="text" name="lastName" placeholder="Name" value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_lastName;} ?>">
+	<input type="text" name="lastName" placeholder="Name" value="<?php if(isset($_POST['submit']) && $submitted != 'true'){echo $p_lastName;} ?>">
 	</p>
 	
 	

@@ -135,7 +135,7 @@ include($path.'functions/check_box_tables.php');
 		<h3 class="checkbox-header">Display?:</h3>
 		<div class="vert-checkboxes">
 		<label class="checkbox-label"><input type="radio" name="db_view" <?php if (isset($db_content) && $db_content =="screen") echo "checked";?> value="screen">Display To Screen</label>
-		<label class="checkbox-label"><input type="radio" name="db_view" <?php if (isset($db_content) && $db_content =="xls") echo "checked";?> value="xls">Download (.csv)</label>
+		<label class="checkbox-label"><input type="radio" name="db_view" <?php if (isset($db_content) && $db_content =="xls") echo "checked";?> value="xls">Download (tab-delimited .txt)</label>
 		</div>
 		</p>
 		

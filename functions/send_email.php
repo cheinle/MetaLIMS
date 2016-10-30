@@ -29,6 +29,37 @@ function send_user_email($email_address,$role,$login_allow){
 	
 		return $sent_success;
 }
+
+function send_user_registration_email($email_address,$role,$login_allow){
+		$sent_success = 'false';
+		
+		$allow_deny = '';
+		if($login_allow == 1){
+			$allow_deny = 'active';
+		}else{
+			$allow_deny = 'inactive';
+		}
+		
+		$new_role = 'User';
+		if($role == 'Y'){
+			$new_role = 'Admin';
+		}
+		
+		$subject = "NanoLIMS User Registration";
+        $message = "You have been registered by an admin to use NanoLIMS. Your role has been set to: <b>{$new_role}</b>.<br/>Your login permission has been set to: <b>{$allow_deny}</b><br/>Please use 'Forgot Password?' feature on login screen to reset your password<br/><br/>";
+        $message = wordwrap($message, 70, "\r\n");
+        $headers = 'From: no-reply@nanolims' . "\r\n" .
+                   'MIME-Version: 1.0'."\r\n".
+                   'Content-Type: text/html; charset=UTF-8'."\r\n";
+
+		
+    	if(mail($email_address, $subject, $message, $headers)){
+    		$sent_success = 'true';
+    	}
+	
+		return $sent_success;
+}
+	
 	
 	
 	

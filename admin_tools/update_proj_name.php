@@ -181,13 +181,13 @@ include('../database_connection.php');
 		echo '</div>';
 	?>
 	<form class="registration" action="update_proj_name.php" method="GET">
-	* = required field <br>
-	<strong>Note to Admin:</strong> Please Email User For Suggestions on Changes to Name/Abbrev if needed. <br>
-	Add button will automatically generate an approval email to sender notifying them of approval
-	
 		<fieldset>
 		<LEGEND><b>Project Name Info:</b></LEGEND>
-		<p>Note: Project Name Must Be Between 3-19 Characters And Contain No Spaces Or Special Characters Other Than Hyphens</p>
+		<p><i>&nbsp* = required field</i></p>
+		
+		<pre>Note: Project Name must be between 3-19 characters and contain no spaces or special characters other than hyphens
+Project abbreviation is used to create sample names for downstream sequencing submission
+Submission will automatically generate an approval email to sender notifying them that their project has been added</pre>
 		<p><a id="myLink" href="link">link</a></p>
 		<script>
 	    	var link = "query_samples/query_select_mod.php#projects";

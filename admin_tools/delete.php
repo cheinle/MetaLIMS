@@ -13,7 +13,7 @@ include ('../database_connection.php');
  
 	<body>
 		<div class="page-header">
-	    <h3>Change Visibility</h3>
+	    <h3>Change Visibility For Dropdown Options (Delete)</h3>
 		</div>
 		
 		<script type="text/javascript">
@@ -133,6 +133,14 @@ include ('../database_connection.php');
 	
 	echo '<form  class="registration" id="invisible" name="invisible" action="delete.php" method="GET">';
 	echo '<fieldset>';
+	echo '<pre>Change visibility is a non-premenant delete option and will remove an option from a desired dropdown list. 
+This can be used to archive old selections no longer used or as a non-permanant \'delete\' function for options not wanted. 
+Samples associated with these dropdowns will still contain archived selection unless updated. Selection can be reversed using Option2: Make Visible
+
+Ex: Table Name: Freezer
+Field Value Name: -80C
+
+User will no longer be able to select the -80C freezer to store their samples</pre>';
 	echo '<LEGEND><b>Option1: Make Invisible</b></LEGEND>';
 	echo '<div class="container-fluid">';
   	echo '<div class="row">';

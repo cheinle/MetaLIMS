@@ -37,7 +37,7 @@ $submitted = 'false';
 <fieldset>
 <LEGEND><b>Display Daily Data Info:</b></LEGEND>
 	<div class="col-xs-6">
-	<i>*Sensor information only. To view daily data information with samples, please use Query Info function</i><br><br>
+	<i>*Sensor information only.</i><br><br>
 	<i>(Select Dates AND/OR Location)</i><br>
 	<label class="textbox-label">Select Start & End Date:</label>
 	<input type="text" id="datepicker"  name="smydate" class="shrtfields"><input type="text" id="datepicker2"  name="emydate" class="shrtfields">

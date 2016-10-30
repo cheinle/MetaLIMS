@@ -92,6 +92,10 @@
 </script>
 
 <form class="registration" action="update_freezer_drawers.php" method="GET">
+	<pre>Instruction:
+1) Select 'Add Freezers' to add a freezer name
+2) Select 'Add Drawers' to add a drawer name to your freezer (repeat as necessary)
+3) Select 'Connect Drawers to Freezers' to associate the desired drawer names with your newly added freezer </pre>
 	<div class="container-fluid">
 	<div class="row">
 	<div class="col-xs-6">

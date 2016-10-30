@@ -110,15 +110,21 @@ include('../database_connection.php');
 	?>
 
 <form class="registration" action="add_sample_type.php" method="GET">
-	<p><i>* = required field </i></p>
+
 	<div class="container-fluid">
 	<fieldset>
 	<div class="row">
 	<LEGEND><b>Sample Type Info:</b></LEGEND>
+	<p><i>&nbsp* = required field</i></p>
 	
 
   	<div class="col-xs-6">
-  	<p class = "adjust"><i>Note: Sample Type ID Is Used As A Unique Sample Type Identifier In the Sample Name</i></p>
+  	<pre>
+Ex: Sample Type Name : Blank 
+    Sample Type ID:    B
+    
+Samples can then be assigned as sample type 'blank'
+Resulting sample name = 2016/01/01first-projectB001</pre>
 	<br>
 
 	<!--Sample Type Name-->

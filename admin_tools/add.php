@@ -11,7 +11,7 @@ include ('table_exclude_list.php');
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Add</title>
+		<title>Add Dropdown Options</title>
 	</head>
  
 	<body>
@@ -86,6 +86,15 @@ include ('table_exclude_list.php');
 	
 	
 	echo '<form  class="registration" action="add.php" method="GET">';
+	echo '<pre>Note: Add function is similar to \'Update Sample Fields\' but with more options
+Add is used to add more selections to dropdown menus throughout NanoLIMS
+
+Instuctions: Select \'Table Name\' you would like to update. Then fill out the fields with the desired addition
+
+Ex: Table: Dna Extraction
+D Kit Name: MoBio Power Water DNA Extraction
+
+This will now update the dropdown selection for DNA extraction kit names so that this kit may be recorded as being used for extraction of this sample</pre>';
 	echo '<fieldset>';
 	echo '<LEGEND><b>Choose Table To Add To: </b></LEGEND>';
 	echo '<div class="container-fluid">';

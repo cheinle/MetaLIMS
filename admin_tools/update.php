@@ -9,7 +9,7 @@ include ('table_exclude_list.php');
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Update</title>
+		<title>Update Dropdown Options</title>
 	</head>
  
 	<body>
@@ -111,6 +111,17 @@ include ('table_exclude_list.php');
 	
 	echo '<form  class="registration" action="update.php" method="GET">';
 	echo '<fieldset>';
+	echo '<pre>Update is used to correct or adjust names of options that have been added to dropdown fields and associated information
+
+Ex: Table Name: Location
+	Entry To Update: Beach
+	Edit Entry Here: Beach - New Haven (changed name here)
+	Edit Entry Here: 897 Beach St
+	Edit Entry Here: Rural
+	Edit Entry Here: Open
+	Edit Entry Here: 41.3080556         (changed coordinates here)
+	Edit Entry Here: -72.9286111        (changed coordinates here)
+</pre>';
 	echo '<LEGEND><b>Choose Table And Entry To Update: </b></LEGEND>';
 	echo '<div class="container-fluid">';
   	echo '<div class="row">';

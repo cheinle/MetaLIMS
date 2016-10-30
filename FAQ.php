@@ -53,6 +53,27 @@ include('database_connection.php');
 		  <b>Q: Do Blanks have a sampling time?</b>
 		      A: Blank- Sterilization do not have a sampling duration regardless of what is entered for sample
 		      
+		  <b>Q:What are are all of the sample types and their abbreviations?</b> 
+			A: 
+		      <?php 
+		      	echo "<table style=\"margin-left: 10%\";>";
+				echo "<tr><td><strong>Sample Type</strong></td><td><strong>Sample Type ID</strong></td></tr>";
+		      	$stmt = $dbc->prepare("SELECT sample_type_name,sample_type_id FROM sample_type");
+				if(!$stmt){;
+					die('prepare() failed: ' . htmlspecialchars($stmt->error));
+				}
+				if ($stmt->execute()){
+					$stmt->bind_result($sample_type,$sample_type_id);
+						
+					$array = array();
+					while ($stmt->fetch()){
+							echo "<tr><td>".$sample_type."</td><td>".$sample_type_id."</td></tr>";	
+					}
+				}
+				$stmt->close();
+				echo "</table>"; 
+				 
+		      ?>
 
 		  <b>Q: Why is the search feature not working on my queried table?</b>
 		      A: If you are searching for a word that contains spaces or is a substring of another word, 

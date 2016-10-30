@@ -35,9 +35,17 @@ include('add_a_user_thing_js.php');
 					<fieldset>
 					<LEGEND><b>Sample Collection Info</b></LEGEND>
 					<pre>
-* required field  
-+ required only for text dropdown entries
-					</pre>
+Add a user thing is used to add user created fields for recording on a per sample basis
+	* required field  
+	+ required only for text dropdown entries
+	
+Ex: Enter Label Name:        Blood Type
+Select Field Type:           Text Dropdown
+Enter Dropdown Options:      A;AB;B;O
+Is Field Required For User?: Yes
+
+Field 'Blood Type' will now be required to be filled in for each sample
+</pre>
 			
 						<div class="col-xs-6">
 						<label class="textbox-label">Enter Label Name:*</label>
