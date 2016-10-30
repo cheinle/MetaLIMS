@@ -197,6 +197,10 @@ if(isset($_GET['submit'])){
 				fwrite($myfile, "$sample_num\t");
 				fwrite($myfile, "\n");
 				
+				
+				$sample_name = htmlspecialchars($sample_name);
+				$barcode_name = htmlspecialchars($barcode_name);
+				
 				if(($_GET['db_view']) == 'barcode' ){
 						$img2 = "<img src=\"https://chart.googleapis.com/chart?chs=50x50&cht=qr&chl=".$barcode_name."&choe=UTF-8\" title=\"".$barcode_name."\" />";
 						if($barcode_name == ''){
