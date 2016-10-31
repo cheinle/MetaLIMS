@@ -6,12 +6,7 @@ function field_check($get_array,$check_for){
 				include("../functions/check_collector_names.php");
 
 				$error = 'false';
-				//check that all date/times exist
-				/*if((!$get_array['sdate']) || (!$get_array['stime']) || (!$get_array['edate']) || (!$get_array['etime'])){
-					echo "<p>ERROR: Check Date/Time(s)".'</p><br>';
-					$error = 'true';
-				}*/
-				
+
 				//check that storage locations are picked 
 					//original storage
 				if ($get_array['oStore_temp'] == '0') {//check this makes sense
@@ -26,11 +21,6 @@ function field_check($get_array,$check_for){
 				 	echo '<p>ERROR: Please check Sample Storage Location!<p>';
 					$error = 'true';
 				 }
-				
-				
-				//add other storage locations?
-				
-				
 				
 				//if you have a storage freezer, you must have a storage drawer
 				//check that if freezer is set, the drawer is also set
@@ -73,10 +63,6 @@ function field_check($get_array,$check_for){
 					echo '<p>ERROR: You must select a Relative Location Name!<p>';
 					$error = 'true';
 				}
-				//if ($get_array['airSamp'] == '0') {
-				//	echo '<p>ERROR: You must select an Air Sampler Name!<p>';
-				//	$error = 'true';
-				//}
 				if ($get_array['media'] == '0') {
 					echo '<p>ERROR: You must select a Media Type!<p>';
 					$error = 'true';
@@ -86,61 +72,7 @@ function field_check($get_array,$check_for){
 					echo '<p>ERROR: You must enter a Sample Type!<p>';
 					$error = 'true';
 				}
-				
-				//check flow rate if sample is an air sample
-				//check if flow rate is a number
-				if($get_array['sType'] == 'A'){
-					if(($get_array['fRate'] == '') || ($get_array['fRate_eod'] == '')){
-						echo '<p>ERROR: You must enter a Flow Rate!<p>';
-						$error = 'true';
-					}
-					else{
-						#$regrex_check_fr  = '/(^[0-9]{0,3}\.[0-9][0-9]|[0-9]{0,3})$/';//flow rate should be between 0 and 3 digit number allowing for two decimal places
-						$regrex_check_fr  = '/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/';
-						if (!preg_match("$regrex_check_fr", $get_array['fRate'])){
-							echo '<p>ERROR: You Must Enter Valid Flow Rate. Please Check Your Number.<p>';
-							$error = 'true';
-						}
-						if (!preg_match("$regrex_check_fr", $get_array['fRate_eod'])){
-							echo '<p>ERROR: You Must Enter Valid EOD Flow Rate. Please Check Your Number.<p>';
-							$error = 'true';
-						}	
-					}
-					
-					//if sample type is P-pool, then restrict user from choosing
-					if(!isset($get_array['pooled_flag']) || $get_array['pooled_flag'] == 'NP'){//if you are not a pooled sample
-						if($get_array['sType'] == 'P'){
-							echo '<p>ERROR: Unable To Choose Sample For Pooling Here. Please Use Sample Pooling Page<p>';
-							$error = 'true';	
-						}
-					}
-					
-					
-					//check sampling height if air sample
-					if ($get_array['sampling_height'] == '') {
-						echo '<p>ERROR: You must enter a Sampling Height!<p>';
-						$error = 'true';
-					}
-					elseif($get_array['sampling_height'] == '0.00'){
-						echo '<p>Warning: Sampling Height Is Set To 0.00 cm Above The Ground. Please Check This Is True<p>';
-					}
-					else{
-						//check that sampling height is a number
-						$regrex_check_sh  = '/^\s*(?=.*[0-9])\d{0,5}(?:\.\d{1,2})?\s*$/'; //this can be zero
-						if (!preg_match("$regrex_check_sh", $get_array['sampling_height'])){
-							echo '<p>ERROR: You Must Enter Valid Sampling Height. Please Check Your Number.<p>';
-							$error = 'true';
-						}
-					}		
-				}
-				else{
-					//if you are a fungal or bacteria isolate
-					if(($get_array['fRate'] != '0') || ($get_array['fRate_eod'] != '0')){//if update page
-						echo '<p>ERROR: Flow Rate for Samples Other Than Air Samples Should Be Zero!<p>';
-						$error = 'true';
-					}
-				}
-				
+			
 				//check collector names
 				if(isset($get_array['collector'])){
 					$array=$get_array['collector'];

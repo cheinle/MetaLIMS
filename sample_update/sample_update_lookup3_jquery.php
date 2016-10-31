@@ -79,11 +79,8 @@ include('../functions/get_earliest_date.php');
 				$p_rVol_quant = htmlspecialchars($_GET['rVol_quant']);
 				$p_r_extr_date = htmlspecialchars($_GET['r_extr_date']);
 				$p_notes = htmlspecialchars($_GET['notes']);
-				$p_fRate = htmlspecialchars($_GET['fRate']);
-				$p_fRate_eod = htmlspecialchars($_GET['fRate_eod']);
 				$p_dData = NULL;
 				$p_media = htmlspecialchars($_GET['media']);
-				$p_sampling_height = htmlspecialchars($_GET['sampling_height']);
 				
 				
 				$sample_type_regrex = '/^B.*/';//if you are a blank then your flow rate is zero. so is your time
@@ -113,8 +110,6 @@ include('../functions/get_earliest_date.php');
 				if ($p_rVol_quant == '') {$p_rVol_quant = NULL;}
 				if ($p_r_extr_date == '') {$p_r_extr_date = NULL;} 
 				if ($p_notes == '') {$p_notes = NULL;}
-				if ($p_fRate == '') {$p_fRate = NULL;}
-				if ($p_fRate_eod == '') {$p_fRate_eod = NULL;}
 				if ($p_dData == '0') {$p_dData = NULL;}
 				
 				//check and process collector info
@@ -350,14 +345,11 @@ include('../functions/get_earliest_date.php');
 						r_volume_quant = ?,
 						r_extraction_date = ?,
 						notes = ?,
-						flow_rate = ?,
-						flow_rate_eod = ?,
 						daily_data = ?,
 						sample_num = ?,
 						updated_by = ?,
 						sample_sort = ?,
 						media_type = ?,
-						sampling_height = ?,
 						dExtrName = ?,
 						rExtrName = ?,
 						seq_id = ?, 
@@ -365,7 +357,7 @@ include('../functions/get_earliest_date.php');
 						WHERE sample_name = ? and time_stamp = ?';
  
                     	if($stmt = $dbc ->prepare($query2)) {                 
-                        	$types = 'sssssssssssssdsiisdsiissddsisssdssss'.'s'.'s';//s is for the p_sample_name type, other s is for timestamp
+                        	$types = 'sssssssssssssdsiisdsiisssisssssss'.'s'.'s';//s is for the p_sample_name type, other s is for timestamp
 	                    	$stmt->bind_param(
 	                        	$types,
 	                        	$p_projName, 
@@ -392,14 +384,11 @@ include('../functions/get_earliest_date.php');
 								$p_rVol_quant,
 								$p_r_extr_date,
 								$p_notes,
-								$p_fRate,
-								$p_fRate_eod,
 								$p_dData,
 								$p_sample_number,
 								$p_updated_by,
 								$sample_sort,
 								$p_media,
-								$p_sampling_height,
 								$p_dExtrName, 
 								$p_rExtrName, 
 								$seq_id, 

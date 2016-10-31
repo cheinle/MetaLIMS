@@ -31,12 +31,12 @@
 				$p_rVol_quant = htmlspecialchars($_GET['rVol_quant']);
 				$p_r_extr_date = htmlspecialchars($_GET['r_extr_date']);
 				$p_notes = htmlspecialchars($_GET['notes']);
-				$p_fRate = htmlspecialchars($_GET['fRate']);
-				$p_fRate_eod = htmlspecialchars($_GET['fRate_eod']);
+				//$p_fRate = 0;//removing for now
+				//$p_fRate_eod = 0; //removing for now
 				$p_dData = '0';//removing for now
 				$p_dWeather = '0';//removing for now
 				$p_media = htmlspecialchars($_GET['media']);
-				$p_sampling_height = htmlspecialchars($_GET['sampling_height']);
+				//$p_sampling_height = 0;//removing for now
 				$my_samplers = $_GET['my_samplers'];
 				$start_dates = $_GET['start_dates'];
 				$end_dates = $_GET['end_dates'];
@@ -48,16 +48,16 @@
 					$p_user_things = $_GET['user_things'];
 				}
 				else{
-					$p_user_things = NULL;
+					$p_user_things = array(); //empty array
 				}
 				
 				
-				$sample_type_regrex = '/^B.*/';//if you are a blank then your flow rate is zero. so is your time
-				$sample_type_check = preg_match($sample_type_regrex,$p_sType);
-				if($sample_type_check == true){
-						$p_fRate = '0';
-						$p_fRate_eod = '0';	
-				}
+				//$sample_type_regrex = '/^B.*/';//if you are a blank then your flow rate is zero. so is your time
+				//$sample_type_check = preg_match($sample_type_regrex,$p_sType);
+				//if($sample_type_check == true){
+				//		$p_fRate = '0';
+				//		$p_fRate_eod = '0';	
+				//}
 				
 				//check and process collector info
 				include_once("../functions/check_collector_names.php");
@@ -213,19 +213,16 @@
 																	  r_volume_quant,
 																	  r_extraction_date,
 																	  notes,
-																	  flow_rate,
-																	  flow_rate_eod,
 																	  daily_data,
 																	  sample_num,
 																	  entered_by,
 																	  sample_sort,
 																	  orig_time_stamp,
 																	  media_type,
-																	  sampling_height,
 																	  dExtrName,
 																	  rExtrName,
 																	  seq_id
-																	  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+																	  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 						
 						if(!$stmt2){
 							$insert_check = 'false';
@@ -233,7 +230,7 @@
 						}
 						
 						else{
-							 $stmt2 -> bind_param('sssssssssssssdsiisdsiissddsissssdsss', $p_sample_name, $p_loc,$p_rloc, $p_partSamp, $p_collName, $p_dExtKit, $p_rExtKit, $p_seqInfo, $p_anPipe, $p_barcode, $p_sType, $p_path, $p_projName, $p_dConc,$p_dInstru,$p_dVol,$p_dVol_quant,$p_d_extr_date,$p_rConc,$p_rInstru,$p_rVol,$p_rVol_quant,$p_r_extr_date,$p_notes,$p_fRate,$p_fRate_eod,$p_dData,$p_sample_number,$p_entered_by,$sample_sort,$p_orig_time_stamp,$p_media,$p_sampling_height,$p_dExtrName,$p_rExtrName,$seq_id);
+							 $stmt2 -> bind_param('sssssssssssssdsiisdsiisssisssssss', $p_sample_name, $p_loc,$p_rloc, $p_partSamp, $p_collName, $p_dExtKit, $p_rExtKit, $p_seqInfo, $p_anPipe, $p_barcode, $p_sType, $p_path, $p_projName, $p_dConc,$p_dInstru,$p_dVol,$p_dVol_quant,$p_d_extr_date,$p_rConc,$p_rInstru,$p_rVol,$p_rVol_quant,$p_r_extr_date,$p_notes,$p_dData,$p_sample_number,$p_entered_by,$sample_sort,$p_orig_time_stamp,$p_media,$p_dExtrName,$p_rExtrName,$seq_id);
 							 if(!$stmt2 -> execute()){
 							 	$insert_check = 'false';
 							 	throw new Exception("Execution Failure: Unable To Insert Into Main Sample Table");

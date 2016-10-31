@@ -123,11 +123,11 @@ $root = $_SESSION['link_root'];
 							</p>
 							
 							<!--Flow Rate-->
-							<p>
+							<!--<p>
 							<label class="textbox-label">Flow Rate-Start/End of Day:</label><br>
 							<input type="text" class = "shrtfields" name="fRate" id="fRate"  placeholder="Rate(L/min)" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_fRate;} ?>">
 							<input type="text" class = "shrtfields" name="fRate_eod" id="fRate_eod"  placeholder="Rate(L/min)" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_fRate_eod;} ?>">
-							</p>
+							</p>-->
 			
 							<!--Sample Storage-->
 							<label class="textbox-label">Storage Location:* (pick freezer and drawer owner)</label><br>
@@ -146,15 +146,15 @@ $root = $_SESSION['link_root'];
 			 					}?>
 			 				</select>	
 							
-							<p>
+							<!--<p>
 							<label class="textbox-label">Height Above Floor:
 							</label><br>
 							<input type="text" name="sampling_height" id="sampling_height"  placeholder="Height Above Floor (cm)" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_sampling_height;} ?>">
-							</p>
+							</p>-->
 							
 							<p>
 							<!--sampler dropdown-->
-							<label class="textbox-label">Select Number of Samplers:*<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="This is the number of samplers used to create the original sample. Also, please note that all blanks and cfu samples will have a sampling time duration of zero"></i></label>
+							<label class="textbox-label">Select Number of Samplers:*<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="This is the number of samplers used to create the original sample. Also, please note that sterilization blanks will have a sampling time duration of zero"></i></label>
 							
 							<select id='sampler_num' name='sampler_num'>
 							<option value='0'<?php if ((isset($_GET['submit']) && $submitted != 'true')){

@@ -19,10 +19,10 @@
 							var barcode = $("#barcode").val();
 							var sType = $("#sType").val();
 							var notes = $("#notes").val();
-							var fRate = $("#fRate").val();
-							var fRate_eod = $("#fRate_eod").val();
+							//var fRate = $("#fRate").val();
+							//var fRate_eod = $("#fRate_eod").val();
 							var media = $("#media").val();
-							var sampling_height = $("#sampling_height").val();
+							//var sampling_height = $("#sampling_height").val();
 							var collector_names = $("#collector").val();
 							var collector = [collector_names];
 							var orig_sample_exist = $("#orig_sample_exist").val();
@@ -135,10 +135,10 @@
 								barcode: barcode,
 								sType: sType, 
 								notes: notes, 
-								fRate: fRate,
-								fRate_eod: fRate_eod,
+								//fRate: fRate,
+								//fRate_eod: fRate_eod,
 								media: media,
-								sampling_height: sampling_height, 
+								//sampling_height: sampling_height, 
 								collector: collector,
 								orig_sample_exist: orig_sample_exist,
 								oStore_temp: oStore_temp,

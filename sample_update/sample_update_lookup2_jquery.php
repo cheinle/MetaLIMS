@@ -167,11 +167,11 @@ if (isset($_GET['submit'])) {
 				?>
 				</p>
 				
-				<p>
+				<!--<p>
 				<label class="textbox-label">Flow Rate-Start/End of Day:</label><br>
 				<input type="text" name="fRate" id="fRate"  class = "shrtfields" placeholder="Enter A Flow Rate for SOD" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'flow_rate',$dbc);} ?>">
 				<input type="text" name="fRate_eod" id="fRate_eod"  class = "shrtfields" placeholder="Enter A Flow Rate for EOD" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'flow_rate_eod',$dbc);} ?>">
-				</p>
+				</p>-->
 
 				
 				<p>
@@ -184,11 +184,11 @@ if (isset($_GET['submit'])) {
 				?>
 				</p>
 				
-				<p>
+				<!--<p>
 				<label class="textbox-label">Height Above Floor:
 				</label><br>
 				<input type="text" name="sampling_height" id="sampling_height" placeholder="Enter A Height Above Floor (cm)" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'sampling_height',$dbc);} ?>">
-				</p>
+				</p>-->
 				
 				<!--Invisible Project Name Dropdown-->
 				<input type="text" style="visibility:hidden" name="orig_projName" id="orig_projName" placeholder="Enter A Barcode" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'project_name',$dbc);}?>"/>
