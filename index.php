@@ -3,12 +3,6 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-$root = $_SESSION['link_root'];
-$path = $_SESSION['include_path']; 
-?><script type="text/javascript">var root = "<?php echo $root; ?>";</script><?php 
-
-include($path.'database_connection.php');
-include($path.'path.php');
 
 //if user is not logged in, do not let him access any of the pages/directories
 if(!isset($_SESSION['username'])){  
@@ -17,6 +11,16 @@ if(!isset($_SESSION['username'])){
 	exit();
 }
 else{//if user is logged in, check to see how long he has been idle. Log user out after x amt of time
+	$root = $_SESSION['link_root'];
+	$path = $_SESSION['include_path']; 
+	
+
+	
+	include($path.'database_connection.php');
+	include($path.'path.php');
+	
+	include($path.'config/css.php');
+	include($path.'config/js.php');
 	
 	//Expire the session if user is inactive for 45
 	//minutes or more.
@@ -51,14 +55,9 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	$_SESSION['last_action'] = time();
 }
 
-?>
 
-<?php 
-include($path.'config/css.php');
-include($path.'config/js.php');
-?>
 
-<?php
+
 //get admin email address
 $admin_email = '';
 $admin_Y = 'Y';
