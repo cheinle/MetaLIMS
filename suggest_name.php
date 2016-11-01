@@ -110,34 +110,32 @@ if ($stmt4->execute()){
 
 
 //add custom entries
-foreach (range(1, 20) as $number) {;
-		$query = "SELECT * FROM store_user_things WHERE thing".$number." LIKE ? ORDER BY thing".$number." LIMIT 10";
-	
-		$stmt5 = $dbc->prepare($query);
-		$stmt5->bind_param("s", $param);
+$query = "SELECT * FROM thing_storing WHERE thing_value LIKE ? ORDER BY thing_value LIMIT 10";
+
+$stmt5 = $dbc->prepare($query);
+$stmt5->bind_param("s", $param);
+
+if ($stmt5->execute()){
+	    			
+	if($stmt5->fetch()){
+		$meta5 = $stmt5->result_metadata(); 
+   		while ($field5 = $meta5->fetch_field()){ 
+        	$params5[] = &$row[$field5->name]; 
+    	} 
+
+    	call_user_func_array(array($stmt5, 'bind_result'), $params5); 
+		$stmt5->execute();
 		
-		if ($stmt5->execute()){
-			    			
-			if($stmt5->fetch()){
-				$meta5 = $stmt5->result_metadata(); 
-		   		while ($field5 = $meta5->fetch_field()){ 
-		        	$params5[] = &$row[$field5->name]; 
-		    	} 
-		
-		    	call_user_func_array(array($stmt5, 'bind_result'), $params5); 
-				$stmt5->execute();
-				
-		    	while ($stmt5->fetch()) {
-		    		$item = 'thing'.$number;
-					$data[] = array(
-						'label' => $row[$item],
-						'value' => $row[$item]
-					);				
-				}
-			}
+    	while ($stmt5->fetch()) {
+			$data[] = array(
+				'label' => $row['thing_value'],
+				'value' => $row['thing_value']
+			);				
 		}
-		$stmt5->close();
+	}
 }
+$stmt5->close();
+
 
 echo json_encode($data);
 flush();
