@@ -146,7 +146,7 @@ p.adjust{
 	margin: 0px;
 }
 th {
-    border: 2px solid black;
+    border: 0px solid black;
     word-wrap:break-word;
 	/*white-space : nowrap;*/
 	background-color: grey;
@@ -155,7 +155,7 @@ th {
 	
 }
 td{
-	border: 2px solid black;
+	border: 0x solid black;
 	padding-left: 5px;
 }
 table {

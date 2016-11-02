@@ -10,7 +10,7 @@ include($path.'config/check_required_user_things_js.php');
 include($path.'admin_tools/dynamically_add_user_fields/build_a_user_thing.php');
 include('form_insert_jquery_js.php');
 include ($path.'functions/dropDown.php');
-$root = $_SESSION['link_root'];
+//$root = $_SESSION['link_root'];
 ?>
 
 
