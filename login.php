@@ -80,7 +80,8 @@ if (isset($_POST['login_button'])){
 						$stmt -> bind_param('iis', $first_failed_login,$failed_login_count,$_POST['email']);
 						$stmt -> execute();
 						$stmt -> close();
-						$_SESSION['message'] = 'You are currently locked out. Please wait 10min and try again';
+						//$_SESSION['message'] = 'You are currently locked out. Please wait 10min and try again';
+						$_SESSION['message'] = 'Login invalid. Please try again';
 				  } 
 				  else {
 				  		//initiate brute force login prevention
