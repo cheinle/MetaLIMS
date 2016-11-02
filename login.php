@@ -102,7 +102,7 @@ if (isset($_POST['login_button'])){
 			}	
 			
 	    }else{
-	    	$_SESSION['message'] = 'Loginnn invalid. Please try again';
+	    	$_SESSION['message'] = 'Login invalid. Please try again';
 	    }
 	
 		
