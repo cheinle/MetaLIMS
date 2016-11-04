@@ -3,6 +3,7 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+include('path.php');
 
 //if user is not logged in, do not let him access any of the pages/directories
 if(!isset($_SESSION['username'])){  
