@@ -13,7 +13,8 @@ $database_down = 'false';
 /********************Set Variable For Document Root Path************************/
 //if you did not change the git zip file name and placed folder in webroot, 
 //this will be your path
-$path_in_webroot = '/NanoLIMS/'; 
+//$path_in_webroot = '/NanoLIMS/'; 
+$path_in_webroot = '/series/dynamic/NanoLIMS/NanoLIMS/';
 /////////////////////////////////////////////////////////////////////////////////
 
 
@@ -101,7 +102,7 @@ if (isset($_POST['login_button'])){
 			}	
 			
 	    }else{
-	    	$_SESSION['message'] = 'Loginnn invalid. Please try again';
+	    	$_SESSION['message'] = 'Login invalid. Please try again';
 	    }
 	
 		
