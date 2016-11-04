@@ -62,15 +62,30 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 <head>
 <title>Query Results</title>
 	<meta charset="utf-8">
+	
+	<style>
+		div.dataTables_wrapper {
+        	width: 100%;
+        	margin: 0 ;
+    	}
+
+	</style>
 	<script type="text/javascript">
 		$(document).ready(function() 
 		{
-			// Setup - add a text input to each footer cell
+				// Setup - add a text input to each footer cell
 			$('#datatable tfoot th').each( function () 
 			{
 				var title = $(this).text();
-				$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+				$(this).html( '<input type="text" style="width:100px" placeholder="Search '+title+'" />' );
 			} );
+			
+			//Adding x-scroll
+			$('#datatable').DataTable( {
+		        "scrollX": true
+		    } );
+			
+		
  
 			// DataTable
 			var table = $('#datatable').DataTable();
@@ -96,16 +111,23 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 		//table 2
 		$(document).ready(function() 
 		{
+			
+			//Adding x-scroll
+			/*$('#datatable2').DataTable( {
+		        "scrollX": true
+		    } );*/
 			// Setup - add a text input to each footer cell
 			$('#datatable2 tfoot th').each( function () 
 			{
 				var title = $(this).text();
 				$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
 			} );
+			
+		
  
 			// DataTable
 			var table = $('#datatable2').DataTable();
- 
+
 			// Apply the search
 			table.columns().every( function () 
 			{
@@ -345,7 +367,7 @@ if(isset($_GET['submit'])){
 			$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
 		}
 		else{
-			$query_main = "SELECT $field_names FROM sample JOIN storage_info ON storage_info.sample_name = sample.sample_name JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
+			$query_main = "SELECT $field_names FROM sample JOIN storage_info ON storage_info.sample_name = sample.sample_name LEFT JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
 		}
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////
