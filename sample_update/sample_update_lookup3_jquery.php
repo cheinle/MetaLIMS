@@ -324,7 +324,6 @@ include('../functions/get_earliest_date.php');
 	                	project_name = ?, 
 	                	location_name = ?, 
 	                	relt_loc_name = ?, 
-	                	part_sens_name = ?, 
 	                	collector_name = ?, 
 	                	pool_extracts_id = ?,
 	                	dna_extract_kit_name = ?, 
@@ -333,7 +332,6 @@ include('../functions/get_earliest_date.php');
 						analysis_name = ?, 
 						barcode = ?,
 						sample_type = ?, 
-						particle_ct_csv_file = ?,
 						d_conc = ?,
 						d_conc_instrument = ?,
 						d_volume = ?,
@@ -345,7 +343,6 @@ include('../functions/get_earliest_date.php');
 						r_volume_quant = ?,
 						r_extraction_date = ?,
 						notes = ?,
-						daily_data = ?,
 						sample_num = ?,
 						updated_by = ?,
 						sample_sort = ?,
@@ -357,13 +354,12 @@ include('../functions/get_earliest_date.php');
 						WHERE sample_name = ? and time_stamp = ?';
  
                     	if($stmt = $dbc ->prepare($query2)) {                 
-                        	$types = 'sssssssssssssdsiisdsiisssisssssss'.'s'.'s';//s is for the p_sample_name type, other s is for timestamp
+                        	$types = 'sssssssssssdsiisdsiississsssss'.'s'.'s';//s is for the p_sample_name type, other s is for timestamp
 	                    	$stmt->bind_param(
 	                        	$types,
 	                        	$p_projName, 
 	                        	$p_loc,
 	                        	$p_rloc,
-	                        	$p_partSamp,
 	                        	$p_collName,
 	                        	$p_poolEx , 
 	                        	$p_dExtKit,
@@ -372,7 +368,6 @@ include('../functions/get_earliest_date.php');
 	                        	$p_anPipe,
 	                        	$p_barcode,
 	                        	$p_sType,
-	                        	$p_path,
 	                        	$p_dConc,
 	                        	$p_dInstru,
 	                        	$p_dVol,
@@ -384,7 +379,6 @@ include('../functions/get_earliest_date.php');
 								$p_rVol_quant,
 								$p_r_extr_date,
 								$p_notes,
-								$p_dData,
 								$p_sample_number,
 								$p_updated_by,
 								$sample_sort,
@@ -419,6 +413,7 @@ include('../functions/get_earliest_date.php');
 							}
 	        	
 						}else{
+							
 							throw new Exception("ERROR: Unable to prepare statement. Please notify admin");	
 						}
 							 

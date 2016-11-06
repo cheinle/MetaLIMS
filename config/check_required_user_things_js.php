@@ -61,10 +61,8 @@
                  var inputed = thing_inputs[i11].value;
                  var input_id = thing_inputs[i11].getAttribute("id");
                  var type = thing_inputs[i11].getAttribute("class");
-	        	if(inputed == ''){
-	             	 valid = 'false';
-	                 document.getElementById(input_id).style.backgroundColor = 'blue';
-	             }else{
+	        	 if(inputed != ''){
+	             	 
 	             	//select type from create_user_things where thing_id = input_id. if type equals numeric_input, do a check
 	             	
 	             	if(type == 'numeric_input'){

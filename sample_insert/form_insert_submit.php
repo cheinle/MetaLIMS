@@ -11,7 +11,6 @@
 				$p_projName = htmlspecialchars($_GET['projName']);
 				$p_loc = htmlspecialchars($_GET['loc']);
 				$p_rloc = htmlspecialchars($_GET['rloc']);
-				$p_partSamp = NULL;
 				$p_poolEx = '0';//pooling of extracts has been moved to another page
 				$p_dExtKit = htmlspecialchars($_GET['dExtKit']);
 				$p_rExtKit = htmlspecialchars($_GET['rExtKit']);
@@ -19,7 +18,6 @@
 				$p_anPipe = htmlspecialchars($_GET['anPipe']);
 				$p_barcode = htmlspecialchars($_GET['barcode']);
 				$p_sType = htmlspecialchars($_GET['sType']);
-				$p_path = ''; //removing for now
 				$p_dConc = htmlspecialchars($_GET['dConc']);
    				$p_dInstru = htmlspecialchars($_GET['dInstru']);
    				$p_dVol = htmlspecialchars($_GET['dVol']);
@@ -31,12 +29,7 @@
 				$p_rVol_quant = htmlspecialchars($_GET['rVol_quant']);
 				$p_r_extr_date = htmlspecialchars($_GET['r_extr_date']);
 				$p_notes = htmlspecialchars($_GET['notes']);
-				//$p_fRate = 0;//removing for now
-				//$p_fRate_eod = 0; //removing for now
-				$p_dData = '0';//removing for now
-				$p_dWeather = '0';//removing for now
 				$p_media = htmlspecialchars($_GET['media']);
-				//$p_sampling_height = 0;//removing for now
 				$my_samplers = $_GET['my_samplers'];
 				$start_dates = $_GET['start_dates'];
 				$end_dates = $_GET['end_dates'];
@@ -51,13 +44,6 @@
 					$p_user_things = array(); //empty array
 				}
 				
-				
-				//$sample_type_regrex = '/^B.*/';//if you are a blank then your flow rate is zero. so is your time
-				//$sample_type_check = preg_match($sample_type_regrex,$p_sType);
-				//if($sample_type_check == true){
-				//		$p_fRate = '0';
-				//		$p_fRate_eod = '0';	
-				//}
 				
 				//check and process collector info
 				include_once("../functions/check_collector_names.php");
@@ -168,7 +154,6 @@
 						if ($p_seqInfo == '0') {$p_seqInfo = NULL;}
 						if ($p_anPipe == '0') {$p_anPipe = NULL;}
 						if ($p_barcode == '') {$p_barcode = NULL;}
-						if ($p_path == '') {$p_path = NULL;}
 						if ($p_dConc == '') {$p_dConc = NULL;} 
 		   				if ($p_dInstru == '0') {$p_dInstru = NULL;} 
 		   				if ($p_dVol == '') {$p_dVol = NULL;} 
@@ -179,8 +164,6 @@
 						if ($p_rVol == '') {$p_rVol = NULL;} 
 						if ($p_rVol_quant == '') {$p_rVol_quant = NULL;}
 						if ($p_r_extr_date == '') {$p_r_extr_date = NULL;} 
-						if ($p_dData == '0') {$p_dData = NULL;}
-						if ($p_dWeather == '0') {$p_dWeather = NULL;}
 
 						
 						$insert_check = 'true';
@@ -192,7 +175,6 @@
 						$stmt2 = $dbc -> prepare("INSERT INTO sample (sample_name,
 																	  location_name,
 																	  relt_loc_name, 
-																	  part_sens_name, 
 																	  collector_name, 
 																	  dna_extract_kit_name,
 																	  rna_extract_kit_name,
@@ -200,7 +182,6 @@
 																	  analysis_name,
 																	  barcode,
 																	  sample_type,
-																	  particle_ct_csv_file,
 																	  project_name,
 																	  d_conc,
 																	  d_conc_instrument,
@@ -213,7 +194,6 @@
 																	  r_volume_quant,
 																	  r_extraction_date,
 																	  notes,
-																	  daily_data,
 																	  sample_num,
 																	  entered_by,
 																	  sample_sort,
@@ -222,7 +202,7 @@
 																	  dExtrName,
 																	  rExtrName,
 																	  seq_id
-																	  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+																	  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 						
 						if(!$stmt2){
 							$insert_check = 'false';
@@ -230,7 +210,7 @@
 						}
 						
 						else{
-							 $stmt2 -> bind_param('sssssssssssssdsiisdsiisssisssssss', $p_sample_name, $p_loc,$p_rloc, $p_partSamp, $p_collName, $p_dExtKit, $p_rExtKit, $p_seqInfo, $p_anPipe, $p_barcode, $p_sType, $p_path, $p_projName, $p_dConc,$p_dInstru,$p_dVol,$p_dVol_quant,$p_d_extr_date,$p_rConc,$p_rInstru,$p_rVol,$p_rVol_quant,$p_r_extr_date,$p_notes,$p_dData,$p_sample_number,$p_entered_by,$sample_sort,$p_orig_time_stamp,$p_media,$p_dExtrName,$p_rExtrName,$seq_id);
+							 $stmt2 -> bind_param('sssssssssssdsiisdsiississsssss', $p_sample_name, $p_loc,$p_rloc, $p_collName, $p_dExtKit, $p_rExtKit, $p_seqInfo, $p_anPipe, $p_barcode, $p_sType, $p_projName, $p_dConc,$p_dInstru,$p_dVol,$p_dVol_quant,$p_d_extr_date,$p_rConc,$p_rInstru,$p_rVol,$p_rVol_quant,$p_r_extr_date,$p_notes,$p_sample_number,$p_entered_by,$sample_sort,$p_orig_time_stamp,$p_media,$p_dExtrName,$p_rExtrName,$seq_id);
 							 if(!$stmt2 -> execute()){
 							 	$insert_check = 'false';
 							 	throw new Exception("Execution Failure: Unable To Insert Into Main Sample Table");
@@ -284,8 +264,7 @@
 							$end = $end_dates[$x].' '.$end_times[$x];
 							
 							//check if you are a blank. If you are then make sampling time zero
-							//if($p_sType == 'B' || $p_sType == 'BR' || $p_sType == 'BFR' || $p_sType == 'BMF'){
-							if($sample_type_check == true){
+							if($p_sType == 'B'){
 								$end = $start;
 							}
 							
