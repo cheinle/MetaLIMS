@@ -3,6 +3,7 @@ include ('../index.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include ('../database_connection.php');
+include ('../functions/convert_table_names.php');
 ?>
 <!doctype html>
 <html>
@@ -150,10 +151,22 @@ User will no longer be able to select the -80C freezer to store their samples</p
 						
 	echo "<select id='table' name='table'>";
 	echo "<option value='0'>-Select-</option>";
+	$sort_names = array();
 	foreach($tables as $table => $pk){
-		$new_table_name = ucwords(str_replace("_", " ", $table));
-		echo '<option value="'.$table.'-'.$pk.'">'.$new_table_name.'</option>';
+		$converted_table_name = convert_table_names($table);
+		if($converted_table_name == 'false'){
+			continue;
+		}
+				
+		$sort_names[$converted_table_name] = $table.'-'.$pk;
 	}
+	ksort($sort_names);
+	foreach($sort_names as $name => $id){
+		$name = ucwords(str_replace("_", " ", $name));
+		echo '<option value="'.$id.'">'.$name.'</option>';
+	}
+	
+
 	echo "</select>";
 	
 	echo "<div id='col' name='col'></div>";

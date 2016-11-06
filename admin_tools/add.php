@@ -4,8 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include ('../database_connection.php');
 include ('table_exclude_list.php');
-
-
+include ('../functions/convert_table_names.php');
 ?>
 <!doctype html>
 <html>
@@ -91,7 +90,7 @@ Add is used to add more selections to dropdown menus throughout NanoLIMS
 
 Instuctions: Select \'Table Name\' you would like to update. Then fill out the fields with the desired addition
 
-Ex: Table: Dna Extraction
+Ex: Table: Dna Extraction Kit
 D Kit Name: MoBio Power Water DNA Extraction
 
 This will now update the dropdown selection for DNA extraction kit names so that this kit may be recorded as being used for extraction of this sample</pre>';
@@ -105,9 +104,19 @@ This will now update the dropdown selection for DNA extraction kit names so that
 						
 	echo "<select id='table' name='table'>";
 	echo "<option value='0'>-Select-</option>";
+	$sort_names = array();
 	foreach($tables as $table => $pk){
-			$new_table_name = ucwords(str_replace("_", " ", $table));
-			echo '<option value="'.$table.'">'.$new_table_name.'</option>';
+		$converted_table_name = convert_table_names($table);
+		if($converted_table_name == 'false'){
+			continue;
+		}
+				
+		$sort_names[$converted_table_name] = $table;
+	}
+	ksort($sort_names);
+	foreach($sort_names as $name => $id){
+		$name = ucwords(str_replace("_", " ", $name));
+		echo '<option value="'.$id.'">'.$name.'</option>';
 	}
 	echo "</select>";
 	

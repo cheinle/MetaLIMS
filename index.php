@@ -14,9 +14,11 @@ if(!isset($_SESSION['username'])){
 else{//if user is logged in, check to see how long he has been idle. Log user out after x amt of time
 	$root = $_SESSION['link_root'];
 	$path = $_SESSION['include_path']; 
-	
-
-	
+?>	
+<script type="text/javascript">
+    var root = <?php echo json_encode($root); ?>;	
+</script>
+<?php
 	include($path.'database_connection.php');
 	include($path.'path.php');
 	

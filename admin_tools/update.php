@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include ('../database_connection.php');
 include ('table_exclude_list.php');
+include ('../functions/convert_table_names.php');
 ?>
 <!doctype html>
 <html>
@@ -131,9 +132,20 @@ Ex: Table Name: Location
 						
 	echo "<select id='table' name='table'>";
 	echo "<option value='0'>-Select-</option>";
+	
+	$sort_names = array();
 	foreach($tables as $table => $pk){
-			$new_table_name = ucwords(str_replace("_", " ", $table));
-			echo '<option value="'.$table.'">'.$new_table_name.'</option>';
+			$converted_table_name = convert_table_names($table);
+			if($converted_table_name == 'false'){
+				continue;
+			}
+			
+			$sort_names[$converted_table_name] = $table;
+	}
+	ksort($sort_names);
+	foreach($sort_names as $name => $id){
+			$name = ucwords(str_replace("_", " ", $name));
+			echo '<option value="'.$id.'">'.$name.'</option>';
 	}
 	echo "</select>";
 	

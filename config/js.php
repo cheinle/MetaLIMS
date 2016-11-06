@@ -21,16 +21,6 @@
 <?php echo '<script type="text/javascript" src="'.$_SESSION['link_root'].'config/jquery.ptTimeSelect.js"></script>'; ?>
 
 
-<!--define global path variable-->
-<script type="text/javascript">
-		$(document).ready(function(){  
-		
-    		var root = <?php echo json_encode($_SESSION['link_root']); ?>;
-
-		});
-		
-</script>
-
 <!--Sample Storage Dropdown-->
 <script type="text/javascript">
 		$(document).ready(function(){  
