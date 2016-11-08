@@ -22,8 +22,7 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	include($path.'database_connection.php');
 	include($path.'path.php');
 	
-	include($path.'config/css.php');
-	include($path.'config/js.php');
+
 	
 	//Expire the session if user is inactive for 45
 	//minutes or more.
@@ -56,6 +55,9 @@ else{//if user is logged in, check to see how long he has been idle. Log user ou
 	//Assign the current timestamp as the user's
 	//latest activity
 	$_SESSION['last_action'] = time();
+	
+	include($path.'config/css.php');
+	include($path.'config/js.php');
 }
 
 
