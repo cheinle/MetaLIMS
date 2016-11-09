@@ -9,21 +9,23 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 	$sample_array = array();
 	$thing_label_array = find_thing_labels();
 	
+	 echo "<div class=\"border\" style=\"margin-top:10px\">";
+	 echo "<!-- Nav tabs -->";
+  	 echo "<ul class=\"nav nav-tabs\" role=\"tablist\">";
 	
-	 echo "<div id=\"tabs\">";
-		 echo "<ul >";
-		     echo "<li><a href=\"#fragment-1\"><span>General</span></a></li>";
-			 echo "<li><a href=\"#fragment-2\"><span>DNA Extraction Info</span></a></li>";
-			 echo "<li><a href=\"#fragment-3\"><span>RNA Extraction Info</span></a></li>";
-			 echo "<li><a href=\"#fragment-4\"><span>Analysis</span></a></li>";
-			 echo "<li><a href=\"#fragment-5\"><span>User Created Fields</span></a></li>";
-			 echo "<li><a href=\"#fragment-6\"><span>Notes</span></a></li>";
-		 echo "</ul>";
-	  
-		 echo "<div id=\"fragment-1\">";
+     echo "<li role=\"presentation\" class=\"active\"><a href=\"#fragment1\" aria-controls=\"fragment1\" role=\"tab\" data-toggle=\"tab\">General</a></li>";
+     echo "<li role=\"presentation\"><a href=\"#fragment2\" aria-controls=\"fragment2\" role=\"tab\" data-toggle=\"tab\">DNA Extraction Info</a></li>";
+     echo "<li role=\"presentation\"><a href=\"#fragment3\" aria-controls=\"fragment3\" role=\"tab\" data-toggle=\"tab\">RNA Extraction Info</a></li>";
+     echo "<li role=\"presentation\"><a href=\"#fragment4\" aria-controls=\"fragment4\" role=\"tab\" data-toggle=\"tab\">Analysis</a></li>";
+   	 echo "<li role=\"presentation\"><a href=\"#fragment5\" aria-controls=\"fragment5\" role=\"tab\" data-toggle=\"tab\">User Created Fields</a></li>";
+     echo "<li role=\"presentation\"><a href=\"#fragment6\" aria-controls=\"fragment6\" role=\"tab\" data-toggle=\"tab\">Notes</a></li>";
+   	 
+   	 echo "</ul>";
+	  echo "<div class=\"tab-content\">";
+
+
+		  echo "<div role=\"tabpanel\" class=\"tab-pane active\" id=\"fragment1\">";
 			//General
-				//sample_number, barcode,project name,location,relative location,mediat type,collector names,sample type,storage location,samplers
-		//if ($stmt2 = $dbc->prepare("SELECT sample_name,sample_sort,barcode,project_name,location_name,relt_loc_name,media_type,collector_name,sample_type FROM sample;")) {
 			$stmt->execute();
 				/* bind variables to prepared statement */
 				$stmt->bind_result($sample_name,$sample_sort,$barcode,$project_name,$location,$relative_location,$media_type,$collector_name,$sample_type,$start_time,$end_time,$total_time,$entered_by,$updated_by,$time_stamp
@@ -124,7 +126,8 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				echo "</table>";
 			
 		echo "</div>"; //end div fragment
-		echo "<div id=\"fragment-2\">";
+
+		 echo "<div role=\"tabpanel\" class=\"tab-pane\" id=\"fragment2\">";
 		
 		$stmt->execute();
 				/* bind variables to prepared statement */
@@ -134,6 +137,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				,$analysis_name
 				,$notes
 				);
+				
 				
 		 		echo "<table id=\"datatable2\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
 				echo "<thead>";
@@ -231,7 +235,9 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 		 
 		 
 		 echo "</div>";//end of fragment 2
-		echo "<div id=\"fragment-3\">";
+		
+    	echo "<div role=\"tabpanel\" class=\"tab-pane\" id=\"fragment3\">";
+    	
 		
 			$stmt->execute();
 				/* bind variables to prepared statement */
@@ -334,7 +340,8 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				echo "</tbody>";
 				echo "</table>";
 		 echo "</div>"; //end of fragment 3
-		 echo "<div id=\"fragment-4\">";
+		 //echo "<div id=\"fragment-4\">";
+		 echo "<div role=\"tabpanel\" class=\"tab-pane\" id=\"fragment4\">";
 		
 			$stmt->execute();
 				/* bind variables to prepared statement */
@@ -391,7 +398,9 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				
 				
 		echo "</div>"; //end of fragment 4
-		echo "<div  id=\"fragment-5\">";
+		//echo "<div  id=\"fragment-5\">";
+		echo "<div role=\"tabpanel\" class=\"tab-pane\" id=\"fragment5\">";
+		
 		echo "<table id=\"datatable5\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
 				
 				echo "<thead>";
@@ -436,7 +445,8 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				echo "</table>";
 		
 		echo "</div>";//end of fragment 5
-		echo "<div id=\"fragment-6\">";
+		//echo "<div id=\"fragment-6\">";
+		echo "<div role=\"tabpanel\" class=\"tab-pane\" id=\"fragment6\">";
 		
 		$stmt->execute();
 				/* bind variables to prepared statement */
@@ -505,46 +515,11 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				
 		echo "</div>"; //end of fragment 6
 	echo "</div>"; //end of tabs
-	echo "<script>$( \"#tabs\" ).tabs();</script>";
-	
-	
-	
-	
-		/* close statement */
-				$stmt->close();
-				/* close connection */
-				$dbc->close();
+	echo "</div>"; //end of background div
+
+	/* close statement */
+	$stmt->close();
+	/* close connection */
+	$dbc->close();
 }
-	//DNA
-		//dna extraction date
-		//dna extraction kit
-		//dna concentration
-		//volumne of dna elution
-		//instrument used to measure dna concentration
-		//volume of dna used to measure dna conecntration
-		//location of dna extract in freezer
-		//person who did extract
-		//if exists
-		//if original sample exists
-		
-	//RNA
-		//dna extraction date
-		//dna extraction kit
-		//dna concentration
-		//volumne of dna elution
-		//instrument used to measure dna concentration
-		//volume of dna used to measure dna conecntration
-		//location of dna extract in freezer
-		//person who did extract
-		//if exists
-		//if original sample exists
-	//Analysis
-		//name of analysis pipeline
-	//User Things
-	//Notes
-		//notes
-				
-			
-		
-	    
 ?>

@@ -15,7 +15,9 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <!--Datatables-->
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js"></script>
+
 
 <!--ptTimeSelect-->
 <?php echo '<script type="text/javascript" src="'.$_SESSION['link_root'].'config/jquery.ptTimeSelect.js"></script>'; ?>
@@ -449,91 +451,4 @@ $(document).ready(function() {
 			}	
 		 });  
 </script>
-
-<!--make all sampler times the same-->
-<!--<script type="text/javascript">
-$(document).ready(function() {
-    $('#same_time').change(function() {
-    	
-   if($(this).is(":checked")) {
-      //'checked' event code
-      console.log('what');
-      return;
-   }
-   //'unchecked' event code
-});
-   
-});
-</script>-->
-
-
-<!--custom confirm box-->
-<!--note: not actually using this right now...leaving in case try to get it to work later-->
-<!--<script type="text/javascript">
-var path = window.location.pathname;
-var page = path.split("/").pop();
-console.log( page );
-function deletePost(id){
-	var db_id = id.replace("post_", "");
-	// Run Ajax request here to delete post from database
-	document.body.removeChild(document.getElementById(id));
-}
-function CustomConfirm(){
-	this.render = function(dialog,op,id){
-		var winW = window.innerWidth;
-	    var winH = window.innerHeight;
-		var dialogoverlay = document.getElementById('dialogoverlay');
-	    var dialogbox = document.getElementById('dialogbox');
-		dialogoverlay.style.display = "block";
-	    dialogoverlay.style.height = winH+"px";
-		dialogbox.style.left = (winW/2) - (550 * .5)+"px";
-	    dialogbox.style.top = "100px";
-	    dialogbox.style.display = "block";
-		
-		document.getElementById('dialogboxhead').innerHTML = "Confirm that action";
-	    document.getElementById('dialogboxbody').innerHTML = dialog;
-		document.getElementById('dialogboxfoot').innerHTML = '<button onclick="Confirm.yes(\''+op+'\',\''+id+'\')">Yes</button> <button onclick="Confirm.no()">No</button>';
-	}
-	this.no = function(){
-		document.getElementById('dialogbox').style.display = "none";
-		document.getElementById('dialogoverlay').style.display = "none";
-		return false;
-	}
-	this.yes = function(op,id){
-		if(op == "delete_post"){
-			deletePost(id);
-		}
-		if(op == "update"){
-			return true;
-		}
-		document.getElementById('dialogbox').style.display = "none";
-		document.getElementById('dialogoverlay').style.display = "none";
-	}
-}
-var Confirm = new CustomConfirm();
-</script>
-<script>
-function someFunc() {
-    if (1==2) {
-        return true;
-    } else {
-        alert("Not submitting");
-        return false;
-    }
-}
-function validateMyForm(){
-	onload=Confirm.render('Are You Sure You Want To Update?','update','post_2');
- if() == false)
-  { 
-    alert("validation failed false");
-    returnToPreviousPage();
-    return false;
-  }
-
-  alert("validations passed");
-  return true;
-  */
-}
-</script>
-</script>-->
 

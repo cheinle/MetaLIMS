@@ -152,6 +152,7 @@ th {
 	background-color: grey;
 	height: .5in;
 	padding-left: 5px;
+	  //border-radius: 15px;
 	
 }
 td{
@@ -163,9 +164,10 @@ table {
   overflow:hidden;
   word-wrap:break-word;
   border: 1px solid black;
-  border-radius: 15px;
   box-shadow:0 5px 5px rgba(0,0,0,0.5);
 }
+
+
 th.reg {
     border: 2px solid black;
     word-wrap:break-word;

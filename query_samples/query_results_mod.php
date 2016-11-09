@@ -66,27 +66,36 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 	<style>
 		div.dataTables_wrapper {
         	width: 100%;
-        	margin: 0 ;
+        	margin: 10px 10px 0 0 ;
     	}
+    	th, td { white-space: nowrap; }
 
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() 
 		{
-				// Setup - add a text input to each footer cell
+			//Prevent collapse of headers
+			$('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+       			$.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+    		} );
+    		
+			// Setup - add a text input to each footer cell
 			$('#datatable tfoot th').each( function () 
 			{
 				var title = $(this).text();
-				$(this).html( '<input type="text" style="width:100px" placeholder="Search '+title+'" />' );
+				//$(this).html( '<input type="text" style="width:100px" placeholder="Search '+title+'" />' );
+				$(this).html( '<input type="text" style="width:100px" placeholder="Search" />' );
 			} );
 			
-			//Adding x-scroll
+			//Adding x-scroll, fixed first column and shorten show row number
 			$('#datatable').DataTable( {
-		        "scrollX": true
+		        "scrollX": true,
+		         "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]],
+		         "fixedColumns":   {
+		            leftColumns: 1,
+		        }
 		    } );
 			
-		
- 
 			// DataTable
 			var table = $('#datatable').DataTable();
  
@@ -112,18 +121,23 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 		$(document).ready(function() 
 		{
 			
-			//Adding x-scroll
-			/*$('#datatable2').DataTable( {
-		        "scrollX": true
-		    } );*/
 			// Setup - add a text input to each footer cell
 			$('#datatable2 tfoot th').each( function () 
 			{
 				var title = $(this).text();
-				$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+				$(this).html( '<input type="text" style="width:100px" placeholder="Search" />' );
 			} );
 			
-		
+				//Adding x-scroll, fixed first column and shorten show row number
+			$('#datatable2').DataTable( {
+		        "scrollX": true,
+		         "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]],
+		         "fixedColumns":   {
+		            leftColumns: 1,
+		             
+		        }
+		    } );
+			
  
 			// DataTable
 			var table = $('#datatable2').DataTable();
@@ -152,8 +166,19 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 			$('#datatable3 tfoot th').each( function () 
 			{
 				var title = $(this).text();
-				$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+				$(this).html( '<input type="text" style="width:100px" placeholder="Search" />' );
 			} );
+ 
+ 
+ 			//Adding x-scroll, fixed first column and shorten show row number
+			$('#datatable3').DataTable( {
+		        "scrollX": true,
+		         "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]],
+		         "fixedColumns":   {
+		            leftColumns: 1,
+		        }
+		    } );
+			
  
 			// DataTable
 			var table = $('#datatable3').DataTable();
@@ -182,9 +207,19 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 				$('#datatable4 tfoot th').each( function () 
 				{
 					var title = $(this).text();
-					$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+					$(this).html( '<input type="text" style="width:100px" placeholder="Search" />' );
 				} );
 	 
+	 			//Adding x-scroll, fixed first column and shorten show row number
+				$('#datatable4').DataTable( {
+			        "scrollX": true,
+			         "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]],
+			         "fixedColumns":   {
+			            leftColumns: 1,
+			        }
+			    } );
+			
+ 
 				// DataTable
 				var table = $('#datatable4').DataTable();
 	 
@@ -213,9 +248,20 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 				$('#datatable5 tfoot th').each( function () 
 				{
 					var title = $(this).text();
-					$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+					$(this).html( '<input type="text" style="width:100px" placeholder="Search" />' );
 				} );
 	 
+	 
+	 			//Adding x-scroll, fixed first column and shorten show row number
+				$('#datatable5').DataTable( {
+			        "scrollX": true,
+			         "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]],
+			         "fixedColumns":   {
+			            leftColumns: 1,
+			        }
+			    } );
+			
+ 
 				// DataTable
 				var table = $('#datatable5').DataTable();
 	 
@@ -244,8 +290,19 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 				$('#datatable6 tfoot th').each( function () 
 				{
 					var title = $(this).text();
-					$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+					$(this).html( '<input type="text" style="width:100px" placeholder="Search" />' );
 				} );
+	 
+	 			//Adding x-scroll, fixed first column and shorten show row number
+				$('#datatable6').DataTable( {
+			        "scrollX": true,
+			         "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]],
+			         "fixedColumns":   {
+			            leftColumns: 1,
+			        }
+			    } );
+			
+	 
 	 
 				// DataTable
 				var table = $('#datatable6').DataTable();

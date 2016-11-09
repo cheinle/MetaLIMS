@@ -14,9 +14,11 @@ function build_bulk_storage_update_table($stmt,$root){
 	echo '*Notice: Bulk update will update all samples that have been checkmarked<br>Please refresh page to clear if needed';
 	echo '</pre>';
 	echo '<table class = \'bulk\' id = \'top_table\'>';
+	//echo "<table id=\"datatable\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
 	echo '<thead>';
 	echo '<tr>';
 	echo '<th class="bulk">Sample Name <br><input type="checkbox" id="selecctall"/>(Select All)</th>';
+	//echo '<th>Sample Name <br><input type="checkbox" id="selecctall"/>(Select All)</th>';
 	echo '</tr>';
 	echo '</thead>';					
 	echo '<tbody>';
@@ -29,19 +31,19 @@ function build_bulk_storage_update_table($stmt,$root){
 		}
 	}
 	
-	echo '<tr><td>';
+	//echo '';
 	ksort($sort_the_samples);
 	foreach ($sort_the_samples as $sorted_name => $sname) {
 		
 		?>
-		<label class="checkbox-label" ><input type="checkbox" class = "checkbox1" name="sample_names[]" value="<?php echo $sname ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
+		<tr><td><label class="checkbox-label" ><input type="checkbox" class = "checkbox1" name="sample_names[]" value="<?php echo $sname ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
  																																																 if(isset($_SESSION['sample_array'][$sample_name])){
  																																																 	echo "checked";
 																																																 }
-																																															}?>><?php echo $sname ?></label><br>
+																																															}?>><?php echo $sname ?></label><br></td></tr>
 	<?php
 	}
-	echo '<tr><td>';
+	//echo '</td></tr>';
 	
 	$stmt-> close();
 
