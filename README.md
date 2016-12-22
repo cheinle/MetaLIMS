@@ -3,14 +3,14 @@
 ### NanoLIMS is currently under major re-construction. Suggestion by developers is to not pull current version at this time. A formal release will be created when changes have been finalized. Thank you for your understanding. Please email myself if you have any questions (cheinle@ntu.edu.sg) Apologies for any inconvenience. CHEINLE - Oct 15, 2016 
 
 
-
-
 # NanoLIMS, A Simple Open-Source LIMS System for Small Sequencing Labs 
 
 ##NanoLIMS v1 Manual 
 
 ### Installation and Usage
-* [Installation & Set-up - For Admins](https://github.com/cheinle/NanoLIMS/wiki/Editing-NanoLIMS-v1.0-Manual-For-Admin)
+* [Installation & Set-up - For Admins](https://github.com/cheinle/NanoLIMS/wiki/Editing-NanoLIMS-v1.0-Manual-For-Admin)   
+    Don't know which installation documentation is right for you? Use our     
+    [Documentation Decision Tree](#Documentation-Decision-Tree): 
 * [Basic Usage](https://github.com/cheinle/NanoLIMS/wiki/Editing-NanoLIMS-v1.0-Manual-Basic-Usage)
 * [Misc Info - For Developers](https://github.com/cheinle/NanoLIMS/wiki/NanoLIMS-v1.0-Manual-For Developers)
 
@@ -39,4 +39,8 @@ Email bugs and feature requests to: cheinle@ntu.edu.sg
 
 ##License
 [Read LICENSE] (https://github.com/cheinle/NanoLIMS/blob/master/license.md)
+
+#Documentation Decision Tree
+
+<img src="https://docs.google.com/drawings/d/18nvQsv37nzHn4TGkGvZKSUTyw7hyXd4cNDNpgQ-VW2M/pub?w=960&amp;h=720">
 
