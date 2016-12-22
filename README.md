@@ -18,6 +18,7 @@
 ### Misc   
 *    [nanolims.sh](https://github.com/cheinle/NanoLIMS/wiki/nanolims.sh)
 *    [lamp.sh](https://github.com/cheinle/NanoLIMS/wiki/lamp.sh)
+*    [Installation Decision Tree](https://github.com/cheinle/NanoLIMS/wiki/desision-tree)
 
 
 ##Synopsis
