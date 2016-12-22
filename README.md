@@ -7,6 +7,7 @@
 
 ## NanoLIMS v2 Installation and Usage
 ### Installation
+*    [Installation Decision Tree](https://github.com/cheinle/NanoLIMS/wiki/installation-decision-tree)
 *    [NanoLIMS v2.0 Hosted Installation (via AWS Lightsail)](https://github.com/cheinle/NanoLIMS/wiki/NanoLIMS--v2.0-Hosted-Installation-(via-AWS-Lightsail))
 *    [NanoLIMS v2.0 Full Manual Installation](https://github.com/cheinle/NanoLIMS/wiki/NanoLIMS--v2.0-Full-Manual-Installation)
 
@@ -18,8 +19,6 @@
 ### Misc   
 *    [nanolims.sh](https://github.com/cheinle/NanoLIMS/wiki/nanolims.sh)
 *    [lamp.sh](https://github.com/cheinle/NanoLIMS/wiki/lamp.sh)
-*    [Installation Decision Tree](https://github.com/cheinle/NanoLIMS/wiki/desision-tree)
-
 
 ##Synopsis
 
