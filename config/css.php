@@ -3,7 +3,7 @@
 ?>
 
 <!--Datatables-->
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
 
 <!--Latest complied and minified CSS -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -228,6 +228,22 @@ button.small-button{
 	height: 5%;
 	margin-left: 2%;
 	margin-top: 10px;
+	border-radius: 15px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.5);
+	background: linear-gradient(rgba(192,213,219,1),rgba(192,213,219,0.75),rgba(192,213,219,1));
+}
+
+
+button.mini-button{
+	clear: both;
+	float:left;
+	color: black;
+	background: #C0D5DB;
+	border-color:#EEEEDBS;
+	width: 10%;
+	height: 3.5%;
+	margin-left: 2%;
+	margin-top: 0px;
 	border-radius: 15px;
     box-shadow:0 1px 3px rgba(0,0,0,0.5);
 	background: linear-gradient(rgba(192,213,219,1),rgba(192,213,219,0.75),rgba(192,213,219,1));
@@ -539,7 +555,6 @@ pre.border{
 
 /***********For Bulk Update Tables ********/
 table.bulk{
-
   width:90%;
   float:left;
   color:#818181;

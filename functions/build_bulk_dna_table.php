@@ -15,10 +15,12 @@ function build_bulk_dna_table($stmt,$root){
 	echo '<pre>';
 	echo '*Notice: Bulk Update will update all samples that have been checkmarked';
 	echo '</pre>';
-	echo '<table class = \'bulk\'>';
+	echo '<table id = "datatable_bulk" class ="bulk" style="width:90%">';
+	echo '<button type="button" id="selectAll" class="mini-button" style="float:left;margin-bottom: 0.5%;"><span class="sub"></span> Select All Samples </button>';
+	
 	echo '<thead>';
 	echo '<tr>';
-	echo '<th class="bulk">Sample Name <br><input type="checkbox" id="selecctall"/>(Select All)</th>';
+	echo '<th class="bulk">Sample Name</th>';
 	echo '<th class="bulk">DNA Conc. (ng/uL)</th>';
 	echo '</tr>';
 	echo '</thead>';					
@@ -34,23 +36,24 @@ function build_bulk_dna_table($stmt,$root){
 		}
 	}
 	
-	echo '<tr><td>';
+	
 	ksort($sort_the_samples);
 	foreach ($sort_the_samples as $sorted_name => $sname) {
 		
-		echo '<tr class = "row_collapse">';
+		#echo '<tr class = "row_collapse">';
+		echo '<tr>';
 		$mod_sample_name = preg_replace("/\//",'-',$sname);//jQuery cannot use slashes
 		$mod_sample_name = preg_replace("/\s+/",'-',$mod_sample_name);//jQuery can also not use spaces
 		?>
 		<td>
- 		<input type="checkbox" class = "checkbox1" id="<?php echo $mod_sample_name;?>_checkbox" name="sample[<?php echo $sname; ?>][checkbox]" value="checked" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
+ 		<input type="checkbox" class = "checkbox1" id="<?php echo $mod_sample_name;?>_checkbox" name="sample[<?php echo $sname; ?>][checkbox]" value="checked" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {
  																																																 if(isset($_SESSION['sample_array'][$sname]['checkbox']) && htmlspecialchars($_SESSION['sample_array'][$sname]['checkbox']) == 'checked'){
  																																																 	echo "checked";
 																																																 }
 																																															}?>/> <?php echo $sname ?><br />
 		</td>
 		<?php $dna_conc = htmlspecialchars($sample_dna_conc[$sname]);?>
-		<td><input type="text" class = "checkbox1" id="<?php echo $mod_sample_name;?>_dna" name="sample[<?php echo $sname; ?>][dna]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sname]['dna']);}else{echo $dna_conc;} ?>"></td>
+		<td><input type="text" class = "checkbox1" id="<?php echo $mod_sample_name;?>_dna" name="sample[<?php echo $sname; ?>][dna]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {echo htmlspecialchars($_SESSION['sample_array'][$sname]['dna']);}else{echo $dna_conc;} ?>"></td>
 					
 		<!--mark checkbox if you change a DNA Concentration in the bulk DNA update-->
 		<script type="text/javascript">
@@ -61,13 +64,17 @@ function build_bulk_dna_table($stmt,$root){
 				var sample_name_checkbox = sample_name+'_checkbox';
 	
 	    		$('#'+sample_name_dna).change(function(){ //on change event
-	    			$('#'+sample_name_checkbox).prop('checked',true);
-	    			//alert(sample_name);  
+	    			if($('#'+sample_name_dna).val.length > 0){
+			        	$('#'+sample_name_checkbox).prop('checked',true);
+			        }else{
+			        	$('#'+sample_name_checkbox).prop('checked',false);
+			        }
 				});
 	
 			});	
 		</script>
 		<?php 
+		echo '</tr>';
 	}
 
 	$stmt->close();
@@ -90,7 +97,7 @@ function build_bulk_dna_table($stmt,$root){
 	<td>
 	<p>
 	<label class="textbox-label">DNA Extraction Date:</label><br>
-	<input type="text" id="datepicker5"  name="d_extr_date" placeholder="Enter Date" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['d_extr_date']);} ?>"/>
+	<input type="text" id="datepicker5"  name="d_extr_date" placeholder="Enter Date" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {echo htmlspecialchars($_SESSION['d_extr_date']);} ?>"/>
 	<script>
 	$('#datepicker5').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 	</script>
@@ -118,7 +125,7 @@ function build_bulk_dna_table($stmt,$root){
 	<td>
 	<p>
 	<label class="textbox-label">Volume of DNA Elution (ul):</label><br>
-	<input type="text" name="dVol" class="fields" placeholder="Enter A Volume" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['dVol']);} ?>">
+	<input type="text" name="dVol" class="fields" placeholder="Enter A Volume" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {echo htmlspecialchars($_SESSION['dVol']);} ?>">
 	</p>
 	</td>
 	</tr>
@@ -141,7 +148,7 @@ function build_bulk_dna_table($stmt,$root){
 	<tr>
 	<td>
 	<label class="textbox-label">Volume of DNA Used for Measure DNA Concentration(ul):</label><br>
-	<input type="text" name="dVol_quant" class="fields" placeholder="Enter A Volume" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['dVol_quant']);}  ?>">
+	<input type="text" name="dVol_quant" class="fields" placeholder="Enter A Volume" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {echo htmlspecialchars($_SESSION['dVol_quant']);}  ?>">
 	</p>
 	</td>
 	</tr>
@@ -158,7 +165,7 @@ function build_bulk_dna_table($stmt,$root){
 	?>
 	
 	<select id="dStore_name" name ="dStore_name" class='fields'>
-		<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false'){
+		<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true'){
 		echo '<option value='.$_GET["dStore_name"].'  echo "selected";}} ?>'.$_GET["dStore_name"].' </option>';
 		}else{
 			echo '<option value="0">-Select-</option>';
@@ -173,7 +180,7 @@ function build_bulk_dna_table($stmt,$root){
 	<td>
 	<!--DNA Extractor Name input-->
 	<label class="textbox-label">Enter Name(s) of Persons Who Extracted DNA:</label>
-	<p class="clone2"> <input type="text" name="dExtrName[]" class='input' placeholder="First Name(s)" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['dExtrName']);}  ?>"/></p>
+	<p class="clone2"> <input type="text" name="dExtrName[]" class='input' placeholder="First Name(s)" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {echo htmlspecialchars($_SESSION['dExtrName']);}  ?>"/></p>
 	</p>
 	</td>
 	</tr>
@@ -184,7 +191,7 @@ function build_bulk_dna_table($stmt,$root){
 	<td>
 	<h3 class="checkbox-header">Does Original Sample Still Exist?:</h3><br>
 	<div class="vert-checkboxes">
-	<label class="checkbox-label"></label="checkbox-label"><input type="checkbox" name="orig_sample_exist" class = "orig_sample_exist" id="orig_sample_exist" value="false" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {if(isset($_SESSION['orig_sample_exist']) && $_SESSION['orig_sample_exist'] == 'false'){echo 'checked';}} ?>/>No</label>
+	<label class="checkbox-label"></label="checkbox-label"><input type="checkbox" name="orig_sample_exist" class = "orig_sample_exist" id="orig_sample_exist" value="false" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {if(isset($_SESSION['orig_sample_exist']) && $_SESSION['orig_sample_exist'] == 'true'){echo 'checked';}} ?>/>No</label>
 	<!--<input type="radio" name="orig_sample_exist" class = "orig_sample_exist" id="orig_sample_exist" value="true" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {if(isset($_SESSION['orig_sample_exist']) && $_SESSION['orig_sample_exist'] == 'true'){echo 'checked';}} ?>/>Yes<br />-->
 	</div>
 	</p>
@@ -196,8 +203,8 @@ function build_bulk_dna_table($stmt,$root){
 	<td>
 	<h3 class="checkbox-header">Does DNA Extraction Sample Exist?</h3><br>
 	<div class="vert-checkboxes">
-	<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="one" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {if(isset($_SESSION['DNA_sample_exist']) && $_SESSION['DNA_sample_exist'] == 'one'){echo 'checked';}} ?>/>Yes,DNA Sample Exisits</label>
-	<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="three" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {if(isset($_SESSION['DNA_sample_exist']) && $_SESSION['DNA_sample_exist'] == 'three'){echo 'checked';}}  ?>/>No, DNA Sample Is Used Up</label>
+	<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="one" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {if(isset($_SESSION['DNA_sample_exist']) && $_SESSION['DNA_sample_exist'] == 'one'){echo 'checked';}} ?>/>Yes,DNA Sample Exisits</label>
+	<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="three" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {if(isset($_SESSION['DNA_sample_exist']) && $_SESSION['DNA_sample_exist'] == 'three'){echo 'checked';}}  ?>/>No, DNA Sample Is Used Up</label>
 	</div>
 	</p>
 	</td>

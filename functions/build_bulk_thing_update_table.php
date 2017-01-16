@@ -32,10 +32,11 @@ function build_bulk_thing_update_table($stmt,$root,$selected_thing){
 	echo '<pre>';
 	echo '*Notice: Bulk update will update all samples that have been checkmarked<br>Please refresh page to clear if needed';
 	echo '</pre>';
-	echo '<table class = \'bulk\' id = \'top_table\'>';
+	echo '<table id = "datatable_bulk" class ="bulk" style="width:90%">';
+	echo '<button type="button" id="selectAll" class="mini-button" style="float:left;margin-bottom: 0.5%;"><span class="sub"></span> Select All Samples </button>';
 	echo '<thead>';
 	echo '<tr>';
-	echo '<th class="bulk">Sample Name <br><input type="checkbox" id="selecctall"/>(Select All)</th>';
+	echo '<th class="bulk">Sample Name</th>';
 	echo '<th class="bulk">'.$thing_label.'</th>';
 	echo '</tr>';
 	echo '</thead>';					
@@ -64,7 +65,7 @@ function build_bulk_thing_update_table($stmt,$root,$selected_thing){
 			id="<?php echo $mod_sample_name;?>_checkbox" 
 			name = "sample[<?php echo $sname; ?>][checkbox]"
 			value="<?php echo $mod_sample_name ?>" 
-			<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
+			<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {
 					 if(isset($_SESSION['sample_array'][$sample_name])){
 					 	echo "checked";
 					 }
@@ -94,7 +95,7 @@ function build_bulk_thing_update_table($stmt,$root,$selected_thing){
 			id="<?php echo $mod_sample_name;?>_thing" 
 			name="sample[<?php echo $sname; ?>][thing]" 
 			value="<?php echo find_thing_values($sname,$thing_id) ?>" 
-			<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == "false") {
+			<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == "true") {
 				if(isset($_SESSION['sample_array'][$thing_id])){
 					echo "checked";
 				}
@@ -104,8 +105,29 @@ function build_bulk_thing_update_table($stmt,$root,$selected_thing){
 		</td>
 <?php	} ?>	
 	</tr>
+	<!--mark checkbox if you change a Read Submission name, check the checkbox-->
+				<script type="text/javascript">
+					
+					$(document).ready(function(){  
+						var sample_name = <?php echo(json_encode($mod_sample_name)); ?>;
+						var sample_name_id = sample_name+'_thing';
+						var sample_name_checkbox = sample_name+'_checkbox';
+	
+			        	$('#'+sample_name_id).change(function(){ //on change event
+			        		if($('#'+sample_name_id).val.length > 0){
+			        			$('#'+sample_name_checkbox).prop('checked',true);
+			        		}else{
+			        			$('#'+sample_name_checkbox).prop('checked',false);
+			        		}
+
+						});
+		
+					});	
+				</script>
+	
 	<?php
 	}
+	
 	
 	
 	$stmt-> close();
@@ -161,7 +183,7 @@ function build_bulk_thing_update_table($stmt,$root,$selected_thing){
         var valid = 'true';
         
          //check that at least one checkbox is selected
-        var top_table = document.getElementById("top_table");
+        var top_table = document.getElementById("datatable_bulk");
        	var number_of_samples_checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
         if(number_of_samples_checked < 1){
         	valid = 'false';

@@ -13,10 +13,11 @@ function build_bulk_read_sub_id_table($stmt,$root){
 	echo '<pre>';
 	echo '*Notice: Bulk Update will update all samples that have been checkmarked';
 	echo '</pre>';
-	echo '<table class = \'bulk\'>';
+	echo '<table id = "datatable_bulk" class ="bulk" style="width:90%">';
+	echo '<button type="button" id="selectAll" class="mini-button" style="float:left;margin-bottom: 0.5%;"><span class="sub"></span> Select All Samples </button>';
 	echo '<thead>';
 	echo '<tr>';
-	echo '<th class="bulk">  Sample Name <br><input type="checkbox" id="selecctall"/>(Select All)</th>';
+	echo '<th class="bulk">  Sample Name</th>';
 	echo '<th class="bulk">Seq Sub Name</th>';
 	echo '<th class="bulk">Read Sub Name</th>';
 
@@ -106,7 +107,7 @@ function build_bulk_read_sub_id_table($stmt,$root){
 				
 				
 				?>
-				<td><input type="text" class = "checkbox1" id="<?php echo $mod_sample_name;?>_id" name="sample[<?php echo $sample_name; ?>][id]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['id']);}else{echo $id;} ?>"></td>
+				<td><input type="text" class = "checkbox1" id="<?php echo $mod_sample_name;?>_id" name="sample[<?php echo $sample_name; ?>][id]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {echo "test";echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['id']);}else{echo $id;} ?>"></td>
 				</tr>
 					
 				<!--mark checkbox if you change a Read Submission name, check the checkbox-->
@@ -114,12 +115,16 @@ function build_bulk_read_sub_id_table($stmt,$root){
 					
 					$(document).ready(function(){  
 						var sample_name = <?php echo(json_encode($mod_sample_name)); ?>;
-						var sample_name_dna = sample_name+'_id';
+						var sample_name_id = sample_name+'_id';
 						var sample_name_checkbox = sample_name+'_checkbox';
 	
-			        	$('#'+sample_name_dna).change(function(){ //on change event
-			        		$('#'+sample_name_checkbox).prop('checked',true);
-			        		//alert(sample_name);  
+			        	$('#'+sample_name_id).change(function(){ //on change event
+			        		if($('#'+sample_name_id).val.length > 0){
+			        			$('#'+sample_name_checkbox).prop('checked',true);
+			        		}else{
+			        			$('#'+sample_name_checkbox).prop('checked',false);
+			        		}
+
 						});
 		
 					});	
@@ -152,7 +157,7 @@ function build_bulk_read_sub_id_table($stmt,$root){
 			<td>
 			<p>
 			<label>Date Submitted:</label><br>
-			<input type="text" id="datepicker5"  name="subm_date" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['date_submitted']);} ?>"/>
+			<input type="text" id="datepicker5"  name="subm_date" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {echo htmlspecialchars($_SESSION['date_submitted']);} ?>"/>
 			<script>
 			$('#datepicker5').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 			</script>
@@ -178,7 +183,7 @@ function build_bulk_read_sub_id_table($stmt,$root){
 			<td>
 			<p>
 			<label>Person Who Made Submission:</label><br>
-			<input type="text" name="submitter" class="fields" placeholder="Enter A Name" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['submitter']);} ?>">
+			<input type="text" name="submitter" class="fields" placeholder="Enter A Name" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {echo htmlspecialchars($_SESSION['submitter']);} ?>">
 			</p>
 			</td>
 			</tr>

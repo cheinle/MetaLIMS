@@ -15,7 +15,8 @@ function build_bulk_read_sub_id_update_table($stmt,$root){
 	echo '<pre>';
 	echo '*Notice: Bulk Update will update all samples that have been checkmarked for Update/Delete';
 	echo '</pre>';
-	echo '<table class="bulky_bulk">';
+	#echo '<table class="bulky_bulk">';
+	echo '<table id = "datatable_bulk" class ="bulk" style="width:100%;margin:0px;">';
 	echo '<thead>';
 	echo '<tr>';
 	echo '<th class="bulk">(Uncheck)</th>';

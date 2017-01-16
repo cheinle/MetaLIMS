@@ -72,6 +72,34 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 
 	</style>
 	<script type="text/javascript">
+	
+		//For bulk table updates
+		$(document).ready(function () {
+		   //$('button').on('click', '#selectAll', function () {
+		   	
+		   	$('#selectAll').click(function(){
+		   		//alert("test");
+		      if ($(this).hasClass('allChecked')) {
+		         $('input[type="checkbox"]', '#datatable_bulk').prop('checked', false);
+		      } else {
+		       $('input[type="checkbox"]', '#datatable_bulk').prop('checked', true);
+		       }
+		       $(this).toggleClass('allChecked');
+		     })
+		     
+		     
+		     	$('#datatable_bulk').DataTable( {
+			         "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]]
+			    } );
+				
+				// DataTable
+				//var table_bulk = $('#datatable_bulk').DataTable();
+	 
+		});
+	
+	
+	
+		//For regular query tables	
 		$(document).ready(function() 
 		{
 			//Prevent collapse of headers
@@ -140,10 +168,10 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 			
  
 			// DataTable
-			var table = $('#datatable2').DataTable();
+			var table2 = $('#datatable2').DataTable();
 
 			// Apply the search
-			table.columns().every( function () 
+			table2.columns().every( function () 
 			{
 				var that = this;
  
@@ -181,10 +209,10 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 			
  
 			// DataTable
-			var table = $('#datatable3').DataTable();
+			var table3 = $('#datatable3').DataTable();
  
 			// Apply the search
-			table.columns().every( function () 
+			table3.columns().every( function () 
 			{
 				var that = this;
  
@@ -221,10 +249,10 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 			
  
 				// DataTable
-				var table = $('#datatable4').DataTable();
+				var table4 = $('#datatable4').DataTable();
 	 
 				// Apply the search
-				table.columns().every( function () 
+				table4.columns().every( function () 
 				{
 					var that = this;
 	 
@@ -263,10 +291,10 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 			
  
 				// DataTable
-				var table = $('#datatable5').DataTable();
+				var table5 = $('#datatable5').DataTable();
 	 
 				// Apply the search
-				table.columns().every( function () 
+				table5.columns().every( function () 
 				{
 					var that = this;
 	 
@@ -305,10 +333,10 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 	 
 	 
 				// DataTable
-				var table = $('#datatable6').DataTable();
+				var table6 = $('#datatable6').DataTable();
 	 
 				// Apply the search
-				table.columns().every( function () 
+				table6.columns().every( function () 
 				{
 					var that = this;
 	 
@@ -421,7 +449,7 @@ if(isset($_GET['submit'])){
 			$query_main = "SELECT sample.sample_name,sample.sample_num,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample LEFT JOIN read_submission ON read_submission.sample_name = sample.sample_name LEFT JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
 		}
 		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'view_read_sub' || $_GET['db_content'] == 'update_read_sub')){
-			$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
+			$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name LEFT JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
 		}
 		else{
 			$query_main = "SELECT $field_names FROM sample JOIN storage_info ON storage_info.sample_name = sample.sample_name LEFT JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";

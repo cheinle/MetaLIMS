@@ -87,7 +87,7 @@
 					}else{
 						throw new Exception("ERROR: Sample Insert Failure. Possible Duplicate Entry ");
 						$insert_error = 'true';
-						echo 'An error has occured';
+						echo 'An error has occurred';
 						mysqli_error($dbc);
 						
 					}

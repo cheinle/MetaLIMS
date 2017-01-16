@@ -5,22 +5,23 @@ function build_bulk_storage_update_table($stmt,$root){
 
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	include($path.'config/js.php'); //was not being inherited correctly...just added here for now
+	include($path.'config/css.php'); 
 	include($path.'functions/dropDown.php');
 	
 	echo '<form class="registration" onsubmit="return validate(this)" action="bulk_insert_and_updates/storage_bulk_update.php" method="POST">';
-	//echo '<div class = \'left\'>';
 	echo '<div>';
 	echo '<pre>';
 	echo '*Notice: Bulk update will update all samples that have been checkmarked<br>Please refresh page to clear if needed';
 	echo '</pre>';
-	echo '<table class = \'bulk\' id = \'top_table\'>';
-	//echo "<table id=\"datatable\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
+	
+	echo '<table id = "datatable_bulk" class ="bulk" style="width:90%">';
+	echo '<button type="button" id="selectAll" class="mini-button" style="float:left;margin-bottom: 0.5%;"><span class="sub"></span> Select All Samples </button>';
+	
 	echo '<thead>';
-	echo '<tr>';
-	echo '<th class="bulk">Sample Name <br><input type="checkbox" id="selecctall"/>(Select All)</th>';
-	//echo '<th>Sample Name <br><input type="checkbox" id="selecctall"/>(Select All)</th>';
-	echo '</tr>';
-	echo '</thead>';					
+	echo '<tr><th class="bulk">Sample Name</th></tr>';
+	echo '</thead>';
+	
+						
 	echo '<tbody>';
 
 	$sort_the_samples = array();
@@ -36,20 +37,22 @@ function build_bulk_storage_update_table($stmt,$root){
 	foreach ($sort_the_samples as $sorted_name => $sname) {
 		
 		?>
-		<tr><td><label class="checkbox-label" ><input type="checkbox" class = "checkbox1" name="sample_names[]" value="<?php echo $sname ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
+		<tr><td><label class="checkbox-label" ><input type="checkbox" name="sample_names[]" value="<?php echo $sname ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
  																																																 if(isset($_SESSION['sample_array'][$sample_name])){
  																																																 	echo "checked";
 																																																 }
 																																															}?>><?php echo $sname ?></label><br></td></tr>
 	<?php
 	}
-	//echo '</td></tr>';
 	
 	$stmt-> close();
 
-			echo '</tbody>';
-			echo '</table>';
-			echo '</div>';
+	echo '</tbody>';
+	echo '</table>';
+	echo '</div>';
+			
+			
+			
 			//other fields to update
 			//check if form has  been submitted successfully or not
 			$submitted = 'true';
@@ -58,7 +61,7 @@ function build_bulk_storage_update_table($stmt,$root){
 			}
 			?>
 			<!--<div class = 'right'>--></div>
-			<div = 'bulk'>
+			<div id = 'bulk'>
 			<table class = 'bulk'>
 			<tr>
 			<th class="bulk">Storage Location:(Required)</th>

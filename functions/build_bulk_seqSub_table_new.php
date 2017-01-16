@@ -13,7 +13,8 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
 	echo '<form class="registration" onsubmit="return validate(this)" action="seqSub_bulk_update_new.php" method="POST">';
 	echo '<div>';
 	
-	echo '<table class = \'bulk\'>';
+	#echo '<table class = \'bulk\'>';
+	echo '<table id = "datatable_bulk" class="bulk">';
 	echo '<thead>';
 	echo '<tr>';
 	echo '<th class = "bulk">Sample Name <br></th>';

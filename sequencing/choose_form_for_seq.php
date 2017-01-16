@@ -11,6 +11,21 @@ ini_set('display_errors', 1);
 	<head>
 		<meta charset="utf-8">
 		<title>Choose Form</title>
+		
+		<script type="text/javascript">
+	
+		//For bulk table updates
+		$(document).ready(function () {
+
+		     	$('#datatable_bulk').DataTable( {
+			         "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]]
+			    } );
+				
+				// DataTable
+				var table = $('#datatable_bulk').DataTable();
+	 
+		});
+	</script>
 	</head>
  
 	<body>

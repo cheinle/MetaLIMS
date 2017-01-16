@@ -35,7 +35,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				,$notes
 				);
 				
-				echo "<table id=\"datatable\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
+				echo "<table id=\"datatable\" class=\"display\" cellspacing=\"0\" width=\"90%\ max-width=\"90%\">";
 				echo "<thead>";
 				echo "<tr>";
 				echo "<th>Sample Name</th>";
@@ -139,7 +139,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				);
 				
 				
-		 		echo "<table id=\"datatable2\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
+		 		echo "<table id=\"datatable2\" class=\"display\" cellspacing=\"0\" width=\"90%\ max-width=\"90%\">";
 				echo "<thead>";
 				echo "<tr>";
 				echo "<th>Sample Name</th>";
@@ -247,7 +247,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				,$analysis_name
 				,$notes
 				);
-		 	echo "<table id=\"datatable3\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
+		 	echo "<table id=\"datatable3\" class=\"display\" cellspacing=\"0\" width=\"90%\ max-width=\"90%\">";
 				echo "<thead>";
 				echo "<tr>";
 				echo "<th>Sample Name</th>";
@@ -353,7 +353,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				);
 				
 				
-				echo "<table id=\"datatable4\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
+				echo "<table id=\"datatable4\" class=\"display\" cellspacing=\"0\" width=\"90%\ max-width=\"90%\">";
 				echo "<thead>";
 				echo "<tr>";
 				echo "<th>Sample Name</th>";
@@ -401,7 +401,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 		//echo "<div  id=\"fragment-5\">";
 		echo "<div role=\"tabpanel\" class=\"tab-pane\" id=\"fragment5\">";
 		
-		echo "<table id=\"datatable5\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
+		echo "<table id=\"datatable5\" class=\"display\" cellspacing=\"0\" width=\"90%\ max-width=\"90%\">";
 				
 				echo "<thead>";
 				echo "<tr>";
@@ -457,7 +457,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				,$notes
 				);
 				
-				echo "<table id=\"datatable6\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
+				echo "<table id=\"datatable6\" class=\"display\" cellspacing=\"0\" width=\"90%\ max-width=\"90%\">";
 				echo "<thead>";
 				echo "<tr>";
 				echo "<th>Sample Name</th>";

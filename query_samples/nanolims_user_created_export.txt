@@ -1,1 +1,1 @@
-Sample Name	Sample Sort	
+Sample Name	Sample Sort	Temperature (c)	Salinity (ppt)	Depth (m)	
