@@ -37,7 +37,7 @@ function build_bulk_storage_update_table($stmt,$root){
 	foreach ($sort_the_samples as $sorted_name => $sname) {
 		
 		?>
-		<tr><td><label class="checkbox-label" ><input type="checkbox" name="sample_names[]" value="<?php echo $sname ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
+		<tr><td><label class="checkbox-label" ><input type="checkbox" name="sample_names[]" value="<?php echo $sname ?>" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {
  																																																 if(isset($_SESSION['sample_array'][$sample_name])){
  																																																 	echo "checked";
 																																																 }
@@ -142,7 +142,7 @@ function build_bulk_storage_update_table($stmt,$root){
         var valid = 'true';
         
          //check that at least one checkbox is selected
-        var top_table = document.getElementById("top_table");
+        var top_table = document.getElementById("datatable_bulk");
        	var number_of_samples_checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
         if(number_of_samples_checked < 1){
         	valid = 'false';

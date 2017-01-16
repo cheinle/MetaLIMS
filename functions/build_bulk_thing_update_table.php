@@ -187,7 +187,7 @@ function build_bulk_thing_update_table($stmt,$root,$selected_thing){
        	var number_of_samples_checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
         if(number_of_samples_checked < 1){
         	valid = 'false';
-        	//alert("Warning: Please select checkbox for samples to update");
+        	alert("Warning: Please select checkbox for samples to update");
         	top_table.style.background = "pink";
         }
         else{

@@ -9,7 +9,7 @@ function build_bulk_dna_table($stmt,$root){
 	include($path.'functions/dropDown.php');
 	include($path.'/config/js.php');
 	
-	echo '<form class="registration" onsubmit="return confirm(\'Do you want to submit the form?\');" action="bulk_insert_and_updates/dna_bulk_update.php" method="POST">';
+	echo '<form class="registration" onsubmit="return validate(this)"  action="bulk_insert_and_updates/dna_bulk_update.php" method="POST">';
 	//echo '<div class = \'left\'>';
 	echo '<div>';
 	echo '<pre>';
@@ -89,8 +89,8 @@ function build_bulk_dna_table($stmt,$root){
 	}
 	?>
 	</div>
-	<div = 'bulk'>
-	<table class = 'bulk'>
+	<div id = 'bulk'>
+	<table class = 'bulk' id='bulk'>
 	<th class="bulk">DNA Extraction Info:(Required)</th>
 	
 	<tr>
@@ -224,3 +224,113 @@ function build_bulk_dna_table($stmt,$root){
 
  <?php } ?>
 
+<script type="text/javascript">
+ 	var name_check = 'true';
+	function validate(form) {
+		var valid = 'true';
+
+		if(check_this_form() == 'false'){
+			valid = 'false';
+		}	
+		if(valid == 'false'){
+			alert('ERROR: Some inputs are invalid. Please check fields and ensure at least one sample checkbox is checked');
+			return false;
+		}
+		else{
+			return confirm('Sure You Want To Submit?');
+		}
+	}
+    function check_this_form(){
+       	var index;
+        var valid = 'true';
+        
+         //check that at least one checkbox is selected
+        var top_table = document.getElementById("datatable_bulk");
+       	var number_of_samples_checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+        if(number_of_samples_checked < 1){
+        	valid = 'false';
+        	alert("Warning: Please select checkbox for samples to update");
+        	top_table.style.background = "pink";
+        }
+        else{
+       		top_table.style.background = "white";
+        }
+        
+     
+		        
+         //check that second table is filled in
+        var bottom_table = document.getElementById("bulk");
+	    var input = bottom_table.getElementsByTagName( 'input' ); 
+	    for ( var z = 0; z < input.length; z++ ) { 
+	    	 var input_id = input[z];
+	    	
+	    	 var input_value = input_id.value;
+			 if(input_value.length < 1){
+			 	input_id.style.background = "blue";
+			 }else{
+			 	input_id.style.background = "white";
+			 }
+   		 } 
+   		 
+   		var select = bottom_table.getElementsByTagName( 'select' ); 
+	    for ( var z = 0; z < select.length; z++ ) { 
+	    	 var select_id = select[z];
+	    	
+	    	 var select_value = select_id.value;
+			 if(select_value == 0){
+			 	select_id.style.background = "blue";
+			 }else{
+			 	select_id.style.background = "white";
+			 }
+   		 } 
+
+		if( $('input[type=radio]:selected').length == 0 ) {
+		    alert('Please select if DNA Extraction Sample Exists.');
+		    bottom_table.style.background = "pink";
+		}else{
+			bottom_table.style.background = "white";
+		}
+        
+        //check that all checked have correct input
+       var bulk_form = document.forms[0];
+
+	   var i;
+	   for (i = 0; i < bulk_form.length; i++) {
+	       if (bulk_form[i].checked) {
+	           checkbox_name = bulk_form[i].id;
+
+	           var temp = new Array();
+	           temp = checkbox_name.split("_");
+
+	           var input = document.getElementById(temp[0]+'_dna');
+	           var input_val = input.value;
+		
+	    		if(input_val == ''){
+		      		input.style.background = "blue";
+		       		valid = 'false';
+		   		}
+			    else{
+		       		
+					if(isNumeric(input_val) == false){
+						alert("ERROR: Value must be a number");
+						input.style.background = "blue";
+					   	valid = 'false';
+					}
+					else{
+	             		input.style.background = "white";
+	             	}
+	       		  	
+			   	}
+		    	
+			}
+		}
+		return valid; 
+	}
+	
+	
+	
+	
+	function isNumeric(n) {
+		return !isNaN(parseFloat(n)) && isFinite(n);
+	}
+</script>
