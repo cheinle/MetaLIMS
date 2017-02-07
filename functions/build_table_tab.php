@@ -12,7 +12,7 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 	$thing_label_array = find_thing_labels();
 	
 	if ($stmt->execute()){
-			$myfile = fopen("nanolims_export.txt", "w") or die("Unable to open file!");
+			$myfile = fopen("metalims_export.txt", "w") or die("Unable to open file!");
 			/* bind variables to prepared statement */
 			$stmt->bind_result($sample_name,$sample_sort,$barcode,$project_name,$location,$relative_location,$media_type,$collector_name,$sample_type,$start_time,$end_time,$total_time,$entered_by,$updated_by,$time_stamp
 			,$dna_extraction_date,$dna_extraction_kit,$dna_concentration,$dna_volume_of_elution,$dna_instrument,$dna_vol_for_instrument,$dna_storage,$dna_extractor,$dna_exists,$orig_exists
@@ -159,7 +159,7 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 			
 			
 			/*Create user thing document*/
-			$myThingFile = fopen("nanolims_user_created_export.txt", "w") or die("Unable to open file!");
+			$myThingFile = fopen("metalims_user_created_export.txt", "w") or die("Unable to open file!");
 			fwrite($myThingFile, "Sample Name\t");
 			fwrite($myThingFile, "Sample Sort\t");
 

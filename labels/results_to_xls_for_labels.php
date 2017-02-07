@@ -39,7 +39,7 @@ table {
 if(isset($_GET['submit'])){
 
 		echo '<p>';    
-		echo "<h2>Instructions:</h2> Print QR Codes for Sample Names and Barcode Fields (*if populated) by right-clicking anywhere on page and printing from browser window. Else <a href=\"download.php?download_file=nanolims_labels.txt\">download alternative file</a>. Alternative file will contain tab-delimited entries for easy import into common label making software"	;
+		echo "<h2>Instructions:</h2> Print QR Codes for Sample Names and Barcode Fields (*if populated) by right-clicking anywhere on page and printing from browser window. Else <a href=\"download.php?download_file=metalims_labels.txt\">download alternative file</a>. Alternative file will contain tab-delimited entries for easy import into common label making software"	;
 		echo '</p>';
 		echo '<br>';
 			
@@ -153,7 +153,7 @@ if(isset($_GET['submit'])){
 		}
 	
 		if ($stmt->execute()){
-			$myfile = fopen("nanolims_labels.txt", "w") or die("Unable to open file!");
+			$myfile = fopen("metalims_labels.txt", "w") or die("Unable to open file!");
 			/* bind variables to prepared statement */
 			$stmt->bind_result($sample_name,$barcode_name,$start_date_time,$project_name,$sample_type,$sample_num);
 

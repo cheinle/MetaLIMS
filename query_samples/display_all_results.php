@@ -11,8 +11,8 @@ include('../database_connection.php');
 	<meta charset="utf-8">
 	<title>Query All Results</title>
 
-	<link rel="stylesheet" type="text/css" href="../aquired/freeze/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../aquired/freeze/dataTables.bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../acquired/freeze/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../acquired/freeze/dataTables.bootstrap.css">
 	<style type="text/css" class="init">
 
 	body { font-size: 140%; }
@@ -25,10 +25,10 @@ include('../database_connection.php');
 	}
 
 	</style>
-	<script type="text/javascript" language="javascript" src="../aquired/freeze/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="../aquired/freeze/jquery.dataTables.js"></script>
-	<script type="text/javascript" language="javascript" src="../aquired/freeze/dataTables.fixedColumns.js"></script>
-	<script type="text/javascript" language="javascript" src="../aquired/freeze/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" language="javascript" src="../acquired/freeze/jquery.js"></script>
+	<script type="text/javascript" language="javascript" src="../acquired/freeze/jquery.dataTables.js"></script>
+	<script type="text/javascript" language="javascript" src="../acquired/freeze/dataTables.fixedColumns.js"></script>
+	<script type="text/javascript" language="javascript" src="../acquired/freeze/dataTables.bootstrap.js"></script>
 	<script type="text/javascript" language="javascript" class="init">
 
 

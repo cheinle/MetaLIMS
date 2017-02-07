@@ -12,11 +12,11 @@ function build_xls_output_table($stmt){
 		echo "<p>";
 		echo "*Click link to start download";
 		echo '<div style="text-align:left">';    
-		echo '<a href="download.php?download_file=nanolims_export.txt" style = "font-size: 40px;">Download Main File</a>';
+		echo '<a href="download.php?download_file=metalims_export.txt" style = "font-size: 40px;">Download Main File</a>';
 		echo '</div>';
 		
 		echo '<div style="text-align:left">';    
-		echo '<a href="download.php?download_file=nanolims_user_created_export.txt" style = "font-size: 40px;">Download User Created Things File</a>';
+		echo '<a href="download.php?download_file=metalims_user_created_export.txt" style = "font-size: 40px;">Download User Created Things File</a>';
 		echo '</div>';
 		echo "</p>";
 		

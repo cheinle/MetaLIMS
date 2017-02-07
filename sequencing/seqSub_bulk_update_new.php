@@ -125,7 +125,7 @@ if(isset($_POST['submit'])){
 			
 			//prepare excel sample sheet
 			//require_once dirname(__FILE__) . '/xls_classes/PHPExcel/IOFactory.php';
-			require_once ($path.'aquired/xls_classes/PHPExcel/IOFactory.php');
+			require_once ($path.'acquired/xls_classes/PHPExcel/IOFactory.php');
 			 
 			//$objPHPExcel = PHPExcel_IOFactory::load("Sequencing_SampleSubmissionForm.xlsx");
 			$objPHPExcel = PHPExcel_IOFactory::load($path."sequencing/sequencing_form.xlsx");
