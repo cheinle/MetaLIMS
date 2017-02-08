@@ -1,6 +1,0 @@
-Sample Name	Barcode Name	Start Date/Time	Project Name	Sample Type	Sample Number	
-2016/05/23first-projectA001		2016-05-23 03:00:00	first-project	A	1	
-2016/05/23first-projectB004		2016-05-23 07:00:00	first-project	B	4	
-2016/05/24first-projectA002		2016-05-24 07:00:00	first-project	A	2	
-2016/05/24first-projectB003		2016-05-24 07:00:00	first-project	B	3	
-2016/09/01first-projectS005		2016-09-01 03:00:00	first-project	S	5	

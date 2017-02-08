@@ -53,7 +53,7 @@ if(isset($_POST['submit'])){
 				
 				
 				//if your user is the current user, do not allow to change your own login values? 
-				if($uname == $_SESSION['username'] && $uname != 'admin@nanolims.com'){
+				if($uname == $_SESSION['username'] && $uname != 'admin@metalims.com'){
 					if( $role != $old_user_info[$uname]['role'] || $login_allow != $old_user_info[$uname]['login_allow']  ){
 						echo '<script>alert("Warning: Admin cannot update his/her own login info");</script>';
 						continue;
@@ -118,7 +118,7 @@ if(isset($_POST['submit'])){
 <div id="inner_content" class="inner_content_div" align="center">
 	<div id="datatable_div">
 	<form onsubmit="return confirm(\'Do you want to submit the form?\');" action="update_user_login_info.php" method="POST" class="registration"><!--onsubmit not currently working-->
-	<pre>*Note: Admin are not able to update his/her own login info (exception-admin@nanolims.com)</pre>		
+	<pre>*Note: Admin are not able to update his/her own login info (exception-admin@metalims.com)</pre>		
 	<table id="datatable" class="display" cellspacing="0" width="100%">
 			<thead>
 				<tr>

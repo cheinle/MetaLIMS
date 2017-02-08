@@ -86,7 +86,7 @@ include ('../functions/convert_table_names.php');
 	
 	echo '<form  class="registration" action="add.php" method="GET">';
 	echo '<pre>Note: Add function is similar to \'Update Sample Fields\' but with more options
-Add is used to add more selections to dropdown menus throughout NanoLIMS
+Add is used to add more selections to dropdown menus throughout MetaLIMS
 
 Instuctions: Select \'Table Name\' you would like to update. Then fill out the fields with the desired addition
 

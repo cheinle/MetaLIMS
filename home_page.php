@@ -24,7 +24,7 @@ $root = $_SESSION['link_root'];
 <div id="demo" class="collapse">
 <div style = "clear:both;float: left;width:35%;border-radius:5px;margin-top:10px;margin-left:2%;background-color:white;padding:5px">
 <p>
-New to NanoLIMS? Use the following options to get started!<br>
+New to MetaLIMS? Use the following options to get started!<br>
 <br>
 <strong>Instructions:</strong> <br>
 Before starting to add your samples, please check on the sample insert page<br>

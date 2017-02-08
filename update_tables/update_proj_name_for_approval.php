@@ -114,12 +114,12 @@
 					}
 					$stmt->close();
 					
-					$subject = "Admin Notice: NanoLIMS Project Approval Request";
+					$subject = "Admin Notice: MetaLIMS Project Approval Request";
 			       	$message = "User <b>{$email_address}</b> has requested approval for the following project:<br>Project Name:".$p_projName."<br>Description:".$p_description."<br>Project Abbrev:".$p_abName."<br>Reply-to:".$email_address."<br/><br/><br/>";
 			        $message = wordwrap($message, 70, "\r\n");
 
 						
-			        $headers = 'From: no-reply@nanolims' . "\r\n" .
+			        $headers = 'From: no-reply@metalims' . "\r\n" .
 			            	   'MIME-Version: 1.0'."\r\n".
 			                   'Content-Type: text/html; charset=UTF-8'."\r\n";
 			

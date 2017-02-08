@@ -15,10 +15,10 @@ function send_user_email($email_address,$role,$login_allow){
 			$new_role = 'Admin';
 		}
 		
-		$subject = "NanoLIMS User Update";
+		$subject = "MetaLIMS User Update";
         $message = "Your role has been updated to: <b>{$new_role}</b>.<br/>Your login permission has been updated to: <b>{$allow_deny}</b><br/><br/><br/>";
         $message = wordwrap($message, 70, "\r\n");
-        $headers = 'From: no-reply@nanolims' . "\r\n" .
+        $headers = 'From: no-reply@metalims' . "\r\n" .
                    'MIME-Version: 1.0'."\r\n".
                    'Content-Type: text/html; charset=UTF-8'."\r\n";
 
@@ -45,10 +45,10 @@ function send_user_registration_email($email_address,$role,$login_allow){
 			$new_role = 'Admin';
 		}
 		
-		$subject = "NanoLIMS User Registration";
-        $message = "You have been registered by an admin to use NanoLIMS. Your role has been set to: <b>{$new_role}</b>.<br/>Your login permission has been set to: <b>{$allow_deny}</b><br/>Please use 'Forgot Password?' feature on login screen to reset your password<br/><br/>";
+		$subject = "MetaLIMS User Registration";
+        $message = "You have been registered by an admin to use MetaLIMS. Your role has been set to: <b>{$new_role}</b>.<br/>Your login permission has been set to: <b>{$allow_deny}</b><br/>Please use 'Forgot Password?' feature on login screen to reset your password<br/><br/>";
         $message = wordwrap($message, 70, "\r\n");
-        $headers = 'From: no-reply@nanolims' . "\r\n" .
+        $headers = 'From: no-reply@metalims' . "\r\n" .
                    'MIME-Version: 1.0'."\r\n".
                    'Content-Type: text/html; charset=UTF-8'."\r\n";
 
@@ -112,23 +112,23 @@ function send_admin_email($username,$role,$login_allow,$dbc,$type_of_email){
 		}
 		
 		if($type_of_email == 'update_user'){
-			$subject = "Admin Notice: NanoLIMS User Update";
+			$subject = "Admin Notice: MetaLIMS User Update";
        		$message = "User <b>{$username}</b> role has been updated to: <b>{$new_role}</b>.<br/>Login permission has been updated to: <b>{$allow_deny}</b><br/><br/><br/>";
         	$message = wordwrap($message, 70, "\r\n");
 		}
 		if($type_of_email == 'new_user'){
-			$subject = "Admin Notice: NanoLIMS New User Registered";
+			$subject = "Admin Notice: MetaLIMS New User Registered";
        		$message = "User <b>{$username}</b> has registered. Please update login permission and role (if needed).<br/><br/><br/>";
         	$message = wordwrap($message, 70, "\r\n");
 		}
 		if($type_of_email == 'project_approval'){
-			$subject = "Admin Notice: NanoLIMS Project Approval Request";
+			$subject = "Admin Notice: MetaLIMS Project Approval Request";
        		$message = "User <b>{$username}</b> has requested approval for the following project:.<br/><br/><br/>";
         	$message = wordwrap($message, 70, "\r\n");
 		}
 		
 		
-        $headers = 'From: no-reply@nanolims' . "\r\n" .
+        $headers = 'From: no-reply@metalims' . "\r\n" .
             	   'MIME-Version: 1.0'."\r\n".
                    'Content-Type: text/html; charset=UTF-8'."\r\n";
 
