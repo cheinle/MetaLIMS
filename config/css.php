@@ -240,8 +240,8 @@ button.mini-button{
 	color: black;
 	background: #C0D5DB;
 	border-color:#EEEEDBS;
-	width: 10%;
-	height: 3.5%;
+	width: 200px;
+	height: 30px;
 	margin-left: 2%;
 	margin-top: 0px;
 	border-radius: 15px;
