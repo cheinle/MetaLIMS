@@ -68,7 +68,14 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
         	width: 100%;
         	margin: 10px 10px 0 0 ;
     	}
-    	th, td { white-space: nowrap; }
+    	
+    	@media (max-width: 640px) {
+			td { white-space: wrap; }
+		}
+		@media (min-width: 641px){
+			th, td { white-space: nowrap; }
+		}
+    	
 
 	</style>
 	<script type="text/javascript">
@@ -88,9 +95,15 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 		     })
 		     
 		     
-		     	$('#datatable_bulk').DataTable( {
-			         "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]]
-			    } );
+		     	//$('#datatable_bulk').DataTable( {
+			    //     "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]]
+			    //} );
+				
+				    $('#datatable_bulk')
+			    	.addClass('wrap')
+				    .dataTable( {
+				         responsive: true
+				    } );
 				
 				// DataTable
 				//var table_bulk = $('#datatable_bulk').DataTable();

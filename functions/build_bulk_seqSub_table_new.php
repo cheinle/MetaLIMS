@@ -5,28 +5,27 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
 	include($path.'functions/convert_time.php');
 	include($path.'functions/text_insert_update.php');
-	include($path.'config/js.php'); //was not being inherited correctly...just added here for now;
 
-	echo '<pre>';
+	echo '<pre style="width:90%;margin-left:5%;">';
 	echo '*Notice: Bulk Update Cannot Be Bulk Edited At This Time. Please Double Check Entries';
 	echo '</pre>';
 	echo '<form class="registration" onsubmit="return validate(this)" action="seqSub_bulk_update_new.php" method="POST">';
 	echo '<div>';
-	
-	#echo '<table class = \'bulk\'>';
-	echo '<table id = "datatable_bulk" class="bulk">';
+
+	echo '<table id = "datatable_bulk" style="width:90%;margin-left:5%; background-color:white">';
+
 	echo '<thead>';
 	echo '<tr>';
-	echo '<th class = "bulk">Sample Name <br></th>';
+	echo '<th>Sample Name</th>';
 	if($container_type != 'Tube'){
-		echo '<th class = "bulk">Well Location <br></th>';
+		echo '<th>Well Location</th>';
 	}
-	echo '<th class = "bulk">Sample Conc. (ng/uL)</th>';
-	echo '<th class = "bulk">Volume Of Aliquot(uL)</th>';
-	echo '<th class = "bulk">Sample Buffer<br></th>';
+	echo '<th  >Sample Conc. (ng/uL)</th>';
+	echo '<th  >Volume Of Aliquot(uL)</th>';
+	echo '<th  >Sample Buffer<br></th>';
 
-	echo '<th class = "bulk">Does Orig DNA/RNA Sample Still Exist?<br><label class="checkbox-label"><input type="checkbox" id="selecctallyes"/>Yes</label><label class="checkbox-label"><input type="checkbox" id="selecctallno"/>No</label></th>';
-	echo '<th class = "bulk">Sequencing ID</th>';
+	echo '<th  >Does Orig DNA/RNA Sample Still Exist?<br><label class="checkbox-label"><input type="checkbox" id="selecctallyes"/>Yes</label><label class="checkbox-label"><input type="checkbox" id="selecctallno"/>No</label></th>';
+	echo '<th  >Sequencing ID</th>';
 	
 	echo '</tr>';
 	echo '</thead>';					
@@ -65,7 +64,7 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
 	array_multisort($s_sort, SORT_ASC, $s_name, SORT_ASC, $data);
 
 	foreach($data as $key => $row){
-		echo '<tr class = "row_collapse">';
+		echo '<tr>';
 		$p_value = htmlspecialchars($row['sample_name']);
 		$sid = htmlspecialchars($row['seq_id']);
 		$sample_name = $p_value;
@@ -112,6 +111,7 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
 		<?php } ?>
    		</tbody>
 		</table>
+		
 		<input type='submit' id="sub" class = "button" name ="submit" value='Update Samples' />
 		</form>
 

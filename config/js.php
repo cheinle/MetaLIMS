@@ -17,6 +17,7 @@
 <!--Datatables-->
 <script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="//cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/responsive/1.0.0/js/dataTables.responsive.js"></script>
 
 
 <!--ptTimeSelect-->

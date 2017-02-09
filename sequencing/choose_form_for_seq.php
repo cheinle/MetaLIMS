@@ -8,24 +8,38 @@ ini_set('display_errors', 1);
 ?>
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Choose Form</title>
+<head>
+	<meta charset="utf-8">
+	<title>Choose Form</title>
 		
-		<script type="text/javascript">
+	<script type="text/javascript">
 	
 		//For bulk table updates
 		$(document).ready(function () {
 
-		     	$('#datatable_bulk').DataTable( {
-			         "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]]
-			    } );
-				
-				// DataTable
-				var table = $('#datatable_bulk').DataTable();
+	      $('#datatable_bulk')
+	    	.addClass('wrap')
+		    .dataTable( {
+		         responsive: true,
+		          "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]]
+		    } );
+
 	 
 		});
 	</script>
+	<style>
+		div.dataTables_wrapper {
+        	width: 100%;
+        	margin: 10px 10px 0 0 ;
+    	}
+    	
+    	@media (max-width: 640px) {
+			td { white-space: wrap; }
+		}
+		@media (min-width: 641px){
+			th, td { white-space: nowrap; }
+		}
+	</style>
 	</head>
  
 	<body>

@@ -55,13 +55,19 @@ function build_seq_subbed_output_new($stmt,$root){
 								}
 								else{
 									if($p_key_seq == 'Results Recieved' && $p_value_seq == ''){
-										echo '<strong>'.$p_key_seq.'</strong>: <A HREF="recieved_seq_results.php?id='.$id.'">Click Here To Mark Sequencing Results Recieved</A><br>';
+										echo '<strong>'.$p_key_seq.'</strong>: <a style="color: hotpink;" href="recieved_seq_results.php?id='.$id.'">Click Here To Mark Sequencing Results Recieved</a><br>';
 									}else{
 										echo '<strong>'.$p_key_seq.'</strong>:  '.$p_value_seq.'<br>';
 									}
 								}	
 							}
 						}
+						
+						$name_parts = explode("_",$id);
+						
+						$filename = "SamplesSubmissionForm_".$name_parts[0].'_'.$name_parts[1].".xlsx";
+						echo '<strong>Sample Submission Form</strong>:<a style="color: hotpink" href='.$root.'sequencing/sequencing_sample_submission_forms/'.$filename.' download>Click Here To Download</a><br>';
+					
 					}
 				}
 			}else{
@@ -150,77 +156,4 @@ function build_seq_subbed_output_new($stmt,$root){
 	}
 }
 	
-	/*
-	if ($stmt->execute()){
-		if($stmt->fetch()){
-			    	$meta = $stmt->result_metadata(); 
-		   			while ($field = $meta->fetch_field()){ 
-		        		$params[] = &$row[$field->name]; 
-		    		} 
-		    		call_user_func_array(array($stmt, 'bind_result'), $params); 
-					
-					$stmt->execute();
-					$seen = '';
-					$seen_check = '';
-					$counter = '0';
-					$sample_names_array = array();
-					
-		    		while ($stmt->fetch()) {
-		    			echo "while";
-						if($counter == '0'){
-							echo '<tr>';
-							foreach($row as $key => $value){		
-								$p_key = htmlspecialchars($key);
-								if($p_key == 'seq_id'){
-									$seq_subID = htmlspecialchars($value);
-									echo "seqsubid".$seq_subID.'<br>';
-									//echo '<button type="button"  data-toggle="collapse" data-target="#'.$seq_subID.'" aria-expanded="true" aria-controls="demo" class="buttonLength">'.$seq_subID.'</button><br>';
-									//echo '<div id="'.$seq_subID.'" class="collapse">';
-									//echo '<table class=\'bulk\'>';
-								}
-								else{
-									$p_key = convert_header_names($p_key);
-									if($p_key == 'false'){
-										continue;
-									}
-									else{
-										echo '<th class=\'bulk\'>'.$p_key.'</th>';
-									}	
-								}	
-							}
-						
-							echo '</tr>';
-							
-							echo '<tr>';
-							foreach($row as $key => $value){
-								if($p_key == 'seq_id'){
-									continue;
-								}
-								$p_value= htmlspecialchars($value);
-								echo '<td>'.$p_value.'</td>';
-							}
-							echo '</tr>';
-							
-						}
-						else{
-							echo '<tr>';
-							foreach($row as $key => $value){
-								$p_key = htmlspecialchars($key);
-								if($p_key == 'seq_id'){
-									continue;
-								}
-								$p_value= htmlspecialchars($value);
-								echo '<td>'.$p_value.'</td>';
-							}
-							echo '</tr>';
-						}
-						$counter++;
-					}
-				}
-				echo '</table>';
-				echo '</div>';
-		}
-}
-		
-	*/		
 ?>
