@@ -4,6 +4,7 @@
 
 <!--Datatables-->
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
+<link rel="stylesheet" href="//cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css">
 
 <!--Latest complied and minified CSS -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -736,7 +737,7 @@ form.bulk h3.checkbox-header{
   }
   .sidebar-nav .navbar li a {
     padding-top: 12px;
-    padding-bottom: 12px;
+    padding-bottom: 12px;
   }
 }
 

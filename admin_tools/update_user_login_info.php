@@ -7,7 +7,35 @@ include('../functions/send_email.php');
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Update User Login</title>	
+	<title>Update User Login</title>
+
+		<script type="text/javascript">
+		$(document).ready(function () {
+
+	      $('#datatable')
+	    	.addClass('wrap')
+		    .dataTable( {
+		         responsive: true,
+		          "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]]
+		    } );
+
+	 
+		});
+	</script>
+	<style>
+		div.dataTables_wrapper {
+        	width: 100%;
+        	margin: 10px 10px 0 0 ;
+    	}
+    	
+    	@media (max-width: 640px) {
+			th, td { white-space: wrap; }
+		}
+		@media (min-width: 641px){
+			th, td { white-space: nowrap; }
+		}
+	</style>
+		
 </head>
 <body>
 	<div class="page-header">
@@ -119,7 +147,8 @@ if(isset($_POST['submit'])){
 	<div id="datatable_div">
 	<form onsubmit="return confirm(\'Do you want to submit the form?\');" action="update_user_login_info.php" method="POST" class="registration"><!--onsubmit not currently working-->
 	<pre>*Note: Admin are not able to update his/her own login info (exception-admin@metalims.com)</pre>		
-	<table id="datatable" class="display" cellspacing="0" width="100%">
+	<table id = "datatable" style="width:90%;margin-left:5%; background-color:white">
+	<!--<table id="datatable" class="display" cellspacing="0" width="100%">-->
 			<thead>
 				<tr>
 					<th>&nbsp;User</th>
@@ -146,8 +175,13 @@ if(isset($_POST['submit'])){
 							
 							echo "<td>";
 							?>
-							<input type="radio" name="<?php echo $email_address; ?>_login" value="1" <?php if($visible == 1){echo 'checked';}?>>Yes
-							<input type="radio" name="<?php echo $email_address; ?>_login" value="0" <?php if($visible == 0){echo 'checked';}?>>No<br>
+							  <label class="radio-inline">
+						      	<input type="radio" class="radio-inline" name="<?php echo $email_address; ?>_login" value="1" <?php if($visible == 1){echo 'checked';}?>>Yes
+						      </label>
+						      <label class="radio-inline">
+						         <input type="radio" class="radio-inline" name="<?php echo $email_address; ?>_login" value="0" <?php if($visible == 0){echo 'checked';}?>>No<br>
+						      </label>
+
 							<?php
 							echo "</td>";
 							
@@ -156,10 +190,10 @@ if(isset($_POST['submit'])){
 							<select name="<?php echo $email_address; ?>_role">
 							<option value="Y" <?php if($role == 'Y'){echo 'selected';}?>>Admin</option>
 							<option value="N" <?php if($role == 'N'){echo 'selected';}?>>User</option>
+							</select>
 							<?php
-							echo "</select>";
 							echo "</td>";
-							echo "<tr>";
+							echo "</tr>";
 							
 							if($counter == 0){
 								$users = $email_address;
