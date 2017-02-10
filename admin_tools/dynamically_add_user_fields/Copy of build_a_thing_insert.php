@@ -1,6 +1,5 @@
 <?php
 		include ('../../database_connection.php');
-		include('../../functions/text_insert_update_things.php');
 		
 		
 		//Find how many fields there will be so can split evenly between 2 columns
@@ -19,9 +18,8 @@
 		}
 		$half_of_things = $total_things/2;
 		
-		//Build form of user things
-		$parent_value = $_GET['parent_value'];
-
+		
+		//Populate page with user created fields
 		$stmt = $dbc->prepare("SELECT label_name,type,select_values,thing_id, visible, required FROM create_user_things ORDER BY LENGTH(label_name),label_name");
 		if(!$stmt){
 			die('prepare() failed: ' . htmlspecialchars($stmt->error));
@@ -30,38 +28,35 @@
 			$stmt->bind_result($label_name,$type,$select_values,$thing_id_number,$visible,$required);
 			$counter = 0;
 			$column_number = 1;
+			
 			while ($stmt->fetch()) {
 				$counter++;	
 				if($counter > $half_of_things){
 					$column_number = 2;	
 				}
-				
 				$thing_id = 'thing'.$thing_id_number; //changed from storing as 'thing1' to '1'
-				
+
 				if($type == 'text_input' || $type == 'numeric_input'){
 					if($visible == 1){
-						$value = text_insert_update_things($parent_value,$thing_id_number);
-						
 ?>
+					
 					<script type="text/javascript">
 						var column_number = <?php echo(json_encode(htmlspecialchars($column_number))); ?>	
+					
 						var thing_id = <?php echo(json_encode(htmlspecialchars($thing_id))); ?>	
 					  	var label_text = <?php echo(json_encode(htmlspecialchars($label_name))); ?>	
 					  	var type = <?php echo(json_encode(htmlspecialchars($type))); ?>	
 					  	var label = document.createElement("label");
 					  	var linebreak = document.createElement("br"); 
-					  	label.className="col-md-3 control-label";
+					  	label.className="textbox-label";
 					  	
 					  
 					  	var newInput = document.createElement("input");
-					  	//newInput.type="text";
-					  	//newInput.name= thing_id;
 					  	newInput.setAttribute("type", "text");
 				      	newInput.setAttribute("name", thing_id);
 				      	newInput.setAttribute("id", thing_id);
-				      	var value = <?php echo(json_encode(htmlspecialchars($value))); ?>	
-				      	newInput.setAttribute("value", value);
-				     	newInput.setAttribute("class", type+" form-control input-md");
+				      	newInput.setAttribute("value", "");
+				     	newInput.setAttribute("class", type);
 				     	//newInput.setAttribute("class", 'things');
 					  	var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						 
@@ -86,8 +81,6 @@
 				}
 				if($type == 'select'){
 					if($visible == 1){
-						//	dropDown_update('anPipe', 'analysis', 'analysis_name','analysis_name','analysis_name',$parent_value,$root);
-						$value = text_insert_update_things($parent_value,$thing_id_number);
 						$select_array = explode(';', $select_values);
 ?>
 					<script type="text/javascript">
@@ -96,9 +89,9 @@
 					  var label_text = <?php echo(json_encode(htmlspecialchars($label_name))); ?>	
 					  var label = document.createElement("label");
 					  var linebreak = document.createElement("br"); 
-					  label.className="col-md-3 control-label";
+					  label.className="textbox-label";
 					  
-					  var selected_value = <?php echo(json_encode(htmlspecialchars($value))); ?>;
+					  
 					  var select = document.createElement("select");
 					  var array = <?php echo json_encode($select_array); ?>;
 					  array.unshift("-Select-");
@@ -112,20 +105,14 @@
 							}
 							else{
 								opt.value = option;
-							
-				    			if(opt.value == selected_value){
-				    				opt.setAttribute("selected", "selected");
-				    			}
 							}
 							select.appendChild(opt);
 						}	
 				    	select.setAttribute("name", thing_id);
 				    	select.setAttribute("id", thing_id);
 				    	//select.setAttribute("class", "things");
-				    	select.setAttribute("class", "select form-control input-md");
-				    	select.setAttribute("value", "");
-				    	
-				    		
+				    	select.setAttribute("class", "select");
+				    	select.setAttribute("value", "");	
 						var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						if(required == 'Y'){
 							var node = document.createTextNode(label_text+" :*");

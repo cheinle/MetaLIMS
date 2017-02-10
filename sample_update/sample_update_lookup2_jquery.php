@@ -53,7 +53,7 @@ if (isset($_GET['submit'])) {
 				$transaction_time = date("Y-m-d H:i:s");
 	
 ?>				
-				<form  class="registration" onsubmit="return validate(this)" action="sample_update_lookup3_jquery.php" method="GET">
+				<form  class="form-horizontal" onsubmit="return validate(this)" action="sample_update_lookup3_jquery.php" method="GET">
 				<div id="tabs">
 					  <ul>
 					    <li><a href="#fragment-1"><span>Collection Info</span></a></li>
@@ -72,16 +72,17 @@ if (isset($_GET['submit'])) {
 				<!--see if sample is the end result of a pooling-->
 				<input type="text" style="visibility:hidden" class="hidden" name="pooled_flag" id = "pooled_flag"  value="<?php echo text_insert_update($parent_value,'pooled_flag',$dbc); ?>"/>
 				
-				
 				<br>* = required field <br>
 				<i>(Don't see your desired selection in dropdown list? Please add selection in "Update Dropdowns in Insert Sample" tab)</i>
 				<div id='samplename_availability_result'></div>  
 				<fieldset>
 				<LEGEND><b>Sample Name</b></LEGEND>
-				<div class="col-xs-6">
-				<p>
-				<label class="textbox-label">Sample Name:*</label>
-				<input type="text" name="sample_name" id="sample_name" data-toggle="popover" title="Tip:" data-content="Unable to edit sample name. Please select Go Back button to select a different sample or go to Insert Sample tab to enter a new sample. Sample Name is automatically re-created if name components are updated" placeholder="yyyy/mm/dd[project name][sample_type][sample number-000]" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'sample_name',$dbc);}?>" readonly />
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					
+				<div class="form-group">
+					 <div class="col-md-8">
+				 <label class="col-md-3 control-label">Sample Name:*</label>
+				<input type="text" name="sample_name" id="sample_name" class="form-control input-md" data-toggle="popover" title="Tip:" data-content="Unable to edit sample name. Please select Go Back button to select a different sample or go to Insert Sample tab to enter a new sample. Sample Name is automatically re-created if name components are updated" placeholder="yyyy/mm/dd[project name][sample_type][sample number-000]" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'sample_name',$dbc);}?>" readonly />
 				</p>
 				<script>
 					$(document).ready(function(){
@@ -104,94 +105,104 @@ if (isset($_GET['submit'])) {
 				<div id="fragment-1">
 				<fieldset>
 				<LEGEND><b>Sample Collection Info</b></LEGEND>
-				<div class="col-xs-6">	
-				<p>
-				<label class="textbox-label">Sample Number:*</label>
-				<input type="text" name="sample_number" id="sample_number"  placeholder="[001]" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'sample_num',$dbc);}?>" />
-				</p>
+				<div class="col-xs-12 col-sm-6 col-md-6">	
+				
+				<div class="form-group">
+				 <label class="col-md-3 control-label">Sample Number:*</label>
+				 	<div class="col-md-8">
+					<input type="text" name="sample_number" id="sample_number" class="form-control input-md" placeholder="[001]" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'sample_num',$dbc);}?>" />
+				 </div>
+				</div>
 				
 				<!--Barcode insert field-->
-				<p>
-				<label class="textbox-label">Barcode:(optional)</label><br>
-				<input type="text" name="barcode" id="barcode" placeholder="Enter A Barcode" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'barcode',$dbc);}?>"/>
-				</p>
+				<div class="form-group">
+				   <label class="col-md-3 control-label">Barcode:(optional)</label>
+				   <div class="col-md-8">
+					<input type="text" name="barcode" id="barcode" class="form-control input-md" placeholder="Enter A Barcode" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'barcode',$dbc);}?>"/>
+				   </div>
+				</div>
 
-				<p>
 				<!--Project Name Dropdown-->
-				<label class="textbox-label">Select Project Name:*</label><br/>
-				<?php
-				//url or $_GET name, table name, field name
-				dropDown_update('projName', 'project_name', 'project_name','project_name','project_name',"$parent_value",$root);
-				?>
-				</p>
+				<div class="form-group">
+				 <label class="col-md-3 control-label">Select Project Name:*</label>
+				 <div class="col-md-8">
+					<?php
+					//url or $_GET name, table name, field name
+					dropDown_update('projName', 'project_name', 'project_name','project_name','project_name',"$parent_value",$root);
+					?>
+				 </div>
+				</div>
 				
 				<!--location dropdown-->
-				<p>
-				<label class="textbox-label">Select Location:*</label><br/>
-				<?php
-				//url or $_GET name, table name, field name
-				dropDown_update('loc', 'location', 'loc_name','loc_name','location_name',"$parent_value",$root);
-				?>
-				</p>
+				<div class="form-group">
+				 <label class="col-md-3 control-label">Select Location:*</label>
+				 <div class="col-md-8">
+					<?php
+					//url or $_GET name, table name, field name
+					dropDown_update('loc', 'location', 'loc_name','loc_name','location_name',"$parent_value",$root);
+					?>
+				 </div>
+				</div>
 				
 				<!--relative location dropdown-->
-				<p>
-				<label class="textbox-label">Select Relative Location:*</label><br/>
-				<?php
-				//$select_name,$table_name,$field_name,value,$s_field_name,$sample_name
-				dropDown_update('rloc', 'relt_location', 'loc_name','loc_name','relt_loc_name',"$parent_value",$root);
-				?>
-				</p>
+				<div class="form-group">	 
+					 <label class="col-md-3 control-label">Select Relative Location:*</label>
+					 <div class="col-md-8">
+						<?php
+						//$select_name,$table_name,$field_name,value,$s_field_name,$sample_name
+						dropDown_update('rloc', 'relt_location', 'loc_name','loc_name','relt_loc_name',"$parent_value",$root);
+						?>
+					</div>
+				</div>
 				
-				<p>
+				
+					 
 				<!--media type dropdown-->
-				<label class="textbox-label">Media Type:*</label><br/>
-				<?php
-				//url or $_GET name, table name, field name, select_id, s field name, sample name
-				dropDown_update('media', 'media_type', 'media_type','media_type','media_type',"$parent_value",$root);
-				?>
-				</p>
+				<div class="form-group">
+					 <label class="col-md-3 control-label">Media Type:*</label>
+					 <div class="col-md-8">
+						<?php
+						//url or $_GET name, table name, field name, select_id, s field name, sample name
+						dropDown_update('media', 'media_type', 'media_type','media_type','media_type',"$parent_value",$root);
+						?>
+					</div>
+				</div>
 				
-				<p>
 				<!--Collector Name input-->
-				<label class="textbox-label">Enter Collector Name(s):*</label>
-				<p class="clone"> <input type="text" name="collector[]" id="collector" class='input' placeholder="Comma Seperated Names" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'collector_name',$dbc);} ?>"/></p>
-				</p>
+				<div class="form-group">
+					 <label class="col-md-3 control-label">Enter Collector Name(s):*</label>
+					 <div class="col-md-8">
+						<p class="clone"> <input type="text" name="collector[]" id="collector" class='input form-control input-md' placeholder="Comma Seperated Names" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'collector_name',$dbc);} ?>"/></p>
+					 </div>
+				</div>
 				
 				<!--Sampling Type insert field-->
-				<p>
-				<label class="textbox-label">Sample Type:*<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Please See FAQ"></i></label><br>
-				<?php 
-				//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
-				dropDown_update('sType', 'sample_type', 'sample_type_name','sample_type_id','sample_type',"$parent_value",$root);
-				?>
-				</p>
+				<div class="form-group"> 
+					<label class="col-md-3 control-label">Sample Type:*<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Please See FAQ"></i></label><br>
+					<div class="col-md-8">
+						<?php 
+						//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
+						dropDown_update('sType', 'sample_type', 'sample_type_name','sample_type_id','sample_type',"$parent_value",$root);
+						?>
+					</div>
+				</div>
 				
-				<!--<p>
-				<label class="textbox-label">Flow Rate-Start/End of Day:</label><br>
-				<input type="text" name="fRate" id="fRate"  class = "shrtfields" placeholder="Enter A Flow Rate for SOD" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'flow_rate',$dbc);} ?>">
-				<input type="text" name="fRate_eod" id="fRate_eod"  class = "shrtfields" placeholder="Enter A Flow Rate for EOD" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'flow_rate_eod',$dbc);} ?>">
-				</p>-->
-
 				
-				<p>
+					
 				<!--storage freezer-->
-				<label class="textbox-label">Select Storage Location:*</label><br/>
-				<?php
-				//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
-				dropDown_update_for_storage('oStore_temp', 'freezer', 'freezer_id','freezer_id', 'original',"$parent_value",'0',$root);
-				dropDown_update_for_storage('oStore_name', 'drawer', 'drawer_id','drawer_id', 'original',"$parent_value",'1',$root);
-				?>
-				</p>
-				
-				<!--<p>
-				<label class="textbox-label">Height Above Floor:
-				</label><br>
-				<input type="text" name="sampling_height" id="sampling_height" placeholder="Enter A Height Above Floor (cm)" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'sampling_height',$dbc);} ?>">
-				</p>-->
+				<div class="form-group">
+				 	<label class="col-md-3 control-label">Select Storage Location:*</label>
+				  	<div class="col-md-8">
+						<?php
+						//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
+						dropDown_update_for_storage('oStore_temp', 'freezer', 'freezer_id','freezer_id', 'original',"$parent_value",'0',$root);
+						dropDown_update_for_storage('oStore_name', 'drawer', 'drawer_id','drawer_id', 'original',"$parent_value",'1',$root);
+						?>
+					</div>
+				</div>
 				
 				<!--Invisible Project Name Dropdown-->
-				<input type="text" style="visibility:hidden" name="orig_projName" id="orig_projName" placeholder="Enter A Barcode" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'project_name',$dbc);}?>"/>
+				<input type="text" style="visibility:hidden" name="orig_projName" id="orig_projName" class="form-control input-md" placeholder="Enter A Barcode" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'project_name',$dbc);}?>"/>
 				
 				</div><!--end of col-xs-6-->
 				
@@ -208,183 +219,200 @@ if (isset($_GET['submit'])) {
 				<div id="dna_extraction">
 					
 					<LEGEND><b>DNA Extraction Info</b></LEGEND>
-					<div class="col-xs-6">
+					<div class="col-xs-12 col-sm-6 col-md-6">
 					
-					<p>
-					<label class="textbox-label">DNA Extraction Date:</label><br>
-					<input type="text" id="d_extr_date"  name="d_extr_date" value="<?php echo text_insert_update_dt($parent_value,'d_extraction_date','date');?>"/>
-					<script>
-					$('#d_extr_date').datepicker({ dateFormat: 'yy-mm-dd' }).val();
-					</script>
+					<div class="form-group">
+					 <label class="col-md-3 control-label">DNA Extraction Date:</label>
+					  	<div class="col-md-8">
+							<input type="text" id="d_extr_date"  name="d_extr_date" class="form-control input-md" value="<?php echo text_insert_update_dt($parent_value,'d_extraction_date','date');?>"/>
+							<script>
+							$('#d_extr_date').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+							</script>
+						</div>
+					</div>
 					
-					<p>
 					<!--DNA Extraction Kit dropdown-->
-					<label class="textbox-label">Select DNA Extraction Kit:</label>
-					<br/>
-					<?php
-					//url or $_GET name, table name, field name
-					dropDown_update('dExtKit', 'dna_extraction', 'd_kit_name','d_kit_name','dna_extract_kit_name',"$parent_value",$root);
-					?>
-					</p>
+					<div class="form-group">
+					 <label class="col-md-3 control-label">Select DNA Extraction Kit:</label>
+					  <div class="col-md-8">
+						<?php
+						//url or $_GET name, table name, field name
+						dropDown_update('dExtKit', 'dna_extraction', 'd_kit_name','d_kit_name','dna_extract_kit_name',"$parent_value",$root);
+						?>
+					</div>
+					</div>
 					
 					<!--DNA Concentration-->
-					<p>
-					<label class="textbox-label">DNA Concentration (ng/ul):</label><br>
-					<input type="text" name="dConc" id="dConc" placeholder="Enter A DNA Concentration. Note: (0 = ND = <0.0050ng/ul)" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'d_conc',$dbc);} ?>">
-					</p>
+					<div class="form-group">
+						<label class="col-md-3 control-label">DNA Concentration (ng/ul):</label>
+						 <div class="col-md-8">
+						 <input type="text" name="dConc" id="dConc" class="form-control input-md" placeholder="Enter A DNA Concentration. Note: (0 = ND = <0.0050ng/ul)" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'d_conc',$dbc);} ?>">
+						 </div>
+					</div>
 					
-						<!--Volume of DNA-->
-					<p>
-					<label class="textbox-label">Volume of DNA Elution (ul):</label><br>
-					<input type="text" name="dVol" id="dVol" placeholder="Enter A Volume" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'d_volume',$dbc);} ?>">
-					</p>
+					<!--Volume of DNA-->
+					<div class="form-group">
+					 	<label class="col-md-3 control-label">Volume of DNA Elution (ul):</label>
+					 	<div class="col-md-8">
+							<input type="text" name="dVol" id="dVol" class="form-control input-md" placeholder="Enter A Volume" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'d_volume',$dbc);} ?>">
+						</div>
+					</div>
 	
 	
 					<!--Instrument used to measure DNA concentration-->
-					<p>
-					<label class="textbox-label">Instrument/Kit Used to Measure DNA Concentration:</label><br>
-					<?php
-					//url or $_GET name, table name, field name
-					dropDown_update('dInstru', 'quant_instruments', 'kit_name','kit_name','d_conc_instrument',"$parent_value",$root);
-					?>
-					</p>
+					<div class="form-group">
+						<label class="col-md-3 control-label">Instrument/Kit Used to Measure DNA Concentration:</label>
+						<div class="col-md-8">
+							<?php
+							//url or $_GET name, table name, field name
+							dropDown_update('dInstru', 'quant_instruments', 'kit_name','kit_name','d_conc_instrument',"$parent_value",$root);
+							?>
+						</div>
+					</div>
 	
 					<!--Volume of DNA to measure DNA conc-->
-					<p>
-					<label class="textbox-label">Volume of DNA Used for Measure DNA Concentration(ul):</label><br>
-					<input type="text" name="dVol_quant" id="dVol_quant" placeholder="Enter A Volume" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'d_volume_quant',$dbc);}?>">
-					</p>
+					<div class="form-group">
+					 	<label class="col-md-3 control-label">Volume of DNA Used for Measure DNA Concentration(ul):</label>
+					 	 <div class="col-md-8">
+							<input type="text" name="dVol_quant" id="dVol_quant" class="form-control input-md" placeholder="Enter A Volume" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'d_volume_quant',$dbc);}?>">
+						 </div>
+					</div>
 					<!------------------------------------------------------------>
 					<!--DNA -->
-					<p>
-					<label class="textbox-label">Location of DNA Extract:</label><br>
-					</p>
-					<?php
-					//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
-					dropDown_update_for_storage('dStore_temp', 'freezer', 'freezer_id','freezer_id', 'dna_extr',"$parent_value",'0',$root);
-					dropDown_update_for_storage('dStore_name', 'drawer', 'drawer_id','drawer_id', 'dna_extr',"$parent_value",'1',$root);
-					?>
-					</p>
-					
-					<p>
-					<!--Extractor Name input-->
-					<label class="textbox-label">Enter Name of Person(s) Who Extracted DNA:</label>
-					<p class="clone2"> <input type="text" name="dExtrName[]" id="dExtrName" class="input"  placeholder="Comma Seperated Names" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'dExtrName',$dbc);} ?>"/></p>
-					<!--<p><a href="#" class="add2" rel=".clone2">Add More Names</a></p>
-					</p>
-					<script type="text/javascript">
-					$(document).ready($(function(){
-						var removeLink = ' <a class="remove" href="#" onclick="$(this).parent().slideUp(function(){ $(this).remove() }); return false">remove</a>';
-							$('a.add2').relCopy({ append: removeLink}); 
-						})
-					);
-					</script>-->
-					
-					<p>
-					<h3 class="checkbox-header">Does Original Sample Still Exist?:</h3><br>
-	 				<div class="vert-checkboxes">
-	 				<label class="checkbox-label"><input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" class = "orig_sample_exist" value="false" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>No</label><br />
+					<div class="form-group">
+					 		<label class="col-md-3 control-label">Location of DNA Extract:</label>
+					 		<div class="col-md-8">
+								<?php
+								//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
+								dropDown_update_for_storage('dStore_temp', 'freezer', 'freezer_id','freezer_id', 'dna_extr',"$parent_value",'0',$root);
+								dropDown_update_for_storage('dStore_name', 'drawer', 'drawer_id','drawer_id', 'dna_extr',"$parent_value",'1',$root);
+								?>
+							</div>
 					</div>
-					</p>
 					
-					<p>
+					<!--Extractor Name input-->
+					<div class="form-group">
+					 	<label class="col-md-3 control-label">Enter Name of Person(s) Who Extracted DNA:</label>
+					 	 <div class="col-md-8">
+						<p class="clone2"> <input type="text" name="dExtrName[]" id="dExtrName" class="input form-control input-md"  placeholder="Comma Seperated Names" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'dExtrName',$dbc);} ?>"/></p>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						 
+						<h3 class="checkbox-header">Does Original Sample Still Exist?:</h3><br>
+		 				<div class="vert-checkboxes">
+		 				<label class="checkbox-label"><input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" class = "orig_sample_exist form-control input-md" value="false" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>No</label><br />
+						</div>
+					</div>
+					
+					<div class="form-group">
 					<h3 class="checkbox-header">Does DNA Extraction Sample Exist?:</h3><br>
 					<div class="vert-checkboxes">
 	 				<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>Yes,DNA Sample Exists</label><br />
 					<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'two'){ echo 'checked';}  ?>/>No, DNA Has Not Been Extracted</label><br />
 					<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'three'){ echo 'checked';} ?>/>No, DNA Sample Is Used Up</label><br />
 					</div>
-					</p>
+					</div>
 					</div>
 				</div>
 
-				<div class="col-xs-6">
+				<div class="col-xs-12 col-sm-6 col-md-6">
 				<div id="rna_extraction">
 				<LEGEND><b>RNA Extraction Info</b></LEGEND>
 				
-				<p>
-				<label class="textbox-label">RNA Extraction Date:</label><br>
-				<input type="text" id="r_extr_date"  name="r_extr_date" value="<?php echo text_insert_update_dt($parent_value,'r_extraction_date','date');?>"/>
-				<script>
-				$('#r_extr_date').datepicker({ dateFormat: 'yy-mm-dd' }).val();
-				</script>
-				
-				<p>
+				<div class="form-group">
+				 <label class="col-md-3 control-label">RNA Extraction Date:</label>
+				  <div class="col-md-8">
+					<input type="text" id="r_extr_date"  name="r_extr_date" class="form-control input-md" value="<?php echo text_insert_update_dt($parent_value,'r_extraction_date','date');?>"/>
+					<script>
+					$('#r_extr_date').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+					</script>
+				   </div>
+				</div>
+
 				<!--RNA Extraction dropdown-->
-				<label class="textbox-label">Select RNA Extraction Kit:</label>
-				<br/>
-				<?php
-				//url or $_GET name, table name, field name
-				dropDown_update('rExtKit', 'rna_extraction', 'r_kit_name','r_kit_name','rna_extract_kit_name',"$parent_value",$root);
-				?>
-				</p>
+				<div class="form-group">
+				 <label class="col-md-3 control-label">Select RNA Extraction Kit:</label>
+				  <div class="col-md-8">
+					<?php
+					//url or $_GET name, table name, field name
+					dropDown_update('rExtKit', 'rna_extraction', 'r_kit_name','r_kit_name','rna_extract_kit_name',"$parent_value",$root);
+					?>
+				  </div>
+				</div>
 				
 				<!--RNA Concentration-->		
-				<p>
-				<label class="textbox-label">RNA Concentration (ng/ul):</label><br>
-				<input type="text" name="rConc" id="rConc"  placeholder="Enter an RNA Concentration" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'r_conc',$dbc);} ?>">
-				</p>
+				<div class="form-group">
+				 	<label class="col-md-3 control-label">RNA Concentration (ng/ul):</label>
+				  	<div class="col-md-8">
+					<input type="text" name="rConc" id="rConc"  class="form-control input-md" placeholder="Enter an RNA Concentration" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'r_conc',$dbc);} ?>">
+					</div>
+				</div>
 				
 				<!--RNA Volume-->
-				<p>
-				<label class="textbox-label">Volume of RNA Elution (ul):</label><br>
-				<input type="text" name="rVol" id="rVol" placeholder="Enter A Volume" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'r_volume',$dbc);} ?>">
-				</p>
+				<div class="form-group">
+				 <label class="col-md-3 control-label">Volume of RNA Elution (ul):</label>
+				 <div class="col-md-8">
+					<input type="text" name="rVol" id="rVol" class="form-control input-md" placeholder="Enter A Volume" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'r_volume',$dbc);} ?>">
+				</div>
+				</div>
 		
 				<!--Instrument used to measure RNA concentration-->
-				<p>
-				<label class="textbox-label">Instrument/Kit Used to Measure RNA Concentration:</label><br>
-				<?php
-				//url or $_GET name, table name, field name
-				dropDown_update('rInstru', 'quant_instruments', 'kit_name','kit_name','r_conc_instrument',"$parent_value",$root);
-				?>
-				</p>
+				<div class="form-group">
+				 <label class="col-md-3 control-label">Instrument/Kit Used to Measure RNA Concentration:</label>
+				 <div class="col-md-8">
+					<?php
+					//url or $_GET name, table name, field name
+					dropDown_update('rInstru', 'quant_instruments', 'kit_name','kit_name','r_conc_instrument',"$parent_value",$root);
+					?>
+				 </div>
+				</div>
 				
 				<!--RNA Volume-->
-				<p>
-				<label class="textbox-label">Volume of RNA for Quantification(ul):</label><br>
-				<input type="text" name="rVol_quant" id="rVol_quant" placeholder="Enter A Volume" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'r_volume_quant',$dbc);} ?>">
-				</p>
+				<div class="form-group">
+				 <label class="col-md-3 control-label">Volume of RNA for Quantification(ul):</label>
+				  <div class="col-md-8">
+					<input type="text" name="rVol_quant" id="rVol_quant" class="form-control input-md" placeholder="Enter A Volume" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'r_volume_quant',$dbc);} ?>">
+				  </div>
+				</div>
 				
-				<p>
-				<label class="textbox-label">Location of RNA Extract:</label><br>
-				</p>
-				<?php
-				//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
-				dropDown_update_for_storage('rStore_temp', 'freezer', 'freezer_id','freezer_id', 'rna_extr',"$parent_value",'0',$root);
-				dropDown_update_for_storage('rStore_name', 'drawer', 'drawer_id','drawer_id', 'rna_extr',"$parent_value",'1',$root);
-				?>
+				<div class="form-group">
+					 <label class="col-md-3 control-label">Location of RNA Extract:</label>
+					 <div class="col-md-8">
+						<?php
+						//$select_name,$table_name,$field_name,$select_id,$s_field_name,$sample_name
+						dropDown_update_for_storage('rStore_temp', 'freezer', 'freezer_id','freezer_id', 'rna_extr',"$parent_value",'0',$root);
+						dropDown_update_for_storage('rStore_name', 'drawer', 'drawer_id','drawer_id', 'rna_extr',"$parent_value",'1',$root);
+						?>
+					</div>
+				</div>
 				
-				<p>
 				<!--Extractor Name input-->
-				<label class="textbox-label">Enter Name of Person(s) Who Extracted RNA:</label>
-				<p class="clone3"> <input type="text" name="rExtrName[]" id="rExtrName" class="input" placeholder="Comma Sepearted Names" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'rExtrName',$dbc);} ?>"/></p>
-				<!--<p><a href="#" class="add3" rel=".clone3">Add More Names</a></p>
-				</p>
+				<div class="form-group">
+				 <label class="col-md-3 control-label">Enter Name of Person(s) Who Extracted RNA:</label>
+				 <div class="col-md-8">
+					<p class="clone3"> <input type="text" name="rExtrName[]" id="rExtrName" class="input form-control input-md" placeholder="Comma Sepearted Names" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'rExtrName',$dbc);} ?>"/></p>
+				 </div>
+				</div>
 				
-				<script type="text/javascript">
-				$(document).ready($(function(){
-					var removeLink = ' <a class="remove" href="#" onclick="$(this).parent().slideUp(function(){ $(this).remove() }); return false">remove</a>';
-						$('a.add3').relCopy({ append: removeLink}); 
-					})
-				);
-				</script>-->
-				
-				<p>
+				<div class="form-group">
+					 
 				<h3 class="checkbox-header">Does Original RNA Sample Still Exist?:</h3>
 				<div class="vert-checkboxes">
  				<label class="checkbox-label"><input type="checkbox" class = "orig_sample_exist" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>No</label><br />
 				</div>
-				</p>
+				</div>
 				
-				<p>
+				<div class="form-group">
+			
 				<h3 class="checkbox-header">Does RNA Extraction Sample Exist?:</h3><br>
  				<div class="vert-checkboxes">
  				<label class="checkbox-label"><input type="radio" name="RNA_sample_exist" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>Yes,RNA Sample Exisits</label><br />
 				<label class="checkbox-label"><input type="radio" name="RNA_sample_exist" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'two'){ echo 'checked';}  ?>/>No, RNA Has Not Been Extracted</label><br />
 				<label class="checkbox-label"><input type="radio" name="RNA_sample_exist" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'three'){ echo 'checked';} ?>/>No, RNA Sample Is Used Up</label><br />
 				</div>
-				</p>
+				</div>
 				</div>
 			
 				
@@ -397,15 +425,18 @@ if (isset($_GET['submit'])) {
 					<fieldset>
 						<LEGEND><b>Analysis</b></LEGEND>
 						<p><a href="../update_tables/update_seq_info.php">Fill Out Sequencing Submission Info</a></p>
-						<p>
+						<div class="form-group">
+							
 						<!--Sequencing2 Dropdown-->
-						<label class="textbox-label">Select Analysis Pipeline:</label>
-						<br/>
-						<?php
-						//url or $_GET name, table name, field name
-						dropDown_update('anPipe', 'analysis', 'analysis_name','analysis_name','analysis_name',$parent_value,$root);
-						?>
-						</p>
+						 <label class="col-md-3 control-label">Select Analysis Pipeline:</label>
+						  <div class="col-md-8">
+					
+							<?php
+							//url or $_GET name, table name, field name
+							dropDown_update('anPipe', 'analysis', 'analysis_name','analysis_name','analysis_name',$parent_value,$root);
+							?>
+						  </div>
+						</div>
 					</fieldset>
 				</div><!--end fragment-3-->
 				
@@ -416,7 +447,7 @@ if (isset($_GET['submit'])) {
 					<LEGEND><b>User Created Fields</b></LEGEND>
 					<input type="text" style="visibility:hidden" class="hidden" name="build_type" id="build_type" value="update"/>
 					<input type="text" style="visibility:hidden" class="hidden" name="parent_value" id="parent_value" value="<?php echo $parent_value;?>"/>	
-						<div class="col-xs-6">
+						<div class="col-xs-12 col-sm-6 col-md-6">
 							<div id="required_things1">
 							
 							</div>
@@ -424,7 +455,7 @@ if (isset($_GET['submit'])) {
 								
 							</div>
 						</div>
-						<div class="col-xs-6">
+						<div class="col-xs-12 col-sm-6 col-md-6">
 							<div id="required_things2">
 								
 							</div>
@@ -441,9 +472,10 @@ if (isset($_GET['submit'])) {
 					<fieldset>
 					<LEGEND><b>Notes</b></LEGEND>
 						<div class="col-md-12">
-							<p>
-							<label class="textbox-label">Sample Notes:(optional)</label>
-							<textarea class="form-control" from="sample_form_update" rows="3" name="notes" placeholder = "Enter Date and Initials for Comment (e.g.: YYYY/MM/DD Comment -initials)"><?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'notes',$dbc);} ?></textarea>
+							<div class="form-group">
+								 <div class="col-md-8">
+							 	<label class="col-md-3 control-label">Sample Notes:(optional)</label>
+								<textarea class="form-control" from="sample_form_update" rows="3" name="notes" placeholder = "Enter Date and Initials for Comment (e.g.: YYYY/MM/DD Comment -initials)"><?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'notes',$dbc);} ?></textarea>
 							</p>
 						</div><!--close col-md-12-->
 					</fieldset>

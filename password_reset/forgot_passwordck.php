@@ -114,13 +114,13 @@ if($status=="OK"){
 			//$headers = "Content-Type: text/html; charset=iso-8859-1\n".$headers;// for html mail un-comment this line
 			$site_url=$site_url."activepassword.php?ak=$key&userid=$email";
 			 //echo $site_url;
-			if(mail("$em","Your Request for login details","This is in response to your request for login details at site_name \n \nLogin ID: $em \n To reset your password, please visit this link( or copy and paste this link in your browser window )\n\n
+			if(mail("$em","Your Request for LIMS login details","This is in response to your request for login details at site_name \n \nLogin ID: $em \n To reset your password, please visit this link( or copy and paste this link in your browser window )\n\n
 			\n\n
 			$site_url
 			\n\n
 			<a href='$site_url'>$site_url</a>
 			
-			 \n\n Thank You \n \n siteadmin","$headers")){echo "<center><font face='Verdana' size='2' ><b>THANK YOU</b> <br>Your password is posted to your email address . Please check your mail after some time. </center>";}
+			 \n\n Thank You \n \n siteadmin","$headers")){echo "<center><font face='Verdana' size='2' ><b>THANK YOU</b> <br>Your password is posted to your email address . Please check your spam folder if you do not recieve. </center>";}
 			else{ echo " <center><font face='Verdana' size='2' color=red >There is some system problem in sending login details to your address. Please contact site-admin. <br><br><input type='button' value='Retry' onClick='history.go(-1)'></center></font>";}
 			
 			} 

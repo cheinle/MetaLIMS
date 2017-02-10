@@ -251,6 +251,22 @@ button.mini-button{
 }
 
 /***********For Main Form********/
+form.form-horizontal{
+	 width:90%;
+	 float:left;
+	 color:#818181;
+	 background: #f1f1f1;
+	 border: 2px solid #ccc;
+	 padding:10px;
+	 margin-left: 5%;
+	 font-family: Arial;
+	 font-size: 14px;
+	 box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	 border-radius: 15px;
+}
+
+
+
 form.registration{
  width:90%;
  float:left;

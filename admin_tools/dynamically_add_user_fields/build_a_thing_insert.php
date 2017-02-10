@@ -48,7 +48,7 @@
 					  	var type = <?php echo(json_encode(htmlspecialchars($type))); ?>	
 					  	var label = document.createElement("label");
 					  	var linebreak = document.createElement("br"); 
-					  	label.className="textbox-label";
+					  	label.className="col-md-3 control-label";
 					  	
 					  
 					  	var newInput = document.createElement("input");
@@ -56,7 +56,7 @@
 				      	newInput.setAttribute("name", thing_id);
 				      	newInput.setAttribute("id", thing_id);
 				      	newInput.setAttribute("value", "");
-				     	newInput.setAttribute("class", type);
+				     	newInput.setAttribute("class", type+" form-control input-md");
 				     	//newInput.setAttribute("class", 'things');
 					  	var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						 
@@ -89,7 +89,7 @@
 					  var label_text = <?php echo(json_encode(htmlspecialchars($label_name))); ?>	
 					  var label = document.createElement("label");
 					  var linebreak = document.createElement("br"); 
-					  label.className="textbox-label";
+					  label.className="col-md-3 control-label";
 					  
 					  
 					  var select = document.createElement("select");
@@ -111,7 +111,7 @@
 				    	select.setAttribute("name", thing_id);
 				    	select.setAttribute("id", thing_id);
 				    	//select.setAttribute("class", "things");
-				    	select.setAttribute("class", "select");
+				    	select.setAttribute("class", "select form-control input-md);
 				    	select.setAttribute("value", "");	
 						var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						if(required == 'Y'){

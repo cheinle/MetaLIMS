@@ -44,7 +44,7 @@ function dropDown_update_for_storage($select_name,$table_name,$field_name,$selec
 
 			
 			#now get your dropdown select menu and cycle through it till you match above. When you match above make it the selected option
-			echo "<select id='$p_select_name' name='$p_select_name' class='fields';'>";
+			echo "<select id='$p_select_name' name='$p_select_name' class='fields form-control';'>";
 			echo "<option value='0'>-Select-</option>";
 			$attr = 'selected="selected"';
 			$stmt = $dbc->prepare("SELECT $p_field_name,$p_select_id FROM $p_table_name");
@@ -71,7 +71,7 @@ function dropDown_update_for_storage($select_name,$table_name,$field_name,$selec
 				}
 			}
 			$stmt->close();
-			echo "</select><br>";
+			echo "</select>";
 		}	
      	else{
 			echo "ERROR: Please check table name";

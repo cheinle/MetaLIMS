@@ -17,13 +17,13 @@ function dropDown($select_name,$table_name,$field_name,$select_id,$submitted,$ro
 			include_once($path.'functions/white_list.php');
 			
 			
-				$check = whiteList($p_table_name,'table'); 
+			$check = whiteList($p_table_name,'table'); 
 			$check2 = whiteList($p_field_name,'column');
 			$check3 = whiteList($p_select_id,'column');
 			
 			if($check == 'true' && $check2 == 'true' && $check3 == 'true'){
 
-				echo "<select id='$p_select_name' name='$p_select_name'>";
+				echo "<select id='$p_select_name' name='$p_select_name' class='form-control'>";
 				echo "<option value='0'>-Select-</option>";
 				//$attr = 'selected="selected"'; //page no longer re-loads on submit. No longer needed
 
@@ -44,7 +44,7 @@ function dropDown($select_name,$table_name,$field_name,$select_id,$submitted,$ro
 					}
 				}
 				$stmt->close();
-				echo "</select><br>";
+				echo "</select>";
 				
 			}
 			else{
