@@ -47,33 +47,43 @@
 					  	var label_text = <?php echo(json_encode(htmlspecialchars($label_name))); ?>	
 					  	var type = <?php echo(json_encode(htmlspecialchars($type))); ?>	
 					  	var label = document.createElement("label");
-					  	var linebreak = document.createElement("br"); 
 					  	label.className="col-md-3 control-label";
 					  	
-					  
+					  	var div = document.createElement("div");
+					  	div.className="col-md-8"; 
+					  	
 					  	var newInput = document.createElement("input");
 					  	newInput.setAttribute("type", "text");
 				      	newInput.setAttribute("name", thing_id);
 				      	newInput.setAttribute("id", thing_id);
 				      	newInput.setAttribute("value", "");
 				     	newInput.setAttribute("class", type+" form-control input-md");
-				     	//newInput.setAttribute("class", 'things');
+
 					  	var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
+					  	
+					  	var form_group_div= document.createElement("div");
+					   	form_group_div.className="form-group";
 						 
 						if(required == 'Y'){
 						  var node = document.createTextNode(label_text+" :*");
 					  	  label.appendChild(node);
-						  var required_element = document.getElementById("required_things"+column_number).appendChild(label);
-						  document.getElementById("required_things"+column_number).appendChild(linebreak);
-						  document.getElementById("required_things"+column_number).appendChild(newInput);
-						  document.getElementById("required_things"+column_number).appendChild(linebreak);
+
+						  var required_element = document.getElementById("required_things"+column_number);
+						  required_element.appendChild(form_group_div);
+						  form_group_div.appendChild(label);
+						  form_group_div.appendChild(div);
+						  div.appendChild(newInput);
+						  
+						  
 						}else{
 						  var node = document.createTextNode(label_text+" : ");
-					  	 label.appendChild(node);
-						  var element = document.getElementById("user_things"+column_number).appendChild(label);
-						  document.getElementById("user_things"+column_number).appendChild(linebreak);
-						  document.getElementById("user_things"+column_number).appendChild(newInput);
-						  document.getElementById("user_things"+column_number).appendChild(linebreak);
+					  	  label.appendChild(node);
+					  	 
+						  var non_required_element = document.getElementById("user_things"+column_number);
+						  non_required_element.appendChild(form_group_div);
+						  form_group_div.appendChild(label);
+						  form_group_div.appendChild(div);
+						  div.appendChild(newInput);
 						}
 					</script>
 <?php
@@ -88,16 +98,19 @@
 					  var thing_id = <?php echo(json_encode(htmlspecialchars($thing_id))); ?>	
 					  var label_text = <?php echo(json_encode(htmlspecialchars($label_name))); ?>	
 					  var label = document.createElement("label");
-					  var linebreak = document.createElement("br"); 
 					  label.className="col-md-3 control-label";
 					  
+					  var div = document.createElement("div"); 
+					  div.className="col-md-8";
+					  
+					  var form_group_div= document.createElement("div");
+					  form_group_div.className="form-group";
 					  
 					  var select = document.createElement("select");
 					  var array = <?php echo json_encode($select_array); ?>;
 					  array.unshift("-Select-");
 						for (index = 0; index < array.length; ++index) {
 					   		var option = array[index];
-					   		//alert(option);
 							var opt = document.createElement('option');
 							opt.appendChild(document.createTextNode(option));
 							if(option == '-Select-'){
@@ -110,25 +123,29 @@
 						}	
 				    	select.setAttribute("name", thing_id);
 				    	select.setAttribute("id", thing_id);
-				    	//select.setAttribute("class", "things");
-				    	select.setAttribute("class", "select form-control input-md);
+				    	select.setAttribute("class", "select"+" form-control");
 				    	select.setAttribute("value", "");	
+				    	
 						var required = <?php echo(json_encode(htmlspecialchars($required))); ?>	
 						if(required == 'Y'){
 							var node = document.createTextNode(label_text+" :*");
 					  		label.appendChild(node);
-							var element = document.getElementById("required_things"+column_number).appendChild(label);
-					  	 	document.getElementById("required_things"+column_number).appendChild(linebreak);
-					 	 	document.getElementById("required_things"+column_number).appendChild(select);
-					 	 	document.getElementById("required_things"+column_number).appendChild(linebreak);
+					  		
+							var element = document.getElementById("required_things"+column_number);
+							element.appendChild(form_group_div);
+							form_group_div.appendChild(label);
+						    form_group_div.appendChild(div);
+							div.appendChild(select);
 					 	 	
 						}else{
 							var node = document.createTextNode(label_text+" : ");
 					  		label.appendChild(node);
-							var element = document.getElementById("user_things"+column_number).appendChild(label);
-					  	 	document.getElementById("user_things"+column_number).appendChild(linebreak);
-					 	 	document.getElementById("user_things"+column_number).appendChild(select);
-					 	 	document.getElementById("user_things"+column_number).appendChild(linebreak);
+					 	 	
+					 	 	var nonelement = document.getElementById("user_things"+column_number);
+							nonelement.appendChild(form_group_div);
+							form_group_div.appendChild(label);
+						    form_group_div.appendChild(div);
+							div.appendChild(select);
 						}
 					 	
 					</script>

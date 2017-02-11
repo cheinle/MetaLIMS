@@ -11,10 +11,9 @@ include ($path.'database_connection.php');
 <html>
 <head>
 		<meta charset="utf-8">
-				<!--<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->		
+		<title>Update Samples</title>	
 </head>
 <body class="update">
-	<!--<script type="text/javascript">var root = "<?php echo $root; ?>";</script>-->
 <?php	//drowpdown to select field_name from table_name
 
 
@@ -75,32 +74,35 @@ if (isset($_GET['submit'])) {
 				<br>* = required field <br>
 				<i>(Don't see your desired selection in dropdown list? Please add selection in "Update Dropdowns in Insert Sample" tab)</i>
 				<div id='samplename_availability_result'></div>  
+				
+				<div style="padding:1em 1.4em;">
 				<fieldset>
 				<LEGEND><b>Sample Name</b></LEGEND>
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					
-				<div class="form-group">
-					 <div class="col-md-8">
-				 <label class="col-md-3 control-label">Sample Name:*</label>
-				<input type="text" name="sample_name" id="sample_name" class="form-control input-md" data-toggle="popover" title="Tip:" data-content="Unable to edit sample name. Please select Go Back button to select a different sample or go to Insert Sample tab to enter a new sample. Sample Name is automatically re-created if name components are updated" placeholder="yyyy/mm/dd[project name][sample_type][sample number-000]" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'sample_name',$dbc);}?>" readonly />
-				</p>
-				<script>
-					$(document).ready(function(){
-    					$('[data-toggle="popover"]').popover({
-        					placement : 'right'
-    					});
-					});
-				</script>
-				
-				<style>
-					.popover-content {
-    					font-style: bold;
-    					font-size: 14px;
-					}
-				</style>
+					<div class="form-group">
+						 <div class="col-md-12">
+					 		<!--<label class="col-md-3 control-label">Sample Name:*</label>-->
+							<input type="text" name="sample_name" id="sample_name" class="form-control input-md" data-toggle="popover" title="Tip:" data-content="Sample Name is automatically re-created if name components are updated" placeholder="yyyy/mm/dd[project name][sample_type][sample number-000]" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'sample_name',$dbc);}?>" readonly />
+						</div>
+					</div>
+					<script>
+						$(document).ready(function(){
+	    					$('[data-toggle="popover"]').popover({
+	        					placement : 'right'
+	    					});
+						});
+					</script>
+					
+					<style>
+						.popover-content {
+	    					font-style: bold;
+	    					font-size: 14px;
+						}
+					</style>
 				</div><!--end of col-xs-6-->
 				</fieldset>
-				
+				</div>
 				<!--------------------------------------fragment-1----------------------------------->
 				<div id="fragment-1">
 				<fieldset>

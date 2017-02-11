@@ -312,7 +312,7 @@ form.registration label.textbox-label,label.password-label{
   padding:0px;
 }
 
-form.registration label.textbox-label-sampler{
+/*form.registration label.textbox-label-sampler{
   font-size: 16px;
   width:200px;
   float: left;
@@ -321,7 +321,7 @@ form.registration label.textbox-label-sampler{
   margin:4px 4px 0px 0px;
   padding:0px;
   color:#52bab3;
-}
+}*/
 
 form.registration h3.checkbox-header-sampler{
   font-size: 16px;
