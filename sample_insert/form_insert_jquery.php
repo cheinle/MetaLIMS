@@ -19,7 +19,7 @@ include ($path.'functions/dropDown.php');
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+
 		<title>Form Insert</title>
 	
 	</head>
@@ -158,6 +158,19 @@ include ($path.'functions/dropDown.php');
 							  </div>
 							</div>
 							
+							<!--Original sample exists?-->
+							<div class="form-group">
+							  <label class="col-md-3 control-label" for="checkboxes">Does Original Sample Still Exist?</label>
+							  <div class="col-md-4">
+							  <div class="checkbox">
+							    <label for="checkboxes-0">
+							      <input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" value="false" />
+							      No
+							    </label>
+								</div>
+							  </div>
+							</div>
+							
 
 							
 							<!--sampler dropdown-->
@@ -246,7 +259,7 @@ include ($path.'functions/dropDown.php');
 							
 							<!--Volume of DNA to measure DNA conc-->
 							<div class="form-group">
-							  <label class="col-md-3 control-label">Volume of DNA Used for Measure DNA Concentration(ul):</label>
+							  <label class="col-md-3 control-label">Volume of DNA for Quantification(ul):</label>
 							  <div class="col-md-8">
 								<input type="text" name="dVol_quant" id="dVol_quant"  placeholder="Enter A Volume" value="" class="form-control input-md">
 							  </div>
@@ -278,33 +291,31 @@ include ($path.'functions/dropDown.php');
 							  
 							  
 							<!--Original sample exists?-->
-							<div class="form-group">
-							  <label class="col-md-3 control-label" for="orig_sample_exist">Does Original Sample Still Exist?</label>
-							  <div class="col-md-8"> 
-							  	 <label class="radio-inline" for="orig_sample_exist-0">
-							      <input type="radio" name="orig_sample_exist" id="orig_sample_exist-0" value="true">
-							      Yes
-							    </label>
-							    <label class="radio-inline" for="orig_sample_exist-0">
-							      <input type="radio" name="orig_sample_exist" id="orig_sample_exist-1" value="false" >
+							<!--<div class="form-group">
+							  <label class="col-md-3 control-label" for="checkboxes">Does Original Sample Still Exist?</label>
+							  <div class="col-md-4">
+							  <div class="checkbox">
+							    <label for="checkboxes-0">
+							      <input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" value="false" />
 							      No
 							    </label>
+								</div>
 							  </div>
-							</div>
+							</div>-->
 								
 							<!--DNA sample exists?-->	
 							<div class="form-group">
 							  <label class="col-md-3 control-label" for="DNA_sample_exist">Does DNA Extraction Sample Still Exist?</label>
 							  <div class="col-md-8"> 
-							    <label class="radio-inline" for="DNA_sample_exist-0">
+							    <label for="DNA_sample_exist-0">
 							      <input type="radio" name="DNA_sample_exist" id="DNA_sample_exist-0" value="one">
 							      No, DNA Has Not Been Extracted
 							    </label> 
-							    <label class="radio-inline" for="DNA_sample_exist-1">
+							    <label for="DNA_sample_exist-1">
 							      <input type="radio" name="DNA_sample_exist" id="DNA_sample_exist-1" value="two">
 							      No, DNA Has Not Been Extracted
 							    </label> 
-							    <label class="radio-inline" for="DNA_sample_exist-2">
+							    <label for="DNA_sample_exist-2">
 							      <input type="radio" name="DNA_sample_exist" id="DNA_sample_exist-2" value="three">
 							      No, DNA Sample Is Used Up
 							    </label> 
@@ -402,33 +413,31 @@ include ($path.'functions/dropDown.php');
 								
 							
 								<!-- original sample exist?-->
-								<div class="form-group">
-								  <label class="col-md-3 control-label" for="orig_sample_exist">Does Original Sample Still Exist?</label>
-								  <div class="col-md-8">
-								  	 <label class="radio-inline" for="orig_sample_exist-1">
-								     <input type="radio" name="orig_sample_exist" id="orig_sample_exist-3" value="true">
-								      Yes
-								    </label>   
-								    <label class="radio-inline" for="orig_sample_exist-0">
-								      <input type="radio" name="orig_sample_exist" id="orig_sample_exist-4" value="false">
+								<!--<div class="form-group">
+								  <label class="col-md-3 control-label" for="checkboxes">Does Original Sample Still Exist?</label>
+								  <div class="col-md-4">
+								  <div class="checkbox">
+								    <label for="checkboxes-0">
+								      <input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" value="false" />
 								      No
 								    </label>
+									</div>
 								  </div>
-								</div>
+								</div>-->
 								
 								<!--RNA sample exist?-->
 								<div class="form-group">
 								  <label class="col-md-3 control-label" for="DNA_sample_exist">Does RNA Extraction Sample Still Exist?</label>
 								  <div class="col-md-8"> 
-								    <label class="radio-inline" for="RNA_sample_exist-0">
+								    <label for="RNA_sample_exist-0">
 								      <input type="radio" name="RNA_sample_exist" id="RNA_sample_exist-0" value="one">
 								      No, RNA Has Not Been Extracted
 								    </label> 
-								    <label class="radio-inline" for="RNA_sample_exist-1">
+								    <label for="RNA_sample_exist-1">
 								      <input type="radio" name="RNA_sample_exist" id="RNA_sample_exist-1" value="two">
 								      No, RNA Has Not Been Extracted
 								    </label> 
-								    <label class="radio-inline" for="RNA_sample_exist-2">
+								    <label for="RNA_sample_exist-2">
 								      <input type="radio" name="RNA_sample_exist" id="RNA_sample_exist-2" value="three">
 								      No, RNA Sample Is Used Up
 								    </label> 

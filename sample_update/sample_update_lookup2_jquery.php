@@ -203,6 +203,18 @@ if (isset($_GET['submit'])) {
 					</div>
 				</div>
 				
+				<div class="form-group">
+				  <label class="col-md-3 control-label" for="checkboxes">Does Original Sample Still Exist?</label>
+				  <div class="col-md-4">
+				  <div class="checkbox">
+				    <label for="checkboxes-0">
+				      <input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" value="false" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>
+				      No
+				    </label>
+					</div>
+				  </div>
+				</div>
+				
 				<!--Invisible Project Name Dropdown-->
 				<input type="text" style="visibility:hidden" name="orig_projName" id="orig_projName" class="form-control input-md" placeholder="Enter A Barcode" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'project_name',$dbc);}?>"/>
 				
@@ -219,9 +231,9 @@ if (isset($_GET['submit'])) {
 				<div id="fragment-2">
 				<fieldset>
 				<div id="dna_extraction">
-					
-					<LEGEND><b>DNA Extraction Info</b></LEGEND>
 					<div class="col-xs-12 col-sm-6 col-md-6">
+					<LEGEND><b>DNA Extraction Info</b></LEGEND>
+					
 					
 					<div class="form-group">
 					 <label class="col-md-3 control-label">DNA Extraction Date:</label>
@@ -274,7 +286,7 @@ if (isset($_GET['submit'])) {
 	
 					<!--Volume of DNA to measure DNA conc-->
 					<div class="form-group">
-					 	<label class="col-md-3 control-label">Volume of DNA Used for Measure DNA Concentration(ul):</label>
+					 	<label class="col-md-3 control-label">Volume of DNA for Quantification(ul):</label>
 					 	 <div class="col-md-8">
 							<input type="text" name="dVol_quant" id="dVol_quant" class="form-control input-md" placeholder="Enter A Volume" value="<?php if(isset($_GET['submit'])){echo text_insert_update($parent_value,'d_volume_quant',$dbc);}?>">
 						 </div>
@@ -300,28 +312,51 @@ if (isset($_GET['submit'])) {
 						</div>
 					</div>
 					
-					<div class="form-group">
-						 
-						<h3 class="checkbox-header">Does Original Sample Still Exist?:</h3><br>
-		 				<div class="vert-checkboxes">
-		 				<label class="checkbox-label"><input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" class = "orig_sample_exist form-control input-md" value="false" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>No</label><br />
+					<!--<div class="form-group">
+					  <label class="col-md-3 control-label" for="checkboxes">Does Original Sample Still Exist?</label>
+					  <div class="col-md-4">
+					  <div class="checkbox">
+					    <label for="checkboxes-0">
+					      <input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" value="false" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>
+					      No
+					    </label>
 						</div>
-					</div>
+					  </div>
+					</div>-->
+					
 					
 					<div class="form-group">
-					<h3 class="checkbox-header">Does DNA Extraction Sample Exist?:</h3><br>
-					<div class="vert-checkboxes">
-	 				<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>Yes,DNA Sample Exists</label><br />
-					<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'two'){ echo 'checked';}  ?>/>No, DNA Has Not Been Extracted</label><br />
-					<label class="checkbox-label"><input type="radio" name="DNA_sample_exist" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'three'){ echo 'checked';} ?>/>No, DNA Sample Is Used Up</label><br />
+				  	<label class="col-md-4 control-label" for="radios">Does RNA Extraction Sample Exist?</label>
+					  <div class="col-md-4">
+					  <div class="radio">
+					    <label for="radios-0">
+					      <input type="radio" name="DNA_sample_exist" id="radios-0" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>
+					      Yes,DNA Sample Exists
+					    </label>
+						</div>
+					  <div class="radio">
+					    <label for="radios-1">
+					      <input type="radio" name="DNA_sample_exist" id="radios-1" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'two'){ echo 'checked';}  ?> />
+					      No, DNA Has Not Been Extracted
+					    </label>
+						</div>
+					  <div class="radio">
+					    <label for="radios-2">
+					      <input type="radio" name="DNA_sample_exist" id="radios-2" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'three'){ echo 'checked';} ?> />
+					      No, DNA Sample Is Used Up
+					    </label>
+						</div>
+					  </div>
 					</div>
-					</div>
-					</div>
-				</div>
-
+			
+				
+				</div><!--close dna extraction-->
+				</div><!--close col-xs-6-->
+			
 				<div class="col-xs-12 col-sm-6 col-md-6">
+				<LEGEND><b>RNA Extraction Info</b></LEGEND>	
+				
 				<div id="rna_extraction">
-				<LEGEND><b>RNA Extraction Info</b></LEGEND>
 				
 				<div class="form-group">
 				 <label class="col-md-3 control-label">RNA Extraction Date:</label>
@@ -398,23 +433,44 @@ if (isset($_GET['submit'])) {
 				 </div>
 				</div>
 				
-				<div class="form-group">
-					 
-				<h3 class="checkbox-header">Does Original RNA Sample Still Exist?:</h3>
-				<div class="vert-checkboxes">
- 				<label class="checkbox-label"><input type="checkbox" class = "orig_sample_exist" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>No</label><br />
-				</div>
-				</div>
+				<!--<div class="form-group">
+				  <label class="col-md-3 control-label" for="checkboxes">Does Original Sample Still Exist?</label>
+				  <div class="col-md-4">
+				  <div class="checkbox">
+				    <label for="checkboxes-0">
+				      <input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" value="false" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>
+				      No
+				    </label>
+					</div>
+				  </div>
+				</div>-->
+				
 				
 				<div class="form-group">
-			
-				<h3 class="checkbox-header">Does RNA Extraction Sample Exist?:</h3><br>
- 				<div class="vert-checkboxes">
- 				<label class="checkbox-label"><input type="radio" name="RNA_sample_exist" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>Yes,RNA Sample Exisits</label><br />
-				<label class="checkbox-label"><input type="radio" name="RNA_sample_exist" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'two'){ echo 'checked';}  ?>/>No, RNA Has Not Been Extracted</label><br />
-				<label class="checkbox-label"><input type="radio" name="RNA_sample_exist" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'three'){ echo 'checked';} ?>/>No, RNA Sample Is Used Up</label><br />
+				  <label class="col-md-4 control-label" for="radios">Does RNA Extraction Sample Exist?</label>
+				  <div class="col-md-4">
+				  <div class="radio">
+				    <label for="radios-0">
+				      <input type="radio" name="RNA_sample_exist" id="radios-0" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>
+				      Yes,RNA Sample Exists
+				    </label>
+					</div>
+				  <div class="radio">
+				    <label for="radios-1">
+				      <input type="radio" name="RNA_sample_exist" id="radios-1" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'two'){ echo 'checked';}  ?> />
+				      No, RNA Has Not Been Extracted
+				    </label>
+					</div>
+				  <div class="radio">
+				    <label for="radios-2">
+				      <input type="radio" name="RNA_sample_exist" id="radios-2" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'three'){ echo 'checked';} ?> />
+				      No, RNA Sample Is Used Up
+				    </label>
+					</div>
+				  </div>
 				</div>
-				</div>
+				
+				
 				</div>
 			
 				

@@ -32,10 +32,12 @@
                 var Store_temp = $('#oStore_temp').val(); //<----- get the value from the parent select 
                 if(Store_temp == 'Used'){
 	                $("#oStore_name").html("<option value='Used'>Used</option>"); 
-	                $('.orig_sample_exist').prop('checked',true);
+	                $('#orig_sample_exist').prop('checked',true);
+	                
                 }
                 else{
 	                var Store_name = "oStore_name";
+	                $('#orig_sample_exist').prop('checked',false);
 	                $.ajax({
 	                    url     : root+'freezer_drawer_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
@@ -45,7 +47,7 @@
 	                    error   : function(){alert('An Error Has Occurred')} //error message
 	                })
 	                
-	                $('.orig_sample_exist').prop('checked',false);
+	               
 				}	
 			});
 			

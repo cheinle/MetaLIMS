@@ -250,22 +250,90 @@ button.mini-button{
 	background: linear-gradient(rgba(192,213,219,1),rgba(192,213,219,0.75),rgba(192,213,219,1));
 }
 
-/***********For Main Form********/
+/**********Style Bootstrap Form Class to look like original Registration form class************/
 form.form-horizontal{
-	 width:90%;
-	 float:left;
-	 color:#818181;
-	 background: #f1f1f1;
-	 border: 2px solid #ccc;
-	 padding:10px;
-	 margin-left: 5%;
-	 font-family: Arial;
-	 font-size: 14px;
-	 box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-	 border-radius: 15px;
+  width:90%;
+ float:left;
+ color:#818181;
+ background: #f1f1f1;
+ border: 2px solid #ccc;
+ padding:10px;
+ margin-left: 5%;
+ font-family: Arial;
+ font-size: 14px;
+ box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+ border-radius: 15px;
 }
 
 
+form.form-horizontal fieldset{
+  /*border-top:1px solid #ccc;*/
+  border-left:0;
+  border-bottom:0;
+  border-right:0;
+  padding:6px;
+  margin:0px 0px 0px 0px;
+  
+}
+
+form.form-horizontal legend{
+  text-align:left;
+  color: #7a7a7a;
+  font-size:18px;
+  padding:10px 4px 0px 4px;
+  margin-left:10px;
+  width: 90%;
+}
+
+form.form-horizontal label{
+  font-size: 16px;
+  text-align: right;
+  color:#666666;
+}
+
+form.form-horizontal input[type=text],input[type=password],input[type=email]{
+  font-family: Arial;
+  font-size: 20px;
+  border:1px solid #cccccc;
+  margin:2px 0px 10px 10px;
+  color:#00abdf;
+  height:34px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  border-radius: 5px;
+  text-indent: 0.01;
+}
+
+form.form-horizontal textarea.form-control{
+  font-family: Arial;
+  font-size: 20px;
+  border:1px solid #cccccc;
+  color:#00abdf;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  border-radius: 5px;
+}
+
+
+form.form-horizontal input:focus, form.registration select:focus{
+  background-color:#E0E6FF;
+}
+
+form.form-horizontal select{
+  font-family: Arial;
+  font-size: 20px;
+  border:1px solid #cccccc;
+  margin:2px 0px 10px 10px;
+  color:#00abdf;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  border-radius: 5px;
+   
+  -moz-appearance: none;//remove dropdown arrow because cannot get the arrow to round
+  text-indent: 0.01;
+  text-overflow: '';
+}
+
+
+
+/***********For Registration Form Class********/
 
 form.registration{
  width:90%;
@@ -345,8 +413,8 @@ form.registration input[type=text],input[type=password],input[type=email]{
   border:1px solid #cccccc;
   margin:2px 0px 10px 10px;
   color:#00abdf;
-  height:32px;
-  padding:3px;
+  height:34px;
+  padding:6px 12px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   border-radius: 5px;
 }
@@ -360,7 +428,7 @@ form.registration textarea.form-control{
   margin:2px 0px 10px 10px;
   color:#00abdf;
   height:20%;
-  padding:3px;
+  padding:6px 12px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   border-radius: 5px;
 }
@@ -375,7 +443,7 @@ form.registration input[type=text].shrtfields,input[type=text].time_fields{
   border:1px solid #cccccc;
   margin:0px 0px 10px 10px;
   color:#00abdf;
-  height:32px;
+  height:34px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   border-radius: 5px;
 }
@@ -388,14 +456,14 @@ form.registration input[type=text].bulkfields{
   width:100%;
   border:1px solid #cccccc;
   color:#00abdf;
-  height:32px;
+  height:34px;
   padding: 0px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   border-radius: 5px;
 }
 
 
-form.registration label.checkbox-label,label.radio-label{
+/*form.registration label.checkbox-label,label.radio-label{
 	position:relative;
 	vertical-align: middle;
 	width:200px
@@ -406,7 +474,7 @@ form.registration label.checkbox-label,label.radio-label{
 	text-align: left;
 	color:#666666;
 
-}
+}*/
 
 form.registration input[type=checkbox],input[type=radio]{
   font-family: Arial;
@@ -457,7 +525,6 @@ form.registration select{
   border:1px solid #cccccc;
   margin:2px 0px 10px 10px;
   color:#00abdf;
-  height:32px;
   width: 50%;
   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   border-radius: 5px;
@@ -642,7 +709,7 @@ form.bulk{
   border:1px solid #cccccc;
   margin:2px 0px 10px 10px;
   color:#00abdf;
-  height:32px;
+  height:34px;
   padding:3px;
   border-radius: 15px;
   box-shadow:0 1px 3px rgba(0,0,0,0.5);
@@ -654,7 +721,7 @@ form.bulk input[type=text],select{
   float:left;
   border:1px solid #cccccc;
   color:#00abdf;
-  height:32px;
+  height:34px;
   border-radius: 5px;
   box-shadow:0 1px 3px rgba(0,0,0,0.5);
   
@@ -671,7 +738,7 @@ form.bulk input[type=checkbox],input[type=radio]{
   
   margin:2px 0px 2px 2px;
   color:#00abdf;
-  height:32px;
+  height:34px;
   padding:3px;
 }
 
