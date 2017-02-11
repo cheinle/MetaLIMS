@@ -47,7 +47,7 @@ ini_set('display_errors', 1);
 			                    type    : 'GET', //type of request, GET or POST
 			                    data    : {parent_value:parent_value}, //Data you are sending
 			                    success : function(data){$('#user_things1').html(data)},
-			                    error   : function(){alert("An Error Has Occured")} //error message
+			                    error   : function(){alert("An Error Has Occurred")} //error message
 
 						});
 					}else{

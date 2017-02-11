@@ -99,7 +99,7 @@ include('../database_connection.php');
 					$submitted = 'true';
 				}else{
 					
-					echo 'An Error Has Occured';
+					echo 'An Error Has Occurred';
 					mysqli_error($dbc);
 					
 				}

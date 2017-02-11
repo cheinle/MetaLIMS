@@ -171,7 +171,7 @@ include('../database_connection.php');
 						
 					}else{
 						
-						echo 'An error has occured';
+						echo 'An error has occurred';
 						mysqli_error($dbc);
 						
 					}
