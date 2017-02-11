@@ -15,7 +15,7 @@ include('../functions/send_email.php');
 	      $('#datatable')
 	    	.addClass('wrap')
 		    .dataTable( {
-		         responsive: true,
+		         /*responsive: true,*/ //is not displaying checked radio buttons on larger screen sizes
 		          "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]]
 		    } );
 
@@ -176,10 +176,10 @@ if(isset($_POST['submit'])){
 							echo "<td>";
 							?>
 							  <label class="radio-inline">
-						      	<input type="radio" class="radio-inline" name="<?php echo $email_address; ?>_login" value="1" <?php if($visible == 1){echo 'checked';}?>>Yes
+						      	<input type="radio" class="radio-inline" name="<?php echo $email_address; ?>_login" id="radio1" value="1" <?php if($visible == 1){echo 'checked="checked"';}?>>Yes
 						      </label>
 						      <label class="radio-inline">
-						         <input type="radio" class="radio-inline" name="<?php echo $email_address; ?>_login" value="0" <?php if($visible == 0){echo 'checked';}?>>No<br>
+						         <input type="radio" class="radio-inline" name="<?php echo $email_address; ?>_login" id="radio2" value="0" <?php if($visible == 0){echo 'checked';}?>>No
 						      </label>
 
 							<?php

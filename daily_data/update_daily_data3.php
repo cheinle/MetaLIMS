@@ -190,11 +190,9 @@ error_reporting(E_ALL); ?>
     				}
 				}
 			}
-<<<<<<< HEAD
+
 			echo "</div>";
-=======
-			echo '</div>';
->>>>>>> 6e9a045afaca3313c567d518397313af9c1d2d90
+
 		}
 
 	

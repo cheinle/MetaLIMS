@@ -32,12 +32,12 @@
                 var Store_temp = $('#oStore_temp').val(); //<----- get the value from the parent select 
                 if(Store_temp == 'Used'){
 	                $("#oStore_name").html("<option value='Used'>Used</option>"); 
-	                $('#orig_sample_exist').prop('checked',true);
+	                $('#orig_sample_exist2').prop('checked',true);
 	                
                 }
                 else{
 	                var Store_name = "oStore_name";
-	                $('#orig_sample_exist').prop('checked',false);
+	                $('#orig_sample_exist1').prop('checked',true);
 	                $.ajax({
 	                    url     : root+'freezer_drawer_select.php', //the url you are sending datas to which will again send the result
 	                    type    : 'GET', //type of request, GET or POST
@@ -49,7 +49,7 @@
 	                
 	               
 				}	
-			});
+			   });
 			
 		});
 		
@@ -93,6 +93,20 @@
 				               
                 $('#dStore_temp').change(function(){ //on change event
                 var Store_temp = $('#dStore_temp').val(); //<----- get the value from the parent select 
+                
+                
+                if(Store_temp == 'Used'){
+	                $('#DNA_sample_exist-2').prop('checked',true);
+	                
+                }else if(Store_temp == 0){
+                	alert('test');
+                	$('#DNA_sample_exist-1').prop('checked',true);
+                }else{
+                	$('#DNA_sample_exist-0').prop('checked',true);
+                }
+                
+                
+                
                 var Store_name = "dStore_name";
                 $.ajax({
                     url     : root+'freezer_drawer_select.php', //the url you are sending datas to which will again send the result
@@ -115,6 +129,17 @@
 				               
                 $('#rStore_temp').change(function(){ //on change event
                 var Store_temp = $('#rStore_temp').val(); //<----- get the value from the parent select 
+             
+             	if(Store_temp == 'Used'){
+	                $('#RNA_sample_exist-2').prop('checked',true);     
+                }else if(Store_temp == 0){
+                	$('#RNA_sample_exist-1').prop('checked',true);
+                }else{
+                	$('#RNA_sample_exist-0').prop('checked',true);
+                }
+                
+                
+                
                 var Store_name = "rStore_name";
                 $.ajax({
                     url     : root+'freezer_drawer_select.php', //the url you are sending datas to which will again send the result

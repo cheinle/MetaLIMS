@@ -12,7 +12,6 @@ include('../database_connection.php');
 
 <?php 
 include($_SESSION['include_path'].'index.php');
-include($_SESSION['include_path'].'config/js.php');
 include($_SESSION['include_path'].'functions/text_insert_update_storage_info.php');
 include($_SESSION['include_path'].'functions/dropDown_update_for_storage.php');
 

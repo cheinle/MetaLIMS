@@ -33,7 +33,8 @@ include('../database_connection.php');
 		      
 			The new pooled sample entry will contain information in the notes as to which samples are included in the pool.
 			You can also go to 'Query Info' -> 'Query Pooled Info' and look up all the samples which are included
-			in each pool.
+			in each pool. Note, no user created field information is stored so that the user can decide how to aggreagate this data 
+			for the new sample (note: new sample must be updated with this information)
 	</pre>
 	
 </body>

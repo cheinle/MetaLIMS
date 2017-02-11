@@ -7,7 +7,7 @@ function build_bulk_dna_table($stmt,$root){
 	//include('convert_header_names.php');
 	include($path.'functions/text_insert_update.php');
 	include($path.'functions/dropDown.php');
-	include($path.'/config/js.php');
+	//include($path.'/config/js.php');
 	
 	echo '<form class="registration" onsubmit="return validate(this)"  action="bulk_insert_and_updates/dna_bulk_update.php" method="POST">';
 	//echo '<div class = \'left\'>';

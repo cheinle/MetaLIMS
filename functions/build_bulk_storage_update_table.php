@@ -4,8 +4,6 @@
 function build_bulk_storage_update_table($stmt,$root){
 
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
-	include($path.'config/js.php'); //was not being inherited correctly...just added here for now
-	include($path.'config/css.php'); 
 	include($path.'functions/dropDown.php');
 	
 	echo '<form class="registration" onsubmit="return validate(this)" action="bulk_insert_and_updates/storage_bulk_update.php" method="POST">';

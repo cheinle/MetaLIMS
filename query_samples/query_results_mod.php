@@ -414,8 +414,8 @@ if(isset($_GET['submit'])){
 			$p_query_basis = htmlspecialchars($_GET['query']);
 			$thing_id = '';
 			//check whitelist for p_field
-			$p_field_check = whiteList($p_field, 'column');
-			if($p_field_check == 'true'){
+			//$p_field_check = whiteList($p_field, 'column');
+			//if($p_field_check == 'true'){
 				if($p_field == 'sampler_name'){
 					$query_field = " sample_sampler.$p_field = (?)";
 				}
@@ -428,7 +428,7 @@ if(isset($_GET['submit'])){
 					$query_field = " sample.$p_field = (?)";
 				}
 				$check_field = 'true';
-			}
+			//}
 		}
 		//if(isset($_GET['column_names'])){$field_names = check_box_results($_GET['column_names']);}//removed
 		if(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
@@ -459,10 +459,10 @@ if(isset($_GET['submit'])){
 		////////////////////////////////////////////////////////////////////////////////////////////////		
 	
 		if(isset($_GET['db_content']) && $_GET['db_content'] == 'read_sub'){
-			$query_main = "SELECT sample.sample_name,sample.sample_num,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample LEFT JOIN read_submission ON read_submission.sample_name = sample.sample_name LEFT JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
+			$query_main = "SELECT DISTINCT sample.sample_name,sample.sample_num,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample LEFT JOIN read_submission ON read_submission.sample_name = sample.sample_name LEFT JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
 		}
 		elseif(isset($_GET['db_content']) && ($_GET['db_content'] == 'view_read_sub' || $_GET['db_content'] == 'update_read_sub')){
-			$query_main = "SELECT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name LEFT JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
+			$query_main = "SELECT DISTINCT sample.sample_name,sample.sample_sort,sample.seq_id,read_submission.subm_id,read_submission.subm_db,read_submission.subm_date,read_submission.submitter,read_submission.type_exp FROM sample RIGHT JOIN read_submission ON read_submission.sample_name = sample.sample_name LEFT JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
 		}
 		else{
 			$query_main = "SELECT $field_names FROM sample JOIN storage_info ON storage_info.sample_name = sample.sample_name LEFT JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";

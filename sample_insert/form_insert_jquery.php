@@ -158,24 +158,28 @@ include ($path.'functions/dropDown.php');
 							  </div>
 							</div>
 							
-							<!--Original sample exists?-->
+							
+							
+							<!-- Multiple Radios (inline) -->
 							<div class="form-group">
-							  <label class="col-md-3 control-label" for="checkboxes">Does Original Sample Still Exist?</label>
-							  <div class="col-md-4">
-							  <div class="checkbox">
-							    <label for="checkboxes-0">
-							      <input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" value="false" />
-							      No
-							    </label>
-								</div>
+							  <label class="col-md-3 control-label" for="radios">Does Original Sample Still Exist?</label>
+							  <div class="col-md-4"> 
+							<label class="radio-inline" for="radios-0">
+							  <input type="radio" name="orig_sample_exist" id="orig_sample_exist1" value="true" checked="checked">
+							  Yes
+							</label> 
+							<label class="radio-inline" for="radios-1">
+							  <input type="radio" name="orig_sample_exist" id="orig_sample_exist2" value="false">
+							  No
+							</label>
 							  </div>
 							</div>
-							
+				
 
 							
 							<!--sampler dropdown-->
 							<div class="form-group">
-								<label class="col-md-3 control-label">Select Number of Samplers:*<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="This is the number of samplers used to create the original sample. Also, please note that all blanks and cfu samples will have a sampling time duration of zero"></i></label>
+								<label class="col-md-3 control-label">Select Number of Samplers:*<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="This is the number of samplers used to create the original sample. Field assumes different sampler names. Also, please note that all sample type-blank will have a sampling time duration of zero"></i></label>
 								<div class="col-md-8">
 								<select id='sampler_num' name='sampler_num' class='form-control' required>
 								<option value=''>-Select-</option>
@@ -309,10 +313,10 @@ include ($path.'functions/dropDown.php');
 							  <div class="col-md-8"> 
 							    <label for="DNA_sample_exist-0">
 							      <input type="radio" name="DNA_sample_exist" id="DNA_sample_exist-0" value="one">
-							      No, DNA Has Not Been Extracted
+							      Yes,DNA sample exists
 							    </label> 
 							    <label for="DNA_sample_exist-1">
-							      <input type="radio" name="DNA_sample_exist" id="DNA_sample_exist-1" value="two">
+							      <input type="radio" name="DNA_sample_exist" id="DNA_sample_exist-1" value="two" checked>
 							      No, DNA Has Not Been Extracted
 							    </label> 
 							    <label for="DNA_sample_exist-2">
@@ -427,14 +431,14 @@ include ($path.'functions/dropDown.php');
 								
 								<!--RNA sample exist?-->
 								<div class="form-group">
-								  <label class="col-md-3 control-label" for="DNA_sample_exist">Does RNA Extraction Sample Still Exist?</label>
+								  <label class="col-md-3 control-label" for="RNA_sample_exist">Does RNA Extraction Sample Still Exist?</label>
 								  <div class="col-md-8"> 
 								    <label for="RNA_sample_exist-0">
 								      <input type="radio" name="RNA_sample_exist" id="RNA_sample_exist-0" value="one">
-								      No, RNA Has Not Been Extracted
+								      Yes,RNA Sample Exists
 								    </label> 
 								    <label for="RNA_sample_exist-1">
-								      <input type="radio" name="RNA_sample_exist" id="RNA_sample_exist-1" value="two">
+								      <input type="radio" name="RNA_sample_exist" id="RNA_sample_exist-1" value="two" checked>
 								      No, RNA Has Not Been Extracted
 								    </label> 
 								    <label for="RNA_sample_exist-2">
@@ -469,17 +473,21 @@ include ($path.'functions/dropDown.php');
 					<LEGEND><b>User Created Fields</b></LEGEND>
 						<input type="text" style="visibility:hidden" class="hidden" name="build_type" id="build_type" value="insert"/>
 						<div class="col-xs-12 col-sm-6 col-md-6">
+							<legend>Required Input Fields</legend>
 							<div id="required_things1" >
 								
 							</div>
+							<legend>Input Fields</legend>
 							<div id="user_things1">
 								
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
+							<legend>Required Select Fields</legend>
 							<div id="required_things2">
 								
 							</div>
+							<legend>Select Fields</legend>
 							<div id="user_things2">
 								
 							</div>

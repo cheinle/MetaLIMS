@@ -8,30 +8,56 @@ function build_bulk_read_sub_id_update_table($stmt,$root){
 	//include('convert_header_names.php');
 	
 	include($path.'/functions/dropDown_update_for_read_subm.php');
-	include($path.'/config/js.php');
 	
-	echo '<form class="bulk" onsubmit="return confirm(\'Do you want to submit the form?\');" action="bulk_insert_and_updates/read_submission/read_sub_bulk_update.php" method="POST">';
-	echo '<div>';
+	echo "<style>
+	form.form-horizontal select{
+	  font-family: Arial;
+	  font-size: 12px;
+	  border:1px solid #cccccc;
+	  margin:2px 0px 10px 10px;
+	  color:#00abdf;
+	  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	  border-radius: 5px;
+	   
+	  -moz-appearance: none;//remove dropdown arrow because cannot get the arrow to round
+	  text-indent: 0.01;
+	  text-overflow: ellipsis;
+	}
+	form.form-horizontal input[type=text]{
+	  font-family: Arial;
+	  font-size: 12px;
+	  border:1px solid #cccccc;
+	  margin:2px 0px 10px 10px;
+	  color:#00abdf;
+	  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	  border-radius: 5px;
+	   
+	  -moz-appearance: none;//remove dropdown arrow because cannot get the arrow to round
+	  text-indent: 0.01;
+	  text-overflow: ellipsis;
+	}
+	</style>";
+	
+	echo '<form class="form-horizontal" style="width:100%;margin-left: 0px;" onsubmit="return confirm(\'Do you want to submit the form?\');" action="bulk_insert_and_updates/read_submission/read_sub_bulk_update.php" method="POST">';
 	echo '<pre>';
 	echo '*Notice: Bulk Update will update all samples that have been checkmarked for Update/Delete';
 	echo '</pre>';
-	#echo '<table class="bulky_bulk">';
-	echo '<table id = "datatable_bulk" class ="bulk" style="width:100%;margin:0px;">';
-	echo '<thead>';
-	echo '<tr>';
-	echo '<th class="bulk">(Uncheck)</th>';
-	echo '<th class="bulk">Update</th>';
-	echo '<th class="bulk">Delete</th>';
-	echo '<th class="bulk">Sample Name </th>';
-	echo '<th class="bulk">Seq Sub Name</th>';
-	echo '<th class="bulk">Read Sub Name</th>';
-	echo '<th class="bulk">Read Sub Date</th>';
-	echo '<th class="bulk">Read Sub DB</th>';
-	echo '<th class="bulk">Submitter</th>';
-	echo '<th class="bulk">Type Of Experiment</th>';
-	echo '</tr>';
-	echo '</thead>';					
-	echo '<tbody>';
+
+
+	echo '<div class="container-fluid">';
+  	echo '<div class="row">';  
+	echo '<div class="col-sm-1">(Uncheck)</div>';
+	echo '<div class="col-sm-1">Update</div>';
+	echo '<div class="col-sm-1">Delete</div>';
+	echo '<div class="col-sm-1">Sample Name</div>';
+	echo '<div class="col-sm-1">Seq Sub Name</div>';
+	echo '<div class="col-sm-1">Read Sub Name</div>';
+	echo '<div class="col-sm-1">Read Sub Date</div>';
+	echo '<div class="col-sm-1">Read Sub DB</div>';
+	echo '<div class="col-sm-1">Submitter</div>';
+	echo '<div class="col-sm-3">Type Of Experiment</div>';
+	echo '</div>';
+
 	
 	
 	if ($stmt->execute()){
@@ -75,7 +101,7 @@ function build_bulk_read_sub_id_update_table($stmt,$root){
 		
 			foreach($data as $key => $row){
 				#echo '<tr class = "row_collapse">';
-				echo '<tr>';
+				echo '<div class = "row">';
 				$sub_id = htmlspecialchars($row['subm_id']);
 				$subm_db = htmlspecialchars($row['subm_db']);
 				$subm_date = htmlspecialchars($row['subm_date']);
@@ -95,55 +121,49 @@ function build_bulk_read_sub_id_update_table($stmt,$root){
 				#echo $old_id;
 				
 				?>
-				<td>
+				<div class="col-sm-1">
  				<input type="radio" id="<?php echo $mod_sample_name;?>_<?php echo $old_id;?>_checkbox_uncheck" name="sample[<?php echo $sample_name.','.$old_id; ?>][checkbox]" value="uncheck" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
  																																																 if(isset($_SESSION['sample_array'][$sample_name]['checkbox']) && htmlspecialchars($_SESSION['sample_array'][$sample_name]['checkbox']) == 'uncheck'){
  																																																 	echo "checked";
 																																																 }
 																																															}?>/> <?php #echo $sample_name ?>
-				</td>
-				<td>
+				</div>
+				<div class="col-sm-1">
  				<input type="radio" id="<?php echo $mod_sample_name;?>_<?php echo $old_id;?>_checkbox_update" name="sample[<?php echo $sample_name.','.$old_id; ?>][checkbox]" value="update" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
  																																																 if(isset($_SESSION['sample_array'][$sample_name]['checkbox']) && htmlspecialchars($_SESSION['sample_array'][$sample_name]['checkbox']) == 'update'){
  																																																 	echo "checked";
 																																																 }
 																																															}?>/> <?php #echo $sample_name ?>
-				</td>
-				<td>
+				</div>
+				<div class="col-sm-1">
  				<input type="radio" id="<?php echo $mod_sample_name;?>_<?php echo $old_id;?>_checkbox_delete" name="sample[<?php echo $sample_name.','.$old_id; ?>][checkbox]" value="delete" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {
  																																																 if(isset($_SESSION['sample_array'][$sample_name]['checkbox']) && htmlspecialchars($_SESSION['sample_array'][$sample_name]['checkbox']) == 'delete'){
  																																																 	echo "checked";
 																																																 }
 																																															}?>/> <?php #echo $sample_name ?>
-				</td>
-				<td><?php echo $sample_name; ?></td>
-				<?php
-				echo '<td>'.$row['seq_id'].'</td>';
-
+				</div>
+				<div class="col-sm-1"><?php echo $sample_name; ?></div>
 				
+				<?php echo '<div class="col-sm-1">'.$row['seq_id'].'</div>';?>
 				
-				?>
-				<td><input type="text" class = "checkbox1" id="<?php echo $mod_sample_name;?>_id" name="sample[<?php echo $sample_name.','.$old_id; ?>][id]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['id']);}else{echo $old_id;} ?>"></td>
+				<div class="col-sm-1"><input type="text" class = "form-control input-md" id="<?php echo $mod_sample_name;?>_id" name="sample[<?php echo $sample_name.','.$old_id; ?>][id]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['id']);}else{echo $old_id;} ?>"/></div>
 				
-				<td>
-				
-				<input type="text" id="datepicker5_<?php echo $mod_sample_name.','.$old_id; ?>"  name="sample[<?php echo $sample_name.','.$old_id; ?>][subm_date]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['date_submitted']);}else{ echo $subm_date;} ?>"/>
+				<div class="col-sm-1"><input type="text" class= "form-control input-md" id="datepicker5-<?php echo $mod_sample_name.'-'.$old_id; ?>"  name="sample[<?php echo $sample_name.','.$old_id; ?>][subm_date]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['date_submitted']);}else{ echo $subm_date;} ?>"/></div>
 				<script>
-				var sample_name = <?php echo json_encode("$mod_sample_name,$old_id"); ?>;
-				sample_name = 'datepicker5_'+sample_name;
-
-				var test = document.getElementById(sample_name).value;
-				//alert(test);
-				//you have the correct sample name, but datepicker isn't working.
-				$('#'+sample_name).datepicker({ dateFormat: 'yy-mm-dd' }).val();
+					var sample_name = <?php echo json_encode("$mod_sample_name".'-'."$old_id"); ?>;
+					sample_name = 'datepicker5-'+sample_name;
+	
+					var test = document.getElementById(sample_name).value;
+					//alert(test);
+					//you have the correct sample name, but datepicker isn't working.
+					$('#'+sample_name).datepicker({ dateFormat: 'yy-mm-dd' }).val();
 				</script>
-				</td>
 				
-				<td><?php dropDown_update_for_read_subm('subm_db', 'read_subm_database', 'database_name','database_name','subm_db',"$sample_name","0","$sub_id",$root);?></td>
-				<td><input type="text" name="sample[<?php echo $sample_name.','.$old_id; ?>][submitter]" placeholder="Enter A Name" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['submitter']);}else{ echo $submitter;} ?>"></td>
-				<td><?php dropDown_update_for_read_subm('type_of_experiement', 'read_subm_exp_types', 'exp_types','exp_types','type_exp',"$sample_name","0","$sub_id",$root);?></td>
-				</tr>
-
+				<div class="col-sm-1"><?php dropDown_update_for_read_subm('subm_db', 'read_subm_database', 'database_name','database_name','subm_db',"$sample_name","0","$sub_id",$root);?></div>
+				<div class="col-sm-1"><input type="text" name="sample[<?php echo $sample_name.','.$old_id; ?>][submitter]" class= "form-control input-md" placeholder="Enter A Name" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['submitter']);}else{ echo $submitter;} ?>"/></div>
+				<div class="col-sm-3"><?php dropDown_update_for_read_subm('type_of_experiement', 'read_subm_exp_types', 'exp_types','exp_types','type_exp',"$sample_name","0","$sub_id",$root);?></div>
+			
+				</div><!--close row-->
 				<?php
 					
 			}	
@@ -153,11 +173,9 @@ function build_bulk_read_sub_id_update_table($stmt,$root){
 	}
 		
 			$stmt->close();
-			echo '</tbody>';
-			echo '</table>';
+			echo '</div>'; //close container div
 			echo '<button type="submit" name="submit" value="1" class="button"> Update Samples </button>';
 			echo '</form>';	
-			echo '</div>';
 			
 			
 
