@@ -19,6 +19,7 @@ include ($path.'functions/dropDown.php');
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<title>Form Insert</title>
 	
 	</head>
@@ -30,7 +31,8 @@ include ($path.'functions/dropDown.php');
 		<?php $submitted = 'false';?>
 		</div>
 		
-		<form class = "registration" id="form" name="form">
+		<!--<form class = "registration" id="form" name="form">-->
+		<form class="form-horizontal" id="form" name="form" action="" method="post" style="width: 90%; margin-left:5%;"> 
 		<div id="tabs">
 				  <ul>
 				     <li><a href="#fragment-1"><span>Collection Info</span></a></li>
@@ -54,128 +56,140 @@ include ($path.'functions/dropDown.php');
   					<div id="fragment-1">
   						<fieldset>
 						<LEGEND><b>Sample Collection Info</b></LEGEND>
-  						<div class="col-xs-6">
-							<p>
-							<label class="textbox-label">Sample Number:*</label>
-						
-							<input type="text" name="sample_number" id = "sample_number" placeholder="[001]" value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_sample_number;} ?>">
-							</p>
-							
+  						<div class="col-xs-12 col-sm-6 col-md-6">
+							<!--Sample number field-->
+							<div class="form-group">
+							  <label class="col-md-3 control-label">Sample Number:*</label>  
+							  <div class="col-md-8">
+							 <input type="text" name="sample_number" id = "sample_number" placeholder="[001]" value="" class="form-control input-md" required="">
+							  </div>
+							</div>
+								
 							<!--Barcode insert field-->
-							<p>
-							<label class="textbox-label">Barcode:(optional)</label>
-							<br>
-							<input type="text" name="barcode" id="barcode" placeholder="Enter A Barcode" value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo $p_barcode;}?>"
-							</p>
-			
-							<p>
+							<div class="form-group">
+							  <label class="col-md-3 control-label">Barcode:(optional)</label>  
+							  <div class="col-md-8">
+							  <input type="text" name="barcode" id="barcode" placeholder="Enter A Barcode" value="" class="form-control input-md">
+							  </div>
+							</div>
+							
 							<!--Project Name Dropdown-->
-							<label class="textbox-label">Select Project Name:*</label>
-							<?php
-							//url or $_GET name, table name, field name
-							dropDown('projName', 'project_name', 'project_name','project_name',$submitted,$root);
-							?>
-							</p>
+							<div class="form-group">
+							  <label class="col-md-3 control-label">Select Project Name:*</label>
+							  <div class="col-md-8">
+								  <?php
+								//$_GET name, table name, field name, id name, form submitted, root path, required
+								dropDown('projName', 'project_name', 'project_name','project_name',$submitted,$root,'yes');
+								?>
+							  </div>
+							</div>
+							
+							
 							
 							<!--location dropdown-->
-							<p>
-							<label class="textbox-label">Select Location:*</label>
-							<?php
-			
-							//url or $_GET name, table name, field name
-							dropDown('loc', 'location', 'loc_name','loc_name',$submitted,$root);
-							?>
-							</p>
+							<div class="form-group">
+							  <label class="col-md-3 control-label">Select Location:*</label>
+							  <div class="col-md-8">
+								  <?php
+								//$_GET name, table name, field name, id name, form submitted, root path, required
+								dropDown('loc', 'location', 'loc_name','loc_name',$submitted,$root,'yes');
+								?>
+							  </div>
+							</div>
+							
 							
 							<!--rel location dropdown-->
-							<p>
-							<label class="textbox-label">Select Relative Location:*</label>
-							<?php
-							//url or $_GET name, table name, field name
-							dropDown('rloc', 'relt_location', 'loc_name','loc_name',$submitted,$root);
-							?>
-							</p>
+							<div class="form-group">
+							  <label class="col-md-3 control-label">Select Relative Location:*</label>
+							  <div class="col-md-8">
+								<?php
+								//$_GET name, table name, field name, id name, form submitted, root path, required
+								dropDown('rloc', 'relt_location', 'loc_name','loc_name',$submitted,$root,'yes');
+								?>
+							  </div>
+							</div>
 							
-							<p>
 							<!--media type dropdown-->
-							<label class="textbox-label">Media Type:*</label>
-							<?php
-							//url or $_GET name, table name, field name
-							dropDown('media', 'media_type', 'media_type','media_type',$submitted,$root);
-							?>
-							</p>
-			
-							<p>
+							<div class="form-group">
+							  <label class="col-md-3 control-label">Media Type:*</label>
+							  <div class="col-md-8">
+								<?php
+								//$_GET name, table name, field name, id name, form submitted, root path, required
+								dropDown('media', 'media_type', 'media_type','media_type',$submitted,$root,'yes');
+								?>
+							  </div>
+							</div>
+							
 							<!--Collector Name input-->
-							<label class="textbox-label">Enter Collector Name(s):*</label>
-							<p class="clone"> <input type="text" name="collector[]" id="collector" class='input' placeholder="Comma Seperated Names" value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo $p_collName;} ?>"/></p>
-							</p>
+							<div class="form-group">
+							  <label class="col-md-3 control-label">Enter Collector Name(s):*</label>
+							  <div class="col-md-8">
+								<input type="text" name="collector[]" id="collector" placeholder="Comma Seperated Names" value="" class="form-control input-md" required=""/>
+							  </div>
+							</div>
+							
 						</div><!--col-xs-6-->
 				
-				  		<div class="col-xs-6">
+				  		<div class="col-xs-12 col-sm-6 col-md-6">
+	
 							<!--Sampling Type insert field-->
-							<p>
-							<label class="textbox-label">Sample Type:*<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Please See FAQ"></i></label>
-							<?php
-							//url or $_GET name, table name, field name, value
-							dropDown('sType', 'sample_type', 'sample_type_name','sample_type_id',$submitted,$root);
-							?>
-							</p>
-							
-							<!--Flow Rate-->
-							<!--<p>
-							<label class="textbox-label">Flow Rate-Start/End of Day:</label><br>
-							<input type="text" class = "shrtfields" name="fRate" id="fRate"  placeholder="Rate(L/min)" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_fRate;} ?>">
-							<input type="text" class = "shrtfields" name="fRate_eod" id="fRate_eod"  placeholder="Rate(L/min)" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_fRate_eod;} ?>">
-							</p>-->
+							<div class="form-group">
+							  <label class="col-md-3 control-label" >Sample Type:*<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Please See FAQ"></i></label>
+							  <div class="col-md-8">
+								<?php
+								//$_GET name, table name, field name, id name, form submitted, root path, required, value
+								dropDown('sType', 'sample_type', 'sample_type_name','sample_type_id',$submitted,$root,'yes');
+								?>
+							  </div>
+							</div>
+
 			
 							<!--Sample Storage-->
-							<label class="textbox-label">Storage Location:* (pick freezer and drawer owner)</label><br>
-							<p>
-							<?php
-							//url or $_GET name, table name, field name
-							dropDown('oStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted,$root);
-							?>
+							<div class="form-group">
+							  <label class="col-md-3 control-label" >Storage Location:* (pick freezer and drawer owner)</label>
+							  <div class="col-md-8">
+								<?php
+								//$_GET name, table name, field name, id name, form submitted, root path, required
+								dropDown('oStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted,$root,'yes');
+								?>
+								<select id="oStore_name" name ="oStore_name" class='form-control' required>
+			 					<?php echo '<option value="">-Select-</option>';?>
+			 					</select>	
+							  </div>
+							</div>
 							
-							<select id="oStore_name" name ="oStore_name" >
-			 					<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){
-			 			
-			 						echo '<option value='.$_GET["oStore_name"].'  echo "selected";}} ?>'.$_GET["oStore_name"].' </option>';
-			 					}else{
-			 						echo '<option value="0">-Select-</option>';
-			 					}?>
-			 				</select>	
+							<!--Original sample exists?-->
+							<div class="form-group">
+							  <label class="col-md-3 control-label" for="checkboxes">Does Original Sample Still Exist?</label>
+							  <div class="col-md-4">
+							  <div class="checkbox">
+							    <label for="checkboxes-0">
+							      <input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" value="false" />
+							      No
+							    </label>
+								</div>
+							  </div>
+							</div>
 							
-							<!--<p>
-							<label class="textbox-label">Height Above Floor:
-							</label><br>
-							<input type="text" name="sampling_height" id="sampling_height"  placeholder="Height Above Floor (cm)" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_sampling_height;} ?>">
-							</p>-->
+
 							
-							<p>
 							<!--sampler dropdown-->
-							<label class="textbox-label">Select Number of Samplers:*<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="This is the number of samplers used to create the original sample. Also, please note that sterilization blanks will have a sampling time duration of zero"></i></label>
-							
-							<select id='sampler_num' name='sampler_num'>
-							<option value='0'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-								if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "0" )){ echo "selected";}}?>>-Select-</option>
-							<option value='1'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-								if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "1" )){ echo "selected";}}?>>-1:One-</option>
-							<option value='2'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-								if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "2" )){ echo "selected";}}?>>-2:Two-</option>
-							<option value='3'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-								if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "3" )){ echo "selected";}}?>>-3:Three-</option>
-							<option value='4'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-								if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "4" )){ echo "selected";}}?>>-4:Four-</option>
-							<option value='5'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-								if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "5" )){ echo "selected";}}?>>-5:Five-</option>
-							<option value='6'<?php if ((isset($_GET['submit']) && $submitted != 'true')){
-								if((isset($_GET['sampler_num']) && $_GET['sampler_num'] == "6" )){ echo "selected";}}?>>-6:Six-</option>
-							</select>
-				
-							<div id="div_sampler_num"></div>
-							</p>
-						</div><!--close col xs 6-->
+							<div class="form-group">
+								<label class="col-md-3 control-label">Select Number of Samplers:*<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="This is the number of samplers used to create the original sample. Also, please note that all blanks and cfu samples will have a sampling time duration of zero"></i></label>
+								<div class="col-md-8">
+								<select id='sampler_num' name='sampler_num' class='form-control' required>
+								<option value=''>-Select-</option>
+								<option value='1'>-1:One-</option>
+								<option value='2'>-2:Two-</option>
+								<option value='3'>-3:Three-</option>
+								<option value='4'>-4:Four-</option>
+								<option value='5'>-5:Five-</option>
+								<option value='6'>-6:Six-</option>
+								</select>
+					
+								<div id="div_sampler_num"></div>
+								</div>
+							</div>
 							
 					</fieldset>
 					</div><!--close fragment-1-->
@@ -186,212 +200,275 @@ include ($path.'functions/dropDown.php');
 
 					<div id="fragment-2">
 					<fieldset>
-					<div class="col-xs-6">
+					<div class="col-xs-12 col-sm-6 col-md-6">
 					<LEGEND><b>DNA Extraction Info</b></LEGEND>
 							<div id="dna_extraction">	
-								<p>
-								<label class="textbox-label">DNA Extraction Date:</label><br>
-								<input type="text" id="d_extr_date"  name="d_extr_date" value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo htmlspecialchars($_GET['d_extr_date']);} ?>"/>
+								
+							<!--DNA Extraction Date-->	
+							<div class="form-group">
+							  <label class="col-md-3 control-label">DNA Extraction Date:</label>
+							  <div class="col-md-8">
+								<input type="text" id="d_extr_date"  name="d_extr_date" value="" class="form-control input-md"/>
 								<script>
 								$('#d_extr_date').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 								</script>
-				
-								<p>
-								<!--DNA Extraction Kit dropdown-->
-								<label class="textbox-label">Select DNA Extraction Kit:</label>
-								<br/>
+							  </div>
+							</div>
+							
+							<!--DNA Extraction Kit dropdown-->
+							<div class="form-group">
+							  <label class="col-md-3 control-label">Select DNA Extraction Kit:</label>
+							  <div class="col-md-8">
 								<?php
-								//url or $_GET name, table name, field name
-								dropDown('dExtKit', 'dna_extraction', 'd_kit_name','d_kit_name',$submitted,$root);
+								//$_GET name, table name, field name, id name, form submitted, root path, required
+								dropDown('dExtKit', 'dna_extraction', 'd_kit_name','d_kit_name',$submitted,$root,'no');
 								?>
-								</p>
+							  </div>
+							</div>
+							
+							
+							<!--DNA Concentration-->
+							<div class="form-group">
+							  <label class="col-md-3 control-label">DNA Concentration (ng/ul):</label>
+							  <div class="col-md-8">
+								<input type="text" name="dConc" id="dConc" placeholder="Enter A DNA Concentration" value="" class="form-control input-md">
+							  </div>
+							</div>
+
+	
+							<!--Volume of DNA-->
+							<div class="form-group">
+							  <label class="col-md-3 control-label">Volume of DNA Elution (ul):</label>
+							  <div class="col-md-8">
+								<input type="text" name="dVol"  id="dVol" placeholder="Enter A Volume" value="" class="form-control input-md">
+							  </div>
+							</div>
+							
 								
-								<!--DNA Concentration-->
-								<p>
-								<label class="textbox-label">DNA Concentration (ng/ul):</label><br>
-								<input type="text" name="dConc" id="dConc" placeholder="Enter A DNA Concentration" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_dConc;} ?>">
-								</p>
-				
-								<!--Volume of DNA-->
-								<p>
-								<label class="textbox-label">Volume of DNA Elution (ul):</label><br>
-								<input type="text" name="dVol"  id="dVol" placeholder="Enter A Volume" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_dVol;} ?>">
-								</p>
-								
-								<!--Instrument used to measure DNA concentration-->
-								<p>
-								<label class="textbox-label">Instrument/Kit Used to Measure DNA Concentration:</label><br>
+							<!--Instrument used to measure DNA concentration-->
+							<div class="form-group">
+							  <label class="col-md-3 control-label">Instrument/Kit Used to Measure DNA Concentration:</label>
+							  <div class="col-md-8">
 								<?php
-								//url or $_GET name, table name, field name
-								dropDown('dInstru', 'quant_instruments', 'kit_name','kit_name',$submitted,$root);
+								//$_GET name, table name, field name, id name, form submitted, root path, required
+								dropDown('dInstru', 'quant_instruments', 'kit_name','kit_name',$submitted,$root,'no');
 								?>
-								</p>
-								
-								<!--Volume of DNA to measure DNA conc-->
-								<p>
-								<label class="textbox-label">Volume of DNA Used for Measure DNA Concentration(ul):</label><br>
-								<input type="text" name="dVol_quant" id="dVol_quant"  placeholder="Enter A Volume" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_dVol_quant;} ?>">
-								</p>
-								
-								<!--DNA -->
-								<p>
-								<label class="textbox-label">Location of DNA Extract:(pick freezer and drawer owner)</label><br>
-								<p>
+							  </div>
+							</div>
+							
+							
+							<!--Volume of DNA to measure DNA conc-->
+							<div class="form-group">
+							  <label class="col-md-3 control-label">Volume of DNA for Quantification(ul):</label>
+							  <div class="col-md-8">
+								<input type="text" name="dVol_quant" id="dVol_quant"  placeholder="Enter A Volume" value="" class="form-control input-md">
+							  </div>
+							</div>
+							
+							<!--DNA -->
+							<div class="form-group">
+							  <label class="col-md-3 control-label">Location of DNA Extract:(pick freezer and drawer owner)</label>
+							  <div class="col-md-8">
 								<?php
-								//url or $_GET name, table name, field name
-								dropDown('dStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted,$root);
+								//$_GET name, table name, field name, id name, form submitted, root path, required
+								dropDown('dStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted,$root,'no');
 								?>
-								</p>
-								<select id="dStore_name" name ="dStore_name">
-				 					<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){
-				 						echo '<option value='.$_GET["dStore_name"].'  echo "selected";}} ?>'.$_GET["dStore_name"].' </option>';
-				 					}else{
-				 						echo '<option value="0">-Select-</option>';
-				 					}?>
+							
+								<select id="dStore_name" name ="dStore_name" class="form-control dna">
+				 					<?php echo '<option value="0">-Select-</option>';?>
 				 				</select>	
-				 				
-				 				<p>
-								<!--DNA Extractor Name input-->
-								<label class="textbox-label">Enter Name(s) of Persons Who Extracted DNA:</label>
-								<p class="clone2"> <input type="text" name="dExtrName[]" id = "dExtrName" class='input' placeholder="Comma Seperated Names" value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo $p_dExtrName;} ?>"/></p>
-				 				<p>
-								<h3 class="checkbox-header">Does Original Sample Still Exist?:</h3>
-				 				<div class="vert-checkboxes">
-				 				<label class="checkbox-label"><input type="checkbox" name="orig_sample_exist" class = "orig_sample_exist" id="orig_sample_exist" value="false" <?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){if($p_orig_sample_exist == 'false'){echo 'checked';}} ?>/>No
+							  </div>
+							</div>
+
+							<!--DNA Extractor Name input-->
+							<div class="form-group">
+							  <label class="col-md-3 control-label">Enter Name(s) of Persons Who Extracted DNA:</label>
+							  <div class="col-md-8">
+								<input type="text" name="dExtrName[]" id = "dExtrName" placeholder="Comma Seperated Names" value=""  class="form-control input-md"/>
+						  	  </div>
+							</div>
+							
+							  
+							  
+							<!--Original sample exists?-->
+							<!--<div class="form-group">
+							  <label class="col-md-3 control-label" for="checkboxes">Does Original Sample Still Exist?</label>
+							  <div class="col-md-4">
+							  <div class="checkbox">
+							    <label for="checkboxes-0">
+							      <input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" value="false" />
+							      No
+							    </label>
 								</div>
-								</p>
+							  </div>
+							</div>-->
 								
-								<p>
-								<h3 class="checkbox-header">Does DNA Extraction Sample Still Exist?</h3>
-				 				<div class="vert-checkboxes">
-				 				<label class="radio-label"><input type="radio" name="DNA_sample_exist" value="one" <?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){if($p_DNA_sample_exist == 'one'){echo 'checked';}} ?>/>Yes,DNA Sample Exists</label><br />
-								<label class="radio-label"><input type="radio" name="DNA_sample_exist" value="two" <?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){if($p_DNA_sample_exist == 'two'){echo 'checked';}} ?>/>No, DNA Has Not Been Extracted</label><br />
-								<label class="radio-label"><input type="radio" name="DNA_sample_exist" value="three" <?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){if($p_DNA_sample_exist == 'three'){echo 'checked';}} ?>/>No, DNA Sample Is Used Up</label><br />
-								</div>
-								</p>
-								
-								
+							<!--DNA sample exists?-->	
+							<div class="form-group">
+							  <label class="col-md-3 control-label" for="DNA_sample_exist">Does DNA Extraction Sample Still Exist?</label>
+							  <div class="col-md-8"> 
+							    <label for="DNA_sample_exist-0">
+							      <input type="radio" name="DNA_sample_exist" id="DNA_sample_exist-0" value="one">
+							      No, DNA Has Not Been Extracted
+							    </label> 
+							    <label for="DNA_sample_exist-1">
+							      <input type="radio" name="DNA_sample_exist" id="DNA_sample_exist-1" value="two">
+							      No, DNA Has Not Been Extracted
+							    </label> 
+							    <label for="DNA_sample_exist-2">
+							      <input type="radio" name="DNA_sample_exist" id="DNA_sample_exist-2" value="three">
+							      No, DNA Sample Is Used Up
+							    </label> 
+							  </div>
+							</div>
+							
 							</div><!--close dna extraction-->
 						</div><!--close col-xs-6-->
-						<!--</fieldset>
-						<fieldset>-->
-						<div class="col-xs-6">
+					
+						<div class="col-xs-12 col-sm-6 col-md-6">
 						<LEGEND><b>RNA Extraction Info</b></LEGEND>	
 						
 							<div id="rna_extraction">
 								
-								<p>
-								<label class="textbox-label">RNA Extraction Date:</label><br>
-								<input type="text" id="r_extr_date"  name="r_extr_date" value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo htmlspecialchars($_GET['r_extr_date']);} ?>"/>
-								<script>
-								$('#r_extr_date').datepicker({ dateFormat: 'yy-mm-dd' }).val();
-								</script>
+								<div class="form-group">
+								  <label class="col-md-3 control-label">RNA Extraction Date:</label>
+								  <div class="col-md-8">
+									<input type="text" id="r_extr_date"  name="r_extr_date" value="" class="form-control input-md"/>
+									<script>
+									$('#r_extr_date').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+									</script>
+							  	  </div>
+								</div>
 								
-								<p>
 								<!--RNA Extraction dropdown-->
-								<label class="textbox-label">Select RNA Extraction Kit:</label>
-								<br/>
-								<?php
-								//url or $_GET name, table name, field name
-								dropDown('rExtKit', 'rna_extraction', 'r_kit_name','r_kit_name',$submitted,$root);
-								?>
-								</p>
-								
-								<!--RNA Concentration-->		
-								<p>
-								<label class="textbox-label">RNA Concentration (ng/ul):</label><br>
-								<input type="text" name="rConc" id="rConc" placeholder="Enter an RNA Concentration" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_rConc;} ?>">
-								</p>
-								
+								<div class="form-group">
+								  <label class="col-md-3 control-label">Select RNA Extraction Kit:</label>
+								  <div class="col-md-8">
+									<?php
+									//$_GET name, table name, field name, id name, form submitted, root path, required
+									dropDown('rExtKit', 'rna_extraction', 'r_kit_name','r_kit_name',$submitted,$root,'no');
+									?>
+							  	  </div>
+								</div>
+
+								<!--RNA Concentration-->
+								<div class="form-group">
+								  <label class="col-md-3 control-label">RNA Concentration (ng/ul):</label>
+								  <div class="col-md-8">
+									<input type="text" name="rConc" id="rConc" placeholder="Enter an RNA Concentration" value="" class="form-control input-md">
+							  	  </div>
+								</div>
+										
 								<!--RNA Volume-->
-								<p>
-								<label class="textbox-label">Volume of RNA Elution (ul):</label><br>
-								<input type="text" name="rVol" id="rVol" placeholder="Enter A Volume" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_rVol;} ?>">
-								</p>
-						
+								<div class="form-group">
+								  <label class="col-md-3 control-label">Volume of RNA Elution (ul):</label>
+								  <div class="col-md-8">
+									<input type="text" name="rVol" id="rVol" placeholder="Enter A Volume" value="" class="form-control input-md">
+							  	  </div>
+								</div>
+
 								<!--Instrument used to measure RNA concentration-->
-								<p>
-								<label class="textbox-label">Instrument/Kit Used to Measure RNA Concentration:</label><br>
-								<?php
-								//url or $_GET name, table name, field name
-								dropDown('rInstru', 'quant_instruments', 'kit_name','kit_name',$submitted,$root);
-								?>
-								</p>
+								<div class="form-group">
+								  <label class="col-md-3 control-label">Instrument/Kit Used to Measure RNA Concentration:</label>
+								  <div class="col-md-8">
+										<?php
+										//$_GET name, table name, field name, id name, form submitted, root path, required
+										dropDown('rInstru', 'quant_instruments', 'kit_name','kit_name',$submitted,$root,'no');
+										?>
+							  	  </div>
+								</div>
 								
 								<!--RNA Volume-->
-								<p>
-								<label class="textbox-label">Volume of RNA for Quantification(ul):</label><br>
-								<input type="text" name="rVol_quant" id="rVol_quant" placeholder="Enter A Volume" value="<?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){echo $p_rVol_quant;} ?>">
-								</p>
+								<div class="form-group">
+								  <label class="col-md-3 control-label">Volume of RNA for Quantification(ul):</label>
+								  <div class="col-md-8">
+									<input type="text" name="rVol_quant" id="rVol_quant" placeholder="Enter A Volume" value="" class="form-control input-md">
+							  	  </div>
+								</div>
 								
 								
-								<p>
-								<label class="textbox-label">Location of RNA Extract:(pick freezer and drawer owner)</label><br>
-								<p>
-								<?php
-								//url or $_GET name, table name, field name
-								dropDown('rStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted,$root);
-								?>
-								</p>
-						
-								<select id="rStore_name" name ="rStore_name">
-				 					<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){
-				 						echo '<option value='.$_GET["rStore_name"].'  echo "selected";}} ?>'.$_GET["rStore_name"].' </option>';
-				 					}else{
-				 						echo '<option value="0">-Select-</option>';
-				 					}?>
-				 				</select>
-				 				
-				 				<p>
-								<!--RNA Extractor Name input-->
-								<label class="textbox-label">Enter Name(s) of Persons Who Extracted RNA:</label>
-								<p class="clone3"> <input type="text" name="rExtrName[]" id="rExtrName" class='input' placeholder="Comma Seperated Names" value="<?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {echo $p_rExtrName;} ?>"/></p>
 							
-								
-								<p>
-								<h3 class="checkbox-header">Does Original RNA Sample Still Exist?:</h3><br>
-								<div class="vert-checkboxes">
-				 				<label class="checkbox-label"><input type="checkbox" class="orig_sample_exist" <?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){if($p_orig_sample_exist == 'false'){echo 'checked';}} ?>/>No<br />
+								<!--RNA storage-->
+								<div class="form-group">
+								  <label class="col-md-3 control-label">Location of RNA Extract:(pick freezer and drawer owner)</label>
+								  <div class="col-md-8">
+										<?php
+										//$_GET name, table name, field name, id name, form submitted, root path, required
+										dropDown('rStore_temp', 'freezer', 'freezer_id','freezer_id',$submitted,$root,'no');
+										?>
+										
+										<select id="rStore_name" name ="rStore_name" class="form-control">
+					 					<?php echo '<option value="0">-Select-</option>';?>
+					 					</select>
+							  	  </div>
 								</div>
-								</p>
 								
-								<p>
-								<h3 class="checkbox-header">Does RNA Extraction Sample Exist?:</h3><br>
-				 				<div class="vert-checkboxes">
-				 				<label class="radio-label"><input type="radio" name="RNA_sample_exist" value="one" <?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){if($p_RNA_sample_exist == 'one'){echo 'checked';}} ?>/>Yes,RNA Sample Exisits<br />
-								<label class="radio-label"><input type="radio" name="RNA_sample_exist" value="two" <?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){if($p_RNA_sample_exist == 'two'){echo 'checked';}} ?>/>No, RNA Has Not Been Extracted<br />
-								<label class="radio-label"><input type="radio" name="RNA_sample_exist" value="three" <?php if((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))){if($p_RNA_sample_exist == 'three'){echo 'checked';}} ?>/>No, RNA Sample Is Used Up<br />
+								<!--RNA Extractor Name input-->
+								<div class="form-group">
+								  <label class="col-md-3 control-label">Enter Name(s) of Persons Who Extracted RNA:</label>
+								  <div class="col-md-8">
+									<input type="text" name="rExtrName[]" id="rExtrName" placeholder="Comma Seperated Names" value="" class="form-control input-md"/>
+							  	  </div>
 								</div>
-								</p>
+								
+							
+								<!-- original sample exist?-->
+								<!--<div class="form-group">
+								  <label class="col-md-3 control-label" for="checkboxes">Does Original Sample Still Exist?</label>
+								  <div class="col-md-4">
+								  <div class="checkbox">
+								    <label for="checkboxes-0">
+								      <input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" value="false" />
+								      No
+								    </label>
+									</div>
+								  </div>
+								</div>-->
+								
+								<!--RNA sample exist?-->
+								<div class="form-group">
+								  <label class="col-md-3 control-label" for="DNA_sample_exist">Does RNA Extraction Sample Still Exist?</label>
+								  <div class="col-md-8"> 
+								    <label for="RNA_sample_exist-0">
+								      <input type="radio" name="RNA_sample_exist" id="RNA_sample_exist-0" value="one">
+								      No, RNA Has Not Been Extracted
+								    </label> 
+								    <label for="RNA_sample_exist-1">
+								      <input type="radio" name="RNA_sample_exist" id="RNA_sample_exist-1" value="two">
+								      No, RNA Has Not Been Extracted
+								    </label> 
+								    <label for="RNA_sample_exist-2">
+								      <input type="radio" name="RNA_sample_exist" id="RNA_sample_exist-2" value="three">
+								      No, RNA Sample Is Used Up
+								    </label> 
+								  </div>
+								</div>
 							</div><!--close rna extraction-->
 						</div><!--close col-xs-6-->
-						
-						
-						
-						
-							
-					
 					</fieldset>
+	
 					</div><!--close fragment-2-->
 
 					<div id="fragment-3">
 						<LEGEND><b>Downstream Analysis Info</b></LEGEND>
-							<p>
 							<!--Analysis Pipeline Name Dropdown-->
-							<label class="textbox-label">Select Analysis Pipeline:</label>
-							<br/>
+							<div class="form-group">
+							<label class="col-md-3 control-label">Select Analysis Pipeline:</label>
+							<div class="col-md-8">
 							<?php
 							//url or $_GET name, table name, field name
 							dropDown('anPipe', 'analysis', 'analysis_name','analysis_name',$submitted,$root);
 							?>
-							</p>
+							</div>
+						</div>
 					</div><!--fragment-3-->
+					
 
 					<div id="fragment-4">
 					<fieldset>
 					<LEGEND><b>User Created Fields</b></LEGEND>
 						<input type="text" style="visibility:hidden" class="hidden" name="build_type" id="build_type" value="insert"/>
-						<div class="col-xs-6">
+						<div class="col-xs-12 col-sm-6 col-md-6">
 							<div id="required_things1" >
 								
 							</div>
@@ -399,7 +476,7 @@ include ($path.'functions/dropDown.php');
 								
 							</div>
 						</div>
-						<div class="col-xs-6">
+						<div class="col-xs-12 col-sm-6 col-md-6">
 							<div id="required_things2">
 								
 							</div>
@@ -413,11 +490,13 @@ include ($path.'functions/dropDown.php');
 					<div id="fragment-5">
 					<fieldset>
 					<LEGEND><b>Notes</b></LEGEND>
-						<div class="col-md-12">
-							<p>
-							<label class="textbox-label">Sample Notes:(optional)</label>
-							<textarea class="form-control" from="sample_form" rows="3" name="notes" id="notes" placeholder = "Enter Date and Initials for Comment (e.g.: YYYY/MM/DD Comment -initials)"><?php if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy'])))   {echo $p_notes;} ?></textarea>
-							</p>
+						<div class="col-xs-12 col-sm-12 col-md-12">
+							<div class="form-group">
+							  <label class="col-md-2 control-label" for="textarea">Sample Notes:(optional)</label>
+							  <div class="col-md-8">                     
+							    	<textarea class="form-control" from="sample_form" rows="3" name="notes" id="notes" placeholder = "Enter Date and Initials for Comment (e.g.: YYYY/MM/DD Comment -initials)" class="form-control"></textarea>
+							  </div>
+							</div>
 						</div><!--close col-md-12-->
 						
 						<!--Invisible Project Name Dropdown-->

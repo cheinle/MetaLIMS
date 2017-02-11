@@ -128,9 +128,8 @@
 	<!--ID-->		
 	<p>
 	<label class="textbox-label">Unique Unit Number/Identifier:*</label>
-	<input type="text" name="ID" id="ID" data-toggle="popover" title="What is an Air Sampler Identifier?:" 
-		data-content="A descriptive identifier to add to the air sampler name. For example if you are using the Coriolis marked '1', your
-		Descriptive Identifier may be '1'." 
+	<input type="text" name="ID" id="ID" data-toggle="popover" title="What is a unique identifier?:" 
+		data-content="A descriptive identifier to add to the sampler name. This can be used in the case you have multiple samplers of the same type" 
 		placeholder="Enter A Descriptive Identifier (e.g. 1)" 
 		value="<?php if(isset($_GET['submit']) && $submitted != 'true'){echo $p_ID;} ?>" 
 	/>

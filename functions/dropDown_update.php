@@ -42,7 +42,7 @@ function dropDown_update($select_name,$table_name,$field_name,$select_id,$s_fiel
 		
 		
 		#now get your dropdown slect menu and cycle through it till you match above. When you match above make it the selected option
-		echo "<select id='$p_select_name' name='$p_select_name' class='fields';'>";
+		echo "<select id='$p_select_name' name='$p_select_name' class='fields form-control';'>";
 		echo "<option value='0'>-Select-</option>";
 		$attr = 'selected="selected"';
 		
@@ -70,7 +70,7 @@ function dropDown_update($select_name,$table_name,$field_name,$select_id,$s_fiel
 			}
 		}
 		$stmt->close();
-		echo "</select><br>";
+		echo "</select>";
 }
 else{
 	echo "ERROR: Please check table name";

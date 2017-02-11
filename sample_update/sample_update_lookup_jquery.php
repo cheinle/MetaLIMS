@@ -19,13 +19,19 @@ include ('../database_connection.php');
 		<h3>Update Samples</h3>
 		</div>
 		
-		<form class="registration" id="sample_form_update" action="sample_update_lookup2_jquery.php" method="GET">
-				
+		<form class="form-horizontal" id="sample_form_update" action="sample_update_lookup2_jquery.php" method="GET" style="width: 90%; margin-left:5%;"> 
+		
+
+				<div id="border"></div>
 				<fieldset>
 				<LEGEND><b>Update Sample Info:</b></LEGEND>
 				<div class="col-xs-6">
-				<label class="textbox-label">Sample Name:</label>
-    			<input type="text" placeholder="Sample Name" name="sample_name" id="customerAutocomplte" class="ui-autocomplete-input" autocomplete="off" value="<?php if (isset($_GET['submit'])){text_insert_update($parent_value,'sample_name');}?>"/>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Sample Name:</label>
+					 <div class="col-md-8">
+    				<input type="text" placeholder="Sample Name" name="sample_name" id="customerAutocomplte" class="ui-autocomplete-input form-control input-md" autocomplete="off" value="<?php if (isset($_GET['submit'])){text_insert_update($parent_value,'sample_name');}?>"/>
+				  </div>
+				</div>
 				<script>
 					$(document).ready(function($){
     					$('#customerAutocomplte').autocomplete({

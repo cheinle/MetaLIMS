@@ -11,9 +11,7 @@ include('add_a_user_thing_js.php');
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Form Insert</title>
-		<!--<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->
-	
+		<title>Add User Fields</title>
 	</head>
  
 	<body>

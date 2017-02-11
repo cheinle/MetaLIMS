@@ -13,16 +13,18 @@ try{
 		$p_select_values = htmlspecialchars($_GET['options']);
 		$p_required = htmlspecialchars($_GET['required']);
 	
-		//formatting function - uppercase first letter and lowercase all other letters
+		//formatting function - uppercase first letter and lowercase all other letters. trim whitespace
 		function myfunction(&$value,$key){
 			$value = ucfirst(strtolower($value));
+			$value = trim($value);
 		}
 		
 		//format
 		if($p_type == 'select'){//|| $p_type == 'numeric_select'
 	
 			//format all option entries 
-			$pieces = preg_split("/\s+/", $p_select_values);
+			//$pieces = preg_split("/\s+/", $p_select_values);
+			$pieces = preg_split("/;/", $p_select_values);
 			array_walk($pieces,"myfunction");
 			$p_select_values = implode(";", $pieces);
 

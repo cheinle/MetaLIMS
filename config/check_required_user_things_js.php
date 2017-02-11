@@ -65,7 +65,8 @@
 	             	 
 	             	//select type from create_user_things where thing_id = input_id. if type equals numeric_input, do a check
 	             	
-	             	if(type == 'numeric_input'){
+	             	//if(type == 'numeric_input'){
+	             	if(type.includes('numeric_input')){
 						if(isNumeric(inputed) == false){
 							alert("ERROR: Value must be a number");
 							valid = 'false';

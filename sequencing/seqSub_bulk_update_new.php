@@ -192,7 +192,7 @@ if(isset($_POST['submit'])){
 										
 						//check if add was successful or not. Tell the user
 						if($rows_affected < 0){
-							throw new Exception("An Error Has Occured: No Update For Submission Number");
+							throw new Exception("An Error Has Occurred: No Update For Submission Number");
 						}
 					}
 					else{
@@ -299,7 +299,7 @@ if(isset($_POST['submit'])){
 						$rows_affected_si = $stmt_si ->affected_rows;
 						if($rows_affected_si < 0){
 							$insert_error = 'true';
-							throw new Exception('An error has occured in storing storage info for '.$p_sample_name);
+							throw new Exception('An error has occurred in storing storage info for '.$p_sample_name);
 						}
 					}
 					else{
