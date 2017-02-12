@@ -1,3 +1,4 @@
+<?php include ('../../functions/admin_check.php');?>
 <script type="text/javascript">
 
 				$(document).ready(function() {

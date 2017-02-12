@@ -1,4 +1,4 @@
-<?php 
+<?php include ('../functions/admin_check.php');
 	function check_exclude_list($value,$type){ //type = 'add', 'update','delete' 
 		
 		$list = array(

@@ -18,6 +18,7 @@ include('database_connection.php');
 	</div>
 	
 	<pre class="border">
+		  
 		 <b>Q: The web page looks lovely, but the layout is really crazy. What is wrong?</b> 
 		      A: The database was designed primarily with Google Chrome and Firefox. Please use one of these
 		      preferred browsers. Thanks!
@@ -102,10 +103,10 @@ include('database_connection.php');
 			      and are used as an abbreviatin for the project. 
 			      
 			      The current sequencing submission names are as follows:
-			      	[Sequencing Base Submission ID]-[type of sequencing]-[number of times sample has been submitted for this type of sequencing]
+			      [Sequencing Base Submission ID]-[type of sequencing]-[number of times sample has been submitted for this type of sequencing]
 			      	
-			      	Types of sequencing are: 
-			      	<?php
+			      Types of sequencing are: 
+			      <?php
 			      		echo "<table style=\"margin-left: 10%\";>";
 						echo "<tr><td><strong>Sequencing Type</strong></td><td><strong>Sequencing Type ID</strong></td></tr>";
 				      	$stmt = $dbc->prepare("SELECT application,application_abbrev FROM application");
@@ -122,16 +123,19 @@ include('database_connection.php');
 						}
 						$stmt->close();
 						echo "</table>"; 
-					?>
+				?>
 					
-					Ex: FSTP001-A-01 
+				Ex: FSTP001-A-01 
 					
-					Would be a sample from the project 'first-project' and submitted one time for amplicon sequencing
+				Would be a sample from the project 'first-project' and submitted one time for amplicon sequencing
 	 		
-	 				The Sequencing Base Submission ID can be used by bioinformaticists to seach for the actual sample in the db.
-	 				To find more information about the actual sequencing, please query in the 'Sequencing Submission Info' tab on the 
-	 				main toolbar
+	 			The Sequencing Base Submission ID can be used by bioinformaticists to seach for the actual sample in the db.
+	 			To find more information about the actual sequencing, please query in the 'Sequencing Submission Info' tab on the 
+	 			main toolbar
+	 				
+	 				
 		
+				*Please see MetaLIMS wiki for more details: https://github.com/cheinle/MetaLIMS/wiki
 	</pre>
 	
 </body>

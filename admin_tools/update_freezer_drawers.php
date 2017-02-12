@@ -1,5 +1,8 @@
-<?php include('../index.php'); ?>
-<?php include('../database_connection.php'); ?>
+<?php 
+include ('../functions/admin_check.php');
+include('../index.php');
+include('../database_connection.php');
+?>
 <!doctype html>
 <html>
 <head>
