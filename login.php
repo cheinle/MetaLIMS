@@ -144,6 +144,7 @@ if (isset($_POST['login_button'])){
 					$_SESSION['session_id'] = $new_session_id;
 					$_SESSION['first_name'] = $first_name;
 					$_SESSION['last_name'] = $last_name;
+					$_SESSION['admin_user'] = $admin_user;
 					
 
 					//************ PATH VARIABLES Set Here Using Above $path_in_webroot*******//
