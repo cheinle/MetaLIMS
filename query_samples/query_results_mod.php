@@ -127,7 +127,6 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 			$('#datatable tfoot th').each( function () 
 			{
 				var title = $(this).text();
-				//$(this).html( '<input type="text" style="width:100px" placeholder="Search '+title+'" />' );
 				$(this).html( '<input type="text" style="width:100px" placeholder="Search" />' );
 			} );
 			

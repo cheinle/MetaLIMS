@@ -91,12 +91,46 @@ include('database_connection.php');
 		      'Project Name' and then typing in your project name. Press submit to view table. Click on 'Sample Sort' header to
 		      sort samples in project by sample number
 		      
-		    <b>Q: Can I bulk update database entires?</b> 
+		  <b>Q: Can I bulk update database entires?</b> 
 		      A: Yes, for DNA extraction, storage info, read submission info, and user created fields you can bulk update entires under 'Query Sample Info'. Under 'Display Sample Info
 		      Select search criteria and then select for example select 'Bulk Update For DNA Extration Info' and press enter. Note that column selection
 		      will not matter here. 
 		      
-		  
+
+		  <b>Q: I see the column 'Sequencing Base Submission ID' when I query a sample. What is this? </b> 
+			      A: The current base id is the standard id created for sequencing submission. This ID is created by the user when they request a project name
+			      and are used as an abbreviatin for the project. 
+			      
+			      The current sequencing submission names are as follows:
+			      	[Sequencing Base Submission ID]-[type of sequencing]-[number of times sample has been submitted for this type of sequencing]
+			      	
+			      	Types of sequencing are: 
+			      	<?php
+			      		echo "<table style=\"margin-left: 10%\";>";
+						echo "<tr><td><strong>Sequencing Type</strong></td><td><strong>Sequencing Type ID</strong></td></tr>";
+				      	$stmt = $dbc->prepare("SELECT application,application_abbrev FROM application");
+						if(!$stmt){;
+							die('prepare() failed: ' . htmlspecialchars($stmt->error));
+						}
+						if ($stmt->execute()){
+							$stmt->bind_result($application,$application_abbrev);
+								
+							$array = array();
+							while ($stmt->fetch()){
+									echo "<tr><td>".$application."</td><td>".$application_abbrev."</td></tr>";	
+							}
+						}
+						$stmt->close();
+						echo "</table>"; 
+					?>
+					
+					Ex: FSTP001-A-01 
+					
+					Would be a sample from the project 'first-project' and submitted one time for amplicon sequencing
+	 		
+	 				The Sequencing Base Submission ID can be used by bioinformaticists to seach for the actual sample in the db.
+	 				To find more information about the actual sequencing, please query in the 'Sequencing Submission Info' tab on the 
+	 				main toolbar
 		
 	</pre>
 	
