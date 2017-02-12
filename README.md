@@ -2,6 +2,9 @@
 # MetaLIMS, A Simple Open-Source Laboratory Information Management System for Small Metagenomic Labs
 
 ## MetaLIMS v2 Installation and Usage
+### Home
+*    [About](https://github.com/cheinle/MetaLIMS/wiki/)     
+
 ### Installation
 *    [Installation Decision Tree](https://github.com/cheinle/MetaLIMS/wiki/installation-decision-tree)
 *    [MetaLIMS v2.0 Hosted Installation (via AWS Lightsail)](https://github.com/cheinle/MetaLIMS/wiki/MetaLIMS--v2.0-Hosted-Installation-(via-AWS-Lightsail))
