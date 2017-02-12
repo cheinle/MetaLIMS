@@ -4,7 +4,6 @@
 	include_once("../../../functions/unset_session_vars.php");
 	
 	$sample_array=$_POST['sample'];
-
 	echo "<div class='page-header'><h3>Read Submission Bulk Update</h3></div>";
 	echo "<div class= border>";
 	//if there are no errors, proceed to update the samples choosen
@@ -24,6 +23,8 @@
 				$p_sample_name = $explode[0];
 				
 				if(isset($subm_id['checkbox']) && $subm_id['checkbox'] == 'update'){
+					
+
 					$p_date = htmlspecialchars($subm_id['subm_date']);
 					$p_submitter= htmlspecialchars($subm_id['submitter']);
 					$p_db= htmlspecialchars($subm_id['subm_db']);
@@ -54,6 +55,7 @@
 																	submitter = ?,
 																	type_exp = ?
 																	WHERE sample_name = ? AND subm_id = ? ");
+					
 					$stmt -> bind_param('sssssss', $p_subm_id,													
 															$p_db,
 															$p_date,
@@ -63,6 +65,7 @@
 															$old_id
 															);
 					
+					echo $p_subm_id."<>".$p_db."<>".$p_date."<>".$p_submitter."<>".$p_experiment_type."<>".$p_sample_name."<>".$old_id."<>>>>";
 					$stmt -> execute();
 					$rows_affected = $stmt ->affected_rows;					
 					$stmt -> close();
@@ -72,7 +75,7 @@
 						echo "Updated: ".$p_sample_name.'<br>';
 					}else{
 						$update_delete_error == 'true';
-						throw new Exception("ERROR: No Update/Delete");
+						throw new Exception("ERROR: No Samples Updated");
 					}
 				
 				}

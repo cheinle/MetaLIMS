@@ -28,8 +28,8 @@
 	for ($x = 1; $x <= $num_my_samplers; $x++) {
 		echo "<div class=\"form-group\">";
 		
-		echo "<label class=\"col-md-3 control-label\">Sampler #".$x.":*</label>";
-		echo "<div class=\"col-md-8\">";
+		echo "<label class=\"col-md-2 control-label\" style=\"font-size:12px;\">Sampler #".$x.":*</label>";
+		echo "<div class=\"col-md-10\">";
 		echo "<select id='mySamp".$x."' name='mySamp".$x."' class='form-control'>";
 		echo "<option value='0'>-Select-</option>";
 		$stmt[$x] = $dbc->prepare("SELECT sampler_name, visible FROM sampler");
@@ -50,8 +50,8 @@
 		echo "</div>";
 ?>
 			<div class="form-group">
-				<label class="col-md-3 control-label">Start Date/Time:*</label>
-				<div class="col-md-4">
+				<label class="col-md-2 control-label" style="font-size:12px;">Start Date & Time:*</label>
+				<div class="col-md-5">
 					<input type="text" id="sdate<?php echo $x ?>"  class = "form-control input-md"  placeholder = "Date" name="sdate<?php echo $x ?>" value="<?php 
 						if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {
 							echo htmlspecialchars($_GET['sdate']);
@@ -65,7 +65,7 @@
 					}?>"/>
 				</div>
 				
-				<div class="col-md-4">
+				<div class="col-md-5">
 					<input type="text" name="stime<?php echo $x ?>" id ="stime<?php echo $x ?>" class = "form-control input-md"  placeholder="Time"  value="<?php 
 						if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {
 						echo htmlspecialchars($_GET['stime']);
@@ -80,8 +80,8 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-md-3 control-label">End Date/Time:*</label>
-				<div class="col-md-4">
+				<label class="col-md-2 control-label" style="font-size:12px;">End Date & Time:*</label>
+				<div class="col-md-5">
 					<input type="text" id="edate<?php echo $x ?>" class = "form-control input-md" placeholder = "Date" name="edate<?php echo $x ?>" value="<?php 
 						
 						if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {
@@ -95,7 +95,7 @@
 							}
 						}?>"/>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-5">
 					<input type="text" name="etime<?php echo $x ?>" id="etime<?php echo $x ?>" class = "form-control input-md"  placeholder="Time" value="<?php 
 					
 						if ((isset($_GET['submit']) && $submitted != 'true') || (isset($_GET['copy']))) {

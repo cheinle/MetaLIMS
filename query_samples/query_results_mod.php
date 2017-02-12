@@ -70,12 +70,15 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
     	}
     	
     	@media (max-width: 640px) {
-			td { white-space: wrap; }
+			th, td { white-space: wrap; }
 		}
 		@media (min-width: 641px){
-			th, td { white-space: nowrap; }
+			th, td { white-space: nowrap;  }
+			td{overflow: auto;}
+			td.notes { 
+			  max-width: 181px; 
+			}
 		}
-    	
 
 	</style>
 	<script type="text/javascript">

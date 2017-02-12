@@ -33,12 +33,8 @@ ini_set('display_errors', 1);
         	margin: 10px 10px 0 0 ;
     	}
     	
-    	@media (max-width: 640px) {
-			td { white-space: wrap; }
-		}
-		@media (min-width: 641px){
-			th, td { white-space: nowrap; }
-		}
+    	
+		
 	</style>
 	</head>
  

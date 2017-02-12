@@ -1,4 +1,5 @@
 <?php
+header("X-UA-Compatible: IE=Edge");
 if(!isset($_SESSION)) { session_start(); }
 include ('../index.php');
 error_reporting(E_ALL);

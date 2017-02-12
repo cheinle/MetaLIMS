@@ -18,7 +18,7 @@ function basic_build_table($stmt,$table_type,$root){ //table types are 'dislapy'
 					
 		    		call_user_func_array(array($stmt, 'bind_result'), $params); 
 					echo '<div class="border">';
-					echo '<table id = "datatable_bulk" style="width:90%;margin-left:5%; background-color:white">';
+					echo '<table id = "datatable_bulk" class="display" cellspacing="0" style="width:90%;margin-left:5%; background-color:white">';
 					$header_ct = 0;	
 					$stmt->execute();
 					$count_check = $stmt->fetch();

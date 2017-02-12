@@ -99,7 +99,6 @@
 	                $('#DNA_sample_exist-2').prop('checked',true);
 	                
                 }else if(Store_temp == 0){
-                	alert('test');
                 	$('#DNA_sample_exist-1').prop('checked',true);
                 }else{
                 	$('#DNA_sample_exist-0').prop('checked',true);

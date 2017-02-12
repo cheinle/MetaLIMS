@@ -12,10 +12,7 @@ function build_seq_subbed_output_new($stmt,$root){
 	//then for each seq submission name, grab all of the samples (and their info)
 	
 	$seq_id_array = array();
-	$size = sizeof($seq_id_array);
-	if($size == 0){
-		echo '<script>alert("Sorry! No sequencing submission results found")</script>';
-	}
+
 	if ($stmt->execute()){
 	  	$stmt->bind_result($seq_id);
 	    while ($stmt->fetch()){
