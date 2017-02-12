@@ -325,7 +325,7 @@ form.form-horizontal select{
   color:#00abdf;
   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   border-radius: 5px;
-   
+  padding: 0px 12px;
   -moz-appearance: none;//remove dropdown arrow because cannot get the arrow to round
   text-indent: 0.01;
   text-overflow: '';
@@ -528,7 +528,7 @@ form.registration select{
   width: 50%;
   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   border-radius: 5px;
-   
+  padding: 0px 12px;
   -moz-appearance: none;//remove dropdown arrow because cannot get the arrow to round
   text-indent: 0.01;
   text-overflow: '';
@@ -684,7 +684,7 @@ th.bulk{
 td.bulk {
     border: 2px solid black; //increase boarder to show up in chrome. Still a little weird looking in firefox
 	width: 3.20in;
-	white-space: nowrap;
+	white-space: wrap;
     overflow-x: scroll;
 }
 

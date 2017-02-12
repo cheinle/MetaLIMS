@@ -155,8 +155,13 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
                                      //check if your input is empty
                                      var n = txt.length;
                                      if(n == 0){
-                                        inputs[i].style.background = "blue";
-                                        valid = 'false';
+                                     	var input_type = inputs[i].getAttribute("type");
+                                     	if(input_type != 'search' ){
+                                     		inputs[i].style.background = "blue";
+                                       	 	valid = 'false';
+                                     	}
+                                     	
+                                       
                                         //validate numbers and decimal places?
                                      }
                                      else{

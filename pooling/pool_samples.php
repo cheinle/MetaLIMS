@@ -178,12 +178,9 @@ include ($path.'functions/convert_header_names.php');
 			$relt_location_name = '(pooled)';												
 			$media_type = '(pooled)';												
 			$notes = $p_mydate.' pooled the following samples:'.$pooled_sample_names.'. New sample name:'.$new_sample_name;
-			//$part_sens_name = '(pooled)';
-			$sampling_height = '0.00';
 			$sample_type = 'P';
 			$pooled_flag = 'P';
-			$s_flow_rate = '0.00';
-			$e_flow_rate = '0.00';
+
 			
 			//get username and update entered by with
 			$entered_by = $_SESSION['first_name'].' '.$_SESSION['last_name']; 
@@ -233,17 +230,14 @@ include ($path.'functions/convert_header_names.php');
 																	orig_time_stamp,
 																	project_name,
 																	relt_loc_name,
-																	sampling_height,
 																	sample_type,
 																	seq_id,
 																	start_samp_date_time,
 																	total_samp_time,
 																	sample_num,
-																	pooled_flag,
-																	flow_rate,
-																	flow_rate_eod
+																	pooled_flag
 																
-					) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 								
 					if(!$stmt3){		
 						#echo "Prepare failed: (" . $dbc->errno . ") " . $dbc->error;
@@ -251,7 +245,7 @@ include ($path.'functions/convert_header_names.php');
 						throw new Exception("Prepared Failure For Sample Insertion");
 					}
 					else{
-						$stmt3 -> bind_param('sssssssssssdsssdisdd', 
+						$stmt3 -> bind_param('ssssssssssssssdis', 
 									 						$new_sample_name, 
 									 						$new_sample_sort,
 									 						$collector_name,
@@ -263,15 +257,12 @@ include ($path.'functions/convert_header_names.php');
 									 						$orig_time_stamp,
 									 						$p_projName,
 									 						$relt_location_name,
-									 						$sampling_height,
 									 						$sample_type,
 									 						$seq_id,
 									 						$start_time,
 									 						$total_samp_time,
 									 						$new_sample_number,
-									 						$pooled_flag,
-									 						$s_flow_rate,
-									 						$e_flow_rate
+									 						$pooled_flag
 															);
 									
 						

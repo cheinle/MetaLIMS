@@ -323,7 +323,7 @@ if(isset($_POST['submit'])){
 				$objWriter->save($path.'sequencing/sequencing_sample_submission_forms/SamplesSubmissionForm_'.$dtSub.'_'.$randomString.'.xlsx');
 				
 				$file_name ='SamplesSubmissionForm_'.$dtSub.'_'.$randomString.'.xlsx';
-				echo 'File has been created and stored in : [base_dir]/sequencing/sequencing_sample_submission_forms/',EOL;
+				echo 'File has been created and stored in : [base_dir]/sequencing/sequencing_sample_submission_forms/ and can also be downloaded from a link on the View Past Submissions info page',EOL;
 				echo '<a href='.$root.'sequencing/sequencing_sample_submission_forms/'.$file_name.' download>Click Here To Download</a><br>';
 				if($container_type != "Tube"){
 					echo '<strong>Your Plate Container Name is: '.$container_name.'</strong><br>';

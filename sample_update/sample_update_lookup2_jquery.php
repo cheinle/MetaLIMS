@@ -203,17 +203,23 @@ if (isset($_GET['submit'])) {
 					</div>
 				</div>
 				
+
+				
+				<!-- Multiple Radios (inline) -->
 				<div class="form-group">
-				  <label class="col-md-3 control-label" for="checkboxes">Does Original Sample Still Exist?</label>
-				  <div class="col-md-4">
-				  <div class="checkbox">
-				    <label for="checkboxes-0">
-				      <input type="checkbox" name="orig_sample_exist" id="orig_sample_exist" value="false" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?>/>
-				      No
-				    </label>
-					</div>
+				  <label class="col-md-3 control-label" for="radios">Does Original Sample Still Exist?</label>
+				  <div class="col-md-4"> 
+				<label class="radio-inline" for="radios-0">
+				  <input type="radio" name="orig_sample_exist" id="orig_sample_exist1" value="true" checked="checked" <?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'true'){ echo 'checked';} ?> >
+				  Yes
+				</label> 
+				<label class="radio-inline" for="radios-1">
+				  <input type="radio" name="orig_sample_exist" id="orig_sample_exist2" value="false"<?php $check_exists = text_insert_update_stinfo($parent_value, 'orig_sample_exists','storage_info',$root); if($check_exists == 'false'){ echo 'checked';} ?> >
+				  No
+				</label>
 				  </div>
 				</div>
+				
 				
 				<!--Invisible Project Name Dropdown-->
 				<input type="text" style="visibility:hidden" name="orig_projName" id="orig_projName" class="form-control input-md" placeholder="Enter A Barcode" value="<?php if (isset($_GET['submit'])){echo text_insert_update($parent_value,'project_name',$dbc);}?>"/>
@@ -330,19 +336,19 @@ if (isset($_GET['submit'])) {
 					  <div class="col-md-4">
 					  <div class="radio">
 					    <label for="radios-0">
-					      <input type="radio" name="DNA_sample_exist" id="radios-0" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>
+					      <input type="radio" name="DNA_sample_exist" id="#DNA_sample_exist-0" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>
 					      Yes,DNA Sample Exists
 					    </label>
 						</div>
 					  <div class="radio">
 					    <label for="radios-1">
-					      <input type="radio" name="DNA_sample_exist" id="radios-1" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'two'){ echo 'checked';}  ?> />
+					      <input type="radio" name="DNA_sample_exist" id="#RNA_sample_exist-1" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'two'){ echo 'checked';}  ?> />
 					      No, DNA Has Not Been Extracted
 					    </label>
 						</div>
 					  <div class="radio">
 					    <label for="radios-2">
-					      <input type="radio" name="DNA_sample_exist" id="radios-2" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'three'){ echo 'checked';} ?> />
+					      <input type="radio" name="DNA_sample_exist" id="#RNA_sample_exist-2" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'DNA_sample_exists','storage_info',$root); if($check_exists == 'three'){ echo 'checked';} ?> />
 					      No, DNA Sample Is Used Up
 					    </label>
 						</div>
@@ -451,19 +457,19 @@ if (isset($_GET['submit'])) {
 				  <div class="col-md-4">
 				  <div class="radio">
 				    <label for="radios-0">
-				      <input type="radio" name="RNA_sample_exist" id="radios-0" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>
+				      <input type="radio" name="RNA_sample_exist" id="#RNA_sample_exist-0" value="one" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'one'){ echo 'checked';}  ?>/>
 				      Yes,RNA Sample Exists
 				    </label>
 					</div>
 				  <div class="radio">
 				    <label for="radios-1">
-				      <input type="radio" name="RNA_sample_exist" id="radios-1" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'two'){ echo 'checked';}  ?> />
+				      <input type="radio" name="RNA_sample_exist" id="#RNA_sample_exist-1" value="two" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'two'){ echo 'checked';}  ?> />
 				      No, RNA Has Not Been Extracted
 				    </label>
 					</div>
 				  <div class="radio">
 				    <label for="radios-2">
-				      <input type="radio" name="RNA_sample_exist" id="radios-2" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'three'){ echo 'checked';} ?> />
+				      <input type="radio" name="RNA_sample_exist" id="#RNA_sample_exist-2" value="three" <?php $check_exists = text_insert_update_stinfo($parent_value, 'RNA_sample_exists','storage_info',$root); if($check_exists == 'three'){ echo 'checked';} ?> />
 				      No, RNA Sample Is Used Up
 				    </label>
 					</div>
@@ -506,17 +512,21 @@ if (isset($_GET['submit'])) {
 					<input type="text" style="visibility:hidden" class="hidden" name="build_type" id="build_type" value="update"/>
 					<input type="text" style="visibility:hidden" class="hidden" name="parent_value" id="parent_value" value="<?php echo $parent_value;?>"/>	
 						<div class="col-xs-12 col-sm-6 col-md-6">
+							<legend>Required Input Fields</legend>
 							<div id="required_things1">
 							
 							</div>
+							<legend>Input Fields</legend>
 							<div id="user_things1">
 								
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
+							<legend>Required Select Fields</legend>
 							<div id="required_things2">
 								
 							</div>
+							<legend>Select Fields</legend>
 							<div id="user_things2">
 								
 							</div>

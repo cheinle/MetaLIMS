@@ -15,8 +15,13 @@ include('../functions/send_email.php');
 	      $('#datatable')
 	    	.addClass('wrap')
 		    .dataTable( {
-		         responsive: true,
-		          "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]]
+		         /*responsive: true,*/ //is not displaying checked radio buttons on larger screen sizes
+		          "lengthMenu": [[8, 25, 50, -1], [8, 25, 50, "All"]],
+		          // Disable sorting on the last two columns
+			        "aoColumnDefs" : [ {
+			            'bSortable' : false,
+			            'aTargets' : [ 1,2 ]
+			        } ]
 		    } );
 
 	 
@@ -147,8 +152,7 @@ if(isset($_POST['submit'])){
 	<div id="datatable_div">
 	<form onsubmit="return confirm(\'Do you want to submit the form?\');" action="update_user_login_info.php" method="POST" class="registration"><!--onsubmit not currently working-->
 	<pre>*Note: Admin are not able to update his/her own login info (exception-admin@metalims.com)</pre>		
-	<table id = "datatable" style="width:90%;margin-left:5%; background-color:white">
-	<!--<table id="datatable" class="display" cellspacing="0" width="100%">-->
+	<table id = "datatable" class="display" cellspacing="0" style="width:90%;margin-left:5%; background-color:white">
 			<thead>
 				<tr>
 					<th>&nbsp;User</th>
@@ -176,10 +180,10 @@ if(isset($_POST['submit'])){
 							echo "<td>";
 							?>
 							  <label class="radio-inline">
-						      	<input type="radio" class="radio-inline" name="<?php echo $email_address; ?>_login" value="1" <?php if($visible == 1){echo 'checked';}?>>Yes
+						      	<input type="radio" class="radio-inline" name="<?php echo $email_address; ?>_login" id="radio1" value="1" <?php if($visible == 1){echo 'checked="checked"';}?>>Yes
 						      </label>
 						      <label class="radio-inline">
-						         <input type="radio" class="radio-inline" name="<?php echo $email_address; ?>_login" value="0" <?php if($visible == 0){echo 'checked';}?>>No<br>
+						         <input type="radio" class="radio-inline" name="<?php echo $email_address; ?>_login" id="radio2" value="0" <?php if($visible == 0){echo 'checked';}?>>No
 						      </label>
 
 							<?php

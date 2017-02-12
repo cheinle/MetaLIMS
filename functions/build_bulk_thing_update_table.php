@@ -8,7 +8,6 @@ function build_bulk_thing_update_table($stmt,$root,$selected_thing){
 			</div>';
 	
 	$path = $_SERVER['DOCUMENT_ROOT'].$root;
-	include($path.'config/js.php'); //was not being inherited correctly...just added here for now
 	include($path.'functions/dropDown.php');
 	include($path.'functions/find_thing_labels.php');
 

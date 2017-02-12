@@ -42,7 +42,8 @@ function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$sel
 				
 				#now get your dropdown slect menu and cycle through it till you match above. When you match above make it the selected option
 				$s_name='sample['.$p_sample_name.','.$p_comp_pk_name.']['.$p_select_name.']';
-				echo "<select id='$p_select_name' name='$s_name'>";
+
+				echo "<select id='$p_select_name' name='$s_name' class='form-control'>";
 				echo "<option value='0'>-Select-</option>";
 				$attr = 'selected="selected"';
 	
@@ -69,6 +70,7 @@ function dropDown_update_for_read_subm($select_name,$table_name,$field_name,$sel
 					}
 				}
 				$stmt->close();
+				echo "</select>";
 			}		
      }	
 ?>

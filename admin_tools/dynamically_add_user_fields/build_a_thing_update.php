@@ -22,7 +22,7 @@
 		//Build form of user things
 		$parent_value = $_GET['parent_value'];
 
-		$stmt = $dbc->prepare("SELECT label_name,type,select_values,thing_id, visible, required FROM create_user_things ORDER BY LENGTH(label_name),label_name");
+		$stmt = $dbc->prepare("SELECT label_name,type,select_values,thing_id, visible, required FROM create_user_things ORDER BY label_name,LENGTH(label_name)");
 		if(!$stmt){
 			die('prepare() failed: ' . htmlspecialchars($stmt->error));
 		}

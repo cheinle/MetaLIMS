@@ -75,8 +75,8 @@ if(isset($_GET['submit'])){
 			$p_query_basis = htmlspecialchars($_GET['query']);
 			$thing_id = '';
 			//check whitelist for p_field
-			$p_field_check = whiteList($p_field, 'column');
-			if($p_field_check == 'true'){
+			//$p_field_check = whiteList($p_field, 'column');
+			//if($p_field_check == 'true'){
 				if($p_field == 'sampler_name'){
 					$query_field = " sample_sampler.$p_field = (?)";
 				}
@@ -88,31 +88,14 @@ if(isset($_GET['submit'])){
 					$query_field = " sample.$p_field = (?)";
 				}
 				$check_field = 'true';
-			}
+			//}
 		}
-		//if(isset($_GET['column_names'])){$field_names = check_box_results($_GET['column_names']);}//removed
-		if(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_dna'){
-			$field_names = 'sample.sample_name,sample.d_conc,sample.sample_sort';
-		}
-		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_storage'){
-			$field_names = 'sample.sample_name,sample.sample_sort';
-		}
-		elseif(isset($_GET['db_content']) && $_GET['db_content'] == 'bulk_things'){
-			$field_names = 'sample.sample_name,sample.sample_sort';
-		}
-		else{
-
-			$field_names = 'sample.sample_name,sample.barcode,sample.start_samp_date_time,sample.project_name,sample.sample_type,sample.sample_num';
-		}
-
-		////////////////////////////////////////////////////////////////////////////////////////////////
-		//Check what type of query you are doing
-		////////////////////////////////////////////////////////////////////////////////////////////////		
 	
 
-		$query_main = "SELECT $field_names FROM sample JOIN storage_info ON storage_info.sample_name = sample.sample_name LEFT JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
+		$field_names = 'sample.sample_name,sample.barcode,sample.start_samp_date_time,sample.project_name,sample.sample_type,sample.sample_num';
+		$query_main = "SELECT DISTINCT $field_names FROM sample JOIN storage_info ON storage_info.sample_name = sample.sample_name LEFT JOIN thing_storing ON thing_storing.sample_name = sample.sample_name WHERE ";
 
-		
+
 		////////////////////////////////////////////////////////////////////////////////////////////////
 		//Build Query
 		////////////////////////////////////////////////////////////////////////////////////////////////

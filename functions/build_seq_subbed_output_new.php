@@ -12,6 +12,7 @@ function build_seq_subbed_output_new($stmt,$root){
 	//then for each seq submission name, grab all of the samples (and their info)
 	
 	$seq_id_array = array();
+
 	if ($stmt->execute()){
 	  	$stmt->bind_result($seq_id);
 	    while ($stmt->fetch()){
@@ -80,6 +81,7 @@ function build_seq_subbed_output_new($stmt,$root){
 		}	
 		$stmt_seq->close();
 		
+	
 		////////////////
 		//2
 		

@@ -51,7 +51,7 @@
 				sampling_height: "number",
        		};
 
-             var index;
+             //var index;
              var valid = 'true';
           
              //grab all inputs
@@ -101,7 +101,7 @@
 							var names = txt.split(',');
 							x = names.length;
 							
-							for (index = 0; index < x; ++index) {
+							for (var index = 0; index < x; ++index) {
 		   	 					var name = names[index];
 		   	 			
 		   	 					//check to see if extractor name is already input

@@ -6,7 +6,7 @@
 						//check form
 						var do_check = validate(form);
 						if(do_check == true){
-							alert('Form ok');
+
 
 							//define variables..
 							var sample_number = $("#sample_number").val();
@@ -208,7 +208,7 @@
 				    	valid = 'false';
 				    }
 				   if(valid == 'false'){
-				    	alert('ERROR: Some inputs are invalid. Please check fields and other tabs');
+				    	alert('ERROR: Some inputs are invalid. Please check all tabs for errors');
 				    	return false;
 				   }
 				   else{

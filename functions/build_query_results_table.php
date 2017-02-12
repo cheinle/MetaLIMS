@@ -38,7 +38,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				echo "<table id=\"datatable\" class=\"display\" cellspacing=\"0\" width=\"90%\ max-width=\"90%\">";
 				echo "<thead>";
 				echo "<tr>";
-				echo "<th style='width:181px'>Sample Name</th>";
+				echo "<th >Sample Name</th>";
 				echo "<th>Sample Sort</th>";
 				echo "<th>Barcode</th>";
 				echo "<th>Project Name</th>";
@@ -142,7 +142,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 		 		echo "<table id=\"datatable2\" class=\"display\" cellspacing=\"0\" width=\"90%\ max-width=\"90%\">";
 				echo "<thead>";
 				echo "<tr>";
-				echo "<th style='width:181px'>Sample Name</th>";
+				echo "<th >Sample Name</th>";
 				echo "<th>Sample Sort</th>";
 				echo "<th>Extraction Date (YYYY-MM-DD)</th>";
 				echo "<th>Extraction Kit</th>";
@@ -250,7 +250,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 		 	echo "<table id=\"datatable3\" class=\"display\" cellspacing=\"0\" width=\"90%\ max-width=\"90%\">";
 				echo "<thead>";
 				echo "<tr>";
-				echo "<th style='width:181px'>Sample Name</th>";
+				echo "<th >Sample Name</th>";
 				echo "<th>Sample Sort</th>";
 				echo "<th>Extraction Date (YYYY-MM-DD)</th>";
 				echo "<th>Extraction Kit</th>";
@@ -356,7 +356,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				echo "<table id=\"datatable4\" class=\"display\" cellspacing=\"0\" width=\"90%\ max-width=\"90%\">";
 				echo "<thead>";
 				echo "<tr>";
-				echo "<th style='width:181px'>Sample Name</th>";
+				echo "<th >Sample Name</th>";
 				echo "<th>Sample Sort</th>";
 				echo "<th>Analysis Name</th>";
 				echo "</tr>";
@@ -405,7 +405,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				
 				echo "<thead>";
 				echo "<tr>";
-				echo "<th style='width:181px'>Sample Name</th>";
+				echo "<th >Sample Name</th>";
 				echo "<th>Sample Sort</th>";
 				foreach($thing_label_array as $key => $value){
 					$id_label = explode("|",$value);
@@ -461,7 +461,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				
 				echo "<thead>";
 				echo "<tr>";
-				echo "<th style='width:181px'>Sample Name</th>";
+				echo "<th >Sample Name</th>";
 				echo "<th>Sample Sort</th>";
 				echo "<th>Notes</th>";
 				echo "<th>Entered By</th>";
@@ -504,7 +504,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 					 echo "<tr>";
 					 echo "<td>$sample_name</td>";
 					 echo "<td>$sample_sort</td>";
-					 echo "<td>$notes</td>";
+					 echo "<td class='notes'>$notes</td>";
 					 echo "<td>$entered_by</td>";
 					 echo "<td>$updated_by</td>";
 					 echo "<td>$time_stamp</td>";
