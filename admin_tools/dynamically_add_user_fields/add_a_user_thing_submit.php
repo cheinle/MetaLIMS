@@ -1,4 +1,5 @@
 <?php
+		include ('../../functions/admin_check.php');
 		include ('../../database_connection.php');
 
 try{

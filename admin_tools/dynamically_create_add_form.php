@@ -1,4 +1,5 @@
 <?php
+	include ('../functions/admin_check.php');
  	include('../database_connection.php');
 	//grab all of the columns from the database and create a text input field for it with a label
 	$table_name = $_GET['table_value'];

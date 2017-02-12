@@ -1,4 +1,5 @@
 <?php
+	include ('../functions/admin_check.php');
  	include('../database_connection.php');
 	include('../functions/find_thing_labels.php');
 	include('../functions/find_sample_type_names.php');
