@@ -107,7 +107,7 @@
 	?>
 	
 <form class="registration" action="update_sampler.php" method="GET">
-	<p><i>* = required field </i></p>
+	<p><i>* = required field </i><br>Sampler names will be created using sampler name and unique id provided</p>
 	<fieldset>
 	<LEGEND><b>Sampler Info:</b></LEGEND>
 	<div class="col-xs-6">
