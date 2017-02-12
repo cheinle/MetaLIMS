@@ -65,7 +65,6 @@
 															$old_id
 															);
 					
-					echo $p_subm_id."<>".$p_db."<>".$p_date."<>".$p_submitter."<>".$p_experiment_type."<>".$p_sample_name."<>".$old_id."<>>>>";
 					$stmt -> execute();
 					$rows_affected = $stmt ->affected_rows;					
 					$stmt -> close();

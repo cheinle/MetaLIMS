@@ -82,6 +82,7 @@ function build_table_tab($stmt,$table_type){ //table types are 'dislapy' and 'xl
 					continue;
 				}else{
 					array_push($sample_names_seen,$sample_name);
+					$sample_array[$sample_sort] = $sample_name;
 				}
 					
 				fwrite($myfile, "$sample_name\t");
