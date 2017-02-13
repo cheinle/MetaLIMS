@@ -1,9 +1,9 @@
 <?php
-	include ('../functions/admin_check.php');
- 	if(!isset($_SESSION)) { session_start(); }
+	if(!isset($_SESSION)) { session_start(); }
 
 	$path = $_SESSION['include_path'];
 	$root = $_SESSION['link_root'];
+	include ($path.'/functions/admin_check.php');
  	include($path.'database_connection.php');
 	include($path.'functions/dropDown.php');
 	$type= $_GET['type'];
