@@ -1,5 +1,7 @@
 <?php
-		include ('../../functions/admin_check.php');
+		if(!isset($_SESSION)) { session_start(); }
+		$path = $_SESSION['include_path']; //same as $path
+		include ($path.'/functions/admin_check.php');
 		include ('../../database_connection.php');
 		
 		

@@ -1,4 +1,7 @@
-<?php include ('../functions/admin_check.php');
+<?php 
+	if(!isset($_SESSION)) { session_start(); }
+	$path = $_SESSION['include_path']; //same as $path
+	include ($path.'/functions/admin_check.php');
 	function check_exclude_list($value,$type){ //type = 'add', 'update','delete' 
 		
 		$list = array(

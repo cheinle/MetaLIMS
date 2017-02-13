@@ -1,4 +1,8 @@
-<?php include ('../../functions/admin_check.php');?>
+<?php 
+if(!isset($_SESSION)) { session_start(); }
+$path = $_SESSION['include_path']; //same as $path
+include ($path.'/functions/admin_check.php');
+?>
 <script type="text/javascript">
 
 				$(document).ready(function() {
