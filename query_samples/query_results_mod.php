@@ -73,10 +73,15 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 			th, td { white-space: wrap; }
 		}
 		@media (min-width: 641px){
-			th, td { white-space: nowrap;  }
-			td{overflow: auto;}
+			th, td { white-space: nowrap;}
+			td{overflow:auto;}
+			div.block{overflow: auto;}
+			div.sample_name{
+				overflow:auto;
+				
+			}
 			td.notes { 
-			  max-width: 181px; 
+			  max-width: 300px; 
 			}
 		}
 

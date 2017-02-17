@@ -56,7 +56,7 @@ function basic_build_table($stmt,$table_type,$root){ //table types are 'dislapy'
 								continue;
 							}
 							else{
-								echo '<td>'.$p_value.'</td>';
+								echo '<td><div class="block">'.$p_value.'</div></td>';
 							}
 	
 						}

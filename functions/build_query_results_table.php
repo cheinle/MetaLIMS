@@ -107,19 +107,19 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 					 
 					 
 					 echo "<tr>";
-					 echo "<td>$sample_name</td>";
-					 echo "<td>$sample_sort</td>";
-					 echo "<td>$barcode</td>";
-					 echo "<td>$project_name</td>";
-					 echo "<td>$location</td>";
-					 echo "<td>$relative_location</td>";
-					 echo "<td>$media_type</td>";
-				     echo "<td>$collector_name</td>";
-				     echo "<td>$sample_type</td>";
-					 echo "<td>$start_time</td>";
-					// echo "<td>$end_time</td>";
-					 echo "<td>$converted_total_time</td>"; 
-					  echo "<td>$samplers</td>";
+					 echo "<td><div class='sample_name'>$sample_name</div></td>";
+					 echo "<td><div class='block'>$sample_sort</div></td>";
+					 echo "<td><div class='block'>$barcode</div></td>";
+					 echo "<td><div class='block'>$project_name</div></td>";
+					 echo "<td><div class='block'>$location</div></td>";
+					 echo "<td><div class='block'>$relative_location</div></td>";
+					 echo "<td><div class='block'>$media_type</div></td>";
+				     echo "<td><div class='block'>$collector_name</div></td>";
+				     echo "<td><div class='block'>$sample_type</div></td>";
+					 echo "<td><div class='block'>$start_time</div></td>";
+					// echo "<td><div class='block'>$end_time</div></td>";
+					 echo "<td><div class='block'>$converted_total_time</div></td>"; 
+					  echo "<td><div class='block'>$samplers</div></td>";
 					 echo "</tr>";
 				}
 				echo "</tbody>";
@@ -216,18 +216,18 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 								
 					 
 					 echo "<tr>";
-					 echo "<td>$sample_name</td>";
-					 echo "<td>$sample_sort</td>";
-					 echo "<td>$dna_extraction_date</td>";
-					 echo "<td>$dna_extraction_kit</td>";
-					 echo "<td>$dna_concentration</td>";
-					 echo "<td>$dna_volume_of_elution</td>";
-					 echo "<td>$dna_instrument</td>";
-				     echo "<td>$dna_vol_for_instrument</td>";
-				     echo "<td>$dna_storage</td>";;
-					 echo "<td>$dna_extractor</td>"; 
-					 echo "<td>$dna_exists</td>";
-					 echo "<td> $orig_exists</td>";
+					 echo "<td><div class='sample_name'>$sample_name</div></td>";
+					 echo "<td><div class='block'>$sample_sort</div></td>";
+					 echo "<td><div class='block'>$dna_extraction_date</div></td>";
+					 echo "<td><div class='block'>$dna_extraction_kit</div></td>";
+					 echo "<td><div class='block'>$dna_concentration</div></td>";
+					 echo "<td><div class='block'>$dna_volume_of_elution</div></td>";
+					 echo "<td><div class='block'>$dna_instrument</div></td>";
+				     echo "<td><div class='block'>$dna_vol_for_instrument</div></td>";
+				     echo "<td><div class='block'>$dna_storage</div></td>";;
+					 echo "<td><div class='block'><div class='block'>$dna_extractor</div></td>"; 
+					 echo "<td><div class='block'>$dna_exists</div></td>";
+					 echo "<td><div class='block'> $orig_exists</div></td>";
 					 echo "</tr>";
 				}
 				echo "</tbody>";
@@ -323,18 +323,18 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 					 }
 					 
 					 echo "<tr>";
-					 echo "<td>$sample_name</td>";
-					 echo "<td>$sample_sort</td>";
-					 echo "<td>$rna_extraction_date</td>";
-					 echo "<td>$rna_extraction_kit</td>";
-					 echo "<td>$rna_concentration</td>";
-					 echo "<td>$rna_volume_of_elution</td>";
-					 echo "<td>$rna_instrument</td>";
-				     echo "<td>$rna_vol_for_instrument</td>";
-				     echo "<td>$rna_storage</td>";;
-					 echo "<td>$rna_extractor</td>"; 
-					 echo "<td>$rna_exists</td>";
-					 echo "<td> $orig_exists</td>";
+					 echo "<td><div class='sample_name'>$sample_name</div></td>";
+					 echo "<td><div class='block'>$sample_sort</div></td>";
+					 echo "<td><div class='block'>$rna_extraction_date</div></td>";
+					 echo "<td><div class='block'>$rna_extraction_kit</div></td>";
+					 echo "<td><div class='block'>$rna_concentration</div></td>";
+					 echo "<td><div class='block'>$rna_volume_of_elution</div></td>";
+					 echo "<td><div class='block'>$rna_instrument</div></td>";
+				     echo "<td><div class='block'>$rna_vol_for_instrument</div></td>";
+				     echo "<td><div class='block'>$rna_storage</div></td>";;
+					 echo "<td><div class='block'>$rna_extractor</div></td>"; 
+					 echo "<td><div class='block'>$rna_exists</div></td>";
+					 echo "<td><div class='block'> $orig_exists</div></td>";
 					 echo "</tr>";
 				}
 				echo "</tbody>";
@@ -388,9 +388,9 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 					 }
 					 
 					 echo "<tr>";
-					 echo "<td>$sample_name</td>";
-					 echo "<td>$sample_sort</td>";
-					 echo "<td>$analysis_name</td>";
+					 echo "<td><div class='sample_name'>$sample_name</div></td>";
+					 echo "<td><div class='block'>$sample_sort</div></td>";
+					 echo "<td><div class='block'>$analysis_name</div></td>";
 					 echo "</tr>";
 				}
 				echo "</tbody>";
@@ -430,13 +430,13 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 				echo "<tbody>";
 				foreach($sample_array as $sample_key => $sample_name){					
 					echo "<tr>";
-					echo "<td>$sample_name</td>";
-					echo "<td>$sample_key</td>";
+					echo "<td><div class='sample_name'>$sample_name</div></td>";
+					echo "<td><div class='block'>$sample_key</div></td>";
 					foreach($thing_label_array as $key => $value){
 						$id_label = explode("|",$value);
 						$id =$id_label[0];
 						$thing_value = find_thing_values($sample_name, $id);
-						echo "<td>$thing_value</td>";
+						echo "<td><div class='block'>$thing_value</div></td>";
 					}
 					echo "</tr>";
 				}
@@ -502,12 +502,12 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 					 }
 					 
 					 echo "<tr>";
-					 echo "<td>$sample_name</td>";
-					 echo "<td>$sample_sort</td>";
-					 echo "<td class='notes'>$notes</td>";
-					 echo "<td>$entered_by</td>";
-					 echo "<td>$updated_by</td>";
-					 echo "<td>$time_stamp</td>";
+					 echo "<td><div class='sample_name'>$sample_name</div></td>";
+					 echo "<td><div class='block'>$sample_sort</div></td>";
+					 echo "<td class='notes'><div class='block'>$notes</div></td>";
+					 echo "<td><div class='block'>$entered_by</div></td>";
+					 echo "<td><div class='block'>$updated_by</div></td>";
+					 echo "<td><div class='block'>$time_stamp</div></td>";
 					 echo "</tr>";
 				}
 				echo "</tbody>";
