@@ -293,7 +293,7 @@
 								$seconds_diff = $ts2 - $ts1;
 								
 								$time = ($seconds_diff/3600);
-								$p_time = round($time,2);
+								$p_time = round($time,4);
 							}
 							$query_my_samp = "INSERT INTO sample_sampler (sample_name, sampler_name, start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)";
 							$stmt_my_samp = $dbc -> prepare($query_my_samp);

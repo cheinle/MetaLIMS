@@ -63,8 +63,7 @@ include('../functions/get_earliest_date.php');
 				$p_dExtKit = htmlspecialchars($_GET['dExtKit']);
 				$p_rExtKit = htmlspecialchars($_GET['rExtKit']);
 				$p_seqInfo = NULL;
-				//$p_anPipe = htmlspecialchars($_GET['anPipe']);
-				$p_anPipe = NULL;
+				$p_anPipe = htmlspecialchars($_GET['anPipe']);
 				$p_barcode = htmlspecialchars($_GET['barcode']);
 				$p_sType = htmlspecialchars($_GET['sType']);
 				$p_path = NULL;
@@ -498,7 +497,7 @@ include('../functions/get_earliest_date.php');
 							$seconds_diff = $ts2 - $ts1;
 							
 							$time = ($seconds_diff/3600);
-							$p_time = round($time,2);
+							$p_time = round($time,4);
 						}
 						if(isset($_GET['delete'.$x])){
 							//check if it exists...if it does, delete it
