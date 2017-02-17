@@ -104,7 +104,7 @@ include('../database_connection.php');
 			#include($path.'functions/create_seq_id.php');
 			#$seq_id = create_seq_id($p_projName);
 			//no longer creating seq id. user supplied
-			$seq_id = $p_abName;
+			$seq_id  = strtoupper($p_abName);
 			
 			//check if seq ID exisits. 
 			$stmt2 = $dbc->prepare("SELECT seq_id_start FROM project_name WHERE seq_id_start = ?");
