@@ -72,7 +72,7 @@
                  	 //check if your input is empty
 	                 var n = txt.length;
 	                 if(n == 0){
-	                    inputs[i].style.background = "blue";
+	                    inputs[i].style.background = "#f9ae7d";
 	                    valid = 'false';
                  	}else{
                  		//if you are a collector name, check if you are the correct format and if you are duplicates
@@ -80,7 +80,7 @@
                  			var name_check = txt.match(/^[a-zA-Z, ()]+$/); //should match anthing that is not these character
 							if (name_check == null){ //null means you did not find the pattern
 								alert("Invalid Collector Name. Please Check Names");
-								inputs[i].style.background = "blue";
+								inputs[i].style.background = "#f9ae7d";
 		                    	valid = 'false';
 							}else{
 								inputs[i].style.background = "white";
@@ -106,7 +106,7 @@
 		   	 			
 		   	 					//check to see if extractor name is already input
 		   	 					if(seen.contains(name)){
-		   	 						inputs[i].style.background = "blue";
+		   	 						inputs[i].style.background = "#f9ae7d";
 		   	 						alert("You Have One Or More With The Same Name. Please Check Names");
 		   	 						valid = 'false';
 		   	 					}
@@ -127,7 +127,7 @@
                  		var sample_number_check = txt.match(/^[0-9]{3}$/);
 						if (sample_number_check == null){
 							alert("Sample Number Must Be 3-Digit Format");
-							inputs[i].style.background = "blue";
+							inputs[i].style.background = "#f9ae7d";
 	                    	valid = 'false';
 						}else{
 							inputs[i].style.background = "white";
@@ -149,7 +149,7 @@
 							if (regrex_check == null){
 								alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
 								valid = 'false';
-		             			inputs[i].style.background = "blue";
+		             			inputs[i].style.background = "#f9ae7d";
 							}
 							else{
 		             			inputs[i].style.background = "white";
@@ -172,7 +172,7 @@
                  var name2 = selects[i2].getAttribute("name");
                  if(required[name2]){
 	                 if(selected == '0'){
-	                 	selects[i2].style.background = "blue";
+	                 	selects[i2].style.background = "#f9ae7d";
 	                    valid = 'false';
 	                 }
 	                 else{
@@ -234,7 +234,7 @@
 				
 				var i5;
             	for (i5 = 0; i5 < empty.length; i5++) {
-            		document.getElementById(empty[i5]).style.backgroundColor = 'blue';
+            		document.getElementById(empty[i5]).style.backgroundColor = '#f9ae7d';
             	}
             	var i6;
             	for (i6 = 0; i6 < filled.length; i6++) {
@@ -246,7 +246,7 @@
                  			var name_check = extractor_names.match(/^[a-zA-Z, ()]+$/); //should match anthing that is not these character
 							if (name_check == null){ //null means you did not find the pattern
 								alert("Invalid Extractor Name. Please Check Names");
-								document.getElementById(filled[i6]).style.backgroundColor = 'blue';
+								document.getElementById(filled[i6]).style.backgroundColor = '#f9ae7d';
 		                    	valid = 'false';
 							}else{
 								document.getElementById(filled[i6]).style.backgroundColor = 'white';
@@ -271,7 +271,7 @@
 		   	 					var name = names[index];
 		   	 					//check to see if airSamp name is already input
 		   	 					if(seen.contains(name)){
-		   	 						document.getElementById(filled[i6]).style.backgroundColor = 'blue';
+		   	 						document.getElementById(filled[i6]).style.backgroundColor = '#f9ae7d';
 		   	 						alert("You Have One Or More Extractor Name With The Same Name. Please Check Names");
 		   	 						valid = 'false';
 		   	 					}
@@ -299,7 +299,7 @@
 	            var conc_check = conc.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
 				if (conc_check  == null){
 					alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
-					document.getElementById('dConc').style.background = "blue";
+					document.getElementById('dConc').style.background = "#f9ae7d";
 		            valid = 'false';
 				}
 				else{
@@ -310,7 +310,7 @@
 				var vol_check = vol.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
 				if (vol_check  == null){
 					alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
-					document.getElementById('dVol').style.background = "blue";
+					document.getElementById('dVol').style.background = "#f9ae7d";
 		            valid = 'false';
 				}else{
 					document.getElementById('dVol').style.background = "white";
@@ -320,7 +320,7 @@
 				var vol_check = vol_quant.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
 				if (vol_check  == null){
 					alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
-					document.getElementById('dVol_quant').style.background = "blue";
+					document.getElementById('dVol_quant').style.background = "#f9ae7d";
 		            valid = 'false';
 				}else{
 					document.getElementById('dVol_quant').style.background = "white";
@@ -332,7 +332,7 @@
                 var name_check = extractor_names.match(/^[a-zA-Z, ()]+$/); //should match anthing that is not these character
 				if (name_check == null){ //null means you did not find the pattern
 						alert("Invalid Extractor Name. Please Check Names");
-						document.getElementById('dExtrName').style.backgroundColor = 'blue';
+						document.getElementById('dExtrName').style.backgroundColor = '#f9ae7d';
 		                   valid = 'false';
 				}
 				else{
@@ -359,7 +359,7 @@
 					var name = names[index];
 		   	 		//check to see if airSamp name is already input
 					if(seen.contains(name)){
-		 				document.getElementById('dExtrName').style.backgroundColor = 'blue';
+		 				document.getElementById('dExtrName').style.backgroundColor = '#f9ae7d';
 						alert("You Have One Or More Extractor Name With The Same Name. Please Check Names");
 						valid = 'false';
 					}
@@ -427,7 +427,7 @@
 				
 				var i7;
             	for (i7 = 0; i7 < empty2.length; i7++) {
-            		document.getElementById(empty2[i7]).style.backgroundColor = 'blue';
+            		document.getElementById(empty2[i7]).style.backgroundColor = '#f9ae7d';
             	}
             	var i8;
             	for (i8 = 0; i8 < filled2.length; i8++) {
@@ -436,7 +436,7 @@
                  		var name_check = extractor_names.match(/^[a-zA-Z, ()]+$/); //should match anthing that is not these character
 						if (name_check == null){ //null means you did not find the pattern
 							alert("Invalid RNA Extractor Name. Please Check Names");
-							document.getElementById(filled2[i8]).style.backgroundColor = 'blue';
+							document.getElementById(filled2[i8]).style.backgroundColor = '#f9ae7d';
 		                    valid = 'false';
 						}else{
 							document.getElementById(filled2[i8]).style.backgroundColor = 'white';
@@ -461,7 +461,7 @@
 		   	 				var name = names[index];
 		   	 				//check to see if sampler name is already input
 		   	 				if(seen.contains(name)){
-		   	 					document.getElementById(filled2[i8]).style.backgroundColor = 'blue';
+		   	 					document.getElementById(filled2[i8]).style.backgroundColor = '#f9ae7d';
 		   	 					alert("You Have One Or More Extractor Name With The Same Name. Please Check Names");
 		   	 					valid = 'false';
 		   	 				}
@@ -490,7 +490,7 @@
 	            var rconc_check = rconc.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
 				if (rconc_check  == null){
 					alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
-					document.getElementById('rConc').style.background = "blue";
+					document.getElementById('rConc').style.background = "#f9ae7d";
 		            valid = 'false';
 				}else{
 					document.getElementById('rConc').style.background = "white";
@@ -500,7 +500,7 @@
 				var rvol_check = rvol.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
 				if (rvol_check  == null){
 					alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
-					document.getElementById('rVol').style.background = "blue";
+					document.getElementById('rVol').style.background = "#f9ae7d";
 		            valid = 'false';
 				}else{
 					document.getElementById('rVol').style.background = "white";
@@ -510,7 +510,7 @@
 				var rvol_check = rvol_quant.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
 				if (rvol_check  == null){
 					alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
-					document.getElementById('rVol_quant').style.background = "blue";
+					document.getElementById('rVol_quant').style.background = "#f9ae7d";
 		            valid = 'false';
 				}else{
 					document.getElementById('rVol_quant').style.background = "white";
@@ -520,7 +520,7 @@
                 var name_check = extractor_names.match(/^[a-zA-Z, ()]+$/); //should match anthing that is not these character
 				if (name_check == null){ //null means you did not find the pattern
 					alert("Invalid RNA Extractor Name. Please Check Names");
-					document.getElementById('rExtrName').style.backgroundColor = 'blue';
+					document.getElementById('rExtrName').style.backgroundColor = '#f9ae7d';
 		            valid = 'false';
 				}else{
 					document.getElementById('rExtrName').style.backgroundColor = 'white';
@@ -545,7 +545,7 @@
 		   	 		var name = names[index];
 		   	 		//check to see if extractor name is already input
 		   	 		if(seen.contains(name)){
-		   	 			document.getElementById('rExtrName').style.backgroundColor = 'blue';
+		   	 			document.getElementById('rExtrName').style.backgroundColor = '#f9ae7d';
 		   	 			alert("You Have One Or More Extractor Name With The Same Name. Please Check Names");
 		   	 			valid = 'false';
 		   	 		}

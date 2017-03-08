@@ -222,7 +222,7 @@
 					var x = document.getElementById('sampler_num').value;
 					if(x == 0){
 						valid = 'false';
-						document.getElementById('sampler_num').style.backgroundColor = 'blue';
+						document.getElementById('sampler_num').style.backgroundColor = '#f9ae7d';
 					}
 					else{
 						//create a contains method to check if Sampler name is is entered twice
@@ -242,13 +242,13 @@
 	   	 					var mySamp_name_value = document.getElementById(mySamp_name).value;
 	   	 					if(mySamp_name_value == '0' || mySamp_name_value == 'Needs to be added'){
 	   	 						alert("Whoops! Sampler Name Is Not Valid");
-	   	 						document.getElementById(mySamp_name).style.backgroundColor = 'blue';
+	   	 						document.getElementById(mySamp_name).style.backgroundColor = '#f9ae7d';
 	   	 						valid = 'false';
 	   	 					}
 	   	 					else{
 	   	 						//check to see if mySamp name is already input
 	   	 						if(seen.contains(mySamp_name_value)){
-	   	 							document.getElementById(mySamp_name).style.backgroundColor = 'blue';
+	   	 							document.getElementById(mySamp_name).style.backgroundColor = '#f9ae7d';
 	   	 							alert("You Have Chosen More Than One Sampler With The Same Name. Please Check Names");
 	   	 							valid = 'false';
 	   	 						}
@@ -263,7 +263,7 @@
 	   	 					var start_time_value = document.getElementById(start_time).value;
 	   	 					if(start_time_value == ''){
 	   	 						alert("Whoops! Please Enter A Start Time");
-	   	 						document.getElementById(start_time).style.backgroundColor = 'blue';
+	   	 						document.getElementById(start_time).style.backgroundColor = '#f9ae7d';
 	   	 						valid = 'false';
 	   	 					}
 	   	 					else{
@@ -274,7 +274,7 @@
 	   	 					var end_time_value = document.getElementById(end_time).value;
 	   	 					if(end_time_value == ''){
 	   	 						alert("Whoops! Please Enter An End Time");
-	   	 						document.getElementById(end_time).style.backgroundColor = 'blue';
+	   	 						document.getElementById(end_time).style.backgroundColor = '#f9ae7d';
 	   	 						valid = 'false';
 	   	 					}
 	   	 					
@@ -283,7 +283,7 @@
 	   	 					var start_date_value = document.getElementById(start_date).value;
 	   	 					if(start_date_value == ''){
 	   	 						alert("Whoops! Please Enter An Starting Date");
-	   	 						document.getElementById(start_date).style.backgroundColor = 'blue';
+	   	 						document.getElementById(start_date).style.backgroundColor = '#f9ae7d';
 	   	 						valid = 'false';
 	   	 					}
 	   	 					
@@ -292,7 +292,7 @@
 	   	 					var end_date_value = document.getElementById(end_date).value;
 	   	 					if(end_date_value.length == '0'){
 	   	 						alert("Whoops! Please Enter An End Date");
-	   	 						document.getElementById(end_date).style.backgroundColor = 'blue';
+	   	 						document.getElementById(end_date).style.backgroundColor = '#f9ae7d';
 	   	 						valid = 'false';
 	   	 					}
 	   	 				
@@ -315,18 +315,18 @@
 									if(p_time < 0){
 										valid = 'false';
 										alert("Please Check Date/Times");
-										document.getElementById(start_time).style.backgroundColor = 'blue';
-										document.getElementById(end_time).style.backgroundColor = 'blue';
-										document.getElementById(start_date).style.backgroundColor = 'blue';
-										document.getElementById(end_date).style.backgroundColor = 'blue';
+										document.getElementById(start_time).style.backgroundColor = '#f9ae7d';
+										document.getElementById(end_time).style.backgroundColor = '#f9ae7d';
+										document.getElementById(start_date).style.backgroundColor = '#f9ae7d';
+										document.getElementById(end_date).style.backgroundColor = '#f9ae7d';
 									}
 									else if(p_time > 6.5 && mySamp_check  != null){//check if coriolis sampling is greater than 6 hours
 										valid = 'false';
 										alert("Sampling Is Greater Than 6 Hours For Coriolis Sampling. Please Check Date/Times");
-										document.getElementById(start_time).style.backgroundColor = 'blue';
-										document.getElementById(end_time).style.backgroundColor = 'blue';
-										document.getElementById(start_date).style.backgroundColor = 'blue';
-										document.getElementById(end_date).style.backgroundColor = 'blue';
+										document.getElementById(start_time).style.backgroundColor = '#f9ae7d';
+										document.getElementById(end_time).style.backgroundColor = '#f9ae7d';
+										document.getElementById(start_date).style.backgroundColor = '#f9ae7d';
+										document.getElementById(end_date).style.backgroundColor = '#f9ae7d';
 									}
 									else{
 										document.getElementById(start_time).style.backgroundColor = 'white';

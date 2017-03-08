@@ -31,6 +31,7 @@
     border: none;
     border-radius: 2;
     background: linear-gradient(rgba(192,213,219,1),rgba(192,213,219,0.5),rgba(192,213,219,1));
+   
 }
 
 .nav.navbar-nav li a {
@@ -103,7 +104,7 @@ body.homepage {
 body{
    height: 100%;
    color: black;
-   background: #008080;
+   background: #3e4e50;
    font-family: Arial;
 }
 

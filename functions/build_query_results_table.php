@@ -225,7 +225,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 					 echo "<td><div class='block'>$dna_instrument</div></td>";
 				     echo "<td><div class='block'>$dna_vol_for_instrument</div></td>";
 				     echo "<td><div class='block'>$dna_storage</div></td>";;
-					 echo "<td><div class='block'><div class='block'>$dna_extractor</div></td>"; 
+					 echo "<td><div class='block'>$dna_extractor</div></td>"; 
 					 echo "<td><div class='block'>$dna_exists</div></td>";
 					 echo "<td><div class='block'> $orig_exists</div></td>";
 					 echo "</tr>";
@@ -504,7 +504,7 @@ function build_query_results_table($stmt,$table_type,$dbc){ //table types are 'd
 					 echo "<tr>";
 					 echo "<td><div class='sample_name'>$sample_name</div></td>";
 					 echo "<td><div class='block'>$sample_sort</div></td>";
-					 echo "<td class='notes'><div class='block'>$notes</div></td>";
+					 echo "<td><textarea rows='4'>$notes</textarea></td>";
 					 echo "<td><div class='block'>$entered_by</div></td>";
 					 echo "<td><div class='block'>$updated_by</div></td>";
 					 echo "<td><div class='block'>$time_stamp</div></td>";

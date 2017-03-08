@@ -155,7 +155,7 @@ ini_set('display_errors', 1);
 	                 //check if your input is empty
 	                 var n = txt.length;
 	                 if(n == 0){
-	                    inputs[i].style.background = "blue";
+	                    inputs[i].style.background = "#f9ae7d";
 	                    valid = 'false';
                  	}
                  }
@@ -168,7 +168,7 @@ ini_set('display_errors', 1);
              for (i2 = 0; i2 < selects.length; i2++) {
                  selected = selects[i2].value;
                  if(selected == '0'){
-                 	selects[i2].style.background = "blue";
+                 	selects[i2].style.background = "#f9ae7d";
                     valid = 'false';
                  }
 			}
@@ -189,7 +189,7 @@ ini_set('display_errors', 1);
 				    if(amplicon_type[i].value == 'AmpliconOther'){
 				    	var seqOther = document.getElementById('seqOther');
 				    	if(seqOther.value.length == 0){
-				    		seqOther.style.background = "blue";
+				    		seqOther.style.background = "#f9ae7d";
 				    		valid = 'false';
 				    	}
 				    }

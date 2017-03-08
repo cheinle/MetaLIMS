@@ -17,23 +17,23 @@ include ($path.'/functions/admin_check.php');
 							var valid = 'true';	
 							if(label_text == ''){
 									valid = 'false';
-									document.getElementById('label').style.backgroundColor = 'blue';
+									document.getElementById('label').style.backgroundColor = '#f9ae7d';
 							}else{
 								document.getElementById('label').style.backgroundColor = 'white';
 							}
 							if(type == '0'){
 								valid = 'false';
-								document.getElementById('field_type').style.backgroundColor = 'blue';
+								document.getElementById('field_type').style.backgroundColor = '#f9ae7d';
 							}
 							else if(type == 'select' && options == ''){
 								valid = 'false';
-								document.getElementById('options').style.backgroundColor = 'blue';
-								document.getElementById('field_type').style.backgroundColor = 'blue';
+								document.getElementById('options').style.backgroundColor = '#f9ae7d';
+								document.getElementById('field_type').style.backgroundColor = '#f9ae7d';
 							}
 							else if(type != 'select' && options != ''){
 								valid = 'false';
-								document.getElementById('options').style.backgroundColor = 'blue';
-								document.getElementById('field_type').style.backgroundColor = 'blue';
+								document.getElementById('options').style.backgroundColor = '#f9ae7d';
+								document.getElementById('field_type').style.backgroundColor = '#f9ae7d';
 							}
 							else{
 								document.getElementById('options').style.backgroundColor = 'white';
@@ -42,7 +42,7 @@ include ($path.'/functions/admin_check.php');
 						
 							if(required == '0'){
 								valid = 'false';
-								document.getElementById('required').style.backgroundColor = 'blue';
+								document.getElementById('required').style.backgroundColor = '#f9ae7d';
 							}else{
 								document.getElementById('required').style.backgroundColor = 'white';
 							}

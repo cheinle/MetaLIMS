@@ -205,7 +205,7 @@ function build_bulk_thing_update_table($stmt,$root,$selected_thing){
 	           var input_val = input.value;
 		    	if(type == 'select'){
 		    		if(input_val == '0'){
-			      		input.style.background = "blue";
+			      		input.style.background = "#f9ae7d";
 			       		valid = 'false';
 			   		}
 			   		else{
@@ -214,14 +214,14 @@ function build_bulk_thing_update_table($stmt,$root,$selected_thing){
 		    	}
 		    	else{
 		    		if(input_val == ''){
-			      		input.style.background = "blue";
+			      		input.style.background = "#f9ae7d";
 			       		valid = 'false';
 			   		}
 				    else{
 			       		if(type == 'numeric_input'){
 							if(isNumeric(input_val) == false){
 								alert("ERROR: Value must be a number");
-								input.style.background = "blue";
+								input.style.background = "#f9ae7d";
 							   	valid = 'false';
 							}
 							else{
@@ -231,7 +231,7 @@ function build_bulk_thing_update_table($stmt,$root,$selected_thing){
 						else{
 							if(isNumeric(input_val) == true){
 								alert("ERROR: Value should not be a number");
-								input.style.background = "blue";
+								input.style.background = "#f9ae7d";
 							   	valid = 'false';
 							}
 							else{

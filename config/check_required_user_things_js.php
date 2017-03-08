@@ -15,7 +15,7 @@
                  var select_id = required_selects[i9].getAttribute("id");
           		 if(selected == ''){
           		 	 valid = 'false';
-	                 document.getElementById(select_id).style.backgroundColor = 'blue';
+	                 document.getElementById(select_id).style.backgroundColor = '#f9ae7d';
 	             }else{
 	             	document.getElementById(select_id).style.backgroundColor = 'white';
 	             }
@@ -29,7 +29,7 @@
                  var type = required_inputs[i10].getAttribute("class");
 	             if(inputed == ''){
 	             	 valid = 'false';
-	                 document.getElementById(input_id).style.backgroundColor = 'blue';
+	                 document.getElementById(input_id).style.backgroundColor = '#f9ae7d';
 	             }else{
 	             	//select type from create_user_things where thing_id = input_id. if type equals numeric_input, do a check
 	             	
@@ -37,7 +37,7 @@
 						if(isNumeric(inputed) == false){
 							alert("ERROR: Value must be a number");
 							valid = 'false';
-		             		document.getElementById(input_id).style.backgroundColor = 'blue';
+		             		document.getElementById(input_id).style.backgroundColor = '#f9ae7d';
 						}
 						else{
 		             		document.getElementById(input_id).style.backgroundColor = 'white';
@@ -46,7 +46,7 @@
 	             		if(isNumeric(inputed) == true){
 							alert("ERROR: Value should not be a number");
 							valid = 'false';
-		             		document.getElementById(input_id).style.backgroundColor = 'blue';
+		             		document.getElementById(input_id).style.backgroundColor = '#f9ae7d';
 						}
 						else{
 		             		document.getElementById(input_id).style.backgroundColor = 'white';
@@ -70,7 +70,7 @@
 						if(isNumeric(inputed) == false){
 							alert("ERROR: Value must be a number");
 							valid = 'false';
-		             		document.getElementById(input_id).style.backgroundColor = 'blue';
+		             		document.getElementById(input_id).style.backgroundColor = '#f9ae7d';
 						}
 						else{
 		             		document.getElementById(input_id).style.backgroundColor = 'white';
@@ -79,7 +79,7 @@
 	             		if(isNumeric(inputed) == true){
 							alert("ERROR: Value should not be a number");
 							valid = 'false';
-		             		document.getElementById(input_id).style.backgroundColor = 'blue';
+		             		document.getElementById(input_id).style.backgroundColor = '#f9ae7d';
 						}
 						else{
 		             		document.getElementById(input_id).style.backgroundColor = 'white';

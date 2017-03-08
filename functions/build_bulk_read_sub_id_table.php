@@ -260,7 +260,7 @@ function build_bulk_read_sub_id_table($stmt,$root){
 	    	
 	    	 var input_value = input_id.value;
 			 if(input_value.length < 1){
-			 	input_id.style.background = "blue";
+			 	input_id.style.background = "#f9ae7d";
 			 }else{
 			 	input_id.style.background = "white";
 			 }
@@ -272,7 +272,7 @@ function build_bulk_read_sub_id_table($stmt,$root){
 	    	
 	    	 var select_value = select_id.value;
 			 if(select_value == 0){
-			 	select_id.style.background = "blue";
+			 	select_id.style.background = "#f9ae7d";
 			 }else{
 			 	select_id.style.background = "white";
 			 }
@@ -293,7 +293,7 @@ function build_bulk_read_sub_id_table($stmt,$root){
 	           var input_val = input.value;
 		
 	    		if(input_val == ''){
-		      		input.style.background = "blue";
+		      		input.style.background = "#f9ae7d";
 		       		valid = 'false';
 		   		}
 		    	

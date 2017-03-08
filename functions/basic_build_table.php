@@ -55,6 +55,9 @@ function basic_build_table($stmt,$table_type,$root){ //table types are 'dislapy'
 							if($key == 'false'){
 								continue;
 							}
+							elseif($key == 'Description'){
+									echo "<td><textarea rows='4'>$p_value</textarea></td>";
+							}
 							else{
 								echo '<td><div class="block">'.$p_value.'</div></td>';
 							}

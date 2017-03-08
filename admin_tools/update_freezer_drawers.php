@@ -56,7 +56,7 @@ include('../database_connection.php');
  				 var n = txt.length;
 	             if(n == 0){
 	             	valid = 'false';
-	             	inputs[i].style.background = "blue";
+	             	inputs[i].style.background = "#f9ae7d";
 				 }else{
 				 	inputs[i].style.background = "white";
 				 }
@@ -70,7 +70,7 @@ include('../database_connection.php');
                  values.push(selected);
                  var name2 = selects[i2].getAttribute("name");
 	             if(selected == '0'){
-	                 selects[i2].style.background = "blue";
+	                 selects[i2].style.background = "#f9ae7d";
 	                 valid = 'false';
 	             }
 	             else{

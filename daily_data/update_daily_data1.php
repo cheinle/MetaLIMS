@@ -71,7 +71,7 @@ $submitted = 'false';
 	   	 			var date = 'datepicker';
 	   	 			var date_value = document.getElementById(date).value;
 	   	 			if(date_value == ''){
-	   	 				document.getElementById(date).style.backgroundColor = 'blue';
+	   	 				document.getElementById(date).style.backgroundColor = '#f9ae7d';
 	   	 				valid = 'false'
 	   	 			}
 	   	 			else{
@@ -82,7 +82,7 @@ $submitted = 'false';
 	   	 			var location = 'loc';
 	   	 			var location_value = document.getElementById(location).value;
 	   	 			if(location_value == '0'){
-	   	 				document.getElementById(location).style.backgroundColor = 'blue';
+	   	 				document.getElementById(location).style.backgroundColor = '#f9ae7d';
 	   	 				valid = 'false'
 	   	 			}
 	   	 			else{

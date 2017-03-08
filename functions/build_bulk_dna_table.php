@@ -246,7 +246,7 @@ function build_bulk_dna_table($stmt,$root){
         if(number_of_samples_checked < 1){
         	valid = 'false';
         	alert("Warning: Please select checkbox for samples to update");
-        	top_table.style.background = "pink";
+        	top_table.style.background = "#f9ae7d";
         }
         else{
        		top_table.style.background = "white";
@@ -262,7 +262,7 @@ function build_bulk_dna_table($stmt,$root){
 	    	
 	    	 var input_value = input_id.value;
 			 if(input_value.length < 1){
-			 	input_id.style.background = "blue";
+			 	input_id.style.background = "#f9ae7d ";
 			 }else{
 			 	input_id.style.background = "white";
 			 }
@@ -274,7 +274,7 @@ function build_bulk_dna_table($stmt,$root){
 	    	
 	    	 var select_value = select_id.value;
 			 if(select_value == 0){
-			 	select_id.style.background = "blue";
+			 	select_id.style.background = "#f9ae7d ";
 			 }else{
 			 	select_id.style.background = "white";
 			 }
@@ -282,7 +282,7 @@ function build_bulk_dna_table($stmt,$root){
 
 		if( $('input[type=radio]:selected').length == 0 ) {
 		    alert('Please select if DNA Extraction Sample Exists.');
-		    bottom_table.style.background = "pink";
+		    bottom_table.style.background = "#f9ae7d";
 		}else{
 			bottom_table.style.background = "white";
 		}
@@ -302,14 +302,14 @@ function build_bulk_dna_table($stmt,$root){
 	           var input_val = input.value;
 		
 	    		if(input_val == ''){
-		      		input.style.background = "blue";
+		      		input.style.background = "#f9ae7d ";
 		       		valid = 'false';
 		   		}
 			    else{
 		       		
 					if(isNumeric(input_val) == false){
 						alert("ERROR: Value must be a number");
-						input.style.background = "blue";
+						input.style.background = "#f9ae7d ";
 					   	valid = 'false';
 					}
 					else{
