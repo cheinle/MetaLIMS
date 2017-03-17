@@ -25,7 +25,8 @@
 							//var sampling_height = $("#sampling_height").val();
 							var collector_names = $("#collector").val();
 							var collector = [collector_names];
-							var orig_sample_exist = $("#orig_sample_exist").val();
+							//var orig_sample_exist = $("#orig_sample_exist").val();
+							var orig_sample_exist = $('input[name=orig_sample_exist]:checked').val();
 							var oStore_temp = $("#oStore_temp").val();
 							var oStore_name = $("#oStore_name").val();
 							var enteredBy = $("#enteredBy").val();
@@ -38,7 +39,8 @@
 							var d_extr_date = $("#d_extr_date").val();
 							var dExtrName_names= $("#dExtrName").val();
 							var dExtrName = [dExtrName_names];
-							var DNA_sample_exist = $("#DNA_sample_exist").val();
+							//var DNA_sample_exist = $("#DNA_sample_exist").val();
+							var DNA_sample_exist = $('input[name=DNA_sample_exist]:checked').val();
 							var dStore_temp = $("#dStore_temp").val();
 							var dStore_name = $("#dStore_name").val();
 			
@@ -50,7 +52,8 @@
 							var r_extr_date = $("#r_extr_date").val();
 							var rExtrName_names = $("#rExtrName").val();
 							var rExtrName = [rExtrName_names];
-							var RNA_sample_exist = $("#RNA_sample_exist").val();
+							//var RNA_sample_exist = $("#RNA_sample_exist").val();
+							var RNA_sample_exist = $('input[name=RNA_sample_exist]:checked').val();
 							var rStore_temp = $("#rStore_temp").val();
 							var rStore_name = $("#rStore_name").val();
 
