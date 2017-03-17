@@ -1,11 +1,10 @@
 
-# WARNING: 
-### MetaLIMS is currently under major re-construction. Suggestion by developers is to not pull current version at this time. A formal release will be created when changes have been finalized. Thank you for your understanding. Please email myself if you have any questions (cheinle@ntu.edu.sg) Apologies for any inconvenience. CHEINLE - Oct 15, 2016 
-
-
 # MetaLIMS, A Simple Open-Source Laboratory Information Management System for Small Metagenomic Labs
 
 ## MetaLIMS v2 Installation and Usage
+### Home
+*    [About](https://github.com/cheinle/MetaLIMS/wiki/)     
+
 ### Installation
 *    [Installation Decision Tree](https://github.com/cheinle/MetaLIMS/wiki/installation-decision-tree)
 *    [MetaLIMS v2.0 Hosted Installation (via AWS Lightsail)](https://github.com/cheinle/MetaLIMS/wiki/MetaLIMS--v2.0-Hosted-Installation-(via-AWS-Lightsail))
@@ -16,9 +15,11 @@
 *    [MetaLIMS v2.0 Manual For Basic Usage](https://github.com/cheinle/MetaLIMS/wiki/MetaLIMS-v2.0-Manual-For-Basic-Usage)
 *    [MetaLIMS v2.0 Manual For Developers](https://github.com/cheinle/MetaLIMS/wiki/MetaLIMS-v2.0-Manual-For-Developers)
 
-### Misc   
-*    [metalims.sh](https://github.com/cheinle/MetaLIMS/wiki/metalims.sh)
+### Misc  
 *    [lamp.sh](https://github.com/cheinle/MetaLIMS/wiki/lamp.sh)
+*    [apache_ssl_16.sh](https://github.com/cheinle/MetaLIMS/wiki/apache_ss_16.sh)
+*    [metalims.sh](https://github.com/cheinle/MetaLIMS/wiki/metalims.sh)
+
 
 ##Synopsis
 
@@ -44,7 +45,10 @@ Email bugs and feature requests to: cheinle@ntu.edu.sg
 
 
 ##License
-[Read LICENSE] (https://github.com/cheinle/MetaLIMS/blob/master/license.md)
+[Read LICENSE] (https://github.com/cheinle/MetaLIMS/blob/master/license.md)   
+
+
+Testing
 
 
 

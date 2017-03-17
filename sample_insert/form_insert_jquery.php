@@ -474,21 +474,21 @@ include ($path.'functions/dropDown.php');
 					<LEGEND><b>User Created Fields</b></LEGEND>
 						<input type="text" style="visibility:hidden" class="hidden" name="build_type" id="build_type" value="insert"/>
 						<div class="col-xs-12 col-sm-6 col-md-6">
-							<legend>Required Input Fields</legend>
+							<legend>Required Fields</legend>
 							<div id="required_things1" >
 								
 							</div>
-							<legend>Input Fields</legend>
+							<legend>Non-Required Fields</legend>
 							<div id="user_things1">
 								
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
-							<legend>Required Select Fields</legend>
+							<legend>...</legend>
 							<div id="required_things2">
 								
 							</div>
-							<legend>Select Fields</legend>
+							<legend>...</legend>
 							<div id="user_things2">
 								
 							</div>
