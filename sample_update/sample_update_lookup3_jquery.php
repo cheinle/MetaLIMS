@@ -353,7 +353,8 @@ include('../functions/get_earliest_date.php');
 						WHERE sample_name = ? and time_stamp = ?';
  
                     	if($stmt = $dbc ->prepare($query2)) {                 
-                        	$types = 'sssssssssssdsiisdsiississsssss'.'s'.'s';//s is for the p_sample_name type, other s is for timestamp
+                        	//$types = 'sssssssssssdsiisdsiississsssss'.'s'.'s';//s is for the p_sample_name type, other s is for timestamp
+                        	$types = 'sssssssssssdsddsdsddssisssssss'.'s'.'s';//s is for the p_sample_name type, other s is for timestamp
 	                    	$stmt->bind_param(
 	                        	$types,
 	                        	$p_projName, 

@@ -120,7 +120,9 @@
 					//update sample table 
 					$query = 'UPDATE sample SET d_conc =?, d_extraction_date = ?,dna_extract_kit_name=?,d_volume = ?,d_conc_instrument=?,d_volume_quant =?,dExtrName =?  WHERE sample_name = ?';
 					if($stmt = $dbc ->prepare($query)) {                 
-		                $stmt->bind_param('dssisiss',$p_dConc,$p_d_extr_date,$p_dExtKit,$p_dVol,$p_dInstru,$p_dVol_quant,$p_dExtrName,$p_sample_name);
+		                //$stmt->bind_param('dssisiss',$p_dConc,$p_d_extr_date,$p_dExtKit,$p_dVol,$p_dInstru,$p_dVol_quant,$p_dExtrName,$p_sample_name);
+						$stmt->bind_param('dssdsdss',$p_dConc,$p_d_extr_date,$p_dExtKit,$p_dVol,$p_dInstru,$p_dVol_quant,$p_dExtrName,$p_sample_name);
+		
 		
 		                $stmt -> execute();
 						$rows_affected = $stmt ->affected_rows;

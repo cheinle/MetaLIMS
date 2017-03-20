@@ -62,7 +62,7 @@ include ('../functions/convert_table_names.php');
  				 input_values.push(new_txt);
 	             if(n == 0){
 	             	valid = 'false';
-	             	inputs[i].style.background = "blue";
+	             	inputs[i].style.background = "#f9ae7d";
 				 }else{
 				 	inputs[i].style.background = "white";
 				 }

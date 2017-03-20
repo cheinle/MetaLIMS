@@ -73,15 +73,20 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 			th, td { white-space: wrap; }
 		}
 		@media (min-width: 641px){
-			th, td { white-space: nowrap;}
-			td{overflow:auto;}
+			th, td { white-space: wrap;}
+			/*td{overflow:auto;}
 			div.block{overflow: auto;}
 			div.sample_name{
 				overflow:auto;
 				
+			}*/
+			div.block{
+				max-width:300px;
+				white-space: wrap;
 			}
-			td.notes { 
-			  max-width: 300px; 
+			div.sample_name { 
+			  min-width: 300px; 
+			  white-space: wrap;
 			}
 		}
 
@@ -125,7 +130,7 @@ if((isset($_GET['db_view'])) && ($_GET['db_view'] == 'xls')){
 		{
 			//Prevent collapse of headers
 			$('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
-       			$.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+       			$.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust().fixedColumns().relayout();
     		} );
     		
 			// Setup - add a text input to each footer cell

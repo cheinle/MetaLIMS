@@ -87,7 +87,7 @@ include ('../functions/convert_table_names.php');
 	             if(n == 0){
 	             	if(name != 'select_values'){
 	             		valid = 'false';
-	             		inputs[i].style.background = "blue";
+	             		inputs[i].style.background = "#f9ae7d";
 	             	}
 	             	
 				 }else{

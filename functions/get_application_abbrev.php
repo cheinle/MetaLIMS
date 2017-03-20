@@ -27,7 +27,7 @@ function get_application_abbrev($application,$type){
 		else if($application == 'Transcriptome Sequencing'){
 			RETURN 'T';
 		}
-		else if($application == 'Whole Genome Sequencing'){
+		else if($application == 'Whole genome sequencing'){
 			RETURN 'G';
 		}
 		else if($application == 'PacBio Isolates'){
@@ -62,7 +62,7 @@ function get_application_abbrev($application,$type){
 		else if($application == 'Transcriptome Sequencing'){
 			RETURN 'UPDATE number_of_seq_submissions SET T = ? WHERE sample_name = ?';
 		}
-		else if($application == 'Whole Genome Sequencing'){
+		else if($application == 'Whole genome sequencing'){
 			RETURN 'UPDATE number_of_seq_submissions SET G = ? WHERE sample_name = ?';
 		}
 		else if($application == 'PacBio Isolates'){

@@ -156,7 +156,7 @@ function build_bulk_storage_update_table($stmt,$root){
         for (i2 = 0; i2 < selects.length; i2++) {
         	selected = selects[i2].value;
             if(selected == '0'){
-	        	selects[i2].style.background = "blue";
+	        	selects[i2].style.background = "#f9ae7d";
 	            valid = 'false';
 	        }
 	        else{

@@ -73,8 +73,8 @@ include ('../functions/convert_table_names.php');
 			   		table_value = $('#table').val();
 			   		field_value = $('#column').val();
 			   		if(table_value == '0' || (field_value == '0' || field_value == undefined)){
-			   			$("#table").css({"background-color": "blue"});
-			   			$("#column").css({"background-color": "blue"});
+			   			$("#table").css({"background-color": "#f9ae7d"});
+			   			$("#column").css({"background-color": "#f9ae7d"});
 			   			alert("ERROR: Please Fill In All Invisible Fields");
 			   			event.preventDefault();
 			   		}
@@ -101,8 +101,8 @@ include ('../functions/convert_table_names.php');
 			   		var admin_yn_value = $('#admin_yn').val();
 			   		//alert(admin_yn_value);
 			   		if(table_value == '0' || (field_value == '0' || field_value == undefined)){
-			   			$("#table2").css({"background-color": "blue"});
-			   			$("#column2").css({"background-color": "blue"});
+			   			$("#table2").css({"background-color": "#f9ae7d"});
+			   			$("#column2").css({"background-color": "#f9ae7d"});
 			   			alert("ERROR: Please Fill In All Visible Fields");
 			   			event.preventDefault();
 			   		}

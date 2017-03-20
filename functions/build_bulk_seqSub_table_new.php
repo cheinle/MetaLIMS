@@ -100,7 +100,7 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
 				<td><input type="text" class = "bulkfields" id="<?php echo $mod_sample_name;?>_RIN" name="sample[<?php echo $sample_name; ?>][RIN]" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {echo htmlspecialchars($_SESSION['sample_array'][$sample_name]['RIN']);}?>"></td>
 		<?php }?>			
 		<td>
-		<div id="<?php echo $mod_sample_name;?>_color_checkbox_div">
+		<div id="<?php echo $mod_sample_name;?>_color_checkbox_div" style="margin:2px 0px 10px 10px;height:34px;border-radius: 5px;text-indent: 0.01;">
 		<label class="checkbox-label"><input type="radio" id="<?php echo $mod_sample_name;?>_exists_yes"  class = "checkbox2" name="sample[<?php echo $sample_name; ?>][exists]" value="one" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {if(isset($_SESSION['sample_array'][$sample_name]['exists']) && htmlspecialchars($_SESSION['sample_array'][$sample_name]['exists']) == 'one'){echo "checked='checked'";}}?>">Yes</label>			
 		<label class="checkbox-label"><input type="radio" id="<?php echo $mod_sample_name;?>_exists_no"  class = "checkbox3" name="sample[<?php echo $sample_name; ?>][exists]" value="three" <?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'false') {if(isset($_SESSION['sample_array'][$sample_name]['exists']) && htmlspecialchars($_SESSION['sample_array'][$sample_name]['exists']) == 'three'){echo "checked='checked'";}}?>">No</label>
 		</div>
@@ -120,7 +120,7 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
 		<?php }?>
 																																															 
 		<!---------form validation----->
-		<!--see if anything is not filled in. If it is not, color field blue and don't let the user submit-->
+		<!--see if anything is not filled in. If it is not, color field #f9ae7d and don't let the user submit-->
 					
 		<script type="text/javascript">
 		   function validate(from) {
@@ -157,7 +157,7 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
                                      if(n == 0){
                                      	var input_type = inputs[i].getAttribute("type");
                                      	if(input_type != 'search' ){
-                                     		inputs[i].style.background = "blue";
+                                     		inputs[i].style.background = "#f9ae7d";
                                        	 	valid = 'false';
                                      	}
                                      	
@@ -177,7 +177,7 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
 	                                     	//alert(txt.value);
 	                                     	 if(pattern_well.test(txt) == false){
 	                                     	 	valid = "false";
-	                                     	 	inputs[i].style.background = "blue";	
+	                                     	 	inputs[i].style.background = "#f9ae7d";	
 	                                     	 }else{ inputs[i].style.background = "white";}	
 	                                     };
 	                                     
@@ -188,7 +188,7 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
 	                                     	 var pattern_num = /^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/;	
 	                                     	 if(pattern_num.test(txt) == false){
 	                                     	 	valid = "false";
-	                                     	 	inputs[i].style.background = "blue";	
+	                                     	 	inputs[i].style.background = "#f9ae7d";	
 	                                     	 }else{ inputs[i].style.background = "white";}	
 	                                     };
 	                                     
@@ -199,7 +199,7 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
 	                                     	 var pattern_vol = /^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1})?\s*$/;
 	                                     	 if(pattern_vol.test(txt) == false){
 	                                     	 	valid = "false";
-	                                     	 	inputs[i].style.background = "blue";	
+	                                     	 	inputs[i].style.background = "#f9ae7d";	
 	                                     	 }else{ inputs[i].style.background = "white";}		
 	                                     };
 	                                     
@@ -218,7 +218,7 @@ function build_bulk_seqSub_table_new($array_sample_names,$sample_type,$container
 										color_checkbox_div = document.getElementById(color_checkbox_div);	
 											
 										if((!document.getElementById(exists_name_yes).checked) && (!document.getElementById(exists_name_no).checked)){	
-											color_checkbox_div.style.backgroundColor = "red";
+											color_checkbox_div.style.backgroundColor = "#f9ae7d";
 											valid = 'false';
 										}
 										else{

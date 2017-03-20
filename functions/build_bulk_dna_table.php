@@ -14,7 +14,7 @@ function build_bulk_dna_table($stmt,$root){
 	echo '<pre>';
 	echo '*Notice: Bulk Update will update all samples that have been checkmarked';
 	echo '</pre>';
-	echo '<table id = "datatable_bulk" class ="bulk" style="width:90%">';
+	echo '<table id = "datatable_bulk" name = "datatable_bulk" class ="bulk" style="width:90%">';
 	echo '<button type="button" id="selectAll" class="mini-button" style="float:left;margin-bottom: 0.5%;"><span class="sub"></span> Select All Samples </button>';
 	
 	echo '<thead>';
@@ -126,7 +126,7 @@ function build_bulk_dna_table($stmt,$root){
 	Volume of DNA Elution (ul):
 	</td>
 	<td>
-	<input type="text" name="dVol" class="fields" placeholder="Enter A Volume" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {echo htmlspecialchars($_SESSION['dVol']);} ?>">
+	<input type="text" name="dVol" id="dVol" class="fields" placeholder="Enter A Volume" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {echo htmlspecialchars($_SESSION['dVol']);} ?>">
 	</td>
 	</tr>
 		
@@ -149,7 +149,7 @@ function build_bulk_dna_table($stmt,$root){
 	Volume of DNA Used for Measure DNA Concentration(ul):
 	</td>
 	<td>
-	<input type="text" name="dVol_quant" class="fields" placeholder="Enter A Volume" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {echo htmlspecialchars($_SESSION['dVol_quant']);}  ?>">
+	<input type="text" name="dVol_quant" id="dVol_quant" class="fields" placeholder="Enter A Volume" value="<?php if (isset($_SESSION['submitted']) && $_SESSION['submitted'] == 'true') {echo htmlspecialchars($_SESSION['dVol_quant']);}  ?>">
 	</td>
 	</tr>
 		
@@ -228,12 +228,14 @@ function build_bulk_dna_table($stmt,$root){
 		if(check_this_form() == 'false'){
 			valid = 'false';
 		}	
-		if(valid == 'false'){
-			alert('ERROR: Some inputs are invalid. Please check fields and ensure at least one sample checkbox is checked');
-			return false;
+		
+		if(valid == 'true'){
+			return confirm('Sure You Want To Submit?');
+			
 		}
 		else{
-			return confirm('Sure You Want To Submit?');
+			alert('ERROR: Some inputs are invalid. Please check fields and ensure at least one sample checkbox is checked');
+			return false;
 		}
 	}
     function check_this_form(){
@@ -242,17 +244,15 @@ function build_bulk_dna_table($stmt,$root){
         
          //check that at least one checkbox is selected
         var top_table = document.getElementById("datatable_bulk");
-       	var number_of_samples_checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+        var number_of_samples_checked = $('#datatable_bulk').find('input[type="checkbox"]:checked').length;
         if(number_of_samples_checked < 1){
         	valid = 'false';
         	alert("Warning: Please select checkbox for samples to update");
-        	top_table.style.background = "pink";
+        	top_table.style.background = "#f9ae7d";
         }
         else{
        		top_table.style.background = "white";
         }
-        
-     
 		        
          //check that second table is filled in
         var bottom_table = document.getElementById("bulk");
@@ -262,9 +262,22 @@ function build_bulk_dna_table($stmt,$root){
 	    	
 	    	 var input_value = input_id.value;
 			 if(input_value.length < 1){
-			 	input_id.style.background = "blue";
+			 	valid = 'false';
+			 	input_id.style.background = "#f9ae7d ";
 			 }else{
-			 	input_id.style.background = "white";
+			 	var input_name = input_id.getAttribute("name");
+			 	if(input_name == 'dVol' || input_id == 'dVol_quant'){
+			 		if(isNumeric(input_value) == false){
+						input_id.style.background = "#f9ae7d ";
+					   	valid = 'false';
+					}
+					else{
+	             		input_id.style.background = "white";
+	             	}
+			 	}else{
+			 		input_id.style.background = "white";
+			 	}
+			 	
 			 }
    		 } 
    		 
@@ -274,59 +287,73 @@ function build_bulk_dna_table($stmt,$root){
 	    	
 	    	 var select_value = select_id.value;
 			 if(select_value == 0){
-			 	select_id.style.background = "blue";
+			 	valid = 'false';
+			 	select_id.style.background = "#f9ae7d ";
 			 }else{
 			 	select_id.style.background = "white";
 			 }
    		 } 
 
-		if( $('input[type=radio]:selected').length == 0 ) {
+
+		//check that radio is checked
+		if($('input[name=DNA_sample_exist]:checked').length == 0){
 		    alert('Please select if DNA Extraction Sample Exists.');
-		    bottom_table.style.background = "pink";
+		    valid = 'false';
+		    bottom_table.style.background = "#f9ae7d";
 		}else{
 			bottom_table.style.background = "white";
 		}
         
         //check that all checked have correct input
-       var bulk_form = document.forms[0];
-
-	   var i;
-	   for (i = 0; i < bulk_form.length; i++) {
-	       if (bulk_form[i].checked) {
-	           checkbox_name = bulk_form[i].id;
-
-	           var temp = new Array();
-	           temp = checkbox_name.split("_");
-
-	           var input = document.getElementById(temp[0]+'_dna');
-	           var input_val = input.value;
+	      var bulk_form = document.forms[0];
+	
+		   var i;
+		   for (i = 0; i < bulk_form.length; i++) {
+		       if (bulk_form[i].checked) {
+		           checkbox_name = bulk_form[i].id;
+				   if(checkbox_name != 'orig_sample_exist' && checkbox_name != 'DNA_sample_exist' && checkbox_name != ''){
+				  
+			           var temp = new Array();
+			           temp = checkbox_name.split("_");
 		
-	    		if(input_val == ''){
-		      		input.style.background = "blue";
-		       		valid = 'false';
-		   		}
-			    else{
-		       		
-					if(isNumeric(input_val) == false){
-						alert("ERROR: Value must be a number");
-						input.style.background = "blue";
-					   	valid = 'false';
-					}
-					else{
-	             		input.style.background = "white";
-	             	}
-	       		  	
-			   	}
-		    	
+			           var input = document.getElementById(temp[0]+'_dna');
+			           var input_val = input.value;
+				
+			    		if(input_val == ''){
+				      		input.style.background = "#f9ae7d ";
+				       		valid = 'false';
+				   		}
+					    else{
+				       		
+							if(isNumeric(input_val) == false){
+								input.style.background = "#f9ae7d ";
+							   	valid = 'false';
+							}
+							else{
+			             		input.style.background = "white";
+			             	}
+			       		  	
+					   	}
+					  }
+			    	
+				}
 			}
-		}
-		return valid; 
+			
+	
+			return valid; 
 	}
 	
 	
 	
 	
 	function isNumeric(n) {
-		return !isNaN(parseFloat(n)) && isFinite(n);
+		var value = n;
+		var number_check = value.match(/^\s*(?=.*[0-9])\d{0,3}(?:\.\d{1,2})?\s*$/);
+		if (number_check  == null){
+			alert("Number Must Be 2 Decimal Places Or Less and 3 Digits Or Less");
+            return false;
+		}else{
+			return true;
+		}
 	}
 </script>

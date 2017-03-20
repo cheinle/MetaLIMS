@@ -347,7 +347,7 @@ include('../functions/text_insert_update_storage_info.php');
 		                 var name2 = selects[i2].getAttribute("name");
 		                
 			                 if(selected == '0'){
-			                 	selects[i2].style.backgroundColor = "blue";
+			                 	selects[i2].style.backgroundColor = "#f9ae7d";
 			                    valid = 'false';
 			                 }
 			                 else{
@@ -366,7 +366,7 @@ include('../functions/text_insert_update_storage_info.php');
 		                 //check if your input is empty
 			             var n = txt.length;
 			             if(n == 0){
-			             	inputs[i].style.background = "blue";
+			             	inputs[i].style.background = "#f9ae7d";
 			                valid = 'false';
 		                 }else{
 							inputs[i].style.background = "white";
@@ -393,7 +393,7 @@ include('../functions/text_insert_update_storage_info.php');
 	   	 					
 	 						//check to see if sensor name is already input
 	 						if(seen.contains(sensor_name_value)){
-	 							document.getElementById(sensor_name).style.backgroundColor = 'blue';
+	 							document.getElementById(sensor_name).style.backgroundColor = '#f9ae7d';
 	 							alert("You Have Chosen More Than One Sensor With The Same Name. Please Check Names");
 	 							valid = 'false';
 	 						}
@@ -412,8 +412,8 @@ include('../functions/text_insert_update_storage_info.php');
 
 	   	 					if(start_time_value > end_time_value){
 	   	 						alert("Whoops! Please Check Start And End Times");
-	   	 						document.getElementById(start_time).style.backgroundColor = 'blue';
-	   	 						document.getElementById(end_time).style.backgroundColor = 'blue';
+	   	 						document.getElementById(start_time).style.backgroundColor = '#f9ae7d';
+	   	 						document.getElementById(end_time).style.backgroundColor = '#f9ae7d';
 	   	 						valid = 'false';
 	   	 					}
 	   	 					else{
@@ -427,7 +427,7 @@ include('../functions/text_insert_update_storage_info.php');
 	
 
  							if(!measurement_value.match(/^\s*(?=.*[0-9])\d{0,4}(?:\.\d{1,2})?\s*$/)){
- 								document.getElementById(measurement).style.backgroundColor = 'blue';
+ 								document.getElementById(measurement).style.backgroundColor = '#f9ae7d';
  								valid = 'false'
  								alert("Whoops! Measurement Should Be No More Than 2 Decimal Places And 6 Digits");
  							}
