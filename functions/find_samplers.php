@@ -34,7 +34,7 @@ function find_samplers($sample_name,$table_type){
 			return $dropdown;
 		}
 		else{//view as one string
-			return $string_of_samplers = implode("\n", $array);
+			return $string_of_samplers = implode(";", $array);
 		}
 	}
 	else{
