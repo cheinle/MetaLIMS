@@ -188,6 +188,7 @@ $stmt->close();
 		                  <li><a tabindex="-1" href="'.$root.'admin_tools/add_users.php">Add Users</a></li>
 						  <li><a tabindex="-1" href="'.$root.'admin_tools/update_user_login_info.php">Update User Login</a></li>
 		                </ul>
+		                <li><a tabindex="-1" href="'.$root.'admin_tools/bulk_sample_insert.php">Bulk Sample Insert</a></li>
 		              </li>
 					</ul>
 				</li>';}
