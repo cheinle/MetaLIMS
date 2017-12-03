@@ -37,6 +37,7 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 		//echo "Highest Column: $highestColumn <br>";
 		
 		//  Loop through each row of the worksheet in turn
+		$sample_array = array();
 		for ($row = 2; $row <= $highestRow; $row++){ 
 		    //  Read a row of data into an array
 		    $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
@@ -56,6 +57,7 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 				// Build appropriate extra data above
 				//print_r($rowData);
 			$sample_number = trim($rowData[0][0]);
+			$unformatted_sample_number = $sample_number;
 			if(strlen ($sample_number) == 1){
 				$sample_number = '00'.$sample_number;
 			}elseif(strlen ($sample_number) == 2){
@@ -217,7 +219,9 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 			//$date = $matches[1].'/'.$matches[2].'/'.$matches[3];
 			$date = $reformatted_date;
 			$sample_name = $date.$project_name.$sample_type_id.$sample_number;
-			$sample_sort = $project_name.$sample_number;
+			$sample_sort = $project_name.$unformatted_sample_number;
+			
+			$sample_array[$sample_sort] = $sample_name; //for dna processing
 			
 			
 			//Grab abbreviated project name to create new ID for sequencing submission
@@ -626,11 +630,353 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 			
 			fwrite($myOutFile,"Input sample with sample name: $sample_name ".PHP_EOL);
 		}
+		/*****************************************************************************
+		 * Check for DNA/RNA info sample_array 
+		 * ***************************************************************************/
+		
+		//  Get worksheet dimensions
+		$sheet2 = $objPHPExcel->getSheet(1); 
+		$highestRow2 = $sheet2->getHighestRow(); 
+		$highestColumn2 = $sheet2->getHighestColumn();
+		
+		echo "Highest Row2: $highestRow2 <br>";
+		echo "Highest Column2: $highestColumn2 <br>";
+		
+		//  Loop through each row of the worksheet in turn
+		for ($row2 = 2; $row2 <= $highestRow2; $row2++){ 
+			//  Read a row of data into an array
+			$rowData2 = $sheet2->rangeToArray('A' . $row2 . ':' . $highestColumn2 . $row2,
+											NULL,
+											TRUE,
+											TRUE);
+											
+			$sample_number = $rowData2[0][0];
+			$project_name = $rowData2[0][1];
+			
+			$dna_counter = 0;
+			$rna_counter = 0;
+			if($sample_array[$project_name.$sample_number]){
+				$sample_name = $sample_array[$project_name.$sample_number];
+				
+				$dna_extraction_date = $rowData2[0][2];
+				if($dna_extraction_date != ''){$dna_counter++;}
+				
+				$dna_extraction_kit = $rowData2[0][3];
+				if($dna_extraction_kit != ''){$dna_counter++;}
+				
+				$dna_conc = $rowData2[0][4];
+				if($dna_conc != ''){$dna_counter++;}
+				
+				$dna_volume = $rowData2[0][5];
+				if($dna_volume != ''){$dna_counter++;}
+				
+				$dna_conc_instrument = $rowData2[0][6];
+				if($dna_conc_instrument != ''){$dna_counter++;}
+				
+				$dna_volume_quant = $rowData2[0][7];
+				if($dna_volume_quant != ''){$dna_counter++;}
+				
+				$dna_extractor_name = $rowData2[0][8];
+				if($dna_extractor_name != ''){$dna_counter++;}
+				
+				$dna_storage_freezer = $rowData2[0][9];
+				if($dna_storage_freezer != ''){$dna_counter++;}
+				
+				$dna_storage_drawer = $rowData2[0][10];
+				if($dna_storage_drawer != ''){$dna_counter++;}
+				
+				$dna_storage_exists = $rowData2[0][11];
+				if($dna_storage_exists != ''){$dna_counter++;}
+				
+				if($dna_counter > 0 && $dna_counter < 10){
+					$insert_check = 'false';
+					fwrite($myErrorFile, "All fields for DNA extraction must be filled in. Please check form for sample : $sample_name".PHP_EOL);
+				}
+				
+				if($dna_counter == 10){
+					
+					$date_format = 'd-M-y'; 
+					$date_object_start = DateTime::createFromFormat($date_format, $dna_extraction_date);
+					$dna_extraction_date = $date_object_start->format('Y-m-d'); 	
+					
+					// Check dna_extraction_kit exists
+					$stmt = $dbc->prepare("SELECT d_kit_name FROM dna_extraction WHERE d_kit_name = ? AND visible = 1");
+					$stmt->bind_param("s", $dna_extraction_kit);		
+					if ($stmt->execute()){
+						$stmt->store_result();
+				    	if($stmt->num_rows <= 0){
+				    		fwrite($myErrorFile,"Insert Failure: DNA extraction kit ".$dna_extraction_kit." does not exist. Please manually enter into database and retry".PHP_EOL);
+				    		$insert_check = 'false';
+				    	}
+					} 
+					$stmt -> close();
+					
+					// Check dna_conc_instrument exists
+					$stmt = $dbc->prepare("SELECT kit_name FROM quant_instruments WHERE kit_name = ? AND visible = 1");
+					$stmt->bind_param("s", $dna_conc_instrument);		
+					if ($stmt->execute()){
+						$stmt->store_result();
+				    	if($stmt->num_rows <= 0){
+				    		fwrite($myErrorFile,"Insert Failure: DNA Quantitation Instrument ".$dna_conc_instrument." does not exist. Please manually enter into database and retry".PHP_EOL);
+				    		$insert_check = 'false';
+				    	}
+					} 
+					$stmt -> close();
+					
+					// Check if numeric
+					if(!is_numeric($dna_conc)){
+						$insert_check = 'false';
+						fwrite($myErrorFile,"Insert Failure: DNA concentration must be a number for sample $sample_name".PHP_EOL);
+					}
+					if(!is_numeric($dna_volume)){
+						$insert_check = 'false';
+						fwrite($myErrorFile,"Insert Failure: DNA volume must be a number for sample $sample_name".PHP_EOL);
+					}
+					if(!is_numeric($dna_volume_quant)){
+						$insert_check = 'false';
+						fwrite($myErrorFile,"Insert Failure: DNA volume for quantitation must be a number for sample $sample_name".PHP_EOL);
+					}
+				
+					
+					// Update sample table for dna info
+					$query = "UPDATE sample SET d_extraction_date = ?, dna_extract_kit_name = ?, d_conc = ?, d_volume = ?, d_conc_instrument =?, d_volume_quant = ?, dExtrName = ? WHERE sample_name = ?";
+					if($stmt = $dbc ->prepare($query)) {                 
+						$stmt->bind_param('ssddsdss',$dna_extraction_date, $dna_extraction_kit, $dna_conc ,$dna_volume,$dna_conc_instrument,$dna_volume_quant ,$dna_extractor_name ,$sample_name);
+						if($stmt -> execute()){
+							$rows_affected = $stmt ->affected_rows;
+							$stmt -> close();
+							if($rows_affected < 0){	
+									$insert_check = 'false';
+									fwrite($myErrorFile,"Insert Failure: Unable to insert DNA information for sample1 $sample_name".PHP_EOL);
+								}
+							}
+						else{
+							$insert_check = 'false';
+							fwrite($myErrorFile,"Insert Failure: Unable to insert DNA information for sample2 $sample_name".PHP_EOL);
+						}
+						//$stmt -> close();
+					}
+					else{
+						$insert_check = 'false';
+						fwrite($myErrorFile,"Insert Failure: Unable to insert DNA information for sample3 $sample_name".PHP_EOL);;
+					}
+					
+					
+					// Check if freezer and drawer exist
+					$stmt = $dbc->prepare("SELECT drawer_id, freezer_id FROM freezer_drawer WHERE drawer_id = ? AND freezer_id = ? AND visible_flag = 1");
+					$stmt->bind_param("ss", $dna_storage_drawer,$dna_storage_freezer);		
+					if ($stmt->execute()){
+						$stmt->store_result();
+				    	if($stmt->num_rows <= 0){
+				    		fwrite($myErrorFile,"Insert Failure: Freezer ".$dna_storage_freezer." & Drawer Name ".$dna_storage_drawer." do not exist. Please enter manually or check spelling".PHP_EOL);
+				    		$insert_check = 'false';
+				    	}
+					} 
+					$stmt -> close();
+					
+					
+					// Insert sample_name into storage_info table  with 'dna' storage info
+					$dna_storage = $dna_storage_freezer.','.$dna_storage_drawer;
+					if($dna_storage_exists == 'Y' || $dna_storage_exists == 'y'){
+						$dna_sample_exists = 'one';
+					}elseif($dna_storage_exists == 'N' || $dna_storage_exists == 'n'){
+						$dna_sample_exists = 'three';
+					}else{
+						$insert_check = 'false';
+						fwrite($myErrorFile,"Insert Failure: Sample Exists flag must be Y/y or N/n".PHP_EOL);
+					}
+					
+					if($insert_check == 'true'){
+						$query = "UPDATE storage_info SET dna_extr = ?, DNA_sample_exists = ? WHERE sample_name = ?";
+						if($stmt = $dbc ->prepare($query)) {                 
+							$stmt->bind_param('sss',$dna_storage,$dna_sample_exists,$sample_name);
+							if($stmt -> execute()){
+								$rows_affected = $stmt ->affected_rows;
+								$stmt -> close();
+								if($rows_affected < 0){	
+										$insert_check = 'false';
+										fwrite($myErrorFile,"Insert Failure: unable to insert DNA information for sample $sample_name".PHP_EOL);
+									}
+								}
+							else{
+								$insert_check = 'false';
+								fwrite($myErrorFile,"Insert Failure: unable to insert DNA information for sample $sample_name".PHP_EOL);
+							}
+						}
+						else{
+							$insert_check = 'false';
+							fwrite($myErrorFile,"Insert Failure: unable to insert DNA information for sample $sample_name".PHP_EOL);;
+						}
+						//$stmt->close();
+					}
+							
+				}
+				
+				//RNA
+				$rna_extraction_date = $rowData2[0][12];
+				if($rna_extraction_date != ''){$rna_counter++;}
+				
+				$rna_extraction_kit = $rowData2[0][13];
+				if($rna_extraction_kit != ''){$rna_counter++;}
+				
+				$rna_conc = $rowData2[0][14];
+				if($rna_conc != ''){$rna_counter++;}
+				
+				$rna_volume = $rowData2[0][15];
+				if($rna_volume != ''){$rna_counter++;}
+				
+				$rna_conc_instrument = $rowData2[0][16];
+				if($rna_conc_instrument != ''){$rna_counter++;}
+				
+				$rna_volume_quant = $rowData2[0][17];
+				if($rna_volume_quant != ''){$rna_counter++;}
+				
+				$rna_extractor_name = $rowData2[0][18];
+				if($rna_extractor_name != ''){$rna_counter++;}
+				
+				$rna_storage_freezer = $rowData2[0][19];
+				if($rna_storage_freezer != ''){$rna_counter++;}
+				
+				$rna_storage_drawer = $rowData2[0][20];
+				if($rna_storage_drawer != ''){$rna_counter++;}
+				
+				$rna_storage_exists = $rowData2[0][21];
+				if($rna_storage_exists != ''){$rna_counter++;}
+				
+				if($rna_counter > 0 && $rna_counter < 10){
+					$insert_check = 'false';
+					fwrite($myErrorFile, "All fields for RNA extraction must be filled in. Please check form for sample : $sample_name".PHP_EOL);
+				}
+				
+				if($rna_counter == 10){
+					
+					$date_format = 'd-M-y'; 
+					$date_object_start = DateTime::createFromFormat($date_format, $rna_extraction_date);
+					$rna_extraction_date = $date_object_start->format('Y-m-d'); 	
+					
+					// Check rna_extraction_kit exists
+					$stmt = $dbc->prepare("SELECT r_kit_name FROM rna_extraction WHERE r_kit_name = ? AND visible = 1");
+					$stmt->bind_param("s", $rna_extraction_kit);		
+					if ($stmt->execute()){
+						$stmt->store_result();
+				    	if($stmt->num_rows <= 0){
+				    		fwrite($myErrorFile,"Insert Failure: RNA extraction kit ".$rna_extraction_kit." does not exist. Please manually enter into database and retry".PHP_EOL);
+				    		$insert_check = 'false';
+				    	}
+					} 
+					$stmt -> close();
+					
+					// Check rna_conc_instrument exists
+					$stmt = $dbc->prepare("SELECT kit_name FROM quant_instruments WHERE kit_name = ? AND visible = 1");
+					$stmt->bind_param("s", $rna_conc_instrument);		
+					if ($stmt->execute()){
+						$stmt->store_result();
+				    	if($stmt->num_rows <= 0){
+				    		fwrite($myErrorFile,"Insert Failure: RNA Quantitation Instrument ".$rna_conc_instrument." does not exist. Please manually enter into database and retry".PHP_EOL);
+				    		$insert_check = 'false';
+				    	}
+					} 
+					$stmt -> close();
+					
+					//Check if numeric
+					if(!is_numeric($rna_conc)){
+						$insert_check = 'false';
+						fwrite($myErrorFile,"Insert Failure: RNA concentration must be a number for sample $sample_name".PHP_EOL);
+					}
+					if(!is_numeric($rna_volume)){
+						$insert_check = 'false';
+						fwrite($myErrorFile,"Insert Failure: RNA volume must be a number for sample $sample_name".PHP_EOL);
+					}
+					if(!is_numeric($rna_volume_quant)){
+						$insert_check = 'false';
+						fwrite($myErrorFile,"Insert Failure: RNA volume for quantitation must be a number for sample $sample_name".PHP_EOL);
+					}
+				
+					
+					//Update sample table for rna info
+					$query = "UPDATE sample SET r_extraction_date = ?, rna_extract_kit_name = ?, r_conc = ?, r_volume = ?, r_conc_instrument =?, r_volume_quant = ?, rExtrName = ? WHERE sample_name = ?";
+					if($stmt = $dbc ->prepare($query)) {                 
+						$stmt->bind_param('ssddsdss',$rna_extraction_date, $rna_extraction_kit, $rna_conc ,$rna_volume,$rna_conc_instrument,$rna_volume_quant ,$rna_extractor_name ,$sample_name);
+						if($stmt -> execute()){
+							$rows_affected = $stmt ->affected_rows;
+							$stmt -> close();
+							if($rows_affected < 0){	
+									$insert_check = 'false';
+									fwrite($myErrorFile,"Insert Failure: Unable to insert RNA information for sample $sample_name".PHP_EOL);
+								}
+							}
+						else{
+							$insert_check = 'false';
+							fwrite($myErrorFile,"Insert Failure: Unable to insert RNA information for sample $sample_name".PHP_EOL);
+						}
+					}
+					else{
+						$insert_check = 'false';
+						fwrite($myErrorFile,"Insert Failure: Unable to insert RNA information for sample $sample_name".PHP_EOL);;
+					}
+					
+					// Check if freezer and drawer exist
+					$stmt = $dbc->prepare("SELECT drawer_id, freezer_id FROM freezer_drawer WHERE drawer_id = ? AND freezer_id = ? AND visible_flag = 1");
+					$stmt->bind_param("ss", $rna_storage_drawer,$rna_storage_freezer);		
+					if ($stmt->execute()){
+						$stmt->store_result();
+				    	if($stmt->num_rows <= 0){
+				    		fwrite($myErrorFile,"Insert Failure: Freezer ".$rna_storage_freezer." & Drawer Name ".$rna_storage_drawer." do not exist. Please enter manually or check spelling".PHP_EOL);
+				    		$insert_check = 'false';
+				    	}
+					} 
+					$stmt -> close();
+					
+					
+					// Insert sample_name into storage_info table  with 'rna' storage info
+					$rna_storage = $rna_storage_freezer.','.$rna_storage_drawer;
+					if($rna_storage_exists == 'Y' || $rna_storage_exists == 'y'){
+						$rna_sample_exists = 'one';
+					}elseif($rna_storage_exists == 'N' || $rna_storage_exists == 'n'){
+						$rna_sample_exists = 'three';
+					}else{
+						$insert_check = 'false';
+						fwrite($myErrorFile,"Insert Failure: Sample Exists flag must be Y/y or N/n".PHP_EOL);
+					}
+					
+					if($insert_check == 'true'){
+						$query = "UPDATE storage_info SET rna_extr = ?, RNA_sample_exists = ? WHERE sample_name = ?";
+						if($stmt = $dbc ->prepare($query)) {                 
+							$stmt->bind_param('sss',$rna_storage,$rna_sample_exists,$sample_name);
+							if($stmt -> execute()){
+								$rows_affected = $stmt ->affected_rows;
+								$stmt -> close();
+								if($rows_affected < 0){	
+										$insert_check = 'false';
+										fwrite($myErrorFile,"Insert Failure: unable to insert RNA information for sample $sample_name".PHP_EOL);
+									}
+								}
+							else{
+								$insert_check = 'false';
+								fwrite($myErrorFile,"Insert Failure: unable to insert RNA information for sample $sample_name".PHP_EOL);
+							}
+						}
+						else{
+							$insert_check = 'false';
+							fwrite($myErrorFile,"Insert Failure: unable to insert RNA information for sample $sample_name".PHP_EOL);;
+						}
+						//$stmt->close();
+					}
+							
+				}
+
+			}else{
+				$insert_check = 'false';
+				fwrite($myErrorFile,"ERROR: No sample was created for project $project_name and sample number $sample_number. Unable to insert DNA/RNA info. Please check file".PHP_EOL);
+			}
+		}
+
+		//$insert_check = 'false'; //for testing
+		
 		
 		/*****************************************************************************
 		 * Do One Last Check And Commit If You Had No Errors
 		 * ***************************************************************************/
-		
 		if($insert_check == 'true'){
 			$dbc->commit();
 			return 'Fini!';
