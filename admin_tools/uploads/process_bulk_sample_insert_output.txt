@@ -1,0 +1,5 @@
+Input sample with sample name: 2017/11/27first-projectA073 
+Input sample with sample name: 2017/11/27first-projectA074 
+Input sample with sample name: 2017/11/27first-projectW075 
+Input sample with sample name: 2017/11/27first-projectW076 
+Input sample with sample name: 2017/11/27first-projectW077 
