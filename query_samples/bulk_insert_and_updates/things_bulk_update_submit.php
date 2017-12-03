@@ -6,7 +6,7 @@
 	//you need your thing id
     $sample_array=$_POST['sample'];
 	$thing_id = htmlspecialchars($_POST['thing_id']);
-	echo "thingId".$thing_id;
+	//echo "thingId".$thing_id;
 	echo '<div class="page-header">
 			<h3>Samples Updated</h3>	
 			</div>';
@@ -34,12 +34,19 @@
 					$p_sample_name = $sample_name;
 					$p_thing_value = $value['thing'];
 					
+					$thing_set_query = "INSERT INTO thing_storing
+					  (thing_value, sample_name, thing_id)
+					VALUES
+					  (?, ?, ?)
+					ON DUPLICATE KEY UPDATE
+					  thing_value = (?)";
+					
 
-					$thing_set_query = "UPDATE thing_storing SET thing_value = ? WHERE sample_name = ? AND thing_id = ?";
+					//$thing_set_query = "UPDATE thing_storing SET thing_value = ? WHERE sample_name = ? AND thing_id = ?";
 
 					if($thing_stmt = $dbc ->prepare($thing_set_query)) {
 						
-						$thing_stmt->bind_param('ssi',$p_thing_value, $p_sample_name,$thing_id);
+						$thing_stmt->bind_param('ssis',$p_thing_value, $p_sample_name,$thing_id,$p_thing_value);
 
 						if($thing_stmt -> execute()){
 						
@@ -56,6 +63,7 @@
 							throw new Exception("Execution Error: Unable To Update User Created Info");	
 						}
 					}else{
+						echo mysqli_error($dbc);
 						throw new Exception("Unable To Prepare User Created Info");	
 					}
 				}
