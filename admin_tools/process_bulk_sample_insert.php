@@ -252,8 +252,9 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 			// Get username and update entered by with
 			$entered_by = $_SESSION['first_name'].' '.$_SESSION['last_name'];
 			
-			//Insert data into db. Use prepared statement 
-			$stmt2 = $dbc -> prepare("INSERT INTO sample (
+			if($insert_check = 'true'){
+				//Insert data into db. Use prepared statement 
+				$stmt2 = $dbc -> prepare("INSERT INTO sample (
 														sample_name,
 														sample_num,
 														barcode,
@@ -269,18 +270,19 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 														sample_sort,
 														seq_id
 														) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-						
-			if(!$stmt2){
-				$insert_check = 'false';
-				throw new Exception("Prepare Failure: Unable To Insert Into Main Sample Table");	
-			}else{
-				$stmt2 -> bind_param('sissssssssssss',$sample_name,$sample_number,$barcode,$project_name,$location,$relative_location,$media_type,$collector_names,$sample_type_id,$notes,$orig_time_stamp,$entered_by,$sample_sort,$seq_id);
-				if(!$stmt2 -> execute()){
+							
+				if(!$stmt2){
 					$insert_check = 'false';
-					fwrite($myErrorFile,"Execution Failure: Unable To Insert Into Main Sample Table ".PHP_EOL);
-					throw new Exception("Execution Failure: Unable To Insert Into Main Sample Table");
-				}
-			}	
+					throw new Exception("Prepare Failure: Unable To Insert Into Main Sample Table");	
+				}else{
+					$stmt2 -> bind_param('sissssssssssss',$sample_name,$sample_number,$barcode,$project_name,$location,$relative_location,$media_type,$collector_names,$sample_type_id,$notes,$orig_time_stamp,$entered_by,$sample_sort,$seq_id);
+					if(!$stmt2 -> execute()){
+						$insert_check = 'false';
+						fwrite($myErrorFile,"Execution Failure: Unable To Insert Into Main Sample Table ".PHP_EOL);
+						throw new Exception("Execution Failure: Unable To Insert Into Main Sample Table");
+					}
+				}	
+			}
 			
 			
 			// If sample name was able to be built, check freezer and drawer exist and put insert to freezer_drawer table
@@ -531,29 +533,30 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 					$p_time = round($time,4);
 				}
 				
-				
-				$p_my_samp_name = trim($p_my_samp_name);
-				$query_my_samp = "INSERT INTO sample_sampler (sample_name, sampler_name, start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)";
-				$stmt_my_samp = $dbc -> prepare($query_my_samp);
-				if(!$stmt_my_samp){
-					throw new Exception("Prepare Failure: Unable To Insert Sample Sampler");	
-				}
-				else{
-					$stmt_my_samp -> bind_param('ssssd', $sample_name,$p_my_samp_name,$start,$end,$p_time);
-					if($stmt_my_samp -> execute()){
-						$rows_affected_my_samp = $stmt_my_samp ->affected_rows;
-						$stmt_my_samp -> close();
-						//check if add was successful or not. Tell the user
-				   		if($rows_affected_my_samp <= 0){
-							$insert_check = 'false';
+				if($insert_check == 'true'){
+					$p_my_samp_name = trim($p_my_samp_name);
+					$query_my_samp = "INSERT INTO sample_sampler (sample_name, sampler_name, start_date_time,end_date_time,total_date_time) VALUES (?,?,?,?,?)";
+					$stmt_my_samp = $dbc -> prepare($query_my_samp);
+					if(!$stmt_my_samp){
+						throw new Exception("Prepare Failure: Unable To Insert Sample Sampler");	
+					}
+					else{
+						$stmt_my_samp -> bind_param('ssssd', $sample_name,$p_my_samp_name,$start,$end,$p_time);
+						if($stmt_my_samp -> execute()){
+							$rows_affected_my_samp = $stmt_my_samp ->affected_rows;
+							$stmt_my_samp -> close();
+							//check if add was successful or not. Tell the user
+					   		if($rows_affected_my_samp <= 0){
+								$insert_check = 'false';
+								fwrite($myErrorFile, "An Error Occurred: No sampler info added. Please check date/time format: $sample_name $p_my_samp_name $start $end".PHP_EOL);
+								$insert_check = 'false';
+							}
+						}
+						else{
+							echo mysqli_error($dbc);
 							fwrite($myErrorFile, "An Error Occurred: No sampler info added. Please check date/time format: $sample_name $p_my_samp_name $start $end".PHP_EOL);
 							$insert_check = 'false';
 						}
-					}
-					else{
-						echo mysqli_error($dbc);
-						fwrite($myErrorFile, "An Error Occurred: No sampler info added. Please check date/time format: $sample_name $p_my_samp_name $start $end".PHP_EOL);
-						$insert_check = 'false';
 					}
 				}
 			}
@@ -639,8 +642,8 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 		$highestRow2 = $sheet2->getHighestRow(); 
 		$highestColumn2 = $sheet2->getHighestColumn();
 		
-		echo "Highest Row2: $highestRow2 <br>";
-		echo "Highest Column2: $highestColumn2 <br>";
+		//echo "Highest Row2: $highestRow2 <br>";
+		//echo "Highest Column2: $highestColumn2 <br>";
 		
 		//  Loop through each row of the worksheet in turn
 		for ($row2 = 2; $row2 <= $highestRow2; $row2++){ 
