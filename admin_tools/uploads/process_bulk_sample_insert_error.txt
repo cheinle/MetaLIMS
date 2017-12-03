@@ -1,5 +1,6 @@
-Insert Failure: Sample Type 'Air' does not exist. Please manually enter into database and retry
-exception 'Exception' with message 'Execution Failure: Unable To Insert Into Main Sample Table' in C:\xampp\htdocs\series\dynamic\metaLIMS\admin_tools\process_bulk_sample_insert.php:226
+Insert Failure: Sample Number 057 exists for project first-project .Please check sample number 
+Execution Failure: Unable To Insert Into Main Sample Table 
+exception 'Exception' with message 'Execution Failure: Unable To Insert Into Main Sample Table' in C:\xampp\htdocs\series\dynamic\metaLIMS\admin_tools\process_bulk_sample_insert.php:277
 Stack trace:
-#0 C:\xampp\htdocs\series\dynamic\metaLIMS\admin_tools\bulk_sample_insert.php(157): bulk_sample_insert_parse('xls', 'C:/xampp/htdocs...', '5c672', 'C:/xampp/htdocs...', Object(mysqli))
+#0 C:\xampp\htdocs\series\dynamic\metaLIMS\admin_tools\bulk_sample_insert.php(157): bulk_sample_insert_parse('xls', 'C:/xampp/htdocs...', 'd8f50', 'C:/xampp/htdocs...', Object(mysqli))
 #1 {main} 
