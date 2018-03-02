@@ -974,7 +974,62 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 			}
 		}
 
-		//$insert_check = 'false'; //for testing
+		/*****************************************************************************
+		 * Check for User Defined Field info sample_array 
+		 * ***************************************************************************/
+		
+		//  Get worksheet dimensions
+		$sheet3 = $objPHPExcel->getSheet(2); 
+		$highestRow3 = $sheet3->getHighestRow(); 
+		$highestColumn3 = $sheet3->getHighestColumn();
+		$userThings = array();
+		
+		//  Loop through each row of the worksheet in turn
+		for ($row3 = 1; $row3 <= $highestRow3; $row3++){ 
+			//  Read a row of data into an array
+			$rowData3 = $sheet3->rangeToArray('A' . $row3 . ':' . $highestColumn3 . $row3,
+											NULL,
+											TRUE,
+											TRUE);
+											
+			// Check headers - checking if names of headers match up with existing user defined thing							
+			if($row3 == 1){
+				foreach($rowData3 as $key => $value){ //go through each column
+					$userThingCheck = userThingValidation($value);
+					if($userThingCheck != 'Error' && $userThingCheck != ''){
+						$thing_pieces = explode(":",$userThingCheck);
+						if(exists($thing_pieces[0])){
+							$userThings[$value]['type'] = $thing_pieces[0];
+						}else{
+							//////throw error
+						}
+						
+						if(exists($thing_pieces[1])){
+							$userThings[$value]['required'] = $thing_pieces[1];
+						}else{
+							////throw an error
+						}
+						
+					}
+				}
+				
+			}else{
+				// Process rows data and insert
+				/*$sample_number = $rowData3[0][0];
+				$project_name = $rowData3[0][1];
+				
+				if($sample_array[$project_name.$sample_number]){
+					$sample_name = $sample_array[$project_name.$sample_number];
+					
+					$dna_extraction_date = $rowData3[0][2];
+					if($dna_extraction_date != ''){$dna_counter++;}
+				}*/
+			}
+											
+			
+		}
+		
+		$insert_check = 'false'; //for testing
 		
 		
 		/*****************************************************************************
