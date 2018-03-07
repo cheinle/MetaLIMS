@@ -33,6 +33,7 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 		$highestRow = $sheet->getHighestRow(); 
 		$highestColumn = $sheet->getHighestColumn();
 		
+		
 		//echo "Highest Row: $highestRow <br>";
 		//echo "Highest Column: $highestColumn <br>";
 		
@@ -221,9 +222,11 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 			$sample_name = $date.$project_name.$sample_type_id.$sample_number;
 			$sample_sort = $project_name.$unformatted_sample_number;
 			
+			
 			$sample_array[$sample_sort] = $sample_name; //for dna processing
-			
-			
+		}	
+		
+	/*
 			//Grab abbreviated project name to create new ID for sequencing submission
 			$stmt_sid= $dbc->prepare("SELECT seq_id_start FROM project_name WHERE project_name = ?");
 			$stmt_sid -> bind_param('s', $project_name);
@@ -632,21 +635,23 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 			}
 			
 			fwrite($myOutFile,"Input sample with sample name: $sample_name ".PHP_EOL);
-		}
+		}*/
 		/*****************************************************************************
 		 * Check for DNA/RNA info sample_array 
 		 * ***************************************************************************/
 		
 		//  Get worksheet dimensions
-		$sheet2 = $objPHPExcel->getSheet(1); 
+		/*$sheet2 = $objPHPExcel->getSheet(1); 
 		$highestRow2 = $sheet2->getHighestRow(); 
 		$highestColumn2 = $sheet2->getHighestColumn();
+		*/
+		
 		
 		//echo "Highest Row2: $highestRow2 <br>";
 		//echo "Highest Column2: $highestColumn2 <br>";
 		
 		//  Loop through each row of the worksheet in turn
-		for ($row2 = 2; $row2 <= $highestRow2; $row2++){ 
+		/*for ($row2 = 2; $row2 <= $highestRow2; $row2++){ 
 			//  Read a row of data into an array
 			$rowData2 = $sheet2->rangeToArray('A' . $row2 . ':' . $highestColumn2 . $row2,
 											NULL,
@@ -972,7 +977,7 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 				$insert_check = 'false';
 				fwrite($myErrorFile,"ERROR: No sample was created for project $project_name and sample number $sample_number. Unable to insert DNA/RNA info. Please check file".PHP_EOL);
 			}
-		}
+		}*/
 
 		/*****************************************************************************
 		 * Check for User Defined Field info sample_array 
@@ -991,39 +996,90 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 											NULL,
 											TRUE,
 											TRUE);
-											
+			
+					
 			// Check headers - checking if names of headers match up with existing user defined thing							
 			if($row3 == 1){
-				foreach($rowData3 as $key => $value){ //go through each column
-					$userThingCheck = userThingValidation($value);
-					if($userThingCheck != 'Error' && $userThingCheck != ''){
-						$thing_pieces = explode(":",$userThingCheck);
-						if(exists($thing_pieces[0])){
-							$userThings[$value]['type'] = $thing_pieces[0];
+				//foreach($rowData3 as $key => $value){ //go through each column
+				foreach($rowData3[0] as $sub_key => $sub_value){ 
+					//echo "key:$sub_key<br>";
+					//echo "value:$sub_value<br>";
+
+				
+					$userThingCheck = userThingValidation($dbc,$sub_value);
+					if($userThingCheck == 'FALSE'){
+						//Throw error? 
+					}else{
+						
+						echo "user thing check: $userThingCheck<br>";
+						$thing_pieces = explode("+",$userThingCheck);
+
+						if(isset($thing_pieces[0])){
+							$userThings[$sub_key]['thing_id'] = $thing_pieces[0];
 						}else{
 							//////throw error
 						}
 						
-						if(exists($thing_pieces[1])){
-							$userThings[$value]['required'] = $thing_pieces[1];
+						if(isset($thing_pieces[1])){
+							$userThings[$sub_key]['label'] = $thing_pieces[1];
+						}else{
+							//////throw error
+						}
+						
+						if(isset($thing_pieces[2])){
+							$userThings[$sub_key]['type'] = $thing_pieces[2];
+						}else{
+							//////throw error
+						}
+						
+						if(isset($thing_pieces[3])){
+							$userThings[$sub_key]['required'] = $thing_pieces[3];
 						}else{
 							////throw an error
 						}
 						
+						if($thing_pieces[1] == 'select'){
+							if(isset($thing_pieces[4])){
+								$userThings[$sub_key]['select_options'] = $thing_pieces[4];
+							}else{
+								////throw an error
+							}
+						}
+
 					}
+
 				}
 				
 			}else{
 				// Process rows data and insert
-				/*$sample_number = $rowData3[0][0];
+				$sample_number = $rowData3[0][0];
 				$project_name = $rowData3[0][1];
 				
-				if($sample_array[$project_name.$sample_number]){
-					$sample_name = $sample_array[$project_name.$sample_number];
-					
-					$dna_extraction_date = $rowData3[0][2];
-					if($dna_extraction_date != ''){$dna_counter++;}
-				}*/
+				if(isset($sample_array[$project_name.$sample_number])){
+					foreach($rowData3[0] as $sub_key => $sub_value){ 
+					 	if(isset($userThings[$sub_key]['label'])){
+					 		//echo "key:$sub_key<br>";
+							//echo "value:$sub_value<br>";
+							$label = $userThings[$sub_key]['label'];
+							$tid = $userThings[$sub_key]['thing_id'];
+							$required = $userThings[$sub_key]['required'];
+							$type = $userThings[$sub_key]['type'];
+							if($type == 'select'){
+								$select_options = $userThings[$sub_key]['select_options'];
+							}
+							
+							//Check if values are correct according to type
+							$sample_name = $sample_array[$project_name.$sample_number];
+							echo "Sample Name = $sample_name<br>";
+							echo "Thing label:".$label."<br>";
+							echo "Thing id:".$tid."<br>";
+							echo "Thing required:".$required."<br>";
+							echo "Thing type:".$type."<br>";
+							echo "value:$sub_value<br>";
+					 	}
+
+					}
+				}
 			}
 											
 			
@@ -1055,5 +1111,26 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 	}
 	fclose($myErrorFile);
 	fclose($myLogFile);
+}
+
+function userThingvalidation($dbc,$thing_name){
+	$thing_name = trim($thing_name);
+
+	$check = 'FALSE';
+	$stmt = $dbc->prepare("SELECT thing_id,label_name,type,required,select_values FROM create_user_things WHERE label_name = ? AND visible = 1");
+	$stmt -> bind_param('s', $thing_name);
+	if ($stmt->execute()){
+		$stmt->bind_result($thing_id,$label,$type,$required,$select_values);
+		while ($stmt->fetch()){
+			$check = $thing_id."+".$label."+".$type."+".$required."+".$select_values;   		
+		}
+	} 
+	else {
+		die('execute() failed: ' . htmlspecialchars($stmt->error));
+	}
+	$stmt -> close();
+	
+	return $check;
+	
 }
 ?>
