@@ -55,8 +55,8 @@ ini_set('display_startup_errors', TRUE);
 		<div class="page-header">
 			<strong>Important Instructions & Notes:</strong><br>
 			(BETA)
-			<i>This function is used to bulk insert samples using the existing excel template <a href="uploads/bulk_sample_insert_template.xls"> download here</a> Form copies format of Sample Insert Form's Collection Info tab. Function is still in testing phase and built as a request from user. Tested on Window's machine<br></i>
-			<strong>Warning: </strong>&nbsp All Projects, Locations, Relative Locations, Media Types, Sample Types, Storage Locations, & Samplers must already exist in MetaLIMS (please manually enter if needed). Sample date is taken from first sampler date given<br>
+			<i>This function is used to bulk insert samples using the existing excel template <a href="bulk_sample_insert_template.xls"> download here</a> Form copies format of Sample Insert Form's Collection Info tab. Function is still in testing phase and built as a request from user. Tested on Window's machine<br></i>
+			<strong>Warning: </strong>&nbsp All Projects, Locations, Relative Locations, Media Types, Sample Types, Storage Locations, & Samplers must already exist in MetaLIMS (please manually enter if needed). Sample date is taken from first sampler date given. User created fields must be named exactly the same as in database. Reminder: Please do not use '+' sign or ';' in user created field names<br>
 		</div>
 
 		<!--Paragraph for error message-->
