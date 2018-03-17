@@ -55,8 +55,8 @@ ini_set('display_startup_errors', TRUE);
 		<div class="page-header">
 			<strong>Important Instructions & Notes:</strong><br>
 			(BETA)
-			<i>This function is used to bulk insert samples using the existing excel template <a href="uploads/bulk_sample_insert_template.xls"> download here</a> Form copies format of Sample Insert Form's Collection Info tab. Function is still in testing phase and built as a request from user. Tested on Window's machine<br></i>
-			<strong>Warning: </strong>&nbsp All Projects, Locations, Relative Locations, Media Types, Sample Types, Storage Locations, & Samplers must already exist in MetaLIMS (please manually enter if needed). Sample date is taken from first sampler date given<br>
+			<i>This function is used to bulk insert samples using the existing excel template <a href="bulk_sample_insert_template.xls"> download here</a> Form copies format of Sample Insert Form's Collection Info tab. Function is still in testing phase and built as a request from user. Tested on Window's machine<br></i>
+			<strong>Warning: </strong>&nbsp All Projects, Locations, Relative Locations, Media Types, Sample Types, Storage Locations, & Samplers must already exist in MetaLIMS (please manually enter if needed). Sample date is taken from first sampler date given. User created fields must be named exactly the same as in database. Reminder: Please do not use '+' sign or ';' in user created field names<br>
 		</div>
 
 		<!--Paragraph for error message-->
@@ -68,6 +68,7 @@ ini_set('display_startup_errors', TRUE);
 				<legend><strong>Attach Bulk Sample Insert Excel From (.xls)</strong></legend>
 
 				<div class="form-group">
+					<label class="col-md-3 control-label" >Select file:</label>
 					<div class="col-md-8">
 						<input type="text" id="uploadFile" placeholder="Choose File" style="font-size:16px" disabled="disabled" />
 					</div>
@@ -76,6 +77,16 @@ ini_set('display_startup_errors', TRUE);
 						    <span>Upload</span>
 						    <input type="file" id="uploadBtn" class="upload" name='validationFile' />
 						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-md-3 control-label" >Select date format of file:</label>
+					<div class="col-md-8">
+						<select type="text" id="date_format" name="date_format">
+							<option value = "m/d/y">mm/dd/yy</option>
+							<option value = "m/d/Y">mm/dd/yyyy</option>
+						</select>
 					</div>
 				</div>
 
@@ -92,6 +103,8 @@ ini_set('display_startup_errors', TRUE);
 				{
 
 					$submitted = 'true';
+					//$date_format = 'm/d/Y';
+					$date_format = $_POST['date_format'];
 			
 					// Undefined | Multiple Files | $_FILES Corruption Attack
 					// If this request falls under any of them, treat it invalid
@@ -154,7 +167,7 @@ ini_set('display_startup_errors', TRUE);
 					}
 					else
 					{
-						$result = bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc);
+						$result = bulk_sample_insert_parse($date_format,$ext,$file,$randomString,$path,$dbc);
 						//echo $result;
 
 						//if(is_numeric($result) && $result > 0){

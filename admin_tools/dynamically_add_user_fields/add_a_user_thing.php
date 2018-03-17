@@ -46,6 +46,8 @@ Enter Dropdown Options:      A;AB;B;O
 Is Field Required For User?: Yes
 
 Field 'Blood Type' will now be required to be filled in for each sample
+
+<strong style="color:red">Warning:</strong> Do not use '+' (plus-signs) or ';' (semi-colon) in label names
 </pre>
 			
 						<div class="col-xs-6">

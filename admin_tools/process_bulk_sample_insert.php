@@ -1,40 +1,32 @@
 <?php
 
-function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
-
-
-	//$myErrorFile = fopen("example/sensor_data_upload_error.txt", "w") or die("Unable to open error file!");
-	//$myOutFile = fopen("uploads/process_bulk_sample_insert_output_".$randomString.".txt", "w") or die("Unable to open output file!");
-	//$myErrorFile = fopen("uploads/process_bulk_sample_insert_error_".$randomString.".txt", "w") or die("Unable to open error file!");
-		//**UNLINK FILES on logout?**//
-	
-	$myOutFile = fopen("uploads/process_bulk_sample_insert_output.txt", "w") or die("Unable to open output file!");
-	$myErrorFile = fopen("uploads/process_bulk_sample_insert_error.txt", "w") or die("Unable to open error file!");
-	
+function bulk_sample_insert_parse($date_format,$ext,$file,$randomString,$path,$dbc){
 	//  Include PHPExcel_IOFactory
 	require_once ($path.'acquired/xls_classes/PHPExcel/IOFactory.php');
-
+	
+	// Open files 
+	$myOutFile = fopen("uploads/process_bulk_sample_insert_output.txt", "w") or die("Unable to open output file!");
+	$myErrorFile = fopen("uploads/process_bulk_sample_insert_error.txt", "w") or die("Unable to open error file!");
 	$inputFileName = $file;
-	//$insert_check = 'false';
+	
+	// Set error checking flag
 	$insert_check = 'true';
 
 	//  Read your Excel workbook
 	try {
-		//start transaction
+		// Start transaction
 		$dbc->autocommit(FALSE);
 			
 	    $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
 	    $objReader = PHPExcel_IOFactory::createReader($inputFileType);
 	    $objPHPExcel = $objReader->load($inputFileName);
 	
-	
 		//  Get worksheet dimensions
 		$sheet = $objPHPExcel->getSheet(0); 
 		$highestRow = $sheet->getHighestRow(); 
 		$highestColumn = $sheet->getHighestColumn();
 		
-		//echo "Highest Row: $highestRow <br>";
-		//echo "Highest Column: $highestColumn <br>";
+
 		
 		//  Loop through each row of the worksheet in turn
 		$sample_array = array();
@@ -55,8 +47,11 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 			// Check basic sample table data
 				// Check data exists
 				// Build appropriate extra data above
-				//print_r($rowData);
 			$sample_number = trim($rowData[0][0]);
+			if($sample_number == ''){
+				continue;
+			}
+			
 			$unformatted_sample_number = $sample_number;
 			if(strlen ($sample_number) == 1){
 				$sample_number = '00'.$sample_number;
@@ -114,18 +109,15 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 				$insert_check = 'false';
 			}
 			
-			
-			
 			// Check project name exists
 			$stmt = $dbc->prepare("SELECT project_name FROM project_name WHERE project_name = ? AND visible = 1");
 			$stmt->bind_param("s", $project_name);		
 			if ($stmt->execute()){
 				$stmt->store_result();
-		    	if($stmt->num_rows <= 0){
-		    		fwrite($myErrorFile,"Insert Failure: Project ".$project_name." does not exist. Please manually enter into database and retry".PHP_EOL);
+				if($stmt->num_rows <= 0){
+					fwrite($myErrorFile,"Insert Failure: Project ".$project_name." does not exist. Please manually enter into database and retry".PHP_EOL);
 					$insert_check = 'false';
-		    		//throw new Exception("Insert Failure: Project ".$project_name." does not exist. Please manually enter into database");	
-		    	}
+				}
 				
 			} 
 			$stmt -> close();
@@ -153,7 +145,6 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 		    	if($stmt->num_rows <= 0){
 		    		fwrite($myErrorFile,"Insert Failure: Relative Location ".$relative_location." does not exist. Please manually enter into database and retry".PHP_EOL);
 		    		$insert_check = 'false';
-		    		//throw new Exception("Insert Failure: Relative Location ".$relative_location." does not exist. Please manually enter into database");	
 		    	}
 				
 			} 
@@ -167,7 +158,6 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 		    	if($stmt->num_rows <= 0){
 		    		fwrite($myErrorFile,"Insert Failure: Media Type ".$media_type." does not exist. Please manually enter into database and retry".PHP_EOL);
 					$insert_check = 'false';
-		    		//throw new Exception("Insert Failure: Media Type ".$media_type." does not exist. Please manually enter into database");	
 		    	}
 				
 			} 
@@ -200,30 +190,19 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 		    	if($stmt->num_rows > 0){
 		    		fwrite($myErrorFile,"Insert Failure: Sample Number ".$sample_number." exists for project ".$project_name." .Please check sample number ".PHP_EOL);
 		    		$insert_check = 'false';
-		    		//throw new Exception("Insert Failure: Sample Number ".$sample_number." exists for project ".$project_name);
 		    	}
-				
 			} 
 			$stmt -> close();
-			
-			
-			//echo "<br>INSERT CHECK $insert_check<br><br>";
+
 			// Format sample name and sample sort name
 			$date = trim($rowData[0][12]); //just using start date for sampling date of the first sampler
-			$date_object = DateTime::createFromFormat('d-M-y', $date);
+			$date_object = DateTime::createFromFormat($date_format, $date);
 			$reformatted_date = $date_object->format('Y/m/d'); //must change to this date format first for date_create to read.
-
-			
-			//$regrex_check = '/^(20[0-9][0-9])-([0-1][0-9])-([0-3][0-9])$/'; //remove dashes
-			//preg_match($regrex_check,$date,$matches);
-			//$date = $matches[1].'/'.$matches[2].'/'.$matches[3];
 			$date = $reformatted_date;
 			$sample_name = $date.$project_name.$sample_type_id.$sample_number;
 			$sample_sort = $project_name.$unformatted_sample_number;
-			
 			$sample_array[$sample_sort] = $sample_name; //for dna processing
-			
-			
+		
 			//Grab abbreviated project name to create new ID for sequencing submission
 			$stmt_sid= $dbc->prepare("SELECT seq_id_start FROM project_name WHERE project_name = ?");
 			$stmt_sid -> bind_param('s', $project_name);
@@ -252,7 +231,7 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 			// Get username and update entered by with
 			$entered_by = $_SESSION['first_name'].' '.$_SESSION['last_name'];
 			
-			if($insert_check = 'true'){
+			if($insert_check == 'true'){
 				//Insert data into db. Use prepared statement 
 				$stmt2 = $dbc -> prepare("INSERT INTO sample (
 														sample_name,
@@ -278,7 +257,7 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 					$stmt2 -> bind_param('sissssssssssss',$sample_name,$sample_number,$barcode,$project_name,$location,$relative_location,$media_type,$collector_names,$sample_type_id,$notes,$orig_time_stamp,$entered_by,$sample_sort,$seq_id);
 					if(!$stmt2 -> execute()){
 						$insert_check = 'false';
-						fwrite($myErrorFile,"Execution Failure: Unable To Insert Into Main Sample Table ".PHP_EOL);
+						fwrite($myErrorFile,"Execution Failure: Unable to insert sample into main table. Possible sample $sample_name exists in database. Check and try again or notify admin".PHP_EOL);
 						throw new Exception("Execution Failure: Unable To Insert Into Main Sample Table");
 					}
 				}	
@@ -287,9 +266,7 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 			
 			// If sample name was able to be built, check freezer and drawer exist and put insert to freezer_drawer table
 			$freezer = trim($rowData[0][8]);
-			//$freezer = ltrim($freezer,"'");
 			$drawer = trim($rowData[0][9]);
-			//$drawer = ltrim($drawer,"'");
 			$sample_exists = trim($rowData[0][10]);
 			
 			// Check if freezer and drawer exist
@@ -355,8 +332,6 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 				$start_times[1] = $sampler_stime1;
 				$end_times[1] = $sampler_etime1;
 
-			}else{
-				echo "$sampler1 strt $sampler_sdate1 end $sampler_edate1 $sampler_time1<br>";
 			}
 			
 			// Sampler2
@@ -470,7 +445,6 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 				}
 				
 				//Convert dates
-				$date_format = 'd-M-y'; 
 				$date_object_start = DateTime::createFromFormat($date_format, $start_dates[$x]);
 				$start_dates[$x] = $date_object_start->format('Y-m-d'); 
 				
@@ -553,7 +527,6 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 							}
 						}
 						else{
-							echo mysqli_error($dbc);
 							fwrite($myErrorFile, "An Error Occurred: No sampler info added. Please check date/time format: $sample_name $p_my_samp_name $start $end".PHP_EOL);
 							$insert_check = 'false';
 						}
@@ -561,9 +534,8 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 				}
 			}
 
-			//echo 'earliest and latest'.$earliest_start.' '.$latest_end.'<br>';
-			//format largest sampling period for samplers run at the same time period
-			//update sample table with this new time
+			// Format largest sampling period for samplers run at the same time period
+			// Update sample table with this new time
 			$p_biggest_time;
 			if(($start) && ($end)){
 					$bts1 = strtotime($earliest_start);
@@ -587,7 +559,7 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 					$time_rows_affected = $time_stmt ->affected_rows;
 				
 					$time_stmt -> close();
-					if($time_rows_affected < 1){	
+					if($time_rows_affected < 0){	
 						$insert_check = 'false';
 						//throw new Exception("Insert Failure: Unable to insert sampler");
 						fwrite($myErrorFile,"Insert Failure: Unable To insert sampler".PHP_EOL);
@@ -607,31 +579,33 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 
 
 			// Insert sample name for remaining tables...?
-			$stmt_seq_num = $dbc -> prepare("INSERT INTO number_of_seq_submissions (sample_name) VALUES (?)");
-			if(!$stmt_seq_num){
-					$insert_check = 'false';
-					//throw new Exception("Prepare Failure: Unable to insert sample into Sequence Number Submission table");	
-					fwrite($myErrorFile,"Prepare Failure: Unable to enter sample into Sequence Number Submission table1.".PHP_EOL);
-			}
-			else{
-				$stmt_seq_num -> bind_param('s', $sample_name);
-				if(!$stmt_seq_num-> execute()){
-					$insert_check = 'false';
-					fwrite($myErrorFile,"Execution Failure: Unable to enter sample into Sequence Number Submission table2.".PHP_EOL);
-					//throw new Exception("Execution Failure: Unable to enter sample into Sequence Number Submission table.");	
+			if($insert_check == 'true'){
+				$stmt_seq_num = $dbc -> prepare("INSERT INTO number_of_seq_submissions (sample_name) VALUES (?)");
+				if(!$stmt_seq_num){
+						$insert_check = 'false';
+						//throw new Exception("Prepare Failure: Unable to insert sample into Sequence Number Submission table");	
+						fwrite($myErrorFile,"Prepare Failure: Unable to enter sample into Sequence Number Submission table1.".PHP_EOL);
 				}
 				else{
-					$rows_affected_seq_num = $stmt_seq_num ->affected_rows;
-					$stmt_seq_num -> close();
-					if($rows_affected_seq_num < 0){
+					$stmt_seq_num -> bind_param('s', $sample_name);
+					if(!$stmt_seq_num-> execute()){
 						$insert_check = 'false';
-						fwrite($myErrorFile, "Unable to insert sample into Sequence Number Submission table3".PHP_EOL);
-						//throw new Exception("Unable to insert sample into Sequence Number Submission table");	
+						fwrite($myErrorFile,"Execution Failure: Unable to enter sample into Sequence Number Submission table2.".PHP_EOL);
+						//throw new Exception("Execution Failure: Unable to enter sample into Sequence Number Submission table.");	
+					}
+					else{
+						$rows_affected_seq_num = $stmt_seq_num ->affected_rows;
+						$stmt_seq_num -> close();
+						if($rows_affected_seq_num < 0){
+							$insert_check = 'false';
+							fwrite($myErrorFile, "Unable to insert sample into Sequence Number Submission table3".PHP_EOL);
+							//throw new Exception("Unable to insert sample into Sequence Number Submission table");	
+						}
 					}
 				}
+				
+				fwrite($myOutFile,"Input sample with sample name: $sample_name . Please use sample query to verify upload".PHP_EOL);
 			}
-			
-			fwrite($myOutFile,"Input sample with sample name: $sample_name ".PHP_EOL);
 		}
 		/*****************************************************************************
 		 * Check for DNA/RNA info sample_array 
@@ -641,9 +615,6 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 		$sheet2 = $objPHPExcel->getSheet(1); 
 		$highestRow2 = $sheet2->getHighestRow(); 
 		$highestColumn2 = $sheet2->getHighestColumn();
-		
-		//echo "Highest Row2: $highestRow2 <br>";
-		//echo "Highest Column2: $highestColumn2 <br>";
 		
 		//  Loop through each row of the worksheet in turn
 		for ($row2 = 2; $row2 <= $highestRow2; $row2++){ 
@@ -658,7 +629,7 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 			
 			$dna_counter = 0;
 			$rna_counter = 0;
-			if($sample_array[$project_name.$sample_number]){
+			if(isset($sample_array[$project_name.$sample_number])){
 				$sample_name = $sample_array[$project_name.$sample_number];
 				
 				$dna_extraction_date = $rowData2[0][2];
@@ -697,8 +668,7 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 				}
 				
 				if($dna_counter == 10){
-					
-					$date_format = 'd-M-y'; 
+
 					$date_object_start = DateTime::createFromFormat($date_format, $dna_extraction_date);
 					$dna_extraction_date = $date_object_start->format('Y-m-d'); 	
 					
@@ -757,7 +727,6 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 							$insert_check = 'false';
 							fwrite($myErrorFile,"Insert Failure: Unable to insert DNA information for sample2 $sample_name".PHP_EOL);
 						}
-						//$stmt -> close();
 					}
 					else{
 						$insert_check = 'false';
@@ -810,7 +779,6 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 							$insert_check = 'false';
 							fwrite($myErrorFile,"Insert Failure: unable to insert DNA information for sample $sample_name".PHP_EOL);;
 						}
-						//$stmt->close();
 					}
 							
 				}
@@ -852,8 +820,6 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 				}
 				
 				if($rna_counter == 10){
-					
-					$date_format = 'd-M-y'; 
 					$date_object_start = DateTime::createFromFormat($date_format, $rna_extraction_date);
 					$rna_extraction_date = $date_object_start->format('Y-m-d'); 	
 					
@@ -963,17 +929,167 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 							$insert_check = 'false';
 							fwrite($myErrorFile,"Insert Failure: unable to insert RNA information for sample $sample_name".PHP_EOL);;
 						}
-						//$stmt->close();
 					}
 							
 				}
 
 			}else{
-				$insert_check = 'false';
-				fwrite($myErrorFile,"ERROR: No sample was created for project $project_name and sample number $sample_number. Unable to insert DNA/RNA info. Please check file".PHP_EOL);
+				fwrite($myErrorFile,"ERROR: Unable to insert DNA/RNA info for sample number '$sample_number' and project '$project_name'. Worksheet may be empty. Please check file".PHP_EOL);
 			}
 		}
 
+		/*****************************************************************************
+		 * Check for User Defined Field info sample_array 
+		 * ***************************************************************************/
+		
+		//  Get worksheet dimensions
+		$sheet3 = $objPHPExcel->getSheet(2); 
+		$highestRow3 = $sheet3->getHighestRow(); 
+		$highestColumn3 = $sheet3->getHighestColumn();
+		$userThings = array();
+		
+		//  Loop through each row of the worksheet in turn
+		for ($row3 = 1; $row3 <= $highestRow3; $row3++){ 
+			//  Read a row of data into an array
+			$rowData3 = $sheet3->rangeToArray('A' . $row3 . ':' . $highestColumn3 . $row3,
+											NULL,
+											TRUE,
+											TRUE);
+			
+					
+			// Check headers - checking if names of headers match up with existing user defined thing							
+			if($row3 == 1){
+				foreach($rowData3[0] as $sub_key => $sub_value){ 
+					if($sub_value == 'Sample Number * (3-digit)' || $sub_value == 'Project Name *'){
+						continue;
+					}
+					$userThingCheck = userThingValidation($dbc,$sub_value);
+					if($userThingCheck == 'FALSE'){
+						$insert_check = 'false';
+						fwrite($myErrorFile,"ERROR: User created field '$sub_value' is not a valid field name. Please check spelling".PHP_EOL);
+					}else{
+						
+						$thing_pieces = explode("+",$userThingCheck);
+
+						if(isset($thing_pieces[0])){
+							$userThings[$sub_key]['thing_id'] = $thing_pieces[0];
+						}else{
+							$insert_check = 'false';
+							fwrite($myErrorFile,"ERROR: Internal Error for $project_name and sample number $sample_number. User created field error. Please notify admin".PHP_EOL);}
+						
+						if(isset($thing_pieces[1])){
+							$userThings[$sub_key]['label'] = $thing_pieces[1];
+						}else{
+							$insert_check = 'false';
+							fwrite($myErrorFile,"ERROR: Internal Error for $project_name and sample number $sample_number. User created field error. Please notify admin".PHP_EOL);
+						}
+						
+						if(isset($thing_pieces[2])){
+							$userThings[$sub_key]['type'] = $thing_pieces[2];
+						}else{
+							$insert_check = 'false';
+							fwrite($myErrorFile,"ERROR: Internal Error for $project_name and sample number $sample_number. User created field error. Please notify admin".PHP_EOL);
+						}
+						
+						if(isset($thing_pieces[3])){
+							$userThings[$sub_key]['required'] = $thing_pieces[3];
+						}else{
+							$insert_check = 'false';
+							fwrite($myErrorFile,"ERROR: Internal Error for $project_name and sample number $sample_number. User created field error. Please notify admin".PHP_EOL);
+						}
+						
+						if($thing_pieces[2] == 'select'){
+							if(isset($thing_pieces[4])){
+								$userThings[$sub_key]['select_options'] = $thing_pieces[4];
+							}else{
+								$insert_check = 'false';
+								fwrite($myErrorFile,"ERROR: Internal Error for $project_name and sample number $sample_number. User created field error. Please notify admin".PHP_EOL);
+							}
+						}
+					}
+				}
+			}else{
+				// Process rows data and insert
+				$sample_number = $rowData3[0][0];
+				$project_name = $rowData3[0][1];
+				
+				if(isset($sample_array[$project_name.$sample_number])){
+					foreach($rowData3[0] as $sub_key => $sub_value){ 
+					 	if(isset($userThings[$sub_key]['label'])){
+							$label = $userThings[$sub_key]['label'];
+							$tid = $userThings[$sub_key]['thing_id'];
+							$required = $userThings[$sub_key]['required'];
+							$type = $userThings[$sub_key]['type'];
+							$select_options = '';
+							if($type == 'select'){
+								if(isset($userThings[$sub_key]['select_options'])){
+									$select_options = $userThings[$sub_key]['select_options'];
+								}
+							}
+							
+							//Check if values are correct according to type
+							$sample_name = $sample_array[$project_name.$sample_number];
+							
+							// Check if you are required. If yes, then output error if no value
+							if($required == 'Y'){
+								if($sub_value == ''){
+									$insert_check = 'false';
+									fwrite($myErrorFile,"ERROR: User Field '$label' for '$project_name' and sample number '$sample_number' is a required field and cannot be empty. Unable to insert custom user info. Please check file".PHP_EOL);
+								}
+							}
+							
+							// Check if values are correct type
+							if($type == 'numeric_input'){
+								// Check if it is numeric and insert
+								if(!is_numeric($sub_value)){
+									$insert_check = 'false';
+									fwrite($myErrorFile,"ERROR: Value '$sub_value' for User Field '$label' for '$project_name' and sample number '$sample_number' is not numeric. Unable to insert custom user info. Please check file".PHP_EOL);
+								}
+								
+							}elseif($type == 'select'){
+								// Check if value matches one of the select options
+								$select_options_array = explode(";",$select_options);
+								if (!in_array($sub_value, $select_options_array)) {
+									$insert_check = 'false';
+									fwrite($myErrorFile,"ERROR: Value '$sub_value' for User Field '$label' for '$project_name' and sample number '$sample_number' is not one of the pre-defined options for this field. Unable to insert custom user info. Please check file".PHP_EOL);
+								}
+							}else{
+								// Check that length is less than 300 characters
+								if (strlen($sub_value) > 300) {
+									$insert_check = 'false';
+									fwrite($myErrorFile,"ERROR: Value for User Field '$label' for '$project_name' and sample number '$sample_number' must be shorter than 300 characters. Unable to insert custom user info. Please check file".PHP_EOL);
+								}
+							}
+							
+							
+							if($insert_check == 'true'){
+								// Insert
+								$thing_set_query = "INSERT INTO thing_storing (thing_value, sample_name, thing_id) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE thing_value = (?)";
+								if($thing_stmt = $dbc ->prepare($thing_set_query)) {
+									$thing_stmt->bind_param('ssis',$sub_value, $sample_name,$tid,$sub_value);
+									if($thing_stmt -> execute()){
+										$thing_rows_affected = $thing_stmt ->affected_rows;
+										$thing_stmt -> close();
+										if($thing_rows_affected < 0){
+											$insert_check = 'false';
+											throw new Exception("Unable To Update User Created Info");	
+										}
+									}
+									else{
+										$insert_check = 'false';
+										throw new Exception("Execution Error: Unable To Update User Created Info");	
+									}
+								}else{
+									$insert_check = 'false';
+									throw new Exception("Unable To Prepare User Created Info");	
+								}
+							}
+					 	}
+					}
+				}
+			}
+		}
+		
 		//$insert_check = 'false'; //for testing
 		
 		
@@ -991,7 +1107,7 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 	catch (Exception $e) {
 		if (isset ($dbc)){
 			echo '<script>Alert.render("ERROR: Bulk sample insert failed. No changes made. Please see error messages");</script>';
-			fwrite($myErrorFile, "$e ".PHP_EOL);
+			fwrite($myErrorFile, "Final Error: Please see messages above for errors. No sample insert made".PHP_EOL);
 
 			//rollback if see an error
 			$dbc->rollback ();
@@ -1000,5 +1116,26 @@ function bulk_sample_insert_parse($ext,$file,$randomString,$path,$dbc){
 	}
 	fclose($myErrorFile);
 	fclose($myLogFile);
+}
+
+function userThingvalidation($dbc,$thing_name){
+	$thing_name = trim($thing_name);
+
+	$check = 'FALSE';
+	$stmt = $dbc->prepare("SELECT thing_id,label_name,type,required,select_values FROM create_user_things WHERE label_name = ? AND visible = 1");
+	$stmt -> bind_param('s', $thing_name);
+	if ($stmt->execute()){
+		$stmt->bind_result($thing_id,$label,$type,$required,$select_values);
+		while ($stmt->fetch()){
+			$check = $thing_id."+".$label."+".$type."+".$required."+".$select_values;   		
+		}
+	} 
+	else {
+		die('execute() failed: ' . htmlspecialchars($stmt->error));
+	}
+	$stmt -> close();
+	
+	return $check;
+	
 }
 ?>
