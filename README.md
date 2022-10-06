@@ -1,3 +1,8 @@
+# Notice
+MetaLIMS is no longer being actively maintained. Current applications mentioned may be out of date. While users are encouraged to use the most recent versions (Ubuntu, MySQL, PHP, Apache) possible for all deployments, MetaLIMS has not been updated for changes in recent updates. Usage remains at the user's own discretion. 
+
+
+
 
 # MetaLIMS, A Simple Open-Source Laboratory Information Management System for Small Metagenomic Labs
 
